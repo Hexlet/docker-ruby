@@ -1,0 +1,1380 @@
+module Docker
+  module Models
+    type system_info_response =
+      {
+        architecture: String,
+        cdi_spec_dirs: ::Array[String],
+        cgroup_driver: Docker::Models::SystemInfoResponse::cgroup_driver,
+        cgroup_version: Docker::Models::SystemInfoResponse::cgroup_version,
+        containerd: Docker::Models::SystemInfoResponse::Containerd?,
+        containerd_commit: Docker::Models::SystemInfoResponse::ContainerdCommit,
+        containers: Integer,
+        containers_paused: Integer,
+        containers_running: Integer,
+        containers_stopped: Integer,
+        cpu_cfs_period: bool,
+        cpu_cfs_quota: bool,
+        cpu_set: bool,
+        cpu_shares: bool,
+        debug: bool,
+        default_address_pools: ::Array[Docker::Models::SystemInfoResponse::DefaultAddressPool],
+        default_runtime: String,
+        discovered_devices: ::Array[Docker::Models::SystemInfoResponse::DiscoveredDevice],
+        docker_root_dir: String,
+        driver: String,
+        driver_status: ::Array[::Array[String]],
+        experimental_build: bool,
+        firewall_backend: Docker::Models::SystemInfoResponse::FirewallBackend?,
+        generic_resources: ::Array[Docker::Models::SystemInfoResponse::GenericResource],
+        http_proxy: String,
+        https_proxy: String,
+        id: String,
+        images: Integer,
+        index_server_address: String,
+        init_binary: String,
+        init_commit: Docker::Models::SystemInfoResponse::InitCommit,
+        :i_pv4_forwarding => bool,
+        isolation: Docker::Models::SystemInfoResponse::isolation,
+        kernel_version: String,
+        labels: ::Array[String],
+        live_restore_enabled: bool,
+        logging_driver: String,
+        memory_limit: bool,
+        mem_total: Integer,
+        name: String,
+        ncpu: Integer,
+        n_events_listener: Integer,
+        n_fd: Integer,
+        n_goroutines: Integer,
+        no_proxy: String,
+        nri: Docker::Models::SystemInfoResponse::Nri?,
+        oom_kill_disable: bool,
+        operating_system: String,
+        os_type: String,
+        os_version: String,
+        pids_limit: bool,
+        plugins: Docker::Models::SystemInfoResponse::Plugins,
+        product_license: String,
+        registry_config: Docker::Models::SystemInfoResponse::RegistryConfig?,
+        runc_commit: Docker::Models::SystemInfoResponse::RuncCommit,
+        runtimes: ::Hash[Symbol, Docker::Models::SystemInfoResponse::Runtime],
+        security_options: ::Array[String],
+        server_version: String,
+        swap_limit: bool,
+        swarm: Docker::Models::SystemInfoResponse::Swarm,
+        system_time: String,
+        warnings: ::Array[String]
+      }
+
+    class SystemInfoResponse < Docker::Internal::Type::BaseModel
+      attr_reader architecture: String?
+
+      def architecture=: (String) -> String
+
+      attr_reader cdi_spec_dirs: ::Array[String]?
+
+      def cdi_spec_dirs=: (::Array[String]) -> ::Array[String]
+
+      attr_reader cgroup_driver: Docker::Models::SystemInfoResponse::cgroup_driver?
+
+      def cgroup_driver=: (
+        Docker::Models::SystemInfoResponse::cgroup_driver
+      ) -> Docker::Models::SystemInfoResponse::cgroup_driver
+
+      attr_reader cgroup_version: Docker::Models::SystemInfoResponse::cgroup_version?
+
+      def cgroup_version=: (
+        Docker::Models::SystemInfoResponse::cgroup_version
+      ) -> Docker::Models::SystemInfoResponse::cgroup_version
+
+      attr_accessor containerd: Docker::Models::SystemInfoResponse::Containerd?
+
+      attr_reader containerd_commit: Docker::Models::SystemInfoResponse::ContainerdCommit?
+
+      def containerd_commit=: (
+        Docker::Models::SystemInfoResponse::ContainerdCommit
+      ) -> Docker::Models::SystemInfoResponse::ContainerdCommit
+
+      attr_reader containers: Integer?
+
+      def containers=: (Integer) -> Integer
+
+      attr_reader containers_paused: Integer?
+
+      def containers_paused=: (Integer) -> Integer
+
+      attr_reader containers_running: Integer?
+
+      def containers_running=: (Integer) -> Integer
+
+      attr_reader containers_stopped: Integer?
+
+      def containers_stopped=: (Integer) -> Integer
+
+      attr_reader cpu_cfs_period: bool?
+
+      def cpu_cfs_period=: (bool) -> bool
+
+      attr_reader cpu_cfs_quota: bool?
+
+      def cpu_cfs_quota=: (bool) -> bool
+
+      attr_reader cpu_set: bool?
+
+      def cpu_set=: (bool) -> bool
+
+      attr_reader cpu_shares: bool?
+
+      def cpu_shares=: (bool) -> bool
+
+      attr_reader debug: bool?
+
+      def debug=: (bool) -> bool
+
+      attr_reader default_address_pools: ::Array[Docker::Models::SystemInfoResponse::DefaultAddressPool]?
+
+      def default_address_pools=: (
+        ::Array[Docker::Models::SystemInfoResponse::DefaultAddressPool]
+      ) -> ::Array[Docker::Models::SystemInfoResponse::DefaultAddressPool]
+
+      attr_reader default_runtime: String?
+
+      def default_runtime=: (String) -> String
+
+      attr_reader discovered_devices: ::Array[Docker::Models::SystemInfoResponse::DiscoveredDevice]?
+
+      def discovered_devices=: (
+        ::Array[Docker::Models::SystemInfoResponse::DiscoveredDevice]
+      ) -> ::Array[Docker::Models::SystemInfoResponse::DiscoveredDevice]
+
+      attr_reader docker_root_dir: String?
+
+      def docker_root_dir=: (String) -> String
+
+      attr_reader driver: String?
+
+      def driver=: (String) -> String
+
+      attr_reader driver_status: ::Array[::Array[String]]?
+
+      def driver_status=: (::Array[::Array[String]]) -> ::Array[::Array[String]]
+
+      attr_reader experimental_build: bool?
+
+      def experimental_build=: (bool) -> bool
+
+      attr_accessor firewall_backend: Docker::Models::SystemInfoResponse::FirewallBackend?
+
+      attr_reader generic_resources: ::Array[Docker::Models::SystemInfoResponse::GenericResource]?
+
+      def generic_resources=: (
+        ::Array[Docker::Models::SystemInfoResponse::GenericResource]
+      ) -> ::Array[Docker::Models::SystemInfoResponse::GenericResource]
+
+      attr_reader http_proxy: String?
+
+      def http_proxy=: (String) -> String
+
+      attr_reader https_proxy: String?
+
+      def https_proxy=: (String) -> String
+
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      attr_reader images: Integer?
+
+      def images=: (Integer) -> Integer
+
+      attr_reader index_server_address: String?
+
+      def index_server_address=: (String) -> String
+
+      attr_reader init_binary: String?
+
+      def init_binary=: (String) -> String
+
+      attr_reader init_commit: Docker::Models::SystemInfoResponse::InitCommit?
+
+      def init_commit=: (
+        Docker::Models::SystemInfoResponse::InitCommit
+      ) -> Docker::Models::SystemInfoResponse::InitCommit
+
+      attr_reader i_pv4_forwarding: bool?
+
+      def i_pv4_forwarding=: (bool) -> bool
+
+      attr_reader isolation: Docker::Models::SystemInfoResponse::isolation?
+
+      def isolation=: (
+        Docker::Models::SystemInfoResponse::isolation
+      ) -> Docker::Models::SystemInfoResponse::isolation
+
+      attr_reader kernel_version: String?
+
+      def kernel_version=: (String) -> String
+
+      attr_reader labels: ::Array[String]?
+
+      def labels=: (::Array[String]) -> ::Array[String]
+
+      attr_reader live_restore_enabled: bool?
+
+      def live_restore_enabled=: (bool) -> bool
+
+      attr_reader logging_driver: String?
+
+      def logging_driver=: (String) -> String
+
+      attr_reader memory_limit: bool?
+
+      def memory_limit=: (bool) -> bool
+
+      attr_reader mem_total: Integer?
+
+      def mem_total=: (Integer) -> Integer
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_reader ncpu: Integer?
+
+      def ncpu=: (Integer) -> Integer
+
+      attr_reader n_events_listener: Integer?
+
+      def n_events_listener=: (Integer) -> Integer
+
+      attr_reader n_fd: Integer?
+
+      def n_fd=: (Integer) -> Integer
+
+      attr_reader n_goroutines: Integer?
+
+      def n_goroutines=: (Integer) -> Integer
+
+      attr_reader no_proxy: String?
+
+      def no_proxy=: (String) -> String
+
+      attr_accessor nri: Docker::Models::SystemInfoResponse::Nri?
+
+      attr_reader oom_kill_disable: bool?
+
+      def oom_kill_disable=: (bool) -> bool
+
+      attr_reader operating_system: String?
+
+      def operating_system=: (String) -> String
+
+      attr_reader os_type: String?
+
+      def os_type=: (String) -> String
+
+      attr_reader os_version: String?
+
+      def os_version=: (String) -> String
+
+      attr_reader pids_limit: bool?
+
+      def pids_limit=: (bool) -> bool
+
+      attr_reader plugins: Docker::Models::SystemInfoResponse::Plugins?
+
+      def plugins=: (
+        Docker::Models::SystemInfoResponse::Plugins
+      ) -> Docker::Models::SystemInfoResponse::Plugins
+
+      attr_reader product_license: String?
+
+      def product_license=: (String) -> String
+
+      attr_accessor registry_config: Docker::Models::SystemInfoResponse::RegistryConfig?
+
+      attr_reader runc_commit: Docker::Models::SystemInfoResponse::RuncCommit?
+
+      def runc_commit=: (
+        Docker::Models::SystemInfoResponse::RuncCommit
+      ) -> Docker::Models::SystemInfoResponse::RuncCommit
+
+      attr_reader runtimes: ::Hash[Symbol, Docker::Models::SystemInfoResponse::Runtime]?
+
+      def runtimes=: (
+        ::Hash[Symbol, Docker::Models::SystemInfoResponse::Runtime]
+      ) -> ::Hash[Symbol, Docker::Models::SystemInfoResponse::Runtime]
+
+      attr_reader security_options: ::Array[String]?
+
+      def security_options=: (::Array[String]) -> ::Array[String]
+
+      attr_reader server_version: String?
+
+      def server_version=: (String) -> String
+
+      attr_reader swap_limit: bool?
+
+      def swap_limit=: (bool) -> bool
+
+      attr_reader swarm: Docker::Models::SystemInfoResponse::Swarm?
+
+      def swarm=: (
+        Docker::Models::SystemInfoResponse::Swarm
+      ) -> Docker::Models::SystemInfoResponse::Swarm
+
+      attr_reader system_time: String?
+
+      def system_time=: (String) -> String
+
+      attr_reader warnings: ::Array[String]?
+
+      def warnings=: (::Array[String]) -> ::Array[String]
+
+      def initialize: (
+        ?architecture: String,
+        ?cdi_spec_dirs: ::Array[String],
+        ?cgroup_driver: Docker::Models::SystemInfoResponse::cgroup_driver,
+        ?cgroup_version: Docker::Models::SystemInfoResponse::cgroup_version,
+        ?containerd: Docker::Models::SystemInfoResponse::Containerd?,
+        ?containerd_commit: Docker::Models::SystemInfoResponse::ContainerdCommit,
+        ?containers: Integer,
+        ?containers_paused: Integer,
+        ?containers_running: Integer,
+        ?containers_stopped: Integer,
+        ?cpu_cfs_period: bool,
+        ?cpu_cfs_quota: bool,
+        ?cpu_set: bool,
+        ?cpu_shares: bool,
+        ?debug: bool,
+        ?default_address_pools: ::Array[Docker::Models::SystemInfoResponse::DefaultAddressPool],
+        ?default_runtime: String,
+        ?discovered_devices: ::Array[Docker::Models::SystemInfoResponse::DiscoveredDevice],
+        ?docker_root_dir: String,
+        ?driver: String,
+        ?driver_status: ::Array[::Array[String]],
+        ?experimental_build: bool,
+        ?firewall_backend: Docker::Models::SystemInfoResponse::FirewallBackend?,
+        ?generic_resources: ::Array[Docker::Models::SystemInfoResponse::GenericResource],
+        ?http_proxy: String,
+        ?https_proxy: String,
+        ?id: String,
+        ?images: Integer,
+        ?index_server_address: String,
+        ?init_binary: String,
+        ?init_commit: Docker::Models::SystemInfoResponse::InitCommit,
+        ?i_pv4_forwarding: bool,
+        ?isolation: Docker::Models::SystemInfoResponse::isolation,
+        ?kernel_version: String,
+        ?labels: ::Array[String],
+        ?live_restore_enabled: bool,
+        ?logging_driver: String,
+        ?memory_limit: bool,
+        ?mem_total: Integer,
+        ?name: String,
+        ?ncpu: Integer,
+        ?n_events_listener: Integer,
+        ?n_fd: Integer,
+        ?n_goroutines: Integer,
+        ?no_proxy: String,
+        ?nri: Docker::Models::SystemInfoResponse::Nri?,
+        ?oom_kill_disable: bool,
+        ?operating_system: String,
+        ?os_type: String,
+        ?os_version: String,
+        ?pids_limit: bool,
+        ?plugins: Docker::Models::SystemInfoResponse::Plugins,
+        ?product_license: String,
+        ?registry_config: Docker::Models::SystemInfoResponse::RegistryConfig?,
+        ?runc_commit: Docker::Models::SystemInfoResponse::RuncCommit,
+        ?runtimes: ::Hash[Symbol, Docker::Models::SystemInfoResponse::Runtime],
+        ?security_options: ::Array[String],
+        ?server_version: String,
+        ?swap_limit: bool,
+        ?swarm: Docker::Models::SystemInfoResponse::Swarm,
+        ?system_time: String,
+        ?warnings: ::Array[String]
+      ) -> void
+
+      def to_hash: -> {
+        architecture: String,
+        cdi_spec_dirs: ::Array[String],
+        cgroup_driver: Docker::Models::SystemInfoResponse::cgroup_driver,
+        cgroup_version: Docker::Models::SystemInfoResponse::cgroup_version,
+        containerd: Docker::Models::SystemInfoResponse::Containerd?,
+        containerd_commit: Docker::Models::SystemInfoResponse::ContainerdCommit,
+        containers: Integer,
+        containers_paused: Integer,
+        containers_running: Integer,
+        containers_stopped: Integer,
+        cpu_cfs_period: bool,
+        cpu_cfs_quota: bool,
+        cpu_set: bool,
+        cpu_shares: bool,
+        debug: bool,
+        default_address_pools: ::Array[Docker::Models::SystemInfoResponse::DefaultAddressPool],
+        default_runtime: String,
+        discovered_devices: ::Array[Docker::Models::SystemInfoResponse::DiscoveredDevice],
+        docker_root_dir: String,
+        driver: String,
+        driver_status: ::Array[::Array[String]],
+        experimental_build: bool,
+        firewall_backend: Docker::Models::SystemInfoResponse::FirewallBackend?,
+        generic_resources: ::Array[Docker::Models::SystemInfoResponse::GenericResource],
+        http_proxy: String,
+        https_proxy: String,
+        id: String,
+        images: Integer,
+        index_server_address: String,
+        init_binary: String,
+        init_commit: Docker::Models::SystemInfoResponse::InitCommit,
+        :i_pv4_forwarding => bool,
+        isolation: Docker::Models::SystemInfoResponse::isolation,
+        kernel_version: String,
+        labels: ::Array[String],
+        live_restore_enabled: bool,
+        logging_driver: String,
+        memory_limit: bool,
+        mem_total: Integer,
+        name: String,
+        ncpu: Integer,
+        n_events_listener: Integer,
+        n_fd: Integer,
+        n_goroutines: Integer,
+        no_proxy: String,
+        nri: Docker::Models::SystemInfoResponse::Nri?,
+        oom_kill_disable: bool,
+        operating_system: String,
+        os_type: String,
+        os_version: String,
+        pids_limit: bool,
+        plugins: Docker::Models::SystemInfoResponse::Plugins,
+        product_license: String,
+        registry_config: Docker::Models::SystemInfoResponse::RegistryConfig?,
+        runc_commit: Docker::Models::SystemInfoResponse::RuncCommit,
+        runtimes: ::Hash[Symbol, Docker::Models::SystemInfoResponse::Runtime],
+        security_options: ::Array[String],
+        server_version: String,
+        swap_limit: bool,
+        swarm: Docker::Models::SystemInfoResponse::Swarm,
+        system_time: String,
+        warnings: ::Array[String]
+      }
+
+      type cgroup_driver = :cgroupfs | :systemd | :none
+
+      module CgroupDriver
+        extend Docker::Internal::Type::Enum
+
+        CGROUPFS: :cgroupfs
+        SYSTEMD: :systemd
+        NONE: :none
+
+        def self?.values: -> ::Array[Docker::Models::SystemInfoResponse::cgroup_driver]
+      end
+
+      type cgroup_version = :"1" | :"2"
+
+      module CgroupVersion
+        extend Docker::Internal::Type::Enum
+
+        CGROUP_VERSION_1: :"1"
+        CGROUP_VERSION_2: :"2"
+
+        def self?.values: -> ::Array[Docker::Models::SystemInfoResponse::cgroup_version]
+      end
+
+      type containerd =
+        {
+          address: String,
+          namespaces: Docker::Models::SystemInfoResponse::Containerd::Namespaces
+        }
+
+      class Containerd < Docker::Internal::Type::BaseModel
+        attr_reader address: String?
+
+        def address=: (String) -> String
+
+        attr_reader namespaces: Docker::Models::SystemInfoResponse::Containerd::Namespaces?
+
+        def namespaces=: (
+          Docker::Models::SystemInfoResponse::Containerd::Namespaces
+        ) -> Docker::Models::SystemInfoResponse::Containerd::Namespaces
+
+        def initialize: (
+          ?address: String,
+          ?namespaces: Docker::Models::SystemInfoResponse::Containerd::Namespaces
+        ) -> void
+
+        def to_hash: -> {
+          address: String,
+          namespaces: Docker::Models::SystemInfoResponse::Containerd::Namespaces
+        }
+
+        type namespaces = { containers: String, plugins: String }
+
+        class Namespaces < Docker::Internal::Type::BaseModel
+          attr_reader containers: String?
+
+          def containers=: (String) -> String
+
+          attr_reader plugins: String?
+
+          def plugins=: (String) -> String
+
+          def initialize: (?containers: String, ?plugins: String) -> void
+
+          def to_hash: -> { containers: String, plugins: String }
+        end
+      end
+
+      type containerd_commit = { id: String }
+
+      class ContainerdCommit < Docker::Internal::Type::BaseModel
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        def initialize: (?id: String) -> void
+
+        def to_hash: -> { id: String }
+      end
+
+      type default_address_pool = { base: String, size: Integer }
+
+      class DefaultAddressPool < Docker::Internal::Type::BaseModel
+        attr_reader base: String?
+
+        def base=: (String) -> String
+
+        attr_reader size: Integer?
+
+        def size=: (Integer) -> Integer
+
+        def initialize: (?base: String, ?size: Integer) -> void
+
+        def to_hash: -> { base: String, size: Integer }
+      end
+
+      type discovered_device = { id: String, source: String }
+
+      class DiscoveredDevice < Docker::Internal::Type::BaseModel
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        attr_reader source: String?
+
+        def source=: (String) -> String
+
+        def initialize: (?id: String, ?source: String) -> void
+
+        def to_hash: -> { id: String, source: String }
+      end
+
+      type firewall_backend = { driver: String, info: ::Array[::Array[String]] }
+
+      class FirewallBackend < Docker::Internal::Type::BaseModel
+        attr_reader driver: String?
+
+        def driver=: (String) -> String
+
+        attr_reader info: ::Array[::Array[String]]?
+
+        def info=: (::Array[::Array[String]]) -> ::Array[::Array[String]]
+
+        def initialize: (
+          ?driver: String,
+          ?info: ::Array[::Array[String]]
+        ) -> void
+
+        def to_hash: -> { driver: String, info: ::Array[::Array[String]] }
+      end
+
+      type generic_resource =
+        {
+          discrete_resource_spec: Docker::Models::SystemInfoResponse::GenericResource::DiscreteResourceSpec,
+          named_resource_spec: Docker::Models::SystemInfoResponse::GenericResource::NamedResourceSpec
+        }
+
+      class GenericResource < Docker::Internal::Type::BaseModel
+        attr_reader discrete_resource_spec: Docker::Models::SystemInfoResponse::GenericResource::DiscreteResourceSpec?
+
+        def discrete_resource_spec=: (
+          Docker::Models::SystemInfoResponse::GenericResource::DiscreteResourceSpec
+        ) -> Docker::Models::SystemInfoResponse::GenericResource::DiscreteResourceSpec
+
+        attr_reader named_resource_spec: Docker::Models::SystemInfoResponse::GenericResource::NamedResourceSpec?
+
+        def named_resource_spec=: (
+          Docker::Models::SystemInfoResponse::GenericResource::NamedResourceSpec
+        ) -> Docker::Models::SystemInfoResponse::GenericResource::NamedResourceSpec
+
+        def initialize: (
+          ?discrete_resource_spec: Docker::Models::SystemInfoResponse::GenericResource::DiscreteResourceSpec,
+          ?named_resource_spec: Docker::Models::SystemInfoResponse::GenericResource::NamedResourceSpec
+        ) -> void
+
+        def to_hash: -> {
+          discrete_resource_spec: Docker::Models::SystemInfoResponse::GenericResource::DiscreteResourceSpec,
+          named_resource_spec: Docker::Models::SystemInfoResponse::GenericResource::NamedResourceSpec
+        }
+
+        type discrete_resource_spec = { kind: String, value: Integer }
+
+        class DiscreteResourceSpec < Docker::Internal::Type::BaseModel
+          attr_reader kind: String?
+
+          def kind=: (String) -> String
+
+          attr_reader value: Integer?
+
+          def value=: (Integer) -> Integer
+
+          def initialize: (?kind: String, ?value: Integer) -> void
+
+          def to_hash: -> { kind: String, value: Integer }
+        end
+
+        type named_resource_spec = { kind: String, value: String }
+
+        class NamedResourceSpec < Docker::Internal::Type::BaseModel
+          attr_reader kind: String?
+
+          def kind=: (String) -> String
+
+          attr_reader value: String?
+
+          def value=: (String) -> String
+
+          def initialize: (?kind: String, ?value: String) -> void
+
+          def to_hash: -> { kind: String, value: String }
+        end
+      end
+
+      type init_commit = { id: String }
+
+      class InitCommit < Docker::Internal::Type::BaseModel
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        def initialize: (?id: String) -> void
+
+        def to_hash: -> { id: String }
+      end
+
+      type isolation = :default | :hyperv | :process | :""
+
+      module Isolation
+        extend Docker::Internal::Type::Enum
+
+        DEFAULT: :default
+        HYPERV: :hyperv
+        PROCESS: :process
+        EMPTY: :""
+
+        def self?.values: -> ::Array[Docker::Models::SystemInfoResponse::isolation]
+      end
+
+      type nri = { info: ::Array[::Array[String]] }
+
+      class Nri < Docker::Internal::Type::BaseModel
+        attr_reader info: ::Array[::Array[String]]?
+
+        def info=: (::Array[::Array[String]]) -> ::Array[::Array[String]]
+
+        def initialize: (?info: ::Array[::Array[String]]) -> void
+
+        def to_hash: -> { info: ::Array[::Array[String]] }
+      end
+
+      type plugins =
+        {
+          authorization: ::Array[String],
+          log: ::Array[String],
+          network: ::Array[String],
+          volume: ::Array[String]
+        }
+
+      class Plugins < Docker::Internal::Type::BaseModel
+        attr_reader authorization: ::Array[String]?
+
+        def authorization=: (::Array[String]) -> ::Array[String]
+
+        attr_reader log: ::Array[String]?
+
+        def log=: (::Array[String]) -> ::Array[String]
+
+        attr_reader network: ::Array[String]?
+
+        def network=: (::Array[String]) -> ::Array[String]
+
+        attr_reader volume: ::Array[String]?
+
+        def volume=: (::Array[String]) -> ::Array[String]
+
+        def initialize: (
+          ?authorization: ::Array[String],
+          ?log: ::Array[String],
+          ?network: ::Array[String],
+          ?volume: ::Array[String]
+        ) -> void
+
+        def to_hash: -> {
+          authorization: ::Array[String],
+          log: ::Array[String],
+          network: ::Array[String],
+          volume: ::Array[String]
+        }
+      end
+
+      type registry_config =
+        {
+          index_configs: ::Hash[Symbol, Docker::Models::SystemInfoResponse::RegistryConfig::IndexConfig?],
+          insecure_registry_cid_rs: ::Array[String],
+          mirrors: ::Array[String]
+        }
+
+      class RegistryConfig < Docker::Internal::Type::BaseModel
+        attr_reader index_configs: ::Hash[Symbol, Docker::Models::SystemInfoResponse::RegistryConfig::IndexConfig?]?
+
+        def index_configs=: (
+          ::Hash[Symbol, Docker::Models::SystemInfoResponse::RegistryConfig::IndexConfig?]
+        ) -> ::Hash[Symbol, Docker::Models::SystemInfoResponse::RegistryConfig::IndexConfig?]
+
+        attr_reader insecure_registry_cid_rs: ::Array[String]?
+
+        def insecure_registry_cid_rs=: (::Array[String]) -> ::Array[String]
+
+        attr_reader mirrors: ::Array[String]?
+
+        def mirrors=: (::Array[String]) -> ::Array[String]
+
+        def initialize: (
+          ?index_configs: ::Hash[Symbol, Docker::Models::SystemInfoResponse::RegistryConfig::IndexConfig?],
+          ?insecure_registry_cid_rs: ::Array[String],
+          ?mirrors: ::Array[String]
+        ) -> void
+
+        def to_hash: -> {
+          index_configs: ::Hash[Symbol, Docker::Models::SystemInfoResponse::RegistryConfig::IndexConfig?],
+          insecure_registry_cid_rs: ::Array[String],
+          mirrors: ::Array[String]
+        }
+
+        type index_config =
+          {
+            mirrors: ::Array[String],
+            name: String,
+            official: bool,
+            secure: bool
+          }
+
+        class IndexConfig < Docker::Internal::Type::BaseModel
+          attr_reader mirrors: ::Array[String]?
+
+          def mirrors=: (::Array[String]) -> ::Array[String]
+
+          attr_reader name: String?
+
+          def name=: (String) -> String
+
+          attr_reader official: bool?
+
+          def official=: (bool) -> bool
+
+          attr_reader secure: bool?
+
+          def secure=: (bool) -> bool
+
+          def initialize: (
+            ?mirrors: ::Array[String],
+            ?name: String,
+            ?official: bool,
+            ?secure: bool
+          ) -> void
+
+          def to_hash: -> {
+            mirrors: ::Array[String],
+            name: String,
+            official: bool,
+            secure: bool
+          }
+        end
+      end
+
+      type runc_commit = { id: String }
+
+      class RuncCommit < Docker::Internal::Type::BaseModel
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        def initialize: (?id: String) -> void
+
+        def to_hash: -> { id: String }
+      end
+
+      type runtime =
+        {
+          path: String,
+          runtime_args: ::Array[String]?,
+          status: ::Hash[Symbol, String]?
+        }
+
+      class Runtime < Docker::Internal::Type::BaseModel
+        attr_reader path: String?
+
+        def path=: (String) -> String
+
+        attr_accessor runtime_args: ::Array[String]?
+
+        attr_accessor status: ::Hash[Symbol, String]?
+
+        def initialize: (
+          ?path: String,
+          ?runtime_args: ::Array[String]?,
+          ?status: ::Hash[Symbol, String]?
+        ) -> void
+
+        def to_hash: -> {
+          path: String,
+          runtime_args: ::Array[String]?,
+          status: ::Hash[Symbol, String]?
+        }
+      end
+
+      type swarm =
+        {
+          cluster: Docker::Models::SystemInfoResponse::Swarm::Cluster?,
+          control_available: bool,
+          error: String,
+          local_node_state: Docker::Models::SystemInfoResponse::Swarm::local_node_state,
+          managers: Integer?,
+          node_addr: String,
+          node_id: String,
+          nodes: Integer?,
+          remote_managers: ::Array[Docker::Models::SystemInfoResponse::Swarm::RemoteManager]?
+        }
+
+      class Swarm < Docker::Internal::Type::BaseModel
+        attr_accessor cluster: Docker::Models::SystemInfoResponse::Swarm::Cluster?
+
+        attr_reader control_available: bool?
+
+        def control_available=: (bool) -> bool
+
+        attr_reader error: String?
+
+        def error=: (String) -> String
+
+        attr_reader local_node_state: Docker::Models::SystemInfoResponse::Swarm::local_node_state?
+
+        def local_node_state=: (
+          Docker::Models::SystemInfoResponse::Swarm::local_node_state
+        ) -> Docker::Models::SystemInfoResponse::Swarm::local_node_state
+
+        attr_accessor managers: Integer?
+
+        attr_reader node_addr: String?
+
+        def node_addr=: (String) -> String
+
+        attr_reader node_id: String?
+
+        def node_id=: (String) -> String
+
+        attr_accessor nodes: Integer?
+
+        attr_accessor remote_managers: ::Array[Docker::Models::SystemInfoResponse::Swarm::RemoteManager]?
+
+        def initialize: (
+          ?cluster: Docker::Models::SystemInfoResponse::Swarm::Cluster?,
+          ?control_available: bool,
+          ?error: String,
+          ?local_node_state: Docker::Models::SystemInfoResponse::Swarm::local_node_state,
+          ?managers: Integer?,
+          ?node_addr: String,
+          ?node_id: String,
+          ?nodes: Integer?,
+          ?remote_managers: ::Array[Docker::Models::SystemInfoResponse::Swarm::RemoteManager]?
+        ) -> void
+
+        def to_hash: -> {
+          cluster: Docker::Models::SystemInfoResponse::Swarm::Cluster?,
+          control_available: bool,
+          error: String,
+          local_node_state: Docker::Models::SystemInfoResponse::Swarm::local_node_state,
+          managers: Integer?,
+          node_addr: String,
+          node_id: String,
+          nodes: Integer?,
+          remote_managers: ::Array[Docker::Models::SystemInfoResponse::Swarm::RemoteManager]?
+        }
+
+        type cluster =
+          {
+            created_at: String,
+            data_path_port: Integer,
+            default_addr_pool: ::Array[String],
+            id: String,
+            root_rotation_in_progress: bool,
+            spec: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec,
+            subnet_size: Integer,
+            tls_info: Docker::Models::SystemInfoResponse::Swarm::Cluster::TlsInfo,
+            updated_at: String,
+            version: Docker::Models::SystemInfoResponse::Swarm::Cluster::Version
+          }
+
+        class Cluster < Docker::Internal::Type::BaseModel
+          attr_reader created_at: String?
+
+          def created_at=: (String) -> String
+
+          attr_reader data_path_port: Integer?
+
+          def data_path_port=: (Integer) -> Integer
+
+          attr_reader default_addr_pool: ::Array[String]?
+
+          def default_addr_pool=: (::Array[String]) -> ::Array[String]
+
+          attr_reader id: String?
+
+          def id=: (String) -> String
+
+          attr_reader root_rotation_in_progress: bool?
+
+          def root_rotation_in_progress=: (bool) -> bool
+
+          attr_reader spec: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec?
+
+          def spec=: (
+            Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec
+          ) -> Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec
+
+          attr_reader subnet_size: Integer?
+
+          def subnet_size=: (Integer) -> Integer
+
+          attr_reader tls_info: Docker::Models::SystemInfoResponse::Swarm::Cluster::TlsInfo?
+
+          def tls_info=: (
+            Docker::Models::SystemInfoResponse::Swarm::Cluster::TlsInfo
+          ) -> Docker::Models::SystemInfoResponse::Swarm::Cluster::TlsInfo
+
+          attr_reader updated_at: String?
+
+          def updated_at=: (String) -> String
+
+          attr_reader version: Docker::Models::SystemInfoResponse::Swarm::Cluster::Version?
+
+          def version=: (
+            Docker::Models::SystemInfoResponse::Swarm::Cluster::Version
+          ) -> Docker::Models::SystemInfoResponse::Swarm::Cluster::Version
+
+          def initialize: (
+            ?created_at: String,
+            ?data_path_port: Integer,
+            ?default_addr_pool: ::Array[String],
+            ?id: String,
+            ?root_rotation_in_progress: bool,
+            ?spec: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec,
+            ?subnet_size: Integer,
+            ?tls_info: Docker::Models::SystemInfoResponse::Swarm::Cluster::TlsInfo,
+            ?updated_at: String,
+            ?version: Docker::Models::SystemInfoResponse::Swarm::Cluster::Version
+          ) -> void
+
+          def to_hash: -> {
+            created_at: String,
+            data_path_port: Integer,
+            default_addr_pool: ::Array[String],
+            id: String,
+            root_rotation_in_progress: bool,
+            spec: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec,
+            subnet_size: Integer,
+            tls_info: Docker::Models::SystemInfoResponse::Swarm::Cluster::TlsInfo,
+            updated_at: String,
+            version: Docker::Models::SystemInfoResponse::Swarm::Cluster::Version
+          }
+
+          type spec =
+            {
+              ca_config: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::CaConfig?,
+              dispatcher: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::Dispatcher?,
+              encryption_config: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::EncryptionConfig,
+              labels: ::Hash[Symbol, String],
+              name: String,
+              orchestration: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::Orchestration?,
+              raft: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::Raft,
+              task_defaults: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::TaskDefaults
+            }
+
+          class Spec < Docker::Internal::Type::BaseModel
+            attr_accessor ca_config: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::CaConfig?
+
+            attr_accessor dispatcher: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::Dispatcher?
+
+            attr_reader encryption_config: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::EncryptionConfig?
+
+            def encryption_config=: (
+              Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::EncryptionConfig
+            ) -> Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::EncryptionConfig
+
+            attr_reader labels: ::Hash[Symbol, String]?
+
+            def labels=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+            attr_reader name: String?
+
+            def name=: (String) -> String
+
+            attr_accessor orchestration: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::Orchestration?
+
+            attr_reader raft: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::Raft?
+
+            def raft=: (
+              Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::Raft
+            ) -> Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::Raft
+
+            attr_reader task_defaults: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::TaskDefaults?
+
+            def task_defaults=: (
+              Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::TaskDefaults
+            ) -> Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::TaskDefaults
+
+            def initialize: (
+              ?ca_config: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::CaConfig?,
+              ?dispatcher: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::Dispatcher?,
+              ?encryption_config: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::EncryptionConfig,
+              ?labels: ::Hash[Symbol, String],
+              ?name: String,
+              ?orchestration: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::Orchestration?,
+              ?raft: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::Raft,
+              ?task_defaults: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::TaskDefaults
+            ) -> void
+
+            def to_hash: -> {
+              ca_config: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::CaConfig?,
+              dispatcher: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::Dispatcher?,
+              encryption_config: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::EncryptionConfig,
+              labels: ::Hash[Symbol, String],
+              name: String,
+              orchestration: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::Orchestration?,
+              raft: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::Raft,
+              task_defaults: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::TaskDefaults
+            }
+
+            type ca_config =
+              {
+                external_c_as: ::Array[Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::CaConfig::ExternalCA],
+                force_rotate: Integer,
+                node_cert_expiry: Integer,
+                signing_ca_cert: String,
+                signing_ca_key: String
+              }
+
+            class CaConfig < Docker::Internal::Type::BaseModel
+              attr_reader external_c_as: ::Array[Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::CaConfig::ExternalCA]?
+
+              def external_c_as=: (
+                ::Array[Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::CaConfig::ExternalCA]
+              ) -> ::Array[Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::CaConfig::ExternalCA]
+
+              attr_reader force_rotate: Integer?
+
+              def force_rotate=: (Integer) -> Integer
+
+              attr_reader node_cert_expiry: Integer?
+
+              def node_cert_expiry=: (Integer) -> Integer
+
+              attr_reader signing_ca_cert: String?
+
+              def signing_ca_cert=: (String) -> String
+
+              attr_reader signing_ca_key: String?
+
+              def signing_ca_key=: (String) -> String
+
+              def initialize: (
+                ?external_c_as: ::Array[Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::CaConfig::ExternalCA],
+                ?force_rotate: Integer,
+                ?node_cert_expiry: Integer,
+                ?signing_ca_cert: String,
+                ?signing_ca_key: String
+              ) -> void
+
+              def to_hash: -> {
+                external_c_as: ::Array[Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::CaConfig::ExternalCA],
+                force_rotate: Integer,
+                node_cert_expiry: Integer,
+                signing_ca_cert: String,
+                signing_ca_key: String
+              }
+
+              type external_ca =
+                {
+                  ca_cert: String,
+                  options: ::Hash[Symbol, String],
+                  protocol: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::CaConfig::ExternalCA::protocol,
+                  url: String
+                }
+
+              class ExternalCA < Docker::Internal::Type::BaseModel
+                attr_reader ca_cert: String?
+
+                def ca_cert=: (String) -> String
+
+                attr_reader options: ::Hash[Symbol, String]?
+
+                def options=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+                attr_reader protocol: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::CaConfig::ExternalCA::protocol?
+
+                def protocol=: (
+                  Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::CaConfig::ExternalCA::protocol
+                ) -> Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::CaConfig::ExternalCA::protocol
+
+                attr_reader url: String?
+
+                def url=: (String) -> String
+
+                def initialize: (
+                  ?ca_cert: String,
+                  ?options: ::Hash[Symbol, String],
+                  ?protocol: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::CaConfig::ExternalCA::protocol,
+                  ?url: String
+                ) -> void
+
+                def to_hash: -> {
+                  ca_cert: String,
+                  options: ::Hash[Symbol, String],
+                  protocol: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::CaConfig::ExternalCA::protocol,
+                  url: String
+                }
+
+                type protocol = :cfssl
+
+                module Protocol
+                  extend Docker::Internal::Type::Enum
+
+                  CFSSL: :cfssl
+
+                  def self?.values: -> ::Array[Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::CaConfig::ExternalCA::protocol]
+                end
+              end
+            end
+
+            type dispatcher = { heartbeat_period: Integer }
+
+            class Dispatcher < Docker::Internal::Type::BaseModel
+              attr_reader heartbeat_period: Integer?
+
+              def heartbeat_period=: (Integer) -> Integer
+
+              def initialize: (?heartbeat_period: Integer) -> void
+
+              def to_hash: -> { heartbeat_period: Integer }
+            end
+
+            type encryption_config = { auto_lock_managers: bool }
+
+            class EncryptionConfig < Docker::Internal::Type::BaseModel
+              attr_reader auto_lock_managers: bool?
+
+              def auto_lock_managers=: (bool) -> bool
+
+              def initialize: (?auto_lock_managers: bool) -> void
+
+              def to_hash: -> { auto_lock_managers: bool }
+            end
+
+            type orchestration = { task_history_retention_limit: Integer }
+
+            class Orchestration < Docker::Internal::Type::BaseModel
+              attr_reader task_history_retention_limit: Integer?
+
+              def task_history_retention_limit=: (Integer) -> Integer
+
+              def initialize: (?task_history_retention_limit: Integer) -> void
+
+              def to_hash: -> { task_history_retention_limit: Integer }
+            end
+
+            type raft =
+              {
+                election_tick: Integer,
+                heartbeat_tick: Integer,
+                keep_old_snapshots: Integer,
+                log_entries_for_slow_followers: Integer,
+                snapshot_interval: Integer
+              }
+
+            class Raft < Docker::Internal::Type::BaseModel
+              attr_reader election_tick: Integer?
+
+              def election_tick=: (Integer) -> Integer
+
+              attr_reader heartbeat_tick: Integer?
+
+              def heartbeat_tick=: (Integer) -> Integer
+
+              attr_reader keep_old_snapshots: Integer?
+
+              def keep_old_snapshots=: (Integer) -> Integer
+
+              attr_reader log_entries_for_slow_followers: Integer?
+
+              def log_entries_for_slow_followers=: (Integer) -> Integer
+
+              attr_reader snapshot_interval: Integer?
+
+              def snapshot_interval=: (Integer) -> Integer
+
+              def initialize: (
+                ?election_tick: Integer,
+                ?heartbeat_tick: Integer,
+                ?keep_old_snapshots: Integer,
+                ?log_entries_for_slow_followers: Integer,
+                ?snapshot_interval: Integer
+              ) -> void
+
+              def to_hash: -> {
+                election_tick: Integer,
+                heartbeat_tick: Integer,
+                keep_old_snapshots: Integer,
+                log_entries_for_slow_followers: Integer,
+                snapshot_interval: Integer
+              }
+            end
+
+            type task_defaults =
+              {
+                log_driver: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::TaskDefaults::LogDriver
+              }
+
+            class TaskDefaults < Docker::Internal::Type::BaseModel
+              attr_reader log_driver: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::TaskDefaults::LogDriver?
+
+              def log_driver=: (
+                Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::TaskDefaults::LogDriver
+              ) -> Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::TaskDefaults::LogDriver
+
+              def initialize: (
+                ?log_driver: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::TaskDefaults::LogDriver
+              ) -> void
+
+              def to_hash: -> {
+                log_driver: Docker::Models::SystemInfoResponse::Swarm::Cluster::Spec::TaskDefaults::LogDriver
+              }
+
+              type log_driver =
+                { name: String, options: ::Hash[Symbol, String] }
+
+              class LogDriver < Docker::Internal::Type::BaseModel
+                attr_reader name: String?
+
+                def name=: (String) -> String
+
+                attr_reader options: ::Hash[Symbol, String]?
+
+                def options=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+                def initialize: (
+                  ?name: String,
+                  ?options: ::Hash[Symbol, String]
+                ) -> void
+
+                def to_hash: -> {
+                  name: String,
+                  options: ::Hash[Symbol, String]
+                }
+              end
+            end
+          end
+
+          type tls_info =
+            {
+              cert_issuer_public_key: String,
+              cert_issuer_subject: String,
+              trust_root: String
+            }
+
+          class TlsInfo < Docker::Internal::Type::BaseModel
+            attr_reader cert_issuer_public_key: String?
+
+            def cert_issuer_public_key=: (String) -> String
+
+            attr_reader cert_issuer_subject: String?
+
+            def cert_issuer_subject=: (String) -> String
+
+            attr_reader trust_root: String?
+
+            def trust_root=: (String) -> String
+
+            def initialize: (
+              ?cert_issuer_public_key: String,
+              ?cert_issuer_subject: String,
+              ?trust_root: String
+            ) -> void
+
+            def to_hash: -> {
+              cert_issuer_public_key: String,
+              cert_issuer_subject: String,
+              trust_root: String
+            }
+          end
+
+          type version = { index: Integer }
+
+          class Version < Docker::Internal::Type::BaseModel
+            attr_reader index: Integer?
+
+            def index=: (Integer) -> Integer
+
+            def initialize: (?index: Integer) -> void
+
+            def to_hash: -> { index: Integer }
+          end
+        end
+
+        type local_node_state =
+          :"" | :inactive | :pending | :active | :error | :locked
+
+        module LocalNodeState
+          extend Docker::Internal::Type::Enum
+
+          EMPTY: :""
+          INACTIVE: :inactive
+          PENDING: :pending
+          ACTIVE: :active
+          ERROR: :error
+          LOCKED: :locked
+
+          def self?.values: -> ::Array[Docker::Models::SystemInfoResponse::Swarm::local_node_state]
+        end
+
+        type remote_manager = { addr: String, node_id: String }
+
+        class RemoteManager < Docker::Internal::Type::BaseModel
+          attr_reader addr: String?
+
+          def addr=: (String) -> String
+
+          attr_reader node_id: String?
+
+          def node_id=: (String) -> String
+
+          def initialize: (?addr: String, ?node_id: String) -> void
+
+          def to_hash: -> { addr: String, node_id: String }
+        end
+      end
+    end
+  end
+end

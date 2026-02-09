@@ -1,0 +1,26 @@
+module Docker
+  module Models
+    type volume_list_response =
+      { volumes: ::Array[Docker::Volume], warnings: ::Array[String] }
+
+    class VolumeListResponse < Docker::Internal::Type::BaseModel
+      attr_reader volumes: ::Array[Docker::Volume]?
+
+      def volumes=: (::Array[Docker::Volume]) -> ::Array[Docker::Volume]
+
+      attr_reader warnings: ::Array[String]?
+
+      def warnings=: (::Array[String]) -> ::Array[String]
+
+      def initialize: (
+        ?volumes: ::Array[Docker::Volume],
+        ?warnings: ::Array[String]
+      ) -> void
+
+      def to_hash: -> {
+        volumes: ::Array[Docker::Volume],
+        warnings: ::Array[String]
+      }
+    end
+  end
+end

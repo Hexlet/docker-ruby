@@ -1,0 +1,15 @@
+module Docker
+  module Models
+    type network_create_response = { id: String, warning: String }
+
+    class NetworkCreateResponse < Docker::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor warning: String
+
+      def initialize: (id: String, warning: String) -> void
+
+      def to_hash: -> { id: String, warning: String }
+    end
+  end
+end

@@ -1,0 +1,14 @@
+module Docker
+  module Resources
+    class Auth
+      def login: (
+        ?password: String,
+        ?serveraddress: String,
+        ?username: String,
+        ?request_options: Docker::request_opts
+      ) -> Docker::AuthResponse
+
+      def initialize: (client: Docker::Client) -> void
+    end
+  end
+end
