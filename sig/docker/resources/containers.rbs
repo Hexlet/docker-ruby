@@ -1,0 +1,67 @@
+module Docker
+  module Resources
+    class Containers
+      def create: (
+        config: Docker::ContainerCreateParams::Config,
+        ?name: String,
+        ?platform: String,
+        ?request_options: Docker::request_opts
+      ) -> Docker::CreateResponse
+
+      def list: (
+        ?all: bool,
+        ?filters: String,
+        ?limit: Integer,
+        ?size: bool,
+        ?request_options: Docker::request_opts
+      ) -> Docker::Models::container_list_response
+
+      def delete: (
+        String id,
+        ?force: bool,
+        ?link: bool,
+        ?v: bool,
+        ?request_options: Docker::request_opts
+      ) -> nil
+
+      def inspect_: (
+        String id,
+        ?size: bool,
+        ?request_options: Docker::request_opts
+      ) -> Docker::Container
+
+      def kill: (
+        String id,
+        ?signal: String,
+        ?request_options: Docker::request_opts
+      ) -> nil
+
+      def logs: (
+        String id,
+        ?follow: bool,
+        ?since: Integer,
+        ?stderr: bool,
+        ?stdout: bool,
+        ?tail: String,
+        ?timestamps: bool,
+        ?until_: Integer,
+        ?request_options: Docker::request_opts
+      ) -> StringIO
+
+      def start: (
+        String id,
+        ?detach_keys: String,
+        ?request_options: Docker::request_opts
+      ) -> nil
+
+      def stop: (
+        String id,
+        ?signal: String,
+        ?t: Integer,
+        ?request_options: Docker::request_opts
+      ) -> nil
+
+      def initialize: (client: Docker::Client) -> void
+    end
+  end
+end

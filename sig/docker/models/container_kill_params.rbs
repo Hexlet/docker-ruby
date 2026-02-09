@@ -1,0 +1,25 @@
+module Docker
+  module Models
+    type container_kill_params =
+      { signal: String } & Docker::Internal::Type::request_parameters
+
+    class ContainerKillParams < Docker::Internal::Type::BaseModel
+      extend Docker::Internal::Type::RequestParameters::Converter
+      include Docker::Internal::Type::RequestParameters
+
+      attr_reader signal: String?
+
+      def signal=: (String) -> String
+
+      def initialize: (
+        ?signal: String,
+        ?request_options: Docker::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        signal: String,
+        request_options: Docker::RequestOptions
+      }
+    end
+  end
+end

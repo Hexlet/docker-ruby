@@ -1,0 +1,38 @@
+module Docker
+  module Models
+    type auth_login_params =
+      { password: String, serveraddress: String, username: String }
+      & Docker::Internal::Type::request_parameters
+
+    class AuthLoginParams < Docker::Internal::Type::BaseModel
+      extend Docker::Internal::Type::RequestParameters::Converter
+      include Docker::Internal::Type::RequestParameters
+
+      attr_reader password: String?
+
+      def password=: (String) -> String
+
+      attr_reader serveraddress: String?
+
+      def serveraddress=: (String) -> String
+
+      attr_reader username: String?
+
+      def username=: (String) -> String
+
+      def initialize: (
+        ?password: String,
+        ?serveraddress: String,
+        ?username: String,
+        ?request_options: Docker::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        password: String,
+        serveraddress: String,
+        username: String,
+        request_options: Docker::RequestOptions
+      }
+    end
+  end
+end

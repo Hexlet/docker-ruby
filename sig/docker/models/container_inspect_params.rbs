@@ -1,0 +1,22 @@
+module Docker
+  module Models
+    type container_inspect_params =
+      { size: bool } & Docker::Internal::Type::request_parameters
+
+    class ContainerInspectParams < Docker::Internal::Type::BaseModel
+      extend Docker::Internal::Type::RequestParameters::Converter
+      include Docker::Internal::Type::RequestParameters
+
+      attr_reader size: bool?
+
+      def size=: (bool) -> bool
+
+      def initialize: (
+        ?size: bool,
+        ?request_options: Docker::request_opts
+      ) -> void
+
+      def to_hash: -> { size: bool, request_options: Docker::RequestOptions }
+    end
+  end
+end

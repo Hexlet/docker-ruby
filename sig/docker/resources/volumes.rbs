@@ -1,0 +1,28 @@
+module Docker
+  module Resources
+    class Volumes
+      def create: (
+        create_request: Docker::CreateRequest,
+        ?request_options: Docker::request_opts
+      ) -> Docker::Volume
+
+      def list: (
+        ?filters: String,
+        ?request_options: Docker::request_opts
+      ) -> Docker::Models::VolumeListResponse
+
+      def delete: (
+        String name,
+        ?force: bool,
+        ?request_options: Docker::request_opts
+      ) -> nil
+
+      def inspect_: (
+        String name,
+        ?request_options: Docker::request_opts
+      ) -> Docker::Volume
+
+      def initialize: (client: Docker::Client) -> void
+    end
+  end
+end
