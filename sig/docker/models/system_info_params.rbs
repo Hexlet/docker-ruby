@@ -1,0 +1,14 @@
+module Docker
+  module Models
+    type system_info_params = {  } & Docker::Internal::Type::request_parameters
+
+    class SystemInfoParams < Docker::Internal::Type::BaseModel
+      extend Docker::Internal::Type::RequestParameters::Converter
+      include Docker::Internal::Type::RequestParameters
+
+      def initialize: (?request_options: Docker::request_opts) -> void
+
+      def to_hash: -> { request_options: Docker::RequestOptions }
+    end
+  end
+end

@@ -1,0 +1,1969 @@
+module Docker
+  module Models
+    type container =
+      {
+        app_armor_profile: String,
+        args: ::Array[String],
+        config: Docker::Config,
+        created: String?,
+        driver: String,
+        exec_ids: ::Array[String]?,
+        graph_driver: Docker::Container::GraphDriver,
+        host_config: Docker::Container::HostConfig,
+        hostname_path: String,
+        hosts_path: String,
+        id: String,
+        image: String,
+        image_manifest_descriptor: Docker::Container::ImageManifestDescriptor,
+        log_path: String?,
+        mount_label: String,
+        mounts: ::Array[Docker::Container::Mount],
+        name: String,
+        network_settings: Docker::Container::NetworkSettings,
+        path: String,
+        platform: String,
+        process_label: String,
+        resolv_conf_path: String,
+        restart_count: Integer,
+        size_root_fs: Integer?,
+        size_rw: Integer?,
+        state: Docker::Container::State?,
+        storage: Docker::Container::Storage
+      }
+
+    class Container < Docker::Internal::Type::BaseModel
+      attr_reader app_armor_profile: String?
+
+      def app_armor_profile=: (String) -> String
+
+      attr_reader args: ::Array[String]?
+
+      def args=: (::Array[String]) -> ::Array[String]
+
+      attr_reader config: Docker::Config?
+
+      def config=: (Docker::Config) -> Docker::Config
+
+      attr_accessor created: String?
+
+      attr_reader driver: String?
+
+      def driver=: (String) -> String
+
+      attr_accessor exec_ids: ::Array[String]?
+
+      attr_reader graph_driver: Docker::Container::GraphDriver?
+
+      def graph_driver=: (
+        Docker::Container::GraphDriver
+      ) -> Docker::Container::GraphDriver
+
+      attr_reader host_config: Docker::Container::HostConfig?
+
+      def host_config=: (
+        Docker::Container::HostConfig
+      ) -> Docker::Container::HostConfig
+
+      attr_reader hostname_path: String?
+
+      def hostname_path=: (String) -> String
+
+      attr_reader hosts_path: String?
+
+      def hosts_path=: (String) -> String
+
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      attr_reader image: String?
+
+      def image=: (String) -> String
+
+      attr_reader image_manifest_descriptor: Docker::Container::ImageManifestDescriptor?
+
+      def image_manifest_descriptor=: (
+        Docker::Container::ImageManifestDescriptor
+      ) -> Docker::Container::ImageManifestDescriptor
+
+      attr_accessor log_path: String?
+
+      attr_reader mount_label: String?
+
+      def mount_label=: (String) -> String
+
+      attr_reader mounts: ::Array[Docker::Container::Mount]?
+
+      def mounts=: (
+        ::Array[Docker::Container::Mount]
+      ) -> ::Array[Docker::Container::Mount]
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_reader network_settings: Docker::Container::NetworkSettings?
+
+      def network_settings=: (
+        Docker::Container::NetworkSettings
+      ) -> Docker::Container::NetworkSettings
+
+      attr_reader path: String?
+
+      def path=: (String) -> String
+
+      attr_reader platform: String?
+
+      def platform=: (String) -> String
+
+      attr_reader process_label: String?
+
+      def process_label=: (String) -> String
+
+      attr_reader resolv_conf_path: String?
+
+      def resolv_conf_path=: (String) -> String
+
+      attr_reader restart_count: Integer?
+
+      def restart_count=: (Integer) -> Integer
+
+      attr_accessor size_root_fs: Integer?
+
+      attr_accessor size_rw: Integer?
+
+      attr_accessor state: Docker::Container::State?
+
+      attr_reader storage: Docker::Container::Storage?
+
+      def storage=: (Docker::Container::Storage) -> Docker::Container::Storage
+
+      def initialize: (
+        ?app_armor_profile: String,
+        ?args: ::Array[String],
+        ?config: Docker::Config,
+        ?created: String?,
+        ?driver: String,
+        ?exec_ids: ::Array[String]?,
+        ?graph_driver: Docker::Container::GraphDriver,
+        ?host_config: Docker::Container::HostConfig,
+        ?hostname_path: String,
+        ?hosts_path: String,
+        ?id: String,
+        ?image: String,
+        ?image_manifest_descriptor: Docker::Container::ImageManifestDescriptor,
+        ?log_path: String?,
+        ?mount_label: String,
+        ?mounts: ::Array[Docker::Container::Mount],
+        ?name: String,
+        ?network_settings: Docker::Container::NetworkSettings,
+        ?path: String,
+        ?platform: String,
+        ?process_label: String,
+        ?resolv_conf_path: String,
+        ?restart_count: Integer,
+        ?size_root_fs: Integer?,
+        ?size_rw: Integer?,
+        ?state: Docker::Container::State?,
+        ?storage: Docker::Container::Storage
+      ) -> void
+
+      def to_hash: -> {
+        app_armor_profile: String,
+        args: ::Array[String],
+        config: Docker::Config,
+        created: String?,
+        driver: String,
+        exec_ids: ::Array[String]?,
+        graph_driver: Docker::Container::GraphDriver,
+        host_config: Docker::Container::HostConfig,
+        hostname_path: String,
+        hosts_path: String,
+        id: String,
+        image: String,
+        image_manifest_descriptor: Docker::Container::ImageManifestDescriptor,
+        log_path: String?,
+        mount_label: String,
+        mounts: ::Array[Docker::Container::Mount],
+        name: String,
+        network_settings: Docker::Container::NetworkSettings,
+        path: String,
+        platform: String,
+        process_label: String,
+        resolv_conf_path: String,
+        restart_count: Integer,
+        size_root_fs: Integer?,
+        size_rw: Integer?,
+        state: Docker::Container::State?,
+        storage: Docker::Container::Storage
+      }
+
+      type graph_driver = { data: ::Hash[Symbol, String], name: String }
+
+      class GraphDriver < Docker::Internal::Type::BaseModel
+        attr_accessor data: ::Hash[Symbol, String]
+
+        attr_accessor name: String
+
+        def initialize: (data: ::Hash[Symbol, String], name: String) -> void
+
+        def to_hash: -> { data: ::Hash[Symbol, String], name: String }
+      end
+
+      type host_config =
+        {
+          annotations: ::Hash[Symbol, String],
+          auto_remove: bool,
+          binds: ::Array[String],
+          blkio_device_read_bps: ::Array[Docker::Container::HostConfig::BlkioDeviceReadBp],
+          blkio_device_read_i_ops: ::Array[Docker::Container::HostConfig::BlkioDeviceReadIOp],
+          blkio_device_write_bps: ::Array[Docker::Container::HostConfig::BlkioDeviceWriteBp],
+          blkio_device_write_i_ops: ::Array[Docker::Container::HostConfig::BlkioDeviceWriteIOp],
+          blkio_weight: Integer,
+          blkio_weight_device: ::Array[Docker::Container::HostConfig::BlkioWeightDevice],
+          cap_add: ::Array[String],
+          cap_drop: ::Array[String],
+          cgroup: String,
+          cgroupns_mode: Docker::Models::Container::HostConfig::cgroupns_mode,
+          cgroup_parent: String,
+          console_size: ::Array[Integer]?,
+          container_id_file: String,
+          cpu_count: Integer,
+          cpu_percent: Integer,
+          cpu_period: Integer,
+          cpu_quota: Integer,
+          cpu_realtime_period: Integer,
+          cpu_realtime_runtime: Integer,
+          cpuset_cpus: String,
+          cpuset_mems: String,
+          cpu_shares: Integer,
+          device_cgroup_rules: ::Array[String],
+          device_requests: ::Array[Docker::Container::HostConfig::DeviceRequest],
+          devices: ::Array[Docker::Container::HostConfig::Device],
+          dns: ::Array[String],
+          dns_options: ::Array[String],
+          dns_search: ::Array[String],
+          extra_hosts: ::Array[String],
+          group_add: ::Array[String],
+          init: bool?,
+          io_maximum_bandwidth: Integer,
+          io_maximum_i_ops: Integer,
+          ipc_mode: String,
+          isolation: Docker::Models::Container::HostConfig::isolation,
+          links: ::Array[String],
+          log_config: Docker::Container::HostConfig::LogConfig,
+          masked_paths: ::Array[String],
+          memory: Integer,
+          memory_reservation: Integer,
+          memory_swap: Integer,
+          memory_swappiness: Integer,
+          mounts: ::Array[Docker::Container::HostConfig::Mount],
+          nano_cpus: Integer,
+          network_mode: String,
+          oom_kill_disable: bool,
+          oom_score_adj: Integer,
+          pid_mode: String,
+          pids_limit: Integer?,
+          port_bindings: ::Hash[Symbol, ::Array[Docker::Container::HostConfig::PortBinding]],
+          privileged: bool,
+          publish_all_ports: bool,
+          readonly_paths: ::Array[String],
+          readonly_rootfs: bool,
+          restart_policy: Docker::Container::HostConfig::RestartPolicy,
+          runtime: String?,
+          security_opt: ::Array[String],
+          shm_size: Integer,
+          storage_opt: ::Hash[Symbol, String],
+          sysctls: ::Hash[Symbol, String]?,
+          tmpfs: ::Hash[Symbol, String],
+          ulimits: ::Array[Docker::Container::HostConfig::Ulimit],
+          userns_mode: String,
+          uts_mode: String,
+          volume_driver: String,
+          volumes_from: ::Array[String]
+        }
+
+      class HostConfig < Docker::Internal::Type::BaseModel
+        attr_reader annotations: ::Hash[Symbol, String]?
+
+        def annotations=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+        attr_reader auto_remove: bool?
+
+        def auto_remove=: (bool) -> bool
+
+        attr_reader binds: ::Array[String]?
+
+        def binds=: (::Array[String]) -> ::Array[String]
+
+        attr_reader blkio_device_read_bps: ::Array[Docker::Container::HostConfig::BlkioDeviceReadBp]?
+
+        def blkio_device_read_bps=: (
+          ::Array[Docker::Container::HostConfig::BlkioDeviceReadBp]
+        ) -> ::Array[Docker::Container::HostConfig::BlkioDeviceReadBp]
+
+        attr_reader blkio_device_read_i_ops: ::Array[Docker::Container::HostConfig::BlkioDeviceReadIOp]?
+
+        def blkio_device_read_i_ops=: (
+          ::Array[Docker::Container::HostConfig::BlkioDeviceReadIOp]
+        ) -> ::Array[Docker::Container::HostConfig::BlkioDeviceReadIOp]
+
+        attr_reader blkio_device_write_bps: ::Array[Docker::Container::HostConfig::BlkioDeviceWriteBp]?
+
+        def blkio_device_write_bps=: (
+          ::Array[Docker::Container::HostConfig::BlkioDeviceWriteBp]
+        ) -> ::Array[Docker::Container::HostConfig::BlkioDeviceWriteBp]
+
+        attr_reader blkio_device_write_i_ops: ::Array[Docker::Container::HostConfig::BlkioDeviceWriteIOp]?
+
+        def blkio_device_write_i_ops=: (
+          ::Array[Docker::Container::HostConfig::BlkioDeviceWriteIOp]
+        ) -> ::Array[Docker::Container::HostConfig::BlkioDeviceWriteIOp]
+
+        attr_reader blkio_weight: Integer?
+
+        def blkio_weight=: (Integer) -> Integer
+
+        attr_reader blkio_weight_device: ::Array[Docker::Container::HostConfig::BlkioWeightDevice]?
+
+        def blkio_weight_device=: (
+          ::Array[Docker::Container::HostConfig::BlkioWeightDevice]
+        ) -> ::Array[Docker::Container::HostConfig::BlkioWeightDevice]
+
+        attr_reader cap_add: ::Array[String]?
+
+        def cap_add=: (::Array[String]) -> ::Array[String]
+
+        attr_reader cap_drop: ::Array[String]?
+
+        def cap_drop=: (::Array[String]) -> ::Array[String]
+
+        attr_reader cgroup: String?
+
+        def cgroup=: (String) -> String
+
+        attr_reader cgroupns_mode: Docker::Models::Container::HostConfig::cgroupns_mode?
+
+        def cgroupns_mode=: (
+          Docker::Models::Container::HostConfig::cgroupns_mode
+        ) -> Docker::Models::Container::HostConfig::cgroupns_mode
+
+        attr_reader cgroup_parent: String?
+
+        def cgroup_parent=: (String) -> String
+
+        attr_accessor console_size: ::Array[Integer]?
+
+        attr_reader container_id_file: String?
+
+        def container_id_file=: (String) -> String
+
+        attr_reader cpu_count: Integer?
+
+        def cpu_count=: (Integer) -> Integer
+
+        attr_reader cpu_percent: Integer?
+
+        def cpu_percent=: (Integer) -> Integer
+
+        attr_reader cpu_period: Integer?
+
+        def cpu_period=: (Integer) -> Integer
+
+        attr_reader cpu_quota: Integer?
+
+        def cpu_quota=: (Integer) -> Integer
+
+        attr_reader cpu_realtime_period: Integer?
+
+        def cpu_realtime_period=: (Integer) -> Integer
+
+        attr_reader cpu_realtime_runtime: Integer?
+
+        def cpu_realtime_runtime=: (Integer) -> Integer
+
+        attr_reader cpuset_cpus: String?
+
+        def cpuset_cpus=: (String) -> String
+
+        attr_reader cpuset_mems: String?
+
+        def cpuset_mems=: (String) -> String
+
+        attr_reader cpu_shares: Integer?
+
+        def cpu_shares=: (Integer) -> Integer
+
+        attr_reader device_cgroup_rules: ::Array[String]?
+
+        def device_cgroup_rules=: (::Array[String]) -> ::Array[String]
+
+        attr_reader device_requests: ::Array[Docker::Container::HostConfig::DeviceRequest]?
+
+        def device_requests=: (
+          ::Array[Docker::Container::HostConfig::DeviceRequest]
+        ) -> ::Array[Docker::Container::HostConfig::DeviceRequest]
+
+        attr_reader devices: ::Array[Docker::Container::HostConfig::Device]?
+
+        def devices=: (
+          ::Array[Docker::Container::HostConfig::Device]
+        ) -> ::Array[Docker::Container::HostConfig::Device]
+
+        attr_reader dns: ::Array[String]?
+
+        def dns=: (::Array[String]) -> ::Array[String]
+
+        attr_reader dns_options: ::Array[String]?
+
+        def dns_options=: (::Array[String]) -> ::Array[String]
+
+        attr_reader dns_search: ::Array[String]?
+
+        def dns_search=: (::Array[String]) -> ::Array[String]
+
+        attr_reader extra_hosts: ::Array[String]?
+
+        def extra_hosts=: (::Array[String]) -> ::Array[String]
+
+        attr_reader group_add: ::Array[String]?
+
+        def group_add=: (::Array[String]) -> ::Array[String]
+
+        attr_accessor init: bool?
+
+        attr_reader io_maximum_bandwidth: Integer?
+
+        def io_maximum_bandwidth=: (Integer) -> Integer
+
+        attr_reader io_maximum_i_ops: Integer?
+
+        def io_maximum_i_ops=: (Integer) -> Integer
+
+        attr_reader ipc_mode: String?
+
+        def ipc_mode=: (String) -> String
+
+        attr_reader isolation: Docker::Models::Container::HostConfig::isolation?
+
+        def isolation=: (
+          Docker::Models::Container::HostConfig::isolation
+        ) -> Docker::Models::Container::HostConfig::isolation
+
+        attr_reader links: ::Array[String]?
+
+        def links=: (::Array[String]) -> ::Array[String]
+
+        attr_reader log_config: Docker::Container::HostConfig::LogConfig?
+
+        def log_config=: (
+          Docker::Container::HostConfig::LogConfig
+        ) -> Docker::Container::HostConfig::LogConfig
+
+        attr_reader masked_paths: ::Array[String]?
+
+        def masked_paths=: (::Array[String]) -> ::Array[String]
+
+        attr_reader memory: Integer?
+
+        def memory=: (Integer) -> Integer
+
+        attr_reader memory_reservation: Integer?
+
+        def memory_reservation=: (Integer) -> Integer
+
+        attr_reader memory_swap: Integer?
+
+        def memory_swap=: (Integer) -> Integer
+
+        attr_reader memory_swappiness: Integer?
+
+        def memory_swappiness=: (Integer) -> Integer
+
+        attr_reader mounts: ::Array[Docker::Container::HostConfig::Mount]?
+
+        def mounts=: (
+          ::Array[Docker::Container::HostConfig::Mount]
+        ) -> ::Array[Docker::Container::HostConfig::Mount]
+
+        attr_reader nano_cpus: Integer?
+
+        def nano_cpus=: (Integer) -> Integer
+
+        attr_reader network_mode: String?
+
+        def network_mode=: (String) -> String
+
+        attr_reader oom_kill_disable: bool?
+
+        def oom_kill_disable=: (bool) -> bool
+
+        attr_reader oom_score_adj: Integer?
+
+        def oom_score_adj=: (Integer) -> Integer
+
+        attr_reader pid_mode: String?
+
+        def pid_mode=: (String) -> String
+
+        attr_accessor pids_limit: Integer?
+
+        attr_reader port_bindings: ::Hash[Symbol, ::Array[Docker::Container::HostConfig::PortBinding]]?
+
+        def port_bindings=: (
+          ::Hash[Symbol, ::Array[Docker::Container::HostConfig::PortBinding]]
+        ) -> ::Hash[Symbol, ::Array[Docker::Container::HostConfig::PortBinding]]
+
+        attr_reader privileged: bool?
+
+        def privileged=: (bool) -> bool
+
+        attr_reader publish_all_ports: bool?
+
+        def publish_all_ports=: (bool) -> bool
+
+        attr_reader readonly_paths: ::Array[String]?
+
+        def readonly_paths=: (::Array[String]) -> ::Array[String]
+
+        attr_reader readonly_rootfs: bool?
+
+        def readonly_rootfs=: (bool) -> bool
+
+        attr_reader restart_policy: Docker::Container::HostConfig::RestartPolicy?
+
+        def restart_policy=: (
+          Docker::Container::HostConfig::RestartPolicy
+        ) -> Docker::Container::HostConfig::RestartPolicy
+
+        attr_accessor runtime: String?
+
+        attr_reader security_opt: ::Array[String]?
+
+        def security_opt=: (::Array[String]) -> ::Array[String]
+
+        attr_reader shm_size: Integer?
+
+        def shm_size=: (Integer) -> Integer
+
+        attr_reader storage_opt: ::Hash[Symbol, String]?
+
+        def storage_opt=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+        attr_accessor sysctls: ::Hash[Symbol, String]?
+
+        attr_reader tmpfs: ::Hash[Symbol, String]?
+
+        def tmpfs=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+        attr_reader ulimits: ::Array[Docker::Container::HostConfig::Ulimit]?
+
+        def ulimits=: (
+          ::Array[Docker::Container::HostConfig::Ulimit]
+        ) -> ::Array[Docker::Container::HostConfig::Ulimit]
+
+        attr_reader userns_mode: String?
+
+        def userns_mode=: (String) -> String
+
+        attr_reader uts_mode: String?
+
+        def uts_mode=: (String) -> String
+
+        attr_reader volume_driver: String?
+
+        def volume_driver=: (String) -> String
+
+        attr_reader volumes_from: ::Array[String]?
+
+        def volumes_from=: (::Array[String]) -> ::Array[String]
+
+        def initialize: (
+          ?annotations: ::Hash[Symbol, String],
+          ?auto_remove: bool,
+          ?binds: ::Array[String],
+          ?blkio_device_read_bps: ::Array[Docker::Container::HostConfig::BlkioDeviceReadBp],
+          ?blkio_device_read_i_ops: ::Array[Docker::Container::HostConfig::BlkioDeviceReadIOp],
+          ?blkio_device_write_bps: ::Array[Docker::Container::HostConfig::BlkioDeviceWriteBp],
+          ?blkio_device_write_i_ops: ::Array[Docker::Container::HostConfig::BlkioDeviceWriteIOp],
+          ?blkio_weight: Integer,
+          ?blkio_weight_device: ::Array[Docker::Container::HostConfig::BlkioWeightDevice],
+          ?cap_add: ::Array[String],
+          ?cap_drop: ::Array[String],
+          ?cgroup: String,
+          ?cgroupns_mode: Docker::Models::Container::HostConfig::cgroupns_mode,
+          ?cgroup_parent: String,
+          ?console_size: ::Array[Integer]?,
+          ?container_id_file: String,
+          ?cpu_count: Integer,
+          ?cpu_percent: Integer,
+          ?cpu_period: Integer,
+          ?cpu_quota: Integer,
+          ?cpu_realtime_period: Integer,
+          ?cpu_realtime_runtime: Integer,
+          ?cpuset_cpus: String,
+          ?cpuset_mems: String,
+          ?cpu_shares: Integer,
+          ?device_cgroup_rules: ::Array[String],
+          ?device_requests: ::Array[Docker::Container::HostConfig::DeviceRequest],
+          ?devices: ::Array[Docker::Container::HostConfig::Device],
+          ?dns: ::Array[String],
+          ?dns_options: ::Array[String],
+          ?dns_search: ::Array[String],
+          ?extra_hosts: ::Array[String],
+          ?group_add: ::Array[String],
+          ?init: bool?,
+          ?io_maximum_bandwidth: Integer,
+          ?io_maximum_i_ops: Integer,
+          ?ipc_mode: String,
+          ?isolation: Docker::Models::Container::HostConfig::isolation,
+          ?links: ::Array[String],
+          ?log_config: Docker::Container::HostConfig::LogConfig,
+          ?masked_paths: ::Array[String],
+          ?memory: Integer,
+          ?memory_reservation: Integer,
+          ?memory_swap: Integer,
+          ?memory_swappiness: Integer,
+          ?mounts: ::Array[Docker::Container::HostConfig::Mount],
+          ?nano_cpus: Integer,
+          ?network_mode: String,
+          ?oom_kill_disable: bool,
+          ?oom_score_adj: Integer,
+          ?pid_mode: String,
+          ?pids_limit: Integer?,
+          ?port_bindings: ::Hash[Symbol, ::Array[Docker::Container::HostConfig::PortBinding]],
+          ?privileged: bool,
+          ?publish_all_ports: bool,
+          ?readonly_paths: ::Array[String],
+          ?readonly_rootfs: bool,
+          ?restart_policy: Docker::Container::HostConfig::RestartPolicy,
+          ?runtime: String?,
+          ?security_opt: ::Array[String],
+          ?shm_size: Integer,
+          ?storage_opt: ::Hash[Symbol, String],
+          ?sysctls: ::Hash[Symbol, String]?,
+          ?tmpfs: ::Hash[Symbol, String],
+          ?ulimits: ::Array[Docker::Container::HostConfig::Ulimit],
+          ?userns_mode: String,
+          ?uts_mode: String,
+          ?volume_driver: String,
+          ?volumes_from: ::Array[String]
+        ) -> void
+
+        def to_hash: -> {
+          annotations: ::Hash[Symbol, String],
+          auto_remove: bool,
+          binds: ::Array[String],
+          blkio_device_read_bps: ::Array[Docker::Container::HostConfig::BlkioDeviceReadBp],
+          blkio_device_read_i_ops: ::Array[Docker::Container::HostConfig::BlkioDeviceReadIOp],
+          blkio_device_write_bps: ::Array[Docker::Container::HostConfig::BlkioDeviceWriteBp],
+          blkio_device_write_i_ops: ::Array[Docker::Container::HostConfig::BlkioDeviceWriteIOp],
+          blkio_weight: Integer,
+          blkio_weight_device: ::Array[Docker::Container::HostConfig::BlkioWeightDevice],
+          cap_add: ::Array[String],
+          cap_drop: ::Array[String],
+          cgroup: String,
+          cgroupns_mode: Docker::Models::Container::HostConfig::cgroupns_mode,
+          cgroup_parent: String,
+          console_size: ::Array[Integer]?,
+          container_id_file: String,
+          cpu_count: Integer,
+          cpu_percent: Integer,
+          cpu_period: Integer,
+          cpu_quota: Integer,
+          cpu_realtime_period: Integer,
+          cpu_realtime_runtime: Integer,
+          cpuset_cpus: String,
+          cpuset_mems: String,
+          cpu_shares: Integer,
+          device_cgroup_rules: ::Array[String],
+          device_requests: ::Array[Docker::Container::HostConfig::DeviceRequest],
+          devices: ::Array[Docker::Container::HostConfig::Device],
+          dns: ::Array[String],
+          dns_options: ::Array[String],
+          dns_search: ::Array[String],
+          extra_hosts: ::Array[String],
+          group_add: ::Array[String],
+          init: bool?,
+          io_maximum_bandwidth: Integer,
+          io_maximum_i_ops: Integer,
+          ipc_mode: String,
+          isolation: Docker::Models::Container::HostConfig::isolation,
+          links: ::Array[String],
+          log_config: Docker::Container::HostConfig::LogConfig,
+          masked_paths: ::Array[String],
+          memory: Integer,
+          memory_reservation: Integer,
+          memory_swap: Integer,
+          memory_swappiness: Integer,
+          mounts: ::Array[Docker::Container::HostConfig::Mount],
+          nano_cpus: Integer,
+          network_mode: String,
+          oom_kill_disable: bool,
+          oom_score_adj: Integer,
+          pid_mode: String,
+          pids_limit: Integer?,
+          port_bindings: ::Hash[Symbol, ::Array[Docker::Container::HostConfig::PortBinding]],
+          privileged: bool,
+          publish_all_ports: bool,
+          readonly_paths: ::Array[String],
+          readonly_rootfs: bool,
+          restart_policy: Docker::Container::HostConfig::RestartPolicy,
+          runtime: String?,
+          security_opt: ::Array[String],
+          shm_size: Integer,
+          storage_opt: ::Hash[Symbol, String],
+          sysctls: ::Hash[Symbol, String]?,
+          tmpfs: ::Hash[Symbol, String],
+          ulimits: ::Array[Docker::Container::HostConfig::Ulimit],
+          userns_mode: String,
+          uts_mode: String,
+          volume_driver: String,
+          volumes_from: ::Array[String]
+        }
+
+        type blkio_device_read_bp = { path: String, rate: Integer }
+
+        class BlkioDeviceReadBp < Docker::Internal::Type::BaseModel
+          attr_reader path: String?
+
+          def path=: (String) -> String
+
+          attr_reader rate: Integer?
+
+          def rate=: (Integer) -> Integer
+
+          def initialize: (?path: String, ?rate: Integer) -> void
+
+          def to_hash: -> { path: String, rate: Integer }
+        end
+
+        type blkio_device_read_i_op = { path: String, rate: Integer }
+
+        class BlkioDeviceReadIOp < Docker::Internal::Type::BaseModel
+          attr_reader path: String?
+
+          def path=: (String) -> String
+
+          attr_reader rate: Integer?
+
+          def rate=: (Integer) -> Integer
+
+          def initialize: (?path: String, ?rate: Integer) -> void
+
+          def to_hash: -> { path: String, rate: Integer }
+        end
+
+        type blkio_device_write_bp = { path: String, rate: Integer }
+
+        class BlkioDeviceWriteBp < Docker::Internal::Type::BaseModel
+          attr_reader path: String?
+
+          def path=: (String) -> String
+
+          attr_reader rate: Integer?
+
+          def rate=: (Integer) -> Integer
+
+          def initialize: (?path: String, ?rate: Integer) -> void
+
+          def to_hash: -> { path: String, rate: Integer }
+        end
+
+        type blkio_device_write_i_op = { path: String, rate: Integer }
+
+        class BlkioDeviceWriteIOp < Docker::Internal::Type::BaseModel
+          attr_reader path: String?
+
+          def path=: (String) -> String
+
+          attr_reader rate: Integer?
+
+          def rate=: (Integer) -> Integer
+
+          def initialize: (?path: String, ?rate: Integer) -> void
+
+          def to_hash: -> { path: String, rate: Integer }
+        end
+
+        type blkio_weight_device = { path: String, weight: Integer }
+
+        class BlkioWeightDevice < Docker::Internal::Type::BaseModel
+          attr_reader path: String?
+
+          def path=: (String) -> String
+
+          attr_reader weight: Integer?
+
+          def weight=: (Integer) -> Integer
+
+          def initialize: (?path: String, ?weight: Integer) -> void
+
+          def to_hash: -> { path: String, weight: Integer }
+        end
+
+        type cgroupns_mode = :private | :host
+
+        module CgroupnsMode
+          extend Docker::Internal::Type::Enum
+
+          PRIVATE: :private
+          HOST: :host
+
+          def self?.values: -> ::Array[Docker::Models::Container::HostConfig::cgroupns_mode]
+        end
+
+        type device_request =
+          {
+            capabilities: ::Array[::Array[String]],
+            count: Integer,
+            device_ids: ::Array[String],
+            driver: String,
+            options: ::Hash[Symbol, String]
+          }
+
+        class DeviceRequest < Docker::Internal::Type::BaseModel
+          attr_reader capabilities: ::Array[::Array[String]]?
+
+          def capabilities=: (
+            ::Array[::Array[String]]
+          ) -> ::Array[::Array[String]]
+
+          attr_reader count: Integer?
+
+          def count=: (Integer) -> Integer
+
+          attr_reader device_ids: ::Array[String]?
+
+          def device_ids=: (::Array[String]) -> ::Array[String]
+
+          attr_reader driver: String?
+
+          def driver=: (String) -> String
+
+          attr_reader options: ::Hash[Symbol, String]?
+
+          def options=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+          def initialize: (
+            ?capabilities: ::Array[::Array[String]],
+            ?count: Integer,
+            ?device_ids: ::Array[String],
+            ?driver: String,
+            ?options: ::Hash[Symbol, String]
+          ) -> void
+
+          def to_hash: -> {
+            capabilities: ::Array[::Array[String]],
+            count: Integer,
+            device_ids: ::Array[String],
+            driver: String,
+            options: ::Hash[Symbol, String]
+          }
+        end
+
+        type device =
+          {
+            cgroup_permissions: String,
+            path_in_container: String,
+            path_on_host: String
+          }
+
+        class Device < Docker::Internal::Type::BaseModel
+          attr_reader cgroup_permissions: String?
+
+          def cgroup_permissions=: (String) -> String
+
+          attr_reader path_in_container: String?
+
+          def path_in_container=: (String) -> String
+
+          attr_reader path_on_host: String?
+
+          def path_on_host=: (String) -> String
+
+          def initialize: (
+            ?cgroup_permissions: String,
+            ?path_in_container: String,
+            ?path_on_host: String
+          ) -> void
+
+          def to_hash: -> {
+            cgroup_permissions: String,
+            path_in_container: String,
+            path_on_host: String
+          }
+        end
+
+        type isolation = :default | :process | :hyperv | :""
+
+        module Isolation
+          extend Docker::Internal::Type::Enum
+
+          DEFAULT: :default
+          PROCESS: :process
+          HYPERV: :hyperv
+          EMPTY: :""
+
+          def self?.values: -> ::Array[Docker::Models::Container::HostConfig::isolation]
+        end
+
+        type log_config =
+          {
+            config: ::Hash[Symbol, String],
+            type: Docker::Models::Container::HostConfig::LogConfig::type_
+          }
+
+        class LogConfig < Docker::Internal::Type::BaseModel
+          attr_reader config: ::Hash[Symbol, String]?
+
+          def config=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+          attr_reader type: Docker::Models::Container::HostConfig::LogConfig::type_?
+
+          def type=: (
+            Docker::Models::Container::HostConfig::LogConfig::type_
+          ) -> Docker::Models::Container::HostConfig::LogConfig::type_
+
+          def initialize: (
+            ?config: ::Hash[Symbol, String],
+            ?type: Docker::Models::Container::HostConfig::LogConfig::type_
+          ) -> void
+
+          def to_hash: -> {
+            config: ::Hash[Symbol, String],
+            type: Docker::Models::Container::HostConfig::LogConfig::type_
+          }
+
+          type type_ =
+            :local
+            | :"json-file"
+            | :syslog
+            | :journald
+            | :gelf
+            | :fluentd
+            | :awslogs
+            | :splunk
+            | :etwlogs
+            | :none
+
+          module Type
+            extend Docker::Internal::Type::Enum
+
+            LOCAL: :local
+            JSON_FILE: :"json-file"
+            SYSLOG: :syslog
+            JOURNALD: :journald
+            GELF: :gelf
+            FLUENTD: :fluentd
+            AWSLOGS: :awslogs
+            SPLUNK: :splunk
+            ETWLOGS: :etwlogs
+            NONE: :none
+
+            def self?.values: -> ::Array[Docker::Models::Container::HostConfig::LogConfig::type_]
+          end
+        end
+
+        type mount =
+          {
+            bind_options: Docker::Container::HostConfig::Mount::BindOptions,
+            consistency: String,
+            image_options: Docker::Container::HostConfig::Mount::ImageOptions,
+            read_only: bool,
+            source: String,
+            target: String,
+            tmpfs_options: Docker::Container::HostConfig::Mount::TmpfsOptions,
+            type: Docker::Models::Container::HostConfig::Mount::type_,
+            volume_options: Docker::Container::HostConfig::Mount::VolumeOptions
+          }
+
+        class Mount < Docker::Internal::Type::BaseModel
+          attr_reader bind_options: Docker::Container::HostConfig::Mount::BindOptions?
+
+          def bind_options=: (
+            Docker::Container::HostConfig::Mount::BindOptions
+          ) -> Docker::Container::HostConfig::Mount::BindOptions
+
+          attr_reader consistency: String?
+
+          def consistency=: (String) -> String
+
+          attr_reader image_options: Docker::Container::HostConfig::Mount::ImageOptions?
+
+          def image_options=: (
+            Docker::Container::HostConfig::Mount::ImageOptions
+          ) -> Docker::Container::HostConfig::Mount::ImageOptions
+
+          attr_reader read_only: bool?
+
+          def read_only=: (bool) -> bool
+
+          attr_reader source: String?
+
+          def source=: (String) -> String
+
+          attr_reader target: String?
+
+          def target=: (String) -> String
+
+          attr_reader tmpfs_options: Docker::Container::HostConfig::Mount::TmpfsOptions?
+
+          def tmpfs_options=: (
+            Docker::Container::HostConfig::Mount::TmpfsOptions
+          ) -> Docker::Container::HostConfig::Mount::TmpfsOptions
+
+          attr_reader type: Docker::Models::Container::HostConfig::Mount::type_?
+
+          def type=: (
+            Docker::Models::Container::HostConfig::Mount::type_
+          ) -> Docker::Models::Container::HostConfig::Mount::type_
+
+          attr_reader volume_options: Docker::Container::HostConfig::Mount::VolumeOptions?
+
+          def volume_options=: (
+            Docker::Container::HostConfig::Mount::VolumeOptions
+          ) -> Docker::Container::HostConfig::Mount::VolumeOptions
+
+          def initialize: (
+            ?bind_options: Docker::Container::HostConfig::Mount::BindOptions,
+            ?consistency: String,
+            ?image_options: Docker::Container::HostConfig::Mount::ImageOptions,
+            ?read_only: bool,
+            ?source: String,
+            ?target: String,
+            ?tmpfs_options: Docker::Container::HostConfig::Mount::TmpfsOptions,
+            ?type: Docker::Models::Container::HostConfig::Mount::type_,
+            ?volume_options: Docker::Container::HostConfig::Mount::VolumeOptions
+          ) -> void
+
+          def to_hash: -> {
+            bind_options: Docker::Container::HostConfig::Mount::BindOptions,
+            consistency: String,
+            image_options: Docker::Container::HostConfig::Mount::ImageOptions,
+            read_only: bool,
+            source: String,
+            target: String,
+            tmpfs_options: Docker::Container::HostConfig::Mount::TmpfsOptions,
+            type: Docker::Models::Container::HostConfig::Mount::type_,
+            volume_options: Docker::Container::HostConfig::Mount::VolumeOptions
+          }
+
+          type bind_options =
+            {
+              create_mountpoint: bool,
+              non_recursive: bool,
+              propagation: Docker::Models::Container::HostConfig::Mount::BindOptions::propagation,
+              read_only_force_recursive: bool,
+              read_only_non_recursive: bool
+            }
+
+          class BindOptions < Docker::Internal::Type::BaseModel
+            attr_reader create_mountpoint: bool?
+
+            def create_mountpoint=: (bool) -> bool
+
+            attr_reader non_recursive: bool?
+
+            def non_recursive=: (bool) -> bool
+
+            attr_reader propagation: Docker::Models::Container::HostConfig::Mount::BindOptions::propagation?
+
+            def propagation=: (
+              Docker::Models::Container::HostConfig::Mount::BindOptions::propagation
+            ) -> Docker::Models::Container::HostConfig::Mount::BindOptions::propagation
+
+            attr_reader read_only_force_recursive: bool?
+
+            def read_only_force_recursive=: (bool) -> bool
+
+            attr_reader read_only_non_recursive: bool?
+
+            def read_only_non_recursive=: (bool) -> bool
+
+            def initialize: (
+              ?create_mountpoint: bool,
+              ?non_recursive: bool,
+              ?propagation: Docker::Models::Container::HostConfig::Mount::BindOptions::propagation,
+              ?read_only_force_recursive: bool,
+              ?read_only_non_recursive: bool
+            ) -> void
+
+            def to_hash: -> {
+              create_mountpoint: bool,
+              non_recursive: bool,
+              propagation: Docker::Models::Container::HostConfig::Mount::BindOptions::propagation,
+              read_only_force_recursive: bool,
+              read_only_non_recursive: bool
+            }
+
+            type propagation =
+              :private | :rprivate | :shared | :rshared | :slave | :rslave
+
+            module Propagation
+              extend Docker::Internal::Type::Enum
+
+              PRIVATE: :private
+              RPRIVATE: :rprivate
+              SHARED: :shared
+              RSHARED: :rshared
+              SLAVE: :slave
+              RSLAVE: :rslave
+
+              def self?.values: -> ::Array[Docker::Models::Container::HostConfig::Mount::BindOptions::propagation]
+            end
+          end
+
+          type image_options = { subpath: String }
+
+          class ImageOptions < Docker::Internal::Type::BaseModel
+            attr_reader subpath: String?
+
+            def subpath=: (String) -> String
+
+            def initialize: (?subpath: String) -> void
+
+            def to_hash: -> { subpath: String }
+          end
+
+          type tmpfs_options =
+            {
+              mode: Integer,
+              options: ::Array[::Array[String]],
+              size_bytes: Integer
+            }
+
+          class TmpfsOptions < Docker::Internal::Type::BaseModel
+            attr_reader mode: Integer?
+
+            def mode=: (Integer) -> Integer
+
+            attr_reader options: ::Array[::Array[String]]?
+
+            def options=: (::Array[::Array[String]]) -> ::Array[::Array[String]]
+
+            attr_reader size_bytes: Integer?
+
+            def size_bytes=: (Integer) -> Integer
+
+            def initialize: (
+              ?mode: Integer,
+              ?options: ::Array[::Array[String]],
+              ?size_bytes: Integer
+            ) -> void
+
+            def to_hash: -> {
+              mode: Integer,
+              options: ::Array[::Array[String]],
+              size_bytes: Integer
+            }
+          end
+
+          type type_ = :bind | :cluster | :image | :npipe | :tmpfs | :volume
+
+          module Type
+            extend Docker::Internal::Type::Enum
+
+            BIND: :bind
+            CLUSTER: :cluster
+            IMAGE: :image
+            NPIPE: :npipe
+            TMPFS: :tmpfs
+            VOLUME: :volume
+
+            def self?.values: -> ::Array[Docker::Models::Container::HostConfig::Mount::type_]
+          end
+
+          type volume_options =
+            {
+              driver_config: Docker::Container::HostConfig::Mount::VolumeOptions::DriverConfig,
+              labels: ::Hash[Symbol, String],
+              no_copy: bool,
+              subpath: String
+            }
+
+          class VolumeOptions < Docker::Internal::Type::BaseModel
+            attr_reader driver_config: Docker::Container::HostConfig::Mount::VolumeOptions::DriverConfig?
+
+            def driver_config=: (
+              Docker::Container::HostConfig::Mount::VolumeOptions::DriverConfig
+            ) -> Docker::Container::HostConfig::Mount::VolumeOptions::DriverConfig
+
+            attr_reader labels: ::Hash[Symbol, String]?
+
+            def labels=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+            attr_reader no_copy: bool?
+
+            def no_copy=: (bool) -> bool
+
+            attr_reader subpath: String?
+
+            def subpath=: (String) -> String
+
+            def initialize: (
+              ?driver_config: Docker::Container::HostConfig::Mount::VolumeOptions::DriverConfig,
+              ?labels: ::Hash[Symbol, String],
+              ?no_copy: bool,
+              ?subpath: String
+            ) -> void
+
+            def to_hash: -> {
+              driver_config: Docker::Container::HostConfig::Mount::VolumeOptions::DriverConfig,
+              labels: ::Hash[Symbol, String],
+              no_copy: bool,
+              subpath: String
+            }
+
+            type driver_config =
+              { name: String, options: ::Hash[Symbol, String] }
+
+            class DriverConfig < Docker::Internal::Type::BaseModel
+              attr_reader name: String?
+
+              def name=: (String) -> String
+
+              attr_reader options: ::Hash[Symbol, String]?
+
+              def options=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+              def initialize: (
+                ?name: String,
+                ?options: ::Hash[Symbol, String]
+              ) -> void
+
+              def to_hash: -> { name: String, options: ::Hash[Symbol, String] }
+            end
+          end
+        end
+
+        type port_binding = { host_ip: String, host_port: String }
+
+        class PortBinding < Docker::Internal::Type::BaseModel
+          attr_reader host_ip: String?
+
+          def host_ip=: (String) -> String
+
+          attr_reader host_port: String?
+
+          def host_port=: (String) -> String
+
+          def initialize: (?host_ip: String, ?host_port: String) -> void
+
+          def to_hash: -> { host_ip: String, host_port: String }
+        end
+
+        type restart_policy =
+          {
+            maximum_retry_count: Integer,
+            name: Docker::Models::Container::HostConfig::RestartPolicy::name_
+          }
+
+        class RestartPolicy < Docker::Internal::Type::BaseModel
+          attr_reader maximum_retry_count: Integer?
+
+          def maximum_retry_count=: (Integer) -> Integer
+
+          attr_reader name: Docker::Models::Container::HostConfig::RestartPolicy::name_?
+
+          def name=: (
+            Docker::Models::Container::HostConfig::RestartPolicy::name_
+          ) -> Docker::Models::Container::HostConfig::RestartPolicy::name_
+
+          def initialize: (
+            ?maximum_retry_count: Integer,
+            ?name: Docker::Models::Container::HostConfig::RestartPolicy::name_
+          ) -> void
+
+          def to_hash: -> {
+            maximum_retry_count: Integer,
+            name: Docker::Models::Container::HostConfig::RestartPolicy::name_
+          }
+
+          type name_ = :"" | :no | :always | :"unless-stopped" | :"on-failure"
+
+          module Name
+            extend Docker::Internal::Type::Enum
+
+            EMPTY: :""
+            NO: :no
+            ALWAYS: :always
+            UNLESS_STOPPED: :"unless-stopped"
+            ON_FAILURE: :"on-failure"
+
+            def self?.values: -> ::Array[Docker::Models::Container::HostConfig::RestartPolicy::name_]
+          end
+        end
+
+        type ulimit = { hard: Integer, name: String, soft: Integer }
+
+        class Ulimit < Docker::Internal::Type::BaseModel
+          attr_reader hard: Integer?
+
+          def hard=: (Integer) -> Integer
+
+          attr_reader name: String?
+
+          def name=: (String) -> String
+
+          attr_reader soft: Integer?
+
+          def soft=: (Integer) -> Integer
+
+          def initialize: (
+            ?hard: Integer,
+            ?name: String,
+            ?soft: Integer
+          ) -> void
+
+          def to_hash: -> { hard: Integer, name: String, soft: Integer }
+        end
+      end
+
+      type image_manifest_descriptor =
+        {
+          annotations: ::Hash[Symbol, String]?,
+          artifact_type: String?,
+          data: String?,
+          digest: String,
+          media_type: String,
+          platform: Docker::Container::ImageManifestDescriptor::Platform?,
+          size: Integer,
+          urls: ::Array[String]?
+        }
+
+      class ImageManifestDescriptor < Docker::Internal::Type::BaseModel
+        attr_accessor annotations: ::Hash[Symbol, String]?
+
+        attr_accessor artifact_type: String?
+
+        attr_accessor data: String?
+
+        attr_reader digest: String?
+
+        def digest=: (String) -> String
+
+        attr_reader media_type: String?
+
+        def media_type=: (String) -> String
+
+        attr_accessor platform: Docker::Container::ImageManifestDescriptor::Platform?
+
+        attr_reader size: Integer?
+
+        def size=: (Integer) -> Integer
+
+        attr_accessor urls: ::Array[String]?
+
+        def initialize: (
+          ?annotations: ::Hash[Symbol, String]?,
+          ?artifact_type: String?,
+          ?data: String?,
+          ?digest: String,
+          ?media_type: String,
+          ?platform: Docker::Container::ImageManifestDescriptor::Platform?,
+          ?size: Integer,
+          ?urls: ::Array[String]?
+        ) -> void
+
+        def to_hash: -> {
+          annotations: ::Hash[Symbol, String]?,
+          artifact_type: String?,
+          data: String?,
+          digest: String,
+          media_type: String,
+          platform: Docker::Container::ImageManifestDescriptor::Platform?,
+          size: Integer,
+          urls: ::Array[String]?
+        }
+
+        type platform =
+          {
+            architecture: String,
+            os: String,
+            os_features: ::Array[String],
+            os_version: String,
+            variant: String
+          }
+
+        class Platform < Docker::Internal::Type::BaseModel
+          attr_reader architecture: String?
+
+          def architecture=: (String) -> String
+
+          attr_reader os: String?
+
+          def os=: (String) -> String
+
+          attr_reader os_features: ::Array[String]?
+
+          def os_features=: (::Array[String]) -> ::Array[String]
+
+          attr_reader os_version: String?
+
+          def os_version=: (String) -> String
+
+          attr_reader variant: String?
+
+          def variant=: (String) -> String
+
+          def initialize: (
+            ?architecture: String,
+            ?os: String,
+            ?os_features: ::Array[String],
+            ?os_version: String,
+            ?variant: String
+          ) -> void
+
+          def to_hash: -> {
+            architecture: String,
+            os: String,
+            os_features: ::Array[String],
+            os_version: String,
+            variant: String
+          }
+        end
+      end
+
+      type mount =
+        {
+          destination: String,
+          driver: String,
+          mode: String,
+          name: String,
+          propagation: String,
+          rw: bool,
+          source: String,
+          type: Docker::Models::Container::Mount::type_
+        }
+
+      class Mount < Docker::Internal::Type::BaseModel
+        attr_reader destination: String?
+
+        def destination=: (String) -> String
+
+        attr_reader driver: String?
+
+        def driver=: (String) -> String
+
+        attr_reader mode: String?
+
+        def mode=: (String) -> String
+
+        attr_reader name: String?
+
+        def name=: (String) -> String
+
+        attr_reader propagation: String?
+
+        def propagation=: (String) -> String
+
+        attr_reader rw: bool?
+
+        def rw=: (bool) -> bool
+
+        attr_reader source: String?
+
+        def source=: (String) -> String
+
+        attr_reader type: Docker::Models::Container::Mount::type_?
+
+        def type=: (
+          Docker::Models::Container::Mount::type_
+        ) -> Docker::Models::Container::Mount::type_
+
+        def initialize: (
+          ?destination: String,
+          ?driver: String,
+          ?mode: String,
+          ?name: String,
+          ?propagation: String,
+          ?rw: bool,
+          ?source: String,
+          ?type: Docker::Models::Container::Mount::type_
+        ) -> void
+
+        def to_hash: -> {
+          destination: String,
+          driver: String,
+          mode: String,
+          name: String,
+          propagation: String,
+          rw: bool,
+          source: String,
+          type: Docker::Models::Container::Mount::type_
+        }
+
+        type type_ = :bind | :cluster | :image | :npipe | :tmpfs | :volume
+
+        module Type
+          extend Docker::Internal::Type::Enum
+
+          BIND: :bind
+          CLUSTER: :cluster
+          IMAGE: :image
+          NPIPE: :npipe
+          TMPFS: :tmpfs
+          VOLUME: :volume
+
+          def self?.values: -> ::Array[Docker::Models::Container::Mount::type_]
+        end
+      end
+
+      type network_settings =
+        {
+          networks: ::Hash[Symbol, Docker::Container::NetworkSettings::Network],
+          ports: ::Hash[Symbol, ::Array[Docker::Container::NetworkSettings::Port]],
+          sandbox_id: String,
+          sandbox_key: String
+        }
+
+      class NetworkSettings < Docker::Internal::Type::BaseModel
+        attr_reader networks: ::Hash[Symbol, Docker::Container::NetworkSettings::Network]?
+
+        def networks=: (
+          ::Hash[Symbol, Docker::Container::NetworkSettings::Network]
+        ) -> ::Hash[Symbol, Docker::Container::NetworkSettings::Network]
+
+        attr_reader ports: ::Hash[Symbol, ::Array[Docker::Container::NetworkSettings::Port]]?
+
+        def ports=: (
+          ::Hash[Symbol, ::Array[Docker::Container::NetworkSettings::Port]]
+        ) -> ::Hash[Symbol, ::Array[Docker::Container::NetworkSettings::Port]]
+
+        attr_reader sandbox_id: String?
+
+        def sandbox_id=: (String) -> String
+
+        attr_reader sandbox_key: String?
+
+        def sandbox_key=: (String) -> String
+
+        def initialize: (
+          ?networks: ::Hash[Symbol, Docker::Container::NetworkSettings::Network],
+          ?ports: ::Hash[Symbol, ::Array[Docker::Container::NetworkSettings::Port]],
+          ?sandbox_id: String,
+          ?sandbox_key: String
+        ) -> void
+
+        def to_hash: -> {
+          networks: ::Hash[Symbol, Docker::Container::NetworkSettings::Network],
+          ports: ::Hash[Symbol, ::Array[Docker::Container::NetworkSettings::Port]],
+          sandbox_id: String,
+          sandbox_key: String
+        }
+
+        type network =
+          {
+            aliases: ::Array[String],
+            dns_names: ::Array[String],
+            driver_opts: ::Hash[Symbol, String]?,
+            endpoint_id: String,
+            gateway: String,
+            :global_i_pv6_address => String,
+            :global_i_pv6_prefix_len => Integer,
+            gw_priority: Integer,
+            ip_address: String,
+            ipam_config: Docker::Container::NetworkSettings::Network::IpamConfig?,
+            ip_prefix_len: Integer,
+            :i_pv6_gateway => String,
+            links: ::Array[String],
+            mac_address: String,
+            network_id: String
+          }
+
+        class Network < Docker::Internal::Type::BaseModel
+          attr_reader aliases: ::Array[String]?
+
+          def aliases=: (::Array[String]) -> ::Array[String]
+
+          attr_reader dns_names: ::Array[String]?
+
+          def dns_names=: (::Array[String]) -> ::Array[String]
+
+          attr_accessor driver_opts: ::Hash[Symbol, String]?
+
+          attr_reader endpoint_id: String?
+
+          def endpoint_id=: (String) -> String
+
+          attr_reader gateway: String?
+
+          def gateway=: (String) -> String
+
+          attr_reader global_i_pv6_address: String?
+
+          def global_i_pv6_address=: (String) -> String
+
+          attr_reader global_i_pv6_prefix_len: Integer?
+
+          def global_i_pv6_prefix_len=: (Integer) -> Integer
+
+          attr_reader gw_priority: Integer?
+
+          def gw_priority=: (Integer) -> Integer
+
+          attr_reader ip_address: String?
+
+          def ip_address=: (String) -> String
+
+          attr_accessor ipam_config: Docker::Container::NetworkSettings::Network::IpamConfig?
+
+          attr_reader ip_prefix_len: Integer?
+
+          def ip_prefix_len=: (Integer) -> Integer
+
+          attr_reader i_pv6_gateway: String?
+
+          def i_pv6_gateway=: (String) -> String
+
+          attr_reader links: ::Array[String]?
+
+          def links=: (::Array[String]) -> ::Array[String]
+
+          attr_reader mac_address: String?
+
+          def mac_address=: (String) -> String
+
+          attr_reader network_id: String?
+
+          def network_id=: (String) -> String
+
+          def initialize: (
+            ?aliases: ::Array[String],
+            ?dns_names: ::Array[String],
+            ?driver_opts: ::Hash[Symbol, String]?,
+            ?endpoint_id: String,
+            ?gateway: String,
+            ?global_i_pv6_address: String,
+            ?global_i_pv6_prefix_len: Integer,
+            ?gw_priority: Integer,
+            ?ip_address: String,
+            ?ipam_config: Docker::Container::NetworkSettings::Network::IpamConfig?,
+            ?ip_prefix_len: Integer,
+            ?i_pv6_gateway: String,
+            ?links: ::Array[String],
+            ?mac_address: String,
+            ?network_id: String
+          ) -> void
+
+          def to_hash: -> {
+            aliases: ::Array[String],
+            dns_names: ::Array[String],
+            driver_opts: ::Hash[Symbol, String]?,
+            endpoint_id: String,
+            gateway: String,
+            :global_i_pv6_address => String,
+            :global_i_pv6_prefix_len => Integer,
+            gw_priority: Integer,
+            ip_address: String,
+            ipam_config: Docker::Container::NetworkSettings::Network::IpamConfig?,
+            ip_prefix_len: Integer,
+            :i_pv6_gateway => String,
+            links: ::Array[String],
+            mac_address: String,
+            network_id: String
+          }
+
+          type ipam_config =
+            {
+              :i_pv4_address => String,
+              :i_pv6_address => String,
+              link_local_ips: ::Array[String]
+            }
+
+          class IpamConfig < Docker::Internal::Type::BaseModel
+            attr_reader i_pv4_address: String?
+
+            def i_pv4_address=: (String) -> String
+
+            attr_reader i_pv6_address: String?
+
+            def i_pv6_address=: (String) -> String
+
+            attr_reader link_local_ips: ::Array[String]?
+
+            def link_local_ips=: (::Array[String]) -> ::Array[String]
+
+            def initialize: (
+              ?i_pv4_address: String,
+              ?i_pv6_address: String,
+              ?link_local_ips: ::Array[String]
+            ) -> void
+
+            def to_hash: -> {
+              :i_pv4_address => String,
+              :i_pv6_address => String,
+              link_local_ips: ::Array[String]
+            }
+          end
+        end
+
+        type port = { host_ip: String, host_port: String }
+
+        class Port < Docker::Internal::Type::BaseModel
+          attr_reader host_ip: String?
+
+          def host_ip=: (String) -> String
+
+          attr_reader host_port: String?
+
+          def host_port=: (String) -> String
+
+          def initialize: (?host_ip: String, ?host_port: String) -> void
+
+          def to_hash: -> { host_ip: String, host_port: String }
+        end
+      end
+
+      type state =
+        {
+          dead: bool,
+          error: String,
+          exit_code: Integer,
+          finished_at: String,
+          health: Docker::Container::State::Health?,
+          oom_killed: bool,
+          paused: bool,
+          pid: Integer,
+          restarting: bool,
+          running: bool,
+          started_at: String,
+          status: Docker::Models::Container::State::status
+        }
+
+      class State < Docker::Internal::Type::BaseModel
+        attr_reader dead: bool?
+
+        def dead=: (bool) -> bool
+
+        attr_reader error: String?
+
+        def error=: (String) -> String
+
+        attr_reader exit_code: Integer?
+
+        def exit_code=: (Integer) -> Integer
+
+        attr_reader finished_at: String?
+
+        def finished_at=: (String) -> String
+
+        attr_accessor health: Docker::Container::State::Health?
+
+        attr_reader oom_killed: bool?
+
+        def oom_killed=: (bool) -> bool
+
+        attr_reader paused: bool?
+
+        def paused=: (bool) -> bool
+
+        attr_reader pid: Integer?
+
+        def pid=: (Integer) -> Integer
+
+        attr_reader restarting: bool?
+
+        def restarting=: (bool) -> bool
+
+        attr_reader running: bool?
+
+        def running=: (bool) -> bool
+
+        attr_reader started_at: String?
+
+        def started_at=: (String) -> String
+
+        attr_reader status: Docker::Models::Container::State::status?
+
+        def status=: (
+          Docker::Models::Container::State::status
+        ) -> Docker::Models::Container::State::status
+
+        def initialize: (
+          ?dead: bool,
+          ?error: String,
+          ?exit_code: Integer,
+          ?finished_at: String,
+          ?health: Docker::Container::State::Health?,
+          ?oom_killed: bool,
+          ?paused: bool,
+          ?pid: Integer,
+          ?restarting: bool,
+          ?running: bool,
+          ?started_at: String,
+          ?status: Docker::Models::Container::State::status
+        ) -> void
+
+        def to_hash: -> {
+          dead: bool,
+          error: String,
+          exit_code: Integer,
+          finished_at: String,
+          health: Docker::Container::State::Health?,
+          oom_killed: bool,
+          paused: bool,
+          pid: Integer,
+          restarting: bool,
+          running: bool,
+          started_at: String,
+          status: Docker::Models::Container::State::status
+        }
+
+        type health =
+          {
+            failing_streak: Integer,
+            log: ::Array[Docker::Container::State::Health::Log?],
+            status: Docker::Models::Container::State::Health::status
+          }
+
+        class Health < Docker::Internal::Type::BaseModel
+          attr_reader failing_streak: Integer?
+
+          def failing_streak=: (Integer) -> Integer
+
+          attr_reader log: ::Array[Docker::Container::State::Health::Log?]?
+
+          def log=: (
+            ::Array[Docker::Container::State::Health::Log?]
+          ) -> ::Array[Docker::Container::State::Health::Log?]
+
+          attr_reader status: Docker::Models::Container::State::Health::status?
+
+          def status=: (
+            Docker::Models::Container::State::Health::status
+          ) -> Docker::Models::Container::State::Health::status
+
+          def initialize: (
+            ?failing_streak: Integer,
+            ?log: ::Array[Docker::Container::State::Health::Log?],
+            ?status: Docker::Models::Container::State::Health::status
+          ) -> void
+
+          def to_hash: -> {
+            failing_streak: Integer,
+            log: ::Array[Docker::Container::State::Health::Log?],
+            status: Docker::Models::Container::State::Health::status
+          }
+
+          type log =
+            { end_: String, exit_code: Integer, output: String, start: Time }
+
+          class Log < Docker::Internal::Type::BaseModel
+            attr_reader end_: String?
+
+            def end_=: (String) -> String
+
+            attr_reader exit_code: Integer?
+
+            def exit_code=: (Integer) -> Integer
+
+            attr_reader output: String?
+
+            def output=: (String) -> String
+
+            attr_reader start: Time?
+
+            def start=: (Time) -> Time
+
+            def initialize: (
+              ?end_: String,
+              ?exit_code: Integer,
+              ?output: String,
+              ?start: Time
+            ) -> void
+
+            def to_hash: -> {
+              end_: String,
+              exit_code: Integer,
+              output: String,
+              start: Time
+            }
+          end
+
+          type status = :none | :starting | :healthy | :unhealthy
+
+          module Status
+            extend Docker::Internal::Type::Enum
+
+            NONE: :none
+            STARTING: :starting
+            HEALTHY: :healthy
+            UNHEALTHY: :unhealthy
+
+            def self?.values: -> ::Array[Docker::Models::Container::State::Health::status]
+          end
+        end
+
+        type status =
+          :created
+          | :running
+          | :paused
+          | :restarting
+          | :removing
+          | :exited
+          | :dead
+
+        module Status
+          extend Docker::Internal::Type::Enum
+
+          CREATED: :created
+          RUNNING: :running
+          PAUSED: :paused
+          RESTARTING: :restarting
+          REMOVING: :removing
+          EXITED: :exited
+          DEAD: :dead
+
+          def self?.values: -> ::Array[Docker::Models::Container::State::status]
+        end
+      end
+
+      type storage = { root_fs: Docker::Container::Storage::RootFs }
+
+      class Storage < Docker::Internal::Type::BaseModel
+        attr_reader root_fs: Docker::Container::Storage::RootFs?
+
+        def root_fs=: (
+          Docker::Container::Storage::RootFs
+        ) -> Docker::Container::Storage::RootFs
+
+        def initialize: (?root_fs: Docker::Container::Storage::RootFs) -> void
+
+        def to_hash: -> { root_fs: Docker::Container::Storage::RootFs }
+
+        type root_fs =
+          { snapshot: Docker::Container::Storage::RootFs::Snapshot }
+
+        class RootFs < Docker::Internal::Type::BaseModel
+          attr_reader snapshot: Docker::Container::Storage::RootFs::Snapshot?
+
+          def snapshot=: (
+            Docker::Container::Storage::RootFs::Snapshot
+          ) -> Docker::Container::Storage::RootFs::Snapshot
+
+          def initialize: (
+            ?snapshot: Docker::Container::Storage::RootFs::Snapshot
+          ) -> void
+
+          def to_hash: -> {
+            snapshot: Docker::Container::Storage::RootFs::Snapshot
+          }
+
+          type snapshot = { name: String }
+
+          class Snapshot < Docker::Internal::Type::BaseModel
+            attr_reader name: String?
+
+            def name=: (String) -> String
+
+            def initialize: (?name: String) -> void
+
+            def to_hash: -> { name: String }
+          end
+        end
+      end
+    end
+  end
+end

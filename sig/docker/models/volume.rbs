@@ -1,0 +1,478 @@
+module Docker
+  module Models
+    type volume =
+      {
+        driver: String,
+        labels: ::Hash[Symbol, String],
+        mountpoint: String,
+        name: String,
+        options: ::Hash[Symbol, String],
+        scope: Docker::Models::Volume::scope,
+        cluster_volume: Docker::Volume::ClusterVolume,
+        created_at: String,
+        status: ::Hash[Symbol, top],
+        usage_data: Docker::Volume::UsageData?
+      }
+
+    class Volume < Docker::Internal::Type::BaseModel
+      attr_accessor driver: String
+
+      attr_accessor labels: ::Hash[Symbol, String]
+
+      attr_accessor mountpoint: String
+
+      attr_accessor name: String
+
+      attr_accessor options: ::Hash[Symbol, String]
+
+      attr_accessor scope: Docker::Models::Volume::scope
+
+      attr_reader cluster_volume: Docker::Volume::ClusterVolume?
+
+      def cluster_volume=: (
+        Docker::Volume::ClusterVolume
+      ) -> Docker::Volume::ClusterVolume
+
+      attr_reader created_at: String?
+
+      def created_at=: (String) -> String
+
+      attr_reader status: ::Hash[Symbol, top]?
+
+      def status=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+      attr_accessor usage_data: Docker::Volume::UsageData?
+
+      def initialize: (
+        driver: String,
+        labels: ::Hash[Symbol, String],
+        mountpoint: String,
+        name: String,
+        options: ::Hash[Symbol, String],
+        scope: Docker::Models::Volume::scope,
+        ?cluster_volume: Docker::Volume::ClusterVolume,
+        ?created_at: String,
+        ?status: ::Hash[Symbol, top],
+        ?usage_data: Docker::Volume::UsageData?
+      ) -> void
+
+      def to_hash: -> {
+        driver: String,
+        labels: ::Hash[Symbol, String],
+        mountpoint: String,
+        name: String,
+        options: ::Hash[Symbol, String],
+        scope: Docker::Models::Volume::scope,
+        cluster_volume: Docker::Volume::ClusterVolume,
+        created_at: String,
+        status: ::Hash[Symbol, top],
+        usage_data: Docker::Volume::UsageData?
+      }
+
+      type scope = :local | :global
+
+      module Scope
+        extend Docker::Internal::Type::Enum
+
+        LOCAL: :local
+        GLOBAL: :global
+
+        def self?.values: -> ::Array[Docker::Models::Volume::scope]
+      end
+
+      type cluster_volume =
+        {
+          created_at: String,
+          id: String,
+          info: Docker::Volume::ClusterVolume::Info,
+          publish_status: ::Array[Docker::Volume::ClusterVolume::PublishStatus],
+          spec: Docker::Volume::ClusterVolume::Spec,
+          updated_at: String,
+          version: Docker::Volume::ClusterVolume::Version
+        }
+
+      class ClusterVolume < Docker::Internal::Type::BaseModel
+        attr_reader created_at: String?
+
+        def created_at=: (String) -> String
+
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        attr_reader info: Docker::Volume::ClusterVolume::Info?
+
+        def info=: (
+          Docker::Volume::ClusterVolume::Info
+        ) -> Docker::Volume::ClusterVolume::Info
+
+        attr_reader publish_status: ::Array[Docker::Volume::ClusterVolume::PublishStatus]?
+
+        def publish_status=: (
+          ::Array[Docker::Volume::ClusterVolume::PublishStatus]
+        ) -> ::Array[Docker::Volume::ClusterVolume::PublishStatus]
+
+        attr_reader spec: Docker::Volume::ClusterVolume::Spec?
+
+        def spec=: (
+          Docker::Volume::ClusterVolume::Spec
+        ) -> Docker::Volume::ClusterVolume::Spec
+
+        attr_reader updated_at: String?
+
+        def updated_at=: (String) -> String
+
+        attr_reader version: Docker::Volume::ClusterVolume::Version?
+
+        def version=: (
+          Docker::Volume::ClusterVolume::Version
+        ) -> Docker::Volume::ClusterVolume::Version
+
+        def initialize: (
+          ?created_at: String,
+          ?id: String,
+          ?info: Docker::Volume::ClusterVolume::Info,
+          ?publish_status: ::Array[Docker::Volume::ClusterVolume::PublishStatus],
+          ?spec: Docker::Volume::ClusterVolume::Spec,
+          ?updated_at: String,
+          ?version: Docker::Volume::ClusterVolume::Version
+        ) -> void
+
+        def to_hash: -> {
+          created_at: String,
+          id: String,
+          info: Docker::Volume::ClusterVolume::Info,
+          publish_status: ::Array[Docker::Volume::ClusterVolume::PublishStatus],
+          spec: Docker::Volume::ClusterVolume::Spec,
+          updated_at: String,
+          version: Docker::Volume::ClusterVolume::Version
+        }
+
+        type info =
+          {
+            accessible_topology: ::Array[::Hash[Symbol, String]],
+            capacity_bytes: Integer,
+            volume_context: ::Hash[Symbol, String],
+            volume_id: String
+          }
+
+        class Info < Docker::Internal::Type::BaseModel
+          attr_reader accessible_topology: ::Array[::Hash[Symbol, String]]?
+
+          def accessible_topology=: (
+            ::Array[::Hash[Symbol, String]]
+          ) -> ::Array[::Hash[Symbol, String]]
+
+          attr_reader capacity_bytes: Integer?
+
+          def capacity_bytes=: (Integer) -> Integer
+
+          attr_reader volume_context: ::Hash[Symbol, String]?
+
+          def volume_context=: (
+            ::Hash[Symbol, String]
+          ) -> ::Hash[Symbol, String]
+
+          attr_reader volume_id: String?
+
+          def volume_id=: (String) -> String
+
+          def initialize: (
+            ?accessible_topology: ::Array[::Hash[Symbol, String]],
+            ?capacity_bytes: Integer,
+            ?volume_context: ::Hash[Symbol, String],
+            ?volume_id: String
+          ) -> void
+
+          def to_hash: -> {
+            accessible_topology: ::Array[::Hash[Symbol, String]],
+            capacity_bytes: Integer,
+            volume_context: ::Hash[Symbol, String],
+            volume_id: String
+          }
+        end
+
+        type publish_status =
+          {
+            node_id: String,
+            publish_context: ::Hash[Symbol, String],
+            state: Docker::Models::Volume::ClusterVolume::PublishStatus::state
+          }
+
+        class PublishStatus < Docker::Internal::Type::BaseModel
+          attr_reader node_id: String?
+
+          def node_id=: (String) -> String
+
+          attr_reader publish_context: ::Hash[Symbol, String]?
+
+          def publish_context=: (
+            ::Hash[Symbol, String]
+          ) -> ::Hash[Symbol, String]
+
+          attr_reader state: Docker::Models::Volume::ClusterVolume::PublishStatus::state?
+
+          def state=: (
+            Docker::Models::Volume::ClusterVolume::PublishStatus::state
+          ) -> Docker::Models::Volume::ClusterVolume::PublishStatus::state
+
+          def initialize: (
+            ?node_id: String,
+            ?publish_context: ::Hash[Symbol, String],
+            ?state: Docker::Models::Volume::ClusterVolume::PublishStatus::state
+          ) -> void
+
+          def to_hash: -> {
+            node_id: String,
+            publish_context: ::Hash[Symbol, String],
+            state: Docker::Models::Volume::ClusterVolume::PublishStatus::state
+          }
+
+          type state =
+            :"pending-publish"
+            | :published
+            | :"pending-node-unpublish"
+            | :"pending-controller-unpublish"
+
+          module State
+            extend Docker::Internal::Type::Enum
+
+            PENDING_PUBLISH: :"pending-publish"
+            PUBLISHED: :published
+            PENDING_NODE_UNPUBLISH: :"pending-node-unpublish"
+            PENDING_CONTROLLER_UNPUBLISH: :"pending-controller-unpublish"
+
+            def self?.values: -> ::Array[Docker::Models::Volume::ClusterVolume::PublishStatus::state]
+          end
+        end
+
+        type spec =
+          {
+            access_mode: Docker::Volume::ClusterVolume::Spec::AccessMode,
+            group: String
+          }
+
+        class Spec < Docker::Internal::Type::BaseModel
+          attr_reader access_mode: Docker::Volume::ClusterVolume::Spec::AccessMode?
+
+          def access_mode=: (
+            Docker::Volume::ClusterVolume::Spec::AccessMode
+          ) -> Docker::Volume::ClusterVolume::Spec::AccessMode
+
+          attr_reader group: String?
+
+          def group=: (String) -> String
+
+          def initialize: (
+            ?access_mode: Docker::Volume::ClusterVolume::Spec::AccessMode,
+            ?group: String
+          ) -> void
+
+          def to_hash: -> {
+            access_mode: Docker::Volume::ClusterVolume::Spec::AccessMode,
+            group: String
+          }
+
+          type access_mode =
+            {
+              accessibility_requirements: Docker::Volume::ClusterVolume::Spec::AccessMode::AccessibilityRequirements,
+              availability: Docker::Models::Volume::ClusterVolume::Spec::AccessMode::availability,
+              capacity_range: Docker::Volume::ClusterVolume::Spec::AccessMode::CapacityRange,
+              mount_volume: top,
+              scope: Docker::Models::Volume::ClusterVolume::Spec::AccessMode::scope,
+              secrets: ::Array[Docker::Volume::ClusterVolume::Spec::AccessMode::Secret],
+              sharing: Docker::Models::Volume::ClusterVolume::Spec::AccessMode::sharing
+            }
+
+          class AccessMode < Docker::Internal::Type::BaseModel
+            attr_reader accessibility_requirements: Docker::Volume::ClusterVolume::Spec::AccessMode::AccessibilityRequirements?
+
+            def accessibility_requirements=: (
+              Docker::Volume::ClusterVolume::Spec::AccessMode::AccessibilityRequirements
+            ) -> Docker::Volume::ClusterVolume::Spec::AccessMode::AccessibilityRequirements
+
+            attr_reader availability: Docker::Models::Volume::ClusterVolume::Spec::AccessMode::availability?
+
+            def availability=: (
+              Docker::Models::Volume::ClusterVolume::Spec::AccessMode::availability
+            ) -> Docker::Models::Volume::ClusterVolume::Spec::AccessMode::availability
+
+            attr_reader capacity_range: Docker::Volume::ClusterVolume::Spec::AccessMode::CapacityRange?
+
+            def capacity_range=: (
+              Docker::Volume::ClusterVolume::Spec::AccessMode::CapacityRange
+            ) -> Docker::Volume::ClusterVolume::Spec::AccessMode::CapacityRange
+
+            attr_reader mount_volume: top?
+
+            def mount_volume=: (top) -> top
+
+            attr_reader scope: Docker::Models::Volume::ClusterVolume::Spec::AccessMode::scope?
+
+            def scope=: (
+              Docker::Models::Volume::ClusterVolume::Spec::AccessMode::scope
+            ) -> Docker::Models::Volume::ClusterVolume::Spec::AccessMode::scope
+
+            attr_reader secrets: ::Array[Docker::Volume::ClusterVolume::Spec::AccessMode::Secret]?
+
+            def secrets=: (
+              ::Array[Docker::Volume::ClusterVolume::Spec::AccessMode::Secret]
+            ) -> ::Array[Docker::Volume::ClusterVolume::Spec::AccessMode::Secret]
+
+            attr_reader sharing: Docker::Models::Volume::ClusterVolume::Spec::AccessMode::sharing?
+
+            def sharing=: (
+              Docker::Models::Volume::ClusterVolume::Spec::AccessMode::sharing
+            ) -> Docker::Models::Volume::ClusterVolume::Spec::AccessMode::sharing
+
+            def initialize: (
+              ?accessibility_requirements: Docker::Volume::ClusterVolume::Spec::AccessMode::AccessibilityRequirements,
+              ?availability: Docker::Models::Volume::ClusterVolume::Spec::AccessMode::availability,
+              ?capacity_range: Docker::Volume::ClusterVolume::Spec::AccessMode::CapacityRange,
+              ?mount_volume: top,
+              ?scope: Docker::Models::Volume::ClusterVolume::Spec::AccessMode::scope,
+              ?secrets: ::Array[Docker::Volume::ClusterVolume::Spec::AccessMode::Secret],
+              ?sharing: Docker::Models::Volume::ClusterVolume::Spec::AccessMode::sharing
+            ) -> void
+
+            def to_hash: -> {
+              accessibility_requirements: Docker::Volume::ClusterVolume::Spec::AccessMode::AccessibilityRequirements,
+              availability: Docker::Models::Volume::ClusterVolume::Spec::AccessMode::availability,
+              capacity_range: Docker::Volume::ClusterVolume::Spec::AccessMode::CapacityRange,
+              mount_volume: top,
+              scope: Docker::Models::Volume::ClusterVolume::Spec::AccessMode::scope,
+              secrets: ::Array[Docker::Volume::ClusterVolume::Spec::AccessMode::Secret],
+              sharing: Docker::Models::Volume::ClusterVolume::Spec::AccessMode::sharing
+            }
+
+            type accessibility_requirements =
+              {
+                preferred: ::Array[::Hash[Symbol, String]],
+                requisite: ::Array[::Hash[Symbol, String]]
+              }
+
+            class AccessibilityRequirements < Docker::Internal::Type::BaseModel
+              attr_reader preferred: ::Array[::Hash[Symbol, String]]?
+
+              def preferred=: (
+                ::Array[::Hash[Symbol, String]]
+              ) -> ::Array[::Hash[Symbol, String]]
+
+              attr_reader requisite: ::Array[::Hash[Symbol, String]]?
+
+              def requisite=: (
+                ::Array[::Hash[Symbol, String]]
+              ) -> ::Array[::Hash[Symbol, String]]
+
+              def initialize: (
+                ?preferred: ::Array[::Hash[Symbol, String]],
+                ?requisite: ::Array[::Hash[Symbol, String]]
+              ) -> void
+
+              def to_hash: -> {
+                preferred: ::Array[::Hash[Symbol, String]],
+                requisite: ::Array[::Hash[Symbol, String]]
+              }
+            end
+
+            type availability = :active | :pause | :drain
+
+            module Availability
+              extend Docker::Internal::Type::Enum
+
+              ACTIVE: :active
+              PAUSE: :pause
+              DRAIN: :drain
+
+              def self?.values: -> ::Array[Docker::Models::Volume::ClusterVolume::Spec::AccessMode::availability]
+            end
+
+            type capacity_range =
+              { limit_bytes: Integer, required_bytes: Integer }
+
+            class CapacityRange < Docker::Internal::Type::BaseModel
+              attr_reader limit_bytes: Integer?
+
+              def limit_bytes=: (Integer) -> Integer
+
+              attr_reader required_bytes: Integer?
+
+              def required_bytes=: (Integer) -> Integer
+
+              def initialize: (
+                ?limit_bytes: Integer,
+                ?required_bytes: Integer
+              ) -> void
+
+              def to_hash: -> { limit_bytes: Integer, required_bytes: Integer }
+            end
+
+            type scope = :single | :multi
+
+            module Scope
+              extend Docker::Internal::Type::Enum
+
+              SINGLE: :single
+              MULTI: :multi
+
+              def self?.values: -> ::Array[Docker::Models::Volume::ClusterVolume::Spec::AccessMode::scope]
+            end
+
+            type secret = { key: String, secret: String }
+
+            class Secret < Docker::Internal::Type::BaseModel
+              attr_reader key: String?
+
+              def key=: (String) -> String
+
+              attr_reader secret: String?
+
+              def secret=: (String) -> String
+
+              def initialize: (?key: String, ?secret: String) -> void
+
+              def to_hash: -> { key: String, secret: String }
+            end
+
+            type sharing = :none | :readonly | :onewriter | :all
+
+            module Sharing
+              extend Docker::Internal::Type::Enum
+
+              NONE: :none
+              READONLY: :readonly
+              ONEWRITER: :onewriter
+              ALL: :all
+
+              def self?.values: -> ::Array[Docker::Models::Volume::ClusterVolume::Spec::AccessMode::sharing]
+            end
+          end
+        end
+
+        type version = { index: Integer }
+
+        class Version < Docker::Internal::Type::BaseModel
+          attr_reader index: Integer?
+
+          def index=: (Integer) -> Integer
+
+          def initialize: (?index: Integer) -> void
+
+          def to_hash: -> { index: Integer }
+        end
+      end
+
+      type usage_data = { ref_count: Integer, size: Integer }
+
+      class UsageData < Docker::Internal::Type::BaseModel
+        attr_accessor ref_count: Integer
+
+        attr_accessor size: Integer
+
+        def initialize: (ref_count: Integer, size: Integer) -> void
+
+        def to_hash: -> { ref_count: Integer, size: Integer }
+      end
+    end
+  end
+end

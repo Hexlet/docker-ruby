@@ -1,0 +1,27 @@
+module Docker
+  module Resources
+    class Services
+      def create: (
+        spec: Docker::ServiceCreateParams::Spec,
+        ?x_registry_auth: String,
+        ?request_options: Docker::request_opts
+      ) -> Docker::Models::ServiceCreateResponse
+
+      def list: (
+        ?filters: String,
+        ?status: bool,
+        ?request_options: Docker::request_opts
+      ) -> Docker::Models::service_list_response
+
+      def delete: (String id, ?request_options: Docker::request_opts) -> nil
+
+      def inspect_: (
+        String id,
+        ?insert_defaults: bool,
+        ?request_options: Docker::request_opts
+      ) -> Docker::Service
+
+      def initialize: (client: Docker::Client) -> void
+    end
+  end
+end
