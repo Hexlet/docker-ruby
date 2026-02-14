@@ -1,0 +1,81 @@
+module DockerEngine
+  class AuthLoginParams = DockerEngine::Models::AuthLoginParams
+
+  class AuthResponse = DockerEngine::Models::AuthResponse
+
+  class Config = DockerEngine::Models::Config
+
+  class Container = DockerEngine::Models::Container
+
+  class ContainerCreateParams = DockerEngine::Models::ContainerCreateParams
+
+  class ContainerDeleteParams = DockerEngine::Models::ContainerDeleteParams
+
+  class ContainerInspectParams = DockerEngine::Models::ContainerInspectParams
+
+  class ContainerKillParams = DockerEngine::Models::ContainerKillParams
+
+  class ContainerListParams = DockerEngine::Models::ContainerListParams
+
+  class ContainerLogsParams = DockerEngine::Models::ContainerLogsParams
+
+  class ContainerStartParams = DockerEngine::Models::ContainerStartParams
+
+  class ContainerStopParams = DockerEngine::Models::ContainerStopParams
+
+  class CreateRequest = DockerEngine::Models::CreateRequest
+
+  class CreateResponse = DockerEngine::Models::CreateResponse
+
+  class Error = DockerEngine::Models::Error
+
+  class Image = DockerEngine::Models::Image
+
+  class ImageDeleteParams = DockerEngine::Models::ImageDeleteParams
+
+  class ImageInspectParams = DockerEngine::Models::ImageInspectParams
+
+  class ImageListParams = DockerEngine::Models::ImageListParams
+
+  class ImagePullParams = DockerEngine::Models::ImagePullParams
+
+  class Network = DockerEngine::Models::Network
+
+  class NetworkCreateParams = DockerEngine::Models::NetworkCreateParams
+
+  class NetworkDeleteParams = DockerEngine::Models::NetworkDeleteParams
+
+  class NetworkInspectParams = DockerEngine::Models::NetworkInspectParams
+
+  class NetworkListParams = DockerEngine::Models::NetworkListParams
+
+  class Service = DockerEngine::Models::Service
+
+  class ServiceCreateParams = DockerEngine::Models::ServiceCreateParams
+
+  class ServiceDeleteParams = DockerEngine::Models::ServiceDeleteParams
+
+  class ServiceInspectParams = DockerEngine::Models::ServiceInspectParams
+
+  class ServiceListParams = DockerEngine::Models::ServiceListParams
+
+  class Spec = DockerEngine::Models::Spec
+
+  class Summary = DockerEngine::Models::Summary
+
+  class SystemInfoParams = DockerEngine::Models::SystemInfoParams
+
+  class SystemPingParams = DockerEngine::Models::SystemPingParams
+
+  class SystemVersionParams = DockerEngine::Models::SystemVersionParams
+
+  class Volume = DockerEngine::Models::Volume
+
+  class VolumeCreateParams = DockerEngine::Models::VolumeCreateParams
+
+  class VolumeDeleteParams = DockerEngine::Models::VolumeDeleteParams
+
+  class VolumeInspectParams = DockerEngine::Models::VolumeInspectParams
+
+  class VolumeListParams = DockerEngine::Models::VolumeListParams
+end

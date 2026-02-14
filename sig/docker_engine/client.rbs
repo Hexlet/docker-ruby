@@ -1,0 +1,33 @@
+module DockerEngine
+  class Client < DockerEngine::Internal::Transport::BaseClient
+    DEFAULT_MAX_RETRIES: 2
+
+    DEFAULT_TIMEOUT_IN_SECONDS: Float
+
+    DEFAULT_INITIAL_RETRY_DELAY: Float
+
+    DEFAULT_MAX_RETRY_DELAY: Float
+
+    attr_reader auth: DockerEngine::Resources::Auth
+
+    attr_reader system_: DockerEngine::Resources::System
+
+    attr_reader containers: DockerEngine::Resources::Containers
+
+    attr_reader images: DockerEngine::Resources::Images
+
+    attr_reader networks: DockerEngine::Resources::Networks
+
+    attr_reader volumes: DockerEngine::Resources::Volumes
+
+    attr_reader services: DockerEngine::Resources::Services
+
+    def initialize: (
+      ?base_url: String?,
+      ?max_retries: Integer,
+      ?timeout: Float,
+      ?initial_retry_delay: Float,
+      ?max_retry_delay: Float
+    ) -> void
+  end
+end
