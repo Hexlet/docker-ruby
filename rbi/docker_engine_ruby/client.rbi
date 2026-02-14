@@ -10,6 +10,15 @@ module DockerEngineRuby
 
     DEFAULT_MAX_RETRY_DELAY = T.let(8.0, Float)
 
+    ENVIRONMENTS =
+      T.let(
+        {
+          production: "http://localhost:2375",
+          production_tls: "https://localhost:2376"
+        },
+        T::Hash[Symbol, String]
+      )
+
     sig { returns(DockerEngineRuby::Resources::Auth) }
     attr_reader :auth
 
@@ -58,6 +67,7 @@ module DockerEngineRuby
     # Creates and returns a new client for interacting with the API.
     sig do
       params(
+        environment: T.nilable(T.any(Symbol, String)),
         base_url: T.nilable(String),
         max_retries: Integer,
         timeout: Float,
@@ -66,6 +76,13 @@ module DockerEngineRuby
       ).returns(T.attached_class)
     end
     def self.new(
+      # Specifies the environment to use for the API.
+      #
+      # Each environment maps to a different base URL:
+      #
+      # - `production` corresponds to `http://localhost:2375`
+      # - `production_tls` corresponds to `https://localhost:2376`
+      environment: nil,
       # Override the default base URL for the API, e.g.,
       # `"https://api.example.com/v2/"`. Defaults to `ENV["DOCKER_BASE_URL"]`
       base_url: ENV["DOCKER_BASE_URL"],

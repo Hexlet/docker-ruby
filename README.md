@@ -17,7 +17,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "docker-engine-ruby", "~> 0.4.0"
+gem "docker-engine-ruby", "~> 0.5.0"
 ```
 
 <!-- x-release-please-end -->
@@ -28,7 +28,9 @@ gem "docker-engine-ruby", "~> 0.4.0"
 require "bundler/setup"
 require "docker_engine_ruby"
 
-docker = DockerEngineRuby::Client.new
+docker = DockerEngineRuby::Client.new(
+  environment: "production_tls" # defaults to "production"
+)
 
 create_response = docker.containers.create(name: "sample-container")
 
