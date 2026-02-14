@@ -40,7 +40,7 @@ class DockerEngineRuby::Test::Resources::SwarmTest < DockerEngineRuby::Test::Res
         id: String | nil,
         join_tokens: DockerEngineRuby::SwarmAPI::JoinTokens | nil,
         root_rotation_in_progress: DockerEngineRuby::Internal::Type::Boolean | nil,
-        spec: DockerEngineRuby::Spec | nil,
+        spec: DockerEngineRuby::SwarmSpec | nil,
         subnet_size: Integer | nil,
         tls_info: DockerEngineRuby::SwarmAPI::TlsInfo | nil,
         updated_at: Time | nil,

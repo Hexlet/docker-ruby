@@ -3,7 +3,7 @@ module DockerEngineRuby
     class Swarm
       def update: (
         version: Integer,
-        spec: DockerEngineRuby::Spec,
+        spec: DockerEngineRuby::SwarmSpec,
         ?rotate_manager_token: bool,
         ?rotate_manager_unlock_key: bool,
         ?rotate_worker_token: bool,
@@ -17,7 +17,7 @@ module DockerEngineRuby
         ?default_addr_pool: ::Array[String],
         ?force_new_cluster: bool,
         ?listen_addr: String,
-        ?spec: DockerEngineRuby::Spec,
+        ?spec: DockerEngineRuby::SwarmSpec,
         ?subnet_size: Integer,
         ?request_options: DockerEngineRuby::request_opts
       ) -> String

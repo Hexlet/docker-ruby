@@ -2,14 +2,14 @@ module DockerEngineRuby
   module Resources
     class Configs
       def create: (
-        spec: DockerEngineRuby::Spec,
+        spec: DockerEngineRuby::ConfigSpec,
         ?request_options: DockerEngineRuby::request_opts
       ) -> DockerEngineRuby::Models::ConfigCreateResponse
 
       def update: (
         String id,
         version: Integer,
-        spec: DockerEngineRuby::Spec,
+        spec: DockerEngineRuby::ConfigSpec,
         ?request_options: DockerEngineRuby::request_opts
       ) -> nil
 
@@ -26,7 +26,7 @@ module DockerEngineRuby
       def inspect_: (
         String id,
         ?request_options: DockerEngineRuby::request_opts
-      ) -> DockerEngineRuby::Config
+      ) -> DockerEngineRuby::ConfigObject
 
       def initialize: (client: DockerEngineRuby::Client) -> void
     end

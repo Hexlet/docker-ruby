@@ -46,10 +46,10 @@ module DockerEngineRuby
       end
       attr_writer :manager_status
 
-      sig { returns(T.nilable(DockerEngineRuby::Spec)) }
+      sig { returns(T.nilable(DockerEngineRuby::NodeSpec)) }
       attr_reader :spec
 
-      sig { params(spec: DockerEngineRuby::Spec::OrHash).void }
+      sig { params(spec: DockerEngineRuby::NodeSpec::OrHash).void }
       attr_writer :spec
 
       # NodeStatus represents the status of a node.
@@ -90,7 +90,7 @@ module DockerEngineRuby
           description: DockerEngineRuby::Node::Description::OrHash,
           id: String,
           manager_status: DockerEngineRuby::Node::ManagerStatus::OrHash,
-          spec: DockerEngineRuby::Spec::OrHash,
+          spec: DockerEngineRuby::NodeSpec::OrHash,
           status: DockerEngineRuby::Node::Status::OrHash,
           updated_at: Time,
           version: DockerEngineRuby::Node::Version::OrHash
@@ -137,7 +137,7 @@ module DockerEngineRuby
             description: DockerEngineRuby::Node::Description,
             id: String,
             manager_status: DockerEngineRuby::Node::ManagerStatus,
-            spec: DockerEngineRuby::Spec,
+            spec: DockerEngineRuby::NodeSpec,
             status: DockerEngineRuby::Node::Status,
             updated_at: Time,
             version: DockerEngineRuby::Node::Version

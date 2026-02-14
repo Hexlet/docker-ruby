@@ -12,7 +12,7 @@ module DockerEngineRuby
         node_id: String,
         service_id: String,
         slot: Integer,
-        spec: DockerEngineRuby::Spec,
+        spec: DockerEngineRuby::TaskSpec,
         status: DockerEngineRuby::Task::Status,
         updated_at: Time,
         version: DockerEngineRuby::Task::Version
@@ -65,9 +65,9 @@ module DockerEngineRuby
 
       def slot=: (Integer) -> Integer
 
-      attr_reader spec: DockerEngineRuby::Spec?
+      attr_reader spec: DockerEngineRuby::TaskSpec?
 
-      def spec=: (DockerEngineRuby::Spec) -> DockerEngineRuby::Spec
+      def spec=: (DockerEngineRuby::TaskSpec) -> DockerEngineRuby::TaskSpec
 
       attr_reader status: DockerEngineRuby::Task::Status?
 
@@ -96,7 +96,7 @@ module DockerEngineRuby
         ?node_id: String,
         ?service_id: String,
         ?slot: Integer,
-        ?spec: DockerEngineRuby::Spec,
+        ?spec: DockerEngineRuby::TaskSpec,
         ?status: DockerEngineRuby::Task::Status,
         ?updated_at: Time,
         ?version: DockerEngineRuby::Task::Version
@@ -113,7 +113,7 @@ module DockerEngineRuby
         node_id: String,
         service_id: String,
         slot: Integer,
-        spec: DockerEngineRuby::Spec,
+        spec: DockerEngineRuby::TaskSpec,
         status: DockerEngineRuby::Task::Status,
         updated_at: Time,
         version: DockerEngineRuby::Task::Version

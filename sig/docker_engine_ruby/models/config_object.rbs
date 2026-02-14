@@ -1,0 +1,64 @@
+module DockerEngineRuby
+  module Models
+    type config_object =
+      {
+        created_at: Time,
+        id: String,
+        spec: DockerEngineRuby::ConfigSpec,
+        updated_at: Time,
+        version: DockerEngineRuby::ConfigObject::Version
+      }
+
+    class ConfigObject < DockerEngineRuby::Internal::Type::BaseModel
+      attr_reader created_at: Time?
+
+      def created_at=: (Time) -> Time
+
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      attr_reader spec: DockerEngineRuby::ConfigSpec?
+
+      def spec=: (DockerEngineRuby::ConfigSpec) -> DockerEngineRuby::ConfigSpec
+
+      attr_reader updated_at: Time?
+
+      def updated_at=: (Time) -> Time
+
+      attr_reader version: DockerEngineRuby::ConfigObject::Version?
+
+      def version=: (
+        DockerEngineRuby::ConfigObject::Version
+      ) -> DockerEngineRuby::ConfigObject::Version
+
+      def initialize: (
+        ?created_at: Time,
+        ?id: String,
+        ?spec: DockerEngineRuby::ConfigSpec,
+        ?updated_at: Time,
+        ?version: DockerEngineRuby::ConfigObject::Version
+      ) -> void
+
+      def to_hash: -> {
+        created_at: Time,
+        id: String,
+        spec: DockerEngineRuby::ConfigSpec,
+        updated_at: Time,
+        version: DockerEngineRuby::ConfigObject::Version
+      }
+
+      type version = { index: Integer }
+
+      class Version < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader index: Integer?
+
+        def index=: (Integer) -> Integer
+
+        def initialize: (?index: Integer) -> void
+
+        def to_hash: -> { index: Integer }
+      end
+    end
+  end
+end

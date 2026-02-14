@@ -1,0 +1,238 @@
+module DockerEngineRuby
+  module Models
+    type network_summary =
+      {
+        attachable: bool,
+        config_from: DockerEngineRuby::NetworkSummary::ConfigFrom,
+        config_only: bool,
+        created: Time,
+        driver: String,
+        :enable_i_pv4 => bool,
+        :enable_i_pv6 => bool,
+        id: String,
+        ingress: bool,
+        internal: bool,
+        ipam: DockerEngineRuby::NetworkSummary::Ipam,
+        labels: ::Hash[Symbol, String],
+        name: String,
+        options: ::Hash[Symbol, String],
+        peers: ::Array[DockerEngineRuby::NetworkSummary::Peer],
+        scope: String
+      }
+
+    class NetworkSummary < DockerEngineRuby::Internal::Type::BaseModel
+      attr_reader attachable: bool?
+
+      def attachable=: (bool) -> bool
+
+      attr_reader config_from: DockerEngineRuby::NetworkSummary::ConfigFrom?
+
+      def config_from=: (
+        DockerEngineRuby::NetworkSummary::ConfigFrom
+      ) -> DockerEngineRuby::NetworkSummary::ConfigFrom
+
+      attr_reader config_only: bool?
+
+      def config_only=: (bool) -> bool
+
+      attr_reader created: Time?
+
+      def created=: (Time) -> Time
+
+      attr_reader driver: String?
+
+      def driver=: (String) -> String
+
+      attr_reader enable_i_pv4: bool?
+
+      def enable_i_pv4=: (bool) -> bool
+
+      attr_reader enable_i_pv6: bool?
+
+      def enable_i_pv6=: (bool) -> bool
+
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      attr_reader ingress: bool?
+
+      def ingress=: (bool) -> bool
+
+      attr_reader internal: bool?
+
+      def internal=: (bool) -> bool
+
+      attr_reader ipam: DockerEngineRuby::NetworkSummary::Ipam?
+
+      def ipam=: (
+        DockerEngineRuby::NetworkSummary::Ipam
+      ) -> DockerEngineRuby::NetworkSummary::Ipam
+
+      attr_reader labels: ::Hash[Symbol, String]?
+
+      def labels=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_reader options: ::Hash[Symbol, String]?
+
+      def options=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+      attr_reader peers: ::Array[DockerEngineRuby::NetworkSummary::Peer]?
+
+      def peers=: (
+        ::Array[DockerEngineRuby::NetworkSummary::Peer]
+      ) -> ::Array[DockerEngineRuby::NetworkSummary::Peer]
+
+      attr_reader scope: String?
+
+      def scope=: (String) -> String
+
+      def initialize: (
+        ?attachable: bool,
+        ?config_from: DockerEngineRuby::NetworkSummary::ConfigFrom,
+        ?config_only: bool,
+        ?created: Time,
+        ?driver: String,
+        ?enable_i_pv4: bool,
+        ?enable_i_pv6: bool,
+        ?id: String,
+        ?ingress: bool,
+        ?internal: bool,
+        ?ipam: DockerEngineRuby::NetworkSummary::Ipam,
+        ?labels: ::Hash[Symbol, String],
+        ?name: String,
+        ?options: ::Hash[Symbol, String],
+        ?peers: ::Array[DockerEngineRuby::NetworkSummary::Peer],
+        ?scope: String
+      ) -> void
+
+      def to_hash: -> {
+        attachable: bool,
+        config_from: DockerEngineRuby::NetworkSummary::ConfigFrom,
+        config_only: bool,
+        created: Time,
+        driver: String,
+        :enable_i_pv4 => bool,
+        :enable_i_pv6 => bool,
+        id: String,
+        ingress: bool,
+        internal: bool,
+        ipam: DockerEngineRuby::NetworkSummary::Ipam,
+        labels: ::Hash[Symbol, String],
+        name: String,
+        options: ::Hash[Symbol, String],
+        peers: ::Array[DockerEngineRuby::NetworkSummary::Peer],
+        scope: String
+      }
+
+      type config_from = { network: String }
+
+      class ConfigFrom < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader network: String?
+
+        def network=: (String) -> String
+
+        def initialize: (?network: String) -> void
+
+        def to_hash: -> { network: String }
+      end
+
+      type ipam =
+        {
+          config: ::Array[DockerEngineRuby::NetworkSummary::Ipam::Config],
+          driver: String,
+          options: ::Hash[Symbol, String]
+        }
+
+      class Ipam < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader config: ::Array[DockerEngineRuby::NetworkSummary::Ipam::Config]?
+
+        def config=: (
+          ::Array[DockerEngineRuby::NetworkSummary::Ipam::Config]
+        ) -> ::Array[DockerEngineRuby::NetworkSummary::Ipam::Config]
+
+        attr_reader driver: String?
+
+        def driver=: (String) -> String
+
+        attr_reader options: ::Hash[Symbol, String]?
+
+        def options=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+        def initialize: (
+          ?config: ::Array[DockerEngineRuby::NetworkSummary::Ipam::Config],
+          ?driver: String,
+          ?options: ::Hash[Symbol, String]
+        ) -> void
+
+        def to_hash: -> {
+          config: ::Array[DockerEngineRuby::NetworkSummary::Ipam::Config],
+          driver: String,
+          options: ::Hash[Symbol, String]
+        }
+
+        type config =
+          {
+            auxiliary_addresses: ::Hash[Symbol, String],
+            gateway: String,
+            ip_range: String,
+            subnet: String
+          }
+
+        class Config < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader auxiliary_addresses: ::Hash[Symbol, String]?
+
+          def auxiliary_addresses=: (
+            ::Hash[Symbol, String]
+          ) -> ::Hash[Symbol, String]
+
+          attr_reader gateway: String?
+
+          def gateway=: (String) -> String
+
+          attr_reader ip_range: String?
+
+          def ip_range=: (String) -> String
+
+          attr_reader subnet: String?
+
+          def subnet=: (String) -> String
+
+          def initialize: (
+            ?auxiliary_addresses: ::Hash[Symbol, String],
+            ?gateway: String,
+            ?ip_range: String,
+            ?subnet: String
+          ) -> void
+
+          def to_hash: -> {
+            auxiliary_addresses: ::Hash[Symbol, String],
+            gateway: String,
+            ip_range: String,
+            subnet: String
+          }
+        end
+      end
+
+      type peer = { ip: String, name: String }
+
+      class Peer < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader ip: String?
+
+        def ip=: (String) -> String
+
+        attr_reader name: String?
+
+        def name=: (String) -> String
+
+        def initialize: (?ip: String, ?name: String) -> void
+
+        def to_hash: -> { ip: String, name: String }
+      end
+    end
+  end
+end

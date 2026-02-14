@@ -13,6 +13,10 @@ module DockerEngineRuby
 
   class ConfigListParams = DockerEngineRuby::Models::ConfigListParams
 
+  class ConfigObject = DockerEngineRuby::Models::ConfigObject
+
+  class ConfigSpec = DockerEngineRuby::Models::ConfigSpec
+
   class ConfigUpdateParams = DockerEngineRuby::Models::ConfigUpdateParams
 
   class ConnectRequest = DockerEngineRuby::Models::ConnectRequest
@@ -117,6 +121,8 @@ module DockerEngineRuby
 
   class ImageSearchParams = DockerEngineRuby::Models::ImageSearchParams
 
+  class ImageSummary = DockerEngineRuby::Models::ImageSummary
+
   class ImageTagParams = DockerEngineRuby::Models::ImageTagParams
 
   class Info = DockerEngineRuby::Models::Info
@@ -133,6 +139,8 @@ module DockerEngineRuby
 
   class NetworkCreateParams = DockerEngineRuby::Models::NetworkCreateParams
 
+  class NetworkCreateResponse = DockerEngineRuby::Models::NetworkCreateResponse
+
   class NetworkDeleteParams = DockerEngineRuby::Models::NetworkDeleteParams
 
   class NetworkDisconnectParams = DockerEngineRuby::Models::NetworkDisconnectParams
@@ -143,6 +151,8 @@ module DockerEngineRuby
 
   class NetworkPruneParams = DockerEngineRuby::Models::NetworkPruneParams
 
+  class NetworkSummary = DockerEngineRuby::Models::NetworkSummary
+
   class Node = DockerEngineRuby::Models::Node
 
   class NodeDeleteParams = DockerEngineRuby::Models::NodeDeleteParams
@@ -150,6 +160,8 @@ module DockerEngineRuby
   class NodeInspectParams = DockerEngineRuby::Models::NodeInspectParams
 
   class NodeListParams = DockerEngineRuby::Models::NodeListParams
+
+  class NodeSpec = DockerEngineRuby::Models::NodeSpec
 
   class NodeUpdateParams = DockerEngineRuby::Models::NodeUpdateParams
 
@@ -189,11 +201,15 @@ module DockerEngineRuby
 
   class SecretListParams = DockerEngineRuby::Models::SecretListParams
 
+  class SecretSpec = DockerEngineRuby::Models::SecretSpec
+
   class SecretUpdateParams = DockerEngineRuby::Models::SecretUpdateParams
 
   class Service = DockerEngineRuby::Models::Service
 
   class ServiceCreateParams = DockerEngineRuby::Models::ServiceCreateParams
+
+  class ServiceCreateResponse = DockerEngineRuby::Models::ServiceCreateResponse
 
   class ServiceDeleteParams = DockerEngineRuby::Models::ServiceDeleteParams
 
@@ -203,9 +219,11 @@ module DockerEngineRuby
 
   class ServiceLogsParams = DockerEngineRuby::Models::ServiceLogsParams
 
+  class ServiceSpec = DockerEngineRuby::Models::ServiceSpec
+
   class ServiceUpdateParams = DockerEngineRuby::Models::ServiceUpdateParams
 
-  class Spec = DockerEngineRuby::Models::Spec
+  class ServiceUpdateResponse = DockerEngineRuby::Models::ServiceUpdateResponse
 
   class StatsResponse = DockerEngineRuby::Models::StatsResponse
 
@@ -220,6 +238,8 @@ module DockerEngineRuby
   class SwarmJoinParams = DockerEngineRuby::Models::SwarmJoinParams
 
   class SwarmLeaveParams = DockerEngineRuby::Models::SwarmLeaveParams
+
+  class SwarmSpec = DockerEngineRuby::Models::SwarmSpec
 
   class SwarmUnlockKeyParams = DockerEngineRuby::Models::SwarmUnlockKeyParams
 
@@ -244,6 +264,8 @@ module DockerEngineRuby
   class TaskListParams = DockerEngineRuby::Models::TaskListParams
 
   class TaskLogsParams = DockerEngineRuby::Models::TaskLogsParams
+
+  class TaskSpec = DockerEngineRuby::Models::TaskSpec
 
   class TopResponse = DockerEngineRuby::Models::TopResponse
 

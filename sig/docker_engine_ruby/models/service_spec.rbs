@@ -1,0 +1,471 @@
+module DockerEngineRuby
+  module Models
+    type service_spec =
+      {
+        endpoint_spec: DockerEngineRuby::ServiceSpec::EndpointSpec,
+        labels: ::Hash[Symbol, String],
+        mode: DockerEngineRuby::ServiceSpec::Mode,
+        name: String,
+        networks: ::Array[DockerEngineRuby::ServiceSpec::Network],
+        rollback_config: DockerEngineRuby::ServiceSpec::RollbackConfig,
+        task_template: DockerEngineRuby::TaskSpec,
+        update_config: DockerEngineRuby::ServiceSpec::UpdateConfig
+      }
+
+    class ServiceSpec < DockerEngineRuby::Internal::Type::BaseModel
+      attr_reader endpoint_spec: DockerEngineRuby::ServiceSpec::EndpointSpec?
+
+      def endpoint_spec=: (
+        DockerEngineRuby::ServiceSpec::EndpointSpec
+      ) -> DockerEngineRuby::ServiceSpec::EndpointSpec
+
+      attr_reader labels: ::Hash[Symbol, String]?
+
+      def labels=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+      attr_reader mode: DockerEngineRuby::ServiceSpec::Mode?
+
+      def mode=: (
+        DockerEngineRuby::ServiceSpec::Mode
+      ) -> DockerEngineRuby::ServiceSpec::Mode
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_reader networks: ::Array[DockerEngineRuby::ServiceSpec::Network]?
+
+      def networks=: (
+        ::Array[DockerEngineRuby::ServiceSpec::Network]
+      ) -> ::Array[DockerEngineRuby::ServiceSpec::Network]
+
+      attr_reader rollback_config: DockerEngineRuby::ServiceSpec::RollbackConfig?
+
+      def rollback_config=: (
+        DockerEngineRuby::ServiceSpec::RollbackConfig
+      ) -> DockerEngineRuby::ServiceSpec::RollbackConfig
+
+      attr_reader task_template: DockerEngineRuby::TaskSpec?
+
+      def task_template=: (
+        DockerEngineRuby::TaskSpec
+      ) -> DockerEngineRuby::TaskSpec
+
+      attr_reader update_config: DockerEngineRuby::ServiceSpec::UpdateConfig?
+
+      def update_config=: (
+        DockerEngineRuby::ServiceSpec::UpdateConfig
+      ) -> DockerEngineRuby::ServiceSpec::UpdateConfig
+
+      def initialize: (
+        ?endpoint_spec: DockerEngineRuby::ServiceSpec::EndpointSpec,
+        ?labels: ::Hash[Symbol, String],
+        ?mode: DockerEngineRuby::ServiceSpec::Mode,
+        ?name: String,
+        ?networks: ::Array[DockerEngineRuby::ServiceSpec::Network],
+        ?rollback_config: DockerEngineRuby::ServiceSpec::RollbackConfig,
+        ?task_template: DockerEngineRuby::TaskSpec,
+        ?update_config: DockerEngineRuby::ServiceSpec::UpdateConfig
+      ) -> void
+
+      def to_hash: -> {
+        endpoint_spec: DockerEngineRuby::ServiceSpec::EndpointSpec,
+        labels: ::Hash[Symbol, String],
+        mode: DockerEngineRuby::ServiceSpec::Mode,
+        name: String,
+        networks: ::Array[DockerEngineRuby::ServiceSpec::Network],
+        rollback_config: DockerEngineRuby::ServiceSpec::RollbackConfig,
+        task_template: DockerEngineRuby::TaskSpec,
+        update_config: DockerEngineRuby::ServiceSpec::UpdateConfig
+      }
+
+      type endpoint_spec =
+        {
+          mode: DockerEngineRuby::Models::ServiceSpec::EndpointSpec::mode,
+          ports: ::Array[DockerEngineRuby::ServiceSpec::EndpointSpec::Port]
+        }
+
+      class EndpointSpec < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader mode: DockerEngineRuby::Models::ServiceSpec::EndpointSpec::mode?
+
+        def mode=: (
+          DockerEngineRuby::Models::ServiceSpec::EndpointSpec::mode
+        ) -> DockerEngineRuby::Models::ServiceSpec::EndpointSpec::mode
+
+        attr_reader ports: ::Array[DockerEngineRuby::ServiceSpec::EndpointSpec::Port]?
+
+        def ports=: (
+          ::Array[DockerEngineRuby::ServiceSpec::EndpointSpec::Port]
+        ) -> ::Array[DockerEngineRuby::ServiceSpec::EndpointSpec::Port]
+
+        def initialize: (
+          ?mode: DockerEngineRuby::Models::ServiceSpec::EndpointSpec::mode,
+          ?ports: ::Array[DockerEngineRuby::ServiceSpec::EndpointSpec::Port]
+        ) -> void
+
+        def to_hash: -> {
+          mode: DockerEngineRuby::Models::ServiceSpec::EndpointSpec::mode,
+          ports: ::Array[DockerEngineRuby::ServiceSpec::EndpointSpec::Port]
+        }
+
+        type mode = :vip | :dnsrr
+
+        module Mode
+          extend DockerEngineRuby::Internal::Type::Enum
+
+          VIP: :vip
+          DNSRR: :dnsrr
+
+          def self?.values: -> ::Array[DockerEngineRuby::Models::ServiceSpec::EndpointSpec::mode]
+        end
+
+        type port =
+          {
+            name: String,
+            protocol: DockerEngineRuby::Models::ServiceSpec::EndpointSpec::Port::protocol,
+            published_port: Integer,
+            publish_mode: DockerEngineRuby::Models::ServiceSpec::EndpointSpec::Port::publish_mode,
+            target_port: Integer
+          }
+
+        class Port < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader name: String?
+
+          def name=: (String) -> String
+
+          attr_reader protocol: DockerEngineRuby::Models::ServiceSpec::EndpointSpec::Port::protocol?
+
+          def protocol=: (
+            DockerEngineRuby::Models::ServiceSpec::EndpointSpec::Port::protocol
+          ) -> DockerEngineRuby::Models::ServiceSpec::EndpointSpec::Port::protocol
+
+          attr_reader published_port: Integer?
+
+          def published_port=: (Integer) -> Integer
+
+          attr_reader publish_mode: DockerEngineRuby::Models::ServiceSpec::EndpointSpec::Port::publish_mode?
+
+          def publish_mode=: (
+            DockerEngineRuby::Models::ServiceSpec::EndpointSpec::Port::publish_mode
+          ) -> DockerEngineRuby::Models::ServiceSpec::EndpointSpec::Port::publish_mode
+
+          attr_reader target_port: Integer?
+
+          def target_port=: (Integer) -> Integer
+
+          def initialize: (
+            ?name: String,
+            ?protocol: DockerEngineRuby::Models::ServiceSpec::EndpointSpec::Port::protocol,
+            ?published_port: Integer,
+            ?publish_mode: DockerEngineRuby::Models::ServiceSpec::EndpointSpec::Port::publish_mode,
+            ?target_port: Integer
+          ) -> void
+
+          def to_hash: -> {
+            name: String,
+            protocol: DockerEngineRuby::Models::ServiceSpec::EndpointSpec::Port::protocol,
+            published_port: Integer,
+            publish_mode: DockerEngineRuby::Models::ServiceSpec::EndpointSpec::Port::publish_mode,
+            target_port: Integer
+          }
+
+          type protocol = :tcp | :udp | :sctp
+
+          module Protocol
+            extend DockerEngineRuby::Internal::Type::Enum
+
+            TCP: :tcp
+            UDP: :udp
+            SCTP: :sctp
+
+            def self?.values: -> ::Array[DockerEngineRuby::Models::ServiceSpec::EndpointSpec::Port::protocol]
+          end
+
+          type publish_mode = :ingress | :host
+
+          module PublishMode
+            extend DockerEngineRuby::Internal::Type::Enum
+
+            INGRESS: :ingress
+            HOST: :host
+
+            def self?.values: -> ::Array[DockerEngineRuby::Models::ServiceSpec::EndpointSpec::Port::publish_mode]
+          end
+        end
+      end
+
+      type mode =
+        {
+          global: ::Hash[Symbol, top],
+          global_job: ::Hash[Symbol, top],
+          replicated: DockerEngineRuby::ServiceSpec::Mode::Replicated,
+          replicated_job: DockerEngineRuby::ServiceSpec::Mode::ReplicatedJob
+        }
+
+      class Mode < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader global: ::Hash[Symbol, top]?
+
+        def global=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+        attr_reader global_job: ::Hash[Symbol, top]?
+
+        def global_job=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+        attr_reader replicated: DockerEngineRuby::ServiceSpec::Mode::Replicated?
+
+        def replicated=: (
+          DockerEngineRuby::ServiceSpec::Mode::Replicated
+        ) -> DockerEngineRuby::ServiceSpec::Mode::Replicated
+
+        attr_reader replicated_job: DockerEngineRuby::ServiceSpec::Mode::ReplicatedJob?
+
+        def replicated_job=: (
+          DockerEngineRuby::ServiceSpec::Mode::ReplicatedJob
+        ) -> DockerEngineRuby::ServiceSpec::Mode::ReplicatedJob
+
+        def initialize: (
+          ?global: ::Hash[Symbol, top],
+          ?global_job: ::Hash[Symbol, top],
+          ?replicated: DockerEngineRuby::ServiceSpec::Mode::Replicated,
+          ?replicated_job: DockerEngineRuby::ServiceSpec::Mode::ReplicatedJob
+        ) -> void
+
+        def to_hash: -> {
+          global: ::Hash[Symbol, top],
+          global_job: ::Hash[Symbol, top],
+          replicated: DockerEngineRuby::ServiceSpec::Mode::Replicated,
+          replicated_job: DockerEngineRuby::ServiceSpec::Mode::ReplicatedJob
+        }
+
+        type replicated = { replicas: Integer }
+
+        class Replicated < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader replicas: Integer?
+
+          def replicas=: (Integer) -> Integer
+
+          def initialize: (?replicas: Integer) -> void
+
+          def to_hash: -> { replicas: Integer }
+        end
+
+        type replicated_job =
+          { max_concurrent: Integer, total_completions: Integer }
+
+        class ReplicatedJob < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader max_concurrent: Integer?
+
+          def max_concurrent=: (Integer) -> Integer
+
+          attr_reader total_completions: Integer?
+
+          def total_completions=: (Integer) -> Integer
+
+          def initialize: (
+            ?max_concurrent: Integer,
+            ?total_completions: Integer
+          ) -> void
+
+          def to_hash: -> {
+            max_concurrent: Integer,
+            total_completions: Integer
+          }
+        end
+      end
+
+      type network =
+        {
+          aliases: ::Array[String],
+          driver_opts: ::Hash[Symbol, String],
+          target: String
+        }
+
+      class Network < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader aliases: ::Array[String]?
+
+        def aliases=: (::Array[String]) -> ::Array[String]
+
+        attr_reader driver_opts: ::Hash[Symbol, String]?
+
+        def driver_opts=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+        attr_reader target: String?
+
+        def target=: (String) -> String
+
+        def initialize: (
+          ?aliases: ::Array[String],
+          ?driver_opts: ::Hash[Symbol, String],
+          ?target: String
+        ) -> void
+
+        def to_hash: -> {
+          aliases: ::Array[String],
+          driver_opts: ::Hash[Symbol, String],
+          target: String
+        }
+      end
+
+      type rollback_config =
+        {
+          delay: Integer,
+          failure_action: DockerEngineRuby::Models::ServiceSpec::RollbackConfig::failure_action,
+          max_failure_ratio: Float,
+          monitor: Integer,
+          order: DockerEngineRuby::Models::ServiceSpec::RollbackConfig::order,
+          parallelism: Integer
+        }
+
+      class RollbackConfig < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader delay: Integer?
+
+        def delay=: (Integer) -> Integer
+
+        attr_reader failure_action: DockerEngineRuby::Models::ServiceSpec::RollbackConfig::failure_action?
+
+        def failure_action=: (
+          DockerEngineRuby::Models::ServiceSpec::RollbackConfig::failure_action
+        ) -> DockerEngineRuby::Models::ServiceSpec::RollbackConfig::failure_action
+
+        attr_reader max_failure_ratio: Float?
+
+        def max_failure_ratio=: (Float) -> Float
+
+        attr_reader monitor: Integer?
+
+        def monitor=: (Integer) -> Integer
+
+        attr_reader order: DockerEngineRuby::Models::ServiceSpec::RollbackConfig::order?
+
+        def order=: (
+          DockerEngineRuby::Models::ServiceSpec::RollbackConfig::order
+        ) -> DockerEngineRuby::Models::ServiceSpec::RollbackConfig::order
+
+        attr_reader parallelism: Integer?
+
+        def parallelism=: (Integer) -> Integer
+
+        def initialize: (
+          ?delay: Integer,
+          ?failure_action: DockerEngineRuby::Models::ServiceSpec::RollbackConfig::failure_action,
+          ?max_failure_ratio: Float,
+          ?monitor: Integer,
+          ?order: DockerEngineRuby::Models::ServiceSpec::RollbackConfig::order,
+          ?parallelism: Integer
+        ) -> void
+
+        def to_hash: -> {
+          delay: Integer,
+          failure_action: DockerEngineRuby::Models::ServiceSpec::RollbackConfig::failure_action,
+          max_failure_ratio: Float,
+          monitor: Integer,
+          order: DockerEngineRuby::Models::ServiceSpec::RollbackConfig::order,
+          parallelism: Integer
+        }
+
+        type failure_action = :continue | :pause
+
+        module FailureAction
+          extend DockerEngineRuby::Internal::Type::Enum
+
+          CONTINUE: :continue
+          PAUSE: :pause
+
+          def self?.values: -> ::Array[DockerEngineRuby::Models::ServiceSpec::RollbackConfig::failure_action]
+        end
+
+        type order = :"stop-first" | :"start-first"
+
+        module Order
+          extend DockerEngineRuby::Internal::Type::Enum
+
+          STOP_FIRST: :"stop-first"
+          START_FIRST: :"start-first"
+
+          def self?.values: -> ::Array[DockerEngineRuby::Models::ServiceSpec::RollbackConfig::order]
+        end
+      end
+
+      type update_config =
+        {
+          delay: Integer,
+          failure_action: DockerEngineRuby::Models::ServiceSpec::UpdateConfig::failure_action,
+          max_failure_ratio: Float,
+          monitor: Integer,
+          order: DockerEngineRuby::Models::ServiceSpec::UpdateConfig::order,
+          parallelism: Integer
+        }
+
+      class UpdateConfig < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader delay: Integer?
+
+        def delay=: (Integer) -> Integer
+
+        attr_reader failure_action: DockerEngineRuby::Models::ServiceSpec::UpdateConfig::failure_action?
+
+        def failure_action=: (
+          DockerEngineRuby::Models::ServiceSpec::UpdateConfig::failure_action
+        ) -> DockerEngineRuby::Models::ServiceSpec::UpdateConfig::failure_action
+
+        attr_reader max_failure_ratio: Float?
+
+        def max_failure_ratio=: (Float) -> Float
+
+        attr_reader monitor: Integer?
+
+        def monitor=: (Integer) -> Integer
+
+        attr_reader order: DockerEngineRuby::Models::ServiceSpec::UpdateConfig::order?
+
+        def order=: (
+          DockerEngineRuby::Models::ServiceSpec::UpdateConfig::order
+        ) -> DockerEngineRuby::Models::ServiceSpec::UpdateConfig::order
+
+        attr_reader parallelism: Integer?
+
+        def parallelism=: (Integer) -> Integer
+
+        def initialize: (
+          ?delay: Integer,
+          ?failure_action: DockerEngineRuby::Models::ServiceSpec::UpdateConfig::failure_action,
+          ?max_failure_ratio: Float,
+          ?monitor: Integer,
+          ?order: DockerEngineRuby::Models::ServiceSpec::UpdateConfig::order,
+          ?parallelism: Integer
+        ) -> void
+
+        def to_hash: -> {
+          delay: Integer,
+          failure_action: DockerEngineRuby::Models::ServiceSpec::UpdateConfig::failure_action,
+          max_failure_ratio: Float,
+          monitor: Integer,
+          order: DockerEngineRuby::Models::ServiceSpec::UpdateConfig::order,
+          parallelism: Integer
+        }
+
+        type failure_action = :continue | :pause | :rollback
+
+        module FailureAction
+          extend DockerEngineRuby::Internal::Type::Enum
+
+          CONTINUE: :continue
+          PAUSE: :pause
+          ROLLBACK: :rollback
+
+          def self?.values: -> ::Array[DockerEngineRuby::Models::ServiceSpec::UpdateConfig::failure_action]
+        end
+
+        type order = :"stop-first" | :"start-first"
+
+        module Order
+          extend DockerEngineRuby::Internal::Type::Enum
+
+          STOP_FIRST: :"stop-first"
+          START_FIRST: :"start-first"
+
+          def self?.values: -> ::Array[DockerEngineRuby::Models::ServiceSpec::UpdateConfig::order]
+        end
+      end
+    end
+  end
+end

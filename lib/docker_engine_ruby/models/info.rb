@@ -1303,8 +1303,8 @@ module DockerEngineRuby
           # @!attribute spec
           #   User modifiable swarm configuration.
           #
-          #   @return [DockerEngineRuby::Models::Spec, nil]
-          optional :spec, -> { DockerEngineRuby::Spec }, api_name: :Spec
+          #   @return [DockerEngineRuby::Models::SwarmSpec, nil]
+          optional :spec, -> { DockerEngineRuby::SwarmSpec }, api_name: :Spec
 
           # @!attribute subnet_size
           #   SubnetSize specifies the subnet size of the networks created from the default
@@ -1358,7 +1358,7 @@ module DockerEngineRuby
           #
           #   @param root_rotation_in_progress [Boolean] Whether there is currently a root CA rotation in progress for the swarm
           #
-          #   @param spec [DockerEngineRuby::Models::Spec] User modifiable swarm configuration.
+          #   @param spec [DockerEngineRuby::Models::SwarmSpec] User modifiable swarm configuration.
           #
           #   @param subnet_size [Integer] SubnetSize specifies the subnet size of the networks created from the
           #

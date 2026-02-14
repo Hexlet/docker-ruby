@@ -7,7 +7,7 @@ module DockerEngineRuby
       #
       # @overload create(spec:, request_options: {})
       #
-      # @param spec [DockerEngineRuby::Models::Spec]
+      # @param spec [DockerEngineRuby::Models::ConfigSpec]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [DockerEngineRuby::Models::ConfigCreateResponse]
@@ -32,7 +32,7 @@ module DockerEngineRuby
       #
       # @param version [Integer] Query param
       #
-      # @param spec [DockerEngineRuby::Models::Spec] Body param
+      # @param spec [DockerEngineRuby::Models::ConfigSpec] Body param
       #
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -58,7 +58,7 @@ module DockerEngineRuby
       # @param filters [String]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Array<DockerEngineRuby::Models::Config>]
+      # @return [Array<DockerEngineRuby::Models::ConfigObject>]
       #
       # @see DockerEngineRuby::Models::ConfigListParams
       def list(params = {})
@@ -67,7 +67,7 @@ module DockerEngineRuby
           method: :get,
           path: "configs",
           query: parsed,
-          model: DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Config],
+          model: DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::ConfigObject],
           options: options
         )
       end
@@ -98,14 +98,14 @@ module DockerEngineRuby
       # @param id [String]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [DockerEngineRuby::Models::Config]
+      # @return [DockerEngineRuby::Models::ConfigObject]
       #
       # @see DockerEngineRuby::Models::ConfigInspectParams
       def inspect_(id, params = {})
         @client.request(
           method: :get,
           path: ["configs/%1$s", id],
-          model: DockerEngineRuby::Config,
+          model: DockerEngineRuby::ConfigObject,
           options: params[:request_options]
         )
       end

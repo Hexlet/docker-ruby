@@ -9,7 +9,7 @@ class DockerEngineRuby::Test::Resources::NetworksTest < DockerEngineRuby::Test::
     response = @docker.networks.create(name: "Name")
 
     assert_pattern do
-      response => DockerEngineRuby::CreateResponse
+      response => DockerEngineRuby::NetworkCreateResponse
     end
 
     assert_pattern do
@@ -26,7 +26,7 @@ class DockerEngineRuby::Test::Resources::NetworksTest < DockerEngineRuby::Test::
     response = @docker.networks.list
 
     assert_pattern do
-      response => ^(DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Summary])
+      response => ^(DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::NetworkSummary])
     end
   end
 

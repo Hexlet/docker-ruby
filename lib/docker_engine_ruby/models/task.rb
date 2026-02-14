@@ -75,8 +75,8 @@ module DockerEngineRuby
       # @!attribute spec
       #   User modifiable task configuration.
       #
-      #   @return [DockerEngineRuby::Models::Spec, nil]
-      optional :spec, -> { DockerEngineRuby::Spec }, api_name: :Spec
+      #   @return [DockerEngineRuby::Models::TaskSpec, nil]
+      optional :spec, -> { DockerEngineRuby::TaskSpec }, api_name: :Spec
 
       # @!attribute status
       #   represents the status of a task.
@@ -127,7 +127,7 @@ module DockerEngineRuby
       #
       #   @param slot [Integer]
       #
-      #   @param spec [DockerEngineRuby::Models::Spec] User modifiable task configuration.
+      #   @param spec [DockerEngineRuby::Models::TaskSpec] User modifiable task configuration.
       #
       #   @param status [DockerEngineRuby::Models::Task::Status] represents the status of a task.
       #

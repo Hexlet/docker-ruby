@@ -9,7 +9,7 @@ module DockerEngineRuby
       #
       # @param version [Integer] Query param
       #
-      # @param spec [DockerEngineRuby::Models::Spec] Body param: User modifiable swarm configuration.
+      # @param spec [DockerEngineRuby::Models::SwarmSpec] Body param: User modifiable swarm configuration.
       #
       # @param rotate_manager_token [Boolean] Query param
       #
@@ -54,7 +54,7 @@ module DockerEngineRuby
       #
       # @param listen_addr [String]
       #
-      # @param spec [DockerEngineRuby::Models::Spec] User modifiable swarm configuration.
+      # @param spec [DockerEngineRuby::Models::SwarmSpec] User modifiable swarm configuration.
       #
       # @param subnet_size [Integer]
       #

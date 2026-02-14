@@ -100,10 +100,10 @@ module DockerEngineRuby
       attr_writer :slot
 
       # User modifiable task configuration.
-      sig { returns(T.nilable(DockerEngineRuby::Spec)) }
+      sig { returns(T.nilable(DockerEngineRuby::TaskSpec)) }
       attr_reader :spec
 
-      sig { params(spec: DockerEngineRuby::Spec::OrHash).void }
+      sig { params(spec: DockerEngineRuby::TaskSpec::OrHash).void }
       attr_writer :spec
 
       # represents the status of a task.
@@ -147,7 +147,7 @@ module DockerEngineRuby
           node_id: String,
           service_id: String,
           slot: Integer,
-          spec: DockerEngineRuby::Spec::OrHash,
+          spec: DockerEngineRuby::TaskSpec::OrHash,
           status: DockerEngineRuby::Task::Status::OrHash,
           updated_at: Time,
           version: DockerEngineRuby::Task::Version::OrHash
@@ -210,7 +210,7 @@ module DockerEngineRuby
             node_id: String,
             service_id: String,
             slot: Integer,
-            spec: DockerEngineRuby::Spec,
+            spec: DockerEngineRuby::TaskSpec,
             status: DockerEngineRuby::Task::Status,
             updated_at: Time,
             version: DockerEngineRuby::Task::Version

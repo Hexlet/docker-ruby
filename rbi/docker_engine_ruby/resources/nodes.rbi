@@ -8,7 +8,7 @@ module DockerEngineRuby
         params(
           id: String,
           version: Integer,
-          spec: DockerEngineRuby::Spec::OrHash,
+          spec: DockerEngineRuby::NodeSpec::OrHash,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).void
       end

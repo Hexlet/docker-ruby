@@ -1,0 +1,457 @@
+module DockerEngineRuby
+  module Models
+    type image_summary =
+      {
+        containers: Integer,
+        created: Integer,
+        id: String,
+        labels: ::Hash[Symbol, String],
+        parent_id: String,
+        repo_digests: ::Array[String],
+        repo_tags: ::Array[String],
+        shared_size: Integer,
+        size: Integer,
+        descriptor: DockerEngineRuby::ImageSummary::Descriptor?,
+        manifests: ::Array[DockerEngineRuby::ImageSummary::Manifest]
+      }
+
+    class ImageSummary < DockerEngineRuby::Internal::Type::BaseModel
+      attr_accessor containers: Integer
+
+      attr_accessor created: Integer
+
+      attr_accessor id: String
+
+      attr_accessor labels: ::Hash[Symbol, String]
+
+      attr_accessor parent_id: String
+
+      attr_accessor repo_digests: ::Array[String]
+
+      attr_accessor repo_tags: ::Array[String]
+
+      attr_accessor shared_size: Integer
+
+      attr_accessor size: Integer
+
+      attr_accessor descriptor: DockerEngineRuby::ImageSummary::Descriptor?
+
+      attr_reader manifests: ::Array[DockerEngineRuby::ImageSummary::Manifest]?
+
+      def manifests=: (
+        ::Array[DockerEngineRuby::ImageSummary::Manifest]
+      ) -> ::Array[DockerEngineRuby::ImageSummary::Manifest]
+
+      def initialize: (
+        containers: Integer,
+        created: Integer,
+        id: String,
+        labels: ::Hash[Symbol, String],
+        parent_id: String,
+        repo_digests: ::Array[String],
+        repo_tags: ::Array[String],
+        shared_size: Integer,
+        size: Integer,
+        ?descriptor: DockerEngineRuby::ImageSummary::Descriptor?,
+        ?manifests: ::Array[DockerEngineRuby::ImageSummary::Manifest]
+      ) -> void
+
+      def to_hash: -> {
+        containers: Integer,
+        created: Integer,
+        id: String,
+        labels: ::Hash[Symbol, String],
+        parent_id: String,
+        repo_digests: ::Array[String],
+        repo_tags: ::Array[String],
+        shared_size: Integer,
+        size: Integer,
+        descriptor: DockerEngineRuby::ImageSummary::Descriptor?,
+        manifests: ::Array[DockerEngineRuby::ImageSummary::Manifest]
+      }
+
+      type descriptor =
+        {
+          annotations: ::Hash[Symbol, String]?,
+          artifact_type: String?,
+          data: String?,
+          digest: String,
+          media_type: String,
+          platform: DockerEngineRuby::ImageSummary::Descriptor::Platform,
+          size: Integer,
+          urls: ::Array[String]?
+        }
+
+      class Descriptor < DockerEngineRuby::Internal::Type::BaseModel
+        attr_accessor annotations: ::Hash[Symbol, String]?
+
+        attr_accessor artifact_type: String?
+
+        attr_accessor data: String?
+
+        attr_reader digest: String?
+
+        def digest=: (String) -> String
+
+        attr_reader media_type: String?
+
+        def media_type=: (String) -> String
+
+        attr_reader platform: DockerEngineRuby::ImageSummary::Descriptor::Platform?
+
+        def platform=: (
+          DockerEngineRuby::ImageSummary::Descriptor::Platform
+        ) -> DockerEngineRuby::ImageSummary::Descriptor::Platform
+
+        attr_reader size: Integer?
+
+        def size=: (Integer) -> Integer
+
+        attr_accessor urls: ::Array[String]?
+
+        def initialize: (
+          ?annotations: ::Hash[Symbol, String]?,
+          ?artifact_type: String?,
+          ?data: String?,
+          ?digest: String,
+          ?media_type: String,
+          ?platform: DockerEngineRuby::ImageSummary::Descriptor::Platform,
+          ?size: Integer,
+          ?urls: ::Array[String]?
+        ) -> void
+
+        def to_hash: -> {
+          annotations: ::Hash[Symbol, String]?,
+          artifact_type: String?,
+          data: String?,
+          digest: String,
+          media_type: String,
+          platform: DockerEngineRuby::ImageSummary::Descriptor::Platform,
+          size: Integer,
+          urls: ::Array[String]?
+        }
+
+        type platform =
+          {
+            architecture: String,
+            os: String,
+            os_features: ::Array[String],
+            os_version: String,
+            variant: String
+          }
+
+        class Platform < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader architecture: String?
+
+          def architecture=: (String) -> String
+
+          attr_reader os: String?
+
+          def os=: (String) -> String
+
+          attr_reader os_features: ::Array[String]?
+
+          def os_features=: (::Array[String]) -> ::Array[String]
+
+          attr_reader os_version: String?
+
+          def os_version=: (String) -> String
+
+          attr_reader variant: String?
+
+          def variant=: (String) -> String
+
+          def initialize: (
+            ?architecture: String,
+            ?os: String,
+            ?os_features: ::Array[String],
+            ?os_version: String,
+            ?variant: String
+          ) -> void
+
+          def to_hash: -> {
+            architecture: String,
+            os: String,
+            os_features: ::Array[String],
+            os_version: String,
+            variant: String
+          }
+        end
+      end
+
+      type manifest =
+        {
+          available: bool,
+          descriptor: DockerEngineRuby::ImageSummary::Manifest::Descriptor,
+          id: String,
+          kind: DockerEngineRuby::Models::ImageSummary::Manifest::kind,
+          size: DockerEngineRuby::ImageSummary::Manifest::Size,
+          attestation_data: DockerEngineRuby::ImageSummary::Manifest::AttestationData?,
+          image_data: DockerEngineRuby::ImageSummary::Manifest::ImageData?
+        }
+
+      class Manifest < DockerEngineRuby::Internal::Type::BaseModel
+        attr_accessor available: bool
+
+        attr_accessor descriptor: DockerEngineRuby::ImageSummary::Manifest::Descriptor
+
+        attr_accessor id: String
+
+        attr_accessor kind: DockerEngineRuby::Models::ImageSummary::Manifest::kind
+
+        attr_accessor size: DockerEngineRuby::ImageSummary::Manifest::Size
+
+        attr_accessor attestation_data: DockerEngineRuby::ImageSummary::Manifest::AttestationData?
+
+        attr_accessor image_data: DockerEngineRuby::ImageSummary::Manifest::ImageData?
+
+        def initialize: (
+          available: bool,
+          descriptor: DockerEngineRuby::ImageSummary::Manifest::Descriptor,
+          id: String,
+          kind: DockerEngineRuby::Models::ImageSummary::Manifest::kind,
+          size: DockerEngineRuby::ImageSummary::Manifest::Size,
+          ?attestation_data: DockerEngineRuby::ImageSummary::Manifest::AttestationData?,
+          ?image_data: DockerEngineRuby::ImageSummary::Manifest::ImageData?
+        ) -> void
+
+        def to_hash: -> {
+          available: bool,
+          descriptor: DockerEngineRuby::ImageSummary::Manifest::Descriptor,
+          id: String,
+          kind: DockerEngineRuby::Models::ImageSummary::Manifest::kind,
+          size: DockerEngineRuby::ImageSummary::Manifest::Size,
+          attestation_data: DockerEngineRuby::ImageSummary::Manifest::AttestationData?,
+          image_data: DockerEngineRuby::ImageSummary::Manifest::ImageData?
+        }
+
+        type descriptor =
+          {
+            annotations: ::Hash[Symbol, String]?,
+            artifact_type: String?,
+            data: String?,
+            digest: String,
+            media_type: String,
+            platform: DockerEngineRuby::ImageSummary::Manifest::Descriptor::Platform,
+            size: Integer,
+            urls: ::Array[String]?
+          }
+
+        class Descriptor < DockerEngineRuby::Internal::Type::BaseModel
+          attr_accessor annotations: ::Hash[Symbol, String]?
+
+          attr_accessor artifact_type: String?
+
+          attr_accessor data: String?
+
+          attr_reader digest: String?
+
+          def digest=: (String) -> String
+
+          attr_reader media_type: String?
+
+          def media_type=: (String) -> String
+
+          attr_reader platform: DockerEngineRuby::ImageSummary::Manifest::Descriptor::Platform?
+
+          def platform=: (
+            DockerEngineRuby::ImageSummary::Manifest::Descriptor::Platform
+          ) -> DockerEngineRuby::ImageSummary::Manifest::Descriptor::Platform
+
+          attr_reader size: Integer?
+
+          def size=: (Integer) -> Integer
+
+          attr_accessor urls: ::Array[String]?
+
+          def initialize: (
+            ?annotations: ::Hash[Symbol, String]?,
+            ?artifact_type: String?,
+            ?data: String?,
+            ?digest: String,
+            ?media_type: String,
+            ?platform: DockerEngineRuby::ImageSummary::Manifest::Descriptor::Platform,
+            ?size: Integer,
+            ?urls: ::Array[String]?
+          ) -> void
+
+          def to_hash: -> {
+            annotations: ::Hash[Symbol, String]?,
+            artifact_type: String?,
+            data: String?,
+            digest: String,
+            media_type: String,
+            platform: DockerEngineRuby::ImageSummary::Manifest::Descriptor::Platform,
+            size: Integer,
+            urls: ::Array[String]?
+          }
+
+          type platform =
+            {
+              architecture: String,
+              os: String,
+              os_features: ::Array[String],
+              os_version: String,
+              variant: String
+            }
+
+          class Platform < DockerEngineRuby::Internal::Type::BaseModel
+            attr_reader architecture: String?
+
+            def architecture=: (String) -> String
+
+            attr_reader os: String?
+
+            def os=: (String) -> String
+
+            attr_reader os_features: ::Array[String]?
+
+            def os_features=: (::Array[String]) -> ::Array[String]
+
+            attr_reader os_version: String?
+
+            def os_version=: (String) -> String
+
+            attr_reader variant: String?
+
+            def variant=: (String) -> String
+
+            def initialize: (
+              ?architecture: String,
+              ?os: String,
+              ?os_features: ::Array[String],
+              ?os_version: String,
+              ?variant: String
+            ) -> void
+
+            def to_hash: -> {
+              architecture: String,
+              os: String,
+              os_features: ::Array[String],
+              os_version: String,
+              variant: String
+            }
+          end
+        end
+
+        type kind = :image | :attestation | :unknown
+
+        module Kind
+          extend DockerEngineRuby::Internal::Type::Enum
+
+          IMAGE: :image
+          ATTESTATION: :attestation
+          UNKNOWN: :unknown
+
+          def self?.values: -> ::Array[DockerEngineRuby::Models::ImageSummary::Manifest::kind]
+        end
+
+        type size = { content: Integer, total: Integer }
+
+        class Size < DockerEngineRuby::Internal::Type::BaseModel
+          attr_accessor content: Integer
+
+          attr_accessor total: Integer
+
+          def initialize: (content: Integer, total: Integer) -> void
+
+          def to_hash: -> { content: Integer, total: Integer }
+        end
+
+        type attestation_data = { for_: String }
+
+        class AttestationData < DockerEngineRuby::Internal::Type::BaseModel
+          attr_accessor for_: String
+
+          def initialize: (for_: String) -> void
+
+          def to_hash: -> { for_: String }
+        end
+
+        type image_data =
+          {
+            containers: ::Array[String],
+            platform: DockerEngineRuby::ImageSummary::Manifest::ImageData::Platform,
+            size: DockerEngineRuby::ImageSummary::Manifest::ImageData::Size
+          }
+
+        class ImageData < DockerEngineRuby::Internal::Type::BaseModel
+          attr_accessor containers: ::Array[String]
+
+          attr_accessor platform: DockerEngineRuby::ImageSummary::Manifest::ImageData::Platform
+
+          attr_accessor size: DockerEngineRuby::ImageSummary::Manifest::ImageData::Size
+
+          def initialize: (
+            containers: ::Array[String],
+            platform: DockerEngineRuby::ImageSummary::Manifest::ImageData::Platform,
+            size: DockerEngineRuby::ImageSummary::Manifest::ImageData::Size
+          ) -> void
+
+          def to_hash: -> {
+            containers: ::Array[String],
+            platform: DockerEngineRuby::ImageSummary::Manifest::ImageData::Platform,
+            size: DockerEngineRuby::ImageSummary::Manifest::ImageData::Size
+          }
+
+          type platform =
+            {
+              architecture: String,
+              os: String,
+              os_features: ::Array[String],
+              os_version: String,
+              variant: String
+            }
+
+          class Platform < DockerEngineRuby::Internal::Type::BaseModel
+            attr_reader architecture: String?
+
+            def architecture=: (String) -> String
+
+            attr_reader os: String?
+
+            def os=: (String) -> String
+
+            attr_reader os_features: ::Array[String]?
+
+            def os_features=: (::Array[String]) -> ::Array[String]
+
+            attr_reader os_version: String?
+
+            def os_version=: (String) -> String
+
+            attr_reader variant: String?
+
+            def variant=: (String) -> String
+
+            def initialize: (
+              ?architecture: String,
+              ?os: String,
+              ?os_features: ::Array[String],
+              ?os_version: String,
+              ?variant: String
+            ) -> void
+
+            def to_hash: -> {
+              architecture: String,
+              os: String,
+              os_features: ::Array[String],
+              os_version: String,
+              variant: String
+            }
+          end
+
+          type size = { unpacked: Integer }
+
+          class Size < DockerEngineRuby::Internal::Type::BaseModel
+            attr_accessor unpacked: Integer
+
+            def initialize: (unpacked: Integer) -> void
+
+            def to_hash: -> { unpacked: Integer }
+          end
+        end
+      end
+    end
+  end
+end
