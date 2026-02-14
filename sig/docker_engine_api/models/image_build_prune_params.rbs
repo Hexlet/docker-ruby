@@ -1,0 +1,56 @@
+module DockerEngineAPI
+  module Models
+    type image_build_prune_params =
+      {
+        all: bool,
+        filters: String,
+        max_used_space: Integer,
+        min_free_space: Integer,
+        reserved_space: Integer
+      }
+      & DockerEngineAPI::Internal::Type::request_parameters
+
+    class ImageBuildPruneParams < DockerEngineAPI::Internal::Type::BaseModel
+      extend DockerEngineAPI::Internal::Type::RequestParameters::Converter
+      include DockerEngineAPI::Internal::Type::RequestParameters
+
+      attr_reader all: bool?
+
+      def all=: (bool) -> bool
+
+      attr_reader filters: String?
+
+      def filters=: (String) -> String
+
+      attr_reader max_used_space: Integer?
+
+      def max_used_space=: (Integer) -> Integer
+
+      attr_reader min_free_space: Integer?
+
+      def min_free_space=: (Integer) -> Integer
+
+      attr_reader reserved_space: Integer?
+
+      def reserved_space=: (Integer) -> Integer
+
+      def initialize: (
+        ?all: bool,
+        ?filters: String,
+        ?max_used_space: Integer,
+        ?min_free_space: Integer,
+        ?reserved_space: Integer,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        all: bool,
+        filters: String,
+        max_used_space: Integer,
+        min_free_space: Integer,
+        reserved_space: Integer,
+        request_options: DockerEngineAPI::RequestOptions
+      }
+    end
+  end
+end

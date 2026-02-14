@@ -1,0 +1,23 @@
+module DockerEngineAPI
+  module Models
+    type container_archive_params =
+      { path: String } & DockerEngineAPI::Internal::Type::request_parameters
+
+    class ContainerArchiveParams < DockerEngineAPI::Internal::Type::BaseModel
+      extend DockerEngineAPI::Internal::Type::RequestParameters::Converter
+      include DockerEngineAPI::Internal::Type::RequestParameters
+
+      attr_accessor path: String
+
+      def initialize: (
+        path: String,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        path: String,
+        request_options: DockerEngineAPI::RequestOptions
+      }
+    end
+  end
+end

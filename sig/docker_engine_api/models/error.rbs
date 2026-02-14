@@ -1,0 +1,13 @@
+module DockerEngineAPI
+  module Models
+    type error = { message: String }
+
+    class Error < DockerEngineAPI::Internal::Type::BaseModel
+      attr_accessor message: String
+
+      def initialize: (message: String) -> void
+
+      def to_hash: -> { message: String }
+    end
+  end
+end

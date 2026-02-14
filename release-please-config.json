@@ -60,7 +60,7 @@
     }
   ],
   "release-type": "ruby",
-  "version-file": "lib/docker_engine/version.rb",
+  "version-file": "lib/docker_engine_api/version.rb",
   "extra-files": [
     {
       "type": "ruby-readme",

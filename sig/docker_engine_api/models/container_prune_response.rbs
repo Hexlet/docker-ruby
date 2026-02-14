@@ -1,0 +1,26 @@
+module DockerEngineAPI
+  module Models
+    type container_prune_response =
+      { containers_deleted: ::Array[String], space_reclaimed: Integer }
+
+    class ContainerPruneResponse < DockerEngineAPI::Internal::Type::BaseModel
+      attr_reader containers_deleted: ::Array[String]?
+
+      def containers_deleted=: (::Array[String]) -> ::Array[String]
+
+      attr_reader space_reclaimed: Integer?
+
+      def space_reclaimed=: (Integer) -> Integer
+
+      def initialize: (
+        ?containers_deleted: ::Array[String],
+        ?space_reclaimed: Integer
+      ) -> void
+
+      def to_hash: -> {
+        containers_deleted: ::Array[String],
+        space_reclaimed: Integer
+      }
+    end
+  end
+end

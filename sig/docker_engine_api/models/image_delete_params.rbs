@@ -1,0 +1,38 @@
+module DockerEngineAPI
+  module Models
+    type image_delete_params =
+      { force: bool, noprune: bool, platforms: ::Array[String] }
+      & DockerEngineAPI::Internal::Type::request_parameters
+
+    class ImageDeleteParams < DockerEngineAPI::Internal::Type::BaseModel
+      extend DockerEngineAPI::Internal::Type::RequestParameters::Converter
+      include DockerEngineAPI::Internal::Type::RequestParameters
+
+      attr_reader force: bool?
+
+      def force=: (bool) -> bool
+
+      attr_reader noprune: bool?
+
+      def noprune=: (bool) -> bool
+
+      attr_reader platforms: ::Array[String]?
+
+      def platforms=: (::Array[String]) -> ::Array[String]
+
+      def initialize: (
+        ?force: bool,
+        ?noprune: bool,
+        ?platforms: ::Array[String],
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        force: bool,
+        noprune: bool,
+        platforms: ::Array[String],
+        request_options: DockerEngineAPI::RequestOptions
+      }
+    end
+  end
+end

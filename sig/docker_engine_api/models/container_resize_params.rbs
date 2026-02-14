@@ -1,0 +1,28 @@
+module DockerEngineAPI
+  module Models
+    type container_resize_params =
+      { h: Integer, w: Integer }
+      & DockerEngineAPI::Internal::Type::request_parameters
+
+    class ContainerResizeParams < DockerEngineAPI::Internal::Type::BaseModel
+      extend DockerEngineAPI::Internal::Type::RequestParameters::Converter
+      include DockerEngineAPI::Internal::Type::RequestParameters
+
+      attr_accessor h: Integer
+
+      attr_accessor w: Integer
+
+      def initialize: (
+        h: Integer,
+        w: Integer,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        h: Integer,
+        w: Integer,
+        request_options: DockerEngineAPI::RequestOptions
+      }
+    end
+  end
+end

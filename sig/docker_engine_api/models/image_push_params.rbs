@@ -1,0 +1,36 @@
+module DockerEngineAPI
+  module Models
+    type image_push_params =
+      { x_registry_auth: String, platform: String, tag: String }
+      & DockerEngineAPI::Internal::Type::request_parameters
+
+    class ImagePushParams < DockerEngineAPI::Internal::Type::BaseModel
+      extend DockerEngineAPI::Internal::Type::RequestParameters::Converter
+      include DockerEngineAPI::Internal::Type::RequestParameters
+
+      attr_accessor x_registry_auth: String
+
+      attr_reader platform: String?
+
+      def platform=: (String) -> String
+
+      attr_reader tag: String?
+
+      def tag=: (String) -> String
+
+      def initialize: (
+        x_registry_auth: String,
+        ?platform: String,
+        ?tag: String,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        x_registry_auth: String,
+        platform: String,
+        tag: String,
+        request_options: DockerEngineAPI::RequestOptions
+      }
+    end
+  end
+end

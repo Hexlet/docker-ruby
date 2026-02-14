@@ -1,0 +1,23 @@
+module DockerEngineAPI
+  module Models
+    type container_rename_params =
+      { name: String } & DockerEngineAPI::Internal::Type::request_parameters
+
+    class ContainerRenameParams < DockerEngineAPI::Internal::Type::BaseModel
+      extend DockerEngineAPI::Internal::Type::RequestParameters::Converter
+      include DockerEngineAPI::Internal::Type::RequestParameters
+
+      attr_accessor name: String
+
+      def initialize: (
+        name: String,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        name: String,
+        request_options: DockerEngineAPI::RequestOptions
+      }
+    end
+  end
+end

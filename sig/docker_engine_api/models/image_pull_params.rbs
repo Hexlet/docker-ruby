@@ -1,0 +1,84 @@
+module DockerEngineAPI
+  module Models
+    type image_pull_params =
+      {
+        changes: ::Array[String],
+        from_image: String,
+        from_src: String,
+        message: String,
+        platform: String,
+        repo: String,
+        tag: String,
+        body: String,
+        x_registry_auth: String
+      }
+      & DockerEngineAPI::Internal::Type::request_parameters
+
+    class ImagePullParams < DockerEngineAPI::Internal::Type::BaseModel
+      extend DockerEngineAPI::Internal::Type::RequestParameters::Converter
+      include DockerEngineAPI::Internal::Type::RequestParameters
+
+      attr_reader changes: ::Array[String]?
+
+      def changes=: (::Array[String]) -> ::Array[String]
+
+      attr_reader from_image: String?
+
+      def from_image=: (String) -> String
+
+      attr_reader from_src: String?
+
+      def from_src=: (String) -> String
+
+      attr_reader message: String?
+
+      def message=: (String) -> String
+
+      attr_reader platform: String?
+
+      def platform=: (String) -> String
+
+      attr_reader repo: String?
+
+      def repo=: (String) -> String
+
+      attr_reader tag: String?
+
+      def tag=: (String) -> String
+
+      attr_reader body: String?
+
+      def body=: (String) -> String
+
+      attr_reader x_registry_auth: String?
+
+      def x_registry_auth=: (String) -> String
+
+      def initialize: (
+        ?changes: ::Array[String],
+        ?from_image: String,
+        ?from_src: String,
+        ?message: String,
+        ?platform: String,
+        ?repo: String,
+        ?tag: String,
+        ?body: String,
+        ?x_registry_auth: String,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        changes: ::Array[String],
+        from_image: String,
+        from_src: String,
+        message: String,
+        platform: String,
+        repo: String,
+        tag: String,
+        body: String,
+        x_registry_auth: String,
+        request_options: DockerEngineAPI::RequestOptions
+      }
+    end
+  end
+end

@@ -1,0 +1,60 @@
+module DockerEngineAPI
+  module Resources
+    class Networks
+      def create: (
+        name: String,
+        ?attachable: bool,
+        ?config_from: DockerEngineAPI::NetworkCreateParams::ConfigFrom,
+        ?config_only: bool,
+        ?driver: String,
+        ?enable_i_pv4: bool,
+        ?enable_i_pv6: bool,
+        ?ingress: bool,
+        ?internal: bool,
+        ?ipam: DockerEngineAPI::NetworkCreateParams::Ipam,
+        ?labels: ::Hash[Symbol, String],
+        ?options: ::Hash[Symbol, String],
+        ?scope: String,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> DockerEngineAPI::CreateResponse
+
+      def list: (
+        ?filters: String,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> DockerEngineAPI::Models::network_list_response
+
+      def delete: (
+        String id,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> nil
+
+      def connect: (
+        String id,
+        container: String,
+        ?endpoint_config: DockerEngineAPI::ConnectRequest::EndpointConfig,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> nil
+
+      def disconnect: (
+        String id,
+        container: String,
+        ?force: bool,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> nil
+
+      def inspect_: (
+        String id,
+        ?scope: String,
+        ?verbose: bool,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> DockerEngineAPI::Models::NetworkInspectResponse
+
+      def prune: (
+        ?filters: String,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> DockerEngineAPI::Models::NetworkPruneResponse
+
+      def initialize: (client: DockerEngineAPI::Client) -> void
+    end
+  end
+end

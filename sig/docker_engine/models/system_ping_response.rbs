@@ -1,5 +1,0 @@
-module DockerEngine
-  module Models
-    class SystemPingResponse = String
-  end
-end

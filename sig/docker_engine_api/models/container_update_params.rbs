@@ -1,0 +1,476 @@
+module DockerEngineAPI
+  module Models
+    type container_update_params =
+      {
+        blkio_device_read_bps: ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceReadBp],
+        blkio_device_read_i_ops: ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceReadIOp],
+        blkio_device_write_bps: ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceWriteBp],
+        blkio_device_write_i_ops: ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceWriteIOp],
+        blkio_weight: Integer,
+        blkio_weight_device: ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioWeightDevice],
+        cgroup_parent: String,
+        cpu_count: Integer,
+        cpu_percent: Integer,
+        cpu_period: Integer,
+        cpu_quota: Integer,
+        cpu_realtime_period: Integer,
+        cpu_realtime_runtime: Integer,
+        cpuset_cpus: String,
+        cpuset_mems: String,
+        cpu_shares: Integer,
+        device_cgroup_rules: ::Array[String],
+        device_requests: ::Array[DockerEngineAPI::ContainerUpdateParams::DeviceRequest],
+        devices: ::Array[DockerEngineAPI::ContainerUpdateParams::Device],
+        init: bool?,
+        io_maximum_bandwidth: Integer,
+        io_maximum_i_ops: Integer,
+        memory: Integer,
+        memory_reservation: Integer,
+        memory_swap: Integer,
+        memory_swappiness: Integer,
+        nano_cpus: Integer,
+        oom_kill_disable: bool,
+        pids_limit: Integer?,
+        restart_policy: DockerEngineAPI::ContainerUpdateParams::RestartPolicy,
+        ulimits: ::Array[DockerEngineAPI::ContainerUpdateParams::Ulimit]
+      }
+      & DockerEngineAPI::Internal::Type::request_parameters
+
+    class ContainerUpdateParams < DockerEngineAPI::Internal::Type::BaseModel
+      extend DockerEngineAPI::Internal::Type::RequestParameters::Converter
+      include DockerEngineAPI::Internal::Type::RequestParameters
+
+      attr_reader blkio_device_read_bps: ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceReadBp]?
+
+      def blkio_device_read_bps=: (
+        ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceReadBp]
+      ) -> ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceReadBp]
+
+      attr_reader blkio_device_read_i_ops: ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceReadIOp]?
+
+      def blkio_device_read_i_ops=: (
+        ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceReadIOp]
+      ) -> ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceReadIOp]
+
+      attr_reader blkio_device_write_bps: ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceWriteBp]?
+
+      def blkio_device_write_bps=: (
+        ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceWriteBp]
+      ) -> ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceWriteBp]
+
+      attr_reader blkio_device_write_i_ops: ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceWriteIOp]?
+
+      def blkio_device_write_i_ops=: (
+        ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceWriteIOp]
+      ) -> ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceWriteIOp]
+
+      attr_reader blkio_weight: Integer?
+
+      def blkio_weight=: (Integer) -> Integer
+
+      attr_reader blkio_weight_device: ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioWeightDevice]?
+
+      def blkio_weight_device=: (
+        ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioWeightDevice]
+      ) -> ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioWeightDevice]
+
+      attr_reader cgroup_parent: String?
+
+      def cgroup_parent=: (String) -> String
+
+      attr_reader cpu_count: Integer?
+
+      def cpu_count=: (Integer) -> Integer
+
+      attr_reader cpu_percent: Integer?
+
+      def cpu_percent=: (Integer) -> Integer
+
+      attr_reader cpu_period: Integer?
+
+      def cpu_period=: (Integer) -> Integer
+
+      attr_reader cpu_quota: Integer?
+
+      def cpu_quota=: (Integer) -> Integer
+
+      attr_reader cpu_realtime_period: Integer?
+
+      def cpu_realtime_period=: (Integer) -> Integer
+
+      attr_reader cpu_realtime_runtime: Integer?
+
+      def cpu_realtime_runtime=: (Integer) -> Integer
+
+      attr_reader cpuset_cpus: String?
+
+      def cpuset_cpus=: (String) -> String
+
+      attr_reader cpuset_mems: String?
+
+      def cpuset_mems=: (String) -> String
+
+      attr_reader cpu_shares: Integer?
+
+      def cpu_shares=: (Integer) -> Integer
+
+      attr_reader device_cgroup_rules: ::Array[String]?
+
+      def device_cgroup_rules=: (::Array[String]) -> ::Array[String]
+
+      attr_reader device_requests: ::Array[DockerEngineAPI::ContainerUpdateParams::DeviceRequest]?
+
+      def device_requests=: (
+        ::Array[DockerEngineAPI::ContainerUpdateParams::DeviceRequest]
+      ) -> ::Array[DockerEngineAPI::ContainerUpdateParams::DeviceRequest]
+
+      attr_reader devices: ::Array[DockerEngineAPI::ContainerUpdateParams::Device]?
+
+      def devices=: (
+        ::Array[DockerEngineAPI::ContainerUpdateParams::Device]
+      ) -> ::Array[DockerEngineAPI::ContainerUpdateParams::Device]
+
+      attr_accessor init: bool?
+
+      attr_reader io_maximum_bandwidth: Integer?
+
+      def io_maximum_bandwidth=: (Integer) -> Integer
+
+      attr_reader io_maximum_i_ops: Integer?
+
+      def io_maximum_i_ops=: (Integer) -> Integer
+
+      attr_reader memory: Integer?
+
+      def memory=: (Integer) -> Integer
+
+      attr_reader memory_reservation: Integer?
+
+      def memory_reservation=: (Integer) -> Integer
+
+      attr_reader memory_swap: Integer?
+
+      def memory_swap=: (Integer) -> Integer
+
+      attr_reader memory_swappiness: Integer?
+
+      def memory_swappiness=: (Integer) -> Integer
+
+      attr_reader nano_cpus: Integer?
+
+      def nano_cpus=: (Integer) -> Integer
+
+      attr_reader oom_kill_disable: bool?
+
+      def oom_kill_disable=: (bool) -> bool
+
+      attr_accessor pids_limit: Integer?
+
+      attr_reader restart_policy: DockerEngineAPI::ContainerUpdateParams::RestartPolicy?
+
+      def restart_policy=: (
+        DockerEngineAPI::ContainerUpdateParams::RestartPolicy
+      ) -> DockerEngineAPI::ContainerUpdateParams::RestartPolicy
+
+      attr_reader ulimits: ::Array[DockerEngineAPI::ContainerUpdateParams::Ulimit]?
+
+      def ulimits=: (
+        ::Array[DockerEngineAPI::ContainerUpdateParams::Ulimit]
+      ) -> ::Array[DockerEngineAPI::ContainerUpdateParams::Ulimit]
+
+      def initialize: (
+        ?blkio_device_read_bps: ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceReadBp],
+        ?blkio_device_read_i_ops: ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceReadIOp],
+        ?blkio_device_write_bps: ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceWriteBp],
+        ?blkio_device_write_i_ops: ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceWriteIOp],
+        ?blkio_weight: Integer,
+        ?blkio_weight_device: ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioWeightDevice],
+        ?cgroup_parent: String,
+        ?cpu_count: Integer,
+        ?cpu_percent: Integer,
+        ?cpu_period: Integer,
+        ?cpu_quota: Integer,
+        ?cpu_realtime_period: Integer,
+        ?cpu_realtime_runtime: Integer,
+        ?cpuset_cpus: String,
+        ?cpuset_mems: String,
+        ?cpu_shares: Integer,
+        ?device_cgroup_rules: ::Array[String],
+        ?device_requests: ::Array[DockerEngineAPI::ContainerUpdateParams::DeviceRequest],
+        ?devices: ::Array[DockerEngineAPI::ContainerUpdateParams::Device],
+        ?init: bool?,
+        ?io_maximum_bandwidth: Integer,
+        ?io_maximum_i_ops: Integer,
+        ?memory: Integer,
+        ?memory_reservation: Integer,
+        ?memory_swap: Integer,
+        ?memory_swappiness: Integer,
+        ?nano_cpus: Integer,
+        ?oom_kill_disable: bool,
+        ?pids_limit: Integer?,
+        ?restart_policy: DockerEngineAPI::ContainerUpdateParams::RestartPolicy,
+        ?ulimits: ::Array[DockerEngineAPI::ContainerUpdateParams::Ulimit],
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        blkio_device_read_bps: ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceReadBp],
+        blkio_device_read_i_ops: ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceReadIOp],
+        blkio_device_write_bps: ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceWriteBp],
+        blkio_device_write_i_ops: ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceWriteIOp],
+        blkio_weight: Integer,
+        blkio_weight_device: ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioWeightDevice],
+        cgroup_parent: String,
+        cpu_count: Integer,
+        cpu_percent: Integer,
+        cpu_period: Integer,
+        cpu_quota: Integer,
+        cpu_realtime_period: Integer,
+        cpu_realtime_runtime: Integer,
+        cpuset_cpus: String,
+        cpuset_mems: String,
+        cpu_shares: Integer,
+        device_cgroup_rules: ::Array[String],
+        device_requests: ::Array[DockerEngineAPI::ContainerUpdateParams::DeviceRequest],
+        devices: ::Array[DockerEngineAPI::ContainerUpdateParams::Device],
+        init: bool?,
+        io_maximum_bandwidth: Integer,
+        io_maximum_i_ops: Integer,
+        memory: Integer,
+        memory_reservation: Integer,
+        memory_swap: Integer,
+        memory_swappiness: Integer,
+        nano_cpus: Integer,
+        oom_kill_disable: bool,
+        pids_limit: Integer?,
+        restart_policy: DockerEngineAPI::ContainerUpdateParams::RestartPolicy,
+        ulimits: ::Array[DockerEngineAPI::ContainerUpdateParams::Ulimit],
+        request_options: DockerEngineAPI::RequestOptions
+      }
+
+      type blkio_device_read_bp = { path: String, rate: Integer }
+
+      class BlkioDeviceReadBp < DockerEngineAPI::Internal::Type::BaseModel
+        attr_reader path: String?
+
+        def path=: (String) -> String
+
+        attr_reader rate: Integer?
+
+        def rate=: (Integer) -> Integer
+
+        def initialize: (?path: String, ?rate: Integer) -> void
+
+        def to_hash: -> { path: String, rate: Integer }
+      end
+
+      type blkio_device_read_i_op = { path: String, rate: Integer }
+
+      class BlkioDeviceReadIOp < DockerEngineAPI::Internal::Type::BaseModel
+        attr_reader path: String?
+
+        def path=: (String) -> String
+
+        attr_reader rate: Integer?
+
+        def rate=: (Integer) -> Integer
+
+        def initialize: (?path: String, ?rate: Integer) -> void
+
+        def to_hash: -> { path: String, rate: Integer }
+      end
+
+      type blkio_device_write_bp = { path: String, rate: Integer }
+
+      class BlkioDeviceWriteBp < DockerEngineAPI::Internal::Type::BaseModel
+        attr_reader path: String?
+
+        def path=: (String) -> String
+
+        attr_reader rate: Integer?
+
+        def rate=: (Integer) -> Integer
+
+        def initialize: (?path: String, ?rate: Integer) -> void
+
+        def to_hash: -> { path: String, rate: Integer }
+      end
+
+      type blkio_device_write_i_op = { path: String, rate: Integer }
+
+      class BlkioDeviceWriteIOp < DockerEngineAPI::Internal::Type::BaseModel
+        attr_reader path: String?
+
+        def path=: (String) -> String
+
+        attr_reader rate: Integer?
+
+        def rate=: (Integer) -> Integer
+
+        def initialize: (?path: String, ?rate: Integer) -> void
+
+        def to_hash: -> { path: String, rate: Integer }
+      end
+
+      type blkio_weight_device = { path: String, weight: Integer }
+
+      class BlkioWeightDevice < DockerEngineAPI::Internal::Type::BaseModel
+        attr_reader path: String?
+
+        def path=: (String) -> String
+
+        attr_reader weight: Integer?
+
+        def weight=: (Integer) -> Integer
+
+        def initialize: (?path: String, ?weight: Integer) -> void
+
+        def to_hash: -> { path: String, weight: Integer }
+      end
+
+      type device_request =
+        {
+          capabilities: ::Array[::Array[String]],
+          count: Integer,
+          device_ids: ::Array[String],
+          driver: String,
+          options: ::Hash[Symbol, String]
+        }
+
+      class DeviceRequest < DockerEngineAPI::Internal::Type::BaseModel
+        attr_reader capabilities: ::Array[::Array[String]]?
+
+        def capabilities=: (
+          ::Array[::Array[String]]
+        ) -> ::Array[::Array[String]]
+
+        attr_reader count: Integer?
+
+        def count=: (Integer) -> Integer
+
+        attr_reader device_ids: ::Array[String]?
+
+        def device_ids=: (::Array[String]) -> ::Array[String]
+
+        attr_reader driver: String?
+
+        def driver=: (String) -> String
+
+        attr_reader options: ::Hash[Symbol, String]?
+
+        def options=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+        def initialize: (
+          ?capabilities: ::Array[::Array[String]],
+          ?count: Integer,
+          ?device_ids: ::Array[String],
+          ?driver: String,
+          ?options: ::Hash[Symbol, String]
+        ) -> void
+
+        def to_hash: -> {
+          capabilities: ::Array[::Array[String]],
+          count: Integer,
+          device_ids: ::Array[String],
+          driver: String,
+          options: ::Hash[Symbol, String]
+        }
+      end
+
+      type device =
+        {
+          cgroup_permissions: String,
+          path_in_container: String,
+          path_on_host: String
+        }
+
+      class Device < DockerEngineAPI::Internal::Type::BaseModel
+        attr_reader cgroup_permissions: String?
+
+        def cgroup_permissions=: (String) -> String
+
+        attr_reader path_in_container: String?
+
+        def path_in_container=: (String) -> String
+
+        attr_reader path_on_host: String?
+
+        def path_on_host=: (String) -> String
+
+        def initialize: (
+          ?cgroup_permissions: String,
+          ?path_in_container: String,
+          ?path_on_host: String
+        ) -> void
+
+        def to_hash: -> {
+          cgroup_permissions: String,
+          path_in_container: String,
+          path_on_host: String
+        }
+      end
+
+      type restart_policy =
+        {
+          maximum_retry_count: Integer,
+          name: DockerEngineAPI::Models::ContainerUpdateParams::RestartPolicy::name_
+        }
+
+      class RestartPolicy < DockerEngineAPI::Internal::Type::BaseModel
+        attr_reader maximum_retry_count: Integer?
+
+        def maximum_retry_count=: (Integer) -> Integer
+
+        attr_reader name: DockerEngineAPI::Models::ContainerUpdateParams::RestartPolicy::name_?
+
+        def name=: (
+          DockerEngineAPI::Models::ContainerUpdateParams::RestartPolicy::name_
+        ) -> DockerEngineAPI::Models::ContainerUpdateParams::RestartPolicy::name_
+
+        def initialize: (
+          ?maximum_retry_count: Integer,
+          ?name: DockerEngineAPI::Models::ContainerUpdateParams::RestartPolicy::name_
+        ) -> void
+
+        def to_hash: -> {
+          maximum_retry_count: Integer,
+          name: DockerEngineAPI::Models::ContainerUpdateParams::RestartPolicy::name_
+        }
+
+        type name_ = :"" | :no | :always | :"unless-stopped" | :"on-failure"
+
+        module Name
+          extend DockerEngineAPI::Internal::Type::Enum
+
+          EMPTY: :""
+          NO: :no
+          ALWAYS: :always
+          UNLESS_STOPPED: :"unless-stopped"
+          ON_FAILURE: :"on-failure"
+
+          def self?.values: -> ::Array[DockerEngineAPI::Models::ContainerUpdateParams::RestartPolicy::name_]
+        end
+      end
+
+      type ulimit = { hard: Integer, name: String, soft: Integer }
+
+      class Ulimit < DockerEngineAPI::Internal::Type::BaseModel
+        attr_reader hard: Integer?
+
+        def hard=: (Integer) -> Integer
+
+        attr_reader name: String?
+
+        def name=: (String) -> String
+
+        attr_reader soft: Integer?
+
+        def soft=: (Integer) -> Integer
+
+        def initialize: (?hard: Integer, ?name: String, ?soft: Integer) -> void
+
+        def to_hash: -> { hard: Integer, name: String, soft: Integer }
+      end
+    end
+  end
+end

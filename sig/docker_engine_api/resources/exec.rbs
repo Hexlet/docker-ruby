@@ -1,0 +1,27 @@
+module DockerEngineAPI
+  module Resources
+    class Exec
+      def inspect_: (
+        String id,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> DockerEngineAPI::Models::ExecInspectResponse
+
+      def resize: (
+        String id,
+        h: Integer,
+        w: Integer,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> nil
+
+      def start: (
+        String id,
+        ?console_size: ::Array[Integer]?,
+        ?detach: bool,
+        ?tty: bool,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> nil
+
+      def initialize: (client: DockerEngineAPI::Client) -> void
+    end
+  end
+end

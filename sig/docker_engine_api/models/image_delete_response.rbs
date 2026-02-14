@@ -1,0 +1,7 @@
+module DockerEngineAPI
+  module Models
+    type image_delete_response = ::Array[DockerEngineAPI::DeleteItem]
+
+    ImageDeleteResponse: DockerEngineAPI::Internal::Type::Converter
+  end
+end

@@ -1,0 +1,77 @@
+module DockerEngineAPI
+  module Models
+    type swarm_init_params =
+      {
+        advertise_addr: String,
+        data_path_addr: String,
+        data_path_port: Integer,
+        default_addr_pool: ::Array[String],
+        force_new_cluster: bool,
+        listen_addr: String,
+        spec: DockerEngineAPI::Spec,
+        subnet_size: Integer
+      }
+      & DockerEngineAPI::Internal::Type::request_parameters
+
+    class SwarmInitParams < DockerEngineAPI::Internal::Type::BaseModel
+      extend DockerEngineAPI::Internal::Type::RequestParameters::Converter
+      include DockerEngineAPI::Internal::Type::RequestParameters
+
+      attr_reader advertise_addr: String?
+
+      def advertise_addr=: (String) -> String
+
+      attr_reader data_path_addr: String?
+
+      def data_path_addr=: (String) -> String
+
+      attr_reader data_path_port: Integer?
+
+      def data_path_port=: (Integer) -> Integer
+
+      attr_reader default_addr_pool: ::Array[String]?
+
+      def default_addr_pool=: (::Array[String]) -> ::Array[String]
+
+      attr_reader force_new_cluster: bool?
+
+      def force_new_cluster=: (bool) -> bool
+
+      attr_reader listen_addr: String?
+
+      def listen_addr=: (String) -> String
+
+      attr_reader spec: DockerEngineAPI::Spec?
+
+      def spec=: (DockerEngineAPI::Spec) -> DockerEngineAPI::Spec
+
+      attr_reader subnet_size: Integer?
+
+      def subnet_size=: (Integer) -> Integer
+
+      def initialize: (
+        ?advertise_addr: String,
+        ?data_path_addr: String,
+        ?data_path_port: Integer,
+        ?default_addr_pool: ::Array[String],
+        ?force_new_cluster: bool,
+        ?listen_addr: String,
+        ?spec: DockerEngineAPI::Spec,
+        ?subnet_size: Integer,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        advertise_addr: String,
+        data_path_addr: String,
+        data_path_port: Integer,
+        default_addr_pool: ::Array[String],
+        force_new_cluster: bool,
+        listen_addr: String,
+        spec: DockerEngineAPI::Spec,
+        subnet_size: Integer,
+        request_options: DockerEngineAPI::RequestOptions
+      }
+    end
+  end
+end

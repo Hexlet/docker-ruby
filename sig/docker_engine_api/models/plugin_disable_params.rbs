@@ -1,0 +1,25 @@
+module DockerEngineAPI
+  module Models
+    type plugin_disable_params =
+      { force: bool } & DockerEngineAPI::Internal::Type::request_parameters
+
+    class PluginDisableParams < DockerEngineAPI::Internal::Type::BaseModel
+      extend DockerEngineAPI::Internal::Type::RequestParameters::Converter
+      include DockerEngineAPI::Internal::Type::RequestParameters
+
+      attr_reader force: bool?
+
+      def force=: (bool) -> bool
+
+      def initialize: (
+        ?force: bool,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        force: bool,
+        request_options: DockerEngineAPI::RequestOptions
+      }
+    end
+  end
+end

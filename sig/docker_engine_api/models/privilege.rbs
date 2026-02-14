@@ -1,0 +1,32 @@
+module DockerEngineAPI
+  module Models
+    type privilege =
+      { description: String, name: String, value: ::Array[String] }
+
+    class Privilege < DockerEngineAPI::Internal::Type::BaseModel
+      attr_reader description: String?
+
+      def description=: (String) -> String
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_reader value: ::Array[String]?
+
+      def value=: (::Array[String]) -> ::Array[String]
+
+      def initialize: (
+        ?description: String,
+        ?name: String,
+        ?value: ::Array[String]
+      ) -> void
+
+      def to_hash: -> {
+        description: String,
+        name: String,
+        value: ::Array[String]
+      }
+    end
+  end
+end

@@ -1,0 +1,63 @@
+module DockerEngineAPI
+  module Models
+    type container_attach_params =
+      {
+        detach_keys: String,
+        logs: bool,
+        stderr: bool,
+        stdin: bool,
+        stdout: bool,
+        stream: bool
+      }
+      & DockerEngineAPI::Internal::Type::request_parameters
+
+    class ContainerAttachParams < DockerEngineAPI::Internal::Type::BaseModel
+      extend DockerEngineAPI::Internal::Type::RequestParameters::Converter
+      include DockerEngineAPI::Internal::Type::RequestParameters
+
+      attr_reader detach_keys: String?
+
+      def detach_keys=: (String) -> String
+
+      attr_reader logs: bool?
+
+      def logs=: (bool) -> bool
+
+      attr_reader stderr: bool?
+
+      def stderr=: (bool) -> bool
+
+      attr_reader stdin: bool?
+
+      def stdin=: (bool) -> bool
+
+      attr_reader stdout: bool?
+
+      def stdout=: (bool) -> bool
+
+      attr_reader stream: bool?
+
+      def stream=: (bool) -> bool
+
+      def initialize: (
+        ?detach_keys: String,
+        ?logs: bool,
+        ?stderr: bool,
+        ?stdin: bool,
+        ?stdout: bool,
+        ?stream: bool,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        detach_keys: String,
+        logs: bool,
+        stderr: bool,
+        stdin: bool,
+        stdout: bool,
+        stream: bool,
+        request_options: DockerEngineAPI::RequestOptions
+      }
+    end
+  end
+end
