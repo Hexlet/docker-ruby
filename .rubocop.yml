@@ -40,9 +40,9 @@ Layout/LineLength:
   AllowedPatterns:
     - "^\\s*#.*$"
     - ^require(_relative)?
-    - "Docker::Internal::Type::BaseModel$"
+    - "DockerEngine::Internal::Type::BaseModel$"
     - "^\\s*[A-Z0-9_]+ = :"
-    - "Docker::(Models|Resources|Test)::"
+    - "DockerEngine::(Models|Resources|Test)::"
   Max: 110
 
 Layout/MultilineArrayLineBreaks:

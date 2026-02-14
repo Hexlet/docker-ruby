@@ -1,7 +1,0 @@
-module Docker
-  module Models
-    type image_list_response = ::Array[Docker::Summary]
-
-    ImageListResponse: Docker::Internal::Type::Converter
-  end
-end

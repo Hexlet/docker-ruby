@@ -1,0 +1,203 @@
+module DockerEngine
+  module Models
+    type network_create_params =
+      {
+        name: String,
+        attachable: bool,
+        config_from: DockerEngine::NetworkCreateParams::ConfigFrom,
+        config_only: bool,
+        driver: String,
+        :enable_i_pv4 => bool,
+        :enable_i_pv6 => bool,
+        ingress: bool,
+        internal: bool,
+        ipam: DockerEngine::NetworkCreateParams::Ipam,
+        labels: ::Hash[Symbol, String],
+        options: ::Hash[Symbol, String],
+        scope: String
+      }
+      & DockerEngine::Internal::Type::request_parameters
+
+    class NetworkCreateParams < DockerEngine::Internal::Type::BaseModel
+      extend DockerEngine::Internal::Type::RequestParameters::Converter
+      include DockerEngine::Internal::Type::RequestParameters
+
+      attr_accessor name: String
+
+      attr_reader attachable: bool?
+
+      def attachable=: (bool) -> bool
+
+      attr_reader config_from: DockerEngine::NetworkCreateParams::ConfigFrom?
+
+      def config_from=: (
+        DockerEngine::NetworkCreateParams::ConfigFrom
+      ) -> DockerEngine::NetworkCreateParams::ConfigFrom
+
+      attr_reader config_only: bool?
+
+      def config_only=: (bool) -> bool
+
+      attr_reader driver: String?
+
+      def driver=: (String) -> String
+
+      attr_reader enable_i_pv4: bool?
+
+      def enable_i_pv4=: (bool) -> bool
+
+      attr_reader enable_i_pv6: bool?
+
+      def enable_i_pv6=: (bool) -> bool
+
+      attr_reader ingress: bool?
+
+      def ingress=: (bool) -> bool
+
+      attr_reader internal: bool?
+
+      def internal=: (bool) -> bool
+
+      attr_reader ipam: DockerEngine::NetworkCreateParams::Ipam?
+
+      def ipam=: (
+        DockerEngine::NetworkCreateParams::Ipam
+      ) -> DockerEngine::NetworkCreateParams::Ipam
+
+      attr_reader labels: ::Hash[Symbol, String]?
+
+      def labels=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+      attr_reader options: ::Hash[Symbol, String]?
+
+      def options=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+      attr_reader scope: String?
+
+      def scope=: (String) -> String
+
+      def initialize: (
+        name: String,
+        ?attachable: bool,
+        ?config_from: DockerEngine::NetworkCreateParams::ConfigFrom,
+        ?config_only: bool,
+        ?driver: String,
+        ?enable_i_pv4: bool,
+        ?enable_i_pv6: bool,
+        ?ingress: bool,
+        ?internal: bool,
+        ?ipam: DockerEngine::NetworkCreateParams::Ipam,
+        ?labels: ::Hash[Symbol, String],
+        ?options: ::Hash[Symbol, String],
+        ?scope: String,
+        ?request_options: DockerEngine::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        name: String,
+        attachable: bool,
+        config_from: DockerEngine::NetworkCreateParams::ConfigFrom,
+        config_only: bool,
+        driver: String,
+        :enable_i_pv4 => bool,
+        :enable_i_pv6 => bool,
+        ingress: bool,
+        internal: bool,
+        ipam: DockerEngine::NetworkCreateParams::Ipam,
+        labels: ::Hash[Symbol, String],
+        options: ::Hash[Symbol, String],
+        scope: String,
+        request_options: DockerEngine::RequestOptions
+      }
+
+      type config_from = { network: String }
+
+      class ConfigFrom < DockerEngine::Internal::Type::BaseModel
+        attr_reader network: String?
+
+        def network=: (String) -> String
+
+        def initialize: (?network: String) -> void
+
+        def to_hash: -> { network: String }
+      end
+
+      type ipam =
+        {
+          config: ::Array[DockerEngine::NetworkCreateParams::Ipam::Config],
+          driver: String,
+          options: ::Hash[Symbol, String]
+        }
+
+      class Ipam < DockerEngine::Internal::Type::BaseModel
+        attr_reader config: ::Array[DockerEngine::NetworkCreateParams::Ipam::Config]?
+
+        def config=: (
+          ::Array[DockerEngine::NetworkCreateParams::Ipam::Config]
+        ) -> ::Array[DockerEngine::NetworkCreateParams::Ipam::Config]
+
+        attr_reader driver: String?
+
+        def driver=: (String) -> String
+
+        attr_reader options: ::Hash[Symbol, String]?
+
+        def options=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+        def initialize: (
+          ?config: ::Array[DockerEngine::NetworkCreateParams::Ipam::Config],
+          ?driver: String,
+          ?options: ::Hash[Symbol, String]
+        ) -> void
+
+        def to_hash: -> {
+          config: ::Array[DockerEngine::NetworkCreateParams::Ipam::Config],
+          driver: String,
+          options: ::Hash[Symbol, String]
+        }
+
+        type config =
+          {
+            auxiliary_addresses: ::Hash[Symbol, String],
+            gateway: String,
+            ip_range: String,
+            subnet: String
+          }
+
+        class Config < DockerEngine::Internal::Type::BaseModel
+          attr_reader auxiliary_addresses: ::Hash[Symbol, String]?
+
+          def auxiliary_addresses=: (
+            ::Hash[Symbol, String]
+          ) -> ::Hash[Symbol, String]
+
+          attr_reader gateway: String?
+
+          def gateway=: (String) -> String
+
+          attr_reader ip_range: String?
+
+          def ip_range=: (String) -> String
+
+          attr_reader subnet: String?
+
+          def subnet=: (String) -> String
+
+          def initialize: (
+            ?auxiliary_addresses: ::Hash[Symbol, String],
+            ?gateway: String,
+            ?ip_range: String,
+            ?subnet: String
+          ) -> void
+
+          def to_hash: -> {
+            auxiliary_addresses: ::Hash[Symbol, String],
+            gateway: String,
+            ip_range: String,
+            subnet: String
+          }
+        end
+      end
+    end
+  end
+end

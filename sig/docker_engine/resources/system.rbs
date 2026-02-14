@@ -1,0 +1,17 @@
+module DockerEngine
+  module Resources
+    class System
+      def info: (
+        ?request_options: DockerEngine::request_opts
+      ) -> DockerEngine::Models::SystemInfoResponse
+
+      def ping: (?request_options: DockerEngine::request_opts) -> String
+
+      def version: (
+        ?request_options: DockerEngine::request_opts
+      ) -> DockerEngine::Models::SystemVersionResponse
+
+      def initialize: (client: DockerEngine::Client) -> void
+    end
+  end
+end

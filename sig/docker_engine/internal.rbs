@@ -1,0 +1,9 @@
+module DockerEngine
+  module Internal
+    extend DockerEngine::Internal::Util::SorbetRuntimeSupport
+
+    type file_input = Pathname | StringIO | IO | String | DockerEngine::FilePart
+
+    OMIT: Object
+  end
+end
