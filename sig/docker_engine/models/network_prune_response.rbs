@@ -1,0 +1,15 @@
+module DockerEngine
+  module Models
+    type network_prune_response = { networks_deleted: ::Array[String] }
+
+    class NetworkPruneResponse < DockerEngine::Internal::Type::BaseModel
+      attr_reader networks_deleted: ::Array[String]?
+
+      def networks_deleted=: (::Array[String]) -> ::Array[String]
+
+      def initialize: (?networks_deleted: ::Array[String]) -> void
+
+      def to_hash: -> { networks_deleted: ::Array[String] }
+    end
+  end
+end

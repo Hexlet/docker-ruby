@@ -1,0 +1,40 @@
+module DockerEngine
+  module Models
+    type container_wait_params =
+      { condition: DockerEngine::Models::ContainerWaitParams::condition }
+      & DockerEngine::Internal::Type::request_parameters
+
+    class ContainerWaitParams < DockerEngine::Internal::Type::BaseModel
+      extend DockerEngine::Internal::Type::RequestParameters::Converter
+      include DockerEngine::Internal::Type::RequestParameters
+
+      attr_reader condition: DockerEngine::Models::ContainerWaitParams::condition?
+
+      def condition=: (
+        DockerEngine::Models::ContainerWaitParams::condition
+      ) -> DockerEngine::Models::ContainerWaitParams::condition
+
+      def initialize: (
+        ?condition: DockerEngine::Models::ContainerWaitParams::condition,
+        ?request_options: DockerEngine::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        condition: DockerEngine::Models::ContainerWaitParams::condition,
+        request_options: DockerEngine::RequestOptions
+      }
+
+      type condition = :"not-running" | :"next-exit" | :removed
+
+      module Condition
+        extend DockerEngine::Internal::Type::Enum
+
+        NOT_RUNNING: :"not-running"
+        NEXT_EXIT: :"next-exit"
+        REMOVED: :removed
+
+        def self?.values: -> ::Array[DockerEngine::Models::ContainerWaitParams::condition]
+      end
+    end
+  end
+end

@@ -1,0 +1,25 @@
+module DockerEngine
+  module Models
+    type swarm_unlock_params =
+      { unlock_key: String } & DockerEngine::Internal::Type::request_parameters
+
+    class SwarmUnlockParams < DockerEngine::Internal::Type::BaseModel
+      extend DockerEngine::Internal::Type::RequestParameters::Converter
+      include DockerEngine::Internal::Type::RequestParameters
+
+      attr_reader unlock_key: String?
+
+      def unlock_key=: (String) -> String
+
+      def initialize: (
+        ?unlock_key: String,
+        ?request_options: DockerEngine::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        unlock_key: String,
+        request_options: DockerEngine::RequestOptions
+      }
+    end
+  end
+end

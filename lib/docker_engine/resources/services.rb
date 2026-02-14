@@ -16,7 +16,7 @@ module DockerEngine
       #
       # @param request_options [DockerEngine::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [DockerEngine::Models::ServiceCreateResponse]
+      # @return [DockerEngine::Models::CreateResponse]
       #
       # @see DockerEngine::Models::ServiceCreateParams
       def create(params)
@@ -26,7 +26,45 @@ module DockerEngine
           path: "services/create",
           headers: parsed.except(:spec).transform_keys(x_registry_auth: "x-registry-auth"),
           body: parsed[:spec],
-          model: DockerEngine::Models::ServiceCreateResponse,
+          model: DockerEngine::CreateResponse,
+          options: options
+        )
+      end
+
+      # Some parameter documentations has been truncated, see
+      # {DockerEngine::Models::ServiceUpdateParams} for more details.
+      #
+      # Update a service
+      #
+      # @overload update(id, version:, spec:, registry_auth_from: nil, rollback: nil, x_registry_auth: nil, request_options: {})
+      #
+      # @param id [String] Path param: ID or name of service.
+      #
+      # @param version [Integer] Query param: The version number of the service object being updated. This is
+      #
+      # @param spec [DockerEngine::Models::ServiceUpdateParams::Spec] Body param: User modifiable configuration for a service.
+      #
+      # @param registry_auth_from [Symbol, DockerEngine::Models::ServiceUpdateParams::RegistryAuthFrom] Query param: If the `X-Registry-Auth` header is not specified, this parameter
+      #
+      # @param rollback [String] Query param: Set to this parameter to `previous` to cause a server-side rollback
+      #
+      # @param x_registry_auth [String] Header param: A base64url-encoded auth configuration for pulling from private
+      #
+      # @param request_options [DockerEngine::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [DockerEngine::Models::UpdateResponse]
+      #
+      # @see DockerEngine::Models::ServiceUpdateParams
+      def update(id, params)
+        parsed, options = DockerEngine::ServiceUpdateParams.dump_request(params)
+        query_params = [:version, :registry_auth_from, :rollback]
+        @client.request(
+          method: :post,
+          path: ["services/%1$s/update", id],
+          query: parsed.slice(*query_params).transform_keys(registry_auth_from: "registryAuthFrom"),
+          headers: parsed.except(:spec, *query_params).transform_keys(x_registry_auth: "x-registry-auth"),
+          body: parsed[:spec],
+          model: DockerEngine::UpdateResponse,
           options: options
         )
       end
@@ -98,6 +136,50 @@ module DockerEngine
           path: ["services/%1$s", id],
           query: parsed.transform_keys(insert_defaults: "insertDefaults"),
           model: DockerEngine::Service,
+          options: options
+        )
+      end
+
+      # Some parameter documentations has been truncated, see
+      # {DockerEngine::Models::ServiceLogsParams} for more details.
+      #
+      # Get `stdout` and `stderr` logs from a service. See also
+      # [`/containers/{id}/logs`](#operation/ContainerLogs).
+      #
+      # **Note**: This endpoint works only for services with the `local`, `json-file` or
+      # `journald` logging drivers.
+      #
+      # @overload logs(id, details: nil, follow: nil, since: nil, stderr: nil, stdout: nil, tail: nil, timestamps: nil, request_options: {})
+      #
+      # @param id [String] ID or name of the service
+      #
+      # @param details [Boolean] Show service context and extra details provided to logs.
+      #
+      # @param follow [Boolean] Keep connection after returning logs.
+      #
+      # @param since [Integer] Only return logs since this time, as a UNIX timestamp
+      #
+      # @param stderr [Boolean] Return logs from `stderr`
+      #
+      # @param stdout [Boolean] Return logs from `stdout`
+      #
+      # @param tail [String] Only return this number of log lines from the end of the logs.
+      #
+      # @param timestamps [Boolean] Add timestamps to every log line
+      #
+      # @param request_options [DockerEngine::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [StringIO]
+      #
+      # @see DockerEngine::Models::ServiceLogsParams
+      def logs(id, params = {})
+        parsed, options = DockerEngine::ServiceLogsParams.dump_request(params)
+        @client.request(
+          method: :get,
+          path: ["services/%1$s/logs", id],
+          query: parsed,
+          headers: {"accept" => "application/vnd.docker.multiplexed-stream"},
+          model: StringIO,
           options: options
         )
       end

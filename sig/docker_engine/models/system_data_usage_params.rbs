@@ -1,0 +1,50 @@
+module DockerEngine
+  module Models
+    type system_data_usage_params =
+      {
+        type: ::Array[DockerEngine::Models::SystemDataUsageParams::type_],
+        verbose: bool
+      }
+      & DockerEngine::Internal::Type::request_parameters
+
+    class SystemDataUsageParams < DockerEngine::Internal::Type::BaseModel
+      extend DockerEngine::Internal::Type::RequestParameters::Converter
+      include DockerEngine::Internal::Type::RequestParameters
+
+      attr_reader type: ::Array[DockerEngine::Models::SystemDataUsageParams::type_]?
+
+      def type=: (
+        ::Array[DockerEngine::Models::SystemDataUsageParams::type_]
+      ) -> ::Array[DockerEngine::Models::SystemDataUsageParams::type_]
+
+      attr_reader verbose: bool?
+
+      def verbose=: (bool) -> bool
+
+      def initialize: (
+        ?type: ::Array[DockerEngine::Models::SystemDataUsageParams::type_],
+        ?verbose: bool,
+        ?request_options: DockerEngine::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        type: ::Array[DockerEngine::Models::SystemDataUsageParams::type_],
+        verbose: bool,
+        request_options: DockerEngine::RequestOptions
+      }
+
+      type type_ = :container | :image | :volume | :"build-cache"
+
+      module Type
+        extend DockerEngine::Internal::Type::Enum
+
+        CONTAINER: :container
+        IMAGE: :image
+        VOLUME: :volume
+        BUILD_CACHE: :"build-cache"
+
+        def self?.values: -> ::Array[DockerEngine::Models::SystemDataUsageParams::type_]
+      end
+    end
+  end
+end

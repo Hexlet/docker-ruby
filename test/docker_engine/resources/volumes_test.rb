@@ -28,13 +28,23 @@ class DockerEngine::Test::Resources::VolumesTest < DockerEngine::Test::ResourceT
     end
   end
 
+  def test_update_required_params
+    skip("Prism tests are disabled")
+
+    response = @docker.volumes.update("name", version: 0)
+
+    assert_pattern do
+      response => nil
+    end
+  end
+
   def test_list
     skip("Prism tests are disabled")
 
     response = @docker.volumes.list
 
     assert_pattern do
-      response => DockerEngine::Models::VolumeListResponse
+      response => DockerEngine::ListResponse
     end
 
     assert_pattern do
@@ -76,6 +86,23 @@ class DockerEngine::Test::Resources::VolumesTest < DockerEngine::Test::ResourceT
         created_at: String | nil,
         status: ^(DockerEngine::Internal::Type::HashOf[DockerEngine::Internal::Type::Unknown]) | nil,
         usage_data: DockerEngine::Volume::UsageData | nil
+      }
+    end
+  end
+
+  def test_prune
+    skip("Prism tests are disabled")
+
+    response = @docker.volumes.prune
+
+    assert_pattern do
+      response => DockerEngine::Models::VolumePruneResponse
+    end
+
+    assert_pattern do
+      response => {
+        space_reclaimed: Integer | nil,
+        volumes_deleted: ^(DockerEngine::Internal::Type::ArrayOf[String]) | nil
       }
     end
   end

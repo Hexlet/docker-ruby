@@ -1,0 +1,25 @@
+module DockerEngine
+  module Models
+    type plugin_enable_params =
+      { timeout: Integer } & DockerEngine::Internal::Type::request_parameters
+
+    class PluginEnableParams < DockerEngine::Internal::Type::BaseModel
+      extend DockerEngine::Internal::Type::RequestParameters::Converter
+      include DockerEngine::Internal::Type::RequestParameters
+
+      attr_reader timeout: Integer?
+
+      def timeout=: (Integer) -> Integer
+
+      def initialize: (
+        ?timeout: Integer,
+        ?request_options: DockerEngine::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        timeout: Integer,
+        request_options: DockerEngine::RequestOptions
+      }
+    end
+  end
+end

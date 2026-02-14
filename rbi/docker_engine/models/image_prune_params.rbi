@@ -1,0 +1,63 @@
+# typed: strong
+
+module DockerEngine
+  module Models
+    class ImagePruneParams < DockerEngine::Internal::Type::BaseModel
+      extend DockerEngine::Internal::Type::RequestParameters::Converter
+      include DockerEngine::Internal::Type::RequestParameters
+
+      OrHash =
+        T.type_alias do
+          T.any(DockerEngine::ImagePruneParams, DockerEngine::Internal::AnyHash)
+        end
+
+      # Filters to process on the prune list, encoded as JSON (a `map[string][]string`).
+      # Available filters:
+      #
+      # - `dangling=<boolean>` When set to `true` (or `1`), prune only unused _and_
+      #   untagged images. When set to `false` (or `0`), all unused images are pruned.
+      # - `until=<string>` Prune images created before this timestamp. The `<timestamp>`
+      #   can be Unix timestamps, date formatted timestamps, or Go duration strings
+      #   (e.g. `10m`, `1h30m`) computed relative to the daemon machine’s time.
+      # - `label` (`label=<key>`, `label=<key>=<value>`, `label!=<key>`, or
+      #   `label!=<key>=<value>`) Prune images with (or without, in case `label!=...` is
+      #   used) the specified labels.
+      sig { returns(T.nilable(String)) }
+      attr_reader :filters
+
+      sig { params(filters: String).void }
+      attr_writer :filters
+
+      sig do
+        params(
+          filters: String,
+          request_options: DockerEngine::RequestOptions::OrHash
+        ).returns(T.attached_class)
+      end
+      def self.new(
+        # Filters to process on the prune list, encoded as JSON (a `map[string][]string`).
+        # Available filters:
+        #
+        # - `dangling=<boolean>` When set to `true` (or `1`), prune only unused _and_
+        #   untagged images. When set to `false` (or `0`), all unused images are pruned.
+        # - `until=<string>` Prune images created before this timestamp. The `<timestamp>`
+        #   can be Unix timestamps, date formatted timestamps, or Go duration strings
+        #   (e.g. `10m`, `1h30m`) computed relative to the daemon machine’s time.
+        # - `label` (`label=<key>`, `label=<key>=<value>`, `label!=<key>`, or
+        #   `label!=<key>=<value>`) Prune images with (or without, in case `label!=...` is
+        #   used) the specified labels.
+        filters: nil,
+        request_options: {}
+      )
+      end
+
+      sig do
+        override.returns(
+          { filters: String, request_options: DockerEngine::RequestOptions }
+        )
+      end
+      def to_hash
+      end
+    end
+  end
+end

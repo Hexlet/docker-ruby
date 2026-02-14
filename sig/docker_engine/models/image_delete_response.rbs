@@ -1,23 +1,6 @@
 module DockerEngine
   module Models
-    type image_delete_response_item = { deleted: String, untagged: String }
-
-    class ImageDeleteResponseItem < DockerEngine::Internal::Type::BaseModel
-      attr_reader deleted: String?
-
-      def deleted=: (String) -> String
-
-      attr_reader untagged: String?
-
-      def untagged=: (String) -> String
-
-      def initialize: (?deleted: String, ?untagged: String) -> void
-
-      def to_hash: -> { deleted: String, untagged: String }
-    end
-
-    type image_delete_response =
-      ::Array[DockerEngine::Models::ImageDeleteResponseItem]
+    type image_delete_response = ::Array[DockerEngine::DeleteItem]
 
     ImageDeleteResponse: DockerEngine::Internal::Type::Converter
   end

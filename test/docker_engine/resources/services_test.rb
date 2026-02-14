@@ -9,12 +9,28 @@ class DockerEngine::Test::Resources::ServicesTest < DockerEngine::Test::Resource
     response = @docker.services.create(spec: {})
 
     assert_pattern do
-      response => DockerEngine::Models::ServiceCreateResponse
+      response => DockerEngine::CreateResponse
     end
 
     assert_pattern do
       response => {
         id: String | nil,
+        warnings: ^(DockerEngine::Internal::Type::ArrayOf[String]) | nil
+      }
+    end
+  end
+
+  def test_update_required_params
+    skip("Prism tests are disabled")
+
+    response = @docker.services.update("id", version: 0, spec: {})
+
+    assert_pattern do
+      response => DockerEngine::UpdateResponse
+    end
+
+    assert_pattern do
+      response => {
         warnings: ^(DockerEngine::Internal::Type::ArrayOf[String]) | nil
       }
     end
@@ -61,6 +77,16 @@ class DockerEngine::Test::Resources::ServicesTest < DockerEngine::Test::Resource
         update_status: DockerEngine::Service::UpdateStatus | nil,
         version: DockerEngine::Service::Version | nil
       }
+    end
+  end
+
+  def test_logs
+    skip("Prism tests are disabled")
+
+    response = @docker.services.logs("id")
+
+    assert_pattern do
+      response => StringIO
     end
   end
 end

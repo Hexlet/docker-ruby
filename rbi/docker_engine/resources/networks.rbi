@@ -20,7 +20,7 @@ module DockerEngine
           options: T::Hash[Symbol, String],
           scope: String,
           request_options: DockerEngine::RequestOptions::OrHash
-        ).returns(DockerEngine::Models::NetworkCreateResponse)
+        ).returns(DockerEngine::CreateResponse)
       end
       def create(
         # The network's name.
@@ -104,6 +104,48 @@ module DockerEngine
       )
       end
 
+      # The network must be either a local-scoped network or a swarm-scoped network with
+      # the `attachable` option set. A network cannot be re-attached to a running
+      # container
+      sig do
+        params(
+          id: String,
+          container: String,
+          endpoint_config: DockerEngine::ConnectRequest::EndpointConfig::OrHash,
+          request_options: DockerEngine::RequestOptions::OrHash
+        ).void
+      end
+      def connect(
+        # Network ID or name
+        id,
+        # The ID or name of the container to connect to the network.
+        container:,
+        # Configuration for a network endpoint.
+        endpoint_config: nil,
+        request_options: {}
+      )
+      end
+
+      # Disconnect a container from a network
+      sig do
+        params(
+          id: String,
+          container: String,
+          force: T::Boolean,
+          request_options: DockerEngine::RequestOptions::OrHash
+        ).void
+      end
+      def disconnect(
+        # Network ID or name
+        id,
+        # The ID or name of the container to disconnect from the network.
+        container:,
+        # Force the container to disconnect from the network.
+        force: nil,
+        request_options: {}
+      )
+      end
+
       # Inspect a network
       sig do
         params(
@@ -120,6 +162,30 @@ module DockerEngine
         scope: nil,
         # Detailed inspect output for troubleshooting
         verbose: nil,
+        request_options: {}
+      )
+      end
+
+      # Delete unused networks
+      sig do
+        params(
+          filters: String,
+          request_options: DockerEngine::RequestOptions::OrHash
+        ).returns(DockerEngine::Models::NetworkPruneResponse)
+      end
+      def prune(
+        # Filters to process on the prune list, encoded as JSON (a `map[string][]string`).
+        #
+        # Available filters:
+        #
+        # - `until=<timestamp>` Prune networks created before this timestamp. The
+        #   `<timestamp>` can be Unix timestamps, date formatted timestamps, or Go
+        #   duration strings (e.g. `10m`, `1h30m`) computed relative to the daemon
+        #   machine’s time.
+        # - `label` (`label=<key>`, `label=<key>=<value>`, `label!=<key>`, or
+        #   `label!=<key>=<value>`) Prune networks with (or without, in case `label!=...`
+        #   is used) the specified labels.
+        filters: nil,
         request_options: {}
       )
       end

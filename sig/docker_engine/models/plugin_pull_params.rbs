@@ -1,0 +1,49 @@
+module DockerEngine
+  module Models
+    type plugin_pull_params =
+      {
+        remote: String,
+        name: String,
+        body: ::Array[DockerEngine::Privilege],
+        x_registry_auth: String
+      }
+      & DockerEngine::Internal::Type::request_parameters
+
+    class PluginPullParams < DockerEngine::Internal::Type::BaseModel
+      extend DockerEngine::Internal::Type::RequestParameters::Converter
+      include DockerEngine::Internal::Type::RequestParameters
+
+      attr_accessor remote: String
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_reader body: ::Array[DockerEngine::Privilege]?
+
+      def body=: (
+        ::Array[DockerEngine::Privilege]
+      ) -> ::Array[DockerEngine::Privilege]
+
+      attr_reader x_registry_auth: String?
+
+      def x_registry_auth=: (String) -> String
+
+      def initialize: (
+        remote: String,
+        ?name: String,
+        ?body: ::Array[DockerEngine::Privilege],
+        ?x_registry_auth: String,
+        ?request_options: DockerEngine::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        remote: String,
+        name: String,
+        body: ::Array[DockerEngine::Privilege],
+        x_registry_auth: String,
+        request_options: DockerEngine::RequestOptions
+      }
+    end
+  end
+end
