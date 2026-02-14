@@ -1,0 +1,5 @@
+module DockerEngineRuby
+  module Models
+    class SystemPingResponse = String
+  end
+end

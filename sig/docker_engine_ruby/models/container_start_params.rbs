@@ -1,0 +1,26 @@
+module DockerEngineRuby
+  module Models
+    type container_start_params =
+      { detach_keys: String }
+      & DockerEngineRuby::Internal::Type::request_parameters
+
+    class ContainerStartParams < DockerEngineRuby::Internal::Type::BaseModel
+      extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
+      include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_reader detach_keys: String?
+
+      def detach_keys=: (String) -> String
+
+      def initialize: (
+        ?detach_keys: String,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        detach_keys: String,
+        request_options: DockerEngineRuby::RequestOptions
+      }
+    end
+  end
+end

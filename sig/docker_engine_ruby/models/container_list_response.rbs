@@ -1,0 +1,7 @@
+module DockerEngineRuby
+  module Models
+    type container_list_response = ::Array[DockerEngineRuby::Summary]
+
+    ContainerListResponse: DockerEngineRuby::Internal::Type::Converter
+  end
+end

@@ -1,0 +1,23 @@
+module DockerEngineRuby
+  module Models
+    type plugin_privileges_params =
+      { remote: String } & DockerEngineRuby::Internal::Type::request_parameters
+
+    class PluginPrivilegesParams < DockerEngineRuby::Internal::Type::BaseModel
+      extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
+      include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_accessor remote: String
+
+      def initialize: (
+        remote: String,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        remote: String,
+        request_options: DockerEngineRuby::RequestOptions
+      }
+    end
+  end
+end

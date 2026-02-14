@@ -1,3 +1,0 @@
-module DockerEngineAPI
-  VERSION: String
-end

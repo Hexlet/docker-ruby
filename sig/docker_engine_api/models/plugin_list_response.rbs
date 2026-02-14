@@ -1,7 +1,0 @@
-module DockerEngineAPI
-  module Models
-    type plugin_list_response = ::Array[DockerEngineAPI::Plugin]
-
-    PluginListResponse: DockerEngineAPI::Internal::Type::Converter
-  end
-end

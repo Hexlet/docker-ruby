@@ -1,0 +1,7 @@
+module DockerEngineRuby
+  module Models
+    type service_list_response = ::Array[DockerEngineRuby::Service]
+
+    ServiceListResponse: DockerEngineRuby::Internal::Type::Converter
+  end
+end

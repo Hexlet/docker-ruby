@@ -1,0 +1,26 @@
+module DockerEngineRuby
+  module Models
+    type image_get_params =
+      { platform: ::Array[String] }
+      & DockerEngineRuby::Internal::Type::request_parameters
+
+    class ImageGetParams < DockerEngineRuby::Internal::Type::BaseModel
+      extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
+      include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_reader platform: ::Array[String]?
+
+      def platform=: (::Array[String]) -> ::Array[String]
+
+      def initialize: (
+        ?platform: ::Array[String],
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        platform: ::Array[String],
+        request_options: DockerEngineRuby::RequestOptions
+      }
+    end
+  end
+end

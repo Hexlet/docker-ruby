@@ -1,0 +1,269 @@
+module DockerEngineRuby
+  class AuthLoginParams = DockerEngineRuby::Models::AuthLoginParams
+
+  class AuthResponse = DockerEngineRuby::Models::AuthResponse
+
+  class Config = DockerEngineRuby::Models::Config
+
+  class ConfigCreateParams = DockerEngineRuby::Models::ConfigCreateParams
+
+  class ConfigDeleteParams = DockerEngineRuby::Models::ConfigDeleteParams
+
+  class ConfigInspectParams = DockerEngineRuby::Models::ConfigInspectParams
+
+  class ConfigListParams = DockerEngineRuby::Models::ConfigListParams
+
+  class ConfigUpdateParams = DockerEngineRuby::Models::ConfigUpdateParams
+
+  class ConnectRequest = DockerEngineRuby::Models::ConnectRequest
+
+  class Container = DockerEngineRuby::Models::Container
+
+  class ContainerArchiveParams = DockerEngineRuby::Models::ContainerArchiveParams
+
+  class ContainerAttachParams = DockerEngineRuby::Models::ContainerAttachParams
+
+  class ContainerChangesParams = DockerEngineRuby::Models::ContainerChangesParams
+
+  class ContainerCreateParams = DockerEngineRuby::Models::ContainerCreateParams
+
+  class ContainerDeleteParams = DockerEngineRuby::Models::ContainerDeleteParams
+
+  class ContainerExecParams = DockerEngineRuby::Models::ContainerExecParams
+
+  class ContainerExportParams = DockerEngineRuby::Models::ContainerExportParams
+
+  class ContainerInspectParams = DockerEngineRuby::Models::ContainerInspectParams
+
+  class ContainerKillParams = DockerEngineRuby::Models::ContainerKillParams
+
+  class ContainerListParams = DockerEngineRuby::Models::ContainerListParams
+
+  class ContainerLogsParams = DockerEngineRuby::Models::ContainerLogsParams
+
+  class ContainerPauseParams = DockerEngineRuby::Models::ContainerPauseParams
+
+  class ContainerPruneParams = DockerEngineRuby::Models::ContainerPruneParams
+
+  class ContainerRenameParams = DockerEngineRuby::Models::ContainerRenameParams
+
+  class ContainerResizeParams = DockerEngineRuby::Models::ContainerResizeParams
+
+  class ContainerRestartParams = DockerEngineRuby::Models::ContainerRestartParams
+
+  class ContainerStartParams = DockerEngineRuby::Models::ContainerStartParams
+
+  class ContainerStatsParams = DockerEngineRuby::Models::ContainerStatsParams
+
+  class ContainerStopParams = DockerEngineRuby::Models::ContainerStopParams
+
+  class ContainerTopParams = DockerEngineRuby::Models::ContainerTopParams
+
+  class ContainerUnpauseParams = DockerEngineRuby::Models::ContainerUnpauseParams
+
+  class ContainerUpdateParams = DockerEngineRuby::Models::ContainerUpdateParams
+
+  class ContainerWaitParams = DockerEngineRuby::Models::ContainerWaitParams
+
+  class CreateRequest = DockerEngineRuby::Models::CreateRequest
+
+  class CreateResponse = DockerEngineRuby::Models::CreateResponse
+
+  class DeleteItem = DockerEngineRuby::Models::DeleteItem
+
+  class DisconnectRequest = DockerEngineRuby::Models::DisconnectRequest
+
+  class DistributionInspectParams = DockerEngineRuby::Models::DistributionInspectParams
+
+  class Error = DockerEngineRuby::Models::Error
+
+  class ExecInspectParams = DockerEngineRuby::Models::ExecInspectParams
+
+  class ExecResizeParams = DockerEngineRuby::Models::ExecResizeParams
+
+  class ExecStartParams = DockerEngineRuby::Models::ExecStartParams
+
+  class FilesystemChange = DockerEngineRuby::Models::FilesystemChange
+
+  class HistoryItem = DockerEngineRuby::Models::HistoryItem
+
+  class Image = DockerEngineRuby::Models::Image
+
+  class ImageBuildParams = DockerEngineRuby::Models::ImageBuildParams
+
+  class ImageBuildPruneParams = DockerEngineRuby::Models::ImageBuildPruneParams
+
+  class ImageCommitParams = DockerEngineRuby::Models::ImageCommitParams
+
+  class ImageDeleteParams = DockerEngineRuby::Models::ImageDeleteParams
+
+  class ImageGetAllParams = DockerEngineRuby::Models::ImageGetAllParams
+
+  class ImageGetParams = DockerEngineRuby::Models::ImageGetParams
+
+  class ImageHistoryParams = DockerEngineRuby::Models::ImageHistoryParams
+
+  class ImageInspectParams = DockerEngineRuby::Models::ImageInspectParams
+
+  class ImageListParams = DockerEngineRuby::Models::ImageListParams
+
+  class ImageLoadParams = DockerEngineRuby::Models::ImageLoadParams
+
+  class ImagePruneParams = DockerEngineRuby::Models::ImagePruneParams
+
+  class ImagePullParams = DockerEngineRuby::Models::ImagePullParams
+
+  class ImagePushParams = DockerEngineRuby::Models::ImagePushParams
+
+  class ImageSearchParams = DockerEngineRuby::Models::ImageSearchParams
+
+  class ImageTagParams = DockerEngineRuby::Models::ImageTagParams
+
+  class Info = DockerEngineRuby::Models::Info
+
+  class Inspect = DockerEngineRuby::Models::Inspect
+
+  class InspectResponse = DockerEngineRuby::Models::InspectResponse
+
+  class ListResponse = DockerEngineRuby::Models::ListResponse
+
+  class Network = DockerEngineRuby::Models::Network
+
+  class NetworkConnectParams = DockerEngineRuby::Models::NetworkConnectParams
+
+  class NetworkCreateParams = DockerEngineRuby::Models::NetworkCreateParams
+
+  class NetworkDeleteParams = DockerEngineRuby::Models::NetworkDeleteParams
+
+  class NetworkDisconnectParams = DockerEngineRuby::Models::NetworkDisconnectParams
+
+  class NetworkInspectParams = DockerEngineRuby::Models::NetworkInspectParams
+
+  class NetworkListParams = DockerEngineRuby::Models::NetworkListParams
+
+  class NetworkPruneParams = DockerEngineRuby::Models::NetworkPruneParams
+
+  class Node = DockerEngineRuby::Models::Node
+
+  class NodeDeleteParams = DockerEngineRuby::Models::NodeDeleteParams
+
+  class NodeInspectParams = DockerEngineRuby::Models::NodeInspectParams
+
+  class NodeListParams = DockerEngineRuby::Models::NodeListParams
+
+  class NodeUpdateParams = DockerEngineRuby::Models::NodeUpdateParams
+
+  class Plugin = DockerEngineRuby::Models::Plugin
+
+  class PluginCreateParams = DockerEngineRuby::Models::PluginCreateParams
+
+  class PluginDeleteParams = DockerEngineRuby::Models::PluginDeleteParams
+
+  class PluginDisableParams = DockerEngineRuby::Models::PluginDisableParams
+
+  class PluginEnableParams = DockerEngineRuby::Models::PluginEnableParams
+
+  class PluginInspectParams = DockerEngineRuby::Models::PluginInspectParams
+
+  class PluginListParams = DockerEngineRuby::Models::PluginListParams
+
+  class PluginPrivilegesParams = DockerEngineRuby::Models::PluginPrivilegesParams
+
+  class PluginPullParams = DockerEngineRuby::Models::PluginPullParams
+
+  class PluginPushParams = DockerEngineRuby::Models::PluginPushParams
+
+  class PluginSetParams = DockerEngineRuby::Models::PluginSetParams
+
+  class PluginUpgradeParams = DockerEngineRuby::Models::PluginUpgradeParams
+
+  class Privilege = DockerEngineRuby::Models::Privilege
+
+  class Secret = DockerEngineRuby::Models::Secret
+
+  class SecretCreateParams = DockerEngineRuby::Models::SecretCreateParams
+
+  class SecretDeleteParams = DockerEngineRuby::Models::SecretDeleteParams
+
+  class SecretInspectParams = DockerEngineRuby::Models::SecretInspectParams
+
+  class SecretListParams = DockerEngineRuby::Models::SecretListParams
+
+  class SecretUpdateParams = DockerEngineRuby::Models::SecretUpdateParams
+
+  class Service = DockerEngineRuby::Models::Service
+
+  class ServiceCreateParams = DockerEngineRuby::Models::ServiceCreateParams
+
+  class ServiceDeleteParams = DockerEngineRuby::Models::ServiceDeleteParams
+
+  class ServiceInspectParams = DockerEngineRuby::Models::ServiceInspectParams
+
+  class ServiceListParams = DockerEngineRuby::Models::ServiceListParams
+
+  class ServiceLogsParams = DockerEngineRuby::Models::ServiceLogsParams
+
+  class ServiceUpdateParams = DockerEngineRuby::Models::ServiceUpdateParams
+
+  class Spec = DockerEngineRuby::Models::Spec
+
+  class StatsResponse = DockerEngineRuby::Models::StatsResponse
+
+  class Summary = DockerEngineRuby::Models::Summary
+
+  class SwarmAPI = DockerEngineRuby::Models::SwarmAPI
+
+  class SwarmInitParams = DockerEngineRuby::Models::SwarmInitParams
+
+  class SwarmInspectParams = DockerEngineRuby::Models::SwarmInspectParams
+
+  class SwarmJoinParams = DockerEngineRuby::Models::SwarmJoinParams
+
+  class SwarmLeaveParams = DockerEngineRuby::Models::SwarmLeaveParams
+
+  class SwarmUnlockKeyParams = DockerEngineRuby::Models::SwarmUnlockKeyParams
+
+  class SwarmUnlockParams = DockerEngineRuby::Models::SwarmUnlockParams
+
+  class SwarmUpdateParams = DockerEngineRuby::Models::SwarmUpdateParams
+
+  class SystemDataUsageParams = DockerEngineRuby::Models::SystemDataUsageParams
+
+  class SystemEventsParams = DockerEngineRuby::Models::SystemEventsParams
+
+  class SystemInfoParams = DockerEngineRuby::Models::SystemInfoParams
+
+  class SystemPingParams = DockerEngineRuby::Models::SystemPingParams
+
+  class SystemVersionParams = DockerEngineRuby::Models::SystemVersionParams
+
+  class Task = DockerEngineRuby::Models::Task
+
+  class TaskInspectParams = DockerEngineRuby::Models::TaskInspectParams
+
+  class TaskListParams = DockerEngineRuby::Models::TaskListParams
+
+  class TaskLogsParams = DockerEngineRuby::Models::TaskLogsParams
+
+  class TopResponse = DockerEngineRuby::Models::TopResponse
+
+  class UpdateResponse = DockerEngineRuby::Models::UpdateResponse
+
+  class Version = DockerEngineRuby::Models::Version
+
+  class Volume = DockerEngineRuby::Models::Volume
+
+  class VolumeCreateParams = DockerEngineRuby::Models::VolumeCreateParams
+
+  class VolumeDeleteParams = DockerEngineRuby::Models::VolumeDeleteParams
+
+  class VolumeInspectParams = DockerEngineRuby::Models::VolumeInspectParams
+
+  class VolumeListParams = DockerEngineRuby::Models::VolumeListParams
+
+  class VolumePruneParams = DockerEngineRuby::Models::VolumePruneParams
+
+  class VolumeUpdateParams = DockerEngineRuby::Models::VolumeUpdateParams
+
+  class WaitResponse = DockerEngineRuby::Models::WaitResponse
+end

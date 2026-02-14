@@ -1,0 +1,19 @@
+module DockerEngineRuby
+  module Models
+    type delete_item = { deleted: String, untagged: String }
+
+    class DeleteItem < DockerEngineRuby::Internal::Type::BaseModel
+      attr_reader deleted: String?
+
+      def deleted=: (String) -> String
+
+      attr_reader untagged: String?
+
+      def untagged=: (String) -> String
+
+      def initialize: (?deleted: String, ?untagged: String) -> void
+
+      def to_hash: -> { deleted: String, untagged: String }
+    end
+  end
+end

@@ -1,0 +1,7 @@
+module DockerEngineRuby
+  module Models
+    type plugin_privileges_response = ::Array[DockerEngineRuby::Privilege]
+
+    PluginPrivilegesResponse: DockerEngineRuby::Internal::Type::Converter
+  end
+end

@@ -1,0 +1,40 @@
+module DockerEngineRuby
+  module Resources
+    class Volumes
+      def create: (
+        create_request: DockerEngineRuby::CreateRequest,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> DockerEngineRuby::Volume
+
+      def update: (
+        String name,
+        version: Integer,
+        ?spec: DockerEngineRuby::VolumeUpdateParams::Spec,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> nil
+
+      def list: (
+        ?filters: String,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> DockerEngineRuby::ListResponse
+
+      def delete: (
+        String name,
+        ?force: bool,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> nil
+
+      def inspect_: (
+        String name,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> DockerEngineRuby::Volume
+
+      def prune: (
+        ?filters: String,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> DockerEngineRuby::Models::VolumePruneResponse
+
+      def initialize: (client: DockerEngineRuby::Client) -> void
+    end
+  end
+end

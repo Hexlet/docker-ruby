@@ -1,0 +1,30 @@
+module DockerEngineRuby
+  module Resources
+    class System
+      def data_usage: (
+        ?type: ::Array[DockerEngineRuby::Models::SystemDataUsageParams::type_],
+        ?verbose: bool,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> DockerEngineRuby::Models::SystemDataUsageResponse
+
+      def events: (
+        ?filters: String,
+        ?since: String,
+        ?until_: String,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> DockerEngineRuby::Models::SystemEventsResponse
+
+      def info: (
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> DockerEngineRuby::Info
+
+      def ping: (?request_options: DockerEngineRuby::request_opts) -> String
+
+      def version: (
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> DockerEngineRuby::Version
+
+      def initialize: (client: DockerEngineRuby::Client) -> void
+    end
+  end
+end

@@ -1,0 +1,1082 @@
+module DockerEngineRuby
+  module Models
+    type info =
+      {
+        architecture: String,
+        cdi_spec_dirs: ::Array[String],
+        cgroup_driver: DockerEngineRuby::Models::Info::cgroup_driver,
+        cgroup_version: DockerEngineRuby::Models::Info::cgroup_version,
+        containerd: DockerEngineRuby::Info::Containerd?,
+        containerd_commit: DockerEngineRuby::Info::ContainerdCommit,
+        containers: Integer,
+        containers_paused: Integer,
+        containers_running: Integer,
+        containers_stopped: Integer,
+        cpu_cfs_period: bool,
+        cpu_cfs_quota: bool,
+        cpu_set: bool,
+        cpu_shares: bool,
+        debug: bool,
+        default_address_pools: ::Array[DockerEngineRuby::Info::DefaultAddressPool],
+        default_runtime: String,
+        discovered_devices: ::Array[DockerEngineRuby::Info::DiscoveredDevice],
+        docker_root_dir: String,
+        driver: String,
+        driver_status: ::Array[::Array[String]],
+        experimental_build: bool,
+        firewall_backend: DockerEngineRuby::Info::FirewallBackend?,
+        generic_resources: ::Array[DockerEngineRuby::Info::GenericResource],
+        http_proxy: String,
+        https_proxy: String,
+        id: String,
+        images: Integer,
+        index_server_address: String,
+        init_binary: String,
+        init_commit: DockerEngineRuby::Info::InitCommit,
+        :i_pv4_forwarding => bool,
+        isolation: DockerEngineRuby::Models::Info::isolation,
+        kernel_version: String,
+        labels: ::Array[String],
+        live_restore_enabled: bool,
+        logging_driver: String,
+        memory_limit: bool,
+        mem_total: Integer,
+        name: String,
+        ncpu: Integer,
+        n_events_listener: Integer,
+        n_fd: Integer,
+        n_goroutines: Integer,
+        no_proxy: String,
+        nri: DockerEngineRuby::Info::Nri?,
+        oom_kill_disable: bool,
+        operating_system: String,
+        os_type: String,
+        os_version: String,
+        pids_limit: bool,
+        plugins: DockerEngineRuby::Info::Plugins,
+        product_license: String,
+        registry_config: DockerEngineRuby::Info::RegistryConfig?,
+        runc_commit: DockerEngineRuby::Info::RuncCommit,
+        runtimes: ::Hash[Symbol, DockerEngineRuby::Info::Runtime],
+        security_options: ::Array[String],
+        server_version: String,
+        swap_limit: bool,
+        swarm: DockerEngineRuby::Info::Swarm,
+        system_time: String,
+        warnings: ::Array[String]
+      }
+
+    class Info < DockerEngineRuby::Internal::Type::BaseModel
+      attr_reader architecture: String?
+
+      def architecture=: (String) -> String
+
+      attr_reader cdi_spec_dirs: ::Array[String]?
+
+      def cdi_spec_dirs=: (::Array[String]) -> ::Array[String]
+
+      attr_reader cgroup_driver: DockerEngineRuby::Models::Info::cgroup_driver?
+
+      def cgroup_driver=: (
+        DockerEngineRuby::Models::Info::cgroup_driver
+      ) -> DockerEngineRuby::Models::Info::cgroup_driver
+
+      attr_reader cgroup_version: DockerEngineRuby::Models::Info::cgroup_version?
+
+      def cgroup_version=: (
+        DockerEngineRuby::Models::Info::cgroup_version
+      ) -> DockerEngineRuby::Models::Info::cgroup_version
+
+      attr_accessor containerd: DockerEngineRuby::Info::Containerd?
+
+      attr_reader containerd_commit: DockerEngineRuby::Info::ContainerdCommit?
+
+      def containerd_commit=: (
+        DockerEngineRuby::Info::ContainerdCommit
+      ) -> DockerEngineRuby::Info::ContainerdCommit
+
+      attr_reader containers: Integer?
+
+      def containers=: (Integer) -> Integer
+
+      attr_reader containers_paused: Integer?
+
+      def containers_paused=: (Integer) -> Integer
+
+      attr_reader containers_running: Integer?
+
+      def containers_running=: (Integer) -> Integer
+
+      attr_reader containers_stopped: Integer?
+
+      def containers_stopped=: (Integer) -> Integer
+
+      attr_reader cpu_cfs_period: bool?
+
+      def cpu_cfs_period=: (bool) -> bool
+
+      attr_reader cpu_cfs_quota: bool?
+
+      def cpu_cfs_quota=: (bool) -> bool
+
+      attr_reader cpu_set: bool?
+
+      def cpu_set=: (bool) -> bool
+
+      attr_reader cpu_shares: bool?
+
+      def cpu_shares=: (bool) -> bool
+
+      attr_reader debug: bool?
+
+      def debug=: (bool) -> bool
+
+      attr_reader default_address_pools: ::Array[DockerEngineRuby::Info::DefaultAddressPool]?
+
+      def default_address_pools=: (
+        ::Array[DockerEngineRuby::Info::DefaultAddressPool]
+      ) -> ::Array[DockerEngineRuby::Info::DefaultAddressPool]
+
+      attr_reader default_runtime: String?
+
+      def default_runtime=: (String) -> String
+
+      attr_reader discovered_devices: ::Array[DockerEngineRuby::Info::DiscoveredDevice]?
+
+      def discovered_devices=: (
+        ::Array[DockerEngineRuby::Info::DiscoveredDevice]
+      ) -> ::Array[DockerEngineRuby::Info::DiscoveredDevice]
+
+      attr_reader docker_root_dir: String?
+
+      def docker_root_dir=: (String) -> String
+
+      attr_reader driver: String?
+
+      def driver=: (String) -> String
+
+      attr_reader driver_status: ::Array[::Array[String]]?
+
+      def driver_status=: (::Array[::Array[String]]) -> ::Array[::Array[String]]
+
+      attr_reader experimental_build: bool?
+
+      def experimental_build=: (bool) -> bool
+
+      attr_accessor firewall_backend: DockerEngineRuby::Info::FirewallBackend?
+
+      attr_reader generic_resources: ::Array[DockerEngineRuby::Info::GenericResource]?
+
+      def generic_resources=: (
+        ::Array[DockerEngineRuby::Info::GenericResource]
+      ) -> ::Array[DockerEngineRuby::Info::GenericResource]
+
+      attr_reader http_proxy: String?
+
+      def http_proxy=: (String) -> String
+
+      attr_reader https_proxy: String?
+
+      def https_proxy=: (String) -> String
+
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      attr_reader images: Integer?
+
+      def images=: (Integer) -> Integer
+
+      attr_reader index_server_address: String?
+
+      def index_server_address=: (String) -> String
+
+      attr_reader init_binary: String?
+
+      def init_binary=: (String) -> String
+
+      attr_reader init_commit: DockerEngineRuby::Info::InitCommit?
+
+      def init_commit=: (
+        DockerEngineRuby::Info::InitCommit
+      ) -> DockerEngineRuby::Info::InitCommit
+
+      attr_reader i_pv4_forwarding: bool?
+
+      def i_pv4_forwarding=: (bool) -> bool
+
+      attr_reader isolation: DockerEngineRuby::Models::Info::isolation?
+
+      def isolation=: (
+        DockerEngineRuby::Models::Info::isolation
+      ) -> DockerEngineRuby::Models::Info::isolation
+
+      attr_reader kernel_version: String?
+
+      def kernel_version=: (String) -> String
+
+      attr_reader labels: ::Array[String]?
+
+      def labels=: (::Array[String]) -> ::Array[String]
+
+      attr_reader live_restore_enabled: bool?
+
+      def live_restore_enabled=: (bool) -> bool
+
+      attr_reader logging_driver: String?
+
+      def logging_driver=: (String) -> String
+
+      attr_reader memory_limit: bool?
+
+      def memory_limit=: (bool) -> bool
+
+      attr_reader mem_total: Integer?
+
+      def mem_total=: (Integer) -> Integer
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_reader ncpu: Integer?
+
+      def ncpu=: (Integer) -> Integer
+
+      attr_reader n_events_listener: Integer?
+
+      def n_events_listener=: (Integer) -> Integer
+
+      attr_reader n_fd: Integer?
+
+      def n_fd=: (Integer) -> Integer
+
+      attr_reader n_goroutines: Integer?
+
+      def n_goroutines=: (Integer) -> Integer
+
+      attr_reader no_proxy: String?
+
+      def no_proxy=: (String) -> String
+
+      attr_accessor nri: DockerEngineRuby::Info::Nri?
+
+      attr_reader oom_kill_disable: bool?
+
+      def oom_kill_disable=: (bool) -> bool
+
+      attr_reader operating_system: String?
+
+      def operating_system=: (String) -> String
+
+      attr_reader os_type: String?
+
+      def os_type=: (String) -> String
+
+      attr_reader os_version: String?
+
+      def os_version=: (String) -> String
+
+      attr_reader pids_limit: bool?
+
+      def pids_limit=: (bool) -> bool
+
+      attr_reader plugins: DockerEngineRuby::Info::Plugins?
+
+      def plugins=: (
+        DockerEngineRuby::Info::Plugins
+      ) -> DockerEngineRuby::Info::Plugins
+
+      attr_reader product_license: String?
+
+      def product_license=: (String) -> String
+
+      attr_accessor registry_config: DockerEngineRuby::Info::RegistryConfig?
+
+      attr_reader runc_commit: DockerEngineRuby::Info::RuncCommit?
+
+      def runc_commit=: (
+        DockerEngineRuby::Info::RuncCommit
+      ) -> DockerEngineRuby::Info::RuncCommit
+
+      attr_reader runtimes: ::Hash[Symbol, DockerEngineRuby::Info::Runtime]?
+
+      def runtimes=: (
+        ::Hash[Symbol, DockerEngineRuby::Info::Runtime]
+      ) -> ::Hash[Symbol, DockerEngineRuby::Info::Runtime]
+
+      attr_reader security_options: ::Array[String]?
+
+      def security_options=: (::Array[String]) -> ::Array[String]
+
+      attr_reader server_version: String?
+
+      def server_version=: (String) -> String
+
+      attr_reader swap_limit: bool?
+
+      def swap_limit=: (bool) -> bool
+
+      attr_reader swarm: DockerEngineRuby::Info::Swarm?
+
+      def swarm=: (
+        DockerEngineRuby::Info::Swarm
+      ) -> DockerEngineRuby::Info::Swarm
+
+      attr_reader system_time: String?
+
+      def system_time=: (String) -> String
+
+      attr_reader warnings: ::Array[String]?
+
+      def warnings=: (::Array[String]) -> ::Array[String]
+
+      def initialize: (
+        ?architecture: String,
+        ?cdi_spec_dirs: ::Array[String],
+        ?cgroup_driver: DockerEngineRuby::Models::Info::cgroup_driver,
+        ?cgroup_version: DockerEngineRuby::Models::Info::cgroup_version,
+        ?containerd: DockerEngineRuby::Info::Containerd?,
+        ?containerd_commit: DockerEngineRuby::Info::ContainerdCommit,
+        ?containers: Integer,
+        ?containers_paused: Integer,
+        ?containers_running: Integer,
+        ?containers_stopped: Integer,
+        ?cpu_cfs_period: bool,
+        ?cpu_cfs_quota: bool,
+        ?cpu_set: bool,
+        ?cpu_shares: bool,
+        ?debug: bool,
+        ?default_address_pools: ::Array[DockerEngineRuby::Info::DefaultAddressPool],
+        ?default_runtime: String,
+        ?discovered_devices: ::Array[DockerEngineRuby::Info::DiscoveredDevice],
+        ?docker_root_dir: String,
+        ?driver: String,
+        ?driver_status: ::Array[::Array[String]],
+        ?experimental_build: bool,
+        ?firewall_backend: DockerEngineRuby::Info::FirewallBackend?,
+        ?generic_resources: ::Array[DockerEngineRuby::Info::GenericResource],
+        ?http_proxy: String,
+        ?https_proxy: String,
+        ?id: String,
+        ?images: Integer,
+        ?index_server_address: String,
+        ?init_binary: String,
+        ?init_commit: DockerEngineRuby::Info::InitCommit,
+        ?i_pv4_forwarding: bool,
+        ?isolation: DockerEngineRuby::Models::Info::isolation,
+        ?kernel_version: String,
+        ?labels: ::Array[String],
+        ?live_restore_enabled: bool,
+        ?logging_driver: String,
+        ?memory_limit: bool,
+        ?mem_total: Integer,
+        ?name: String,
+        ?ncpu: Integer,
+        ?n_events_listener: Integer,
+        ?n_fd: Integer,
+        ?n_goroutines: Integer,
+        ?no_proxy: String,
+        ?nri: DockerEngineRuby::Info::Nri?,
+        ?oom_kill_disable: bool,
+        ?operating_system: String,
+        ?os_type: String,
+        ?os_version: String,
+        ?pids_limit: bool,
+        ?plugins: DockerEngineRuby::Info::Plugins,
+        ?product_license: String,
+        ?registry_config: DockerEngineRuby::Info::RegistryConfig?,
+        ?runc_commit: DockerEngineRuby::Info::RuncCommit,
+        ?runtimes: ::Hash[Symbol, DockerEngineRuby::Info::Runtime],
+        ?security_options: ::Array[String],
+        ?server_version: String,
+        ?swap_limit: bool,
+        ?swarm: DockerEngineRuby::Info::Swarm,
+        ?system_time: String,
+        ?warnings: ::Array[String]
+      ) -> void
+
+      def to_hash: -> {
+        architecture: String,
+        cdi_spec_dirs: ::Array[String],
+        cgroup_driver: DockerEngineRuby::Models::Info::cgroup_driver,
+        cgroup_version: DockerEngineRuby::Models::Info::cgroup_version,
+        containerd: DockerEngineRuby::Info::Containerd?,
+        containerd_commit: DockerEngineRuby::Info::ContainerdCommit,
+        containers: Integer,
+        containers_paused: Integer,
+        containers_running: Integer,
+        containers_stopped: Integer,
+        cpu_cfs_period: bool,
+        cpu_cfs_quota: bool,
+        cpu_set: bool,
+        cpu_shares: bool,
+        debug: bool,
+        default_address_pools: ::Array[DockerEngineRuby::Info::DefaultAddressPool],
+        default_runtime: String,
+        discovered_devices: ::Array[DockerEngineRuby::Info::DiscoveredDevice],
+        docker_root_dir: String,
+        driver: String,
+        driver_status: ::Array[::Array[String]],
+        experimental_build: bool,
+        firewall_backend: DockerEngineRuby::Info::FirewallBackend?,
+        generic_resources: ::Array[DockerEngineRuby::Info::GenericResource],
+        http_proxy: String,
+        https_proxy: String,
+        id: String,
+        images: Integer,
+        index_server_address: String,
+        init_binary: String,
+        init_commit: DockerEngineRuby::Info::InitCommit,
+        :i_pv4_forwarding => bool,
+        isolation: DockerEngineRuby::Models::Info::isolation,
+        kernel_version: String,
+        labels: ::Array[String],
+        live_restore_enabled: bool,
+        logging_driver: String,
+        memory_limit: bool,
+        mem_total: Integer,
+        name: String,
+        ncpu: Integer,
+        n_events_listener: Integer,
+        n_fd: Integer,
+        n_goroutines: Integer,
+        no_proxy: String,
+        nri: DockerEngineRuby::Info::Nri?,
+        oom_kill_disable: bool,
+        operating_system: String,
+        os_type: String,
+        os_version: String,
+        pids_limit: bool,
+        plugins: DockerEngineRuby::Info::Plugins,
+        product_license: String,
+        registry_config: DockerEngineRuby::Info::RegistryConfig?,
+        runc_commit: DockerEngineRuby::Info::RuncCommit,
+        runtimes: ::Hash[Symbol, DockerEngineRuby::Info::Runtime],
+        security_options: ::Array[String],
+        server_version: String,
+        swap_limit: bool,
+        swarm: DockerEngineRuby::Info::Swarm,
+        system_time: String,
+        warnings: ::Array[String]
+      }
+
+      type cgroup_driver = :cgroupfs | :systemd | :none
+
+      module CgroupDriver
+        extend DockerEngineRuby::Internal::Type::Enum
+
+        CGROUPFS: :cgroupfs
+        SYSTEMD: :systemd
+        NONE: :none
+
+        def self?.values: -> ::Array[DockerEngineRuby::Models::Info::cgroup_driver]
+      end
+
+      type cgroup_version = :"1" | :"2"
+
+      module CgroupVersion
+        extend DockerEngineRuby::Internal::Type::Enum
+
+        CGROUP_VERSION_1: :"1"
+        CGROUP_VERSION_2: :"2"
+
+        def self?.values: -> ::Array[DockerEngineRuby::Models::Info::cgroup_version]
+      end
+
+      type containerd =
+        {
+          address: String,
+          namespaces: DockerEngineRuby::Info::Containerd::Namespaces
+        }
+
+      class Containerd < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader address: String?
+
+        def address=: (String) -> String
+
+        attr_reader namespaces: DockerEngineRuby::Info::Containerd::Namespaces?
+
+        def namespaces=: (
+          DockerEngineRuby::Info::Containerd::Namespaces
+        ) -> DockerEngineRuby::Info::Containerd::Namespaces
+
+        def initialize: (
+          ?address: String,
+          ?namespaces: DockerEngineRuby::Info::Containerd::Namespaces
+        ) -> void
+
+        def to_hash: -> {
+          address: String,
+          namespaces: DockerEngineRuby::Info::Containerd::Namespaces
+        }
+
+        type namespaces = { containers: String, plugins: String }
+
+        class Namespaces < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader containers: String?
+
+          def containers=: (String) -> String
+
+          attr_reader plugins: String?
+
+          def plugins=: (String) -> String
+
+          def initialize: (?containers: String, ?plugins: String) -> void
+
+          def to_hash: -> { containers: String, plugins: String }
+        end
+      end
+
+      type containerd_commit = { id: String }
+
+      class ContainerdCommit < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        def initialize: (?id: String) -> void
+
+        def to_hash: -> { id: String }
+      end
+
+      type default_address_pool = { base: String, size: Integer }
+
+      class DefaultAddressPool < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader base: String?
+
+        def base=: (String) -> String
+
+        attr_reader size: Integer?
+
+        def size=: (Integer) -> Integer
+
+        def initialize: (?base: String, ?size: Integer) -> void
+
+        def to_hash: -> { base: String, size: Integer }
+      end
+
+      type discovered_device = { id: String, source: String }
+
+      class DiscoveredDevice < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        attr_reader source: String?
+
+        def source=: (String) -> String
+
+        def initialize: (?id: String, ?source: String) -> void
+
+        def to_hash: -> { id: String, source: String }
+      end
+
+      type firewall_backend = { driver: String, info: ::Array[::Array[String]] }
+
+      class FirewallBackend < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader driver: String?
+
+        def driver=: (String) -> String
+
+        attr_reader info: ::Array[::Array[String]]?
+
+        def info=: (::Array[::Array[String]]) -> ::Array[::Array[String]]
+
+        def initialize: (
+          ?driver: String,
+          ?info: ::Array[::Array[String]]
+        ) -> void
+
+        def to_hash: -> { driver: String, info: ::Array[::Array[String]] }
+      end
+
+      type generic_resource =
+        {
+          discrete_resource_spec: DockerEngineRuby::Info::GenericResource::DiscreteResourceSpec,
+          named_resource_spec: DockerEngineRuby::Info::GenericResource::NamedResourceSpec
+        }
+
+      class GenericResource < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader discrete_resource_spec: DockerEngineRuby::Info::GenericResource::DiscreteResourceSpec?
+
+        def discrete_resource_spec=: (
+          DockerEngineRuby::Info::GenericResource::DiscreteResourceSpec
+        ) -> DockerEngineRuby::Info::GenericResource::DiscreteResourceSpec
+
+        attr_reader named_resource_spec: DockerEngineRuby::Info::GenericResource::NamedResourceSpec?
+
+        def named_resource_spec=: (
+          DockerEngineRuby::Info::GenericResource::NamedResourceSpec
+        ) -> DockerEngineRuby::Info::GenericResource::NamedResourceSpec
+
+        def initialize: (
+          ?discrete_resource_spec: DockerEngineRuby::Info::GenericResource::DiscreteResourceSpec,
+          ?named_resource_spec: DockerEngineRuby::Info::GenericResource::NamedResourceSpec
+        ) -> void
+
+        def to_hash: -> {
+          discrete_resource_spec: DockerEngineRuby::Info::GenericResource::DiscreteResourceSpec,
+          named_resource_spec: DockerEngineRuby::Info::GenericResource::NamedResourceSpec
+        }
+
+        type discrete_resource_spec = { kind: String, value: Integer }
+
+        class DiscreteResourceSpec < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader kind: String?
+
+          def kind=: (String) -> String
+
+          attr_reader value: Integer?
+
+          def value=: (Integer) -> Integer
+
+          def initialize: (?kind: String, ?value: Integer) -> void
+
+          def to_hash: -> { kind: String, value: Integer }
+        end
+
+        type named_resource_spec = { kind: String, value: String }
+
+        class NamedResourceSpec < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader kind: String?
+
+          def kind=: (String) -> String
+
+          attr_reader value: String?
+
+          def value=: (String) -> String
+
+          def initialize: (?kind: String, ?value: String) -> void
+
+          def to_hash: -> { kind: String, value: String }
+        end
+      end
+
+      type init_commit = { id: String }
+
+      class InitCommit < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        def initialize: (?id: String) -> void
+
+        def to_hash: -> { id: String }
+      end
+
+      type isolation = :default | :hyperv | :process | :""
+
+      module Isolation
+        extend DockerEngineRuby::Internal::Type::Enum
+
+        DEFAULT: :default
+        HYPERV: :hyperv
+        PROCESS: :process
+        EMPTY: :""
+
+        def self?.values: -> ::Array[DockerEngineRuby::Models::Info::isolation]
+      end
+
+      type nri = { info: ::Array[::Array[String]] }
+
+      class Nri < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader info: ::Array[::Array[String]]?
+
+        def info=: (::Array[::Array[String]]) -> ::Array[::Array[String]]
+
+        def initialize: (?info: ::Array[::Array[String]]) -> void
+
+        def to_hash: -> { info: ::Array[::Array[String]] }
+      end
+
+      type plugins =
+        {
+          authorization: ::Array[String],
+          log: ::Array[String],
+          network: ::Array[String],
+          volume: ::Array[String]
+        }
+
+      class Plugins < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader authorization: ::Array[String]?
+
+        def authorization=: (::Array[String]) -> ::Array[String]
+
+        attr_reader log: ::Array[String]?
+
+        def log=: (::Array[String]) -> ::Array[String]
+
+        attr_reader network: ::Array[String]?
+
+        def network=: (::Array[String]) -> ::Array[String]
+
+        attr_reader volume: ::Array[String]?
+
+        def volume=: (::Array[String]) -> ::Array[String]
+
+        def initialize: (
+          ?authorization: ::Array[String],
+          ?log: ::Array[String],
+          ?network: ::Array[String],
+          ?volume: ::Array[String]
+        ) -> void
+
+        def to_hash: -> {
+          authorization: ::Array[String],
+          log: ::Array[String],
+          network: ::Array[String],
+          volume: ::Array[String]
+        }
+      end
+
+      type registry_config =
+        {
+          index_configs: ::Hash[Symbol, DockerEngineRuby::Info::RegistryConfig::IndexConfig?],
+          insecure_registry_cid_rs: ::Array[String],
+          mirrors: ::Array[String]
+        }
+
+      class RegistryConfig < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader index_configs: ::Hash[Symbol, DockerEngineRuby::Info::RegistryConfig::IndexConfig?]?
+
+        def index_configs=: (
+          ::Hash[Symbol, DockerEngineRuby::Info::RegistryConfig::IndexConfig?]
+        ) -> ::Hash[Symbol, DockerEngineRuby::Info::RegistryConfig::IndexConfig?]
+
+        attr_reader insecure_registry_cid_rs: ::Array[String]?
+
+        def insecure_registry_cid_rs=: (::Array[String]) -> ::Array[String]
+
+        attr_reader mirrors: ::Array[String]?
+
+        def mirrors=: (::Array[String]) -> ::Array[String]
+
+        def initialize: (
+          ?index_configs: ::Hash[Symbol, DockerEngineRuby::Info::RegistryConfig::IndexConfig?],
+          ?insecure_registry_cid_rs: ::Array[String],
+          ?mirrors: ::Array[String]
+        ) -> void
+
+        def to_hash: -> {
+          index_configs: ::Hash[Symbol, DockerEngineRuby::Info::RegistryConfig::IndexConfig?],
+          insecure_registry_cid_rs: ::Array[String],
+          mirrors: ::Array[String]
+        }
+
+        type index_config =
+          {
+            mirrors: ::Array[String],
+            name: String,
+            official: bool,
+            secure: bool
+          }
+
+        class IndexConfig < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader mirrors: ::Array[String]?
+
+          def mirrors=: (::Array[String]) -> ::Array[String]
+
+          attr_reader name: String?
+
+          def name=: (String) -> String
+
+          attr_reader official: bool?
+
+          def official=: (bool) -> bool
+
+          attr_reader secure: bool?
+
+          def secure=: (bool) -> bool
+
+          def initialize: (
+            ?mirrors: ::Array[String],
+            ?name: String,
+            ?official: bool,
+            ?secure: bool
+          ) -> void
+
+          def to_hash: -> {
+            mirrors: ::Array[String],
+            name: String,
+            official: bool,
+            secure: bool
+          }
+        end
+      end
+
+      type runc_commit = { id: String }
+
+      class RuncCommit < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        def initialize: (?id: String) -> void
+
+        def to_hash: -> { id: String }
+      end
+
+      type runtime =
+        {
+          path: String,
+          runtime_args: ::Array[String]?,
+          status: ::Hash[Symbol, String]?
+        }
+
+      class Runtime < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader path: String?
+
+        def path=: (String) -> String
+
+        attr_accessor runtime_args: ::Array[String]?
+
+        attr_accessor status: ::Hash[Symbol, String]?
+
+        def initialize: (
+          ?path: String,
+          ?runtime_args: ::Array[String]?,
+          ?status: ::Hash[Symbol, String]?
+        ) -> void
+
+        def to_hash: -> {
+          path: String,
+          runtime_args: ::Array[String]?,
+          status: ::Hash[Symbol, String]?
+        }
+      end
+
+      type swarm =
+        {
+          cluster: DockerEngineRuby::Info::Swarm::Cluster?,
+          control_available: bool,
+          error: String,
+          local_node_state: DockerEngineRuby::Models::Info::Swarm::local_node_state,
+          managers: Integer?,
+          node_addr: String,
+          node_id: String,
+          nodes: Integer?,
+          remote_managers: ::Array[DockerEngineRuby::Info::Swarm::RemoteManager]?
+        }
+
+      class Swarm < DockerEngineRuby::Internal::Type::BaseModel
+        attr_accessor cluster: DockerEngineRuby::Info::Swarm::Cluster?
+
+        attr_reader control_available: bool?
+
+        def control_available=: (bool) -> bool
+
+        attr_reader error: String?
+
+        def error=: (String) -> String
+
+        attr_reader local_node_state: DockerEngineRuby::Models::Info::Swarm::local_node_state?
+
+        def local_node_state=: (
+          DockerEngineRuby::Models::Info::Swarm::local_node_state
+        ) -> DockerEngineRuby::Models::Info::Swarm::local_node_state
+
+        attr_accessor managers: Integer?
+
+        attr_reader node_addr: String?
+
+        def node_addr=: (String) -> String
+
+        attr_reader node_id: String?
+
+        def node_id=: (String) -> String
+
+        attr_accessor nodes: Integer?
+
+        attr_accessor remote_managers: ::Array[DockerEngineRuby::Info::Swarm::RemoteManager]?
+
+        def initialize: (
+          ?cluster: DockerEngineRuby::Info::Swarm::Cluster?,
+          ?control_available: bool,
+          ?error: String,
+          ?local_node_state: DockerEngineRuby::Models::Info::Swarm::local_node_state,
+          ?managers: Integer?,
+          ?node_addr: String,
+          ?node_id: String,
+          ?nodes: Integer?,
+          ?remote_managers: ::Array[DockerEngineRuby::Info::Swarm::RemoteManager]?
+        ) -> void
+
+        def to_hash: -> {
+          cluster: DockerEngineRuby::Info::Swarm::Cluster?,
+          control_available: bool,
+          error: String,
+          local_node_state: DockerEngineRuby::Models::Info::Swarm::local_node_state,
+          managers: Integer?,
+          node_addr: String,
+          node_id: String,
+          nodes: Integer?,
+          remote_managers: ::Array[DockerEngineRuby::Info::Swarm::RemoteManager]?
+        }
+
+        type cluster =
+          {
+            created_at: String,
+            data_path_port: Integer,
+            default_addr_pool: ::Array[String],
+            id: String,
+            root_rotation_in_progress: bool,
+            spec: DockerEngineRuby::Spec,
+            subnet_size: Integer,
+            tls_info: DockerEngineRuby::Info::Swarm::Cluster::TlsInfo,
+            updated_at: String,
+            version: DockerEngineRuby::Info::Swarm::Cluster::Version
+          }
+
+        class Cluster < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader created_at: String?
+
+          def created_at=: (String) -> String
+
+          attr_reader data_path_port: Integer?
+
+          def data_path_port=: (Integer) -> Integer
+
+          attr_reader default_addr_pool: ::Array[String]?
+
+          def default_addr_pool=: (::Array[String]) -> ::Array[String]
+
+          attr_reader id: String?
+
+          def id=: (String) -> String
+
+          attr_reader root_rotation_in_progress: bool?
+
+          def root_rotation_in_progress=: (bool) -> bool
+
+          attr_reader spec: DockerEngineRuby::Spec?
+
+          def spec=: (DockerEngineRuby::Spec) -> DockerEngineRuby::Spec
+
+          attr_reader subnet_size: Integer?
+
+          def subnet_size=: (Integer) -> Integer
+
+          attr_reader tls_info: DockerEngineRuby::Info::Swarm::Cluster::TlsInfo?
+
+          def tls_info=: (
+            DockerEngineRuby::Info::Swarm::Cluster::TlsInfo
+          ) -> DockerEngineRuby::Info::Swarm::Cluster::TlsInfo
+
+          attr_reader updated_at: String?
+
+          def updated_at=: (String) -> String
+
+          attr_reader version: DockerEngineRuby::Info::Swarm::Cluster::Version?
+
+          def version=: (
+            DockerEngineRuby::Info::Swarm::Cluster::Version
+          ) -> DockerEngineRuby::Info::Swarm::Cluster::Version
+
+          def initialize: (
+            ?created_at: String,
+            ?data_path_port: Integer,
+            ?default_addr_pool: ::Array[String],
+            ?id: String,
+            ?root_rotation_in_progress: bool,
+            ?spec: DockerEngineRuby::Spec,
+            ?subnet_size: Integer,
+            ?tls_info: DockerEngineRuby::Info::Swarm::Cluster::TlsInfo,
+            ?updated_at: String,
+            ?version: DockerEngineRuby::Info::Swarm::Cluster::Version
+          ) -> void
+
+          def to_hash: -> {
+            created_at: String,
+            data_path_port: Integer,
+            default_addr_pool: ::Array[String],
+            id: String,
+            root_rotation_in_progress: bool,
+            spec: DockerEngineRuby::Spec,
+            subnet_size: Integer,
+            tls_info: DockerEngineRuby::Info::Swarm::Cluster::TlsInfo,
+            updated_at: String,
+            version: DockerEngineRuby::Info::Swarm::Cluster::Version
+          }
+
+          type tls_info =
+            {
+              cert_issuer_public_key: String,
+              cert_issuer_subject: String,
+              trust_root: String
+            }
+
+          class TlsInfo < DockerEngineRuby::Internal::Type::BaseModel
+            attr_reader cert_issuer_public_key: String?
+
+            def cert_issuer_public_key=: (String) -> String
+
+            attr_reader cert_issuer_subject: String?
+
+            def cert_issuer_subject=: (String) -> String
+
+            attr_reader trust_root: String?
+
+            def trust_root=: (String) -> String
+
+            def initialize: (
+              ?cert_issuer_public_key: String,
+              ?cert_issuer_subject: String,
+              ?trust_root: String
+            ) -> void
+
+            def to_hash: -> {
+              cert_issuer_public_key: String,
+              cert_issuer_subject: String,
+              trust_root: String
+            }
+          end
+
+          type version = { index: Integer }
+
+          class Version < DockerEngineRuby::Internal::Type::BaseModel
+            attr_reader index: Integer?
+
+            def index=: (Integer) -> Integer
+
+            def initialize: (?index: Integer) -> void
+
+            def to_hash: -> { index: Integer }
+          end
+        end
+
+        type local_node_state =
+          :"" | :inactive | :pending | :active | :error | :locked
+
+        module LocalNodeState
+          extend DockerEngineRuby::Internal::Type::Enum
+
+          EMPTY: :""
+          INACTIVE: :inactive
+          PENDING: :pending
+          ACTIVE: :active
+          ERROR: :error
+          LOCKED: :locked
+
+          def self?.values: -> ::Array[DockerEngineRuby::Models::Info::Swarm::local_node_state]
+        end
+
+        type remote_manager = { addr: String, node_id: String }
+
+        class RemoteManager < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader addr: String?
+
+          def addr=: (String) -> String
+
+          attr_reader node_id: String?
+
+          def node_id=: (String) -> String
+
+          def initialize: (?addr: String, ?node_id: String) -> void
+
+          def to_hash: -> { addr: String, node_id: String }
+        end
+      end
+    end
+  end
+end

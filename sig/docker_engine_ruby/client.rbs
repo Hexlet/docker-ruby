@@ -1,0 +1,49 @@
+module DockerEngineRuby
+  class Client < DockerEngineRuby::Internal::Transport::BaseClient
+    DEFAULT_MAX_RETRIES: 2
+
+    DEFAULT_TIMEOUT_IN_SECONDS: Float
+
+    DEFAULT_INITIAL_RETRY_DELAY: Float
+
+    DEFAULT_MAX_RETRY_DELAY: Float
+
+    attr_reader auth: DockerEngineRuby::Resources::Auth
+
+    attr_reader system_: DockerEngineRuby::Resources::System
+
+    attr_reader containers: DockerEngineRuby::Resources::Containers
+
+    attr_reader exec_: DockerEngineRuby::Resources::Exec
+
+    attr_reader images: DockerEngineRuby::Resources::Images
+
+    attr_reader networks: DockerEngineRuby::Resources::Networks
+
+    attr_reader volumes: DockerEngineRuby::Resources::Volumes
+
+    attr_reader services: DockerEngineRuby::Resources::Services
+
+    attr_reader configs: DockerEngineRuby::Resources::Configs
+
+    attr_reader secrets: DockerEngineRuby::Resources::Secrets
+
+    attr_reader nodes: DockerEngineRuby::Resources::Nodes
+
+    attr_reader swarm: DockerEngineRuby::Resources::Swarm
+
+    attr_reader tasks: DockerEngineRuby::Resources::Tasks
+
+    attr_reader plugins: DockerEngineRuby::Resources::Plugins
+
+    attr_reader distribution: DockerEngineRuby::Resources::Distribution
+
+    def initialize: (
+      ?base_url: String?,
+      ?max_retries: Integer,
+      ?timeout: Float,
+      ?initial_retry_delay: Float,
+      ?max_retry_delay: Float
+    ) -> void
+  end
+end

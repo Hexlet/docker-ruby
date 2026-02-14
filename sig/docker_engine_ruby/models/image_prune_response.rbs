@@ -1,0 +1,31 @@
+module DockerEngineRuby
+  module Models
+    type image_prune_response =
+      {
+        images_deleted: ::Array[DockerEngineRuby::DeleteItem],
+        space_reclaimed: Integer
+      }
+
+    class ImagePruneResponse < DockerEngineRuby::Internal::Type::BaseModel
+      attr_reader images_deleted: ::Array[DockerEngineRuby::DeleteItem]?
+
+      def images_deleted=: (
+        ::Array[DockerEngineRuby::DeleteItem]
+      ) -> ::Array[DockerEngineRuby::DeleteItem]
+
+      attr_reader space_reclaimed: Integer?
+
+      def space_reclaimed=: (Integer) -> Integer
+
+      def initialize: (
+        ?images_deleted: ::Array[DockerEngineRuby::DeleteItem],
+        ?space_reclaimed: Integer
+      ) -> void
+
+      def to_hash: -> {
+        images_deleted: ::Array[DockerEngineRuby::DeleteItem],
+        space_reclaimed: Integer
+      }
+    end
+  end
+end

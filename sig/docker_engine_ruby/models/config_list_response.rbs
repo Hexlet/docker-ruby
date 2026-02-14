@@ -1,0 +1,7 @@
+module DockerEngineRuby
+  module Models
+    type config_list_response = ::Array[DockerEngineRuby::Config]
+
+    ConfigListResponse: DockerEngineRuby::Internal::Type::Converter
+  end
+end

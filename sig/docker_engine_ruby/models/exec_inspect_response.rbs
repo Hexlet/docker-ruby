@@ -1,0 +1,94 @@
+module DockerEngineRuby
+  module Models
+    type exec_inspect_response =
+      {
+        can_remove: bool,
+        container_id: String,
+        detach_keys: String,
+        exit_code: Integer,
+        id: String,
+        open_stderr: bool,
+        open_stdin: bool,
+        open_stdout: bool,
+        pid: Integer,
+        process_config: DockerEngineRuby::InspectResponse,
+        running: bool
+      }
+
+    class ExecInspectResponse < DockerEngineRuby::Internal::Type::BaseModel
+      attr_reader can_remove: bool?
+
+      def can_remove=: (bool) -> bool
+
+      attr_reader container_id: String?
+
+      def container_id=: (String) -> String
+
+      attr_reader detach_keys: String?
+
+      def detach_keys=: (String) -> String
+
+      attr_reader exit_code: Integer?
+
+      def exit_code=: (Integer) -> Integer
+
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      attr_reader open_stderr: bool?
+
+      def open_stderr=: (bool) -> bool
+
+      attr_reader open_stdin: bool?
+
+      def open_stdin=: (bool) -> bool
+
+      attr_reader open_stdout: bool?
+
+      def open_stdout=: (bool) -> bool
+
+      attr_reader pid: Integer?
+
+      def pid=: (Integer) -> Integer
+
+      attr_reader process_config: DockerEngineRuby::InspectResponse?
+
+      def process_config=: (
+        DockerEngineRuby::InspectResponse
+      ) -> DockerEngineRuby::InspectResponse
+
+      attr_reader running: bool?
+
+      def running=: (bool) -> bool
+
+      def initialize: (
+        ?can_remove: bool,
+        ?container_id: String,
+        ?detach_keys: String,
+        ?exit_code: Integer,
+        ?id: String,
+        ?open_stderr: bool,
+        ?open_stdin: bool,
+        ?open_stdout: bool,
+        ?pid: Integer,
+        ?process_config: DockerEngineRuby::InspectResponse,
+        ?running: bool
+      ) -> void
+
+      def to_hash: -> {
+        can_remove: bool,
+        container_id: String,
+        detach_keys: String,
+        exit_code: Integer,
+        id: String,
+        open_stderr: bool,
+        open_stdin: bool,
+        open_stdout: bool,
+        pid: Integer,
+        process_config: DockerEngineRuby::InspectResponse,
+        running: bool
+      }
+    end
+  end
+end

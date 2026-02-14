@@ -1,0 +1,25 @@
+module DockerEngineRuby
+  module Models
+    type container_top_params =
+      { ps_args: String } & DockerEngineRuby::Internal::Type::request_parameters
+
+    class ContainerTopParams < DockerEngineRuby::Internal::Type::BaseModel
+      extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
+      include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_reader ps_args: String?
+
+      def ps_args=: (String) -> String
+
+      def initialize: (
+        ?ps_args: String,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        ps_args: String,
+        request_options: DockerEngineRuby::RequestOptions
+      }
+    end
+  end
+end

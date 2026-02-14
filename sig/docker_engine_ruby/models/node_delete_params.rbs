@@ -1,0 +1,25 @@
+module DockerEngineRuby
+  module Models
+    type node_delete_params =
+      { force: bool } & DockerEngineRuby::Internal::Type::request_parameters
+
+    class NodeDeleteParams < DockerEngineRuby::Internal::Type::BaseModel
+      extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
+      include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_reader force: bool?
+
+      def force=: (bool) -> bool
+
+      def initialize: (
+        ?force: bool,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        force: bool,
+        request_options: DockerEngineRuby::RequestOptions
+      }
+    end
+  end
+end
