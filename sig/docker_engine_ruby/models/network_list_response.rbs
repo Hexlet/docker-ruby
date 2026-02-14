@@ -1,0 +1,7 @@
+module DockerEngineRuby
+  module Models
+    type network_list_response = ::Array[DockerEngineRuby::Summary]
+
+    NetworkListResponse: DockerEngineRuby::Internal::Type::Converter
+  end
+end

@@ -1,0 +1,64 @@
+# typed: strong
+
+module DockerEngineRuby
+  module Models
+    class NodeListParams < DockerEngineRuby::Internal::Type::BaseModel
+      extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
+      include DockerEngineRuby::Internal::Type::RequestParameters
+
+      OrHash =
+        T.type_alias do
+          T.any(
+            DockerEngineRuby::NodeListParams,
+            DockerEngineRuby::Internal::AnyHash
+          )
+        end
+
+      # Filters to process on the nodes list, encoded as JSON (a `map[string][]string`).
+      #
+      # Available filters:
+      #
+      # - `id=<node id>`
+      # - `label=<engine label>`
+      # - `membership=`(`accepted`|`pending`)`
+      # - `name=<node name>`
+      # - `node.label=<node label>`
+      # - `role=`(`manager`|`worker`)`
+      sig { returns(T.nilable(String)) }
+      attr_reader :filters
+
+      sig { params(filters: String).void }
+      attr_writer :filters
+
+      sig do
+        params(
+          filters: String,
+          request_options: DockerEngineRuby::RequestOptions::OrHash
+        ).returns(T.attached_class)
+      end
+      def self.new(
+        # Filters to process on the nodes list, encoded as JSON (a `map[string][]string`).
+        #
+        # Available filters:
+        #
+        # - `id=<node id>`
+        # - `label=<engine label>`
+        # - `membership=`(`accepted`|`pending`)`
+        # - `name=<node name>`
+        # - `node.label=<node label>`
+        # - `role=`(`manager`|`worker`)`
+        filters: nil,
+        request_options: {}
+      )
+      end
+
+      sig do
+        override.returns(
+          { filters: String, request_options: DockerEngineRuby::RequestOptions }
+        )
+      end
+      def to_hash
+      end
+    end
+  end
+end

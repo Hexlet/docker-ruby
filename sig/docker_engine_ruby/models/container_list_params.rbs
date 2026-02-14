@@ -1,0 +1,44 @@
+module DockerEngineRuby
+  module Models
+    type container_list_params =
+      { all: bool, filters: String, limit: Integer, size: bool }
+      & DockerEngineRuby::Internal::Type::request_parameters
+
+    class ContainerListParams < DockerEngineRuby::Internal::Type::BaseModel
+      extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
+      include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_reader all: bool?
+
+      def all=: (bool) -> bool
+
+      attr_reader filters: String?
+
+      def filters=: (String) -> String
+
+      attr_reader limit: Integer?
+
+      def limit=: (Integer) -> Integer
+
+      attr_reader size: bool?
+
+      def size=: (bool) -> bool
+
+      def initialize: (
+        ?all: bool,
+        ?filters: String,
+        ?limit: Integer,
+        ?size: bool,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        all: bool,
+        filters: String,
+        limit: Integer,
+        size: bool,
+        request_options: DockerEngineRuby::RequestOptions
+      }
+    end
+  end
+end

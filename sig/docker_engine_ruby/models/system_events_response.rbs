@@ -1,0 +1,124 @@
+module DockerEngineRuby
+  module Models
+    type system_events_response =
+      {
+        action: String,
+        actor: DockerEngineRuby::Models::SystemEventsResponse::Actor,
+        scope: DockerEngineRuby::Models::SystemEventsResponse::scope,
+        time: Integer,
+        time_nano: Integer,
+        type: DockerEngineRuby::Models::SystemEventsResponse::type_
+      }
+
+    class SystemEventsResponse < DockerEngineRuby::Internal::Type::BaseModel
+      attr_reader action: String?
+
+      def action=: (String) -> String
+
+      attr_reader actor: DockerEngineRuby::Models::SystemEventsResponse::Actor?
+
+      def actor=: (
+        DockerEngineRuby::Models::SystemEventsResponse::Actor
+      ) -> DockerEngineRuby::Models::SystemEventsResponse::Actor
+
+      attr_reader scope: DockerEngineRuby::Models::SystemEventsResponse::scope?
+
+      def scope=: (
+        DockerEngineRuby::Models::SystemEventsResponse::scope
+      ) -> DockerEngineRuby::Models::SystemEventsResponse::scope
+
+      attr_reader time: Integer?
+
+      def time=: (Integer) -> Integer
+
+      attr_reader time_nano: Integer?
+
+      def time_nano=: (Integer) -> Integer
+
+      attr_reader type: DockerEngineRuby::Models::SystemEventsResponse::type_?
+
+      def type=: (
+        DockerEngineRuby::Models::SystemEventsResponse::type_
+      ) -> DockerEngineRuby::Models::SystemEventsResponse::type_
+
+      def initialize: (
+        ?action: String,
+        ?actor: DockerEngineRuby::Models::SystemEventsResponse::Actor,
+        ?scope: DockerEngineRuby::Models::SystemEventsResponse::scope,
+        ?time: Integer,
+        ?time_nano: Integer,
+        ?type: DockerEngineRuby::Models::SystemEventsResponse::type_
+      ) -> void
+
+      def to_hash: -> {
+        action: String,
+        actor: DockerEngineRuby::Models::SystemEventsResponse::Actor,
+        scope: DockerEngineRuby::Models::SystemEventsResponse::scope,
+        time: Integer,
+        time_nano: Integer,
+        type: DockerEngineRuby::Models::SystemEventsResponse::type_
+      }
+
+      type actor = { attributes: ::Hash[Symbol, String], id: String }
+
+      class Actor < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader attributes: ::Hash[Symbol, String]?
+
+        def attributes=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+        attr_reader id: String?
+
+        def id=: (String) -> String
+
+        def initialize: (
+          ?attributes: ::Hash[Symbol, String],
+          ?id: String
+        ) -> void
+
+        def to_hash: -> { attributes: ::Hash[Symbol, String], id: String }
+      end
+
+      type scope = :local | :swarm
+
+      module Scope
+        extend DockerEngineRuby::Internal::Type::Enum
+
+        LOCAL: :local
+        SWARM: :swarm
+
+        def self?.values: -> ::Array[DockerEngineRuby::Models::SystemEventsResponse::scope]
+      end
+
+      type type_ =
+        :builder
+        | :config
+        | :container
+        | :daemon
+        | :image
+        | :network
+        | :node
+        | :plugin
+        | :secret
+        | :service
+        | :volume
+
+      module Type
+        extend DockerEngineRuby::Internal::Type::Enum
+
+        BUILDER: :builder
+        CONFIG: :config
+        CONTAINER: :container
+        DAEMON: :daemon
+        IMAGE: :image
+        NETWORK: :network
+        NODE: :node
+        PLUGIN: :plugin
+        SECRET: :secret
+        SERVICE: :service
+        VOLUME: :volume
+
+        def self?.values: -> ::Array[DockerEngineRuby::Models::SystemEventsResponse::type_]
+      end
+    end
+  end
+end

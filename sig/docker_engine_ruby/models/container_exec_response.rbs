@@ -1,0 +1,13 @@
+module DockerEngineRuby
+  module Models
+    type container_exec_response = { id: String }
+
+    class ContainerExecResponse < DockerEngineRuby::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      def initialize: (id: String) -> void
+
+      def to_hash: -> { id: String }
+    end
+  end
+end

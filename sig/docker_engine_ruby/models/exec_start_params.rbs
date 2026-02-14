@@ -1,0 +1,36 @@
+module DockerEngineRuby
+  module Models
+    type exec_start_params =
+      { console_size: ::Array[Integer]?, detach: bool, tty: bool }
+      & DockerEngineRuby::Internal::Type::request_parameters
+
+    class ExecStartParams < DockerEngineRuby::Internal::Type::BaseModel
+      extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
+      include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_accessor console_size: ::Array[Integer]?
+
+      attr_reader detach: bool?
+
+      def detach=: (bool) -> bool
+
+      attr_reader tty: bool?
+
+      def tty=: (bool) -> bool
+
+      def initialize: (
+        ?console_size: ::Array[Integer]?,
+        ?detach: bool,
+        ?tty: bool,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        console_size: ::Array[Integer]?,
+        detach: bool,
+        tty: bool,
+        request_options: DockerEngineRuby::RequestOptions
+      }
+    end
+  end
+end

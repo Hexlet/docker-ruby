@@ -6,7 +6,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ## Documentation
 
-Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/docker-engine-api).
+Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/docker-engine-ruby).
 
 The REST API documentation can be found on [docs.docker.com](https://docs.docker.com/engine/api/latest/).
 
@@ -17,7 +17,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "docker-engine-api", "~> 0.2.0"
+gem "docker-engine-ruby", "~> 0.2.0"
 ```
 
 <!-- x-release-please-end -->
@@ -26,9 +26,9 @@ gem "docker-engine-api", "~> 0.2.0"
 
 ```ruby
 require "bundler/setup"
-require "docker_engine_api"
+require "docker_engine_ruby"
 
-docker = DockerEngineAPI::Client.new
+docker = DockerEngineRuby::Client.new
 
 create_response = docker.containers.create(name: "sample-container")
 
@@ -37,17 +37,17 @@ puts(create_response.Id)
 
 ### Handling errors
 
-When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `DockerEngineAPI::Errors::APIError` will be thrown:
+When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `DockerEngineRuby::Errors::APIError` will be thrown:
 
 ```ruby
 begin
   container = docker.containers.list
-rescue DockerEngineAPI::Errors::APIConnectionError => e
+rescue DockerEngineRuby::Errors::APIConnectionError => e
   puts("The server could not be reached")
   puts(e.cause)  # an underlying Exception, likely raised within `net/http`
-rescue DockerEngineAPI::Errors::RateLimitError => e
+rescue DockerEngineRuby::Errors::RateLimitError => e
   puts("A 429 status code was received; we should back off a bit.")
-rescue DockerEngineAPI::Errors::APIStatusError => e
+rescue DockerEngineRuby::Errors::APIStatusError => e
   puts("Another non-200-range status code was received")
   puts(e.status)
 end
@@ -79,7 +79,7 @@ You can use the `max_retries` option to configure or disable this:
 
 ```ruby
 # Configure the default for all requests:
-docker = DockerEngineAPI::Client.new(
+docker = DockerEngineRuby::Client.new(
   max_retries: 0 # default is 2
 )
 
@@ -93,7 +93,7 @@ By default, requests will time out after 60 seconds. You can use the timeout opt
 
 ```ruby
 # Configure the default for all requests:
-docker = DockerEngineAPI::Client.new(
+docker = DockerEngineRuby::Client.new(
   timeout: nil # default is 60
 )
 
@@ -101,7 +101,7 @@ docker = DockerEngineAPI::Client.new(
 docker.containers.list(request_options: {timeout: 5})
 ```
 
-On timeout, `DockerEngineAPI::Errors::APITimeoutError` is raised.
+On timeout, `DockerEngineRuby::Errors::APITimeoutError` is raised.
 
 Note that requests that time out are retried by default.
 
@@ -109,7 +109,7 @@ Note that requests that time out are retried by default.
 
 ### BaseModel
 
-All parameter and response objects inherit from `DockerEngineAPI::Internal::Type::BaseModel`, which provides several conveniences, including:
+All parameter and response objects inherit from `DockerEngineRuby::Internal::Type::BaseModel`, which provides several conveniences, including:
 
 1. All fields, including unknown ones, are accessible with `obj[:prop]` syntax, and can be destructured with `obj => {prop: prop}` or pattern-matching syntax.
 
@@ -160,9 +160,9 @@ response = client.request(
 
 ### Concurrency & connection pooling
 
-The `DockerEngineAPI::Client` instances are threadsafe, but are only are fork-safe when there are no in-flight HTTP requests.
+The `DockerEngineRuby::Client` instances are threadsafe, but are only are fork-safe when there are no in-flight HTTP requests.
 
-Each instance of `DockerEngineAPI::Client` has its own HTTP connection pool with a default size of 99. As such, we recommend instantiating the client once per application in most settings.
+Each instance of `DockerEngineRuby::Client` has its own HTTP connection pool with a default size of 99. As such, we recommend instantiating the client once per application in most settings.
 
 When all available connections from the pool are checked out, requests wait for a new connection to become available, with queue time counting towards the request timeout.
 
@@ -185,7 +185,7 @@ Or, equivalently:
 docker.containers.create(name: "sample-container")
 
 # You can also splat a full Params class:
-params = DockerEngineAPI::ContainerCreateParams.new(name: "sample-container")
+params = DockerEngineRuby::ContainerCreateParams.new(name: "sample-container")
 docker.containers.create(**params)
 ```
 
@@ -195,10 +195,10 @@ Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::E
 
 ```ruby
 # :"not-running"
-puts(DockerEngineAPI::ContainerWaitParams::Condition::NOT_RUNNING)
+puts(DockerEngineRuby::ContainerWaitParams::Condition::NOT_RUNNING)
 
-# Revealed type: `T.all(DockerEngineAPI::ContainerWaitParams::Condition, Symbol)`
-T.reveal_type(DockerEngineAPI::ContainerWaitParams::Condition::NOT_RUNNING)
+# Revealed type: `T.all(DockerEngineRuby::ContainerWaitParams::Condition, Symbol)`
+T.reveal_type(DockerEngineRuby::ContainerWaitParams::Condition::NOT_RUNNING)
 ```
 
 Enum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:
@@ -206,7 +206,7 @@ Enum parameters have a "relaxed" type, so you can either pass in enum constants 
 ```ruby
 # Using the enum constants preserves the tagged type information:
 docker.containers.wait(
-  condition: DockerEngineAPI::ContainerWaitParams::Condition::NOT_RUNNING,
+  condition: DockerEngineRuby::ContainerWaitParams::Condition::NOT_RUNNING,
   # …
 )
 

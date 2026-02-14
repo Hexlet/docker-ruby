@@ -1,0 +1,32 @@
+module DockerEngineRuby
+  module Models
+    type network_inspect_params =
+      { scope: String, verbose: bool }
+      & DockerEngineRuby::Internal::Type::request_parameters
+
+    class NetworkInspectParams < DockerEngineRuby::Internal::Type::BaseModel
+      extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
+      include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_reader scope: String?
+
+      def scope=: (String) -> String
+
+      attr_reader verbose: bool?
+
+      def verbose=: (bool) -> bool
+
+      def initialize: (
+        ?scope: String,
+        ?verbose: bool,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        scope: String,
+        verbose: bool,
+        request_options: DockerEngineRuby::RequestOptions
+      }
+    end
+  end
+end

@@ -1,0 +1,26 @@
+module DockerEngineRuby
+  module Models
+    type service_inspect_params =
+      { insert_defaults: bool }
+      & DockerEngineRuby::Internal::Type::request_parameters
+
+    class ServiceInspectParams < DockerEngineRuby::Internal::Type::BaseModel
+      extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
+      include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_reader insert_defaults: bool?
+
+      def insert_defaults=: (bool) -> bool
+
+      def initialize: (
+        ?insert_defaults: bool,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        insert_defaults: bool,
+        request_options: DockerEngineRuby::RequestOptions
+      }
+    end
+  end
+end

@@ -1,0 +1,70 @@
+module DockerEngineRuby
+  module Models
+    type service_logs_params =
+      {
+        details: bool,
+        follow: bool,
+        since: Integer,
+        stderr: bool,
+        stdout: bool,
+        tail: String,
+        timestamps: bool
+      }
+      & DockerEngineRuby::Internal::Type::request_parameters
+
+    class ServiceLogsParams < DockerEngineRuby::Internal::Type::BaseModel
+      extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
+      include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_reader details: bool?
+
+      def details=: (bool) -> bool
+
+      attr_reader follow: bool?
+
+      def follow=: (bool) -> bool
+
+      attr_reader since: Integer?
+
+      def since=: (Integer) -> Integer
+
+      attr_reader stderr: bool?
+
+      def stderr=: (bool) -> bool
+
+      attr_reader stdout: bool?
+
+      def stdout=: (bool) -> bool
+
+      attr_reader tail: String?
+
+      def tail=: (String) -> String
+
+      attr_reader timestamps: bool?
+
+      def timestamps=: (bool) -> bool
+
+      def initialize: (
+        ?details: bool,
+        ?follow: bool,
+        ?since: Integer,
+        ?stderr: bool,
+        ?stdout: bool,
+        ?tail: String,
+        ?timestamps: bool,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        details: bool,
+        follow: bool,
+        since: Integer,
+        stderr: bool,
+        stdout: bool,
+        tail: String,
+        timestamps: bool,
+        request_options: DockerEngineRuby::RequestOptions
+      }
+    end
+  end
+end

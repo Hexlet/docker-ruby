@@ -1,0 +1,15 @@
+module DockerEngineRuby
+  module Models
+    type network_disconnect_params =
+      {  } & DockerEngineRuby::Internal::Type::request_parameters
+
+    class NetworkDisconnectParams < DockerEngineRuby::Models::DisconnectRequest
+      extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
+      include DockerEngineRuby::Internal::Type::RequestParameters
+
+      def initialize: (?request_options: DockerEngineRuby::request_opts) -> void
+
+      def to_hash: -> { request_options: DockerEngineRuby::RequestOptions }
+    end
+  end
+end

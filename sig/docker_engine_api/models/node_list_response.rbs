@@ -1,7 +1,0 @@
-module DockerEngineAPI
-  module Models
-    type node_list_response = ::Array[DockerEngineAPI::Node]
-
-    NodeListResponse: DockerEngineAPI::Internal::Type::Converter
-  end
-end

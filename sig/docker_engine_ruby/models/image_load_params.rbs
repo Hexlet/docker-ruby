@@ -1,0 +1,40 @@
+module DockerEngineRuby
+  module Models
+    type image_load_params =
+      {
+        body: DockerEngineRuby::Internal::file_input,
+        platform: ::Array[String],
+        quiet: bool
+      }
+      & DockerEngineRuby::Internal::Type::request_parameters
+
+    class ImageLoadParams < DockerEngineRuby::Internal::Type::BaseModel
+      extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
+      include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_accessor body: DockerEngineRuby::Internal::file_input
+
+      attr_reader platform: ::Array[String]?
+
+      def platform=: (::Array[String]) -> ::Array[String]
+
+      attr_reader quiet: bool?
+
+      def quiet=: (bool) -> bool
+
+      def initialize: (
+        body: DockerEngineRuby::Internal::file_input,
+        ?platform: ::Array[String],
+        ?quiet: bool,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        body: DockerEngineRuby::Internal::file_input,
+        platform: ::Array[String],
+        quiet: bool,
+        request_options: DockerEngineRuby::RequestOptions
+      }
+    end
+  end
+end
