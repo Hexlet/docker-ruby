@@ -15,6 +15,11 @@ module DockerEngineRuby
     # Default max retry delay in seconds.
     DEFAULT_MAX_RETRY_DELAY = 8.0
 
+    # rubocop:disable Style/MutableConstant
+    # @type [Hash{Symbol=>String}]
+    ENVIRONMENTS = {production: "http://localhost:2375", production_tls: "https://localhost:2376"}
+    # rubocop:enable Style/MutableConstant
+
     # @return [DockerEngineRuby::Resources::Auth]
     attr_reader :auth
 
@@ -62,6 +67,13 @@ module DockerEngineRuby
 
     # Creates and returns a new client for interacting with the API.
     #
+    # @param environment [:production, :production_tls, nil] Specifies the environment to use for the API.
+    #
+    # Each environment maps to a different base URL:
+    #
+    # - `production` corresponds to `http://localhost:2375`
+    # - `production_tls` corresponds to `https://localhost:2376`
+    #
     # @param base_url [String, nil] Override the default base URL for the API, e.g.,
     # `"https://api.example.com/v2/"`. Defaults to `ENV["DOCKER_BASE_URL"]`
     #
@@ -73,13 +85,17 @@ module DockerEngineRuby
     #
     # @param max_retry_delay [Float]
     def initialize(
+      environment: nil,
       base_url: ENV["DOCKER_BASE_URL"],
       max_retries: self.class::DEFAULT_MAX_RETRIES,
       timeout: self.class::DEFAULT_TIMEOUT_IN_SECONDS,
       initial_retry_delay: self.class::DEFAULT_INITIAL_RETRY_DELAY,
       max_retry_delay: self.class::DEFAULT_MAX_RETRY_DELAY
     )
-      base_url ||= "http://localhost:2375"
+      base_url ||= DockerEngineRuby::Client::ENVIRONMENTS.fetch(environment&.to_sym || :production) do
+        message = "environment must be one of #{DockerEngineRuby::Client::ENVIRONMENTS.keys}, got #{environment}"
+        raise ArgumentError.new(message)
+      end
 
       super(
         base_url: base_url,

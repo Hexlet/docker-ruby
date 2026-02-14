@@ -8,6 +8,11 @@ module DockerEngineRuby
 
     DEFAULT_MAX_RETRY_DELAY: Float
 
+    ENVIRONMENTS: {
+      production: "http://localhost:2375",
+      production_tls: "https://localhost:2376"
+    }
+
     attr_reader auth: DockerEngineRuby::Resources::Auth
 
     attr_reader system_: DockerEngineRuby::Resources::System
@@ -39,6 +44,7 @@ module DockerEngineRuby
     attr_reader distribution: DockerEngineRuby::Resources::Distribution
 
     def initialize: (
+      ?environment: :production | :production_tls | nil,
       ?base_url: String?,
       ?max_retries: Integer,
       ?timeout: Float,
