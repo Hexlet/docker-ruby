@@ -1,0 +1,70 @@
+module DockerEngineAPI
+  module Models
+    type container_logs_params =
+      {
+        follow: bool,
+        since: Integer,
+        stderr: bool,
+        stdout: bool,
+        tail: String,
+        timestamps: bool,
+        until_: Integer
+      }
+      & DockerEngineAPI::Internal::Type::request_parameters
+
+    class ContainerLogsParams < DockerEngineAPI::Internal::Type::BaseModel
+      extend DockerEngineAPI::Internal::Type::RequestParameters::Converter
+      include DockerEngineAPI::Internal::Type::RequestParameters
+
+      attr_reader follow: bool?
+
+      def follow=: (bool) -> bool
+
+      attr_reader since: Integer?
+
+      def since=: (Integer) -> Integer
+
+      attr_reader stderr: bool?
+
+      def stderr=: (bool) -> bool
+
+      attr_reader stdout: bool?
+
+      def stdout=: (bool) -> bool
+
+      attr_reader tail: String?
+
+      def tail=: (String) -> String
+
+      attr_reader timestamps: bool?
+
+      def timestamps=: (bool) -> bool
+
+      attr_reader until_: Integer?
+
+      def until_=: (Integer) -> Integer
+
+      def initialize: (
+        ?follow: bool,
+        ?since: Integer,
+        ?stderr: bool,
+        ?stdout: bool,
+        ?tail: String,
+        ?timestamps: bool,
+        ?until_: Integer,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        follow: bool,
+        since: Integer,
+        stderr: bool,
+        stdout: bool,
+        tail: String,
+        timestamps: bool,
+        until_: Integer,
+        request_options: DockerEngineAPI::RequestOptions
+      }
+    end
+  end
+end

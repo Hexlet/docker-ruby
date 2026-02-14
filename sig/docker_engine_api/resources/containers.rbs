@@ -1,0 +1,200 @@
+module DockerEngineAPI
+  module Resources
+    class Containers
+      def create: (
+        config: DockerEngineAPI::ContainerCreateParams::Config,
+        ?name: String,
+        ?platform: String,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> DockerEngineAPI::CreateResponse
+
+      def update: (
+        String id,
+        ?blkio_device_read_bps: ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceReadBp],
+        ?blkio_device_read_i_ops: ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceReadIOp],
+        ?blkio_device_write_bps: ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceWriteBp],
+        ?blkio_device_write_i_ops: ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioDeviceWriteIOp],
+        ?blkio_weight: Integer,
+        ?blkio_weight_device: ::Array[DockerEngineAPI::ContainerUpdateParams::BlkioWeightDevice],
+        ?cgroup_parent: String,
+        ?cpu_count: Integer,
+        ?cpu_percent: Integer,
+        ?cpu_period: Integer,
+        ?cpu_quota: Integer,
+        ?cpu_realtime_period: Integer,
+        ?cpu_realtime_runtime: Integer,
+        ?cpuset_cpus: String,
+        ?cpuset_mems: String,
+        ?cpu_shares: Integer,
+        ?device_cgroup_rules: ::Array[String],
+        ?device_requests: ::Array[DockerEngineAPI::ContainerUpdateParams::DeviceRequest],
+        ?devices: ::Array[DockerEngineAPI::ContainerUpdateParams::Device],
+        ?init: bool?,
+        ?io_maximum_bandwidth: Integer,
+        ?io_maximum_i_ops: Integer,
+        ?memory: Integer,
+        ?memory_reservation: Integer,
+        ?memory_swap: Integer,
+        ?memory_swappiness: Integer,
+        ?nano_cpus: Integer,
+        ?oom_kill_disable: bool,
+        ?pids_limit: Integer?,
+        ?restart_policy: DockerEngineAPI::ContainerUpdateParams::RestartPolicy,
+        ?ulimits: ::Array[DockerEngineAPI::ContainerUpdateParams::Ulimit],
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> DockerEngineAPI::UpdateResponse
+
+      def list: (
+        ?all: bool,
+        ?filters: String,
+        ?limit: Integer,
+        ?size: bool,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> DockerEngineAPI::Models::container_list_response
+
+      def delete: (
+        String id,
+        ?force: bool,
+        ?link: bool,
+        ?v: bool,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> nil
+
+      def archive: (
+        String id,
+        path: String,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> nil
+
+      def attach: (
+        String id,
+        ?detach_keys: String,
+        ?logs: bool,
+        ?stderr: bool,
+        ?stdin: bool,
+        ?stdout: bool,
+        ?stream: bool,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> nil
+
+      def changes: (
+        String id,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> DockerEngineAPI::Models::container_changes_response
+
+      def exec_: (
+        String id,
+        ?attach_stderr: bool,
+        ?attach_stdin: bool,
+        ?attach_stdout: bool,
+        ?cmd: ::Array[String],
+        ?console_size: ::Array[Integer]?,
+        ?detach_keys: String,
+        ?env: ::Array[String],
+        ?privileged: bool,
+        ?tty: bool,
+        ?user: String,
+        ?working_dir: String,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> DockerEngineAPI::Models::ContainerExecResponse
+
+      def export: (
+        String id,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> nil
+
+      def inspect_: (
+        String id,
+        ?size: bool,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> DockerEngineAPI::Container
+
+      def kill: (
+        String id,
+        ?signal: String,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> nil
+
+      def logs: (
+        String id,
+        ?follow: bool,
+        ?since: Integer,
+        ?stderr: bool,
+        ?stdout: bool,
+        ?tail: String,
+        ?timestamps: bool,
+        ?until_: Integer,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> StringIO
+
+      def pause: (
+        String id,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> nil
+
+      def prune: (
+        ?filters: String,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> DockerEngineAPI::Models::ContainerPruneResponse
+
+      def rename: (
+        String id,
+        name: String,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> nil
+
+      def resize: (
+        String id,
+        h: Integer,
+        w: Integer,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> nil
+
+      def restart: (
+        String id,
+        ?signal: String,
+        ?t: Integer,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> nil
+
+      def start: (
+        String id,
+        ?detach_keys: String,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> nil
+
+      def stats: (
+        String id,
+        ?one_shot: bool,
+        ?stream: bool,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> DockerEngineAPI::StatsResponse
+
+      def stop: (
+        String id,
+        ?signal: String,
+        ?t: Integer,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> nil
+
+      def `top`: (
+        String id,
+        ?ps_args: String,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> DockerEngineAPI::TopResponse
+
+      def unpause: (
+        String id,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> nil
+
+      def wait: (
+        String id,
+        ?condition: DockerEngineAPI::Models::ContainerWaitParams::condition,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> DockerEngineAPI::WaitResponse
+
+      def initialize: (client: DockerEngineAPI::Client) -> void
+    end
+  end
+end

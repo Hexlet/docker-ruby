@@ -1,0 +1,25 @@
+module DockerEngineAPI
+  module Models
+    type image_inspect_params =
+      { manifests: bool } & DockerEngineAPI::Internal::Type::request_parameters
+
+    class ImageInspectParams < DockerEngineAPI::Internal::Type::BaseModel
+      extend DockerEngineAPI::Internal::Type::RequestParameters::Converter
+      include DockerEngineAPI::Internal::Type::RequestParameters
+
+      attr_reader manifests: bool?
+
+      def manifests=: (bool) -> bool
+
+      def initialize: (
+        ?manifests: bool,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        manifests: bool,
+        request_options: DockerEngineAPI::RequestOptions
+      }
+    end
+  end
+end

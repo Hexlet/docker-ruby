@@ -1,0 +1,15 @@
+module DockerEngineAPI
+  module Models
+    type network_connect_params =
+      {  } & DockerEngineAPI::Internal::Type::request_parameters
+
+    class NetworkConnectParams < DockerEngineAPI::Models::ConnectRequest
+      extend DockerEngineAPI::Internal::Type::RequestParameters::Converter
+      include DockerEngineAPI::Internal::Type::RequestParameters
+
+      def initialize: (?request_options: DockerEngineAPI::request_opts) -> void
+
+      def to_hash: -> { request_options: DockerEngineAPI::RequestOptions }
+    end
+  end
+end

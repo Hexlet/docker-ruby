@@ -1,3 +1,0 @@
-module DockerEngine
-  VERSION: String
-end

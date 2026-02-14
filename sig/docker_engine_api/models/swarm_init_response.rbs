@@ -1,0 +1,5 @@
+module DockerEngineAPI
+  module Models
+    class SwarmInitResponse = String
+  end
+end

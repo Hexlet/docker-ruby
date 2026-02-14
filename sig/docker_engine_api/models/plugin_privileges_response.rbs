@@ -1,0 +1,7 @@
+module DockerEngineAPI
+  module Models
+    type plugin_privileges_response = ::Array[DockerEngineAPI::Privilege]
+
+    PluginPrivilegesResponse: DockerEngineAPI::Internal::Type::Converter
+  end
+end

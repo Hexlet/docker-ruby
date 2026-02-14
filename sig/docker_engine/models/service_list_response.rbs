@@ -1,7 +1,0 @@
-module DockerEngine
-  module Models
-    type service_list_response = ::Array[DockerEngine::Service]
-
-    ServiceListResponse: DockerEngine::Internal::Type::Converter
-  end
-end

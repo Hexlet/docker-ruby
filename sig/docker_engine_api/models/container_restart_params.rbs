@@ -1,0 +1,32 @@
+module DockerEngineAPI
+  module Models
+    type container_restart_params =
+      { signal: String, t: Integer }
+      & DockerEngineAPI::Internal::Type::request_parameters
+
+    class ContainerRestartParams < DockerEngineAPI::Internal::Type::BaseModel
+      extend DockerEngineAPI::Internal::Type::RequestParameters::Converter
+      include DockerEngineAPI::Internal::Type::RequestParameters
+
+      attr_reader signal: String?
+
+      def signal=: (String) -> String
+
+      attr_reader t: Integer?
+
+      def t=: (Integer) -> Integer
+
+      def initialize: (
+        ?signal: String,
+        ?t: Integer,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        signal: String,
+        t: Integer,
+        request_options: DockerEngineAPI::RequestOptions
+      }
+    end
+  end
+end
