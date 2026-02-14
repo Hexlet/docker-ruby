@@ -2,20 +2,20 @@ module DockerEngineRuby
   module Resources
     class Services
       def create: (
-        spec: DockerEngineRuby::Spec,
+        spec: DockerEngineRuby::ServiceSpec,
         ?x_registry_auth: String,
         ?request_options: DockerEngineRuby::request_opts
-      ) -> DockerEngineRuby::CreateResponse
+      ) -> DockerEngineRuby::ServiceCreateResponse
 
       def update: (
         String id,
         version: Integer,
-        spec: DockerEngineRuby::Spec,
+        spec: DockerEngineRuby::ServiceSpec,
         ?registry_auth_from: DockerEngineRuby::Models::ServiceUpdateParams::registry_auth_from,
         ?rollback: String,
         ?x_registry_auth: String,
         ?request_options: DockerEngineRuby::request_opts
-      ) -> DockerEngineRuby::UpdateResponse
+      ) -> DockerEngineRuby::ServiceUpdateResponse
 
       def list: (
         ?filters: String,

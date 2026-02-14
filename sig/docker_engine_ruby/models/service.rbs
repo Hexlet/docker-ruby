@@ -7,7 +7,7 @@ module DockerEngineRuby
         id: String,
         job_status: DockerEngineRuby::Service::JobStatus,
         service_status: DockerEngineRuby::Service::ServiceStatus,
-        spec: DockerEngineRuby::Spec,
+        spec: DockerEngineRuby::ServiceSpec,
         updated_at: Time,
         update_status: DockerEngineRuby::Service::UpdateStatus,
         version: DockerEngineRuby::Service::Version
@@ -40,9 +40,11 @@ module DockerEngineRuby
         DockerEngineRuby::Service::ServiceStatus
       ) -> DockerEngineRuby::Service::ServiceStatus
 
-      attr_reader spec: DockerEngineRuby::Spec?
+      attr_reader spec: DockerEngineRuby::ServiceSpec?
 
-      def spec=: (DockerEngineRuby::Spec) -> DockerEngineRuby::Spec
+      def spec=: (
+        DockerEngineRuby::ServiceSpec
+      ) -> DockerEngineRuby::ServiceSpec
 
       attr_reader updated_at: Time?
 
@@ -66,7 +68,7 @@ module DockerEngineRuby
         ?id: String,
         ?job_status: DockerEngineRuby::Service::JobStatus,
         ?service_status: DockerEngineRuby::Service::ServiceStatus,
-        ?spec: DockerEngineRuby::Spec,
+        ?spec: DockerEngineRuby::ServiceSpec,
         ?updated_at: Time,
         ?update_status: DockerEngineRuby::Service::UpdateStatus,
         ?version: DockerEngineRuby::Service::Version
@@ -78,7 +80,7 @@ module DockerEngineRuby
         id: String,
         job_status: DockerEngineRuby::Service::JobStatus,
         service_status: DockerEngineRuby::Service::ServiceStatus,
-        spec: DockerEngineRuby::Spec,
+        spec: DockerEngineRuby::ServiceSpec,
         updated_at: Time,
         update_status: DockerEngineRuby::Service::UpdateStatus,
         version: DockerEngineRuby::Service::Version

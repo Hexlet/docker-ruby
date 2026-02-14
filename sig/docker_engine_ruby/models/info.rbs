@@ -939,7 +939,7 @@ module DockerEngineRuby
             default_addr_pool: ::Array[String],
             id: String,
             root_rotation_in_progress: bool,
-            spec: DockerEngineRuby::Spec,
+            spec: DockerEngineRuby::SwarmSpec,
             subnet_size: Integer,
             tls_info: DockerEngineRuby::Info::Swarm::Cluster::TlsInfo,
             updated_at: Time,
@@ -967,9 +967,11 @@ module DockerEngineRuby
 
           def root_rotation_in_progress=: (bool) -> bool
 
-          attr_reader spec: DockerEngineRuby::Spec?
+          attr_reader spec: DockerEngineRuby::SwarmSpec?
 
-          def spec=: (DockerEngineRuby::Spec) -> DockerEngineRuby::Spec
+          def spec=: (
+            DockerEngineRuby::SwarmSpec
+          ) -> DockerEngineRuby::SwarmSpec
 
           attr_reader subnet_size: Integer?
 
@@ -997,7 +999,7 @@ module DockerEngineRuby
             ?default_addr_pool: ::Array[String],
             ?id: String,
             ?root_rotation_in_progress: bool,
-            ?spec: DockerEngineRuby::Spec,
+            ?spec: DockerEngineRuby::SwarmSpec,
             ?subnet_size: Integer,
             ?tls_info: DockerEngineRuby::Info::Swarm::Cluster::TlsInfo,
             ?updated_at: Time,
@@ -1010,7 +1012,7 @@ module DockerEngineRuby
             default_addr_pool: ::Array[String],
             id: String,
             root_rotation_in_progress: bool,
-            spec: DockerEngineRuby::Spec,
+            spec: DockerEngineRuby::SwarmSpec,
             subnet_size: Integer,
             tls_info: DockerEngineRuby::Info::Swarm::Cluster::TlsInfo,
             updated_at: Time,

@@ -7,7 +7,7 @@ module DockerEngineRuby
       #
       # @overload create(spec:, request_options: {})
       #
-      # @param spec [DockerEngineRuby::Models::Spec]
+      # @param spec [DockerEngineRuby::Models::SecretSpec]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [DockerEngineRuby::Models::SecretCreateResponse]
@@ -32,7 +32,7 @@ module DockerEngineRuby
       #
       # @param version [Integer] Query param
       #
-      # @param spec [DockerEngineRuby::Models::Spec] Body param
+      # @param spec [DockerEngineRuby::Models::SecretSpec] Body param
       #
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #

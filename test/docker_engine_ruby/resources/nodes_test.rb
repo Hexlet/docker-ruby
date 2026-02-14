@@ -48,7 +48,7 @@ class DockerEngineRuby::Test::Resources::NodesTest < DockerEngineRuby::Test::Res
         description: DockerEngineRuby::Node::Description | nil,
         id: String | nil,
         manager_status: DockerEngineRuby::Node::ManagerStatus | nil,
-        spec: DockerEngineRuby::Spec | nil,
+        spec: DockerEngineRuby::NodeSpec | nil,
         status: DockerEngineRuby::Node::Status | nil,
         updated_at: Time | nil,
         version: DockerEngineRuby::Node::Version | nil

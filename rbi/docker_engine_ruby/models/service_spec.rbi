@@ -2,18 +2,23 @@
 
 module DockerEngineRuby
   module Models
-    class Spec < DockerEngineRuby::Internal::Type::BaseModel
+    class ServiceSpec < DockerEngineRuby::Internal::Type::BaseModel
       OrHash =
         T.type_alias do
-          T.any(DockerEngineRuby::Spec, DockerEngineRuby::Internal::AnyHash)
+          T.any(
+            DockerEngineRuby::ServiceSpec,
+            DockerEngineRuby::Internal::AnyHash
+          )
         end
 
       # Properties that can be configured to access and load balance a service.
-      sig { returns(T.nilable(DockerEngineRuby::Spec::EndpointSpec)) }
+      sig { returns(T.nilable(DockerEngineRuby::ServiceSpec::EndpointSpec)) }
       attr_reader :endpoint_spec
 
       sig do
-        params(endpoint_spec: DockerEngineRuby::Spec::EndpointSpec::OrHash).void
+        params(
+          endpoint_spec: DockerEngineRuby::ServiceSpec::EndpointSpec::OrHash
+        ).void
       end
       attr_writer :endpoint_spec
 
@@ -25,10 +30,10 @@ module DockerEngineRuby
       attr_writer :labels
 
       # Scheduling mode for the service.
-      sig { returns(T.nilable(DockerEngineRuby::Spec::Mode)) }
+      sig { returns(T.nilable(DockerEngineRuby::ServiceSpec::Mode)) }
       attr_reader :mode
 
-      sig { params(mode: DockerEngineRuby::Spec::Mode::OrHash).void }
+      sig { params(mode: DockerEngineRuby::ServiceSpec::Mode::OrHash).void }
       attr_writer :mode
 
       # Name of the service.
@@ -42,52 +47,59 @@ module DockerEngineRuby
       #
       # Deprecated: This field is deprecated since v1.44. The Networks field in TaskSpec
       # should be used instead.
-      sig { returns(T.nilable(T::Array[DockerEngineRuby::Spec::Network])) }
+      sig do
+        returns(T.nilable(T::Array[DockerEngineRuby::ServiceSpec::Network]))
+      end
       attr_reader :networks
 
       sig do
-        params(networks: T::Array[DockerEngineRuby::Spec::Network::OrHash]).void
+        params(
+          networks: T::Array[DockerEngineRuby::ServiceSpec::Network::OrHash]
+        ).void
       end
       attr_writer :networks
 
       # Specification for the rollback strategy of the service.
-      sig { returns(T.nilable(DockerEngineRuby::Spec::RollbackConfig)) }
+      sig { returns(T.nilable(DockerEngineRuby::ServiceSpec::RollbackConfig)) }
       attr_reader :rollback_config
 
       sig do
         params(
-          rollback_config: DockerEngineRuby::Spec::RollbackConfig::OrHash
+          rollback_config: DockerEngineRuby::ServiceSpec::RollbackConfig::OrHash
         ).void
       end
       attr_writer :rollback_config
 
       # User modifiable task configuration.
-      sig { returns(T.nilable(DockerEngineRuby::Spec)) }
+      sig { returns(T.nilable(DockerEngineRuby::TaskSpec)) }
       attr_reader :task_template
 
-      sig { params(task_template: DockerEngineRuby::Spec::OrHash).void }
+      sig { params(task_template: DockerEngineRuby::TaskSpec::OrHash).void }
       attr_writer :task_template
 
       # Specification for the update strategy of the service.
-      sig { returns(T.nilable(DockerEngineRuby::Spec::UpdateConfig)) }
+      sig { returns(T.nilable(DockerEngineRuby::ServiceSpec::UpdateConfig)) }
       attr_reader :update_config
 
       sig do
-        params(update_config: DockerEngineRuby::Spec::UpdateConfig::OrHash).void
+        params(
+          update_config: DockerEngineRuby::ServiceSpec::UpdateConfig::OrHash
+        ).void
       end
       attr_writer :update_config
 
       # User modifiable configuration for a service.
       sig do
         params(
-          endpoint_spec: DockerEngineRuby::Spec::EndpointSpec::OrHash,
+          endpoint_spec: DockerEngineRuby::ServiceSpec::EndpointSpec::OrHash,
           labels: T::Hash[Symbol, String],
-          mode: DockerEngineRuby::Spec::Mode::OrHash,
+          mode: DockerEngineRuby::ServiceSpec::Mode::OrHash,
           name: String,
-          networks: T::Array[DockerEngineRuby::Spec::Network::OrHash],
-          rollback_config: DockerEngineRuby::Spec::RollbackConfig::OrHash,
-          task_template: DockerEngineRuby::Spec::OrHash,
-          update_config: DockerEngineRuby::Spec::UpdateConfig::OrHash
+          networks: T::Array[DockerEngineRuby::ServiceSpec::Network::OrHash],
+          rollback_config:
+            DockerEngineRuby::ServiceSpec::RollbackConfig::OrHash,
+          task_template: DockerEngineRuby::TaskSpec::OrHash,
+          update_config: DockerEngineRuby::ServiceSpec::UpdateConfig::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
@@ -116,14 +128,14 @@ module DockerEngineRuby
       sig do
         override.returns(
           {
-            endpoint_spec: DockerEngineRuby::Spec::EndpointSpec,
+            endpoint_spec: DockerEngineRuby::ServiceSpec::EndpointSpec,
             labels: T::Hash[Symbol, String],
-            mode: DockerEngineRuby::Spec::Mode,
+            mode: DockerEngineRuby::ServiceSpec::Mode,
             name: String,
-            networks: T::Array[DockerEngineRuby::Spec::Network],
-            rollback_config: DockerEngineRuby::Spec::RollbackConfig,
-            task_template: DockerEngineRuby::Spec,
-            update_config: DockerEngineRuby::Spec::UpdateConfig
+            networks: T::Array[DockerEngineRuby::ServiceSpec::Network],
+            rollback_config: DockerEngineRuby::ServiceSpec::RollbackConfig,
+            task_template: DockerEngineRuby::TaskSpec,
+            update_config: DockerEngineRuby::ServiceSpec::UpdateConfig
           }
         )
       end
@@ -134,7 +146,7 @@ module DockerEngineRuby
         OrHash =
           T.type_alias do
             T.any(
-              DockerEngineRuby::Spec::EndpointSpec,
+              DockerEngineRuby::ServiceSpec::EndpointSpec,
               DockerEngineRuby::Internal::AnyHash
             )
           end
@@ -142,14 +154,16 @@ module DockerEngineRuby
         # The mode of resolution to use for internal load balancing between tasks.
         sig do
           returns(
-            T.nilable(DockerEngineRuby::Spec::EndpointSpec::Mode::OrSymbol)
+            T.nilable(
+              DockerEngineRuby::ServiceSpec::EndpointSpec::Mode::OrSymbol
+            )
           )
         end
         attr_reader :mode
 
         sig do
           params(
-            mode: DockerEngineRuby::Spec::EndpointSpec::Mode::OrSymbol
+            mode: DockerEngineRuby::ServiceSpec::EndpointSpec::Mode::OrSymbol
           ).void
         end
         attr_writer :mode
@@ -158,14 +172,19 @@ module DockerEngineRuby
         # can only be provided if `vip` resolution mode is used.
         sig do
           returns(
-            T.nilable(T::Array[DockerEngineRuby::Spec::EndpointSpec::Port])
+            T.nilable(
+              T::Array[DockerEngineRuby::ServiceSpec::EndpointSpec::Port]
+            )
           )
         end
         attr_reader :ports
 
         sig do
           params(
-            ports: T::Array[DockerEngineRuby::Spec::EndpointSpec::Port::OrHash]
+            ports:
+              T::Array[
+                DockerEngineRuby::ServiceSpec::EndpointSpec::Port::OrHash
+              ]
           ).void
         end
         attr_writer :ports
@@ -173,8 +192,11 @@ module DockerEngineRuby
         # Properties that can be configured to access and load balance a service.
         sig do
           params(
-            mode: DockerEngineRuby::Spec::EndpointSpec::Mode::OrSymbol,
-            ports: T::Array[DockerEngineRuby::Spec::EndpointSpec::Port::OrHash]
+            mode: DockerEngineRuby::ServiceSpec::EndpointSpec::Mode::OrSymbol,
+            ports:
+              T::Array[
+                DockerEngineRuby::ServiceSpec::EndpointSpec::Port::OrHash
+              ]
           ).returns(T.attached_class)
         end
         def self.new(
@@ -189,8 +211,8 @@ module DockerEngineRuby
         sig do
           override.returns(
             {
-              mode: DockerEngineRuby::Spec::EndpointSpec::Mode::OrSymbol,
-              ports: T::Array[DockerEngineRuby::Spec::EndpointSpec::Port]
+              mode: DockerEngineRuby::ServiceSpec::EndpointSpec::Mode::OrSymbol,
+              ports: T::Array[DockerEngineRuby::ServiceSpec::EndpointSpec::Port]
             }
           )
         end
@@ -203,24 +225,26 @@ module DockerEngineRuby
 
           TaggedSymbol =
             T.type_alias do
-              T.all(Symbol, DockerEngineRuby::Spec::EndpointSpec::Mode)
+              T.all(Symbol, DockerEngineRuby::ServiceSpec::EndpointSpec::Mode)
             end
           OrSymbol = T.type_alias { T.any(Symbol, String) }
 
           VIP =
             T.let(
               :vip,
-              DockerEngineRuby::Spec::EndpointSpec::Mode::TaggedSymbol
+              DockerEngineRuby::ServiceSpec::EndpointSpec::Mode::TaggedSymbol
             )
           DNSRR =
             T.let(
               :dnsrr,
-              DockerEngineRuby::Spec::EndpointSpec::Mode::TaggedSymbol
+              DockerEngineRuby::ServiceSpec::EndpointSpec::Mode::TaggedSymbol
             )
 
           sig do
             override.returns(
-              T::Array[DockerEngineRuby::Spec::EndpointSpec::Mode::TaggedSymbol]
+              T::Array[
+                DockerEngineRuby::ServiceSpec::EndpointSpec::Mode::TaggedSymbol
+              ]
             )
           end
           def self.values
@@ -231,7 +255,7 @@ module DockerEngineRuby
           OrHash =
             T.type_alias do
               T.any(
-                DockerEngineRuby::Spec::EndpointSpec::Port,
+                DockerEngineRuby::ServiceSpec::EndpointSpec::Port,
                 DockerEngineRuby::Internal::AnyHash
               )
             end
@@ -245,7 +269,7 @@ module DockerEngineRuby
           sig do
             returns(
               T.nilable(
-                DockerEngineRuby::Spec::EndpointSpec::Port::Protocol::OrSymbol
+                DockerEngineRuby::ServiceSpec::EndpointSpec::Port::Protocol::OrSymbol
               )
             )
           end
@@ -254,7 +278,7 @@ module DockerEngineRuby
           sig do
             params(
               protocol:
-                DockerEngineRuby::Spec::EndpointSpec::Port::Protocol::OrSymbol
+                DockerEngineRuby::ServiceSpec::EndpointSpec::Port::Protocol::OrSymbol
             ).void
           end
           attr_writer :protocol
@@ -277,7 +301,7 @@ module DockerEngineRuby
           sig do
             returns(
               T.nilable(
-                DockerEngineRuby::Spec::EndpointSpec::Port::PublishMode::OrSymbol
+                DockerEngineRuby::ServiceSpec::EndpointSpec::Port::PublishMode::OrSymbol
               )
             )
           end
@@ -286,7 +310,7 @@ module DockerEngineRuby
           sig do
             params(
               publish_mode:
-                DockerEngineRuby::Spec::EndpointSpec::Port::PublishMode::OrSymbol
+                DockerEngineRuby::ServiceSpec::EndpointSpec::Port::PublishMode::OrSymbol
             ).void
           end
           attr_writer :publish_mode
@@ -302,10 +326,10 @@ module DockerEngineRuby
             params(
               name: String,
               protocol:
-                DockerEngineRuby::Spec::EndpointSpec::Port::Protocol::OrSymbol,
+                DockerEngineRuby::ServiceSpec::EndpointSpec::Port::Protocol::OrSymbol,
               published_port: Integer,
               publish_mode:
-                DockerEngineRuby::Spec::EndpointSpec::Port::PublishMode::OrSymbol,
+                DockerEngineRuby::ServiceSpec::EndpointSpec::Port::PublishMode::OrSymbol,
               target_port: Integer
             ).returns(T.attached_class)
           end
@@ -333,10 +357,10 @@ module DockerEngineRuby
               {
                 name: String,
                 protocol:
-                  DockerEngineRuby::Spec::EndpointSpec::Port::Protocol::OrSymbol,
+                  DockerEngineRuby::ServiceSpec::EndpointSpec::Port::Protocol::OrSymbol,
                 published_port: Integer,
                 publish_mode:
-                  DockerEngineRuby::Spec::EndpointSpec::Port::PublishMode::OrSymbol,
+                  DockerEngineRuby::ServiceSpec::EndpointSpec::Port::PublishMode::OrSymbol,
                 target_port: Integer
               }
             )
@@ -351,7 +375,7 @@ module DockerEngineRuby
               T.type_alias do
                 T.all(
                   Symbol,
-                  DockerEngineRuby::Spec::EndpointSpec::Port::Protocol
+                  DockerEngineRuby::ServiceSpec::EndpointSpec::Port::Protocol
                 )
               end
             OrSymbol = T.type_alias { T.any(Symbol, String) }
@@ -359,23 +383,23 @@ module DockerEngineRuby
             TCP =
               T.let(
                 :tcp,
-                DockerEngineRuby::Spec::EndpointSpec::Port::Protocol::TaggedSymbol
+                DockerEngineRuby::ServiceSpec::EndpointSpec::Port::Protocol::TaggedSymbol
               )
             UDP =
               T.let(
                 :udp,
-                DockerEngineRuby::Spec::EndpointSpec::Port::Protocol::TaggedSymbol
+                DockerEngineRuby::ServiceSpec::EndpointSpec::Port::Protocol::TaggedSymbol
               )
             SCTP =
               T.let(
                 :sctp,
-                DockerEngineRuby::Spec::EndpointSpec::Port::Protocol::TaggedSymbol
+                DockerEngineRuby::ServiceSpec::EndpointSpec::Port::Protocol::TaggedSymbol
               )
 
             sig do
               override.returns(
                 T::Array[
-                  DockerEngineRuby::Spec::EndpointSpec::Port::Protocol::TaggedSymbol
+                  DockerEngineRuby::ServiceSpec::EndpointSpec::Port::Protocol::TaggedSymbol
                 ]
               )
             end
@@ -398,7 +422,7 @@ module DockerEngineRuby
               T.type_alias do
                 T.all(
                   Symbol,
-                  DockerEngineRuby::Spec::EndpointSpec::Port::PublishMode
+                  DockerEngineRuby::ServiceSpec::EndpointSpec::Port::PublishMode
                 )
               end
             OrSymbol = T.type_alias { T.any(Symbol, String) }
@@ -406,18 +430,18 @@ module DockerEngineRuby
             INGRESS =
               T.let(
                 :ingress,
-                DockerEngineRuby::Spec::EndpointSpec::Port::PublishMode::TaggedSymbol
+                DockerEngineRuby::ServiceSpec::EndpointSpec::Port::PublishMode::TaggedSymbol
               )
             HOST =
               T.let(
                 :host,
-                DockerEngineRuby::Spec::EndpointSpec::Port::PublishMode::TaggedSymbol
+                DockerEngineRuby::ServiceSpec::EndpointSpec::Port::PublishMode::TaggedSymbol
               )
 
             sig do
               override.returns(
                 T::Array[
-                  DockerEngineRuby::Spec::EndpointSpec::Port::PublishMode::TaggedSymbol
+                  DockerEngineRuby::ServiceSpec::EndpointSpec::Port::PublishMode::TaggedSymbol
                 ]
               )
             end
@@ -431,7 +455,7 @@ module DockerEngineRuby
         OrHash =
           T.type_alias do
             T.any(
-              DockerEngineRuby::Spec::Mode,
+              DockerEngineRuby::ServiceSpec::Mode,
               DockerEngineRuby::Internal::AnyHash
             )
           end
@@ -448,22 +472,27 @@ module DockerEngineRuby
         sig { params(global_job: T::Hash[Symbol, T.anything]).void }
         attr_writer :global_job
 
-        sig { returns(T.nilable(DockerEngineRuby::Spec::Mode::Replicated)) }
+        sig do
+          returns(T.nilable(DockerEngineRuby::ServiceSpec::Mode::Replicated))
+        end
         attr_reader :replicated
 
         sig do
           params(
-            replicated: DockerEngineRuby::Spec::Mode::Replicated::OrHash
+            replicated: DockerEngineRuby::ServiceSpec::Mode::Replicated::OrHash
           ).void
         end
         attr_writer :replicated
 
-        sig { returns(T.nilable(DockerEngineRuby::Spec::Mode::ReplicatedJob)) }
+        sig do
+          returns(T.nilable(DockerEngineRuby::ServiceSpec::Mode::ReplicatedJob))
+        end
         attr_reader :replicated_job
 
         sig do
           params(
-            replicated_job: DockerEngineRuby::Spec::Mode::ReplicatedJob::OrHash
+            replicated_job:
+              DockerEngineRuby::ServiceSpec::Mode::ReplicatedJob::OrHash
           ).void
         end
         attr_writer :replicated_job
@@ -473,8 +502,9 @@ module DockerEngineRuby
           params(
             global: T::Hash[Symbol, T.anything],
             global_job: T::Hash[Symbol, T.anything],
-            replicated: DockerEngineRuby::Spec::Mode::Replicated::OrHash,
-            replicated_job: DockerEngineRuby::Spec::Mode::ReplicatedJob::OrHash
+            replicated: DockerEngineRuby::ServiceSpec::Mode::Replicated::OrHash,
+            replicated_job:
+              DockerEngineRuby::ServiceSpec::Mode::ReplicatedJob::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
@@ -490,8 +520,8 @@ module DockerEngineRuby
             {
               global: T::Hash[Symbol, T.anything],
               global_job: T::Hash[Symbol, T.anything],
-              replicated: DockerEngineRuby::Spec::Mode::Replicated,
-              replicated_job: DockerEngineRuby::Spec::Mode::ReplicatedJob
+              replicated: DockerEngineRuby::ServiceSpec::Mode::Replicated,
+              replicated_job: DockerEngineRuby::ServiceSpec::Mode::ReplicatedJob
             }
           )
         end
@@ -502,7 +532,7 @@ module DockerEngineRuby
           OrHash =
             T.type_alias do
               T.any(
-                DockerEngineRuby::Spec::Mode::Replicated,
+                DockerEngineRuby::ServiceSpec::Mode::Replicated,
                 DockerEngineRuby::Internal::AnyHash
               )
             end
@@ -526,7 +556,7 @@ module DockerEngineRuby
           OrHash =
             T.type_alias do
               T.any(
-                DockerEngineRuby::Spec::Mode::ReplicatedJob,
+                DockerEngineRuby::ServiceSpec::Mode::ReplicatedJob,
                 DockerEngineRuby::Internal::AnyHash
               )
             end
@@ -565,7 +595,7 @@ module DockerEngineRuby
         OrHash =
           T.type_alias do
             T.any(
-              DockerEngineRuby::Spec::Network,
+              DockerEngineRuby::ServiceSpec::Network,
               DockerEngineRuby::Internal::AnyHash
             )
           end
@@ -626,7 +656,7 @@ module DockerEngineRuby
         OrHash =
           T.type_alias do
             T.any(
-              DockerEngineRuby::Spec::RollbackConfig,
+              DockerEngineRuby::ServiceSpec::RollbackConfig,
               DockerEngineRuby::Internal::AnyHash
             )
           end
@@ -640,7 +670,7 @@ module DockerEngineRuby
         sig do
           returns(
             T.nilable(
-              DockerEngineRuby::Spec::RollbackConfig::FailureAction::OrSymbol
+              DockerEngineRuby::ServiceSpec::RollbackConfig::FailureAction::OrSymbol
             )
           )
         end
@@ -649,7 +679,7 @@ module DockerEngineRuby
         sig do
           params(
             failure_action:
-              DockerEngineRuby::Spec::RollbackConfig::FailureAction::OrSymbol
+              DockerEngineRuby::ServiceSpec::RollbackConfig::FailureAction::OrSymbol
           ).void
         end
         attr_writer :failure_action
@@ -668,14 +698,17 @@ module DockerEngineRuby
 
         sig do
           returns(
-            T.nilable(DockerEngineRuby::Spec::RollbackConfig::Order::OrSymbol)
+            T.nilable(
+              DockerEngineRuby::ServiceSpec::RollbackConfig::Order::OrSymbol
+            )
           )
         end
         attr_reader :order
 
         sig do
           params(
-            order: DockerEngineRuby::Spec::RollbackConfig::Order::OrSymbol
+            order:
+              DockerEngineRuby::ServiceSpec::RollbackConfig::Order::OrSymbol
           ).void
         end
         attr_writer :order
@@ -691,10 +724,11 @@ module DockerEngineRuby
           params(
             delay: Integer,
             failure_action:
-              DockerEngineRuby::Spec::RollbackConfig::FailureAction::OrSymbol,
+              DockerEngineRuby::ServiceSpec::RollbackConfig::FailureAction::OrSymbol,
             max_failure_ratio: Float,
             monitor: Integer,
-            order: DockerEngineRuby::Spec::RollbackConfig::Order::OrSymbol,
+            order:
+              DockerEngineRuby::ServiceSpec::RollbackConfig::Order::OrSymbol,
             parallelism: Integer
           ).returns(T.attached_class)
         end
@@ -713,10 +747,11 @@ module DockerEngineRuby
             {
               delay: Integer,
               failure_action:
-                DockerEngineRuby::Spec::RollbackConfig::FailureAction::OrSymbol,
+                DockerEngineRuby::ServiceSpec::RollbackConfig::FailureAction::OrSymbol,
               max_failure_ratio: Float,
               monitor: Integer,
-              order: DockerEngineRuby::Spec::RollbackConfig::Order::OrSymbol,
+              order:
+                DockerEngineRuby::ServiceSpec::RollbackConfig::Order::OrSymbol,
               parallelism: Integer
             }
           )
@@ -731,7 +766,7 @@ module DockerEngineRuby
             T.type_alias do
               T.all(
                 Symbol,
-                DockerEngineRuby::Spec::RollbackConfig::FailureAction
+                DockerEngineRuby::ServiceSpec::RollbackConfig::FailureAction
               )
             end
           OrSymbol = T.type_alias { T.any(Symbol, String) }
@@ -739,18 +774,18 @@ module DockerEngineRuby
           CONTINUE =
             T.let(
               :continue,
-              DockerEngineRuby::Spec::RollbackConfig::FailureAction::TaggedSymbol
+              DockerEngineRuby::ServiceSpec::RollbackConfig::FailureAction::TaggedSymbol
             )
           PAUSE =
             T.let(
               :pause,
-              DockerEngineRuby::Spec::RollbackConfig::FailureAction::TaggedSymbol
+              DockerEngineRuby::ServiceSpec::RollbackConfig::FailureAction::TaggedSymbol
             )
 
           sig do
             override.returns(
               T::Array[
-                DockerEngineRuby::Spec::RollbackConfig::FailureAction::TaggedSymbol
+                DockerEngineRuby::ServiceSpec::RollbackConfig::FailureAction::TaggedSymbol
               ]
             )
           end
@@ -763,25 +798,28 @@ module DockerEngineRuby
 
           TaggedSymbol =
             T.type_alias do
-              T.all(Symbol, DockerEngineRuby::Spec::RollbackConfig::Order)
+              T.all(
+                Symbol,
+                DockerEngineRuby::ServiceSpec::RollbackConfig::Order
+              )
             end
           OrSymbol = T.type_alias { T.any(Symbol, String) }
 
           STOP_FIRST =
             T.let(
               :"stop-first",
-              DockerEngineRuby::Spec::RollbackConfig::Order::TaggedSymbol
+              DockerEngineRuby::ServiceSpec::RollbackConfig::Order::TaggedSymbol
             )
           START_FIRST =
             T.let(
               :"start-first",
-              DockerEngineRuby::Spec::RollbackConfig::Order::TaggedSymbol
+              DockerEngineRuby::ServiceSpec::RollbackConfig::Order::TaggedSymbol
             )
 
           sig do
             override.returns(
               T::Array[
-                DockerEngineRuby::Spec::RollbackConfig::Order::TaggedSymbol
+                DockerEngineRuby::ServiceSpec::RollbackConfig::Order::TaggedSymbol
               ]
             )
           end
@@ -794,7 +832,7 @@ module DockerEngineRuby
         OrHash =
           T.type_alias do
             T.any(
-              DockerEngineRuby::Spec::UpdateConfig,
+              DockerEngineRuby::ServiceSpec::UpdateConfig,
               DockerEngineRuby::Internal::AnyHash
             )
           end
@@ -808,7 +846,7 @@ module DockerEngineRuby
         sig do
           returns(
             T.nilable(
-              DockerEngineRuby::Spec::UpdateConfig::FailureAction::OrSymbol
+              DockerEngineRuby::ServiceSpec::UpdateConfig::FailureAction::OrSymbol
             )
           )
         end
@@ -817,7 +855,7 @@ module DockerEngineRuby
         sig do
           params(
             failure_action:
-              DockerEngineRuby::Spec::UpdateConfig::FailureAction::OrSymbol
+              DockerEngineRuby::ServiceSpec::UpdateConfig::FailureAction::OrSymbol
           ).void
         end
         attr_writer :failure_action
@@ -836,14 +874,16 @@ module DockerEngineRuby
 
         sig do
           returns(
-            T.nilable(DockerEngineRuby::Spec::UpdateConfig::Order::OrSymbol)
+            T.nilable(
+              DockerEngineRuby::ServiceSpec::UpdateConfig::Order::OrSymbol
+            )
           )
         end
         attr_reader :order
 
         sig do
           params(
-            order: DockerEngineRuby::Spec::UpdateConfig::Order::OrSymbol
+            order: DockerEngineRuby::ServiceSpec::UpdateConfig::Order::OrSymbol
           ).void
         end
         attr_writer :order
@@ -859,10 +899,10 @@ module DockerEngineRuby
           params(
             delay: Integer,
             failure_action:
-              DockerEngineRuby::Spec::UpdateConfig::FailureAction::OrSymbol,
+              DockerEngineRuby::ServiceSpec::UpdateConfig::FailureAction::OrSymbol,
             max_failure_ratio: Float,
             monitor: Integer,
-            order: DockerEngineRuby::Spec::UpdateConfig::Order::OrSymbol,
+            order: DockerEngineRuby::ServiceSpec::UpdateConfig::Order::OrSymbol,
             parallelism: Integer
           ).returns(T.attached_class)
         end
@@ -881,10 +921,11 @@ module DockerEngineRuby
             {
               delay: Integer,
               failure_action:
-                DockerEngineRuby::Spec::UpdateConfig::FailureAction::OrSymbol,
+                DockerEngineRuby::ServiceSpec::UpdateConfig::FailureAction::OrSymbol,
               max_failure_ratio: Float,
               monitor: Integer,
-              order: DockerEngineRuby::Spec::UpdateConfig::Order::OrSymbol,
+              order:
+                DockerEngineRuby::ServiceSpec::UpdateConfig::Order::OrSymbol,
               parallelism: Integer
             }
           )
@@ -897,30 +938,33 @@ module DockerEngineRuby
 
           TaggedSymbol =
             T.type_alias do
-              T.all(Symbol, DockerEngineRuby::Spec::UpdateConfig::FailureAction)
+              T.all(
+                Symbol,
+                DockerEngineRuby::ServiceSpec::UpdateConfig::FailureAction
+              )
             end
           OrSymbol = T.type_alias { T.any(Symbol, String) }
 
           CONTINUE =
             T.let(
               :continue,
-              DockerEngineRuby::Spec::UpdateConfig::FailureAction::TaggedSymbol
+              DockerEngineRuby::ServiceSpec::UpdateConfig::FailureAction::TaggedSymbol
             )
           PAUSE =
             T.let(
               :pause,
-              DockerEngineRuby::Spec::UpdateConfig::FailureAction::TaggedSymbol
+              DockerEngineRuby::ServiceSpec::UpdateConfig::FailureAction::TaggedSymbol
             )
           ROLLBACK =
             T.let(
               :rollback,
-              DockerEngineRuby::Spec::UpdateConfig::FailureAction::TaggedSymbol
+              DockerEngineRuby::ServiceSpec::UpdateConfig::FailureAction::TaggedSymbol
             )
 
           sig do
             override.returns(
               T::Array[
-                DockerEngineRuby::Spec::UpdateConfig::FailureAction::TaggedSymbol
+                DockerEngineRuby::ServiceSpec::UpdateConfig::FailureAction::TaggedSymbol
               ]
             )
           end
@@ -933,25 +977,25 @@ module DockerEngineRuby
 
           TaggedSymbol =
             T.type_alias do
-              T.all(Symbol, DockerEngineRuby::Spec::UpdateConfig::Order)
+              T.all(Symbol, DockerEngineRuby::ServiceSpec::UpdateConfig::Order)
             end
           OrSymbol = T.type_alias { T.any(Symbol, String) }
 
           STOP_FIRST =
             T.let(
               :"stop-first",
-              DockerEngineRuby::Spec::UpdateConfig::Order::TaggedSymbol
+              DockerEngineRuby::ServiceSpec::UpdateConfig::Order::TaggedSymbol
             )
           START_FIRST =
             T.let(
               :"start-first",
-              DockerEngineRuby::Spec::UpdateConfig::Order::TaggedSymbol
+              DockerEngineRuby::ServiceSpec::UpdateConfig::Order::TaggedSymbol
             )
 
           sig do
             override.returns(
               T::Array[
-                DockerEngineRuby::Spec::UpdateConfig::Order::TaggedSymbol
+                DockerEngineRuby::ServiceSpec::UpdateConfig::Order::TaggedSymbol
               ]
             )
           end

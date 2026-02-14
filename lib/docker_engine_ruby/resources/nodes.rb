@@ -11,7 +11,7 @@ module DockerEngineRuby
       #
       # @param version [Integer] Query param
       #
-      # @param spec [DockerEngineRuby::Models::Spec] Body param
+      # @param spec [DockerEngineRuby::Models::NodeSpec] Body param
       #
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #

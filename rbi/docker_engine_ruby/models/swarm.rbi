@@ -56,10 +56,10 @@ module DockerEngineRuby
       attr_writer :root_rotation_in_progress
 
       # User modifiable swarm configuration.
-      sig { returns(T.nilable(DockerEngineRuby::Spec)) }
+      sig { returns(T.nilable(DockerEngineRuby::SwarmSpec)) }
       attr_reader :spec
 
-      sig { params(spec: DockerEngineRuby::Spec::OrHash).void }
+      sig { params(spec: DockerEngineRuby::SwarmSpec::OrHash).void }
       attr_writer :spec
 
       # SubnetSize specifies the subnet size of the networks created from the default
@@ -109,7 +109,7 @@ module DockerEngineRuby
           id: String,
           join_tokens: DockerEngineRuby::SwarmAPI::JoinTokens::OrHash,
           root_rotation_in_progress: T::Boolean,
-          spec: DockerEngineRuby::Spec::OrHash,
+          spec: DockerEngineRuby::SwarmSpec::OrHash,
           subnet_size: Integer,
           tls_info: DockerEngineRuby::SwarmAPI::TlsInfo::OrHash,
           updated_at: Time,
@@ -165,7 +165,7 @@ module DockerEngineRuby
             id: String,
             join_tokens: DockerEngineRuby::SwarmAPI::JoinTokens,
             root_rotation_in_progress: T::Boolean,
-            spec: DockerEngineRuby::Spec,
+            spec: DockerEngineRuby::SwarmSpec,
             subnet_size: Integer,
             tls_info: DockerEngineRuby::SwarmAPI::TlsInfo,
             updated_at: Time,

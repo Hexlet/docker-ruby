@@ -51,10 +51,10 @@ module DockerEngineRuby
       attr_writer :listen_addr
 
       # User modifiable swarm configuration.
-      sig { returns(T.nilable(DockerEngineRuby::Spec)) }
+      sig { returns(T.nilable(DockerEngineRuby::SwarmSpec)) }
       attr_reader :spec
 
-      sig { params(spec: DockerEngineRuby::Spec::OrHash).void }
+      sig { params(spec: DockerEngineRuby::SwarmSpec::OrHash).void }
       attr_writer :spec
 
       sig { returns(T.nilable(Integer)) }
@@ -71,7 +71,7 @@ module DockerEngineRuby
           default_addr_pool: T::Array[String],
           force_new_cluster: T::Boolean,
           listen_addr: String,
-          spec: DockerEngineRuby::Spec::OrHash,
+          spec: DockerEngineRuby::SwarmSpec::OrHash,
           subnet_size: Integer,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
@@ -99,7 +99,7 @@ module DockerEngineRuby
             default_addr_pool: T::Array[String],
             force_new_cluster: T::Boolean,
             listen_addr: String,
-            spec: DockerEngineRuby::Spec,
+            spec: DockerEngineRuby::SwarmSpec,
             subnet_size: Integer,
             request_options: DockerEngineRuby::RequestOptions
           }

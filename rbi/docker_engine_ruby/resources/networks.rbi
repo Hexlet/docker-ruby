@@ -21,7 +21,7 @@ module DockerEngineRuby
           options: T::Hash[Symbol, String],
           scope: String,
           request_options: DockerEngineRuby::RequestOptions::OrHash
-        ).returns(DockerEngineRuby::CreateResponse)
+        ).returns(DockerEngineRuby::NetworkCreateResponse)
       end
       def create(
         name:,
@@ -47,7 +47,7 @@ module DockerEngineRuby
         params(
           filters: String,
           request_options: DockerEngineRuby::RequestOptions::OrHash
-        ).returns(T::Array[DockerEngineRuby::Summary])
+        ).returns(T::Array[DockerEngineRuby::NetworkSummary])
       end
       def list(filters: nil, request_options: {})
       end

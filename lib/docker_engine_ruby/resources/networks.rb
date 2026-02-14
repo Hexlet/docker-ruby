@@ -38,7 +38,7 @@ module DockerEngineRuby
       #
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [DockerEngineRuby::Models::CreateResponse]
+      # @return [DockerEngineRuby::Models::NetworkCreateResponse]
       #
       # @see DockerEngineRuby::Models::NetworkCreateParams
       def create(params)
@@ -47,7 +47,7 @@ module DockerEngineRuby
           method: :post,
           path: "networks/create",
           body: parsed,
-          model: DockerEngineRuby::CreateResponse,
+          model: DockerEngineRuby::NetworkCreateResponse,
           options: options
         )
       end
@@ -59,7 +59,7 @@ module DockerEngineRuby
       # @param filters [String]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Array<DockerEngineRuby::Models::Summary>]
+      # @return [Array<DockerEngineRuby::Models::NetworkSummary>]
       #
       # @see DockerEngineRuby::Models::NetworkListParams
       def list(params = {})
@@ -68,7 +68,7 @@ module DockerEngineRuby
           method: :get,
           path: "networks",
           query: parsed,
-          model: DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Summary],
+          model: DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::NetworkSummary],
           options: options
         )
       end

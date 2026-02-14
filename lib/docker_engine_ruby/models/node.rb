@@ -34,8 +34,8 @@ module DockerEngineRuby
 
       # @!attribute spec
       #
-      #   @return [DockerEngineRuby::Models::Spec, nil]
-      optional :spec, -> { DockerEngineRuby::Spec }, api_name: :Spec
+      #   @return [DockerEngineRuby::Models::NodeSpec, nil]
+      optional :spec, -> { DockerEngineRuby::NodeSpec }, api_name: :Spec
 
       # @!attribute status
       #   NodeStatus represents the status of a node.
@@ -78,7 +78,7 @@ module DockerEngineRuby
       #
       #   @param manager_status [DockerEngineRuby::Models::Node::ManagerStatus] ManagerStatus represents the status of a manager.
       #
-      #   @param spec [DockerEngineRuby::Models::Spec]
+      #   @param spec [DockerEngineRuby::Models::NodeSpec]
       #
       #   @param status [DockerEngineRuby::Models::Node::Status] NodeStatus represents the status of a node.
       #

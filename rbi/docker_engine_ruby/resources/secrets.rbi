@@ -6,7 +6,7 @@ module DockerEngineRuby
       # Create a secret
       sig do
         params(
-          spec: DockerEngineRuby::Spec::OrHash,
+          spec: DockerEngineRuby::SecretSpec::OrHash,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(DockerEngineRuby::Models::SecretCreateResponse)
       end
@@ -18,7 +18,7 @@ module DockerEngineRuby
         params(
           id: String,
           version: Integer,
-          spec: DockerEngineRuby::Spec::OrHash,
+          spec: DockerEngineRuby::SecretSpec::OrHash,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).void
       end

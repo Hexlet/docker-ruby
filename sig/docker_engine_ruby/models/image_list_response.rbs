@@ -1,6 +1,6 @@
 module DockerEngineRuby
   module Models
-    type image_list_response = ::Array[DockerEngineRuby::Summary]
+    type image_list_response = ::Array[DockerEngineRuby::ImageSummary]
 
     ImageListResponse: DockerEngineRuby::Internal::Type::Converter
   end

@@ -35,7 +35,7 @@ class DockerEngineRuby::Test::Resources::ConfigsTest < DockerEngineRuby::Test::R
     response = @docker.configs.list
 
     assert_pattern do
-      response => ^(DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Config])
+      response => ^(DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::ConfigObject])
     end
   end
 
@@ -55,16 +55,16 @@ class DockerEngineRuby::Test::Resources::ConfigsTest < DockerEngineRuby::Test::R
     response = @docker.configs.inspect_("id")
 
     assert_pattern do
-      response => DockerEngineRuby::Config
+      response => DockerEngineRuby::ConfigObject
     end
 
     assert_pattern do
       response => {
         created_at: Time | nil,
         id: String | nil,
-        spec: DockerEngineRuby::Spec | nil,
+        spec: DockerEngineRuby::ConfigSpec | nil,
         updated_at: Time | nil,
-        version: DockerEngineRuby::Config::Version | nil
+        version: DockerEngineRuby::ConfigObject::Version | nil
       }
     end
   end

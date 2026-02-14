@@ -2,12 +2,12 @@
 
 module DockerEngineRuby
   module Models
-    class Spec < DockerEngineRuby::Internal::Type::BaseModel
+    class ServiceSpec < DockerEngineRuby::Internal::Type::BaseModel
       # @!attribute endpoint_spec
       #   Properties that can be configured to access and load balance a service.
       #
-      #   @return [DockerEngineRuby::Models::Spec::EndpointSpec, nil]
-      optional :endpoint_spec, -> { DockerEngineRuby::Spec::EndpointSpec }, api_name: :EndpointSpec
+      #   @return [DockerEngineRuby::Models::ServiceSpec::EndpointSpec, nil]
+      optional :endpoint_spec, -> { DockerEngineRuby::ServiceSpec::EndpointSpec }, api_name: :EndpointSpec
 
       # @!attribute labels
       #   User-defined key/value metadata.
@@ -18,8 +18,8 @@ module DockerEngineRuby
       # @!attribute mode
       #   Scheduling mode for the service.
       #
-      #   @return [DockerEngineRuby::Models::Spec::Mode, nil]
-      optional :mode, -> { DockerEngineRuby::Spec::Mode }, api_name: :Mode
+      #   @return [DockerEngineRuby::Models::ServiceSpec::Mode, nil]
+      optional :mode, -> { DockerEngineRuby::ServiceSpec::Mode }, api_name: :Mode
 
       # @!attribute name
       #   Name of the service.
@@ -33,81 +33,87 @@ module DockerEngineRuby
       #   Deprecated: This field is deprecated since v1.44. The Networks field in TaskSpec
       #   should be used instead.
       #
-      #   @return [Array<DockerEngineRuby::Models::Spec::Network>, nil]
+      #   @return [Array<DockerEngineRuby::Models::ServiceSpec::Network>, nil]
       optional :networks,
-               -> { DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Spec::Network] },
+               -> { DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::ServiceSpec::Network] },
                api_name: :Networks
 
       # @!attribute rollback_config
       #   Specification for the rollback strategy of the service.
       #
-      #   @return [DockerEngineRuby::Models::Spec::RollbackConfig, nil]
-      optional :rollback_config, -> { DockerEngineRuby::Spec::RollbackConfig }, api_name: :RollbackConfig
+      #   @return [DockerEngineRuby::Models::ServiceSpec::RollbackConfig, nil]
+      optional :rollback_config,
+               -> {
+                 DockerEngineRuby::ServiceSpec::RollbackConfig
+               },
+               api_name: :RollbackConfig
 
       # @!attribute task_template
       #   User modifiable task configuration.
       #
-      #   @return [DockerEngineRuby::Models::Spec, nil]
-      optional :task_template, -> { DockerEngineRuby::Spec }, api_name: :TaskTemplate
+      #   @return [DockerEngineRuby::Models::TaskSpec, nil]
+      optional :task_template, -> { DockerEngineRuby::TaskSpec }, api_name: :TaskTemplate
 
       # @!attribute update_config
       #   Specification for the update strategy of the service.
       #
-      #   @return [DockerEngineRuby::Models::Spec::UpdateConfig, nil]
-      optional :update_config, -> { DockerEngineRuby::Spec::UpdateConfig }, api_name: :UpdateConfig
+      #   @return [DockerEngineRuby::Models::ServiceSpec::UpdateConfig, nil]
+      optional :update_config, -> { DockerEngineRuby::ServiceSpec::UpdateConfig }, api_name: :UpdateConfig
 
       # @!method initialize(endpoint_spec: nil, labels: nil, mode: nil, name: nil, networks: nil, rollback_config: nil, task_template: nil, update_config: nil)
       #   Some parameter documentations has been truncated, see
-      #   {DockerEngineRuby::Models::Spec} for more details.
+      #   {DockerEngineRuby::Models::ServiceSpec} for more details.
       #
       #   User modifiable configuration for a service.
       #
-      #   @param endpoint_spec [DockerEngineRuby::Models::Spec::EndpointSpec] Properties that can be configured to access and load balance a service.
+      #   @param endpoint_spec [DockerEngineRuby::Models::ServiceSpec::EndpointSpec] Properties that can be configured to access and load balance a service.
       #
       #   @param labels [Hash{Symbol=>String}] User-defined key/value metadata.
       #
-      #   @param mode [DockerEngineRuby::Models::Spec::Mode] Scheduling mode for the service.
+      #   @param mode [DockerEngineRuby::Models::ServiceSpec::Mode] Scheduling mode for the service.
       #
       #   @param name [String] Name of the service.
       #
-      #   @param networks [Array<DockerEngineRuby::Models::Spec::Network>] Specifies which networks the service should attach to.
+      #   @param networks [Array<DockerEngineRuby::Models::ServiceSpec::Network>] Specifies which networks the service should attach to.
       #
-      #   @param rollback_config [DockerEngineRuby::Models::Spec::RollbackConfig] Specification for the rollback strategy of the service.
+      #   @param rollback_config [DockerEngineRuby::Models::ServiceSpec::RollbackConfig] Specification for the rollback strategy of the service.
       #
-      #   @param task_template [DockerEngineRuby::Models::Spec] User modifiable task configuration.
+      #   @param task_template [DockerEngineRuby::Models::TaskSpec] User modifiable task configuration.
       #
-      #   @param update_config [DockerEngineRuby::Models::Spec::UpdateConfig] Specification for the update strategy of the service.
+      #   @param update_config [DockerEngineRuby::Models::ServiceSpec::UpdateConfig] Specification for the update strategy of the service.
 
-      # @see DockerEngineRuby::Models::Spec#endpoint_spec
+      # @see DockerEngineRuby::Models::ServiceSpec#endpoint_spec
       class EndpointSpec < DockerEngineRuby::Internal::Type::BaseModel
         # @!attribute mode
         #   The mode of resolution to use for internal load balancing between tasks.
         #
-        #   @return [Symbol, DockerEngineRuby::Models::Spec::EndpointSpec::Mode, nil]
-        optional :mode, enum: -> { DockerEngineRuby::Spec::EndpointSpec::Mode }, api_name: :Mode
+        #   @return [Symbol, DockerEngineRuby::Models::ServiceSpec::EndpointSpec::Mode, nil]
+        optional :mode, enum: -> { DockerEngineRuby::ServiceSpec::EndpointSpec::Mode }, api_name: :Mode
 
         # @!attribute ports
         #   List of exposed ports that this service is accessible on from the outside. Ports
         #   can only be provided if `vip` resolution mode is used.
         #
-        #   @return [Array<DockerEngineRuby::Models::Spec::EndpointSpec::Port>, nil]
+        #   @return [Array<DockerEngineRuby::Models::ServiceSpec::EndpointSpec::Port>, nil]
         optional :ports,
-                 -> { DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Spec::EndpointSpec::Port] },
+                 -> {
+                   DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::ServiceSpec::EndpointSpec::Port]
+                 },
                  api_name: :Ports
 
         # @!method initialize(mode: nil, ports: nil)
         #   Some parameter documentations has been truncated, see
-        #   {DockerEngineRuby::Models::Spec::EndpointSpec} for more details.
+        #   {DockerEngineRuby::Models::ServiceSpec::EndpointSpec} for more details.
         #
         #   Properties that can be configured to access and load balance a service.
         #
-        #   @param mode [Symbol, DockerEngineRuby::Models::Spec::EndpointSpec::Mode] The mode of resolution to use for internal load balancing between tasks.
+        #   @param mode [Symbol, DockerEngineRuby::Models::ServiceSpec::EndpointSpec::Mode] The mode of resolution to use for internal load balancing between tasks.
         #
-        #   @param ports [Array<DockerEngineRuby::Models::Spec::EndpointSpec::Port>] List of exposed ports that this service is accessible on from the
+        #   @param ports [Array<DockerEngineRuby::Models::ServiceSpec::EndpointSpec::Port>] List of exposed ports that this service is accessible on from the
 
         # The mode of resolution to use for internal load balancing between tasks.
         #
-        # @see DockerEngineRuby::Models::Spec::EndpointSpec#mode
+        # @see DockerEngineRuby::Models::ServiceSpec::EndpointSpec#mode
         module Mode
           extend DockerEngineRuby::Internal::Type::Enum
 
@@ -126,11 +132,9 @@ module DockerEngineRuby
 
           # @!attribute protocol
           #
-          #   @return [Symbol, DockerEngineRuby::Models::Spec::EndpointSpec::Port::Protocol, nil]
+          #   @return [Symbol, DockerEngineRuby::Models::ServiceSpec::EndpointSpec::Port::Protocol, nil]
           optional :protocol,
-                   enum: -> {
-                     DockerEngineRuby::Spec::EndpointSpec::Port::Protocol
-                   },
+                   enum: -> { DockerEngineRuby::ServiceSpec::EndpointSpec::Port::Protocol },
                    api_name: :Protocol
 
           # @!attribute published_port
@@ -149,9 +153,9 @@ module DockerEngineRuby
           #   - "host" bypasses the routing mesh and publish the port directly on the swarm
           #     node where that service is running.
           #
-          #   @return [Symbol, DockerEngineRuby::Models::Spec::EndpointSpec::Port::PublishMode, nil]
+          #   @return [Symbol, DockerEngineRuby::Models::ServiceSpec::EndpointSpec::Port::PublishMode, nil]
           optional :publish_mode,
-                   enum: -> { DockerEngineRuby::Spec::EndpointSpec::Port::PublishMode },
+                   enum: -> { DockerEngineRuby::ServiceSpec::EndpointSpec::Port::PublishMode },
                    api_name: :PublishMode
 
           # @!attribute target_port
@@ -162,19 +166,19 @@ module DockerEngineRuby
 
           # @!method initialize(name: nil, protocol: nil, published_port: nil, publish_mode: nil, target_port: nil)
           #   Some parameter documentations has been truncated, see
-          #   {DockerEngineRuby::Models::Spec::EndpointSpec::Port} for more details.
+          #   {DockerEngineRuby::Models::ServiceSpec::EndpointSpec::Port} for more details.
           #
           #   @param name [String]
           #
-          #   @param protocol [Symbol, DockerEngineRuby::Models::Spec::EndpointSpec::Port::Protocol]
+          #   @param protocol [Symbol, DockerEngineRuby::Models::ServiceSpec::EndpointSpec::Port::Protocol]
           #
           #   @param published_port [Integer] The port on the swarm hosts.
           #
-          #   @param publish_mode [Symbol, DockerEngineRuby::Models::Spec::EndpointSpec::Port::PublishMode] The mode in which port is published.
+          #   @param publish_mode [Symbol, DockerEngineRuby::Models::ServiceSpec::EndpointSpec::Port::PublishMode] The mode in which port is published.
           #
           #   @param target_port [Integer] The port inside the container.
 
-          # @see DockerEngineRuby::Models::Spec::EndpointSpec::Port#protocol
+          # @see DockerEngineRuby::Models::ServiceSpec::EndpointSpec::Port#protocol
           module Protocol
             extend DockerEngineRuby::Internal::Type::Enum
 
@@ -195,7 +199,7 @@ module DockerEngineRuby
           # - "host" bypasses the routing mesh and publish the port directly on the swarm
           #   node where that service is running.
           #
-          # @see DockerEngineRuby::Models::Spec::EndpointSpec::Port#publish_mode
+          # @see DockerEngineRuby::Models::ServiceSpec::EndpointSpec::Port#publish_mode
           module PublishMode
             extend DockerEngineRuby::Internal::Type::Enum
 
@@ -208,7 +212,7 @@ module DockerEngineRuby
         end
       end
 
-      # @see DockerEngineRuby::Models::Spec#mode
+      # @see DockerEngineRuby::Models::ServiceSpec#mode
       class Mode < DockerEngineRuby::Internal::Type::BaseModel
         # @!attribute global
         #
@@ -226,23 +230,25 @@ module DockerEngineRuby
 
         # @!attribute replicated
         #
-        #   @return [DockerEngineRuby::Models::Spec::Mode::Replicated, nil]
-        optional :replicated, -> { DockerEngineRuby::Spec::Mode::Replicated }, api_name: :Replicated
+        #   @return [DockerEngineRuby::Models::ServiceSpec::Mode::Replicated, nil]
+        optional :replicated, -> { DockerEngineRuby::ServiceSpec::Mode::Replicated }, api_name: :Replicated
 
         # @!attribute replicated_job
         #
-        #   @return [DockerEngineRuby::Models::Spec::Mode::ReplicatedJob, nil]
-        optional :replicated_job, -> { DockerEngineRuby::Spec::Mode::ReplicatedJob }, api_name: :ReplicatedJob
+        #   @return [DockerEngineRuby::Models::ServiceSpec::Mode::ReplicatedJob, nil]
+        optional :replicated_job,
+                 -> { DockerEngineRuby::ServiceSpec::Mode::ReplicatedJob },
+                 api_name: :ReplicatedJob
 
         # @!method initialize(global: nil, global_job: nil, replicated: nil, replicated_job: nil)
         #   Scheduling mode for the service.
         #
         #   @param global [Hash{Symbol=>Object}]
         #   @param global_job [Hash{Symbol=>Object}]
-        #   @param replicated [DockerEngineRuby::Models::Spec::Mode::Replicated]
-        #   @param replicated_job [DockerEngineRuby::Models::Spec::Mode::ReplicatedJob]
+        #   @param replicated [DockerEngineRuby::Models::ServiceSpec::Mode::Replicated]
+        #   @param replicated_job [DockerEngineRuby::Models::ServiceSpec::Mode::ReplicatedJob]
 
-        # @see DockerEngineRuby::Models::Spec::Mode#replicated
+        # @see DockerEngineRuby::Models::ServiceSpec::Mode#replicated
         class Replicated < DockerEngineRuby::Internal::Type::BaseModel
           # @!attribute replicas
           #
@@ -253,7 +259,7 @@ module DockerEngineRuby
           #   @param replicas [Integer]
         end
 
-        # @see DockerEngineRuby::Models::Spec::Mode#replicated_job
+        # @see DockerEngineRuby::Models::ServiceSpec::Mode#replicated_job
         class ReplicatedJob < DockerEngineRuby::Internal::Type::BaseModel
           # @!attribute max_concurrent
           #
@@ -300,7 +306,7 @@ module DockerEngineRuby
         #   @param target [String] The target network for attachment. Must be a network name or ID.
       end
 
-      # @see DockerEngineRuby::Models::Spec#rollback_config
+      # @see DockerEngineRuby::Models::ServiceSpec#rollback_config
       class RollbackConfig < DockerEngineRuby::Internal::Type::BaseModel
         # @!attribute delay
         #
@@ -309,9 +315,9 @@ module DockerEngineRuby
 
         # @!attribute failure_action
         #
-        #   @return [Symbol, DockerEngineRuby::Models::Spec::RollbackConfig::FailureAction, nil]
+        #   @return [Symbol, DockerEngineRuby::Models::ServiceSpec::RollbackConfig::FailureAction, nil]
         optional :failure_action,
-                 enum: -> { DockerEngineRuby::Spec::RollbackConfig::FailureAction },
+                 enum: -> { DockerEngineRuby::ServiceSpec::RollbackConfig::FailureAction },
                  api_name: :FailureAction
 
         # @!attribute max_failure_ratio
@@ -326,8 +332,8 @@ module DockerEngineRuby
 
         # @!attribute order
         #
-        #   @return [Symbol, DockerEngineRuby::Models::Spec::RollbackConfig::Order, nil]
-        optional :order, enum: -> { DockerEngineRuby::Spec::RollbackConfig::Order }, api_name: :Order
+        #   @return [Symbol, DockerEngineRuby::Models::ServiceSpec::RollbackConfig::Order, nil]
+        optional :order, enum: -> { DockerEngineRuby::ServiceSpec::RollbackConfig::Order }, api_name: :Order
 
         # @!attribute parallelism
         #
@@ -338,13 +344,13 @@ module DockerEngineRuby
         #   Specification for the rollback strategy of the service.
         #
         #   @param delay [Integer]
-        #   @param failure_action [Symbol, DockerEngineRuby::Models::Spec::RollbackConfig::FailureAction]
+        #   @param failure_action [Symbol, DockerEngineRuby::Models::ServiceSpec::RollbackConfig::FailureAction]
         #   @param max_failure_ratio [Float]
         #   @param monitor [Integer]
-        #   @param order [Symbol, DockerEngineRuby::Models::Spec::RollbackConfig::Order]
+        #   @param order [Symbol, DockerEngineRuby::Models::ServiceSpec::RollbackConfig::Order]
         #   @param parallelism [Integer]
 
-        # @see DockerEngineRuby::Models::Spec::RollbackConfig#failure_action
+        # @see DockerEngineRuby::Models::ServiceSpec::RollbackConfig#failure_action
         module FailureAction
           extend DockerEngineRuby::Internal::Type::Enum
 
@@ -355,7 +361,7 @@ module DockerEngineRuby
           #   @return [Array<Symbol>]
         end
 
-        # @see DockerEngineRuby::Models::Spec::RollbackConfig#order
+        # @see DockerEngineRuby::Models::ServiceSpec::RollbackConfig#order
         module Order
           extend DockerEngineRuby::Internal::Type::Enum
 
@@ -367,7 +373,7 @@ module DockerEngineRuby
         end
       end
 
-      # @see DockerEngineRuby::Models::Spec#update_config
+      # @see DockerEngineRuby::Models::ServiceSpec#update_config
       class UpdateConfig < DockerEngineRuby::Internal::Type::BaseModel
         # @!attribute delay
         #
@@ -376,9 +382,9 @@ module DockerEngineRuby
 
         # @!attribute failure_action
         #
-        #   @return [Symbol, DockerEngineRuby::Models::Spec::UpdateConfig::FailureAction, nil]
+        #   @return [Symbol, DockerEngineRuby::Models::ServiceSpec::UpdateConfig::FailureAction, nil]
         optional :failure_action,
-                 enum: -> { DockerEngineRuby::Spec::UpdateConfig::FailureAction },
+                 enum: -> { DockerEngineRuby::ServiceSpec::UpdateConfig::FailureAction },
                  api_name: :FailureAction
 
         # @!attribute max_failure_ratio
@@ -393,8 +399,8 @@ module DockerEngineRuby
 
         # @!attribute order
         #
-        #   @return [Symbol, DockerEngineRuby::Models::Spec::UpdateConfig::Order, nil]
-        optional :order, enum: -> { DockerEngineRuby::Spec::UpdateConfig::Order }, api_name: :Order
+        #   @return [Symbol, DockerEngineRuby::Models::ServiceSpec::UpdateConfig::Order, nil]
+        optional :order, enum: -> { DockerEngineRuby::ServiceSpec::UpdateConfig::Order }, api_name: :Order
 
         # @!attribute parallelism
         #
@@ -405,13 +411,13 @@ module DockerEngineRuby
         #   Specification for the update strategy of the service.
         #
         #   @param delay [Integer]
-        #   @param failure_action [Symbol, DockerEngineRuby::Models::Spec::UpdateConfig::FailureAction]
+        #   @param failure_action [Symbol, DockerEngineRuby::Models::ServiceSpec::UpdateConfig::FailureAction]
         #   @param max_failure_ratio [Float]
         #   @param monitor [Integer]
-        #   @param order [Symbol, DockerEngineRuby::Models::Spec::UpdateConfig::Order]
+        #   @param order [Symbol, DockerEngineRuby::Models::ServiceSpec::UpdateConfig::Order]
         #   @param parallelism [Integer]
 
-        # @see DockerEngineRuby::Models::Spec::UpdateConfig#failure_action
+        # @see DockerEngineRuby::Models::ServiceSpec::UpdateConfig#failure_action
         module FailureAction
           extend DockerEngineRuby::Internal::Type::Enum
 
@@ -423,7 +429,7 @@ module DockerEngineRuby
           #   @return [Array<Symbol>]
         end
 
-        # @see DockerEngineRuby::Models::Spec::UpdateConfig#order
+        # @see DockerEngineRuby::Models::ServiceSpec::UpdateConfig#order
         module Order
           extend DockerEngineRuby::Internal::Type::Enum
 

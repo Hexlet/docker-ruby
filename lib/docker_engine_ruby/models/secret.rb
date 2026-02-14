@@ -16,8 +16,8 @@ module DockerEngineRuby
 
       # @!attribute spec
       #
-      #   @return [DockerEngineRuby::Models::Spec, nil]
-      optional :spec, -> { DockerEngineRuby::Spec }, api_name: :Spec
+      #   @return [DockerEngineRuby::Models::SecretSpec, nil]
+      optional :spec, -> { DockerEngineRuby::SecretSpec }, api_name: :Spec
 
       # @!attribute updated_at
       #
@@ -46,7 +46,7 @@ module DockerEngineRuby
       #
       #   @param id [String]
       #
-      #   @param spec [DockerEngineRuby::Models::Spec]
+      #   @param spec [DockerEngineRuby::Models::SecretSpec]
       #
       #   @param updated_at [Time]
       #

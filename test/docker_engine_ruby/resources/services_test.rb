@@ -9,7 +9,7 @@ class DockerEngineRuby::Test::Resources::ServicesTest < DockerEngineRuby::Test::
     response = @docker.services.create(spec: {})
 
     assert_pattern do
-      response => DockerEngineRuby::CreateResponse
+      response => DockerEngineRuby::ServiceCreateResponse
     end
 
     assert_pattern do
@@ -26,7 +26,7 @@ class DockerEngineRuby::Test::Resources::ServicesTest < DockerEngineRuby::Test::
     response = @docker.services.update("id", version: 0, spec: {})
 
     assert_pattern do
-      response => DockerEngineRuby::UpdateResponse
+      response => DockerEngineRuby::ServiceUpdateResponse
     end
 
     assert_pattern do
@@ -72,7 +72,7 @@ class DockerEngineRuby::Test::Resources::ServicesTest < DockerEngineRuby::Test::
         id: String | nil,
         job_status: DockerEngineRuby::Service::JobStatus | nil,
         service_status: DockerEngineRuby::Service::ServiceStatus | nil,
-        spec: DockerEngineRuby::Spec | nil,
+        spec: DockerEngineRuby::ServiceSpec | nil,
         updated_at: Time | nil,
         update_status: DockerEngineRuby::Service::UpdateStatus | nil,
         version: DockerEngineRuby::Service::Version | nil

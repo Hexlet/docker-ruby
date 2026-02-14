@@ -38,8 +38,8 @@ module DockerEngineRuby
       # @!attribute spec
       #   User modifiable configuration for a service.
       #
-      #   @return [DockerEngineRuby::Models::Spec, nil]
-      optional :spec, -> { DockerEngineRuby::Spec }, api_name: :Spec
+      #   @return [DockerEngineRuby::Models::ServiceSpec, nil]
+      optional :spec, -> { DockerEngineRuby::ServiceSpec }, api_name: :Spec
 
       # @!attribute updated_at
       #
@@ -80,7 +80,7 @@ module DockerEngineRuby
       #
       #   @param service_status [DockerEngineRuby::Models::Service::ServiceStatus] The status of the service's tasks. Provided only when requested as
       #
-      #   @param spec [DockerEngineRuby::Models::Spec] User modifiable configuration for a service.
+      #   @param spec [DockerEngineRuby::Models::ServiceSpec] User modifiable configuration for a service.
       #
       #   @param updated_at [Time]
       #

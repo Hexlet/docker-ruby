@@ -7,7 +7,7 @@ module DockerEngineRuby
       sig do
         params(
           version: Integer,
-          spec: DockerEngineRuby::Spec::OrHash,
+          spec: DockerEngineRuby::SwarmSpec::OrHash,
           rotate_manager_token: T::Boolean,
           rotate_manager_unlock_key: T::Boolean,
           rotate_worker_token: T::Boolean,
@@ -38,7 +38,7 @@ module DockerEngineRuby
           default_addr_pool: T::Array[String],
           force_new_cluster: T::Boolean,
           listen_addr: String,
-          spec: DockerEngineRuby::Spec::OrHash,
+          spec: DockerEngineRuby::SwarmSpec::OrHash,
           subnet_size: Integer,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(String)

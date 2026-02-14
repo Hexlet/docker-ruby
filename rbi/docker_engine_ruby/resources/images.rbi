@@ -12,7 +12,7 @@ module DockerEngineRuby
           manifests: T::Boolean,
           shared_size: T::Boolean,
           request_options: DockerEngineRuby::RequestOptions::OrHash
-        ).returns(T::Array[DockerEngineRuby::Summary])
+        ).returns(T::Array[DockerEngineRuby::ImageSummary])
       end
       def list(
         all: nil,

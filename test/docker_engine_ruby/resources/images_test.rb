@@ -9,7 +9,7 @@ class DockerEngineRuby::Test::Resources::ImagesTest < DockerEngineRuby::Test::Re
     response = @docker.images.list
 
     assert_pattern do
-      response => ^(DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Summary])
+      response => ^(DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::ImageSummary])
     end
   end
 
