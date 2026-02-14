@@ -1,0 +1,225 @@
+module DockerEngine
+  module Models
+    type config =
+      {
+        args_escaped: bool?,
+        attach_stderr: bool,
+        attach_stdin: bool,
+        attach_stdout: bool,
+        cmd: ::Array[String],
+        domainname: String,
+        entrypoint: ::Array[String],
+        env: ::Array[String],
+        exposed_ports: ::Hash[Symbol, top]?,
+        healthcheck: DockerEngine::Config::Healthcheck,
+        hostname: String,
+        image: String,
+        labels: ::Hash[Symbol, String],
+        network_disabled: bool?,
+        on_build: ::Array[String]?,
+        open_stdin: bool,
+        shell: ::Array[String]?,
+        stdin_once: bool,
+        stop_signal: String?,
+        stop_timeout: Integer?,
+        tty: bool,
+        user: String,
+        volumes: ::Hash[Symbol, top],
+        working_dir: String
+      }
+
+    class Config < DockerEngine::Internal::Type::BaseModel
+      attr_accessor args_escaped: bool?
+
+      attr_reader attach_stderr: bool?
+
+      def attach_stderr=: (bool) -> bool
+
+      attr_reader attach_stdin: bool?
+
+      def attach_stdin=: (bool) -> bool
+
+      attr_reader attach_stdout: bool?
+
+      def attach_stdout=: (bool) -> bool
+
+      attr_reader cmd: ::Array[String]?
+
+      def cmd=: (::Array[String]) -> ::Array[String]
+
+      attr_reader domainname: String?
+
+      def domainname=: (String) -> String
+
+      attr_reader entrypoint: ::Array[String]?
+
+      def entrypoint=: (::Array[String]) -> ::Array[String]
+
+      attr_reader env: ::Array[String]?
+
+      def env=: (::Array[String]) -> ::Array[String]
+
+      attr_accessor exposed_ports: ::Hash[Symbol, top]?
+
+      attr_reader healthcheck: DockerEngine::Config::Healthcheck?
+
+      def healthcheck=: (
+        DockerEngine::Config::Healthcheck
+      ) -> DockerEngine::Config::Healthcheck
+
+      attr_reader hostname: String?
+
+      def hostname=: (String) -> String
+
+      attr_reader image: String?
+
+      def image=: (String) -> String
+
+      attr_reader labels: ::Hash[Symbol, String]?
+
+      def labels=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+      attr_accessor network_disabled: bool?
+
+      attr_accessor on_build: ::Array[String]?
+
+      attr_reader open_stdin: bool?
+
+      def open_stdin=: (bool) -> bool
+
+      attr_accessor shell: ::Array[String]?
+
+      attr_reader stdin_once: bool?
+
+      def stdin_once=: (bool) -> bool
+
+      attr_accessor stop_signal: String?
+
+      attr_accessor stop_timeout: Integer?
+
+      attr_reader tty: bool?
+
+      def tty=: (bool) -> bool
+
+      attr_reader user: String?
+
+      def user=: (String) -> String
+
+      attr_reader volumes: ::Hash[Symbol, top]?
+
+      def volumes=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+      attr_reader working_dir: String?
+
+      def working_dir=: (String) -> String
+
+      def initialize: (
+        ?args_escaped: bool?,
+        ?attach_stderr: bool,
+        ?attach_stdin: bool,
+        ?attach_stdout: bool,
+        ?cmd: ::Array[String],
+        ?domainname: String,
+        ?entrypoint: ::Array[String],
+        ?env: ::Array[String],
+        ?exposed_ports: ::Hash[Symbol, top]?,
+        ?healthcheck: DockerEngine::Config::Healthcheck,
+        ?hostname: String,
+        ?image: String,
+        ?labels: ::Hash[Symbol, String],
+        ?network_disabled: bool?,
+        ?on_build: ::Array[String]?,
+        ?open_stdin: bool,
+        ?shell: ::Array[String]?,
+        ?stdin_once: bool,
+        ?stop_signal: String?,
+        ?stop_timeout: Integer?,
+        ?tty: bool,
+        ?user: String,
+        ?volumes: ::Hash[Symbol, top],
+        ?working_dir: String
+      ) -> void
+
+      def to_hash: -> {
+        args_escaped: bool?,
+        attach_stderr: bool,
+        attach_stdin: bool,
+        attach_stdout: bool,
+        cmd: ::Array[String],
+        domainname: String,
+        entrypoint: ::Array[String],
+        env: ::Array[String],
+        exposed_ports: ::Hash[Symbol, top]?,
+        healthcheck: DockerEngine::Config::Healthcheck,
+        hostname: String,
+        image: String,
+        labels: ::Hash[Symbol, String],
+        network_disabled: bool?,
+        on_build: ::Array[String]?,
+        open_stdin: bool,
+        shell: ::Array[String]?,
+        stdin_once: bool,
+        stop_signal: String?,
+        stop_timeout: Integer?,
+        tty: bool,
+        user: String,
+        volumes: ::Hash[Symbol, top],
+        working_dir: String
+      }
+
+      type healthcheck =
+        {
+          interval: Integer,
+          retries: Integer,
+          start_interval: Integer,
+          start_period: Integer,
+          test_: ::Array[String],
+          timeout: Integer
+        }
+
+      class Healthcheck < DockerEngine::Internal::Type::BaseModel
+        attr_reader interval: Integer?
+
+        def interval=: (Integer) -> Integer
+
+        attr_reader retries: Integer?
+
+        def retries=: (Integer) -> Integer
+
+        attr_reader start_interval: Integer?
+
+        def start_interval=: (Integer) -> Integer
+
+        attr_reader start_period: Integer?
+
+        def start_period=: (Integer) -> Integer
+
+        attr_reader test_: ::Array[String]?
+
+        def test_=: (::Array[String]) -> ::Array[String]
+
+        attr_reader timeout: Integer?
+
+        def timeout=: (Integer) -> Integer
+
+        def initialize: (
+          ?interval: Integer,
+          ?retries: Integer,
+          ?start_interval: Integer,
+          ?start_period: Integer,
+          ?test_: ::Array[String],
+          ?timeout: Integer
+        ) -> void
+
+        def to_hash: -> {
+          interval: Integer,
+          retries: Integer,
+          start_interval: Integer,
+          start_period: Integer,
+          test_: ::Array[String],
+          timeout: Integer
+        }
+      end
+    end
+  end
+end

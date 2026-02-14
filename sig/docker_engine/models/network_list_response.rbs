@@ -1,0 +1,7 @@
+module DockerEngine
+  module Models
+    type network_list_response = ::Array[DockerEngine::Summary]
+
+    NetworkListResponse: DockerEngine::Internal::Type::Converter
+  end
+end

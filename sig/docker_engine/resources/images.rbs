@@ -1,0 +1,43 @@
+module DockerEngine
+  module Resources
+    class Images
+      def list: (
+        ?all: bool,
+        ?digests: bool,
+        ?filters: String,
+        ?manifests: bool,
+        ?shared_size: bool,
+        ?request_options: DockerEngine::request_opts
+      ) -> DockerEngine::Models::image_list_response
+
+      def delete: (
+        String name,
+        ?force: bool,
+        ?noprune: bool,
+        ?platforms: ::Array[String],
+        ?request_options: DockerEngine::request_opts
+      ) -> DockerEngine::Models::image_delete_response
+
+      def inspect_: (
+        String name,
+        ?manifests: bool,
+        ?request_options: DockerEngine::request_opts
+      ) -> DockerEngine::Image
+
+      def pull: (
+        ?changes: ::Array[String],
+        ?from_image: String,
+        ?from_src: String,
+        ?message: String,
+        ?platform: String,
+        ?repo: String,
+        ?tag: String,
+        ?body: String,
+        ?x_registry_auth: String,
+        ?request_options: DockerEngine::request_opts
+      ) -> nil
+
+      def initialize: (client: DockerEngine::Client) -> void
+    end
+  end
+end

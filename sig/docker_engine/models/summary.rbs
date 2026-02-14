@@ -1,0 +1,634 @@
+module DockerEngine
+  module Models
+    type summary =
+      {
+        command: String,
+        created: Integer,
+        health: DockerEngine::Summary::Health,
+        host_config: DockerEngine::Summary::HostConfig,
+        id: String,
+        image: String,
+        image_id: String,
+        image_manifest_descriptor: DockerEngine::Summary::ImageManifestDescriptor,
+        labels: ::Hash[Symbol, String],
+        mounts: ::Array[DockerEngine::Summary::Mount],
+        names: ::Array[String],
+        network_settings: DockerEngine::Summary::NetworkSettings,
+        ports: ::Array[DockerEngine::Summary::Port],
+        size_root_fs: Integer?,
+        size_rw: Integer?,
+        state: DockerEngine::Models::Summary::state,
+        status: String
+      }
+
+    class Summary < DockerEngine::Internal::Type::BaseModel
+      attr_reader command: String?
+
+      def command=: (String) -> String
+
+      attr_reader created: Integer?
+
+      def created=: (Integer) -> Integer
+
+      attr_reader health: DockerEngine::Summary::Health?
+
+      def health=: (
+        DockerEngine::Summary::Health
+      ) -> DockerEngine::Summary::Health
+
+      attr_reader host_config: DockerEngine::Summary::HostConfig?
+
+      def host_config=: (
+        DockerEngine::Summary::HostConfig
+      ) -> DockerEngine::Summary::HostConfig
+
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      attr_reader image: String?
+
+      def image=: (String) -> String
+
+      attr_reader image_id: String?
+
+      def image_id=: (String) -> String
+
+      attr_reader image_manifest_descriptor: DockerEngine::Summary::ImageManifestDescriptor?
+
+      def image_manifest_descriptor=: (
+        DockerEngine::Summary::ImageManifestDescriptor
+      ) -> DockerEngine::Summary::ImageManifestDescriptor
+
+      attr_reader labels: ::Hash[Symbol, String]?
+
+      def labels=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+      attr_reader mounts: ::Array[DockerEngine::Summary::Mount]?
+
+      def mounts=: (
+        ::Array[DockerEngine::Summary::Mount]
+      ) -> ::Array[DockerEngine::Summary::Mount]
+
+      attr_reader names: ::Array[String]?
+
+      def names=: (::Array[String]) -> ::Array[String]
+
+      attr_reader network_settings: DockerEngine::Summary::NetworkSettings?
+
+      def network_settings=: (
+        DockerEngine::Summary::NetworkSettings
+      ) -> DockerEngine::Summary::NetworkSettings
+
+      attr_reader ports: ::Array[DockerEngine::Summary::Port]?
+
+      def ports=: (
+        ::Array[DockerEngine::Summary::Port]
+      ) -> ::Array[DockerEngine::Summary::Port]
+
+      attr_accessor size_root_fs: Integer?
+
+      attr_accessor size_rw: Integer?
+
+      attr_reader state: DockerEngine::Models::Summary::state?
+
+      def state=: (
+        DockerEngine::Models::Summary::state
+      ) -> DockerEngine::Models::Summary::state
+
+      attr_reader status: String?
+
+      def status=: (String) -> String
+
+      def initialize: (
+        ?command: String,
+        ?created: Integer,
+        ?health: DockerEngine::Summary::Health,
+        ?host_config: DockerEngine::Summary::HostConfig,
+        ?id: String,
+        ?image: String,
+        ?image_id: String,
+        ?image_manifest_descriptor: DockerEngine::Summary::ImageManifestDescriptor,
+        ?labels: ::Hash[Symbol, String],
+        ?mounts: ::Array[DockerEngine::Summary::Mount],
+        ?names: ::Array[String],
+        ?network_settings: DockerEngine::Summary::NetworkSettings,
+        ?ports: ::Array[DockerEngine::Summary::Port],
+        ?size_root_fs: Integer?,
+        ?size_rw: Integer?,
+        ?state: DockerEngine::Models::Summary::state,
+        ?status: String
+      ) -> void
+
+      def to_hash: -> {
+        command: String,
+        created: Integer,
+        health: DockerEngine::Summary::Health,
+        host_config: DockerEngine::Summary::HostConfig,
+        id: String,
+        image: String,
+        image_id: String,
+        image_manifest_descriptor: DockerEngine::Summary::ImageManifestDescriptor,
+        labels: ::Hash[Symbol, String],
+        mounts: ::Array[DockerEngine::Summary::Mount],
+        names: ::Array[String],
+        network_settings: DockerEngine::Summary::NetworkSettings,
+        ports: ::Array[DockerEngine::Summary::Port],
+        size_root_fs: Integer?,
+        size_rw: Integer?,
+        state: DockerEngine::Models::Summary::state,
+        status: String
+      }
+
+      type health =
+        {
+          failing_streak: Integer,
+          status: DockerEngine::Models::Summary::Health::status
+        }
+
+      class Health < DockerEngine::Internal::Type::BaseModel
+        attr_reader failing_streak: Integer?
+
+        def failing_streak=: (Integer) -> Integer
+
+        attr_reader status: DockerEngine::Models::Summary::Health::status?
+
+        def status=: (
+          DockerEngine::Models::Summary::Health::status
+        ) -> DockerEngine::Models::Summary::Health::status
+
+        def initialize: (
+          ?failing_streak: Integer,
+          ?status: DockerEngine::Models::Summary::Health::status
+        ) -> void
+
+        def to_hash: -> {
+          failing_streak: Integer,
+          status: DockerEngine::Models::Summary::Health::status
+        }
+
+        type status = :none | :starting | :healthy | :unhealthy
+
+        module Status
+          extend DockerEngine::Internal::Type::Enum
+
+          NONE: :none
+          STARTING: :starting
+          HEALTHY: :healthy
+          UNHEALTHY: :unhealthy
+
+          def self?.values: -> ::Array[DockerEngine::Models::Summary::Health::status]
+        end
+      end
+
+      type host_config =
+        { annotations: ::Hash[Symbol, String]?, network_mode: String }
+
+      class HostConfig < DockerEngine::Internal::Type::BaseModel
+        attr_accessor annotations: ::Hash[Symbol, String]?
+
+        attr_reader network_mode: String?
+
+        def network_mode=: (String) -> String
+
+        def initialize: (
+          ?annotations: ::Hash[Symbol, String]?,
+          ?network_mode: String
+        ) -> void
+
+        def to_hash: -> {
+          annotations: ::Hash[Symbol, String]?,
+          network_mode: String
+        }
+      end
+
+      type image_manifest_descriptor =
+        {
+          annotations: ::Hash[Symbol, String]?,
+          artifact_type: String?,
+          data: String?,
+          digest: String,
+          media_type: String,
+          platform: DockerEngine::Summary::ImageManifestDescriptor::Platform?,
+          size: Integer,
+          urls: ::Array[String]?
+        }
+
+      class ImageManifestDescriptor < DockerEngine::Internal::Type::BaseModel
+        attr_accessor annotations: ::Hash[Symbol, String]?
+
+        attr_accessor artifact_type: String?
+
+        attr_accessor data: String?
+
+        attr_reader digest: String?
+
+        def digest=: (String) -> String
+
+        attr_reader media_type: String?
+
+        def media_type=: (String) -> String
+
+        attr_accessor platform: DockerEngine::Summary::ImageManifestDescriptor::Platform?
+
+        attr_reader size: Integer?
+
+        def size=: (Integer) -> Integer
+
+        attr_accessor urls: ::Array[String]?
+
+        def initialize: (
+          ?annotations: ::Hash[Symbol, String]?,
+          ?artifact_type: String?,
+          ?data: String?,
+          ?digest: String,
+          ?media_type: String,
+          ?platform: DockerEngine::Summary::ImageManifestDescriptor::Platform?,
+          ?size: Integer,
+          ?urls: ::Array[String]?
+        ) -> void
+
+        def to_hash: -> {
+          annotations: ::Hash[Symbol, String]?,
+          artifact_type: String?,
+          data: String?,
+          digest: String,
+          media_type: String,
+          platform: DockerEngine::Summary::ImageManifestDescriptor::Platform?,
+          size: Integer,
+          urls: ::Array[String]?
+        }
+
+        type platform =
+          {
+            architecture: String,
+            os: String,
+            os_features: ::Array[String],
+            os_version: String,
+            variant: String
+          }
+
+        class Platform < DockerEngine::Internal::Type::BaseModel
+          attr_reader architecture: String?
+
+          def architecture=: (String) -> String
+
+          attr_reader os: String?
+
+          def os=: (String) -> String
+
+          attr_reader os_features: ::Array[String]?
+
+          def os_features=: (::Array[String]) -> ::Array[String]
+
+          attr_reader os_version: String?
+
+          def os_version=: (String) -> String
+
+          attr_reader variant: String?
+
+          def variant=: (String) -> String
+
+          def initialize: (
+            ?architecture: String,
+            ?os: String,
+            ?os_features: ::Array[String],
+            ?os_version: String,
+            ?variant: String
+          ) -> void
+
+          def to_hash: -> {
+            architecture: String,
+            os: String,
+            os_features: ::Array[String],
+            os_version: String,
+            variant: String
+          }
+        end
+      end
+
+      type mount =
+        {
+          destination: String,
+          driver: String,
+          mode: String,
+          name: String,
+          propagation: String,
+          rw: bool,
+          source: String,
+          type: DockerEngine::Models::Summary::Mount::type_
+        }
+
+      class Mount < DockerEngine::Internal::Type::BaseModel
+        attr_reader destination: String?
+
+        def destination=: (String) -> String
+
+        attr_reader driver: String?
+
+        def driver=: (String) -> String
+
+        attr_reader mode: String?
+
+        def mode=: (String) -> String
+
+        attr_reader name: String?
+
+        def name=: (String) -> String
+
+        attr_reader propagation: String?
+
+        def propagation=: (String) -> String
+
+        attr_reader rw: bool?
+
+        def rw=: (bool) -> bool
+
+        attr_reader source: String?
+
+        def source=: (String) -> String
+
+        attr_reader type: DockerEngine::Models::Summary::Mount::type_?
+
+        def type=: (
+          DockerEngine::Models::Summary::Mount::type_
+        ) -> DockerEngine::Models::Summary::Mount::type_
+
+        def initialize: (
+          ?destination: String,
+          ?driver: String,
+          ?mode: String,
+          ?name: String,
+          ?propagation: String,
+          ?rw: bool,
+          ?source: String,
+          ?type: DockerEngine::Models::Summary::Mount::type_
+        ) -> void
+
+        def to_hash: -> {
+          destination: String,
+          driver: String,
+          mode: String,
+          name: String,
+          propagation: String,
+          rw: bool,
+          source: String,
+          type: DockerEngine::Models::Summary::Mount::type_
+        }
+
+        type type_ = :bind | :cluster | :image | :npipe | :tmpfs | :volume
+
+        module Type
+          extend DockerEngine::Internal::Type::Enum
+
+          BIND: :bind
+          CLUSTER: :cluster
+          IMAGE: :image
+          NPIPE: :npipe
+          TMPFS: :tmpfs
+          VOLUME: :volume
+
+          def self?.values: -> ::Array[DockerEngine::Models::Summary::Mount::type_]
+        end
+      end
+
+      type network_settings =
+        {
+          networks: ::Hash[Symbol, DockerEngine::Summary::NetworkSettings::Network]
+        }
+
+      class NetworkSettings < DockerEngine::Internal::Type::BaseModel
+        attr_reader networks: ::Hash[Symbol, DockerEngine::Summary::NetworkSettings::Network]?
+
+        def networks=: (
+          ::Hash[Symbol, DockerEngine::Summary::NetworkSettings::Network]
+        ) -> ::Hash[Symbol, DockerEngine::Summary::NetworkSettings::Network]
+
+        def initialize: (
+          ?networks: ::Hash[Symbol, DockerEngine::Summary::NetworkSettings::Network]
+        ) -> void
+
+        def to_hash: -> {
+          networks: ::Hash[Symbol, DockerEngine::Summary::NetworkSettings::Network]
+        }
+
+        type network =
+          {
+            aliases: ::Array[String],
+            dns_names: ::Array[String],
+            driver_opts: ::Hash[Symbol, String]?,
+            endpoint_id: String,
+            gateway: String,
+            :global_i_pv6_address => String,
+            :global_i_pv6_prefix_len => Integer,
+            gw_priority: Integer,
+            ip_address: String,
+            ipam_config: DockerEngine::Summary::NetworkSettings::Network::IpamConfig?,
+            ip_prefix_len: Integer,
+            :i_pv6_gateway => String,
+            links: ::Array[String],
+            mac_address: String,
+            network_id: String
+          }
+
+        class Network < DockerEngine::Internal::Type::BaseModel
+          attr_reader aliases: ::Array[String]?
+
+          def aliases=: (::Array[String]) -> ::Array[String]
+
+          attr_reader dns_names: ::Array[String]?
+
+          def dns_names=: (::Array[String]) -> ::Array[String]
+
+          attr_accessor driver_opts: ::Hash[Symbol, String]?
+
+          attr_reader endpoint_id: String?
+
+          def endpoint_id=: (String) -> String
+
+          attr_reader gateway: String?
+
+          def gateway=: (String) -> String
+
+          attr_reader global_i_pv6_address: String?
+
+          def global_i_pv6_address=: (String) -> String
+
+          attr_reader global_i_pv6_prefix_len: Integer?
+
+          def global_i_pv6_prefix_len=: (Integer) -> Integer
+
+          attr_reader gw_priority: Integer?
+
+          def gw_priority=: (Integer) -> Integer
+
+          attr_reader ip_address: String?
+
+          def ip_address=: (String) -> String
+
+          attr_accessor ipam_config: DockerEngine::Summary::NetworkSettings::Network::IpamConfig?
+
+          attr_reader ip_prefix_len: Integer?
+
+          def ip_prefix_len=: (Integer) -> Integer
+
+          attr_reader i_pv6_gateway: String?
+
+          def i_pv6_gateway=: (String) -> String
+
+          attr_reader links: ::Array[String]?
+
+          def links=: (::Array[String]) -> ::Array[String]
+
+          attr_reader mac_address: String?
+
+          def mac_address=: (String) -> String
+
+          attr_reader network_id: String?
+
+          def network_id=: (String) -> String
+
+          def initialize: (
+            ?aliases: ::Array[String],
+            ?dns_names: ::Array[String],
+            ?driver_opts: ::Hash[Symbol, String]?,
+            ?endpoint_id: String,
+            ?gateway: String,
+            ?global_i_pv6_address: String,
+            ?global_i_pv6_prefix_len: Integer,
+            ?gw_priority: Integer,
+            ?ip_address: String,
+            ?ipam_config: DockerEngine::Summary::NetworkSettings::Network::IpamConfig?,
+            ?ip_prefix_len: Integer,
+            ?i_pv6_gateway: String,
+            ?links: ::Array[String],
+            ?mac_address: String,
+            ?network_id: String
+          ) -> void
+
+          def to_hash: -> {
+            aliases: ::Array[String],
+            dns_names: ::Array[String],
+            driver_opts: ::Hash[Symbol, String]?,
+            endpoint_id: String,
+            gateway: String,
+            :global_i_pv6_address => String,
+            :global_i_pv6_prefix_len => Integer,
+            gw_priority: Integer,
+            ip_address: String,
+            ipam_config: DockerEngine::Summary::NetworkSettings::Network::IpamConfig?,
+            ip_prefix_len: Integer,
+            :i_pv6_gateway => String,
+            links: ::Array[String],
+            mac_address: String,
+            network_id: String
+          }
+
+          type ipam_config =
+            {
+              :i_pv4_address => String,
+              :i_pv6_address => String,
+              link_local_ips: ::Array[String]
+            }
+
+          class IpamConfig < DockerEngine::Internal::Type::BaseModel
+            attr_reader i_pv4_address: String?
+
+            def i_pv4_address=: (String) -> String
+
+            attr_reader i_pv6_address: String?
+
+            def i_pv6_address=: (String) -> String
+
+            attr_reader link_local_ips: ::Array[String]?
+
+            def link_local_ips=: (::Array[String]) -> ::Array[String]
+
+            def initialize: (
+              ?i_pv4_address: String,
+              ?i_pv6_address: String,
+              ?link_local_ips: ::Array[String]
+            ) -> void
+
+            def to_hash: -> {
+              :i_pv4_address => String,
+              :i_pv6_address => String,
+              link_local_ips: ::Array[String]
+            }
+          end
+        end
+      end
+
+      type port =
+        {
+          private_port: Integer,
+          type: DockerEngine::Models::Summary::Port::type_,
+          ip: String,
+          public_port: Integer
+        }
+
+      class Port < DockerEngine::Internal::Type::BaseModel
+        attr_accessor private_port: Integer
+
+        attr_accessor type: DockerEngine::Models::Summary::Port::type_
+
+        attr_reader ip: String?
+
+        def ip=: (String) -> String
+
+        attr_reader public_port: Integer?
+
+        def public_port=: (Integer) -> Integer
+
+        def initialize: (
+          private_port: Integer,
+          type: DockerEngine::Models::Summary::Port::type_,
+          ?ip: String,
+          ?public_port: Integer
+        ) -> void
+
+        def to_hash: -> {
+          private_port: Integer,
+          type: DockerEngine::Models::Summary::Port::type_,
+          ip: String,
+          public_port: Integer
+        }
+
+        type type_ = :tcp | :udp | :sctp
+
+        module Type
+          extend DockerEngine::Internal::Type::Enum
+
+          TCP: :tcp
+          UDP: :udp
+          SCTP: :sctp
+
+          def self?.values: -> ::Array[DockerEngine::Models::Summary::Port::type_]
+        end
+      end
+
+      type state =
+        :created
+        | :running
+        | :paused
+        | :restarting
+        | :exited
+        | :removing
+        | :dead
+
+      module State
+        extend DockerEngine::Internal::Type::Enum
+
+        CREATED: :created
+        RUNNING: :running
+        PAUSED: :paused
+        RESTARTING: :restarting
+        EXITED: :exited
+        REMOVING: :removing
+        DEAD: :dead
+
+        def self?.values: -> ::Array[DockerEngine::Models::Summary::state]
+      end
+    end
+  end
+end
