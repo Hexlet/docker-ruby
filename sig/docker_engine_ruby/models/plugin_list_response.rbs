@@ -1,0 +1,7 @@
+module DockerEngineRuby
+  module Models
+    type plugin_list_response = ::Array[DockerEngineRuby::Plugin]
+
+    PluginListResponse: DockerEngineRuby::Internal::Type::Converter
+  end
+end

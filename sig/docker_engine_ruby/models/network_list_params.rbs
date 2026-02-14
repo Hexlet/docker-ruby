@@ -1,0 +1,25 @@
+module DockerEngineRuby
+  module Models
+    type network_list_params =
+      { filters: String } & DockerEngineRuby::Internal::Type::request_parameters
+
+    class NetworkListParams < DockerEngineRuby::Internal::Type::BaseModel
+      extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
+      include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_reader filters: String?
+
+      def filters=: (String) -> String
+
+      def initialize: (
+        ?filters: String,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        filters: String,
+        request_options: DockerEngineRuby::RequestOptions
+      }
+    end
+  end
+end

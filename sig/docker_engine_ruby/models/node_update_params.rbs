@@ -1,0 +1,24 @@
+module DockerEngineRuby
+  module Models
+    type node_update_params =
+      { version: Integer }
+      & DockerEngineRuby::Internal::Type::request_parameters
+
+    class NodeUpdateParams < DockerEngineRuby::Internal::Type::BaseModel
+      extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
+      include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_accessor version: Integer
+
+      def initialize: (
+        version: Integer,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        version: Integer,
+        request_options: DockerEngineRuby::RequestOptions
+      }
+    end
+  end
+end

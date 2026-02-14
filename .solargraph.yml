@@ -5,7 +5,7 @@ include:
   - 'Rakefile'
   - 'examples/**/*.rb'
   - 'lib/**/*.rb'
-  - 'test/docker_engine_api/resource_namespaces.rb'
-  - 'test/docker_engine_api/test_helper.rb'
+  - 'test/docker_engine_ruby/resource_namespaces.rb'
+  - 'test/docker_engine_ruby/test_helper.rb'
 exclude:
   - 'rbi/**/*'

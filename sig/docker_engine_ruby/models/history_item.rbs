@@ -1,0 +1,45 @@
+module DockerEngineRuby
+  module Models
+    type history_item =
+      {
+        comment: String,
+        created: Integer,
+        created_by: String,
+        id: String,
+        size: Integer,
+        tags: ::Array[String]
+      }
+
+    class HistoryItem < DockerEngineRuby::Internal::Type::BaseModel
+      attr_accessor comment: String
+
+      attr_accessor created: Integer
+
+      attr_accessor created_by: String
+
+      attr_accessor id: String
+
+      attr_accessor size: Integer
+
+      attr_accessor tags: ::Array[String]
+
+      def initialize: (
+        comment: String,
+        created: Integer,
+        created_by: String,
+        id: String,
+        size: Integer,
+        tags: ::Array[String]
+      ) -> void
+
+      def to_hash: -> {
+        comment: String,
+        created: Integer,
+        created_by: String,
+        id: String,
+        size: Integer,
+        tags: ::Array[String]
+      }
+    end
+  end
+end

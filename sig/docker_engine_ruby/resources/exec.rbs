@@ -1,0 +1,27 @@
+module DockerEngineRuby
+  module Resources
+    class Exec
+      def inspect_: (
+        String id,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> DockerEngineRuby::Models::ExecInspectResponse
+
+      def resize: (
+        String id,
+        h: Integer,
+        w: Integer,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> nil
+
+      def start: (
+        String id,
+        ?console_size: ::Array[Integer]?,
+        ?detach: bool,
+        ?tty: bool,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> nil
+
+      def initialize: (client: DockerEngineRuby::Client) -> void
+    end
+  end
+end

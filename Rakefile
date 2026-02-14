@@ -162,7 +162,7 @@ multitask(:"build:gem") do
     sig/*
   GLOB
 
-  sh(*%w[gem build -- docker_engine_api.gemspec])
+  sh(*%w[gem build -- docker_engine_ruby.gemspec])
   rm_rf(ignore_file)
 end
 

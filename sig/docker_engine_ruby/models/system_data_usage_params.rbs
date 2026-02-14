@@ -1,0 +1,50 @@
+module DockerEngineRuby
+  module Models
+    type system_data_usage_params =
+      {
+        type: ::Array[DockerEngineRuby::Models::SystemDataUsageParams::type_],
+        verbose: bool
+      }
+      & DockerEngineRuby::Internal::Type::request_parameters
+
+    class SystemDataUsageParams < DockerEngineRuby::Internal::Type::BaseModel
+      extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
+      include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_reader type: ::Array[DockerEngineRuby::Models::SystemDataUsageParams::type_]?
+
+      def type=: (
+        ::Array[DockerEngineRuby::Models::SystemDataUsageParams::type_]
+      ) -> ::Array[DockerEngineRuby::Models::SystemDataUsageParams::type_]
+
+      attr_reader verbose: bool?
+
+      def verbose=: (bool) -> bool
+
+      def initialize: (
+        ?type: ::Array[DockerEngineRuby::Models::SystemDataUsageParams::type_],
+        ?verbose: bool,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        type: ::Array[DockerEngineRuby::Models::SystemDataUsageParams::type_],
+        verbose: bool,
+        request_options: DockerEngineRuby::RequestOptions
+      }
+
+      type type_ = :container | :image | :volume | :"build-cache"
+
+      module Type
+        extend DockerEngineRuby::Internal::Type::Enum
+
+        CONTAINER: :container
+        IMAGE: :image
+        VOLUME: :volume
+        BUILD_CACHE: :"build-cache"
+
+        def self?.values: -> ::Array[DockerEngineRuby::Models::SystemDataUsageParams::type_]
+      end
+    end
+  end
+end

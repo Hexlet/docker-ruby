@@ -1,0 +1,12 @@
+module DockerEngineRuby
+  module Resources
+    class Distribution
+      def inspect_: (
+        String name,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> DockerEngineRuby::Inspect
+
+      def initialize: (client: DockerEngineRuby::Client) -> void
+    end
+  end
+end

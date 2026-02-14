@@ -1,0 +1,34 @@
+module DockerEngineRuby
+  module Models
+    type filesystem_change =
+      { kind: DockerEngineRuby::Models::FilesystemChange::kind, path: String }
+
+    class FilesystemChange < DockerEngineRuby::Internal::Type::BaseModel
+      attr_accessor kind: DockerEngineRuby::Models::FilesystemChange::kind
+
+      attr_accessor path: String
+
+      def initialize: (
+        kind: DockerEngineRuby::Models::FilesystemChange::kind,
+        path: String
+      ) -> void
+
+      def to_hash: -> {
+        kind: DockerEngineRuby::Models::FilesystemChange::kind,
+        path: String
+      }
+
+      type kind = 0 | 1 | 2
+
+      module Kind
+        extend DockerEngineRuby::Internal::Type::Enum
+
+        KIND_0: 0
+        KIND_1: 1
+        KIND_2: 2
+
+        def self?.values: -> ::Array[DockerEngineRuby::Models::FilesystemChange::kind]
+      end
+    end
+  end
+end

@@ -1,0 +1,7 @@
+module DockerEngineRuby
+  module Models
+    type image_history_response = ::Array[DockerEngineRuby::HistoryItem]
+
+    ImageHistoryResponse: DockerEngineRuby::Internal::Type::Converter
+  end
+end

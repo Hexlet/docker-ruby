@@ -1,0 +1,38 @@
+module DockerEngineRuby
+  module Models
+    type auth_login_params =
+      { password: String, serveraddress: String, username: String }
+      & DockerEngineRuby::Internal::Type::request_parameters
+
+    class AuthLoginParams < DockerEngineRuby::Internal::Type::BaseModel
+      extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
+      include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_reader password: String?
+
+      def password=: (String) -> String
+
+      attr_reader serveraddress: String?
+
+      def serveraddress=: (String) -> String
+
+      attr_reader username: String?
+
+      def username=: (String) -> String
+
+      def initialize: (
+        ?password: String,
+        ?serveraddress: String,
+        ?username: String,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        password: String,
+        serveraddress: String,
+        username: String,
+        request_options: DockerEngineRuby::RequestOptions
+      }
+    end
+  end
+end

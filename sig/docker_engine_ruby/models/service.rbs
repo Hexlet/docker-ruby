@@ -1,0 +1,471 @@
+module DockerEngineRuby
+  module Models
+    type service =
+      {
+        created_at: String,
+        endpoint: DockerEngineRuby::Service::Endpoint,
+        id: String,
+        job_status: DockerEngineRuby::Service::JobStatus,
+        service_status: DockerEngineRuby::Service::ServiceStatus,
+        spec: DockerEngineRuby::Spec,
+        updated_at: String,
+        update_status: DockerEngineRuby::Service::UpdateStatus,
+        version: DockerEngineRuby::Service::Version
+      }
+
+    class Service < DockerEngineRuby::Internal::Type::BaseModel
+      attr_reader created_at: String?
+
+      def created_at=: (String) -> String
+
+      attr_reader endpoint: DockerEngineRuby::Service::Endpoint?
+
+      def endpoint=: (
+        DockerEngineRuby::Service::Endpoint
+      ) -> DockerEngineRuby::Service::Endpoint
+
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      attr_reader job_status: DockerEngineRuby::Service::JobStatus?
+
+      def job_status=: (
+        DockerEngineRuby::Service::JobStatus
+      ) -> DockerEngineRuby::Service::JobStatus
+
+      attr_reader service_status: DockerEngineRuby::Service::ServiceStatus?
+
+      def service_status=: (
+        DockerEngineRuby::Service::ServiceStatus
+      ) -> DockerEngineRuby::Service::ServiceStatus
+
+      attr_reader spec: DockerEngineRuby::Spec?
+
+      def spec=: (DockerEngineRuby::Spec) -> DockerEngineRuby::Spec
+
+      attr_reader updated_at: String?
+
+      def updated_at=: (String) -> String
+
+      attr_reader update_status: DockerEngineRuby::Service::UpdateStatus?
+
+      def update_status=: (
+        DockerEngineRuby::Service::UpdateStatus
+      ) -> DockerEngineRuby::Service::UpdateStatus
+
+      attr_reader version: DockerEngineRuby::Service::Version?
+
+      def version=: (
+        DockerEngineRuby::Service::Version
+      ) -> DockerEngineRuby::Service::Version
+
+      def initialize: (
+        ?created_at: String,
+        ?endpoint: DockerEngineRuby::Service::Endpoint,
+        ?id: String,
+        ?job_status: DockerEngineRuby::Service::JobStatus,
+        ?service_status: DockerEngineRuby::Service::ServiceStatus,
+        ?spec: DockerEngineRuby::Spec,
+        ?updated_at: String,
+        ?update_status: DockerEngineRuby::Service::UpdateStatus,
+        ?version: DockerEngineRuby::Service::Version
+      ) -> void
+
+      def to_hash: -> {
+        created_at: String,
+        endpoint: DockerEngineRuby::Service::Endpoint,
+        id: String,
+        job_status: DockerEngineRuby::Service::JobStatus,
+        service_status: DockerEngineRuby::Service::ServiceStatus,
+        spec: DockerEngineRuby::Spec,
+        updated_at: String,
+        update_status: DockerEngineRuby::Service::UpdateStatus,
+        version: DockerEngineRuby::Service::Version
+      }
+
+      type endpoint =
+        {
+          ports: ::Array[DockerEngineRuby::Service::Endpoint::Port],
+          spec: DockerEngineRuby::Service::Endpoint::Spec,
+          virtual_ips: ::Array[DockerEngineRuby::Service::Endpoint::VirtualIP]
+        }
+
+      class Endpoint < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader ports: ::Array[DockerEngineRuby::Service::Endpoint::Port]?
+
+        def ports=: (
+          ::Array[DockerEngineRuby::Service::Endpoint::Port]
+        ) -> ::Array[DockerEngineRuby::Service::Endpoint::Port]
+
+        attr_reader spec: DockerEngineRuby::Service::Endpoint::Spec?
+
+        def spec=: (
+          DockerEngineRuby::Service::Endpoint::Spec
+        ) -> DockerEngineRuby::Service::Endpoint::Spec
+
+        attr_reader virtual_ips: ::Array[DockerEngineRuby::Service::Endpoint::VirtualIP]?
+
+        def virtual_ips=: (
+          ::Array[DockerEngineRuby::Service::Endpoint::VirtualIP]
+        ) -> ::Array[DockerEngineRuby::Service::Endpoint::VirtualIP]
+
+        def initialize: (
+          ?ports: ::Array[DockerEngineRuby::Service::Endpoint::Port],
+          ?spec: DockerEngineRuby::Service::Endpoint::Spec,
+          ?virtual_ips: ::Array[DockerEngineRuby::Service::Endpoint::VirtualIP]
+        ) -> void
+
+        def to_hash: -> {
+          ports: ::Array[DockerEngineRuby::Service::Endpoint::Port],
+          spec: DockerEngineRuby::Service::Endpoint::Spec,
+          virtual_ips: ::Array[DockerEngineRuby::Service::Endpoint::VirtualIP]
+        }
+
+        type port =
+          {
+            name: String,
+            protocol: DockerEngineRuby::Models::Service::Endpoint::Port::protocol,
+            published_port: Integer,
+            publish_mode: DockerEngineRuby::Models::Service::Endpoint::Port::publish_mode,
+            target_port: Integer
+          }
+
+        class Port < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader name: String?
+
+          def name=: (String) -> String
+
+          attr_reader protocol: DockerEngineRuby::Models::Service::Endpoint::Port::protocol?
+
+          def protocol=: (
+            DockerEngineRuby::Models::Service::Endpoint::Port::protocol
+          ) -> DockerEngineRuby::Models::Service::Endpoint::Port::protocol
+
+          attr_reader published_port: Integer?
+
+          def published_port=: (Integer) -> Integer
+
+          attr_reader publish_mode: DockerEngineRuby::Models::Service::Endpoint::Port::publish_mode?
+
+          def publish_mode=: (
+            DockerEngineRuby::Models::Service::Endpoint::Port::publish_mode
+          ) -> DockerEngineRuby::Models::Service::Endpoint::Port::publish_mode
+
+          attr_reader target_port: Integer?
+
+          def target_port=: (Integer) -> Integer
+
+          def initialize: (
+            ?name: String,
+            ?protocol: DockerEngineRuby::Models::Service::Endpoint::Port::protocol,
+            ?published_port: Integer,
+            ?publish_mode: DockerEngineRuby::Models::Service::Endpoint::Port::publish_mode,
+            ?target_port: Integer
+          ) -> void
+
+          def to_hash: -> {
+            name: String,
+            protocol: DockerEngineRuby::Models::Service::Endpoint::Port::protocol,
+            published_port: Integer,
+            publish_mode: DockerEngineRuby::Models::Service::Endpoint::Port::publish_mode,
+            target_port: Integer
+          }
+
+          type protocol = :tcp | :udp | :sctp
+
+          module Protocol
+            extend DockerEngineRuby::Internal::Type::Enum
+
+            TCP: :tcp
+            UDP: :udp
+            SCTP: :sctp
+
+            def self?.values: -> ::Array[DockerEngineRuby::Models::Service::Endpoint::Port::protocol]
+          end
+
+          type publish_mode = :ingress | :host
+
+          module PublishMode
+            extend DockerEngineRuby::Internal::Type::Enum
+
+            INGRESS: :ingress
+            HOST: :host
+
+            def self?.values: -> ::Array[DockerEngineRuby::Models::Service::Endpoint::Port::publish_mode]
+          end
+        end
+
+        type spec =
+          {
+            mode: DockerEngineRuby::Models::Service::Endpoint::Spec::mode,
+            ports: ::Array[DockerEngineRuby::Service::Endpoint::Spec::Port]
+          }
+
+        class Spec < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader mode: DockerEngineRuby::Models::Service::Endpoint::Spec::mode?
+
+          def mode=: (
+            DockerEngineRuby::Models::Service::Endpoint::Spec::mode
+          ) -> DockerEngineRuby::Models::Service::Endpoint::Spec::mode
+
+          attr_reader ports: ::Array[DockerEngineRuby::Service::Endpoint::Spec::Port]?
+
+          def ports=: (
+            ::Array[DockerEngineRuby::Service::Endpoint::Spec::Port]
+          ) -> ::Array[DockerEngineRuby::Service::Endpoint::Spec::Port]
+
+          def initialize: (
+            ?mode: DockerEngineRuby::Models::Service::Endpoint::Spec::mode,
+            ?ports: ::Array[DockerEngineRuby::Service::Endpoint::Spec::Port]
+          ) -> void
+
+          def to_hash: -> {
+            mode: DockerEngineRuby::Models::Service::Endpoint::Spec::mode,
+            ports: ::Array[DockerEngineRuby::Service::Endpoint::Spec::Port]
+          }
+
+          type mode = :vip | :dnsrr
+
+          module Mode
+            extend DockerEngineRuby::Internal::Type::Enum
+
+            VIP: :vip
+            DNSRR: :dnsrr
+
+            def self?.values: -> ::Array[DockerEngineRuby::Models::Service::Endpoint::Spec::mode]
+          end
+
+          type port =
+            {
+              name: String,
+              protocol: DockerEngineRuby::Models::Service::Endpoint::Spec::Port::protocol,
+              published_port: Integer,
+              publish_mode: DockerEngineRuby::Models::Service::Endpoint::Spec::Port::publish_mode,
+              target_port: Integer
+            }
+
+          class Port < DockerEngineRuby::Internal::Type::BaseModel
+            attr_reader name: String?
+
+            def name=: (String) -> String
+
+            attr_reader protocol: DockerEngineRuby::Models::Service::Endpoint::Spec::Port::protocol?
+
+            def protocol=: (
+              DockerEngineRuby::Models::Service::Endpoint::Spec::Port::protocol
+            ) -> DockerEngineRuby::Models::Service::Endpoint::Spec::Port::protocol
+
+            attr_reader published_port: Integer?
+
+            def published_port=: (Integer) -> Integer
+
+            attr_reader publish_mode: DockerEngineRuby::Models::Service::Endpoint::Spec::Port::publish_mode?
+
+            def publish_mode=: (
+              DockerEngineRuby::Models::Service::Endpoint::Spec::Port::publish_mode
+            ) -> DockerEngineRuby::Models::Service::Endpoint::Spec::Port::publish_mode
+
+            attr_reader target_port: Integer?
+
+            def target_port=: (Integer) -> Integer
+
+            def initialize: (
+              ?name: String,
+              ?protocol: DockerEngineRuby::Models::Service::Endpoint::Spec::Port::protocol,
+              ?published_port: Integer,
+              ?publish_mode: DockerEngineRuby::Models::Service::Endpoint::Spec::Port::publish_mode,
+              ?target_port: Integer
+            ) -> void
+
+            def to_hash: -> {
+              name: String,
+              protocol: DockerEngineRuby::Models::Service::Endpoint::Spec::Port::protocol,
+              published_port: Integer,
+              publish_mode: DockerEngineRuby::Models::Service::Endpoint::Spec::Port::publish_mode,
+              target_port: Integer
+            }
+
+            type protocol = :tcp | :udp | :sctp
+
+            module Protocol
+              extend DockerEngineRuby::Internal::Type::Enum
+
+              TCP: :tcp
+              UDP: :udp
+              SCTP: :sctp
+
+              def self?.values: -> ::Array[DockerEngineRuby::Models::Service::Endpoint::Spec::Port::protocol]
+            end
+
+            type publish_mode = :ingress | :host
+
+            module PublishMode
+              extend DockerEngineRuby::Internal::Type::Enum
+
+              INGRESS: :ingress
+              HOST: :host
+
+              def self?.values: -> ::Array[DockerEngineRuby::Models::Service::Endpoint::Spec::Port::publish_mode]
+            end
+          end
+        end
+
+        type virtual_ip = { addr: String, network_id: String }
+
+        class VirtualIP < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader addr: String?
+
+          def addr=: (String) -> String
+
+          attr_reader network_id: String?
+
+          def network_id=: (String) -> String
+
+          def initialize: (?addr: String, ?network_id: String) -> void
+
+          def to_hash: -> { addr: String, network_id: String }
+        end
+      end
+
+      type job_status =
+        {
+          job_iteration: DockerEngineRuby::Service::JobStatus::JobIteration,
+          last_execution: String
+        }
+
+      class JobStatus < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader job_iteration: DockerEngineRuby::Service::JobStatus::JobIteration?
+
+        def job_iteration=: (
+          DockerEngineRuby::Service::JobStatus::JobIteration
+        ) -> DockerEngineRuby::Service::JobStatus::JobIteration
+
+        attr_reader last_execution: String?
+
+        def last_execution=: (String) -> String
+
+        def initialize: (
+          ?job_iteration: DockerEngineRuby::Service::JobStatus::JobIteration,
+          ?last_execution: String
+        ) -> void
+
+        def to_hash: -> {
+          job_iteration: DockerEngineRuby::Service::JobStatus::JobIteration,
+          last_execution: String
+        }
+
+        type job_iteration = { index: Integer }
+
+        class JobIteration < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader index: Integer?
+
+          def index=: (Integer) -> Integer
+
+          def initialize: (?index: Integer) -> void
+
+          def to_hash: -> { index: Integer }
+        end
+      end
+
+      type service_status =
+        {
+          completed_tasks: Integer,
+          desired_tasks: Integer,
+          running_tasks: Integer
+        }
+
+      class ServiceStatus < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader completed_tasks: Integer?
+
+        def completed_tasks=: (Integer) -> Integer
+
+        attr_reader desired_tasks: Integer?
+
+        def desired_tasks=: (Integer) -> Integer
+
+        attr_reader running_tasks: Integer?
+
+        def running_tasks=: (Integer) -> Integer
+
+        def initialize: (
+          ?completed_tasks: Integer,
+          ?desired_tasks: Integer,
+          ?running_tasks: Integer
+        ) -> void
+
+        def to_hash: -> {
+          completed_tasks: Integer,
+          desired_tasks: Integer,
+          running_tasks: Integer
+        }
+      end
+
+      type update_status =
+        {
+          completed_at: String,
+          message: String,
+          started_at: String,
+          state: DockerEngineRuby::Models::Service::UpdateStatus::state
+        }
+
+      class UpdateStatus < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader completed_at: String?
+
+        def completed_at=: (String) -> String
+
+        attr_reader message: String?
+
+        def message=: (String) -> String
+
+        attr_reader started_at: String?
+
+        def started_at=: (String) -> String
+
+        attr_reader state: DockerEngineRuby::Models::Service::UpdateStatus::state?
+
+        def state=: (
+          DockerEngineRuby::Models::Service::UpdateStatus::state
+        ) -> DockerEngineRuby::Models::Service::UpdateStatus::state
+
+        def initialize: (
+          ?completed_at: String,
+          ?message: String,
+          ?started_at: String,
+          ?state: DockerEngineRuby::Models::Service::UpdateStatus::state
+        ) -> void
+
+        def to_hash: -> {
+          completed_at: String,
+          message: String,
+          started_at: String,
+          state: DockerEngineRuby::Models::Service::UpdateStatus::state
+        }
+
+        type state = :updating | :paused | :completed
+
+        module State
+          extend DockerEngineRuby::Internal::Type::Enum
+
+          UPDATING: :updating
+          PAUSED: :paused
+          COMPLETED: :completed
+
+          def self?.values: -> ::Array[DockerEngineRuby::Models::Service::UpdateStatus::state]
+        end
+      end
+
+      type version = { index: Integer }
+
+      class Version < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader index: Integer?
+
+        def index=: (Integer) -> Integer
+
+        def initialize: (?index: Integer) -> void
+
+        def to_hash: -> { index: Integer }
+      end
+    end
+  end
+end

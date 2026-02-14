@@ -1,0 +1,73 @@
+module DockerEngineRuby
+  module Resources
+    class Plugins
+      def create: (
+        name: String,
+        body: DockerEngineRuby::Internal::file_input,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> nil
+
+      def list: (
+        ?filters: String,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> DockerEngineRuby::Models::plugin_list_response
+
+      def delete: (
+        String name,
+        ?force: bool,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> DockerEngineRuby::Plugin
+
+      def disable: (
+        String name,
+        ?force: bool,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> nil
+
+      def enable: (
+        String name,
+        ?timeout: Integer,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> nil
+
+      def inspect_: (
+        String name,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> DockerEngineRuby::Plugin
+
+      def privileges: (
+        remote: String,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> DockerEngineRuby::Models::plugin_privileges_response
+
+      def pull: (
+        remote: String,
+        ?name: String,
+        ?body: ::Array[DockerEngineRuby::Privilege],
+        ?x_registry_auth: String,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> nil
+
+      def push: (
+        String name,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> nil
+
+      def set: (
+        String name,
+        ?body: ::Array[String],
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> nil
+
+      def upgrade: (
+        String name,
+        remote: String,
+        ?body: ::Array[DockerEngineRuby::Privilege],
+        ?x_registry_auth: String,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> nil
+
+      def initialize: (client: DockerEngineRuby::Client) -> void
+    end
+  end
+end

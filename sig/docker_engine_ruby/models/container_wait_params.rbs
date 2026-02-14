@@ -1,0 +1,40 @@
+module DockerEngineRuby
+  module Models
+    type container_wait_params =
+      { condition: DockerEngineRuby::Models::ContainerWaitParams::condition }
+      & DockerEngineRuby::Internal::Type::request_parameters
+
+    class ContainerWaitParams < DockerEngineRuby::Internal::Type::BaseModel
+      extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
+      include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_reader condition: DockerEngineRuby::Models::ContainerWaitParams::condition?
+
+      def condition=: (
+        DockerEngineRuby::Models::ContainerWaitParams::condition
+      ) -> DockerEngineRuby::Models::ContainerWaitParams::condition
+
+      def initialize: (
+        ?condition: DockerEngineRuby::Models::ContainerWaitParams::condition,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        condition: DockerEngineRuby::Models::ContainerWaitParams::condition,
+        request_options: DockerEngineRuby::RequestOptions
+      }
+
+      type condition = :"not-running" | :"next-exit" | :removed
+
+      module Condition
+        extend DockerEngineRuby::Internal::Type::Enum
+
+        NOT_RUNNING: :"not-running"
+        NEXT_EXIT: :"next-exit"
+        REMOVED: :removed
+
+        def self?.values: -> ::Array[DockerEngineRuby::Models::ContainerWaitParams::condition]
+      end
+    end
+  end
+end

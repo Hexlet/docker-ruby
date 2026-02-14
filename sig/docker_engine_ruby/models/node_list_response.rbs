@@ -1,0 +1,7 @@
+module DockerEngineRuby
+  module Models
+    type node_list_response = ::Array[DockerEngineRuby::Node]
+
+    NodeListResponse: DockerEngineRuby::Internal::Type::Converter
+  end
+end

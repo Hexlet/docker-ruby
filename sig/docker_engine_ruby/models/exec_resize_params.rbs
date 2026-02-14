@@ -1,0 +1,28 @@
+module DockerEngineRuby
+  module Models
+    type exec_resize_params =
+      { h: Integer, w: Integer }
+      & DockerEngineRuby::Internal::Type::request_parameters
+
+    class ExecResizeParams < DockerEngineRuby::Internal::Type::BaseModel
+      extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
+      include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_accessor h: Integer
+
+      attr_accessor w: Integer
+
+      def initialize: (
+        h: Integer,
+        w: Integer,
+        ?request_options: DockerEngineRuby::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        h: Integer,
+        w: Integer,
+        request_options: DockerEngineRuby::RequestOptions
+      }
+    end
+  end
+end

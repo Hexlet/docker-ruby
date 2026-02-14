@@ -1,0 +1,730 @@
+module DockerEngineRuby
+  module Models
+    type stats_response =
+      {
+        id: String?,
+        blkio_stats: DockerEngineRuby::StatsResponse::BlkioStats?,
+        cpu_stats: DockerEngineRuby::StatsResponse::CPUStats?,
+        memory_stats: DockerEngineRuby::StatsResponse::MemoryStats,
+        name: String?,
+        networks: top?,
+        num_procs: Integer,
+        os_type: String?,
+        pids_stats: DockerEngineRuby::StatsResponse::PidsStats?,
+        precpu_stats: DockerEngineRuby::StatsResponse::PrecpuStats?,
+        preread: Time,
+        read: Time,
+        storage_stats: DockerEngineRuby::StatsResponse::StorageStats?
+      }
+
+    class StatsResponse < DockerEngineRuby::Internal::Type::BaseModel
+      attr_accessor id: String?
+
+      attr_accessor blkio_stats: DockerEngineRuby::StatsResponse::BlkioStats?
+
+      attr_accessor cpu_stats: DockerEngineRuby::StatsResponse::CPUStats?
+
+      attr_reader memory_stats: DockerEngineRuby::StatsResponse::MemoryStats?
+
+      def memory_stats=: (
+        DockerEngineRuby::StatsResponse::MemoryStats
+      ) -> DockerEngineRuby::StatsResponse::MemoryStats
+
+      attr_accessor name: String?
+
+      attr_accessor networks: top?
+
+      attr_reader num_procs: Integer?
+
+      def num_procs=: (Integer) -> Integer
+
+      attr_accessor os_type: String?
+
+      attr_accessor pids_stats: DockerEngineRuby::StatsResponse::PidsStats?
+
+      attr_accessor precpu_stats: DockerEngineRuby::StatsResponse::PrecpuStats?
+
+      attr_reader preread: Time?
+
+      def preread=: (Time) -> Time
+
+      attr_reader read: Time?
+
+      def read=: (Time) -> Time
+
+      attr_accessor storage_stats: DockerEngineRuby::StatsResponse::StorageStats?
+
+      def initialize: (
+        ?id: String?,
+        ?blkio_stats: DockerEngineRuby::StatsResponse::BlkioStats?,
+        ?cpu_stats: DockerEngineRuby::StatsResponse::CPUStats?,
+        ?memory_stats: DockerEngineRuby::StatsResponse::MemoryStats,
+        ?name: String?,
+        ?networks: top?,
+        ?num_procs: Integer,
+        ?os_type: String?,
+        ?pids_stats: DockerEngineRuby::StatsResponse::PidsStats?,
+        ?precpu_stats: DockerEngineRuby::StatsResponse::PrecpuStats?,
+        ?preread: Time,
+        ?read: Time,
+        ?storage_stats: DockerEngineRuby::StatsResponse::StorageStats?
+      ) -> void
+
+      def to_hash: -> {
+        id: String?,
+        blkio_stats: DockerEngineRuby::StatsResponse::BlkioStats?,
+        cpu_stats: DockerEngineRuby::StatsResponse::CPUStats?,
+        memory_stats: DockerEngineRuby::StatsResponse::MemoryStats,
+        name: String?,
+        networks: top?,
+        num_procs: Integer,
+        os_type: String?,
+        pids_stats: DockerEngineRuby::StatsResponse::PidsStats?,
+        precpu_stats: DockerEngineRuby::StatsResponse::PrecpuStats?,
+        preread: Time,
+        read: Time,
+        storage_stats: DockerEngineRuby::StatsResponse::StorageStats?
+      }
+
+      type blkio_stats =
+        {
+          io_merged_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoMergedRecursive?]?,
+          io_queue_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoQueueRecursive?]?,
+          io_service_bytes_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive?],
+          io_service_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceTimeRecursive?]?,
+          io_serviced_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServicedRecursive?]?,
+          io_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoTimeRecursive?]?,
+          io_wait_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoWaitTimeRecursive?]?,
+          sectors_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::SectorsRecursive?]?
+        }
+
+      class BlkioStats < DockerEngineRuby::Internal::Type::BaseModel
+        attr_accessor io_merged_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoMergedRecursive?]?
+
+        attr_accessor io_queue_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoQueueRecursive?]?
+
+        attr_reader io_service_bytes_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive?]?
+
+        def io_service_bytes_recursive=: (
+          ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive?]
+        ) -> ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive?]
+
+        attr_accessor io_service_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceTimeRecursive?]?
+
+        attr_accessor io_serviced_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServicedRecursive?]?
+
+        attr_accessor io_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoTimeRecursive?]?
+
+        attr_accessor io_wait_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoWaitTimeRecursive?]?
+
+        attr_accessor sectors_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::SectorsRecursive?]?
+
+        def initialize: (
+          ?io_merged_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoMergedRecursive?]?,
+          ?io_queue_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoQueueRecursive?]?,
+          ?io_service_bytes_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive?],
+          ?io_service_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceTimeRecursive?]?,
+          ?io_serviced_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServicedRecursive?]?,
+          ?io_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoTimeRecursive?]?,
+          ?io_wait_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoWaitTimeRecursive?]?,
+          ?sectors_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::SectorsRecursive?]?
+        ) -> void
+
+        def to_hash: -> {
+          io_merged_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoMergedRecursive?]?,
+          io_queue_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoQueueRecursive?]?,
+          io_service_bytes_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive?],
+          io_service_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceTimeRecursive?]?,
+          io_serviced_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServicedRecursive?]?,
+          io_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoTimeRecursive?]?,
+          io_wait_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoWaitTimeRecursive?]?,
+          sectors_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::SectorsRecursive?]?
+        }
+
+        type io_merged_recursive =
+          { major: Integer, minor: Integer, op: String, value: Integer }
+
+        class IoMergedRecursive < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader major: Integer?
+
+          def major=: (Integer) -> Integer
+
+          attr_reader minor: Integer?
+
+          def minor=: (Integer) -> Integer
+
+          attr_reader op: String?
+
+          def op=: (String) -> String
+
+          attr_reader value: Integer?
+
+          def value=: (Integer) -> Integer
+
+          def initialize: (
+            ?major: Integer,
+            ?minor: Integer,
+            ?op: String,
+            ?value: Integer
+          ) -> void
+
+          def to_hash: -> {
+            major: Integer,
+            minor: Integer,
+            op: String,
+            value: Integer
+          }
+        end
+
+        type io_queue_recursive =
+          { major: Integer, minor: Integer, op: String, value: Integer }
+
+        class IoQueueRecursive < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader major: Integer?
+
+          def major=: (Integer) -> Integer
+
+          attr_reader minor: Integer?
+
+          def minor=: (Integer) -> Integer
+
+          attr_reader op: String?
+
+          def op=: (String) -> String
+
+          attr_reader value: Integer?
+
+          def value=: (Integer) -> Integer
+
+          def initialize: (
+            ?major: Integer,
+            ?minor: Integer,
+            ?op: String,
+            ?value: Integer
+          ) -> void
+
+          def to_hash: -> {
+            major: Integer,
+            minor: Integer,
+            op: String,
+            value: Integer
+          }
+        end
+
+        type io_service_bytes_recursive =
+          { major: Integer, minor: Integer, op: String, value: Integer }
+
+        class IoServiceBytesRecursive < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader major: Integer?
+
+          def major=: (Integer) -> Integer
+
+          attr_reader minor: Integer?
+
+          def minor=: (Integer) -> Integer
+
+          attr_reader op: String?
+
+          def op=: (String) -> String
+
+          attr_reader value: Integer?
+
+          def value=: (Integer) -> Integer
+
+          def initialize: (
+            ?major: Integer,
+            ?minor: Integer,
+            ?op: String,
+            ?value: Integer
+          ) -> void
+
+          def to_hash: -> {
+            major: Integer,
+            minor: Integer,
+            op: String,
+            value: Integer
+          }
+        end
+
+        type io_service_time_recursive =
+          { major: Integer, minor: Integer, op: String, value: Integer }
+
+        class IoServiceTimeRecursive < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader major: Integer?
+
+          def major=: (Integer) -> Integer
+
+          attr_reader minor: Integer?
+
+          def minor=: (Integer) -> Integer
+
+          attr_reader op: String?
+
+          def op=: (String) -> String
+
+          attr_reader value: Integer?
+
+          def value=: (Integer) -> Integer
+
+          def initialize: (
+            ?major: Integer,
+            ?minor: Integer,
+            ?op: String,
+            ?value: Integer
+          ) -> void
+
+          def to_hash: -> {
+            major: Integer,
+            minor: Integer,
+            op: String,
+            value: Integer
+          }
+        end
+
+        type io_serviced_recursive =
+          { major: Integer, minor: Integer, op: String, value: Integer }
+
+        class IoServicedRecursive < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader major: Integer?
+
+          def major=: (Integer) -> Integer
+
+          attr_reader minor: Integer?
+
+          def minor=: (Integer) -> Integer
+
+          attr_reader op: String?
+
+          def op=: (String) -> String
+
+          attr_reader value: Integer?
+
+          def value=: (Integer) -> Integer
+
+          def initialize: (
+            ?major: Integer,
+            ?minor: Integer,
+            ?op: String,
+            ?value: Integer
+          ) -> void
+
+          def to_hash: -> {
+            major: Integer,
+            minor: Integer,
+            op: String,
+            value: Integer
+          }
+        end
+
+        type io_time_recursive =
+          { major: Integer, minor: Integer, op: String, value: Integer }
+
+        class IoTimeRecursive < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader major: Integer?
+
+          def major=: (Integer) -> Integer
+
+          attr_reader minor: Integer?
+
+          def minor=: (Integer) -> Integer
+
+          attr_reader op: String?
+
+          def op=: (String) -> String
+
+          attr_reader value: Integer?
+
+          def value=: (Integer) -> Integer
+
+          def initialize: (
+            ?major: Integer,
+            ?minor: Integer,
+            ?op: String,
+            ?value: Integer
+          ) -> void
+
+          def to_hash: -> {
+            major: Integer,
+            minor: Integer,
+            op: String,
+            value: Integer
+          }
+        end
+
+        type io_wait_time_recursive =
+          { major: Integer, minor: Integer, op: String, value: Integer }
+
+        class IoWaitTimeRecursive < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader major: Integer?
+
+          def major=: (Integer) -> Integer
+
+          attr_reader minor: Integer?
+
+          def minor=: (Integer) -> Integer
+
+          attr_reader op: String?
+
+          def op=: (String) -> String
+
+          attr_reader value: Integer?
+
+          def value=: (Integer) -> Integer
+
+          def initialize: (
+            ?major: Integer,
+            ?minor: Integer,
+            ?op: String,
+            ?value: Integer
+          ) -> void
+
+          def to_hash: -> {
+            major: Integer,
+            minor: Integer,
+            op: String,
+            value: Integer
+          }
+        end
+
+        type sectors_recursive =
+          { major: Integer, minor: Integer, op: String, value: Integer }
+
+        class SectorsRecursive < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader major: Integer?
+
+          def major=: (Integer) -> Integer
+
+          attr_reader minor: Integer?
+
+          def minor=: (Integer) -> Integer
+
+          attr_reader op: String?
+
+          def op=: (String) -> String
+
+          attr_reader value: Integer?
+
+          def value=: (Integer) -> Integer
+
+          def initialize: (
+            ?major: Integer,
+            ?minor: Integer,
+            ?op: String,
+            ?value: Integer
+          ) -> void
+
+          def to_hash: -> {
+            major: Integer,
+            minor: Integer,
+            op: String,
+            value: Integer
+          }
+        end
+      end
+
+      type cpu_stats =
+        {
+          cpu_usage: DockerEngineRuby::StatsResponse::CPUStats::CPUUsage?,
+          online_cpus: Integer?,
+          system_cpu_usage: Integer?,
+          throttling_data: DockerEngineRuby::StatsResponse::CPUStats::ThrottlingData?
+        }
+
+      class CPUStats < DockerEngineRuby::Internal::Type::BaseModel
+        attr_accessor cpu_usage: DockerEngineRuby::StatsResponse::CPUStats::CPUUsage?
+
+        attr_accessor online_cpus: Integer?
+
+        attr_accessor system_cpu_usage: Integer?
+
+        attr_accessor throttling_data: DockerEngineRuby::StatsResponse::CPUStats::ThrottlingData?
+
+        def initialize: (
+          ?cpu_usage: DockerEngineRuby::StatsResponse::CPUStats::CPUUsage?,
+          ?online_cpus: Integer?,
+          ?system_cpu_usage: Integer?,
+          ?throttling_data: DockerEngineRuby::StatsResponse::CPUStats::ThrottlingData?
+        ) -> void
+
+        def to_hash: -> {
+          cpu_usage: DockerEngineRuby::StatsResponse::CPUStats::CPUUsage?,
+          online_cpus: Integer?,
+          system_cpu_usage: Integer?,
+          throttling_data: DockerEngineRuby::StatsResponse::CPUStats::ThrottlingData?
+        }
+
+        type cpu_usage =
+          {
+            percpu_usage: ::Array[Integer]?,
+            total_usage: Integer,
+            usage_in_kernelmode: Integer,
+            usage_in_usermode: Integer
+          }
+
+        class CPUUsage < DockerEngineRuby::Internal::Type::BaseModel
+          attr_accessor percpu_usage: ::Array[Integer]?
+
+          attr_reader total_usage: Integer?
+
+          def total_usage=: (Integer) -> Integer
+
+          attr_reader usage_in_kernelmode: Integer?
+
+          def usage_in_kernelmode=: (Integer) -> Integer
+
+          attr_reader usage_in_usermode: Integer?
+
+          def usage_in_usermode=: (Integer) -> Integer
+
+          def initialize: (
+            ?percpu_usage: ::Array[Integer]?,
+            ?total_usage: Integer,
+            ?usage_in_kernelmode: Integer,
+            ?usage_in_usermode: Integer
+          ) -> void
+
+          def to_hash: -> {
+            percpu_usage: ::Array[Integer]?,
+            total_usage: Integer,
+            usage_in_kernelmode: Integer,
+            usage_in_usermode: Integer
+          }
+        end
+
+        type throttling_data =
+          {
+            periods: Integer,
+            throttled_periods: Integer,
+            throttled_time: Integer
+          }
+
+        class ThrottlingData < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader periods: Integer?
+
+          def periods=: (Integer) -> Integer
+
+          attr_reader throttled_periods: Integer?
+
+          def throttled_periods=: (Integer) -> Integer
+
+          attr_reader throttled_time: Integer?
+
+          def throttled_time=: (Integer) -> Integer
+
+          def initialize: (
+            ?periods: Integer,
+            ?throttled_periods: Integer,
+            ?throttled_time: Integer
+          ) -> void
+
+          def to_hash: -> {
+            periods: Integer,
+            throttled_periods: Integer,
+            throttled_time: Integer
+          }
+        end
+      end
+
+      type memory_stats =
+        {
+          commitbytes: Integer?,
+          commitpeakbytes: Integer?,
+          failcnt: Integer?,
+          limit: Integer?,
+          max_usage: Integer?,
+          privateworkingset: Integer?,
+          stats: ::Hash[Symbol, Integer],
+          usage: Integer?
+        }
+
+      class MemoryStats < DockerEngineRuby::Internal::Type::BaseModel
+        attr_accessor commitbytes: Integer?
+
+        attr_accessor commitpeakbytes: Integer?
+
+        attr_accessor failcnt: Integer?
+
+        attr_accessor limit: Integer?
+
+        attr_accessor max_usage: Integer?
+
+        attr_accessor privateworkingset: Integer?
+
+        attr_reader stats: ::Hash[Symbol, Integer]?
+
+        def stats=: (::Hash[Symbol, Integer]) -> ::Hash[Symbol, Integer]
+
+        attr_accessor usage: Integer?
+
+        def initialize: (
+          ?commitbytes: Integer?,
+          ?commitpeakbytes: Integer?,
+          ?failcnt: Integer?,
+          ?limit: Integer?,
+          ?max_usage: Integer?,
+          ?privateworkingset: Integer?,
+          ?stats: ::Hash[Symbol, Integer],
+          ?usage: Integer?
+        ) -> void
+
+        def to_hash: -> {
+          commitbytes: Integer?,
+          commitpeakbytes: Integer?,
+          failcnt: Integer?,
+          limit: Integer?,
+          max_usage: Integer?,
+          privateworkingset: Integer?,
+          stats: ::Hash[Symbol, Integer],
+          usage: Integer?
+        }
+      end
+
+      type pids_stats = { current: Integer?, limit: Integer? }
+
+      class PidsStats < DockerEngineRuby::Internal::Type::BaseModel
+        attr_accessor current: Integer?
+
+        attr_accessor limit: Integer?
+
+        def initialize: (?current: Integer?, ?limit: Integer?) -> void
+
+        def to_hash: -> { current: Integer?, limit: Integer? }
+      end
+
+      type precpu_stats =
+        {
+          cpu_usage: DockerEngineRuby::StatsResponse::PrecpuStats::CPUUsage?,
+          online_cpus: Integer?,
+          system_cpu_usage: Integer?,
+          throttling_data: DockerEngineRuby::StatsResponse::PrecpuStats::ThrottlingData?
+        }
+
+      class PrecpuStats < DockerEngineRuby::Internal::Type::BaseModel
+        attr_accessor cpu_usage: DockerEngineRuby::StatsResponse::PrecpuStats::CPUUsage?
+
+        attr_accessor online_cpus: Integer?
+
+        attr_accessor system_cpu_usage: Integer?
+
+        attr_accessor throttling_data: DockerEngineRuby::StatsResponse::PrecpuStats::ThrottlingData?
+
+        def initialize: (
+          ?cpu_usage: DockerEngineRuby::StatsResponse::PrecpuStats::CPUUsage?,
+          ?online_cpus: Integer?,
+          ?system_cpu_usage: Integer?,
+          ?throttling_data: DockerEngineRuby::StatsResponse::PrecpuStats::ThrottlingData?
+        ) -> void
+
+        def to_hash: -> {
+          cpu_usage: DockerEngineRuby::StatsResponse::PrecpuStats::CPUUsage?,
+          online_cpus: Integer?,
+          system_cpu_usage: Integer?,
+          throttling_data: DockerEngineRuby::StatsResponse::PrecpuStats::ThrottlingData?
+        }
+
+        type cpu_usage =
+          {
+            percpu_usage: ::Array[Integer]?,
+            total_usage: Integer,
+            usage_in_kernelmode: Integer,
+            usage_in_usermode: Integer
+          }
+
+        class CPUUsage < DockerEngineRuby::Internal::Type::BaseModel
+          attr_accessor percpu_usage: ::Array[Integer]?
+
+          attr_reader total_usage: Integer?
+
+          def total_usage=: (Integer) -> Integer
+
+          attr_reader usage_in_kernelmode: Integer?
+
+          def usage_in_kernelmode=: (Integer) -> Integer
+
+          attr_reader usage_in_usermode: Integer?
+
+          def usage_in_usermode=: (Integer) -> Integer
+
+          def initialize: (
+            ?percpu_usage: ::Array[Integer]?,
+            ?total_usage: Integer,
+            ?usage_in_kernelmode: Integer,
+            ?usage_in_usermode: Integer
+          ) -> void
+
+          def to_hash: -> {
+            percpu_usage: ::Array[Integer]?,
+            total_usage: Integer,
+            usage_in_kernelmode: Integer,
+            usage_in_usermode: Integer
+          }
+        end
+
+        type throttling_data =
+          {
+            periods: Integer,
+            throttled_periods: Integer,
+            throttled_time: Integer
+          }
+
+        class ThrottlingData < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader periods: Integer?
+
+          def periods=: (Integer) -> Integer
+
+          attr_reader throttled_periods: Integer?
+
+          def throttled_periods=: (Integer) -> Integer
+
+          attr_reader throttled_time: Integer?
+
+          def throttled_time=: (Integer) -> Integer
+
+          def initialize: (
+            ?periods: Integer,
+            ?throttled_periods: Integer,
+            ?throttled_time: Integer
+          ) -> void
+
+          def to_hash: -> {
+            periods: Integer,
+            throttled_periods: Integer,
+            throttled_time: Integer
+          }
+        end
+      end
+
+      type storage_stats =
+        {
+          read_count_normalized: Integer?,
+          read_size_bytes: Integer?,
+          write_count_normalized: Integer?,
+          write_size_bytes: Integer?
+        }
+
+      class StorageStats < DockerEngineRuby::Internal::Type::BaseModel
+        attr_accessor read_count_normalized: Integer?
+
+        attr_accessor read_size_bytes: Integer?
+
+        attr_accessor write_count_normalized: Integer?
+
+        attr_accessor write_size_bytes: Integer?
+
+        def initialize: (
+          ?read_count_normalized: Integer?,
+          ?read_size_bytes: Integer?,
+          ?write_count_normalized: Integer?,
+          ?write_size_bytes: Integer?
+        ) -> void
+
+        def to_hash: -> {
+          read_count_normalized: Integer?,
+          read_size_bytes: Integer?,
+          write_count_normalized: Integer?,
+          write_size_bytes: Integer?
+        }
+      end
+    end
+  end
+end

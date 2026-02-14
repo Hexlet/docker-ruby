@@ -1,0 +1,8 @@
+module DockerEngineRuby
+  module Models
+    type container_changes_response =
+      ::Array[DockerEngineRuby::FilesystemChange]
+
+    ContainerChangesResponse: DockerEngineRuby::Internal::Type::Converter
+  end
+end

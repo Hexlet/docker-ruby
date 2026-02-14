@@ -40,9 +40,9 @@ Layout/LineLength:
   AllowedPatterns:
     - "^\\s*#.*$"
     - ^require(_relative)?
-    - "DockerEngineAPI::Internal::Type::BaseModel$"
+    - "DockerEngineRuby::Internal::Type::BaseModel$"
     - "^\\s*[A-Z0-9_]+ = :"
-    - "DockerEngineAPI::(Models|Resources|Test)::"
+    - "DockerEngineRuby::(Models|Resources|Test)::"
   Max: 110
 
 Layout/MultilineArrayLineBreaks:
