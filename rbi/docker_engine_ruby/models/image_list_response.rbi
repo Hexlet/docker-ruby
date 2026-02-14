@@ -4,7 +4,9 @@ module DockerEngineRuby
   module Models
     ImageListResponse =
       T.let(
-        DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Summary],
+        DockerEngineRuby::Internal::Type::ArrayOf[
+          DockerEngineRuby::ImageSummary
+        ],
         DockerEngineRuby::Internal::Type::Converter
       )
   end

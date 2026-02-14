@@ -6,7 +6,7 @@ module DockerEngineRuby
         description: DockerEngineRuby::Node::Description,
         id: String,
         manager_status: DockerEngineRuby::Node::ManagerStatus,
-        spec: DockerEngineRuby::Spec,
+        spec: DockerEngineRuby::NodeSpec,
         status: DockerEngineRuby::Node::Status,
         updated_at: Time,
         version: DockerEngineRuby::Node::Version
@@ -33,9 +33,9 @@ module DockerEngineRuby
         DockerEngineRuby::Node::ManagerStatus
       ) -> DockerEngineRuby::Node::ManagerStatus
 
-      attr_reader spec: DockerEngineRuby::Spec?
+      attr_reader spec: DockerEngineRuby::NodeSpec?
 
-      def spec=: (DockerEngineRuby::Spec) -> DockerEngineRuby::Spec
+      def spec=: (DockerEngineRuby::NodeSpec) -> DockerEngineRuby::NodeSpec
 
       attr_reader status: DockerEngineRuby::Node::Status?
 
@@ -58,7 +58,7 @@ module DockerEngineRuby
         ?description: DockerEngineRuby::Node::Description,
         ?id: String,
         ?manager_status: DockerEngineRuby::Node::ManagerStatus,
-        ?spec: DockerEngineRuby::Spec,
+        ?spec: DockerEngineRuby::NodeSpec,
         ?status: DockerEngineRuby::Node::Status,
         ?updated_at: Time,
         ?version: DockerEngineRuby::Node::Version
@@ -69,7 +69,7 @@ module DockerEngineRuby
         description: DockerEngineRuby::Node::Description,
         id: String,
         manager_status: DockerEngineRuby::Node::ManagerStatus,
-        spec: DockerEngineRuby::Spec,
+        spec: DockerEngineRuby::NodeSpec,
         status: DockerEngineRuby::Node::Status,
         updated_at: Time,
         version: DockerEngineRuby::Node::Version

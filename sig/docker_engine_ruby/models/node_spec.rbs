@@ -1,0 +1,70 @@
+module DockerEngineRuby
+  module Models
+    type node_spec =
+      {
+        availability: DockerEngineRuby::Models::NodeSpec::availability,
+        labels: ::Hash[Symbol, String],
+        name: String,
+        role: DockerEngineRuby::Models::NodeSpec::role
+      }
+
+    class NodeSpec < DockerEngineRuby::Internal::Type::BaseModel
+      attr_reader availability: DockerEngineRuby::Models::NodeSpec::availability?
+
+      def availability=: (
+        DockerEngineRuby::Models::NodeSpec::availability
+      ) -> DockerEngineRuby::Models::NodeSpec::availability
+
+      attr_reader labels: ::Hash[Symbol, String]?
+
+      def labels=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_reader role: DockerEngineRuby::Models::NodeSpec::role?
+
+      def role=: (
+        DockerEngineRuby::Models::NodeSpec::role
+      ) -> DockerEngineRuby::Models::NodeSpec::role
+
+      def initialize: (
+        ?availability: DockerEngineRuby::Models::NodeSpec::availability,
+        ?labels: ::Hash[Symbol, String],
+        ?name: String,
+        ?role: DockerEngineRuby::Models::NodeSpec::role
+      ) -> void
+
+      def to_hash: -> {
+        availability: DockerEngineRuby::Models::NodeSpec::availability,
+        labels: ::Hash[Symbol, String],
+        name: String,
+        role: DockerEngineRuby::Models::NodeSpec::role
+      }
+
+      type availability = :active | :pause | :drain
+
+      module Availability
+        extend DockerEngineRuby::Internal::Type::Enum
+
+        ACTIVE: :active
+        PAUSE: :pause
+        DRAIN: :drain
+
+        def self?.values: -> ::Array[DockerEngineRuby::Models::NodeSpec::availability]
+      end
+
+      type role = :worker | :manager
+
+      module Role
+        extend DockerEngineRuby::Internal::Type::Enum
+
+        WORKER: :worker
+        MANAGER: :manager
+
+        def self?.values: -> ::Array[DockerEngineRuby::Models::NodeSpec::role]
+      end
+    end
+  end
+end

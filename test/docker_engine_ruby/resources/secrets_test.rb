@@ -62,7 +62,7 @@ class DockerEngineRuby::Test::Resources::SecretsTest < DockerEngineRuby::Test::R
       response => {
         created_at: Time | nil,
         id: String | nil,
-        spec: DockerEngineRuby::Spec | nil,
+        spec: DockerEngineRuby::SecretSpec | nil,
         updated_at: Time | nil,
         version: DockerEngineRuby::Secret::Version | nil
       }

@@ -14,7 +14,7 @@ module DockerEngineRuby
       # @param shared_size [Boolean]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Array<DockerEngineRuby::Models::Summary>]
+      # @return [Array<DockerEngineRuby::Models::ImageSummary>]
       #
       # @see DockerEngineRuby::Models::ImageListParams
       def list(params = {})
@@ -23,7 +23,7 @@ module DockerEngineRuby
           method: :get,
           path: "images/json",
           query: parsed.transform_keys(shared_size: "shared-size"),
-          model: DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Summary],
+          model: DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::ImageSummary],
           options: options
         )
       end

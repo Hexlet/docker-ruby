@@ -3,6 +3,6 @@
 module DockerEngineRuby
   module Models
     # @type [DockerEngineRuby::Internal::Type::Converter]
-    ConfigListResponse = DockerEngineRuby::Internal::Type::ArrayOf[-> { DockerEngineRuby::Config }]
+    ConfigListResponse = DockerEngineRuby::Internal::Type::ArrayOf[-> { DockerEngineRuby::ConfigObject }]
   end
 end

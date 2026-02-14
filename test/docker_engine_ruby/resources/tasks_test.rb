@@ -34,7 +34,7 @@ class DockerEngineRuby::Test::Resources::TasksTest < DockerEngineRuby::Test::Res
         node_id: String | nil,
         service_id: String | nil,
         slot: Integer | nil,
-        spec: DockerEngineRuby::Spec | nil,
+        spec: DockerEngineRuby::TaskSpec | nil,
         status: DockerEngineRuby::Task::Status | nil,
         updated_at: Time | nil,
         version: DockerEngineRuby::Task::Version | nil

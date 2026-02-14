@@ -20,10 +20,10 @@ module DockerEngineRuby
       sig { params(id: String).void }
       attr_writer :id
 
-      sig { returns(T.nilable(DockerEngineRuby::Spec)) }
+      sig { returns(T.nilable(DockerEngineRuby::SecretSpec)) }
       attr_reader :spec
 
-      sig { params(spec: DockerEngineRuby::Spec::OrHash).void }
+      sig { params(spec: DockerEngineRuby::SecretSpec::OrHash).void }
       attr_writer :spec
 
       sig { returns(T.nilable(Time)) }
@@ -51,7 +51,7 @@ module DockerEngineRuby
         params(
           created_at: Time,
           id: String,
-          spec: DockerEngineRuby::Spec::OrHash,
+          spec: DockerEngineRuby::SecretSpec::OrHash,
           updated_at: Time,
           version: DockerEngineRuby::Secret::Version::OrHash
         ).returns(T.attached_class)
@@ -79,7 +79,7 @@ module DockerEngineRuby
           {
             created_at: Time,
             id: String,
-            spec: DockerEngineRuby::Spec,
+            spec: DockerEngineRuby::SecretSpec,
             updated_at: Time,
             version: DockerEngineRuby::Secret::Version
           }

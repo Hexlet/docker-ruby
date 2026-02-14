@@ -42,8 +42,8 @@ module DockerEngineRuby
       # @!attribute spec
       #   User modifiable swarm configuration.
       #
-      #   @return [DockerEngineRuby::Models::Spec, nil]
-      optional :spec, -> { DockerEngineRuby::Spec }, api_name: :Spec
+      #   @return [DockerEngineRuby::Models::SwarmSpec, nil]
+      optional :spec, -> { DockerEngineRuby::SwarmSpec }, api_name: :Spec
 
       # @!attribute subnet_size
       #
@@ -63,7 +63,7 @@ module DockerEngineRuby
       #
       #   @param listen_addr [String]
       #
-      #   @param spec [DockerEngineRuby::Models::Spec] User modifiable swarm configuration.
+      #   @param spec [DockerEngineRuby::Models::SwarmSpec] User modifiable swarm configuration.
       #
       #   @param subnet_size [Integer]
       #

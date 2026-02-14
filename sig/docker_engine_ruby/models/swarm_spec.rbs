@@ -1,0 +1,293 @@
+module DockerEngineRuby
+  module Models
+    type swarm_spec =
+      {
+        ca_config: DockerEngineRuby::SwarmSpec::CaConfig?,
+        dispatcher: DockerEngineRuby::SwarmSpec::Dispatcher?,
+        encryption_config: DockerEngineRuby::SwarmSpec::EncryptionConfig,
+        labels: ::Hash[Symbol, String],
+        name: String,
+        orchestration: DockerEngineRuby::SwarmSpec::Orchestration?,
+        raft: DockerEngineRuby::SwarmSpec::Raft,
+        task_defaults: DockerEngineRuby::SwarmSpec::TaskDefaults
+      }
+
+    class SwarmSpec < DockerEngineRuby::Internal::Type::BaseModel
+      attr_accessor ca_config: DockerEngineRuby::SwarmSpec::CaConfig?
+
+      attr_accessor dispatcher: DockerEngineRuby::SwarmSpec::Dispatcher?
+
+      attr_reader encryption_config: DockerEngineRuby::SwarmSpec::EncryptionConfig?
+
+      def encryption_config=: (
+        DockerEngineRuby::SwarmSpec::EncryptionConfig
+      ) -> DockerEngineRuby::SwarmSpec::EncryptionConfig
+
+      attr_reader labels: ::Hash[Symbol, String]?
+
+      def labels=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_accessor orchestration: DockerEngineRuby::SwarmSpec::Orchestration?
+
+      attr_reader raft: DockerEngineRuby::SwarmSpec::Raft?
+
+      def raft=: (
+        DockerEngineRuby::SwarmSpec::Raft
+      ) -> DockerEngineRuby::SwarmSpec::Raft
+
+      attr_reader task_defaults: DockerEngineRuby::SwarmSpec::TaskDefaults?
+
+      def task_defaults=: (
+        DockerEngineRuby::SwarmSpec::TaskDefaults
+      ) -> DockerEngineRuby::SwarmSpec::TaskDefaults
+
+      def initialize: (
+        ?ca_config: DockerEngineRuby::SwarmSpec::CaConfig?,
+        ?dispatcher: DockerEngineRuby::SwarmSpec::Dispatcher?,
+        ?encryption_config: DockerEngineRuby::SwarmSpec::EncryptionConfig,
+        ?labels: ::Hash[Symbol, String],
+        ?name: String,
+        ?orchestration: DockerEngineRuby::SwarmSpec::Orchestration?,
+        ?raft: DockerEngineRuby::SwarmSpec::Raft,
+        ?task_defaults: DockerEngineRuby::SwarmSpec::TaskDefaults
+      ) -> void
+
+      def to_hash: -> {
+        ca_config: DockerEngineRuby::SwarmSpec::CaConfig?,
+        dispatcher: DockerEngineRuby::SwarmSpec::Dispatcher?,
+        encryption_config: DockerEngineRuby::SwarmSpec::EncryptionConfig,
+        labels: ::Hash[Symbol, String],
+        name: String,
+        orchestration: DockerEngineRuby::SwarmSpec::Orchestration?,
+        raft: DockerEngineRuby::SwarmSpec::Raft,
+        task_defaults: DockerEngineRuby::SwarmSpec::TaskDefaults
+      }
+
+      type ca_config =
+        {
+          external_c_as: ::Array[DockerEngineRuby::SwarmSpec::CaConfig::ExternalCA],
+          force_rotate: Integer,
+          node_cert_expiry: Integer,
+          signing_ca_cert: String,
+          signing_ca_key: String
+        }
+
+      class CaConfig < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader external_c_as: ::Array[DockerEngineRuby::SwarmSpec::CaConfig::ExternalCA]?
+
+        def external_c_as=: (
+          ::Array[DockerEngineRuby::SwarmSpec::CaConfig::ExternalCA]
+        ) -> ::Array[DockerEngineRuby::SwarmSpec::CaConfig::ExternalCA]
+
+        attr_reader force_rotate: Integer?
+
+        def force_rotate=: (Integer) -> Integer
+
+        attr_reader node_cert_expiry: Integer?
+
+        def node_cert_expiry=: (Integer) -> Integer
+
+        attr_reader signing_ca_cert: String?
+
+        def signing_ca_cert=: (String) -> String
+
+        attr_reader signing_ca_key: String?
+
+        def signing_ca_key=: (String) -> String
+
+        def initialize: (
+          ?external_c_as: ::Array[DockerEngineRuby::SwarmSpec::CaConfig::ExternalCA],
+          ?force_rotate: Integer,
+          ?node_cert_expiry: Integer,
+          ?signing_ca_cert: String,
+          ?signing_ca_key: String
+        ) -> void
+
+        def to_hash: -> {
+          external_c_as: ::Array[DockerEngineRuby::SwarmSpec::CaConfig::ExternalCA],
+          force_rotate: Integer,
+          node_cert_expiry: Integer,
+          signing_ca_cert: String,
+          signing_ca_key: String
+        }
+
+        type external_ca =
+          {
+            ca_cert: String,
+            options: ::Hash[Symbol, String],
+            protocol: DockerEngineRuby::Models::SwarmSpec::CaConfig::ExternalCA::protocol,
+            url: String
+          }
+
+        class ExternalCA < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader ca_cert: String?
+
+          def ca_cert=: (String) -> String
+
+          attr_reader options: ::Hash[Symbol, String]?
+
+          def options=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+          attr_reader protocol: DockerEngineRuby::Models::SwarmSpec::CaConfig::ExternalCA::protocol?
+
+          def protocol=: (
+            DockerEngineRuby::Models::SwarmSpec::CaConfig::ExternalCA::protocol
+          ) -> DockerEngineRuby::Models::SwarmSpec::CaConfig::ExternalCA::protocol
+
+          attr_reader url: String?
+
+          def url=: (String) -> String
+
+          def initialize: (
+            ?ca_cert: String,
+            ?options: ::Hash[Symbol, String],
+            ?protocol: DockerEngineRuby::Models::SwarmSpec::CaConfig::ExternalCA::protocol,
+            ?url: String
+          ) -> void
+
+          def to_hash: -> {
+            ca_cert: String,
+            options: ::Hash[Symbol, String],
+            protocol: DockerEngineRuby::Models::SwarmSpec::CaConfig::ExternalCA::protocol,
+            url: String
+          }
+
+          type protocol = :cfssl
+
+          module Protocol
+            extend DockerEngineRuby::Internal::Type::Enum
+
+            CFSSL: :cfssl
+
+            def self?.values: -> ::Array[DockerEngineRuby::Models::SwarmSpec::CaConfig::ExternalCA::protocol]
+          end
+        end
+      end
+
+      type dispatcher = { heartbeat_period: Integer }
+
+      class Dispatcher < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader heartbeat_period: Integer?
+
+        def heartbeat_period=: (Integer) -> Integer
+
+        def initialize: (?heartbeat_period: Integer) -> void
+
+        def to_hash: -> { heartbeat_period: Integer }
+      end
+
+      type encryption_config = { auto_lock_managers: bool }
+
+      class EncryptionConfig < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader auto_lock_managers: bool?
+
+        def auto_lock_managers=: (bool) -> bool
+
+        def initialize: (?auto_lock_managers: bool) -> void
+
+        def to_hash: -> { auto_lock_managers: bool }
+      end
+
+      type orchestration = { task_history_retention_limit: Integer }
+
+      class Orchestration < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader task_history_retention_limit: Integer?
+
+        def task_history_retention_limit=: (Integer) -> Integer
+
+        def initialize: (?task_history_retention_limit: Integer) -> void
+
+        def to_hash: -> { task_history_retention_limit: Integer }
+      end
+
+      type raft =
+        {
+          election_tick: Integer,
+          heartbeat_tick: Integer,
+          keep_old_snapshots: Integer,
+          log_entries_for_slow_followers: Integer,
+          snapshot_interval: Integer
+        }
+
+      class Raft < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader election_tick: Integer?
+
+        def election_tick=: (Integer) -> Integer
+
+        attr_reader heartbeat_tick: Integer?
+
+        def heartbeat_tick=: (Integer) -> Integer
+
+        attr_reader keep_old_snapshots: Integer?
+
+        def keep_old_snapshots=: (Integer) -> Integer
+
+        attr_reader log_entries_for_slow_followers: Integer?
+
+        def log_entries_for_slow_followers=: (Integer) -> Integer
+
+        attr_reader snapshot_interval: Integer?
+
+        def snapshot_interval=: (Integer) -> Integer
+
+        def initialize: (
+          ?election_tick: Integer,
+          ?heartbeat_tick: Integer,
+          ?keep_old_snapshots: Integer,
+          ?log_entries_for_slow_followers: Integer,
+          ?snapshot_interval: Integer
+        ) -> void
+
+        def to_hash: -> {
+          election_tick: Integer,
+          heartbeat_tick: Integer,
+          keep_old_snapshots: Integer,
+          log_entries_for_slow_followers: Integer,
+          snapshot_interval: Integer
+        }
+      end
+
+      type task_defaults =
+        { log_driver: DockerEngineRuby::SwarmSpec::TaskDefaults::LogDriver }
+
+      class TaskDefaults < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader log_driver: DockerEngineRuby::SwarmSpec::TaskDefaults::LogDriver?
+
+        def log_driver=: (
+          DockerEngineRuby::SwarmSpec::TaskDefaults::LogDriver
+        ) -> DockerEngineRuby::SwarmSpec::TaskDefaults::LogDriver
+
+        def initialize: (
+          ?log_driver: DockerEngineRuby::SwarmSpec::TaskDefaults::LogDriver
+        ) -> void
+
+        def to_hash: -> {
+          log_driver: DockerEngineRuby::SwarmSpec::TaskDefaults::LogDriver
+        }
+
+        type log_driver = { name: String, options: ::Hash[Symbol, String] }
+
+        class LogDriver < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader name: String?
+
+          def name=: (String) -> String
+
+          attr_reader options: ::Hash[Symbol, String]?
+
+          def options=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+          def initialize: (
+            ?name: String,
+            ?options: ::Hash[Symbol, String]
+          ) -> void
+
+          def to_hash: -> { name: String, options: ::Hash[Symbol, String] }
+        end
+      end
+    end
+  end
+end

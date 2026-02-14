@@ -3,6 +3,6 @@
 module DockerEngineRuby
   module Models
     # @type [DockerEngineRuby::Internal::Type::Converter]
-    ImageListResponse = DockerEngineRuby::Internal::Type::ArrayOf[-> { DockerEngineRuby::Summary }]
+    ImageListResponse = DockerEngineRuby::Internal::Type::ArrayOf[-> { DockerEngineRuby::ImageSummary }]
   end
 end

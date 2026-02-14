@@ -8,7 +8,7 @@ module DockerEngineRuby
         default_addr_pool: ::Array[String],
         force_new_cluster: bool,
         listen_addr: String,
-        spec: DockerEngineRuby::Spec,
+        spec: DockerEngineRuby::SwarmSpec,
         subnet_size: Integer
       }
       & DockerEngineRuby::Internal::Type::request_parameters
@@ -41,9 +41,9 @@ module DockerEngineRuby
 
       def listen_addr=: (String) -> String
 
-      attr_reader spec: DockerEngineRuby::Spec?
+      attr_reader spec: DockerEngineRuby::SwarmSpec?
 
-      def spec=: (DockerEngineRuby::Spec) -> DockerEngineRuby::Spec
+      def spec=: (DockerEngineRuby::SwarmSpec) -> DockerEngineRuby::SwarmSpec
 
       attr_reader subnet_size: Integer?
 
@@ -56,7 +56,7 @@ module DockerEngineRuby
         ?default_addr_pool: ::Array[String],
         ?force_new_cluster: bool,
         ?listen_addr: String,
-        ?spec: DockerEngineRuby::Spec,
+        ?spec: DockerEngineRuby::SwarmSpec,
         ?subnet_size: Integer,
         ?request_options: DockerEngineRuby::request_opts
       ) -> void
@@ -68,7 +68,7 @@ module DockerEngineRuby
         default_addr_pool: ::Array[String],
         force_new_cluster: bool,
         listen_addr: String,
-        spec: DockerEngineRuby::Spec,
+        spec: DockerEngineRuby::SwarmSpec,
         subnet_size: Integer,
         request_options: DockerEngineRuby::RequestOptions
       }

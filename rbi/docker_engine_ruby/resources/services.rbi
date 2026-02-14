@@ -6,10 +6,10 @@ module DockerEngineRuby
       # Create a service
       sig do
         params(
-          spec: DockerEngineRuby::Spec::OrHash,
+          spec: DockerEngineRuby::ServiceSpec::OrHash,
           x_registry_auth: String,
           request_options: DockerEngineRuby::RequestOptions::OrHash
-        ).returns(DockerEngineRuby::CreateResponse)
+        ).returns(DockerEngineRuby::ServiceCreateResponse)
       end
       def create(
         # Body param: User modifiable configuration for a service.
@@ -25,13 +25,13 @@ module DockerEngineRuby
         params(
           id: String,
           version: Integer,
-          spec: DockerEngineRuby::Spec::OrHash,
+          spec: DockerEngineRuby::ServiceSpec::OrHash,
           registry_auth_from:
             DockerEngineRuby::ServiceUpdateParams::RegistryAuthFrom::OrSymbol,
           rollback: String,
           x_registry_auth: String,
           request_options: DockerEngineRuby::RequestOptions::OrHash
-        ).returns(DockerEngineRuby::UpdateResponse)
+        ).returns(DockerEngineRuby::ServiceUpdateResponse)
       end
       def update(
         # Path param

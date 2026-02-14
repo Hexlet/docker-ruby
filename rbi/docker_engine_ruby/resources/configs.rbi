@@ -6,7 +6,7 @@ module DockerEngineRuby
       # Create a config
       sig do
         params(
-          spec: DockerEngineRuby::Spec::OrHash,
+          spec: DockerEngineRuby::ConfigSpec::OrHash,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(DockerEngineRuby::Models::ConfigCreateResponse)
       end
@@ -18,7 +18,7 @@ module DockerEngineRuby
         params(
           id: String,
           version: Integer,
-          spec: DockerEngineRuby::Spec::OrHash,
+          spec: DockerEngineRuby::ConfigSpec::OrHash,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).void
       end
@@ -38,7 +38,7 @@ module DockerEngineRuby
         params(
           filters: String,
           request_options: DockerEngineRuby::RequestOptions::OrHash
-        ).returns(T::Array[DockerEngineRuby::Config])
+        ).returns(T::Array[DockerEngineRuby::ConfigObject])
       end
       def list(filters: nil, request_options: {})
       end
@@ -58,7 +58,7 @@ module DockerEngineRuby
         params(
           id: String,
           request_options: DockerEngineRuby::RequestOptions::OrHash
-        ).returns(DockerEngineRuby::Config)
+        ).returns(DockerEngineRuby::ConfigObject)
       end
       def inspect_(id, request_options: {})
       end

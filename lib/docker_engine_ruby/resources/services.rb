@@ -7,13 +7,13 @@ module DockerEngineRuby
       #
       # @overload create(spec:, x_registry_auth: nil, request_options: {})
       #
-      # @param spec [DockerEngineRuby::Models::Spec] Body param: User modifiable configuration for a service.
+      # @param spec [DockerEngineRuby::Models::ServiceSpec] Body param: User modifiable configuration for a service.
       #
       # @param x_registry_auth [String] Header param
       #
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [DockerEngineRuby::Models::CreateResponse]
+      # @return [DockerEngineRuby::Models::ServiceCreateResponse]
       #
       # @see DockerEngineRuby::Models::ServiceCreateParams
       def create(params)
@@ -23,7 +23,7 @@ module DockerEngineRuby
           path: "services/create",
           headers: parsed.except(:spec).transform_keys(x_registry_auth: "x-registry-auth"),
           body: parsed[:spec],
-          model: DockerEngineRuby::CreateResponse,
+          model: DockerEngineRuby::ServiceCreateResponse,
           options: options
         )
       end
@@ -36,7 +36,7 @@ module DockerEngineRuby
       #
       # @param version [Integer] Query param
       #
-      # @param spec [DockerEngineRuby::Models::Spec] Body param: User modifiable configuration for a service.
+      # @param spec [DockerEngineRuby::Models::ServiceSpec] Body param: User modifiable configuration for a service.
       #
       # @param registry_auth_from [Symbol, DockerEngineRuby::Models::ServiceUpdateParams::RegistryAuthFrom] Query param
       #
@@ -46,7 +46,7 @@ module DockerEngineRuby
       #
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [DockerEngineRuby::Models::UpdateResponse]
+      # @return [DockerEngineRuby::Models::ServiceUpdateResponse]
       #
       # @see DockerEngineRuby::Models::ServiceUpdateParams
       def update(id, params)
@@ -58,7 +58,7 @@ module DockerEngineRuby
           query: parsed.slice(*query_params).transform_keys(registry_auth_from: "registryAuthFrom"),
           headers: parsed.except(:spec, *query_params).transform_keys(x_registry_auth: "x-registry-auth"),
           body: parsed[:spec],
-          model: DockerEngineRuby::UpdateResponse,
+          model: DockerEngineRuby::ServiceUpdateResponse,
           options: options
         )
       end

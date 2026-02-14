@@ -51,10 +51,10 @@ module DockerEngineRuby
       attr_writer :service_status
 
       # User modifiable configuration for a service.
-      sig { returns(T.nilable(DockerEngineRuby::Spec)) }
+      sig { returns(T.nilable(DockerEngineRuby::ServiceSpec)) }
       attr_reader :spec
 
-      sig { params(spec: DockerEngineRuby::Spec::OrHash).void }
+      sig { params(spec: DockerEngineRuby::ServiceSpec::OrHash).void }
       attr_writer :spec
 
       sig { returns(T.nilable(Time)) }
@@ -96,7 +96,7 @@ module DockerEngineRuby
           id: String,
           job_status: DockerEngineRuby::Service::JobStatus::OrHash,
           service_status: DockerEngineRuby::Service::ServiceStatus::OrHash,
-          spec: DockerEngineRuby::Spec::OrHash,
+          spec: DockerEngineRuby::ServiceSpec::OrHash,
           updated_at: Time,
           update_status: DockerEngineRuby::Service::UpdateStatus::OrHash,
           version: DockerEngineRuby::Service::Version::OrHash
@@ -140,7 +140,7 @@ module DockerEngineRuby
             id: String,
             job_status: DockerEngineRuby::Service::JobStatus,
             service_status: DockerEngineRuby::Service::ServiceStatus,
-            spec: DockerEngineRuby::Spec,
+            spec: DockerEngineRuby::ServiceSpec,
             updated_at: Time,
             update_status: DockerEngineRuby::Service::UpdateStatus,
             version: DockerEngineRuby::Service::Version
