@@ -14,11 +14,7 @@ module DockerEngineRuby
 
       attr_accessor remote: String
 
-      attr_reader body: ::Array[DockerEngineRuby::Privilege]?
-
-      def body=: (
-        ::Array[DockerEngineRuby::Privilege]
-      ) -> ::Array[DockerEngineRuby::Privilege]
+      attr_accessor body: ::Array[DockerEngineRuby::Privilege]
 
       attr_reader x_registry_auth: String?
 
@@ -26,7 +22,7 @@ module DockerEngineRuby
 
       def initialize: (
         remote: String,
-        ?body: ::Array[DockerEngineRuby::Privilege],
+        body: ::Array[DockerEngineRuby::Privilege],
         ?x_registry_auth: String,
         ?request_options: DockerEngineRuby::request_opts
       ) -> void

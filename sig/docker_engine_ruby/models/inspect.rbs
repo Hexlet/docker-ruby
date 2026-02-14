@@ -3,22 +3,22 @@ module DockerEngineRuby
     type inspect_ =
       {
         descriptor: DockerEngineRuby::Inspect::Descriptor,
-        platforms: ::Array[DockerEngineRuby::Inspect::Platform?]
+        platforms: ::Array[DockerEngineRuby::Inspect::Platform]
       }
 
     class Inspect < DockerEngineRuby::Internal::Type::BaseModel
       attr_accessor descriptor: DockerEngineRuby::Inspect::Descriptor
 
-      attr_accessor platforms: ::Array[DockerEngineRuby::Inspect::Platform?]
+      attr_accessor platforms: ::Array[DockerEngineRuby::Inspect::Platform]
 
       def initialize: (
         descriptor: DockerEngineRuby::Inspect::Descriptor,
-        platforms: ::Array[DockerEngineRuby::Inspect::Platform?]
+        platforms: ::Array[DockerEngineRuby::Inspect::Platform]
       ) -> void
 
       def to_hash: -> {
         descriptor: DockerEngineRuby::Inspect::Descriptor,
-        platforms: ::Array[DockerEngineRuby::Inspect::Platform?]
+        platforms: ::Array[DockerEngineRuby::Inspect::Platform]
       }
 
       type descriptor =
@@ -28,7 +28,7 @@ module DockerEngineRuby
           data: String?,
           digest: String,
           media_type: String,
-          platform: DockerEngineRuby::Inspect::Descriptor::Platform?,
+          platform: DockerEngineRuby::Inspect::Descriptor::Platform,
           size: Integer,
           urls: ::Array[String]?
         }
@@ -48,7 +48,11 @@ module DockerEngineRuby
 
         def media_type=: (String) -> String
 
-        attr_accessor platform: DockerEngineRuby::Inspect::Descriptor::Platform?
+        attr_reader platform: DockerEngineRuby::Inspect::Descriptor::Platform?
+
+        def platform=: (
+          DockerEngineRuby::Inspect::Descriptor::Platform
+        ) -> DockerEngineRuby::Inspect::Descriptor::Platform
 
         attr_reader size: Integer?
 
@@ -62,7 +66,7 @@ module DockerEngineRuby
           ?data: String?,
           ?digest: String,
           ?media_type: String,
-          ?platform: DockerEngineRuby::Inspect::Descriptor::Platform?,
+          ?platform: DockerEngineRuby::Inspect::Descriptor::Platform,
           ?size: Integer,
           ?urls: ::Array[String]?
         ) -> void
@@ -73,7 +77,7 @@ module DockerEngineRuby
           data: String?,
           digest: String,
           media_type: String,
-          platform: DockerEngineRuby::Inspect::Descriptor::Platform?,
+          platform: DockerEngineRuby::Inspect::Descriptor::Platform,
           size: Integer,
           urls: ::Array[String]?
         }

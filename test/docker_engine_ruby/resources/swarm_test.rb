@@ -34,7 +34,7 @@ class DockerEngineRuby::Test::Resources::SwarmTest < DockerEngineRuby::Test::Res
 
     assert_pattern do
       response => {
-        created_at: String | nil,
+        created_at: Time | nil,
         data_path_port: Integer | nil,
         default_addr_pool: ^(DockerEngineRuby::Internal::Type::ArrayOf[String]) | nil,
         id: String | nil,
@@ -43,7 +43,7 @@ class DockerEngineRuby::Test::Resources::SwarmTest < DockerEngineRuby::Test::Res
         spec: DockerEngineRuby::Spec | nil,
         subnet_size: Integer | nil,
         tls_info: DockerEngineRuby::SwarmAPI::TlsInfo | nil,
-        updated_at: String | nil,
+        updated_at: Time | nil,
         version: DockerEngineRuby::SwarmAPI::Version | nil
       }
     end

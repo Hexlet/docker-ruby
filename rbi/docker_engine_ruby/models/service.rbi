@@ -8,10 +8,10 @@ module DockerEngineRuby
           T.any(DockerEngineRuby::Service, DockerEngineRuby::Internal::AnyHash)
         end
 
-      sig { returns(T.nilable(String)) }
+      sig { returns(T.nilable(Time)) }
       attr_reader :created_at
 
-      sig { params(created_at: String).void }
+      sig { params(created_at: Time).void }
       attr_writer :created_at
 
       sig { returns(T.nilable(DockerEngineRuby::Service::Endpoint)) }
@@ -57,10 +57,10 @@ module DockerEngineRuby
       sig { params(spec: DockerEngineRuby::Spec::OrHash).void }
       attr_writer :spec
 
-      sig { returns(T.nilable(String)) }
+      sig { returns(T.nilable(Time)) }
       attr_reader :updated_at
 
-      sig { params(updated_at: String).void }
+      sig { params(updated_at: Time).void }
       attr_writer :updated_at
 
       # The status of a service update.
@@ -91,13 +91,13 @@ module DockerEngineRuby
 
       sig do
         params(
-          created_at: String,
+          created_at: Time,
           endpoint: DockerEngineRuby::Service::Endpoint::OrHash,
           id: String,
           job_status: DockerEngineRuby::Service::JobStatus::OrHash,
           service_status: DockerEngineRuby::Service::ServiceStatus::OrHash,
           spec: DockerEngineRuby::Spec::OrHash,
-          updated_at: String,
+          updated_at: Time,
           update_status: DockerEngineRuby::Service::UpdateStatus::OrHash,
           version: DockerEngineRuby::Service::Version::OrHash
         ).returns(T.attached_class)
@@ -135,13 +135,13 @@ module DockerEngineRuby
       sig do
         override.returns(
           {
-            created_at: String,
+            created_at: Time,
             endpoint: DockerEngineRuby::Service::Endpoint,
             id: String,
             job_status: DockerEngineRuby::Service::JobStatus,
             service_status: DockerEngineRuby::Service::ServiceStatus,
             spec: DockerEngineRuby::Spec,
-            updated_at: String,
+            updated_at: Time,
             update_status: DockerEngineRuby::Service::UpdateStatus,
             version: DockerEngineRuby::Service::Version
           }
@@ -799,11 +799,10 @@ module DockerEngineRuby
         end
         attr_writer :job_iteration
 
-        # The last time, as observed by the server, that this job was started.
-        sig { returns(T.nilable(String)) }
+        sig { returns(T.nilable(Time)) }
         attr_reader :last_execution
 
-        sig { params(last_execution: String).void }
+        sig { params(last_execution: Time).void }
         attr_writer :last_execution
 
         # The status of the service when it is in one of ReplicatedJob or GlobalJob modes.
@@ -814,7 +813,7 @@ module DockerEngineRuby
           params(
             job_iteration:
               DockerEngineRuby::Service::JobStatus::JobIteration::OrHash,
-            last_execution: String
+            last_execution: Time
           ).returns(T.attached_class)
         end
         def self.new(
@@ -828,7 +827,6 @@ module DockerEngineRuby
           # of the requests can succeed. As a result, two separate update requests that
           # happen at the same time will not unintentionally overwrite each other.
           job_iteration: nil,
-          # The last time, as observed by the server, that this job was started.
           last_execution: nil
         )
         end
@@ -837,7 +835,7 @@ module DockerEngineRuby
           override.returns(
             {
               job_iteration: DockerEngineRuby::Service::JobStatus::JobIteration,
-              last_execution: String
+              last_execution: Time
             }
           )
         end
@@ -887,27 +885,18 @@ module DockerEngineRuby
             )
           end
 
-        # The number of tasks for a job that are in the Completed state. This field must
-        # be cross-referenced with the service type, as the value of 0 may mean the
-        # service is not in a job mode, or it may mean the job-mode service has no tasks
-        # yet Completed.
         sig { returns(T.nilable(Integer)) }
         attr_reader :completed_tasks
 
         sig { params(completed_tasks: Integer).void }
         attr_writer :completed_tasks
 
-        # The number of tasks for the service desired to be running. For replicated
-        # services, this is the replica count from the service spec. For global services,
-        # this is computed by taking count of all tasks for the service with a Desired
-        # State other than Shutdown.
         sig { returns(T.nilable(Integer)) }
         attr_reader :desired_tasks
 
         sig { params(desired_tasks: Integer).void }
         attr_writer :desired_tasks
 
-        # The number of tasks for the service currently in the Running state.
         sig { returns(T.nilable(Integer)) }
         attr_reader :running_tasks
 
@@ -924,17 +913,8 @@ module DockerEngineRuby
           ).returns(T.attached_class)
         end
         def self.new(
-          # The number of tasks for a job that are in the Completed state. This field must
-          # be cross-referenced with the service type, as the value of 0 may mean the
-          # service is not in a job mode, or it may mean the job-mode service has no tasks
-          # yet Completed.
           completed_tasks: nil,
-          # The number of tasks for the service desired to be running. For replicated
-          # services, this is the replica count from the service spec. For global services,
-          # this is computed by taking count of all tasks for the service with a Desired
-          # State other than Shutdown.
           desired_tasks: nil,
-          # The number of tasks for the service currently in the Running state.
           running_tasks: nil
         )
         end
@@ -961,10 +941,10 @@ module DockerEngineRuby
             )
           end
 
-        sig { returns(T.nilable(String)) }
+        sig { returns(T.nilable(Time)) }
         attr_reader :completed_at
 
-        sig { params(completed_at: String).void }
+        sig { params(completed_at: Time).void }
         attr_writer :completed_at
 
         sig { returns(T.nilable(String)) }
@@ -973,10 +953,10 @@ module DockerEngineRuby
         sig { params(message: String).void }
         attr_writer :message
 
-        sig { returns(T.nilable(String)) }
+        sig { returns(T.nilable(Time)) }
         attr_reader :started_at
 
-        sig { params(started_at: String).void }
+        sig { params(started_at: Time).void }
         attr_writer :started_at
 
         sig do
@@ -998,9 +978,9 @@ module DockerEngineRuby
         # The status of a service update.
         sig do
           params(
-            completed_at: String,
+            completed_at: Time,
             message: String,
-            started_at: String,
+            started_at: Time,
             state: DockerEngineRuby::Service::UpdateStatus::State::OrSymbol
           ).returns(T.attached_class)
         end
@@ -1015,9 +995,9 @@ module DockerEngineRuby
         sig do
           override.returns(
             {
-              completed_at: String,
+              completed_at: Time,
               message: String,
-              started_at: String,
+              started_at: Time,
               state:
                 DockerEngineRuby::Service::UpdateStatus::State::TaggedSymbol
             }

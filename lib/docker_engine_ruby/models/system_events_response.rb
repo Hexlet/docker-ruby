@@ -75,9 +75,6 @@ module DockerEngineRuby
         optional :id, String, api_name: :ID
 
         # @!method initialize(attributes: nil, id: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {DockerEngineRuby::Models::SystemEventsResponse::Actor} for more details.
-        #
         #   Actor describes something that generates events, like a container, network, or a
         #   volume.
         #

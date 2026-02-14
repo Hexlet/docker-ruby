@@ -6,7 +6,7 @@ class DockerEngineRuby::Test::Resources::NodesTest < DockerEngineRuby::Test::Res
   def test_update_required_params
     skip("Prism tests are disabled")
 
-    response = @docker.nodes.update("id", version: 0)
+    response = @docker.nodes.update("id", version: 0, spec: {})
 
     assert_pattern do
       response => nil
@@ -44,13 +44,13 @@ class DockerEngineRuby::Test::Resources::NodesTest < DockerEngineRuby::Test::Res
 
     assert_pattern do
       response => {
-        created_at: String | nil,
+        created_at: Time | nil,
         description: DockerEngineRuby::Node::Description | nil,
         id: String | nil,
         manager_status: DockerEngineRuby::Node::ManagerStatus | nil,
         spec: DockerEngineRuby::Spec | nil,
         status: DockerEngineRuby::Node::Status | nil,
-        updated_at: String | nil,
+        updated_at: Time | nil,
         version: DockerEngineRuby::Node::Version | nil
       }
     end

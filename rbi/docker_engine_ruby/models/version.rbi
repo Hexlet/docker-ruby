@@ -185,46 +185,32 @@ module DockerEngineRuby
             )
           end
 
-        # Name of the component
         sig { returns(String) }
         attr_accessor :name
 
-        # Version of the component
         sig { returns(String) }
         attr_accessor :version
 
-        # Key/value pairs of strings with additional information about the component.
-        # These values are intended for informational purposes only, and their content is
-        # not defined, and not part of the API specification.
-        #
-        # These messages can be printed by the client as information to the user.
-        sig { returns(T.nilable(T.anything)) }
+        sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
         attr_accessor :details
 
         sig do
           params(
             name: String,
             version: String,
-            details: T.nilable(T.anything)
+            details: T.nilable(T::Hash[Symbol, T.anything])
           ).returns(T.attached_class)
         end
-        def self.new(
-          # Name of the component
-          name:,
-          # Version of the component
-          version:,
-          # Key/value pairs of strings with additional information about the component.
-          # These values are intended for informational purposes only, and their content is
-          # not defined, and not part of the API specification.
-          #
-          # These messages can be printed by the client as information to the user.
-          details: nil
-        )
+        def self.new(name:, version:, details: nil)
         end
 
         sig do
           override.returns(
-            { name: String, version: String, details: T.nilable(T.anything) }
+            {
+              name: String,
+              version: String,
+              details: T.nilable(T::Hash[Symbol, T.anything])
+            }
           )
         end
         def to_hash

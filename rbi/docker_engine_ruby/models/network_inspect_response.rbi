@@ -2,7 +2,7 @@
 
 module DockerEngineRuby
   module Models
-    class NetworkInspectResponse < DockerEngineRuby::Models::Network
+    class NetworkInspectResponse < DockerEngineRuby::Internal::Type::BaseModel
       OrHash =
         T.type_alias do
           T.any(
@@ -11,324 +11,471 @@ module DockerEngineRuby
           )
         end
 
-      # Contains endpoints attached to the network.
+      # Whether a global / swarm scope network is manually attachable by regular
+      # containers from workers in swarm mode.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :attachable
+
+      sig { params(attachable: T::Boolean).void }
+      attr_writer :attachable
+
+      # The config-only network source to provide the configuration for this network.
       sig do
         returns(
           T.nilable(
-            T::Hash[
-              Symbol,
-              DockerEngineRuby::Models::NetworkInspectResponse::Container
-            ]
+            DockerEngineRuby::Models::NetworkInspectResponse::ConfigFrom
           )
         )
       end
-      attr_reader :containers
+      attr_reader :config_from
 
       sig do
         params(
-          containers:
-            T::Hash[
-              Symbol,
-              DockerEngineRuby::Models::NetworkInspectResponse::Container::OrHash
+          config_from:
+            DockerEngineRuby::Models::NetworkInspectResponse::ConfigFrom::OrHash
+        ).void
+      end
+      attr_writer :config_from
+
+      # Whether the network is a config-only network. Config-only networks are
+      # placeholder networks for network configurations to be used by other networks.
+      # Config-only networks cannot be used directly to run containers or services.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :config_only
+
+      sig { params(config_only: T::Boolean).void }
+      attr_writer :config_only
+
+      # Date and time at which the network was created in
+      # [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
+      sig { returns(T.nilable(Time)) }
+      attr_reader :created
+
+      sig { params(created: Time).void }
+      attr_writer :created
+
+      # The name of the driver used to create the network (e.g. `bridge`, `overlay`).
+      sig { returns(T.nilable(String)) }
+      attr_reader :driver
+
+      sig { params(driver: String).void }
+      attr_writer :driver
+
+      # Whether the network was created with IPv4 enabled.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :enable_i_pv4
+
+      sig { params(enable_i_pv4: T::Boolean).void }
+      attr_writer :enable_i_pv4
+
+      # Whether the network was created with IPv6 enabled.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :enable_i_pv6
+
+      sig { params(enable_i_pv6: T::Boolean).void }
+      attr_writer :enable_i_pv6
+
+      # ID that uniquely identifies a network on a single machine.
+      sig { returns(T.nilable(String)) }
+      attr_reader :id
+
+      sig { params(id: String).void }
+      attr_writer :id
+
+      # Whether the network is providing the routing-mesh for the swarm cluster.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :ingress
+
+      sig { params(ingress: T::Boolean).void }
+      attr_writer :ingress
+
+      # Whether the network is created to only allow internal networking connectivity.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :internal
+
+      sig { params(internal: T::Boolean).void }
+      attr_writer :internal
+
+      # The network's IP Address Management.
+      sig do
+        returns(
+          T.nilable(DockerEngineRuby::Models::NetworkInspectResponse::Ipam)
+        )
+      end
+      attr_reader :ipam
+
+      sig do
+        params(
+          ipam: DockerEngineRuby::Models::NetworkInspectResponse::Ipam::OrHash
+        ).void
+      end
+      attr_writer :ipam
+
+      # Metadata specific to the network being created.
+      sig { returns(T.nilable(T::Hash[Symbol, String])) }
+      attr_reader :labels
+
+      sig { params(labels: T::Hash[Symbol, String]).void }
+      attr_writer :labels
+
+      # Name of the network.
+      sig { returns(T.nilable(String)) }
+      attr_reader :name
+
+      sig { params(name: String).void }
+      attr_writer :name
+
+      # Network-specific options uses when creating the network.
+      sig { returns(T.nilable(T::Hash[Symbol, String])) }
+      attr_reader :options
+
+      sig { params(options: T::Hash[Symbol, String]).void }
+      attr_writer :options
+
+      # List of peer nodes for an overlay network. This field is only present for
+      # overlay networks, and omitted for other network types.
+      sig do
+        returns(
+          T.nilable(
+            T::Array[DockerEngineRuby::Models::NetworkInspectResponse::Peer]
+          )
+        )
+      end
+      attr_reader :peers
+
+      sig do
+        params(
+          peers:
+            T::Array[
+              DockerEngineRuby::Models::NetworkInspectResponse::Peer::OrHash
             ]
         ).void
       end
-      attr_writer :containers
+      attr_writer :peers
 
-      # List of services using the network. This field is only present for swarm scope
-      # networks, and omitted for local scope networks.
-      sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
-      attr_reader :services
+      # The level at which the network exists (e.g. `swarm` for cluster-wide or `local`
+      # for machine level)
+      sig { returns(T.nilable(String)) }
+      attr_reader :scope
 
-      sig { params(services: T::Hash[Symbol, T.anything]).void }
-      attr_writer :services
-
-      # provides runtime information about the network such as the number of allocated
-      # IPs.
-      sig do
-        returns(
-          T.nilable(DockerEngineRuby::Models::NetworkInspectResponse::Status)
-        )
-      end
-      attr_reader :status
-
-      sig do
-        params(
-          status:
-            DockerEngineRuby::Models::NetworkInspectResponse::Status::OrHash
-        ).void
-      end
-      attr_writer :status
+      sig { params(scope: String).void }
+      attr_writer :scope
 
       # The body of the "get network" http response message.
       sig do
         params(
-          containers:
-            T::Hash[
-              Symbol,
-              DockerEngineRuby::Models::NetworkInspectResponse::Container::OrHash
+          attachable: T::Boolean,
+          config_from:
+            DockerEngineRuby::Models::NetworkInspectResponse::ConfigFrom::OrHash,
+          config_only: T::Boolean,
+          created: Time,
+          driver: String,
+          enable_i_pv4: T::Boolean,
+          enable_i_pv6: T::Boolean,
+          id: String,
+          ingress: T::Boolean,
+          internal: T::Boolean,
+          ipam: DockerEngineRuby::Models::NetworkInspectResponse::Ipam::OrHash,
+          labels: T::Hash[Symbol, String],
+          name: String,
+          options: T::Hash[Symbol, String],
+          peers:
+            T::Array[
+              DockerEngineRuby::Models::NetworkInspectResponse::Peer::OrHash
             ],
-          services: T::Hash[Symbol, T.anything],
-          status:
-            DockerEngineRuby::Models::NetworkInspectResponse::Status::OrHash
+          scope: String
         ).returns(T.attached_class)
       end
       def self.new(
-        # Contains endpoints attached to the network.
-        containers: nil,
-        # List of services using the network. This field is only present for swarm scope
-        # networks, and omitted for local scope networks.
-        services: nil,
-        # provides runtime information about the network such as the number of allocated
-        # IPs.
-        status: nil
+        # Whether a global / swarm scope network is manually attachable by regular
+        # containers from workers in swarm mode.
+        attachable: nil,
+        # The config-only network source to provide the configuration for this network.
+        config_from: nil,
+        # Whether the network is a config-only network. Config-only networks are
+        # placeholder networks for network configurations to be used by other networks.
+        # Config-only networks cannot be used directly to run containers or services.
+        config_only: nil,
+        # Date and time at which the network was created in
+        # [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
+        created: nil,
+        # The name of the driver used to create the network (e.g. `bridge`, `overlay`).
+        driver: nil,
+        # Whether the network was created with IPv4 enabled.
+        enable_i_pv4: nil,
+        # Whether the network was created with IPv6 enabled.
+        enable_i_pv6: nil,
+        # ID that uniquely identifies a network on a single machine.
+        id: nil,
+        # Whether the network is providing the routing-mesh for the swarm cluster.
+        ingress: nil,
+        # Whether the network is created to only allow internal networking connectivity.
+        internal: nil,
+        # The network's IP Address Management.
+        ipam: nil,
+        # Metadata specific to the network being created.
+        labels: nil,
+        # Name of the network.
+        name: nil,
+        # Network-specific options uses when creating the network.
+        options: nil,
+        # List of peer nodes for an overlay network. This field is only present for
+        # overlay networks, and omitted for other network types.
+        peers: nil,
+        # The level at which the network exists (e.g. `swarm` for cluster-wide or `local`
+        # for machine level)
+        scope: nil
       )
       end
 
       sig do
         override.returns(
           {
-            containers:
-              T::Hash[
-                Symbol,
-                DockerEngineRuby::Models::NetworkInspectResponse::Container
-              ],
-            services: T::Hash[Symbol, T.anything],
-            status: DockerEngineRuby::Models::NetworkInspectResponse::Status
+            attachable: T::Boolean,
+            config_from:
+              DockerEngineRuby::Models::NetworkInspectResponse::ConfigFrom,
+            config_only: T::Boolean,
+            created: Time,
+            driver: String,
+            enable_i_pv4: T::Boolean,
+            enable_i_pv6: T::Boolean,
+            id: String,
+            ingress: T::Boolean,
+            internal: T::Boolean,
+            ipam: DockerEngineRuby::Models::NetworkInspectResponse::Ipam,
+            labels: T::Hash[Symbol, String],
+            name: String,
+            options: T::Hash[Symbol, String],
+            peers:
+              T::Array[DockerEngineRuby::Models::NetworkInspectResponse::Peer],
+            scope: String
           }
         )
       end
       def to_hash
       end
 
-      class Container < DockerEngineRuby::Internal::Type::BaseModel
+      class ConfigFrom < DockerEngineRuby::Internal::Type::BaseModel
         OrHash =
           T.type_alias do
             T.any(
-              DockerEngineRuby::Models::NetworkInspectResponse::Container,
+              DockerEngineRuby::Models::NetworkInspectResponse::ConfigFrom,
               DockerEngineRuby::Internal::AnyHash
             )
           end
 
+        # The name of the config-only network that provides the network's configuration.
+        # The specified network must be an existing config-only network. Only network
+        # names are allowed, not network IDs.
         sig { returns(T.nilable(String)) }
-        attr_reader :endpoint_id
+        attr_reader :network
 
-        sig { params(endpoint_id: String).void }
-        attr_writer :endpoint_id
+        sig { params(network: String).void }
+        attr_writer :network
 
-        sig { returns(T.nilable(String)) }
-        attr_reader :i_pv4_address
+        # The config-only network source to provide the configuration for this network.
+        sig { params(network: String).returns(T.attached_class) }
+        def self.new(
+          # The name of the config-only network that provides the network's configuration.
+          # The specified network must be an existing config-only network. Only network
+          # names are allowed, not network IDs.
+          network: nil
+        )
+        end
 
-        sig { params(i_pv4_address: String).void }
-        attr_writer :i_pv4_address
+        sig { override.returns({ network: String }) }
+        def to_hash
+        end
+      end
 
-        sig { returns(T.nilable(String)) }
-        attr_reader :i_pv6_address
+      class Ipam < DockerEngineRuby::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              DockerEngineRuby::Models::NetworkInspectResponse::Ipam,
+              DockerEngineRuby::Internal::AnyHash
+            )
+          end
 
-        sig { params(i_pv6_address: String).void }
-        attr_writer :i_pv6_address
+        # List of IPAM configuration options, specified as a map:
+        #
+        # ```
+        # {"Subnet": <CIDR>, "IPRange": <CIDR>, "Gateway": <IP address>, "AuxAddress": <device_name:IP address>}
+        # ```
+        sig do
+          returns(
+            T.nilable(
+              T::Array[
+                DockerEngineRuby::Models::NetworkInspectResponse::Ipam::Config
+              ]
+            )
+          )
+        end
+        attr_reader :config
 
-        sig { returns(T.nilable(String)) }
-        attr_reader :mac_address
-
-        sig { params(mac_address: String).void }
-        attr_writer :mac_address
-
-        sig { returns(T.nilable(String)) }
-        attr_reader :name
-
-        sig { params(name: String).void }
-        attr_writer :name
-
-        # contains network resources allocated and used for a container in a network.
         sig do
           params(
-            endpoint_id: String,
-            i_pv4_address: String,
-            i_pv6_address: String,
-            mac_address: String,
-            name: String
+            config:
+              T::Array[
+                DockerEngineRuby::Models::NetworkInspectResponse::Ipam::Config::OrHash
+              ]
+          ).void
+        end
+        attr_writer :config
+
+        # Name of the IPAM driver to use.
+        sig { returns(T.nilable(String)) }
+        attr_reader :driver
+
+        sig { params(driver: String).void }
+        attr_writer :driver
+
+        # Driver-specific options, specified as a map.
+        sig { returns(T.nilable(T::Hash[Symbol, String])) }
+        attr_reader :options
+
+        sig { params(options: T::Hash[Symbol, String]).void }
+        attr_writer :options
+
+        # The network's IP Address Management.
+        sig do
+          params(
+            config:
+              T::Array[
+                DockerEngineRuby::Models::NetworkInspectResponse::Ipam::Config::OrHash
+              ],
+            driver: String,
+            options: T::Hash[Symbol, String]
           ).returns(T.attached_class)
         end
         def self.new(
-          endpoint_id: nil,
-          i_pv4_address: nil,
-          i_pv6_address: nil,
-          mac_address: nil,
-          name: nil
+          # List of IPAM configuration options, specified as a map:
+          #
+          # ```
+          # {"Subnet": <CIDR>, "IPRange": <CIDR>, "Gateway": <IP address>, "AuxAddress": <device_name:IP address>}
+          # ```
+          config: nil,
+          # Name of the IPAM driver to use.
+          driver: nil,
+          # Driver-specific options, specified as a map.
+          options: nil
         )
         end
 
         sig do
           override.returns(
             {
-              endpoint_id: String,
-              i_pv4_address: String,
-              i_pv6_address: String,
-              mac_address: String,
-              name: String
-            }
-          )
-        end
-        def to_hash
-        end
-      end
-
-      class Status < DockerEngineRuby::Internal::Type::BaseModel
-        OrHash =
-          T.type_alias do
-            T.any(
-              DockerEngineRuby::Models::NetworkInspectResponse::Status,
-              DockerEngineRuby::Internal::AnyHash
-            )
-          end
-
-        sig do
-          returns(
-            T.nilable(
-              DockerEngineRuby::Models::NetworkInspectResponse::Status::Ipam
-            )
-          )
-        end
-        attr_reader :ipam
-
-        sig do
-          params(
-            ipam:
-              DockerEngineRuby::Models::NetworkInspectResponse::Status::Ipam::OrHash
-          ).void
-        end
-        attr_writer :ipam
-
-        # provides runtime information about the network such as the number of allocated
-        # IPs.
-        sig do
-          params(
-            ipam:
-              DockerEngineRuby::Models::NetworkInspectResponse::Status::Ipam::OrHash
-          ).returns(T.attached_class)
-        end
-        def self.new(ipam: nil)
-        end
-
-        sig do
-          override.returns(
-            {
-              ipam:
-                DockerEngineRuby::Models::NetworkInspectResponse::Status::Ipam
+              config:
+                T::Array[
+                  DockerEngineRuby::Models::NetworkInspectResponse::Ipam::Config
+                ],
+              driver: String,
+              options: T::Hash[Symbol, String]
             }
           )
         end
         def to_hash
         end
 
-        class Ipam < DockerEngineRuby::Internal::Type::BaseModel
+        class Config < DockerEngineRuby::Internal::Type::BaseModel
           OrHash =
             T.type_alias do
               T.any(
-                DockerEngineRuby::Models::NetworkInspectResponse::Status::Ipam,
+                DockerEngineRuby::Models::NetworkInspectResponse::Ipam::Config,
                 DockerEngineRuby::Internal::AnyHash
               )
             end
 
-          sig do
-            returns(
-              T.nilable(
-                T::Hash[
-                  Symbol,
-                  DockerEngineRuby::Models::NetworkInspectResponse::Status::Ipam::Subnet
-                ]
-              )
-            )
-          end
-          attr_reader :subnets
+          sig { returns(T.nilable(T::Hash[Symbol, String])) }
+          attr_reader :auxiliary_addresses
+
+          sig { params(auxiliary_addresses: T::Hash[Symbol, String]).void }
+          attr_writer :auxiliary_addresses
+
+          sig { returns(T.nilable(String)) }
+          attr_reader :gateway
+
+          sig { params(gateway: String).void }
+          attr_writer :gateway
+
+          sig { returns(T.nilable(String)) }
+          attr_reader :ip_range
+
+          sig { params(ip_range: String).void }
+          attr_writer :ip_range
+
+          sig { returns(T.nilable(String)) }
+          attr_reader :subnet
+
+          sig { params(subnet: String).void }
+          attr_writer :subnet
 
           sig do
             params(
-              subnets:
-                T::Hash[
-                  Symbol,
-                  DockerEngineRuby::Models::NetworkInspectResponse::Status::Ipam::Subnet::OrHash
-                ]
-            ).void
-          end
-          attr_writer :subnets
-
-          sig do
-            params(
-              subnets:
-                T::Hash[
-                  Symbol,
-                  DockerEngineRuby::Models::NetworkInspectResponse::Status::Ipam::Subnet::OrHash
-                ]
+              auxiliary_addresses: T::Hash[Symbol, String],
+              gateway: String,
+              ip_range: String,
+              subnet: String
             ).returns(T.attached_class)
           end
-          def self.new(subnets: nil)
+          def self.new(
+            auxiliary_addresses: nil,
+            gateway: nil,
+            ip_range: nil,
+            subnet: nil
+          )
           end
 
           sig do
             override.returns(
               {
-                subnets:
-                  T::Hash[
-                    Symbol,
-                    DockerEngineRuby::Models::NetworkInspectResponse::Status::Ipam::Subnet
-                  ]
+                auxiliary_addresses: T::Hash[Symbol, String],
+                gateway: String,
+                ip_range: String,
+                subnet: String
               }
             )
           end
           def to_hash
           end
+        end
+      end
 
-          class Subnet < DockerEngineRuby::Internal::Type::BaseModel
-            OrHash =
-              T.type_alias do
-                T.any(
-                  DockerEngineRuby::Models::NetworkInspectResponse::Status::Ipam::Subnet,
-                  DockerEngineRuby::Internal::AnyHash
-                )
-              end
-
-            # Number of IP addresses within the network's IPRange for the subnet that are
-            # available for allocation, saturating at 2<sup>64</sup> - 1.
-            sig { returns(T.nilable(Integer)) }
-            attr_reader :dynamic_ips_available
-
-            sig { params(dynamic_ips_available: Integer).void }
-            attr_writer :dynamic_ips_available
-
-            # Number of IP addresses in the subnet that are in use or reserved and are
-            # therefore unavailable for allocation, saturating at 2<sup>64</sup> - 1.
-            sig { returns(T.nilable(Integer)) }
-            attr_reader :ips_in_use
-
-            sig { params(ips_in_use: Integer).void }
-            attr_writer :ips_in_use
-
-            sig do
-              params(
-                dynamic_ips_available: Integer,
-                ips_in_use: Integer
-              ).returns(T.attached_class)
-            end
-            def self.new(
-              # Number of IP addresses within the network's IPRange for the subnet that are
-              # available for allocation, saturating at 2<sup>64</sup> - 1.
-              dynamic_ips_available: nil,
-              # Number of IP addresses in the subnet that are in use or reserved and are
-              # therefore unavailable for allocation, saturating at 2<sup>64</sup> - 1.
-              ips_in_use: nil
+      class Peer < DockerEngineRuby::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              DockerEngineRuby::Models::NetworkInspectResponse::Peer,
+              DockerEngineRuby::Internal::AnyHash
             )
-            end
-
-            sig do
-              override.returns(
-                { dynamic_ips_available: Integer, ips_in_use: Integer }
-              )
-            end
-            def to_hash
-            end
           end
+
+        # IP-address of the peer-node in the Swarm cluster.
+        sig { returns(T.nilable(String)) }
+        attr_reader :ip
+
+        sig { params(ip: String).void }
+        attr_writer :ip
+
+        # ID of the peer-node in the Swarm cluster.
+        sig { returns(T.nilable(String)) }
+        attr_reader :name
+
+        sig { params(name: String).void }
+        attr_writer :name
+
+        # represents one peer of an overlay network.
+        sig { params(ip: String, name: String).returns(T.attached_class) }
+        def self.new(
+          # IP-address of the peer-node in the Swarm cluster.
+          ip: nil,
+          # ID of the peer-node in the Swarm cluster.
+          name: nil
+        )
+        end
+
+        sig { override.returns({ ip: String, name: String }) }
+        def to_hash
         end
       end
     end

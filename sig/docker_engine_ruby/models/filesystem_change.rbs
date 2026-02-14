@@ -18,7 +18,7 @@ module DockerEngineRuby
         path: String
       }
 
-      type kind = 0 | 1 | 2
+      type kind = Float
 
       module Kind
         extend DockerEngineRuby::Internal::Type::Enum

@@ -3,22 +3,19 @@
 module DockerEngineRuby
   module Resources
     class Swarm
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::SwarmUpdateParams} for more details.
-      #
       # Update a swarm
       #
       # @overload update(version:, spec:, rotate_manager_token: nil, rotate_manager_unlock_key: nil, rotate_worker_token: nil, request_options: {})
       #
-      # @param version [Integer] Query param: The version number of the swarm object being updated. This is
+      # @param version [Integer] Query param
       #
       # @param spec [DockerEngineRuby::Models::Spec] Body param: User modifiable swarm configuration.
       #
-      # @param rotate_manager_token [Boolean] Query param: Rotate the manager join token.
+      # @param rotate_manager_token [Boolean] Query param
       #
-      # @param rotate_manager_unlock_key [Boolean] Query param: Rotate the manager unlock key.
+      # @param rotate_manager_unlock_key [Boolean] Query param
       #
-      # @param rotate_worker_token [Boolean] Query param: Rotate the worker join token.
+      # @param rotate_worker_token [Boolean] Query param
       #
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -41,28 +38,25 @@ module DockerEngineRuby
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::SwarmInitParams} for more details.
-      #
       # Initialize a new swarm
       #
       # @overload init(advertise_addr: nil, data_path_addr: nil, data_path_port: nil, default_addr_pool: nil, force_new_cluster: nil, listen_addr: nil, spec: nil, subnet_size: nil, request_options: {})
       #
-      # @param advertise_addr [String] Externally reachable address advertised to other nodes. This
+      # @param advertise_addr [String]
       #
-      # @param data_path_addr [String] Address or interface to use for data path traffic (format:
+      # @param data_path_addr [String]
       #
-      # @param data_path_port [Integer] DataPathPort specifies the data path port number for data traffic.
+      # @param data_path_port [Integer]
       #
-      # @param default_addr_pool [Array<String>] Default Address Pool specifies default subnet pools for global
+      # @param default_addr_pool [Array<String>]
       #
-      # @param force_new_cluster [Boolean] Force creation of a new swarm.
+      # @param force_new_cluster [Boolean]
       #
-      # @param listen_addr [String] Listen address used for inter-manager communication, as well
+      # @param listen_addr [String]
       #
       # @param spec [DockerEngineRuby::Models::Spec] User modifiable swarm configuration.
       #
-      # @param subnet_size [Integer] SubnetSize specifies the subnet size of the networks created
+      # @param subnet_size [Integer]
       #
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -71,7 +65,14 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::SwarmInitParams
       def init(params = {})
         parsed, options = DockerEngineRuby::SwarmInitParams.dump_request(params)
-        @client.request(method: :post, path: "swarm/init", body: parsed, model: String, options: options)
+        @client.request(
+          method: :post,
+          path: "swarm/init",
+          headers: {"accept" => "text/plain"},
+          body: parsed,
+          model: String,
+          options: options
+        )
       end
 
       # Inspect swarm
@@ -92,23 +93,15 @@ module DockerEngineRuby
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::SwarmJoinParams} for more details.
-      #
       # Join an existing swarm
       #
       # @overload join(advertise_addr: nil, data_path_addr: nil, join_token: nil, listen_addr: nil, remote_addrs: nil, request_options: {})
       #
-      # @param advertise_addr [String] Externally reachable address advertised to other nodes. This
-      #
-      # @param data_path_addr [String] Address or interface to use for data path traffic (format:
-      #
-      # @param join_token [String] Secret token for joining this swarm.
-      #
-      # @param listen_addr [String] Listen address used for inter-manager communication if the node
-      #
-      # @param remote_addrs [Array<String>] Addresses of manager nodes already participating in the swarm.
-      #
+      # @param advertise_addr [String]
+      # @param data_path_addr [String]
+      # @param join_token [String]
+      # @param listen_addr [String]
+      # @param remote_addrs [Array<String>]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [nil]
@@ -119,15 +112,11 @@ module DockerEngineRuby
         @client.request(method: :post, path: "swarm/join", body: parsed, model: NilClass, options: options)
       end
 
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::SwarmLeaveParams} for more details.
-      #
       # Leave a swarm
       #
       # @overload leave(force: nil, request_options: {})
       #
-      # @param force [Boolean] Force leave swarm, even if this is the last manager or that it will
-      #
+      # @param force [Boolean]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [nil]
@@ -142,8 +131,7 @@ module DockerEngineRuby
       #
       # @overload unlock(unlock_key: nil, request_options: {})
       #
-      # @param unlock_key [String] The swarm's unlock key.
-      #
+      # @param unlock_key [String]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [nil]

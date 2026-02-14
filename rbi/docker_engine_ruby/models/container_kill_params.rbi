@@ -14,7 +14,6 @@ module DockerEngineRuby
           )
         end
 
-      # Signal to send to the container as an integer or string (e.g. `SIGINT`).
       sig { returns(T.nilable(String)) }
       attr_reader :signal
 
@@ -27,11 +26,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # Signal to send to the container as an integer or string (e.g. `SIGINT`).
-        signal: nil,
-        request_options: {}
-      )
+      def self.new(signal: nil, request_options: {})
       end
 
       sig do

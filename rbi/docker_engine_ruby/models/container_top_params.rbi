@@ -14,7 +14,6 @@ module DockerEngineRuby
           )
         end
 
-      # The arguments to pass to `ps`. For example, `aux`
       sig { returns(T.nilable(String)) }
       attr_reader :ps_args
 
@@ -27,11 +26,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # The arguments to pass to `ps`. For example, `aux`
-        ps_args: nil,
-        request_options: {}
-      )
+      def self.new(ps_args: nil, request_options: {})
       end
 
       sig do

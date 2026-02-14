@@ -11,7 +11,6 @@ module DockerEngineRuby
           )
         end
 
-      # Networks that were deleted
       sig { returns(T.nilable(T::Array[String])) }
       attr_reader :networks_deleted
 
@@ -21,10 +20,7 @@ module DockerEngineRuby
       sig do
         params(networks_deleted: T::Array[String]).returns(T.attached_class)
       end
-      def self.new(
-        # Networks that were deleted
-        networks_deleted: nil
-      )
+      def self.new(networks_deleted: nil)
       end
 
       sig { override.returns({ networks_deleted: T::Array[String] }) }

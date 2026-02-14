@@ -2,7 +2,7 @@ module DockerEngineRuby
   module Resources
     class System
       def data_usage: (
-        ?type: ::Array[DockerEngineRuby::Models::SystemDataUsageParams::type_],
+        ?type: DockerEngineRuby::Models::SystemDataUsageParams::type_,
         ?verbose: bool,
         ?request_options: DockerEngineRuby::request_opts
       ) -> DockerEngineRuby::Models::SystemDataUsageResponse

@@ -8,22 +8,18 @@ module DockerEngineRuby
       include DockerEngineRuby::Internal::Type::RequestParameters
 
       # @!attribute scope
-      #   Filter the network by scope (swarm, global, or local)
       #
       #   @return [String, nil]
       optional :scope, String
 
       # @!attribute verbose
-      #   Detailed inspect output for troubleshooting
       #
       #   @return [Boolean, nil]
       optional :verbose, DockerEngineRuby::Internal::Type::Boolean
 
       # @!method initialize(scope: nil, verbose: nil, request_options: {})
-      #   @param scope [String] Filter the network by scope (swarm, global, or local)
-      #
-      #   @param verbose [Boolean] Detailed inspect output for troubleshooting
-      #
+      #   @param scope [String]
+      #   @param verbose [Boolean]
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]
     end
   end

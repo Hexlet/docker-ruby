@@ -12,8 +12,7 @@ module DockerEngineRuby
         ).void
       end
       def create(
-        # Query param: The name of the plugin. The `:latest` tag is optional, and is the
-        # default if omitted.
+        # Query param
         name:,
         # Body param
         body:,
@@ -21,24 +20,14 @@ module DockerEngineRuby
       )
       end
 
-      # Returns information about installed plugins.
+      # List plugins
       sig do
         params(
           filters: String,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T::Array[DockerEngineRuby::Plugin])
       end
-      def list(
-        # A JSON encoded value of the filters (a `map[string][]string`) to process on the
-        # plugin list.
-        #
-        # Available filters:
-        #
-        # - `capability=<capability name>`
-        # - `enable=<true>|<false>`
-        filters: nil,
-        request_options: {}
-      )
+      def list(filters: nil, request_options: {})
       end
 
       # Remove a plugin
@@ -49,15 +38,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(DockerEngineRuby::Plugin)
       end
-      def delete(
-        # The name of the plugin. The `:latest` tag is optional, and is the default if
-        # omitted.
-        name,
-        # Disable the plugin before removing. This may result in issues if the plugin is
-        # in use by a container.
-        force: nil,
-        request_options: {}
-      )
+      def delete(name, force: nil, request_options: {})
       end
 
       # Disable a plugin
@@ -68,14 +49,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).void
       end
-      def disable(
-        # The name of the plugin. The `:latest` tag is optional, and is the default if
-        # omitted.
-        name,
-        # Force disable a plugin even if still in use.
-        force: nil,
-        request_options: {}
-      )
+      def disable(name, force: nil, request_options: {})
       end
 
       # Enable a plugin
@@ -86,14 +60,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).void
       end
-      def enable(
-        # The name of the plugin. The `:latest` tag is optional, and is the default if
-        # omitted.
-        name,
-        # Set the HTTP client timeout (in seconds)
-        timeout: nil,
-        request_options: {}
-      )
+      def enable(name, timeout: nil, request_options: {})
       end
 
       # Inspect a plugin
@@ -103,12 +70,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(DockerEngineRuby::Plugin)
       end
-      def inspect_(
-        # The name of the plugin. The `:latest` tag is optional, and is the default if
-        # omitted.
-        name,
-        request_options: {}
-      )
+      def inspect_(name, request_options: {})
       end
 
       # Get plugin privileges
@@ -118,59 +80,40 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T::Array[DockerEngineRuby::Privilege])
       end
-      def privileges(
-        # The name of the plugin. The `:latest` tag is optional, and is the default if
-        # omitted.
-        remote:,
-        request_options: {}
-      )
+      def privileges(remote:, request_options: {})
       end
 
-      # Pulls and installs a plugin. After the plugin is installed, it can be enabled
-      # using the
-      # [`POST /plugins/{name}/enable` endpoint](#operation/PostPluginsEnable).
+      # Install a plugin
       sig do
         params(
           remote: String,
-          name: String,
           body: T::Array[DockerEngineRuby::Privilege::OrHash],
+          name: String,
           x_registry_auth: String,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).void
       end
       def pull(
-        # Query param: Remote reference for plugin to install.
-        #
-        # The `:latest` tag is optional, and is used as the default if omitted.
+        # Query param
         remote:,
-        # Query param: Local name for the pulled plugin.
-        #
-        # The `:latest` tag is optional, and is used as the default if omitted.
-        name: nil,
         # Body param
-        body: nil,
-        # Header param: A base64url-encoded auth configuration to use when pulling a
-        # plugin from a registry.
-        #
-        # Refer to the [authentication section](#section/Authentication) for details.
+        body:,
+        # Query param
+        name: nil,
+        # Header param
         x_registry_auth: nil,
         request_options: {}
       )
       end
 
-      # Push a plugin to the registry.
+      # Push a plugin
       sig do
         params(
           name: String,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).void
       end
-      def push(
-        # The name of the plugin. The `:latest` tag is optional, and is the default if
-        # omitted.
-        name,
-        request_options: {}
-      )
+      def push(name, request_options: {})
       end
 
       # Configure a plugin
@@ -181,13 +124,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).void
       end
-      def set(
-        # The name of the plugin. The `:latest` tag is optional, and is the default if
-        # omitted.
-        name,
-        body: nil,
-        request_options: {}
-      )
+      def set(name, body:, request_options: {})
       end
 
       # Upgrade a plugin
@@ -201,19 +138,13 @@ module DockerEngineRuby
         ).void
       end
       def upgrade(
-        # Path param: The name of the plugin. The `:latest` tag is optional, and is the
-        # default if omitted.
+        # Path param
         name,
-        # Query param: Remote reference to upgrade to.
-        #
-        # The `:latest` tag is optional, and is used as the default if omitted.
+        # Query param
         remote:,
         # Body param
-        body: nil,
-        # Header param: A base64url-encoded auth configuration to use when pulling a
-        # plugin from a registry.
-        #
-        # Refer to the [authentication section](#section/Authentication) for details.
+        body:,
+        # Header param
         x_registry_auth: nil,
         request_options: {}
       )

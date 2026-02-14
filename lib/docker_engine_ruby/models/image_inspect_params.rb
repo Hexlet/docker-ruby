@@ -8,14 +8,12 @@ module DockerEngineRuby
       include DockerEngineRuby::Internal::Type::RequestParameters
 
       # @!attribute manifests
-      #   Include Manifests in the image summary.
       #
       #   @return [Boolean, nil]
       optional :manifests, DockerEngineRuby::Internal::Type::Boolean
 
       # @!method initialize(manifests: nil, request_options: {})
-      #   @param manifests [Boolean] Include Manifests in the image summary.
-      #
+      #   @param manifests [Boolean]
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]
     end
   end

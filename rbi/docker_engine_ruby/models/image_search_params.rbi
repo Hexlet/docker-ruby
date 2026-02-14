@@ -14,22 +14,15 @@ module DockerEngineRuby
           )
         end
 
-      # Term to search
       sig { returns(String) }
       attr_accessor :term
 
-      # A JSON encoded value of the filters (a `map[string][]string`) to process on the
-      # images list. Available filters:
-      #
-      # - `is-official=(true|false)`
-      # - `stars=<number>` Matches images that has at least 'number' stars.
       sig { returns(T.nilable(String)) }
       attr_reader :filters
 
       sig { params(filters: String).void }
       attr_writer :filters
 
-      # Maximum number of results to return
       sig { returns(T.nilable(Integer)) }
       attr_reader :limit
 
@@ -44,19 +37,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # Term to search
-        term:,
-        # A JSON encoded value of the filters (a `map[string][]string`) to process on the
-        # images list. Available filters:
-        #
-        # - `is-official=(true|false)`
-        # - `stars=<number>` Matches images that has at least 'number' stars.
-        filters: nil,
-        # Maximum number of results to return
-        limit: nil,
-        request_options: {}
-      )
+      def self.new(term:, filters: nil, limit: nil, request_options: {})
       end
 
       sig do

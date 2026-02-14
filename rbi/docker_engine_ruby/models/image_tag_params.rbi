@@ -14,14 +14,12 @@ module DockerEngineRuby
           )
         end
 
-      # The repository to tag in. For example, `someuser/someimage`.
       sig { returns(T.nilable(String)) }
       attr_reader :repo
 
       sig { params(repo: String).void }
       attr_writer :repo
 
-      # The name of the new tag.
       sig { returns(T.nilable(String)) }
       attr_reader :tag
 
@@ -35,13 +33,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # The repository to tag in. For example, `someuser/someimage`.
-        repo: nil,
-        # The name of the new tag.
-        tag: nil,
-        request_options: {}
-      )
+      def self.new(repo: nil, tag: nil, request_options: {})
       end
 
       sig do

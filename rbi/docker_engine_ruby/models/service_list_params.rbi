@@ -14,22 +14,12 @@ module DockerEngineRuby
           )
         end
 
-      # A JSON encoded value of the filters (a `map[string][]string`) to process on the
-      # services list.
-      #
-      # Available filters:
-      #
-      # - `id=<service id>`
-      # - `label=<service label>`
-      # - `mode=["replicated"|"global"]`
-      # - `name=<service name>`
       sig { returns(T.nilable(String)) }
       attr_reader :filters
 
       sig { params(filters: String).void }
       attr_writer :filters
 
-      # Include service status, with count of running and desired tasks.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :status
 
@@ -43,21 +33,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # A JSON encoded value of the filters (a `map[string][]string`) to process on the
-        # services list.
-        #
-        # Available filters:
-        #
-        # - `id=<service id>`
-        # - `label=<service label>`
-        # - `mode=["replicated"|"global"]`
-        # - `name=<service name>`
-        filters: nil,
-        # Include service status, with count of running and desired tasks.
-        status: nil,
-        request_options: {}
-      )
+      def self.new(filters: nil, status: nil, request_options: {})
       end
 
       sig do

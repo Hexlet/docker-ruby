@@ -5,7 +5,6 @@ module DockerEngineRuby
     # @see DockerEngineRuby::Resources::Networks#prune
     class NetworkPruneResponse < DockerEngineRuby::Internal::Type::BaseModel
       # @!attribute networks_deleted
-      #   Networks that were deleted
       #
       #   @return [Array<String>, nil]
       optional :networks_deleted,
@@ -13,7 +12,7 @@ module DockerEngineRuby
                api_name: :NetworksDeleted
 
       # @!method initialize(networks_deleted: nil)
-      #   @param networks_deleted [Array<String>] Networks that were deleted
+      #   @param networks_deleted [Array<String>]
     end
   end
 end

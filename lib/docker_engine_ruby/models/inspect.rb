@@ -14,11 +14,9 @@ module DockerEngineRuby
       # @!attribute platforms
       #   An array containing all platforms supported by the image.
       #
-      #   @return [Array<DockerEngineRuby::Models::Inspect::Platform, nil>]
+      #   @return [Array<DockerEngineRuby::Models::Inspect::Platform>]
       required :platforms,
-               -> {
-                 DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Inspect::Platform, nil?: true]
-               },
+               -> { DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Inspect::Platform] },
                api_name: :Platforms
 
       # @!method initialize(descriptor:, platforms:)
@@ -30,7 +28,7 @@ module DockerEngineRuby
       #
       #   @param descriptor [DockerEngineRuby::Models::Inspect::Descriptor] A descriptor struct containing digest, media type, and size, as defined in
       #
-      #   @param platforms [Array<DockerEngineRuby::Models::Inspect::Platform, nil>] An array containing all platforms supported by the image.
+      #   @param platforms [Array<DockerEngineRuby::Models::Inspect::Platform>] An array containing all platforms supported by the image.
 
       # @see DockerEngineRuby::Models::Inspect#descriptor
       class Descriptor < DockerEngineRuby::Internal::Type::BaseModel
@@ -72,7 +70,7 @@ module DockerEngineRuby
         #   [OCI Image Index Specification](https://github.com/opencontainers/image-spec/blob/v1.0.1/image-index.md).
         #
         #   @return [DockerEngineRuby::Models::Inspect::Descriptor::Platform, nil]
-        optional :platform, -> { DockerEngineRuby::Inspect::Descriptor::Platform }, nil?: true
+        optional :platform, -> { DockerEngineRuby::Inspect::Descriptor::Platform }
 
         # @!attribute size
         #   The size in bytes of the blob.
@@ -103,7 +101,7 @@ module DockerEngineRuby
         #
         #   @param media_type [String] The media type of the object this schema refers to.
         #
-        #   @param platform [DockerEngineRuby::Models::Inspect::Descriptor::Platform, nil] Describes the platform which the image in the manifest runs on, as defined
+        #   @param platform [DockerEngineRuby::Models::Inspect::Descriptor::Platform] Describes the platform which the image in the manifest runs on, as defined
         #
         #   @param size [Integer] The size in bytes of the blob.
         #

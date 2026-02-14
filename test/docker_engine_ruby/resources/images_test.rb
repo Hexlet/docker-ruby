@@ -67,7 +67,7 @@ class DockerEngineRuby::Test::Resources::ImagesTest < DockerEngineRuby::Test::Re
   end
 
   def test_get
-    skip("Prism doesn't support application/x-tar responses")
+    skip("Prism doesn't support application/octet-stream responses")
 
     response = @docker.images.get("name")
 
@@ -77,7 +77,7 @@ class DockerEngineRuby::Test::Resources::ImagesTest < DockerEngineRuby::Test::Re
   end
 
   def test_get_all
-    skip("Prism doesn't support application/x-tar responses")
+    skip("Prism doesn't support application/octet-stream responses")
 
     response = @docker.images.get_all
 
@@ -111,7 +111,7 @@ class DockerEngineRuby::Test::Resources::ImagesTest < DockerEngineRuby::Test::Re
         author: String | nil,
         comment: String | nil,
         config: DockerEngineRuby::Image::Config | nil,
-        created: String | nil,
+        created: Time | nil,
         descriptor: DockerEngineRuby::Image::Descriptor | nil,
         graph_driver: DockerEngineRuby::Image::GraphDriver | nil,
         id: String | nil,
@@ -156,10 +156,10 @@ class DockerEngineRuby::Test::Resources::ImagesTest < DockerEngineRuby::Test::Re
     end
   end
 
-  def test_pull
+  def test_pull_required_params
     skip("Prism tests are disabled")
 
-    response = @docker.images.pull
+    response = @docker.images.pull(body: "body")
 
     assert_pattern do
       response => nil

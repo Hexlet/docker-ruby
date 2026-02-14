@@ -10,10 +10,10 @@ module DockerEngineRuby
 
       # Date and time at which the node was added to the swarm in
       # [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
-      sig { returns(T.nilable(String)) }
+      sig { returns(T.nilable(Time)) }
       attr_reader :created_at
 
-      sig { params(created_at: String).void }
+      sig { params(created_at: Time).void }
       attr_writer :created_at
 
       # NodeDescription encapsulates the properties of the Node as reported by the
@@ -41,8 +41,7 @@ module DockerEngineRuby
 
       sig do
         params(
-          manager_status:
-            T.nilable(DockerEngineRuby::Node::ManagerStatus::OrHash)
+          manager_status: DockerEngineRuby::Node::ManagerStatus::OrHash
         ).void
       end
       attr_writer :manager_status
@@ -64,10 +63,10 @@ module DockerEngineRuby
 
       # Date and time at which the node was last updated in
       # [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
-      sig { returns(T.nilable(String)) }
+      sig { returns(T.nilable(Time)) }
       attr_reader :updated_at
 
-      sig { params(updated_at: String).void }
+      sig { params(updated_at: Time).void }
       attr_writer :updated_at
 
       # The version number of the object such as node, service, etc. This is needed to
@@ -87,14 +86,13 @@ module DockerEngineRuby
 
       sig do
         params(
-          created_at: String,
+          created_at: Time,
           description: DockerEngineRuby::Node::Description::OrHash,
           id: String,
-          manager_status:
-            T.nilable(DockerEngineRuby::Node::ManagerStatus::OrHash),
+          manager_status: DockerEngineRuby::Node::ManagerStatus::OrHash,
           spec: DockerEngineRuby::Spec::OrHash,
           status: DockerEngineRuby::Node::Status::OrHash,
-          updated_at: String,
+          updated_at: Time,
           version: DockerEngineRuby::Node::Version::OrHash
         ).returns(T.attached_class)
       end
@@ -135,13 +133,13 @@ module DockerEngineRuby
       sig do
         override.returns(
           {
-            created_at: String,
+            created_at: Time,
             description: DockerEngineRuby::Node::Description,
             id: String,
-            manager_status: T.nilable(DockerEngineRuby::Node::ManagerStatus),
+            manager_status: DockerEngineRuby::Node::ManagerStatus,
             spec: DockerEngineRuby::Spec,
             status: DockerEngineRuby::Node::Status,
-            updated_at: String,
+            updated_at: Time,
             version: DockerEngineRuby::Node::Version
           }
         )
@@ -401,8 +399,6 @@ module DockerEngineRuby
               )
             end
 
-          # User-defined resources can be either Integer resources (e.g, `SSD=3`) or String
-          # resources (e.g, `GPU=UUID1`).
           sig do
             returns(
               T.nilable(
@@ -449,8 +445,6 @@ module DockerEngineRuby
             ).returns(T.attached_class)
           end
           def self.new(
-            # User-defined resources can be either Integer resources (e.g, `SSD=3`) or String
-            # resources (e.g, `GPU=UUID1`).
             generic_resources: nil,
             memory_bytes: nil,
             nano_cpus: nil

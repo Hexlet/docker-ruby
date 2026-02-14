@@ -12,7 +12,7 @@ module DockerEngineRuby
       #   - `1`: Added ("A")
       #   - `2`: Deleted ("D")
       #
-      #   @return [Integer, DockerEngineRuby::Models::FilesystemChange::Kind]
+      #   @return [Float, DockerEngineRuby::Models::FilesystemChange::Kind]
       required :kind, enum: -> { DockerEngineRuby::FilesystemChange::Kind }, api_name: :Kind
 
       # @!attribute path
@@ -27,7 +27,7 @@ module DockerEngineRuby
       #
       #   Change in the container's filesystem.
       #
-      #   @param kind [Integer, DockerEngineRuby::Models::FilesystemChange::Kind] Kind of change
+      #   @param kind [Float, DockerEngineRuby::Models::FilesystemChange::Kind] Kind of change
       #
       #   @param path [String] Path to file or directory that has changed.
 
@@ -48,7 +48,7 @@ module DockerEngineRuby
         KIND_2 = 2
 
         # @!method self.values
-        #   @return [Array<Integer>]
+        #   @return [Array<Float>]
       end
     end
   end

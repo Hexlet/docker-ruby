@@ -67,13 +67,13 @@ class DockerEngineRuby::Test::Resources::ServicesTest < DockerEngineRuby::Test::
 
     assert_pattern do
       response => {
-        created_at: String | nil,
+        created_at: Time | nil,
         endpoint: DockerEngineRuby::Service::Endpoint | nil,
         id: String | nil,
         job_status: DockerEngineRuby::Service::JobStatus | nil,
         service_status: DockerEngineRuby::Service::ServiceStatus | nil,
         spec: DockerEngineRuby::Spec | nil,
-        updated_at: String | nil,
+        updated_at: Time | nil,
         update_status: DockerEngineRuby::Service::UpdateStatus | nil,
         version: DockerEngineRuby::Service::Version | nil
       }
@@ -81,7 +81,7 @@ class DockerEngineRuby::Test::Resources::ServicesTest < DockerEngineRuby::Test::
   end
 
   def test_logs
-    skip("Prism tests are disabled")
+    skip("Prism doesn't support application/octet-stream responses")
 
     response = @docker.services.logs("id")
 

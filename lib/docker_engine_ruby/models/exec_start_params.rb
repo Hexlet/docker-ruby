@@ -8,7 +8,6 @@ module DockerEngineRuby
       include DockerEngineRuby::Internal::Type::RequestParameters
 
       # @!attribute console_size
-      #   Initial console size, as an `[height, width]` array.
       #
       #   @return [Array<Integer>, nil]
       optional :console_size,
@@ -17,24 +16,19 @@ module DockerEngineRuby
                nil?: true
 
       # @!attribute detach
-      #   Detach from the command.
       #
       #   @return [Boolean, nil]
       optional :detach, DockerEngineRuby::Internal::Type::Boolean, api_name: :Detach
 
       # @!attribute tty
-      #   Allocate a pseudo-TTY.
       #
       #   @return [Boolean, nil]
       optional :tty, DockerEngineRuby::Internal::Type::Boolean, api_name: :Tty
 
       # @!method initialize(console_size: nil, detach: nil, tty: nil, request_options: {})
-      #   @param console_size [Array<Integer>, nil] Initial console size, as an `[height, width]` array.
-      #
-      #   @param detach [Boolean] Detach from the command.
-      #
-      #   @param tty [Boolean] Allocate a pseudo-TTY.
-      #
+      #   @param console_size [Array<Integer>, nil]
+      #   @param detach [Boolean]
+      #   @param tty [Boolean]
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]
     end
   end

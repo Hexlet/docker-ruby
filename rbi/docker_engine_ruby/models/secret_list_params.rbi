@@ -14,15 +14,6 @@ module DockerEngineRuby
           )
         end
 
-      # A JSON encoded value of the filters (a `map[string][]string`) to process on the
-      # secrets list.
-      #
-      # Available filters:
-      #
-      # - `id=<secret id>`
-      # - `label=<key> or label=<key>=value`
-      # - `name=<secret name>`
-      # - `names=<secret name>`
       sig { returns(T.nilable(String)) }
       attr_reader :filters
 
@@ -35,19 +26,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # A JSON encoded value of the filters (a `map[string][]string`) to process on the
-        # secrets list.
-        #
-        # Available filters:
-        #
-        # - `id=<secret id>`
-        # - `label=<key> or label=<key>=value`
-        # - `name=<secret name>`
-        # - `names=<secret name>`
-        filters: nil,
-        request_options: {}
-      )
+      def self.new(filters: nil, request_options: {})
       end
 
       sig do

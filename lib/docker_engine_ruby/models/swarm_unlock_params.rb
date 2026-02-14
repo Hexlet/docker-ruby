@@ -8,14 +8,12 @@ module DockerEngineRuby
       include DockerEngineRuby::Internal::Type::RequestParameters
 
       # @!attribute unlock_key
-      #   The swarm's unlock key.
       #
       #   @return [String, nil]
       optional :unlock_key, String, api_name: :UnlockKey
 
       # @!method initialize(unlock_key: nil, request_options: {})
-      #   @param unlock_key [String] The swarm's unlock key.
-      #
+      #   @param unlock_key [String]
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]
     end
   end

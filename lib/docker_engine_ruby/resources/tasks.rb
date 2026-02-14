@@ -3,15 +3,11 @@
 module DockerEngineRuby
   module Resources
     class Tasks
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::TaskListParams} for more details.
-      #
       # List tasks
       #
       # @overload list(filters: nil, request_options: {})
       #
-      # @param filters [String] A JSON encoded value of the filters (a `map[string][]string`) to
-      #
+      # @param filters [String]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Array<DockerEngineRuby::Models::Task>]
@@ -32,8 +28,7 @@ module DockerEngineRuby
       #
       # @overload inspect_(id, request_options: {})
       #
-      # @param id [String] ID of the task
-      #
+      # @param id [String]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [DockerEngineRuby::Models::Task]
@@ -48,33 +43,18 @@ module DockerEngineRuby
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::TaskLogsParams} for more details.
-      #
-      # Get `stdout` and `stderr` logs from a task. See also
-      # [`/containers/{id}/logs`](#operation/ContainerLogs).
-      #
-      # **Note**: This endpoint works only for services with the `local`, `json-file` or
-      # `journald` logging drivers.
+      # Get task logs
       #
       # @overload logs(id, details: nil, follow: nil, since: nil, stderr: nil, stdout: nil, tail: nil, timestamps: nil, request_options: {})
       #
-      # @param id [String] ID of the task
-      #
-      # @param details [Boolean] Show task context and extra details provided to logs.
-      #
-      # @param follow [Boolean] Keep connection after returning logs.
-      #
-      # @param since [Integer] Only return logs since this time, as a UNIX timestamp
-      #
-      # @param stderr [Boolean] Return logs from `stderr`
-      #
-      # @param stdout [Boolean] Return logs from `stdout`
-      #
-      # @param tail [String] Only return this number of log lines from the end of the logs.
-      #
-      # @param timestamps [Boolean] Add timestamps to every log line
-      #
+      # @param id [String]
+      # @param details [Boolean]
+      # @param follow [Boolean]
+      # @param since [Integer]
+      # @param stderr [Boolean]
+      # @param stdout [Boolean]
+      # @param tail [String]
+      # @param timestamps [Boolean]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [StringIO]
@@ -86,7 +66,7 @@ module DockerEngineRuby
           method: :get,
           path: ["tasks/%1$s/logs", id],
           query: parsed,
-          headers: {"accept" => "application/vnd.docker.multiplexed-stream"},
+          headers: {"accept" => "application/octet-stream"},
           model: StringIO,
           options: options
         )

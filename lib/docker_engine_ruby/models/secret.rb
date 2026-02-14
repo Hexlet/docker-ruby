@@ -6,8 +6,8 @@ module DockerEngineRuby
     class Secret < DockerEngineRuby::Internal::Type::BaseModel
       # @!attribute created_at
       #
-      #   @return [String, nil]
-      optional :created_at, String, api_name: :CreatedAt
+      #   @return [Time, nil]
+      optional :created_at, Time, api_name: :CreatedAt
 
       # @!attribute id
       #
@@ -21,8 +21,8 @@ module DockerEngineRuby
 
       # @!attribute updated_at
       #
-      #   @return [String, nil]
-      optional :updated_at, String, api_name: :UpdatedAt
+      #   @return [Time, nil]
+      optional :updated_at, Time, api_name: :UpdatedAt
 
       # @!attribute version
       #   The version number of the object such as node, service, etc. This is needed to
@@ -42,13 +42,13 @@ module DockerEngineRuby
       #   Some parameter documentations has been truncated, see
       #   {DockerEngineRuby::Models::Secret} for more details.
       #
-      #   @param created_at [String]
+      #   @param created_at [Time]
       #
       #   @param id [String]
       #
       #   @param spec [DockerEngineRuby::Models::Spec]
       #
-      #   @param updated_at [String]
+      #   @param updated_at [Time]
       #
       #   @param version [DockerEngineRuby::Models::Secret::Version] The version number of the object such as node, service, etc. This is needed
 

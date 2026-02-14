@@ -8,8 +8,8 @@ module DockerEngineRuby
       #   Date and time at which the swarm was initialised in
       #   [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
       #
-      #   @return [String, nil]
-      optional :created_at, String, api_name: :CreatedAt
+      #   @return [Time, nil]
+      optional :created_at, Time, api_name: :CreatedAt
 
       # @!attribute data_path_port
       #   DataPathPort specifies the data path port number for data traffic. Acceptable
@@ -71,8 +71,8 @@ module DockerEngineRuby
       #   Date and time at which the swarm was last updated in
       #   [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
       #
-      #   @return [String, nil]
-      optional :updated_at, String, api_name: :UpdatedAt
+      #   @return [Time, nil]
+      optional :updated_at, Time, api_name: :UpdatedAt
 
       # @!attribute version
       #   The version number of the object such as node, service, etc. This is needed to
@@ -92,7 +92,7 @@ module DockerEngineRuby
       #   Some parameter documentations has been truncated, see
       #   {DockerEngineRuby::Models::SwarmAPI} for more details.
       #
-      #   @param created_at [String] Date and time at which the swarm was initialised in
+      #   @param created_at [Time] Date and time at which the swarm was initialised in
       #
       #   @param data_path_port [Integer] DataPathPort specifies the data path port number for data traffic.
       #
@@ -110,7 +110,7 @@ module DockerEngineRuby
       #
       #   @param tls_info [DockerEngineRuby::Models::SwarmAPI::TlsInfo] Information about the issuer of leaf TLS certificates and the trusted root
       #
-      #   @param updated_at [String] Date and time at which the swarm was last updated in
+      #   @param updated_at [Time] Date and time at which the swarm was last updated in
       #
       #   @param version [DockerEngineRuby::Models::SwarmAPI::Version] The version number of the object such as node, service, etc. This is needed
 
@@ -129,9 +129,6 @@ module DockerEngineRuby
         optional :worker, String, api_name: :Worker
 
         # @!method initialize(manager: nil, worker: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {DockerEngineRuby::Models::SwarmAPI::JoinTokens} for more details.
-        #
         #   JoinTokens contains the tokens workers and managers need to join the swarm.
         #
         #   @param manager [String] The token managers can use to join the swarm.

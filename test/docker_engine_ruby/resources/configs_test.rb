@@ -3,10 +3,10 @@
 require_relative "../test_helper"
 
 class DockerEngineRuby::Test::Resources::ConfigsTest < DockerEngineRuby::Test::ResourceTest
-  def test_create
+  def test_create_required_params
     skip("Prism tests are disabled")
 
-    response = @docker.configs.create
+    response = @docker.configs.create(spec: {})
 
     assert_pattern do
       response => DockerEngineRuby::Models::ConfigCreateResponse
@@ -22,7 +22,7 @@ class DockerEngineRuby::Test::Resources::ConfigsTest < DockerEngineRuby::Test::R
   def test_update_required_params
     skip("Prism tests are disabled")
 
-    response = @docker.configs.update("id", version: 0)
+    response = @docker.configs.update("id", version: 0, spec: {})
 
     assert_pattern do
       response => nil
@@ -60,10 +60,10 @@ class DockerEngineRuby::Test::Resources::ConfigsTest < DockerEngineRuby::Test::R
 
     assert_pattern do
       response => {
-        created_at: String | nil,
+        created_at: Time | nil,
         id: String | nil,
         spec: DockerEngineRuby::Spec | nil,
-        updated_at: String | nil,
+        updated_at: Time | nil,
         version: DockerEngineRuby::Config::Version | nil
       }
     end

@@ -14,8 +14,6 @@ module DockerEngineRuby
           )
         end
 
-      # Disable the plugin before removing. This may result in issues if the plugin is
-      # in use by a container.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :force
 
@@ -28,12 +26,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # Disable the plugin before removing. This may result in issues if the plugin is
-        # in use by a container.
-        force: nil,
-        request_options: {}
-      )
+      def self.new(force: nil, request_options: {})
       end
 
       sig do

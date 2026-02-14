@@ -14,21 +14,18 @@ module DockerEngineRuby
           )
         end
 
-      # If the container is running, kill it before removing it.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :force
 
       sig { params(force: T::Boolean).void }
       attr_writer :force
 
-      # Remove the specified link associated with the container.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :link
 
       sig { params(link: T::Boolean).void }
       attr_writer :link
 
-      # Remove anonymous volumes associated with the container.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :v
 
@@ -43,15 +40,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # If the container is running, kill it before removing it.
-        force: nil,
-        # Remove the specified link associated with the container.
-        link: nil,
-        # Remove anonymous volumes associated with the container.
-        v: nil,
-        request_options: {}
-      )
+      def self.new(force: nil, link: nil, v: nil, request_options: {})
       end
 
       sig do

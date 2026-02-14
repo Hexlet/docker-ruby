@@ -8,12 +8,10 @@ module DockerEngineRuby
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
-      attr_reader body: ::Array[String]?
-
-      def body=: (::Array[String]) -> ::Array[String]
+      attr_accessor body: ::Array[String]
 
       def initialize: (
-        ?body: ::Array[String],
+        body: ::Array[String],
         ?request_options: DockerEngineRuby::request_opts
       ) -> void
 

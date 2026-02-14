@@ -34,7 +34,7 @@ module DockerEngineRuby
 
       # Date and time at which the container was created, formatted in
       # [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
-      sig { returns(T.nilable(String)) }
+      sig { returns(T.nilable(Time)) }
       attr_accessor :created
 
       # The storage-driver used for the container's filesystem (graph-driver or
@@ -56,7 +56,8 @@ module DockerEngineRuby
 
       sig do
         params(
-          graph_driver: DockerEngineRuby::Container::GraphDriver::OrHash
+          graph_driver:
+            T.nilable(DockerEngineRuby::Container::GraphDriver::OrHash)
         ).void
       end
       attr_writer :graph_driver
@@ -231,18 +232,18 @@ module DockerEngineRuby
       sig { returns(T.nilable(DockerEngineRuby::Container::State)) }
       attr_reader :state
 
-      sig do
-        params(
-          state: T.nilable(DockerEngineRuby::Container::State::OrHash)
-        ).void
-      end
+      sig { params(state: DockerEngineRuby::Container::State::OrHash).void }
       attr_writer :state
 
       # Information about the storage used by the container.
       sig { returns(T.nilable(DockerEngineRuby::Container::Storage)) }
       attr_reader :storage
 
-      sig { params(storage: DockerEngineRuby::Container::Storage::OrHash).void }
+      sig do
+        params(
+          storage: T.nilable(DockerEngineRuby::Container::Storage::OrHash)
+        ).void
+      end
       attr_writer :storage
 
       sig do
@@ -250,10 +251,11 @@ module DockerEngineRuby
           app_armor_profile: String,
           args: T::Array[String],
           config: DockerEngineRuby::Config::OrHash,
-          created: T.nilable(String),
+          created: T.nilable(Time),
           driver: String,
           exec_ids: T.nilable(T::Array[String]),
-          graph_driver: DockerEngineRuby::Container::GraphDriver::OrHash,
+          graph_driver:
+            T.nilable(DockerEngineRuby::Container::GraphDriver::OrHash),
           host_config: DockerEngineRuby::Container::HostConfig::OrHash,
           hostname_path: String,
           hosts_path: String,
@@ -274,8 +276,8 @@ module DockerEngineRuby
           restart_count: Integer,
           size_root_fs: T.nilable(Integer),
           size_rw: T.nilable(Integer),
-          state: T.nilable(DockerEngineRuby::Container::State::OrHash),
-          storage: DockerEngineRuby::Container::Storage::OrHash
+          state: DockerEngineRuby::Container::State::OrHash,
+          storage: T.nilable(DockerEngineRuby::Container::Storage::OrHash)
         ).returns(T.attached_class)
       end
       def self.new(
@@ -375,10 +377,10 @@ module DockerEngineRuby
             app_armor_profile: String,
             args: T::Array[String],
             config: DockerEngineRuby::Config,
-            created: T.nilable(String),
+            created: T.nilable(Time),
             driver: String,
             exec_ids: T.nilable(T::Array[String]),
-            graph_driver: DockerEngineRuby::Container::GraphDriver,
+            graph_driver: T.nilable(DockerEngineRuby::Container::GraphDriver),
             host_config: DockerEngineRuby::Container::HostConfig,
             hostname_path: String,
             hosts_path: String,
@@ -398,8 +400,8 @@ module DockerEngineRuby
             restart_count: Integer,
             size_root_fs: T.nilable(Integer),
             size_rw: T.nilable(Integer),
-            state: T.nilable(DockerEngineRuby::Container::State),
-            storage: DockerEngineRuby::Container::Storage
+            state: DockerEngineRuby::Container::State,
+            storage: T.nilable(DockerEngineRuby::Container::Storage)
           }
         )
       end
@@ -492,15 +494,15 @@ module DockerEngineRuby
         #   set to `rw`, volumes are mounted read-write.
         # - `[z|Z]` applies SELinux labels to allow or deny multiple containers to read
         #   and write to the same volume.
-        #   - `z`: a _shared_ content label is applied to the content. This label
-        #     indicates that multiple containers can share the volume content, for both
-        #     reading and writing.
-        #   - `Z`: a _private unshared_ label is applied to the content. This label
-        #     indicates that only the current container can use a private volume. Labeling
-        #     systems such as SELinux require proper labels to be placed on volume content
-        #     that is mounted into a container. Without a label, the security system can
-        #     prevent a container's processes from using the content. By default, the
-        #     labels set by the host operating system are not modified.
+        # - `z`: a _shared_ content label is applied to the content. This label indicates
+        #   that multiple containers can share the volume content, for both reading and
+        #   writing.
+        # - `Z`: a _private unshared_ label is applied to the content. This label
+        #   indicates that only the current container can use a private volume. Labeling
+        #   systems such as SELinux require proper labels to be placed on volume content
+        #   that is mounted into a container. Without a label, the security system can
+        #   prevent a container's processes from using the content. By default, the labels
+        #   set by the host operating system are not modified.
         # - `[[r]shared|[r]slave|[r]private]` specifies mount
         #   [propagation behavior](https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt).
         #   This only applies to bind-mounted volumes, not internal volumes or named
@@ -1048,12 +1050,6 @@ module DockerEngineRuby
         sig { returns(T.nilable(Integer)) }
         attr_accessor :pids_limit
 
-        # PortMap describes the mapping of container ports to host ports, using the
-        # container's port-number and protocol as key in the format `<port>/<protocol>`,
-        # for example, `80/udp`.
-        #
-        # If a container's port is mapped for multiple protocols, separate entries are
-        # added to the mapping table.
         sig do
           returns(
             T.nilable(
@@ -1355,15 +1351,15 @@ module DockerEngineRuby
           #   set to `rw`, volumes are mounted read-write.
           # - `[z|Z]` applies SELinux labels to allow or deny multiple containers to read
           #   and write to the same volume.
-          #   - `z`: a _shared_ content label is applied to the content. This label
-          #     indicates that multiple containers can share the volume content, for both
-          #     reading and writing.
-          #   - `Z`: a _private unshared_ label is applied to the content. This label
-          #     indicates that only the current container can use a private volume. Labeling
-          #     systems such as SELinux require proper labels to be placed on volume content
-          #     that is mounted into a container. Without a label, the security system can
-          #     prevent a container's processes from using the content. By default, the
-          #     labels set by the host operating system are not modified.
+          # - `z`: a _shared_ content label is applied to the content. This label indicates
+          #   that multiple containers can share the volume content, for both reading and
+          #   writing.
+          # - `Z`: a _private unshared_ label is applied to the content. This label
+          #   indicates that only the current container can use a private volume. Labeling
+          #   systems such as SELinux require proper labels to be placed on volume content
+          #   that is mounted into a container. Without a label, the security system can
+          #   prevent a container's processes from using the content. By default, the labels
+          #   set by the host operating system are not modified.
           # - `[[r]shared|[r]slave|[r]private]` specifies mount
           #   [propagation behavior](https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt).
           #   This only applies to bind-mounted volumes, not internal volumes or named
@@ -1535,12 +1531,6 @@ module DockerEngineRuby
           # Tune a container's PIDs limit. Set `0` or `-1` for unlimited, or `null` to not
           # change.
           pids_limit: nil,
-          # PortMap describes the mapping of container ports to host ports, using the
-          # container's port-number and protocol as key in the format `<port>/<protocol>`,
-          # for example, `80/udp`.
-          #
-          # If a container's port is mapped for multiple protocols, separate entries are
-          # added to the mapping table.
           port_bindings: nil,
           # Gives the container full access to the host.
           privileged: nil,
@@ -2132,15 +2122,12 @@ module DockerEngineRuby
               )
             end
 
-          # Driver-specific configuration options for the logging driver.
           sig { returns(T.nilable(T::Hash[Symbol, String])) }
           attr_reader :config
 
           sig { params(config: T::Hash[Symbol, String]).void }
           attr_writer :config
 
-          # Name of the logging driver used for the container or "none" if logging is
-          # disabled.
           sig do
             returns(
               T.nilable(
@@ -2166,13 +2153,7 @@ module DockerEngineRuby
                 DockerEngineRuby::Container::HostConfig::LogConfig::Type::OrSymbol
             ).returns(T.attached_class)
           end
-          def self.new(
-            # Driver-specific configuration options for the logging driver.
-            config: nil,
-            # Name of the logging driver used for the container or "none" if logging is
-            # disabled.
-            type: nil
-          )
+          def self.new(config: nil, type: nil)
           end
 
           sig do
@@ -2187,8 +2168,6 @@ module DockerEngineRuby
           def to_hash
           end
 
-          # Name of the logging driver used for the container or "none" if logging is
-          # disabled.
           module Type
             extend DockerEngineRuby::Internal::Type::Enum
 
@@ -2489,21 +2468,18 @@ module DockerEngineRuby
                 )
               end
 
-            # Create mount point on host if missing
             sig { returns(T.nilable(T::Boolean)) }
             attr_reader :create_mountpoint
 
             sig { params(create_mountpoint: T::Boolean).void }
             attr_writer :create_mountpoint
 
-            # Disable recursive bind mount.
             sig { returns(T.nilable(T::Boolean)) }
             attr_reader :non_recursive
 
             sig { params(non_recursive: T::Boolean).void }
             attr_writer :non_recursive
 
-            # A propagation mode with the value `[r]private`, `[r]shared`, or `[r]slave`.
             sig do
               returns(
                 T.nilable(
@@ -2521,19 +2497,12 @@ module DockerEngineRuby
             end
             attr_writer :propagation
 
-            # Raise an error if the mount cannot be made recursively read-only.
             sig { returns(T.nilable(T::Boolean)) }
             attr_reader :read_only_force_recursive
 
             sig { params(read_only_force_recursive: T::Boolean).void }
             attr_writer :read_only_force_recursive
 
-            # Make the mount non-recursively read-only, but still leave the mount recursive
-            # (unless NonRecursive is set to `true` in conjunction).
-            #
-            # Added in v1.44, before that version all read-only mounts were non-recursive by
-            # default. To match the previous behaviour this will default to `true` for clients
-            # on versions prior to v1.44.
             sig { returns(T.nilable(T::Boolean)) }
             attr_reader :read_only_non_recursive
 
@@ -2552,20 +2521,10 @@ module DockerEngineRuby
               ).returns(T.attached_class)
             end
             def self.new(
-              # Create mount point on host if missing
               create_mountpoint: nil,
-              # Disable recursive bind mount.
               non_recursive: nil,
-              # A propagation mode with the value `[r]private`, `[r]shared`, or `[r]slave`.
               propagation: nil,
-              # Raise an error if the mount cannot be made recursively read-only.
               read_only_force_recursive: nil,
-              # Make the mount non-recursively read-only, but still leave the mount recursive
-              # (unless NonRecursive is set to `true` in conjunction).
-              #
-              # Added in v1.44, before that version all read-only mounts were non-recursive by
-              # default. To match the previous behaviour this will default to `true` for clients
-              # on versions prior to v1.44.
               read_only_non_recursive: nil
             )
             end
@@ -2585,7 +2544,6 @@ module DockerEngineRuby
             def to_hash
             end
 
-            # A propagation mode with the value `[r]private`, `[r]shared`, or `[r]slave`.
             module Propagation
               extend DockerEngineRuby::Internal::Type::Enum
 
@@ -2650,7 +2608,6 @@ module DockerEngineRuby
                 )
               end
 
-            # Source path inside the image. Must be relative without any back traversals.
             sig { returns(T.nilable(String)) }
             attr_reader :subpath
 
@@ -2659,10 +2616,7 @@ module DockerEngineRuby
 
             # Optional configuration for the `image` type.
             sig { params(subpath: String).returns(T.attached_class) }
-            def self.new(
-              # Source path inside the image. Must be relative without any back traversals.
-              subpath: nil
-            )
+            def self.new(subpath: nil)
             end
 
             sig { override.returns({ subpath: String }) }
@@ -2679,25 +2633,18 @@ module DockerEngineRuby
                 )
               end
 
-            # The permission mode for the tmpfs mount in an integer. The value must not be in
-            # octal format (e.g. 755) but rather the decimal representation of the octal value
-            # (e.g. 493).
             sig { returns(T.nilable(Integer)) }
             attr_reader :mode
 
             sig { params(mode: Integer).void }
             attr_writer :mode
 
-            # The options to be passed to the tmpfs mount. An array of arrays. Flag options
-            # should be provided as 1-length arrays. Other types should be provided as as
-            # 2-length arrays, where the first item is the key and the second the value.
             sig { returns(T.nilable(T::Array[T::Array[String]])) }
             attr_reader :options
 
             sig { params(options: T::Array[T::Array[String]]).void }
             attr_writer :options
 
-            # The size for the tmpfs mount in bytes.
             sig { returns(T.nilable(Integer)) }
             attr_reader :size_bytes
 
@@ -2712,18 +2659,7 @@ module DockerEngineRuby
                 size_bytes: Integer
               ).returns(T.attached_class)
             end
-            def self.new(
-              # The permission mode for the tmpfs mount in an integer. The value must not be in
-              # octal format (e.g. 755) but rather the decimal representation of the octal value
-              # (e.g. 493).
-              mode: nil,
-              # The options to be passed to the tmpfs mount. An array of arrays. Flag options
-              # should be provided as 1-length arrays. Other types should be provided as as
-              # 2-length arrays, where the first item is the key and the second the value.
-              options: nil,
-              # The size for the tmpfs mount in bytes.
-              size_bytes: nil
-            )
+            def self.new(mode: nil, options: nil, size_bytes: nil)
             end
 
             sig do
@@ -2810,7 +2746,6 @@ module DockerEngineRuby
                 )
               end
 
-            # Map of driver specific options
             sig do
               returns(
                 T.nilable(
@@ -2828,21 +2763,18 @@ module DockerEngineRuby
             end
             attr_writer :driver_config
 
-            # User-defined key/value metadata.
             sig { returns(T.nilable(T::Hash[Symbol, String])) }
             attr_reader :labels
 
             sig { params(labels: T::Hash[Symbol, String]).void }
             attr_writer :labels
 
-            # Populate volume with data from the target.
             sig { returns(T.nilable(T::Boolean)) }
             attr_reader :no_copy
 
             sig { params(no_copy: T::Boolean).void }
             attr_writer :no_copy
 
-            # Source path inside the volume. Must be relative without any back traversals.
             sig { returns(T.nilable(String)) }
             attr_reader :subpath
 
@@ -2860,13 +2792,9 @@ module DockerEngineRuby
               ).returns(T.attached_class)
             end
             def self.new(
-              # Map of driver specific options
               driver_config: nil,
-              # User-defined key/value metadata.
               labels: nil,
-              # Populate volume with data from the target.
               no_copy: nil,
-              # Source path inside the volume. Must be relative without any back traversals.
               subpath: nil
             )
             end
@@ -2894,32 +2822,24 @@ module DockerEngineRuby
                   )
                 end
 
-              # Name of the driver to use to create the volume.
               sig { returns(T.nilable(String)) }
               attr_reader :name
 
               sig { params(name: String).void }
               attr_writer :name
 
-              # key/value map of driver specific options.
               sig { returns(T.nilable(T::Hash[Symbol, String])) }
               attr_reader :options
 
               sig { params(options: T::Hash[Symbol, String]).void }
               attr_writer :options
 
-              # Map of driver specific options
               sig do
                 params(name: String, options: T::Hash[Symbol, String]).returns(
                   T.attached_class
                 )
               end
-              def self.new(
-                # Name of the driver to use to create the volume.
-                name: nil,
-                # key/value map of driver specific options.
-                options: nil
-              )
+              def self.new(name: nil, options: nil)
               end
 
               sig do
@@ -3113,21 +3033,18 @@ module DockerEngineRuby
               )
             end
 
-          # Hard limit
           sig { returns(T.nilable(Integer)) }
           attr_reader :hard
 
           sig { params(hard: Integer).void }
           attr_writer :hard
 
-          # Name of ulimit
           sig { returns(T.nilable(String)) }
           attr_reader :name
 
           sig { params(name: String).void }
           attr_writer :name
 
-          # Soft limit
           sig { returns(T.nilable(Integer)) }
           attr_reader :soft
 
@@ -3139,14 +3056,7 @@ module DockerEngineRuby
               T.attached_class
             )
           end
-          def self.new(
-            # Hard limit
-            hard: nil,
-            # Name of ulimit
-            name: nil,
-            # Soft limit
-            soft: nil
-          )
+          def self.new(hard: nil, name: nil, soft: nil)
           end
 
           sig do
@@ -3209,9 +3119,7 @@ module DockerEngineRuby
         sig do
           params(
             platform:
-              T.nilable(
-                DockerEngineRuby::Container::ImageManifestDescriptor::Platform::OrHash
-              )
+              DockerEngineRuby::Container::ImageManifestDescriptor::Platform::OrHash
           ).void
         end
         attr_writer :platform
@@ -3237,9 +3145,7 @@ module DockerEngineRuby
             digest: String,
             media_type: String,
             platform:
-              T.nilable(
-                DockerEngineRuby::Container::ImageManifestDescriptor::Platform::OrHash
-              ),
+              DockerEngineRuby::Container::ImageManifestDescriptor::Platform::OrHash,
             size: Integer,
             urls: T.nilable(T::Array[String])
           ).returns(T.attached_class)
@@ -3277,9 +3183,7 @@ module DockerEngineRuby
               digest: String,
               media_type: String,
               platform:
-                T.nilable(
-                  DockerEngineRuby::Container::ImageManifestDescriptor::Platform
-                ),
+                DockerEngineRuby::Container::ImageManifestDescriptor::Platform,
               size: Integer,
               urls: T.nilable(T::Array[String])
             }
@@ -3630,12 +3534,6 @@ module DockerEngineRuby
         end
         attr_writer :networks
 
-        # PortMap describes the mapping of container ports to host ports, using the
-        # container's port-number and protocol as key in the format `<port>/<protocol>`,
-        # for example, `80/udp`.
-        #
-        # If a container's port is mapped for multiple protocols, separate entries are
-        # added to the mapping table.
         sig do
           returns(
             T.nilable(
@@ -3697,12 +3595,6 @@ module DockerEngineRuby
         def self.new(
           # Information about all networks that the container is connected to.
           networks: nil,
-          # PortMap describes the mapping of container ports to host ports, using the
-          # container's port-number and protocol as key in the format `<port>/<protocol>`,
-          # for example, `80/udp`.
-          #
-          # If a container's port is mapped for multiple protocols, separate entries are
-          # added to the mapping table.
           ports: nil,
           # SandboxID uniquely represents a container's network stack.
           sandbox_id: nil,
@@ -3823,9 +3715,7 @@ module DockerEngineRuby
           sig do
             params(
               ipam_config:
-                T.nilable(
-                  DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig::OrHash
-                )
+                DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig::OrHash
             ).void
           end
           attr_writer :ipam_config
@@ -3878,9 +3768,7 @@ module DockerEngineRuby
               gw_priority: Integer,
               ip_address: String,
               ipam_config:
-                T.nilable(
-                  DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig::OrHash
-                ),
+                DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig::OrHash,
               ip_prefix_len: Integer,
               i_pv6_gateway: String,
               links: T::Array[String],
@@ -3944,9 +3832,7 @@ module DockerEngineRuby
                 gw_priority: Integer,
                 ip_address: String,
                 ipam_config:
-                  T.nilable(
-                    DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig
-                  ),
+                  DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig,
                 ip_prefix_len: Integer,
                 i_pv6_gateway: String,
                 links: T::Array[String],
@@ -4096,8 +3982,7 @@ module DockerEngineRuby
 
         sig do
           params(
-            health:
-              T.nilable(DockerEngineRuby::Container::State::Health::OrHash)
+            health: DockerEngineRuby::Container::State::Health::OrHash
           ).void
         end
         attr_writer :health
@@ -4178,8 +4063,7 @@ module DockerEngineRuby
             error: String,
             exit_code: Integer,
             finished_at: String,
-            health:
-              T.nilable(DockerEngineRuby::Container::State::Health::OrHash),
+            health: DockerEngineRuby::Container::State::Health::OrHash,
             oom_killed: T::Boolean,
             paused: T::Boolean,
             pid: Integer,
@@ -4233,7 +4117,7 @@ module DockerEngineRuby
               error: String,
               exit_code: Integer,
               finished_at: String,
-              health: T.nilable(DockerEngineRuby::Container::State::Health),
+              health: DockerEngineRuby::Container::State::Health,
               oom_killed: T::Boolean,
               paused: T::Boolean,
               pid: Integer,
@@ -4267,9 +4151,7 @@ module DockerEngineRuby
           sig do
             returns(
               T.nilable(
-                T::Array[
-                  T.nilable(DockerEngineRuby::Container::State::Health::Log)
-                ]
+                T::Array[DockerEngineRuby::Container::State::Health::Log]
               )
             )
           end
@@ -4279,9 +4161,7 @@ module DockerEngineRuby
             params(
               log:
                 T::Array[
-                  T.nilable(
-                    DockerEngineRuby::Container::State::Health::Log::OrHash
-                  )
+                  DockerEngineRuby::Container::State::Health::Log::OrHash
                 ]
             ).void
           end
@@ -4316,9 +4196,7 @@ module DockerEngineRuby
               failing_streak: Integer,
               log:
                 T::Array[
-                  T.nilable(
-                    DockerEngineRuby::Container::State::Health::Log::OrHash
-                  )
+                  DockerEngineRuby::Container::State::Health::Log::OrHash
                 ],
               status:
                 DockerEngineRuby::Container::State::Health::Status::OrSymbol
@@ -4343,10 +4221,7 @@ module DockerEngineRuby
             override.returns(
               {
                 failing_streak: Integer,
-                log:
-                  T::Array[
-                    T.nilable(DockerEngineRuby::Container::State::Health::Log)
-                  ],
+                log: T::Array[DockerEngineRuby::Container::State::Health::Log],
                 status:
                   DockerEngineRuby::Container::State::Health::Status::TaggedSymbol
               }
@@ -4366,10 +4241,10 @@ module DockerEngineRuby
 
             # Date and time at which this check ended in
             # [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
-            sig { returns(T.nilable(String)) }
+            sig { returns(T.nilable(Time)) }
             attr_reader :end_
 
-            sig { params(end_: String).void }
+            sig { params(end_: Time).void }
             attr_writer :end_
 
             # ExitCode meanings:
@@ -4402,7 +4277,7 @@ module DockerEngineRuby
             # HealthcheckResult stores information about a single run of a healthcheck probe
             sig do
               params(
-                end_: String,
+                end_: Time,
                 exit_code: Integer,
                 output: String,
                 start: Time
@@ -4429,12 +4304,7 @@ module DockerEngineRuby
 
             sig do
               override.returns(
-                {
-                  end_: String,
-                  exit_code: Integer,
-                  output: String,
-                  start: Time
-                }
+                { end_: Time, exit_code: Integer, output: String, start: Time }
               )
             end
             def to_hash
@@ -4564,7 +4434,8 @@ module DockerEngineRuby
 
         sig do
           params(
-            root_fs: DockerEngineRuby::Container::Storage::RootFs::OrHash
+            root_fs:
+              T.nilable(DockerEngineRuby::Container::Storage::RootFs::OrHash)
           ).void
         end
         attr_writer :root_fs
@@ -4572,7 +4443,8 @@ module DockerEngineRuby
         # Information about the storage used by the container.
         sig do
           params(
-            root_fs: DockerEngineRuby::Container::Storage::RootFs::OrHash
+            root_fs:
+              T.nilable(DockerEngineRuby::Container::Storage::RootFs::OrHash)
           ).returns(T.attached_class)
         end
         def self.new(
@@ -4583,7 +4455,7 @@ module DockerEngineRuby
 
         sig do
           override.returns(
-            { root_fs: DockerEngineRuby::Container::Storage::RootFs }
+            { root_fs: T.nilable(DockerEngineRuby::Container::Storage::RootFs) }
           )
         end
         def to_hash
@@ -4609,7 +4481,9 @@ module DockerEngineRuby
           sig do
             params(
               snapshot:
-                DockerEngineRuby::Container::Storage::RootFs::Snapshot::OrHash
+                T.nilable(
+                  DockerEngineRuby::Container::Storage::RootFs::Snapshot::OrHash
+                )
             ).void
           end
           attr_writer :snapshot
@@ -4618,7 +4492,9 @@ module DockerEngineRuby
           sig do
             params(
               snapshot:
-                DockerEngineRuby::Container::Storage::RootFs::Snapshot::OrHash
+                T.nilable(
+                  DockerEngineRuby::Container::Storage::RootFs::Snapshot::OrHash
+                )
             ).returns(T.attached_class)
           end
           def self.new(
@@ -4630,7 +4506,10 @@ module DockerEngineRuby
           sig do
             override.returns(
               {
-                snapshot: DockerEngineRuby::Container::Storage::RootFs::Snapshot
+                snapshot:
+                  T.nilable(
+                    DockerEngineRuby::Container::Storage::RootFs::Snapshot
+                  )
               }
             )
           end

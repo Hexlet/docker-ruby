@@ -6,11 +6,11 @@ module DockerEngineRuby
       # Create a config
       sig do
         params(
-          spec: DockerEngineRuby::ConfigCreateParams::Spec::OrHash,
+          spec: DockerEngineRuby::Spec::OrHash,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(DockerEngineRuby::Models::ConfigCreateResponse)
       end
-      def create(spec: nil, request_options: {})
+      def create(spec:, request_options: {})
       end
 
       # Update a Config
@@ -23,13 +23,12 @@ module DockerEngineRuby
         ).void
       end
       def update(
-        # Path param: The ID or name of the config
+        # Path param
         id,
-        # Query param: The version number of the config object being updated. This is
-        # required to avoid conflicting writes.
+        # Query param
         version:,
         # Body param
-        spec: nil,
+        spec:,
         request_options: {}
       )
       end
@@ -41,19 +40,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T::Array[DockerEngineRuby::Config])
       end
-      def list(
-        # A JSON encoded value of the filters (a `map[string][]string`) to process on the
-        # configs list.
-        #
-        # Available filters:
-        #
-        # - `id=<config id>`
-        # - `label=<key> or label=<key>=value`
-        # - `name=<config name>`
-        # - `names=<config name>`
-        filters: nil,
-        request_options: {}
-      )
+      def list(filters: nil, request_options: {})
       end
 
       # Delete a config
@@ -63,11 +50,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).void
       end
-      def delete(
-        # ID of the config
-        id,
-        request_options: {}
-      )
+      def delete(id, request_options: {})
       end
 
       # Inspect a config
@@ -77,11 +60,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(DockerEngineRuby::Config)
       end
-      def inspect_(
-        # ID of the config
-        id,
-        request_options: {}
-      )
+      def inspect_(id, request_options: {})
       end
 
       # @api private

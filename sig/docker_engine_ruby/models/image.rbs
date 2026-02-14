@@ -6,11 +6,11 @@ module DockerEngineRuby
         author: String?,
         comment: String?,
         config: DockerEngineRuby::Image::Config,
-        created: String?,
-        descriptor: DockerEngineRuby::Image::Descriptor,
-        graph_driver: DockerEngineRuby::Image::GraphDriver,
+        created: Time?,
+        descriptor: DockerEngineRuby::Image::Descriptor?,
+        graph_driver: DockerEngineRuby::Image::GraphDriver?,
         id: String,
-        identity: DockerEngineRuby::Image::Identity,
+        identity: DockerEngineRuby::Image::Identity?,
         manifests: ::Array[DockerEngineRuby::Image::Manifest]?,
         metadata: DockerEngineRuby::Image::Metadata,
         os: String,
@@ -37,29 +37,17 @@ module DockerEngineRuby
         DockerEngineRuby::Image::Config
       ) -> DockerEngineRuby::Image::Config
 
-      attr_accessor created: String?
+      attr_accessor created: Time?
 
-      attr_reader descriptor: DockerEngineRuby::Image::Descriptor?
+      attr_accessor descriptor: DockerEngineRuby::Image::Descriptor?
 
-      def descriptor=: (
-        DockerEngineRuby::Image::Descriptor
-      ) -> DockerEngineRuby::Image::Descriptor
-
-      attr_reader graph_driver: DockerEngineRuby::Image::GraphDriver?
-
-      def graph_driver=: (
-        DockerEngineRuby::Image::GraphDriver
-      ) -> DockerEngineRuby::Image::GraphDriver
+      attr_accessor graph_driver: DockerEngineRuby::Image::GraphDriver?
 
       attr_reader id: String?
 
       def id=: (String) -> String
 
-      attr_reader identity: DockerEngineRuby::Image::Identity?
-
-      def identity=: (
-        DockerEngineRuby::Image::Identity
-      ) -> DockerEngineRuby::Image::Identity
+      attr_accessor identity: DockerEngineRuby::Image::Identity?
 
       attr_accessor manifests: ::Array[DockerEngineRuby::Image::Manifest]?
 
@@ -100,11 +88,11 @@ module DockerEngineRuby
         ?author: String?,
         ?comment: String?,
         ?config: DockerEngineRuby::Image::Config,
-        ?created: String?,
-        ?descriptor: DockerEngineRuby::Image::Descriptor,
-        ?graph_driver: DockerEngineRuby::Image::GraphDriver,
+        ?created: Time?,
+        ?descriptor: DockerEngineRuby::Image::Descriptor?,
+        ?graph_driver: DockerEngineRuby::Image::GraphDriver?,
         ?id: String,
-        ?identity: DockerEngineRuby::Image::Identity,
+        ?identity: DockerEngineRuby::Image::Identity?,
         ?manifests: ::Array[DockerEngineRuby::Image::Manifest]?,
         ?metadata: DockerEngineRuby::Image::Metadata,
         ?os: String,
@@ -121,11 +109,11 @@ module DockerEngineRuby
         author: String?,
         comment: String?,
         config: DockerEngineRuby::Image::Config,
-        created: String?,
-        descriptor: DockerEngineRuby::Image::Descriptor,
-        graph_driver: DockerEngineRuby::Image::GraphDriver,
+        created: Time?,
+        descriptor: DockerEngineRuby::Image::Descriptor?,
+        graph_driver: DockerEngineRuby::Image::GraphDriver?,
         id: String,
-        identity: DockerEngineRuby::Image::Identity,
+        identity: DockerEngineRuby::Image::Identity?,
         manifests: ::Array[DockerEngineRuby::Image::Manifest]?,
         metadata: DockerEngineRuby::Image::Metadata,
         os: String,
@@ -143,14 +131,14 @@ module DockerEngineRuby
           cmd: ::Array[String],
           entrypoint: ::Array[String],
           env: ::Array[String],
-          exposed_ports: ::Hash[Symbol, top]?,
+          exposed_ports: ::Hash[Symbol, ::Hash[Symbol, top]]?,
           healthcheck: DockerEngineRuby::Image::Config::Healthcheck,
           labels: ::Hash[Symbol, String],
           on_build: ::Array[String]?,
           shell: ::Array[String]?,
           stop_signal: String?,
           user: String,
-          volumes: ::Hash[Symbol, top],
+          volumes: ::Hash[Symbol, ::Hash[Symbol, top]],
           working_dir: String
         }
 
@@ -169,7 +157,7 @@ module DockerEngineRuby
 
         def env=: (::Array[String]) -> ::Array[String]
 
-        attr_accessor exposed_ports: ::Hash[Symbol, top]?
+        attr_accessor exposed_ports: ::Hash[Symbol, ::Hash[Symbol, top]]?
 
         attr_reader healthcheck: DockerEngineRuby::Image::Config::Healthcheck?
 
@@ -191,9 +179,11 @@ module DockerEngineRuby
 
         def user=: (String) -> String
 
-        attr_reader volumes: ::Hash[Symbol, top]?
+        attr_reader volumes: ::Hash[Symbol, ::Hash[Symbol, top]]?
 
-        def volumes=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+        def volumes=: (
+          ::Hash[Symbol, ::Hash[Symbol, top]]
+        ) -> ::Hash[Symbol, ::Hash[Symbol, top]]
 
         attr_reader working_dir: String?
 
@@ -204,14 +194,14 @@ module DockerEngineRuby
           ?cmd: ::Array[String],
           ?entrypoint: ::Array[String],
           ?env: ::Array[String],
-          ?exposed_ports: ::Hash[Symbol, top]?,
+          ?exposed_ports: ::Hash[Symbol, ::Hash[Symbol, top]]?,
           ?healthcheck: DockerEngineRuby::Image::Config::Healthcheck,
           ?labels: ::Hash[Symbol, String],
           ?on_build: ::Array[String]?,
           ?shell: ::Array[String]?,
           ?stop_signal: String?,
           ?user: String,
-          ?volumes: ::Hash[Symbol, top],
+          ?volumes: ::Hash[Symbol, ::Hash[Symbol, top]],
           ?working_dir: String
         ) -> void
 
@@ -220,14 +210,14 @@ module DockerEngineRuby
           cmd: ::Array[String],
           entrypoint: ::Array[String],
           env: ::Array[String],
-          exposed_ports: ::Hash[Symbol, top]?,
+          exposed_ports: ::Hash[Symbol, ::Hash[Symbol, top]]?,
           healthcheck: DockerEngineRuby::Image::Config::Healthcheck,
           labels: ::Hash[Symbol, String],
           on_build: ::Array[String]?,
           shell: ::Array[String]?,
           stop_signal: String?,
           user: String,
-          volumes: ::Hash[Symbol, top],
+          volumes: ::Hash[Symbol, ::Hash[Symbol, top]],
           working_dir: String
         }
 
@@ -293,7 +283,7 @@ module DockerEngineRuby
           data: String?,
           digest: String,
           media_type: String,
-          platform: DockerEngineRuby::Image::Descriptor::Platform?,
+          platform: DockerEngineRuby::Image::Descriptor::Platform,
           size: Integer,
           urls: ::Array[String]?
         }
@@ -313,7 +303,11 @@ module DockerEngineRuby
 
         def media_type=: (String) -> String
 
-        attr_accessor platform: DockerEngineRuby::Image::Descriptor::Platform?
+        attr_reader platform: DockerEngineRuby::Image::Descriptor::Platform?
+
+        def platform=: (
+          DockerEngineRuby::Image::Descriptor::Platform
+        ) -> DockerEngineRuby::Image::Descriptor::Platform
 
         attr_reader size: Integer?
 
@@ -327,7 +321,7 @@ module DockerEngineRuby
           ?data: String?,
           ?digest: String,
           ?media_type: String,
-          ?platform: DockerEngineRuby::Image::Descriptor::Platform?,
+          ?platform: DockerEngineRuby::Image::Descriptor::Platform,
           ?size: Integer,
           ?urls: ::Array[String]?
         ) -> void
@@ -338,7 +332,7 @@ module DockerEngineRuby
           data: String?,
           digest: String,
           media_type: String,
-          platform: DockerEngineRuby::Image::Descriptor::Platform?,
+          platform: DockerEngineRuby::Image::Descriptor::Platform,
           size: Integer,
           urls: ::Array[String]?
         }
@@ -797,7 +791,7 @@ module DockerEngineRuby
             data: String?,
             digest: String,
             media_type: String,
-            platform: DockerEngineRuby::Image::Manifest::Descriptor::Platform?,
+            platform: DockerEngineRuby::Image::Manifest::Descriptor::Platform,
             size: Integer,
             urls: ::Array[String]?
           }
@@ -817,7 +811,11 @@ module DockerEngineRuby
 
           def media_type=: (String) -> String
 
-          attr_accessor platform: DockerEngineRuby::Image::Manifest::Descriptor::Platform?
+          attr_reader platform: DockerEngineRuby::Image::Manifest::Descriptor::Platform?
+
+          def platform=: (
+            DockerEngineRuby::Image::Manifest::Descriptor::Platform
+          ) -> DockerEngineRuby::Image::Manifest::Descriptor::Platform
 
           attr_reader size: Integer?
 
@@ -831,7 +829,7 @@ module DockerEngineRuby
             ?data: String?,
             ?digest: String,
             ?media_type: String,
-            ?platform: DockerEngineRuby::Image::Manifest::Descriptor::Platform?,
+            ?platform: DockerEngineRuby::Image::Manifest::Descriptor::Platform,
             ?size: Integer,
             ?urls: ::Array[String]?
           ) -> void
@@ -842,7 +840,7 @@ module DockerEngineRuby
             data: String?,
             digest: String,
             media_type: String,
-            platform: DockerEngineRuby::Image::Manifest::Descriptor::Platform?,
+            platform: DockerEngineRuby::Image::Manifest::Descriptor::Platform,
             size: Integer,
             urls: ::Array[String]?
           }
@@ -932,26 +930,26 @@ module DockerEngineRuby
         type image_data =
           {
             containers: ::Array[String],
-            platform: DockerEngineRuby::Image::Manifest::ImageData::Platform?,
+            platform: DockerEngineRuby::Image::Manifest::ImageData::Platform,
             size: DockerEngineRuby::Image::Manifest::ImageData::Size
           }
 
         class ImageData < DockerEngineRuby::Internal::Type::BaseModel
           attr_accessor containers: ::Array[String]
 
-          attr_accessor platform: DockerEngineRuby::Image::Manifest::ImageData::Platform?
+          attr_accessor platform: DockerEngineRuby::Image::Manifest::ImageData::Platform
 
           attr_accessor size: DockerEngineRuby::Image::Manifest::ImageData::Size
 
           def initialize: (
             containers: ::Array[String],
-            platform: DockerEngineRuby::Image::Manifest::ImageData::Platform?,
+            platform: DockerEngineRuby::Image::Manifest::ImageData::Platform,
             size: DockerEngineRuby::Image::Manifest::ImageData::Size
           ) -> void
 
           def to_hash: -> {
             containers: ::Array[String],
-            platform: DockerEngineRuby::Image::Manifest::ImageData::Platform?,
+            platform: DockerEngineRuby::Image::Manifest::ImageData::Platform,
             size: DockerEngineRuby::Image::Manifest::ImageData::Size
           }
 
@@ -1014,14 +1012,14 @@ module DockerEngineRuby
         end
       end
 
-      type metadata = { last_tag_time: String? }
+      type metadata = { last_tag_time: Time? }
 
       class Metadata < DockerEngineRuby::Internal::Type::BaseModel
-        attr_accessor last_tag_time: String?
+        attr_accessor last_tag_time: Time?
 
-        def initialize: (?last_tag_time: String?) -> void
+        def initialize: (?last_tag_time: Time?) -> void
 
-        def to_hash: -> { last_tag_time: String? }
+        def to_hash: -> { last_tag_time: Time? }
       end
 
       type root_fs = { type: String, layers: ::Array[String] }

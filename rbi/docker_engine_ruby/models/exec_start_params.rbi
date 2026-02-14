@@ -14,18 +14,15 @@ module DockerEngineRuby
           )
         end
 
-      # Initial console size, as an `[height, width]` array.
       sig { returns(T.nilable(T::Array[Integer])) }
       attr_accessor :console_size
 
-      # Detach from the command.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :detach
 
       sig { params(detach: T::Boolean).void }
       attr_writer :detach
 
-      # Allocate a pseudo-TTY.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :tty
 
@@ -41,11 +38,8 @@ module DockerEngineRuby
         ).returns(T.attached_class)
       end
       def self.new(
-        # Initial console size, as an `[height, width]` array.
         console_size: nil,
-        # Detach from the command.
         detach: nil,
-        # Allocate a pseudo-TTY.
         tty: nil,
         request_options: {}
       )

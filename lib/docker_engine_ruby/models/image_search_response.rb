@@ -9,11 +9,6 @@ module DockerEngineRuby
       optional :description, String
 
       # @!attribute is_automated
-      #   Whether this repository has automated builds enabled.
-      #
-      #   <p><br /></p>
-      #
-      #   > **Deprecated**: This field is deprecated and will always be "false".
       #
       #   @return [Boolean, nil]
       optional :is_automated, DockerEngineRuby::Internal::Type::Boolean
@@ -34,17 +29,10 @@ module DockerEngineRuby
       optional :star_count, Integer
 
       # @!method initialize(description: nil, is_automated: nil, is_official: nil, name: nil, star_count: nil)
-      #   Some parameter documentations has been truncated, see
-      #   {DockerEngineRuby::Models::ImageSearchResponseItem} for more details.
-      #
       #   @param description [String]
-      #
-      #   @param is_automated [Boolean] Whether this repository has automated builds enabled.
-      #
+      #   @param is_automated [Boolean]
       #   @param is_official [Boolean]
-      #
       #   @param name [String]
-      #
       #   @param star_count [Integer]
     end
 

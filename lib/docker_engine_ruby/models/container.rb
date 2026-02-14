@@ -26,8 +26,8 @@ module DockerEngineRuby
       #   Date and time at which the container was created, formatted in
       #   [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
       #
-      #   @return [String, nil]
-      optional :created, String, api_name: :Created, nil?: true
+      #   @return [Time, nil]
+      optional :created, Time, api_name: :Created, nil?: true
 
       # @!attribute driver
       #   The storage-driver used for the container's filesystem (graph-driver or
@@ -47,7 +47,10 @@ module DockerEngineRuby
       #   filesystem.
       #
       #   @return [DockerEngineRuby::Models::Container::GraphDriver, nil]
-      optional :graph_driver, -> { DockerEngineRuby::Container::GraphDriver }, api_name: :GraphDriver
+      optional :graph_driver,
+               -> { DockerEngineRuby::Container::GraphDriver },
+               api_name: :GraphDriver,
+               nil?: true
 
       # @!attribute host_config
       #   Container configuration that depends on the host we are running on
@@ -197,13 +200,13 @@ module DockerEngineRuby
       #   and will be returned by the "inspect" command.
       #
       #   @return [DockerEngineRuby::Models::Container::State, nil]
-      optional :state, -> { DockerEngineRuby::Container::State }, api_name: :State, nil?: true
+      optional :state, -> { DockerEngineRuby::Container::State }, api_name: :State
 
       # @!attribute storage
       #   Information about the storage used by the container.
       #
       #   @return [DockerEngineRuby::Models::Container::Storage, nil]
-      optional :storage, -> { DockerEngineRuby::Container::Storage }, api_name: :Storage
+      optional :storage, -> { DockerEngineRuby::Container::Storage }, api_name: :Storage, nil?: true
 
       # @!method initialize(app_armor_profile: nil, args: nil, config: nil, created: nil, driver: nil, exec_ids: nil, graph_driver: nil, host_config: nil, hostname_path: nil, hosts_path: nil, id: nil, image: nil, image_manifest_descriptor: nil, log_path: nil, mount_label: nil, mounts: nil, name: nil, network_settings: nil, path: nil, platform: nil, process_label: nil, resolv_conf_path: nil, restart_count: nil, size_root_fs: nil, size_rw: nil, state: nil, storage: nil)
       #   Some parameter documentations has been truncated, see
@@ -215,13 +218,13 @@ module DockerEngineRuby
       #
       #   @param config [DockerEngineRuby::Models::Config] Configuration for a container that is portable between hosts.
       #
-      #   @param created [String, nil] Date and time at which the container was created, formatted in
+      #   @param created [Time, nil] Date and time at which the container was created, formatted in
       #
       #   @param driver [String] The storage-driver used for the container's filesystem (graph-driver
       #
       #   @param exec_ids [Array<String>, nil] IDs of exec instances that are running in the container.
       #
-      #   @param graph_driver [DockerEngineRuby::Models::Container::GraphDriver] Information about the storage driver used to store the container's and
+      #   @param graph_driver [DockerEngineRuby::Models::Container::GraphDriver, nil] Information about the storage driver used to store the container's and
       #
       #   @param host_config [DockerEngineRuby::Models::Container::HostConfig] Container configuration that depends on the host we are running on
       #
@@ -259,9 +262,9 @@ module DockerEngineRuby
       #
       #   @param size_rw [Integer, nil] The size of files that have been created or changed by this container.
       #
-      #   @param state [DockerEngineRuby::Models::Container::State, nil] ContainerState stores container's running state. It's part of ContainerJSONBase
+      #   @param state [DockerEngineRuby::Models::Container::State] ContainerState stores container's running state. It's part of ContainerJSONBase
       #
-      #   @param storage [DockerEngineRuby::Models::Container::Storage] Information about the storage used by the container.
+      #   @param storage [DockerEngineRuby::Models::Container::Storage, nil] Information about the storage used by the container.
 
       # @see DockerEngineRuby::Models::Container#graph_driver
       class GraphDriver < DockerEngineRuby::Internal::Type::BaseModel
@@ -325,15 +328,15 @@ module DockerEngineRuby
         #     set to `rw`, volumes are mounted read-write.
         #   - `[z|Z]` applies SELinux labels to allow or deny multiple containers to read
         #     and write to the same volume.
-        #     - `z`: a _shared_ content label is applied to the content. This label
-        #       indicates that multiple containers can share the volume content, for both
-        #       reading and writing.
-        #     - `Z`: a _private unshared_ label is applied to the content. This label
-        #       indicates that only the current container can use a private volume. Labeling
-        #       systems such as SELinux require proper labels to be placed on volume content
-        #       that is mounted into a container. Without a label, the security system can
-        #       prevent a container's processes from using the content. By default, the
-        #       labels set by the host operating system are not modified.
+        #   - `z`: a _shared_ content label is applied to the content. This label indicates
+        #     that multiple containers can share the volume content, for both reading and
+        #     writing.
+        #   - `Z`: a _private unshared_ label is applied to the content. This label
+        #     indicates that only the current container can use a private volume. Labeling
+        #     systems such as SELinux require proper labels to be placed on volume content
+        #     that is mounted into a container. Without a label, the security system can
+        #     prevent a container's processes from using the content. By default, the labels
+        #     set by the host operating system are not modified.
         #   - `[[r]shared|[r]slave|[r]private]` specifies mount
         #     [propagation behavior](https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt).
         #     This only applies to bind-mounted volumes, not internal volumes or named
@@ -748,12 +751,6 @@ module DockerEngineRuby
         optional :pids_limit, Integer, api_name: :PidsLimit, nil?: true
 
         # @!attribute port_bindings
-        #   PortMap describes the mapping of container ports to host ports, using the
-        #   container's port-number and protocol as key in the format `<port>/<protocol>`,
-        #   for example, `80/udp`.
-        #
-        #   If a container's port is mapped for multiple protocols, separate entries are
-        #   added to the mapping table.
         #
         #   @return [Hash{Symbol=>Array<DockerEngineRuby::Models::Container::HostConfig::PortBinding>}, nil]
         optional :port_bindings,
@@ -998,7 +995,7 @@ module DockerEngineRuby
         #
         #   @param pids_limit [Integer, nil] Tune a container's PIDs limit. Set `0` or `-1` for unlimited, or `null`
         #
-        #   @param port_bindings [Hash{Symbol=>Array<DockerEngineRuby::Models::Container::HostConfig::PortBinding>}] PortMap describes the mapping of container ports to host ports, using the
+        #   @param port_bindings [Hash{Symbol=>Array<DockerEngineRuby::Models::Container::HostConfig::PortBinding>}]
         #
         #   @param privileged [Boolean] Gives the container full access to the host.
         #
@@ -1244,14 +1241,11 @@ module DockerEngineRuby
         # @see DockerEngineRuby::Models::Container::HostConfig#log_config
         class LogConfig < DockerEngineRuby::Internal::Type::BaseModel
           # @!attribute config
-          #   Driver-specific configuration options for the logging driver.
           #
           #   @return [Hash{Symbol=>String}, nil]
           optional :config, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Config
 
           # @!attribute type
-          #   Name of the logging driver used for the container or "none" if logging is
-          #   disabled.
           #
           #   @return [Symbol, DockerEngineRuby::Models::Container::HostConfig::LogConfig::Type, nil]
           optional :type,
@@ -1261,18 +1255,11 @@ module DockerEngineRuby
                    api_name: :Type
 
           # @!method initialize(config: nil, type: nil)
-          #   Some parameter documentations has been truncated, see
-          #   {DockerEngineRuby::Models::Container::HostConfig::LogConfig} for more details.
-          #
           #   The logging configuration for this container
           #
-          #   @param config [Hash{Symbol=>String}] Driver-specific configuration options for the logging driver.
-          #
-          #   @param type [Symbol, DockerEngineRuby::Models::Container::HostConfig::LogConfig::Type] Name of the logging driver used for the container or "none"
+          #   @param config [Hash{Symbol=>String}]
+          #   @param type [Symbol, DockerEngineRuby::Models::Container::HostConfig::LogConfig::Type]
 
-          # Name of the logging driver used for the container or "none" if logging is
-          # disabled.
-          #
           # @see DockerEngineRuby::Models::Container::HostConfig::LogConfig#type
           module Type
             extend DockerEngineRuby::Internal::Type::Enum
@@ -1394,7 +1381,6 @@ module DockerEngineRuby
           # @see DockerEngineRuby::Models::Container::HostConfig::Mount#bind_options
           class BindOptions < DockerEngineRuby::Internal::Type::BaseModel
             # @!attribute create_mountpoint
-            #   Create mount point on host if missing
             #
             #   @return [Boolean, nil]
             optional :create_mountpoint,
@@ -1402,13 +1388,11 @@ module DockerEngineRuby
                      api_name: :CreateMountpoint
 
             # @!attribute non_recursive
-            #   Disable recursive bind mount.
             #
             #   @return [Boolean, nil]
             optional :non_recursive, DockerEngineRuby::Internal::Type::Boolean, api_name: :NonRecursive
 
             # @!attribute propagation
-            #   A propagation mode with the value `[r]private`, `[r]shared`, or `[r]slave`.
             #
             #   @return [Symbol, DockerEngineRuby::Models::Container::HostConfig::Mount::BindOptions::Propagation, nil]
             optional :propagation,
@@ -1416,7 +1400,6 @@ module DockerEngineRuby
                      api_name: :Propagation
 
             # @!attribute read_only_force_recursive
-            #   Raise an error if the mount cannot be made recursively read-only.
             #
             #   @return [Boolean, nil]
             optional :read_only_force_recursive,
@@ -1424,12 +1407,6 @@ module DockerEngineRuby
                      api_name: :ReadOnlyForceRecursive
 
             # @!attribute read_only_non_recursive
-            #   Make the mount non-recursively read-only, but still leave the mount recursive
-            #   (unless NonRecursive is set to `true` in conjunction).
-            #
-            #   Added in v1.44, before that version all read-only mounts were non-recursive by
-            #   default. To match the previous behaviour this will default to `true` for clients
-            #   on versions prior to v1.44.
             #
             #   @return [Boolean, nil]
             optional :read_only_non_recursive,
@@ -1437,24 +1414,14 @@ module DockerEngineRuby
                      api_name: :ReadOnlyNonRecursive
 
             # @!method initialize(create_mountpoint: nil, non_recursive: nil, propagation: nil, read_only_force_recursive: nil, read_only_non_recursive: nil)
-            #   Some parameter documentations has been truncated, see
-            #   {DockerEngineRuby::Models::Container::HostConfig::Mount::BindOptions} for more
-            #   details.
-            #
             #   Optional configuration for the `bind` type.
             #
-            #   @param create_mountpoint [Boolean] Create mount point on host if missing
-            #
-            #   @param non_recursive [Boolean] Disable recursive bind mount.
-            #
-            #   @param propagation [Symbol, DockerEngineRuby::Models::Container::HostConfig::Mount::BindOptions::Propagation] A propagation mode with the value `[r]private`, `[r]shared`, or `[r]slave`.
-            #
-            #   @param read_only_force_recursive [Boolean] Raise an error if the mount cannot be made recursively read-only.
-            #
-            #   @param read_only_non_recursive [Boolean] Make the mount non-recursively read-only, but still leave the mount recursive
+            #   @param create_mountpoint [Boolean]
+            #   @param non_recursive [Boolean]
+            #   @param propagation [Symbol, DockerEngineRuby::Models::Container::HostConfig::Mount::BindOptions::Propagation]
+            #   @param read_only_force_recursive [Boolean]
+            #   @param read_only_non_recursive [Boolean]
 
-            # A propagation mode with the value `[r]private`, `[r]shared`, or `[r]slave`.
-            #
             # @see DockerEngineRuby::Models::Container::HostConfig::Mount::BindOptions#propagation
             module Propagation
               extend DockerEngineRuby::Internal::Type::Enum
@@ -1474,7 +1441,6 @@ module DockerEngineRuby
           # @see DockerEngineRuby::Models::Container::HostConfig::Mount#image_options
           class ImageOptions < DockerEngineRuby::Internal::Type::BaseModel
             # @!attribute subpath
-            #   Source path inside the image. Must be relative without any back traversals.
             #
             #   @return [String, nil]
             optional :subpath, String, api_name: :Subpath
@@ -1482,23 +1448,17 @@ module DockerEngineRuby
             # @!method initialize(subpath: nil)
             #   Optional configuration for the `image` type.
             #
-            #   @param subpath [String] Source path inside the image. Must be relative without any back traversals.
+            #   @param subpath [String]
           end
 
           # @see DockerEngineRuby::Models::Container::HostConfig::Mount#tmpfs_options
           class TmpfsOptions < DockerEngineRuby::Internal::Type::BaseModel
             # @!attribute mode
-            #   The permission mode for the tmpfs mount in an integer. The value must not be in
-            #   octal format (e.g. 755) but rather the decimal representation of the octal value
-            #   (e.g. 493).
             #
             #   @return [Integer, nil]
             optional :mode, Integer, api_name: :Mode
 
             # @!attribute options
-            #   The options to be passed to the tmpfs mount. An array of arrays. Flag options
-            #   should be provided as 1-length arrays. Other types should be provided as as
-            #   2-length arrays, where the first item is the key and the second the value.
             #
             #   @return [Array<Array<String>>, nil]
             optional :options,
@@ -1506,23 +1466,16 @@ module DockerEngineRuby
                      api_name: :Options
 
             # @!attribute size_bytes
-            #   The size for the tmpfs mount in bytes.
             #
             #   @return [Integer, nil]
             optional :size_bytes, Integer, api_name: :SizeBytes
 
             # @!method initialize(mode: nil, options: nil, size_bytes: nil)
-            #   Some parameter documentations has been truncated, see
-            #   {DockerEngineRuby::Models::Container::HostConfig::Mount::TmpfsOptions} for more
-            #   details.
-            #
             #   Optional configuration for the `tmpfs` type.
             #
-            #   @param mode [Integer] The permission mode for the tmpfs mount in an integer.
-            #
-            #   @param options [Array<Array<String>>] The options to be passed to the tmpfs mount. An array of arrays.
-            #
-            #   @param size_bytes [Integer] The size for the tmpfs mount in bytes.
+            #   @param mode [Integer]
+            #   @param options [Array<Array<String>>]
+            #   @param size_bytes [Integer]
           end
 
           # The mount type. Available types:
@@ -1552,7 +1505,6 @@ module DockerEngineRuby
           # @see DockerEngineRuby::Models::Container::HostConfig::Mount#volume_options
           class VolumeOptions < DockerEngineRuby::Internal::Type::BaseModel
             # @!attribute driver_config
-            #   Map of driver specific options
             #
             #   @return [DockerEngineRuby::Models::Container::HostConfig::Mount::VolumeOptions::DriverConfig, nil]
             optional :driver_config,
@@ -1560,19 +1512,16 @@ module DockerEngineRuby
                      api_name: :DriverConfig
 
             # @!attribute labels
-            #   User-defined key/value metadata.
             #
             #   @return [Hash{Symbol=>String}, nil]
             optional :labels, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Labels
 
             # @!attribute no_copy
-            #   Populate volume with data from the target.
             #
             #   @return [Boolean, nil]
             optional :no_copy, DockerEngineRuby::Internal::Type::Boolean, api_name: :NoCopy
 
             # @!attribute subpath
-            #   Source path inside the volume. Must be relative without any back traversals.
             #
             #   @return [String, nil]
             optional :subpath, String, api_name: :Subpath
@@ -1580,34 +1529,26 @@ module DockerEngineRuby
             # @!method initialize(driver_config: nil, labels: nil, no_copy: nil, subpath: nil)
             #   Optional configuration for the `volume` type.
             #
-            #   @param driver_config [DockerEngineRuby::Models::Container::HostConfig::Mount::VolumeOptions::DriverConfig] Map of driver specific options
-            #
-            #   @param labels [Hash{Symbol=>String}] User-defined key/value metadata.
-            #
-            #   @param no_copy [Boolean] Populate volume with data from the target.
-            #
-            #   @param subpath [String] Source path inside the volume. Must be relative without any back traversals.
+            #   @param driver_config [DockerEngineRuby::Models::Container::HostConfig::Mount::VolumeOptions::DriverConfig]
+            #   @param labels [Hash{Symbol=>String}]
+            #   @param no_copy [Boolean]
+            #   @param subpath [String]
 
             # @see DockerEngineRuby::Models::Container::HostConfig::Mount::VolumeOptions#driver_config
             class DriverConfig < DockerEngineRuby::Internal::Type::BaseModel
               # @!attribute name
-              #   Name of the driver to use to create the volume.
               #
               #   @return [String, nil]
               optional :name, String, api_name: :Name
 
               # @!attribute options
-              #   key/value map of driver specific options.
               #
               #   @return [Hash{Symbol=>String}, nil]
               optional :options, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Options
 
               # @!method initialize(name: nil, options: nil)
-              #   Map of driver specific options
-              #
-              #   @param name [String] Name of the driver to use to create the volume.
-              #
-              #   @param options [Hash{Symbol=>String}] key/value map of driver specific options.
+              #   @param name [String]
+              #   @param options [Hash{Symbol=>String}]
             end
           end
         end
@@ -1694,29 +1635,24 @@ module DockerEngineRuby
 
         class Ulimit < DockerEngineRuby::Internal::Type::BaseModel
           # @!attribute hard
-          #   Hard limit
           #
           #   @return [Integer, nil]
           optional :hard, Integer, api_name: :Hard
 
           # @!attribute name
-          #   Name of ulimit
           #
           #   @return [String, nil]
           optional :name, String, api_name: :Name
 
           # @!attribute soft
-          #   Soft limit
           #
           #   @return [Integer, nil]
           optional :soft, Integer, api_name: :Soft
 
           # @!method initialize(hard: nil, name: nil, soft: nil)
-          #   @param hard [Integer] Hard limit
-          #
-          #   @param name [String] Name of ulimit
-          #
-          #   @param soft [Integer] Soft limit
+          #   @param hard [Integer]
+          #   @param name [String]
+          #   @param soft [Integer]
         end
       end
 
@@ -1760,7 +1696,7 @@ module DockerEngineRuby
         #   [OCI Image Index Specification](https://github.com/opencontainers/image-spec/blob/v1.0.1/image-index.md).
         #
         #   @return [DockerEngineRuby::Models::Container::ImageManifestDescriptor::Platform, nil]
-        optional :platform, -> { DockerEngineRuby::Container::ImageManifestDescriptor::Platform }, nil?: true
+        optional :platform, -> { DockerEngineRuby::Container::ImageManifestDescriptor::Platform }
 
         # @!attribute size
         #   The size in bytes of the blob.
@@ -1791,7 +1727,7 @@ module DockerEngineRuby
         #
         #   @param media_type [String] The media type of the object this schema refers to.
         #
-        #   @param platform [DockerEngineRuby::Models::Container::ImageManifestDescriptor::Platform, nil] Describes the platform which the image in the manifest runs on, as defined
+        #   @param platform [DockerEngineRuby::Models::Container::ImageManifestDescriptor::Platform] Describes the platform which the image in the manifest runs on, as defined
         #
         #   @param size [Integer] The size in bytes of the blob.
         #
@@ -1983,12 +1919,6 @@ module DockerEngineRuby
                  api_name: :Networks
 
         # @!attribute ports
-        #   PortMap describes the mapping of container ports to host ports, using the
-        #   container's port-number and protocol as key in the format `<port>/<protocol>`,
-        #   for example, `80/udp`.
-        #
-        #   If a container's port is mapped for multiple protocols, separate entries are
-        #   added to the mapping table.
         #
         #   @return [Hash{Symbol=>Array<DockerEngineRuby::Models::Container::NetworkSettings::Port>}, nil]
         optional :ports,
@@ -2010,14 +1940,11 @@ module DockerEngineRuby
         optional :sandbox_key, String, api_name: :SandboxKey
 
         # @!method initialize(networks: nil, ports: nil, sandbox_id: nil, sandbox_key: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {DockerEngineRuby::Models::Container::NetworkSettings} for more details.
-        #
         #   NetworkSettings exposes the network settings in the API
         #
         #   @param networks [Hash{Symbol=>DockerEngineRuby::Models::Container::NetworkSettings::Network}] Information about all networks that the container is connected to.
         #
-        #   @param ports [Hash{Symbol=>Array<DockerEngineRuby::Models::Container::NetworkSettings::Port>}] PortMap describes the mapping of container ports to host ports, using the
+        #   @param ports [Hash{Symbol=>Array<DockerEngineRuby::Models::Container::NetworkSettings::Port>}]
         #
         #   @param sandbox_id [String] SandboxID uniquely represents a container's network stack.
         #
@@ -2096,8 +2023,7 @@ module DockerEngineRuby
           #   @return [DockerEngineRuby::Models::Container::NetworkSettings::Network::IpamConfig, nil]
           optional :ipam_config,
                    -> { DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig },
-                   api_name: :IPAMConfig,
-                   nil?: true
+                   api_name: :IPAMConfig
 
           # @!attribute ip_prefix_len
           #   Mask length of the IPv4 address.
@@ -2154,7 +2080,7 @@ module DockerEngineRuby
           #
           #   @param ip_address [String] IPv4 address.
           #
-          #   @param ipam_config [DockerEngineRuby::Models::Container::NetworkSettings::Network::IpamConfig, nil] EndpointIPAMConfig represents an endpoint's IPAM configuration.
+          #   @param ipam_config [DockerEngineRuby::Models::Container::NetworkSettings::Network::IpamConfig] EndpointIPAMConfig represents an endpoint's IPAM configuration.
           #
           #   @param ip_prefix_len [Integer] Mask length of the IPv4 address.
           #
@@ -2244,7 +2170,7 @@ module DockerEngineRuby
         #   Health stores information about the container's healthcheck results.
         #
         #   @return [DockerEngineRuby::Models::Container::State::Health, nil]
-        optional :health, -> { DockerEngineRuby::Container::State::Health }, api_name: :Health, nil?: true
+        optional :health, -> { DockerEngineRuby::Container::State::Health }, api_name: :Health
 
         # @!attribute oom_killed
         #   Whether a process within this container has been killed because it ran out of
@@ -2314,7 +2240,7 @@ module DockerEngineRuby
         #
         #   @param finished_at [String] The time when this container last exited.
         #
-        #   @param health [DockerEngineRuby::Models::Container::State::Health, nil] Health stores information about the container's healthcheck results.
+        #   @param health [DockerEngineRuby::Models::Container::State::Health] Health stores information about the container's healthcheck results.
         #
         #   @param oom_killed [Boolean] Whether a process within this container has been killed because it ran
         #
@@ -2341,11 +2267,10 @@ module DockerEngineRuby
           # @!attribute log
           #   Log contains the last few results (oldest first)
           #
-          #   @return [Array<DockerEngineRuby::Models::Container::State::Health::Log, nil>, nil]
+          #   @return [Array<DockerEngineRuby::Models::Container::State::Health::Log>, nil]
           optional :log,
                    -> {
-                     DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Container::State::Health::Log,
-                                                               nil?: true]
+                     DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Container::State::Health::Log]
                    },
                    api_name: :Log
 
@@ -2368,7 +2293,7 @@ module DockerEngineRuby
           #
           #   @param failing_streak [Integer] FailingStreak is the number of consecutive failures
           #
-          #   @param log [Array<DockerEngineRuby::Models::Container::State::Health::Log, nil>] Log contains the last few results (oldest first)
+          #   @param log [Array<DockerEngineRuby::Models::Container::State::Health::Log>] Log contains the last few results (oldest first)
           #
           #   @param status [Symbol, DockerEngineRuby::Models::Container::State::Health::Status] Status is one of `none`, `starting`, `healthy` or `unhealthy`
 
@@ -2377,8 +2302,8 @@ module DockerEngineRuby
             #   Date and time at which this check ended in
             #   [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
             #
-            #   @return [String, nil]
-            optional :end_, String, api_name: :End
+            #   @return [Time, nil]
+            optional :end_, Time, api_name: :End
 
             # @!attribute exit_code
             #   ExitCode meanings:
@@ -2410,7 +2335,7 @@ module DockerEngineRuby
             #
             #   HealthcheckResult stores information about a single run of a healthcheck probe
             #
-            #   @param end_ [String] Date and time at which this check ended in
+            #   @param end_ [Time] Date and time at which this check ended in
             #
             #   @param exit_code [Integer] ExitCode meanings:
             #
@@ -2466,15 +2391,12 @@ module DockerEngineRuby
         #   Information about the storage used for the container's root filesystem.
         #
         #   @return [DockerEngineRuby::Models::Container::Storage::RootFs, nil]
-        optional :root_fs, -> { DockerEngineRuby::Container::Storage::RootFs }, api_name: :RootFS
+        optional :root_fs, -> { DockerEngineRuby::Container::Storage::RootFs }, api_name: :RootFS, nil?: true
 
         # @!method initialize(root_fs: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {DockerEngineRuby::Models::Container::Storage} for more details.
-        #
         #   Information about the storage used by the container.
         #
-        #   @param root_fs [DockerEngineRuby::Models::Container::Storage::RootFs] Information about the storage used for the container's root filesystem.
+        #   @param root_fs [DockerEngineRuby::Models::Container::Storage::RootFs, nil] Information about the storage used for the container's root filesystem.
 
         # @see DockerEngineRuby::Models::Container::Storage#root_fs
         class RootFs < DockerEngineRuby::Internal::Type::BaseModel
@@ -2483,18 +2405,14 @@ module DockerEngineRuby
           #
           #   @return [DockerEngineRuby::Models::Container::Storage::RootFs::Snapshot, nil]
           optional :snapshot,
-                   -> {
-                     DockerEngineRuby::Container::Storage::RootFs::Snapshot
-                   },
-                   api_name: :Snapshot
+                   -> { DockerEngineRuby::Container::Storage::RootFs::Snapshot },
+                   api_name: :Snapshot,
+                   nil?: true
 
           # @!method initialize(snapshot: nil)
-          #   Some parameter documentations has been truncated, see
-          #   {DockerEngineRuby::Models::Container::Storage::RootFs} for more details.
-          #
           #   Information about the storage used for the container's root filesystem.
           #
-          #   @param snapshot [DockerEngineRuby::Models::Container::Storage::RootFs::Snapshot] Information about a snapshot backend of the container's root filesystem.
+          #   @param snapshot [DockerEngineRuby::Models::Container::Storage::RootFs::Snapshot, nil] Information about a snapshot backend of the container's root filesystem.
 
           # @see DockerEngineRuby::Models::Container::Storage::RootFs#snapshot
           class Snapshot < DockerEngineRuby::Internal::Type::BaseModel

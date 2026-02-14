@@ -8,19 +8,12 @@ module DockerEngineRuby
       include DockerEngineRuby::Internal::Type::RequestParameters
 
       # @!attribute detach_keys
-      #   Override the key sequence for detaching a container. Format is a single
-      #   character `[a-Z]` or `ctrl-<value>` where `<value>` is one of: `a-z`, `@`, `^`,
-      #   `[`, `,` or `_`.
       #
       #   @return [String, nil]
       optional :detach_keys, String
 
       # @!method initialize(detach_keys: nil, request_options: {})
-      #   Some parameter documentations has been truncated, see
-      #   {DockerEngineRuby::Models::ContainerStartParams} for more details.
-      #
-      #   @param detach_keys [String] Override the key sequence for detaching a container. Format is a
-      #
+      #   @param detach_keys [String]
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]
     end
   end

@@ -14,7 +14,6 @@ module DockerEngineRuby
           )
         end
 
-      # Fill empty fields with default values.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :insert_defaults
 
@@ -27,11 +26,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # Fill empty fields with default values.
-        insert_defaults: nil,
-        request_options: {}
-      )
+      def self.new(insert_defaults: nil, request_options: {})
       end
 
       sig do

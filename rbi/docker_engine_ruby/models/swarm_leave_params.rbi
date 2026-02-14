@@ -14,8 +14,6 @@ module DockerEngineRuby
           )
         end
 
-      # Force leave swarm, even if this is the last manager or that it will break the
-      # cluster.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :force
 
@@ -28,12 +26,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # Force leave swarm, even if this is the last manager or that it will break the
-        # cluster.
-        force: nil,
-        request_options: {}
-      )
+      def self.new(force: nil, request_options: {})
       end
 
       sig do

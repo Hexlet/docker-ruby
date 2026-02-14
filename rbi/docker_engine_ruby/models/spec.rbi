@@ -436,18 +436,16 @@ module DockerEngineRuby
             )
           end
 
-        sig { returns(T.nilable(T.anything)) }
+        sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
         attr_reader :global
 
-        sig { params(global: T.anything).void }
+        sig { params(global: T::Hash[Symbol, T.anything]).void }
         attr_writer :global
 
-        # The mode used for services which run a task to the completed state on each valid
-        # node.
-        sig { returns(T.nilable(T.anything)) }
+        sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
         attr_reader :global_job
 
-        sig { params(global_job: T.anything).void }
+        sig { params(global_job: T::Hash[Symbol, T.anything]).void }
         attr_writer :global_job
 
         sig { returns(T.nilable(DockerEngineRuby::Spec::Mode::Replicated)) }
@@ -460,8 +458,6 @@ module DockerEngineRuby
         end
         attr_writer :replicated
 
-        # The mode used for services with a finite number of tasks that run to a completed
-        # state.
         sig { returns(T.nilable(DockerEngineRuby::Spec::Mode::ReplicatedJob)) }
         attr_reader :replicated_job
 
@@ -475,20 +471,16 @@ module DockerEngineRuby
         # Scheduling mode for the service.
         sig do
           params(
-            global: T.anything,
-            global_job: T.anything,
+            global: T::Hash[Symbol, T.anything],
+            global_job: T::Hash[Symbol, T.anything],
             replicated: DockerEngineRuby::Spec::Mode::Replicated::OrHash,
             replicated_job: DockerEngineRuby::Spec::Mode::ReplicatedJob::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
           global: nil,
-          # The mode used for services which run a task to the completed state on each valid
-          # node.
           global_job: nil,
           replicated: nil,
-          # The mode used for services with a finite number of tasks that run to a completed
-          # state.
           replicated_job: nil
         )
         end
@@ -496,8 +488,8 @@ module DockerEngineRuby
         sig do
           override.returns(
             {
-              global: T.anything,
-              global_job: T.anything,
+              global: T::Hash[Symbol, T.anything],
+              global_job: T::Hash[Symbol, T.anything],
               replicated: DockerEngineRuby::Spec::Mode::Replicated,
               replicated_job: DockerEngineRuby::Spec::Mode::ReplicatedJob
             }
@@ -539,35 +531,24 @@ module DockerEngineRuby
               )
             end
 
-          # The maximum number of replicas to run simultaneously.
           sig { returns(T.nilable(Integer)) }
           attr_reader :max_concurrent
 
           sig { params(max_concurrent: Integer).void }
           attr_writer :max_concurrent
 
-          # The total number of replicas desired to reach the Completed state. If unset,
-          # will default to the value of `MaxConcurrent`
           sig { returns(T.nilable(Integer)) }
           attr_reader :total_completions
 
           sig { params(total_completions: Integer).void }
           attr_writer :total_completions
 
-          # The mode used for services with a finite number of tasks that run to a completed
-          # state.
           sig do
             params(max_concurrent: Integer, total_completions: Integer).returns(
               T.attached_class
             )
           end
-          def self.new(
-            # The maximum number of replicas to run simultaneously.
-            max_concurrent: nil,
-            # The total number of replicas desired to reach the Completed state. If unset,
-            # will default to the value of `MaxConcurrent`
-            total_completions: nil
-          )
+          def self.new(max_concurrent: nil, total_completions: nil)
           end
 
           sig do
@@ -650,15 +631,12 @@ module DockerEngineRuby
             )
           end
 
-        # Amount of time between rollback iterations, in nanoseconds.
         sig { returns(T.nilable(Integer)) }
         attr_reader :delay
 
         sig { params(delay: Integer).void }
         attr_writer :delay
 
-        # Action to take if an rolled back task fails to run, or stops running during the
-        # rollback.
         sig do
           returns(
             T.nilable(
@@ -676,24 +654,18 @@ module DockerEngineRuby
         end
         attr_writer :failure_action
 
-        # The fraction of tasks that may fail during a rollback before the failure action
-        # is invoked, specified as a floating point number between 0 and 1.
         sig { returns(T.nilable(Float)) }
         attr_reader :max_failure_ratio
 
         sig { params(max_failure_ratio: Float).void }
         attr_writer :max_failure_ratio
 
-        # Amount of time to monitor each rolled back task for failures, in nanoseconds.
         sig { returns(T.nilable(Integer)) }
         attr_reader :monitor
 
         sig { params(monitor: Integer).void }
         attr_writer :monitor
 
-        # The order of operations when rolling back a task. Either the old task is shut
-        # down before the new task is started, or the new task is started before the old
-        # task is shut down.
         sig do
           returns(
             T.nilable(DockerEngineRuby::Spec::RollbackConfig::Order::OrSymbol)
@@ -708,8 +680,6 @@ module DockerEngineRuby
         end
         attr_writer :order
 
-        # Maximum number of tasks to be rolled back in one iteration (0 means unlimited
-        # parallelism).
         sig { returns(T.nilable(Integer)) }
         attr_reader :parallelism
 
@@ -729,22 +699,11 @@ module DockerEngineRuby
           ).returns(T.attached_class)
         end
         def self.new(
-          # Amount of time between rollback iterations, in nanoseconds.
           delay: nil,
-          # Action to take if an rolled back task fails to run, or stops running during the
-          # rollback.
           failure_action: nil,
-          # The fraction of tasks that may fail during a rollback before the failure action
-          # is invoked, specified as a floating point number between 0 and 1.
           max_failure_ratio: nil,
-          # Amount of time to monitor each rolled back task for failures, in nanoseconds.
           monitor: nil,
-          # The order of operations when rolling back a task. Either the old task is shut
-          # down before the new task is started, or the new task is started before the old
-          # task is shut down.
           order: nil,
-          # Maximum number of tasks to be rolled back in one iteration (0 means unlimited
-          # parallelism).
           parallelism: nil
         )
         end
@@ -765,8 +724,6 @@ module DockerEngineRuby
         def to_hash
         end
 
-        # Action to take if an rolled back task fails to run, or stops running during the
-        # rollback.
         module FailureAction
           extend DockerEngineRuby::Internal::Type::Enum
 
@@ -801,9 +758,6 @@ module DockerEngineRuby
           end
         end
 
-        # The order of operations when rolling back a task. Either the old task is shut
-        # down before the new task is started, or the new task is started before the old
-        # task is shut down.
         module Order
           extend DockerEngineRuby::Internal::Type::Enum
 
@@ -845,15 +799,12 @@ module DockerEngineRuby
             )
           end
 
-        # Amount of time between updates, in nanoseconds.
         sig { returns(T.nilable(Integer)) }
         attr_reader :delay
 
         sig { params(delay: Integer).void }
         attr_writer :delay
 
-        # Action to take if an updated task fails to run, or stops running during the
-        # update.
         sig do
           returns(
             T.nilable(
@@ -871,24 +822,18 @@ module DockerEngineRuby
         end
         attr_writer :failure_action
 
-        # The fraction of tasks that may fail during an update before the failure action
-        # is invoked, specified as a floating point number between 0 and 1.
         sig { returns(T.nilable(Float)) }
         attr_reader :max_failure_ratio
 
         sig { params(max_failure_ratio: Float).void }
         attr_writer :max_failure_ratio
 
-        # Amount of time to monitor each updated task for failures, in nanoseconds.
         sig { returns(T.nilable(Integer)) }
         attr_reader :monitor
 
         sig { params(monitor: Integer).void }
         attr_writer :monitor
 
-        # The order of operations when rolling out an updated task. Either the old task is
-        # shut down before the new task is started, or the new task is started before the
-        # old task is shut down.
         sig do
           returns(
             T.nilable(DockerEngineRuby::Spec::UpdateConfig::Order::OrSymbol)
@@ -903,8 +848,6 @@ module DockerEngineRuby
         end
         attr_writer :order
 
-        # Maximum number of tasks to be updated in one iteration (0 means unlimited
-        # parallelism).
         sig { returns(T.nilable(Integer)) }
         attr_reader :parallelism
 
@@ -924,22 +867,11 @@ module DockerEngineRuby
           ).returns(T.attached_class)
         end
         def self.new(
-          # Amount of time between updates, in nanoseconds.
           delay: nil,
-          # Action to take if an updated task fails to run, or stops running during the
-          # update.
           failure_action: nil,
-          # The fraction of tasks that may fail during an update before the failure action
-          # is invoked, specified as a floating point number between 0 and 1.
           max_failure_ratio: nil,
-          # Amount of time to monitor each updated task for failures, in nanoseconds.
           monitor: nil,
-          # The order of operations when rolling out an updated task. Either the old task is
-          # shut down before the new task is started, or the new task is started before the
-          # old task is shut down.
           order: nil,
-          # Maximum number of tasks to be updated in one iteration (0 means unlimited
-          # parallelism).
           parallelism: nil
         )
         end
@@ -960,8 +892,6 @@ module DockerEngineRuby
         def to_hash
         end
 
-        # Action to take if an updated task fails to run, or stops running during the
-        # update.
         module FailureAction
           extend DockerEngineRuby::Internal::Type::Enum
 
@@ -998,9 +928,6 @@ module DockerEngineRuby
           end
         end
 
-        # The order of operations when rolling out an updated task. Either the old task is
-        # shut down before the new task is started, or the new task is started before the
-        # old task is shut down.
         module Order
           extend DockerEngineRuby::Internal::Type::Enum
 

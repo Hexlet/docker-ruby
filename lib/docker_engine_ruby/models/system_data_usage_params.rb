@@ -8,38 +8,65 @@ module DockerEngineRuby
       include DockerEngineRuby::Internal::Type::RequestParameters
 
       # @!attribute type
-      #   Object types, for which to compute and return data.
       #
-      #   @return [Array<Symbol, DockerEngineRuby::Models::SystemDataUsageParams::Type>, nil]
-      optional :type,
-               -> { DockerEngineRuby::Internal::Type::ArrayOf[enum: DockerEngineRuby::SystemDataUsageParams::Type] }
+      #   @return [Symbol, Array<Symbol, DockerEngineRuby::Models::SystemDataUsageParams::Type::UnionMember1>, DockerEngineRuby::Models::SystemDataUsageParams::Type, nil]
+      optional :type, union: -> { DockerEngineRuby::SystemDataUsageParams::Type }
 
       # @!attribute verbose
-      #   Show detailed information on space usage.
       #
       #   @return [Boolean, nil]
       optional :verbose, DockerEngineRuby::Internal::Type::Boolean
 
       # @!method initialize(type: nil, verbose: nil, request_options: {})
-      #   Some parameter documentations has been truncated, see
-      #   {DockerEngineRuby::Models::SystemDataUsageParams} for more details.
-      #
-      #   @param type [Array<Symbol, DockerEngineRuby::Models::SystemDataUsageParams::Type>] Object types, for which to compute and return data.
-      #
-      #   @param verbose [Boolean] Show detailed information on space usage.
-      #
+      #   @param type [Symbol, Array<Symbol, DockerEngineRuby::Models::SystemDataUsageParams::Type::UnionMember1>, DockerEngineRuby::Models::SystemDataUsageParams::Type]
+      #   @param verbose [Boolean]
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]
 
       module Type
-        extend DockerEngineRuby::Internal::Type::Enum
+        extend DockerEngineRuby::Internal::Type::Union
+
+        variant const: -> { DockerEngineRuby::Models::SystemDataUsageParams::Type::CONTAINER }
+
+        variant const: -> { DockerEngineRuby::Models::SystemDataUsageParams::Type::IMAGE }
+
+        variant const: -> { DockerEngineRuby::Models::SystemDataUsageParams::Type::VOLUME }
+
+        variant -> { DockerEngineRuby::Models::SystemDataUsageParams::Type::UnionMember1Array }
+
+        module UnionMember1
+          extend DockerEngineRuby::Internal::Type::Enum
+
+          BUILD_CACHE = :"build-cache"
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # @!method self.variants
+        #   @return [Array(Symbol, Array<Symbol, DockerEngineRuby::Models::SystemDataUsageParams::Type::UnionMember1>)]
+
+        define_sorbet_constant!(:Variants) do
+          T.type_alias do
+            T.any(
+              DockerEngineRuby::SystemDataUsageParams::Type::TaggedSymbol,
+              T::Array[DockerEngineRuby::SystemDataUsageParams::Type::UnionMember1::TaggedSymbol]
+            )
+          end
+        end
+
+        # @!group
 
         CONTAINER = :container
         IMAGE = :image
         VOLUME = :volume
-        BUILD_CACHE = :"build-cache"
 
-        # @!method self.values
-        #   @return [Array<Symbol>]
+        # @!endgroup
+
+        # @type [DockerEngineRuby::Internal::Type::Converter]
+        UnionMember1Array =
+          DockerEngineRuby::Internal::Type::ArrayOf[enum: -> {
+            DockerEngineRuby::SystemDataUsageParams::Type::UnionMember1
+          }]
       end
     end
   end

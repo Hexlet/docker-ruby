@@ -8,10 +8,10 @@ module DockerEngineRuby
           T.any(DockerEngineRuby::Secret, DockerEngineRuby::Internal::AnyHash)
         end
 
-      sig { returns(T.nilable(String)) }
+      sig { returns(T.nilable(Time)) }
       attr_reader :created_at
 
-      sig { params(created_at: String).void }
+      sig { params(created_at: Time).void }
       attr_writer :created_at
 
       sig { returns(T.nilable(String)) }
@@ -26,10 +26,10 @@ module DockerEngineRuby
       sig { params(spec: DockerEngineRuby::Spec::OrHash).void }
       attr_writer :spec
 
-      sig { returns(T.nilable(String)) }
+      sig { returns(T.nilable(Time)) }
       attr_reader :updated_at
 
-      sig { params(updated_at: String).void }
+      sig { params(updated_at: Time).void }
       attr_writer :updated_at
 
       # The version number of the object such as node, service, etc. This is needed to
@@ -49,10 +49,10 @@ module DockerEngineRuby
 
       sig do
         params(
-          created_at: String,
+          created_at: Time,
           id: String,
           spec: DockerEngineRuby::Spec::OrHash,
-          updated_at: String,
+          updated_at: Time,
           version: DockerEngineRuby::Secret::Version::OrHash
         ).returns(T.attached_class)
       end
@@ -77,10 +77,10 @@ module DockerEngineRuby
       sig do
         override.returns(
           {
-            created_at: String,
+            created_at: Time,
             id: String,
             spec: DockerEngineRuby::Spec,
-            updated_at: String,
+            updated_at: Time,
             version: DockerEngineRuby::Secret::Version
           }
         )

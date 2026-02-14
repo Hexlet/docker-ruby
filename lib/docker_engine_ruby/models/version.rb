@@ -117,36 +117,27 @@ module DockerEngineRuby
 
       class Component < DockerEngineRuby::Internal::Type::BaseModel
         # @!attribute name
-        #   Name of the component
         #
         #   @return [String]
         required :name, String, api_name: :Name
 
         # @!attribute version
-        #   Version of the component
         #
         #   @return [String]
         required :version, String, api_name: :Version
 
         # @!attribute details
-        #   Key/value pairs of strings with additional information about the component.
-        #   These values are intended for informational purposes only, and their content is
-        #   not defined, and not part of the API specification.
         #
-        #   These messages can be printed by the client as information to the user.
-        #
-        #   @return [Object, nil]
-        optional :details, DockerEngineRuby::Internal::Type::Unknown, api_name: :Details, nil?: true
+        #   @return [Hash{Symbol=>Object}, nil]
+        optional :details,
+                 DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown],
+                 api_name: :Details,
+                 nil?: true
 
         # @!method initialize(name:, version:, details: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {DockerEngineRuby::Models::Version::Component} for more details.
-        #
-        #   @param name [String] Name of the component
-        #
-        #   @param version [String] Version of the component
-        #
-        #   @param details [Object, nil] Key/value pairs of strings with additional information about the
+        #   @param name [String]
+        #   @param version [String]
+        #   @param details [Hash{Symbol=>Object}, nil]
       end
 
       # @see DockerEngineRuby::Models::Version#platform

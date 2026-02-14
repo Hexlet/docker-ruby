@@ -14,14 +14,12 @@ module DockerEngineRuby
           )
         end
 
-      # Signal to send to the container as an integer or string (e.g. `SIGINT`).
       sig { returns(T.nilable(String)) }
       attr_reader :signal
 
       sig { params(signal: String).void }
       attr_writer :signal
 
-      # Number of seconds to wait before killing the container
       sig { returns(T.nilable(Integer)) }
       attr_reader :t
 
@@ -35,13 +33,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # Signal to send to the container as an integer or string (e.g. `SIGINT`).
-        signal: nil,
-        # Number of seconds to wait before killing the container
-        t: nil,
-        request_options: {}
-      )
+      def self.new(signal: nil, t: nil, request_options: {})
       end
 
       sig do

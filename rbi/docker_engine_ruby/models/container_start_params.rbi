@@ -14,9 +14,6 @@ module DockerEngineRuby
           )
         end
 
-      # Override the key sequence for detaching a container. Format is a single
-      # character `[a-Z]` or `ctrl-<value>` where `<value>` is one of: `a-z`, `@`, `^`,
-      # `[`, `,` or `_`.
       sig { returns(T.nilable(String)) }
       attr_reader :detach_keys
 
@@ -29,13 +26,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # Override the key sequence for detaching a container. Format is a single
-        # character `[a-Z]` or `ctrl-<value>` where `<value>` is one of: `a-z`, `@`, `^`,
-        # `[`, `,` or `_`.
-        detach_keys: nil,
-        request_options: {}
-      )
+      def self.new(detach_keys: nil, request_options: {})
       end
 
       sig do

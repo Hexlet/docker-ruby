@@ -212,15 +212,17 @@ module DockerEngineRuby
       class Mode < DockerEngineRuby::Internal::Type::BaseModel
         # @!attribute global
         #
-        #   @return [Object, nil]
-        optional :global, DockerEngineRuby::Internal::Type::Unknown, api_name: :Global
+        #   @return [Hash{Symbol=>Object}, nil]
+        optional :global,
+                 DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown],
+                 api_name: :Global
 
         # @!attribute global_job
-        #   The mode used for services which run a task to the completed state on each valid
-        #   node.
         #
-        #   @return [Object, nil]
-        optional :global_job, DockerEngineRuby::Internal::Type::Unknown, api_name: :GlobalJob
+        #   @return [Hash{Symbol=>Object}, nil]
+        optional :global_job,
+                 DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown],
+                 api_name: :GlobalJob
 
         # @!attribute replicated
         #
@@ -228,25 +230,17 @@ module DockerEngineRuby
         optional :replicated, -> { DockerEngineRuby::Spec::Mode::Replicated }, api_name: :Replicated
 
         # @!attribute replicated_job
-        #   The mode used for services with a finite number of tasks that run to a completed
-        #   state.
         #
         #   @return [DockerEngineRuby::Models::Spec::Mode::ReplicatedJob, nil]
         optional :replicated_job, -> { DockerEngineRuby::Spec::Mode::ReplicatedJob }, api_name: :ReplicatedJob
 
         # @!method initialize(global: nil, global_job: nil, replicated: nil, replicated_job: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {DockerEngineRuby::Models::Spec::Mode} for more details.
-        #
         #   Scheduling mode for the service.
         #
-        #   @param global [Object]
-        #
-        #   @param global_job [Object] The mode used for services which run a task to the completed state
-        #
+        #   @param global [Hash{Symbol=>Object}]
+        #   @param global_job [Hash{Symbol=>Object}]
         #   @param replicated [DockerEngineRuby::Models::Spec::Mode::Replicated]
-        #
-        #   @param replicated_job [DockerEngineRuby::Models::Spec::Mode::ReplicatedJob] The mode used for services with a finite number of tasks that run
+        #   @param replicated_job [DockerEngineRuby::Models::Spec::Mode::ReplicatedJob]
 
         # @see DockerEngineRuby::Models::Spec::Mode#replicated
         class Replicated < DockerEngineRuby::Internal::Type::BaseModel
@@ -262,28 +256,18 @@ module DockerEngineRuby
         # @see DockerEngineRuby::Models::Spec::Mode#replicated_job
         class ReplicatedJob < DockerEngineRuby::Internal::Type::BaseModel
           # @!attribute max_concurrent
-          #   The maximum number of replicas to run simultaneously.
           #
           #   @return [Integer, nil]
           optional :max_concurrent, Integer, api_name: :MaxConcurrent
 
           # @!attribute total_completions
-          #   The total number of replicas desired to reach the Completed state. If unset,
-          #   will default to the value of `MaxConcurrent`
           #
           #   @return [Integer, nil]
           optional :total_completions, Integer, api_name: :TotalCompletions
 
           # @!method initialize(max_concurrent: nil, total_completions: nil)
-          #   Some parameter documentations has been truncated, see
-          #   {DockerEngineRuby::Models::Spec::Mode::ReplicatedJob} for more details.
-          #
-          #   The mode used for services with a finite number of tasks that run to a completed
-          #   state.
-          #
-          #   @param max_concurrent [Integer] The maximum number of replicas to run simultaneously.
-          #
-          #   @param total_completions [Integer] The total number of replicas desired to reach the Completed
+          #   @param max_concurrent [Integer]
+          #   @param total_completions [Integer]
         end
       end
 
@@ -307,9 +291,6 @@ module DockerEngineRuby
         optional :target, String, api_name: :Target
 
         # @!method initialize(aliases: nil, driver_opts: nil, target: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {DockerEngineRuby::Models::Spec::Network} for more details.
-        #
         #   Specifies how a service should be attached to a particular network.
         #
         #   @param aliases [Array<String>] Discoverable alternate names for the service on this network.
@@ -322,14 +303,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::Spec#rollback_config
       class RollbackConfig < DockerEngineRuby::Internal::Type::BaseModel
         # @!attribute delay
-        #   Amount of time between rollback iterations, in nanoseconds.
         #
         #   @return [Integer, nil]
         optional :delay, Integer, api_name: :Delay
 
         # @!attribute failure_action
-        #   Action to take if an rolled back task fails to run, or stops running during the
-        #   rollback.
         #
         #   @return [Symbol, DockerEngineRuby::Models::Spec::RollbackConfig::FailureAction, nil]
         optional :failure_action,
@@ -337,54 +315,35 @@ module DockerEngineRuby
                  api_name: :FailureAction
 
         # @!attribute max_failure_ratio
-        #   The fraction of tasks that may fail during a rollback before the failure action
-        #   is invoked, specified as a floating point number between 0 and 1.
         #
         #   @return [Float, nil]
         optional :max_failure_ratio, Float, api_name: :MaxFailureRatio
 
         # @!attribute monitor
-        #   Amount of time to monitor each rolled back task for failures, in nanoseconds.
         #
         #   @return [Integer, nil]
         optional :monitor, Integer, api_name: :Monitor
 
         # @!attribute order
-        #   The order of operations when rolling back a task. Either the old task is shut
-        #   down before the new task is started, or the new task is started before the old
-        #   task is shut down.
         #
         #   @return [Symbol, DockerEngineRuby::Models::Spec::RollbackConfig::Order, nil]
         optional :order, enum: -> { DockerEngineRuby::Spec::RollbackConfig::Order }, api_name: :Order
 
         # @!attribute parallelism
-        #   Maximum number of tasks to be rolled back in one iteration (0 means unlimited
-        #   parallelism).
         #
         #   @return [Integer, nil]
         optional :parallelism, Integer, api_name: :Parallelism
 
         # @!method initialize(delay: nil, failure_action: nil, max_failure_ratio: nil, monitor: nil, order: nil, parallelism: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {DockerEngineRuby::Models::Spec::RollbackConfig} for more details.
-        #
         #   Specification for the rollback strategy of the service.
         #
-        #   @param delay [Integer] Amount of time between rollback iterations, in nanoseconds.
-        #
-        #   @param failure_action [Symbol, DockerEngineRuby::Models::Spec::RollbackConfig::FailureAction] Action to take if an rolled back task fails to run, or stops
-        #
-        #   @param max_failure_ratio [Float] The fraction of tasks that may fail during a rollback before the
-        #
-        #   @param monitor [Integer] Amount of time to monitor each rolled back task for failures, in
-        #
-        #   @param order [Symbol, DockerEngineRuby::Models::Spec::RollbackConfig::Order] The order of operations when rolling back a task. Either the old
-        #
-        #   @param parallelism [Integer] Maximum number of tasks to be rolled back in one iteration (0 means
+        #   @param delay [Integer]
+        #   @param failure_action [Symbol, DockerEngineRuby::Models::Spec::RollbackConfig::FailureAction]
+        #   @param max_failure_ratio [Float]
+        #   @param monitor [Integer]
+        #   @param order [Symbol, DockerEngineRuby::Models::Spec::RollbackConfig::Order]
+        #   @param parallelism [Integer]
 
-        # Action to take if an rolled back task fails to run, or stops running during the
-        # rollback.
-        #
         # @see DockerEngineRuby::Models::Spec::RollbackConfig#failure_action
         module FailureAction
           extend DockerEngineRuby::Internal::Type::Enum
@@ -396,10 +355,6 @@ module DockerEngineRuby
           #   @return [Array<Symbol>]
         end
 
-        # The order of operations when rolling back a task. Either the old task is shut
-        # down before the new task is started, or the new task is started before the old
-        # task is shut down.
-        #
         # @see DockerEngineRuby::Models::Spec::RollbackConfig#order
         module Order
           extend DockerEngineRuby::Internal::Type::Enum
@@ -415,14 +370,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::Spec#update_config
       class UpdateConfig < DockerEngineRuby::Internal::Type::BaseModel
         # @!attribute delay
-        #   Amount of time between updates, in nanoseconds.
         #
         #   @return [Integer, nil]
         optional :delay, Integer, api_name: :Delay
 
         # @!attribute failure_action
-        #   Action to take if an updated task fails to run, or stops running during the
-        #   update.
         #
         #   @return [Symbol, DockerEngineRuby::Models::Spec::UpdateConfig::FailureAction, nil]
         optional :failure_action,
@@ -430,54 +382,35 @@ module DockerEngineRuby
                  api_name: :FailureAction
 
         # @!attribute max_failure_ratio
-        #   The fraction of tasks that may fail during an update before the failure action
-        #   is invoked, specified as a floating point number between 0 and 1.
         #
         #   @return [Float, nil]
         optional :max_failure_ratio, Float, api_name: :MaxFailureRatio
 
         # @!attribute monitor
-        #   Amount of time to monitor each updated task for failures, in nanoseconds.
         #
         #   @return [Integer, nil]
         optional :monitor, Integer, api_name: :Monitor
 
         # @!attribute order
-        #   The order of operations when rolling out an updated task. Either the old task is
-        #   shut down before the new task is started, or the new task is started before the
-        #   old task is shut down.
         #
         #   @return [Symbol, DockerEngineRuby::Models::Spec::UpdateConfig::Order, nil]
         optional :order, enum: -> { DockerEngineRuby::Spec::UpdateConfig::Order }, api_name: :Order
 
         # @!attribute parallelism
-        #   Maximum number of tasks to be updated in one iteration (0 means unlimited
-        #   parallelism).
         #
         #   @return [Integer, nil]
         optional :parallelism, Integer, api_name: :Parallelism
 
         # @!method initialize(delay: nil, failure_action: nil, max_failure_ratio: nil, monitor: nil, order: nil, parallelism: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {DockerEngineRuby::Models::Spec::UpdateConfig} for more details.
-        #
         #   Specification for the update strategy of the service.
         #
-        #   @param delay [Integer] Amount of time between updates, in nanoseconds.
-        #
-        #   @param failure_action [Symbol, DockerEngineRuby::Models::Spec::UpdateConfig::FailureAction] Action to take if an updated task fails to run, or stops running
-        #
-        #   @param max_failure_ratio [Float] The fraction of tasks that may fail during an update before the
-        #
-        #   @param monitor [Integer] Amount of time to monitor each updated task for failures, in
-        #
-        #   @param order [Symbol, DockerEngineRuby::Models::Spec::UpdateConfig::Order] The order of operations when rolling out an updated task. Either
-        #
-        #   @param parallelism [Integer] Maximum number of tasks to be updated in one iteration (0 means
+        #   @param delay [Integer]
+        #   @param failure_action [Symbol, DockerEngineRuby::Models::Spec::UpdateConfig::FailureAction]
+        #   @param max_failure_ratio [Float]
+        #   @param monitor [Integer]
+        #   @param order [Symbol, DockerEngineRuby::Models::Spec::UpdateConfig::Order]
+        #   @param parallelism [Integer]
 
-        # Action to take if an updated task fails to run, or stops running during the
-        # update.
-        #
         # @see DockerEngineRuby::Models::Spec::UpdateConfig#failure_action
         module FailureAction
           extend DockerEngineRuby::Internal::Type::Enum
@@ -490,10 +423,6 @@ module DockerEngineRuby
           #   @return [Array<Symbol>]
         end
 
-        # The order of operations when rolling out an updated task. Either the old task is
-        # shut down before the new task is started, or the new task is started before the
-        # old task is shut down.
-        #
         # @see DockerEngineRuby::Models::Spec::UpdateConfig#order
         module Order
           extend DockerEngineRuby::Internal::Type::Enum

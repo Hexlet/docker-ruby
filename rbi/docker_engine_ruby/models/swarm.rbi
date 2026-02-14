@@ -10,10 +10,10 @@ module DockerEngineRuby
 
       # Date and time at which the swarm was initialised in
       # [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
-      sig { returns(T.nilable(String)) }
+      sig { returns(T.nilable(Time)) }
       attr_reader :created_at
 
-      sig { params(created_at: String).void }
+      sig { params(created_at: Time).void }
       attr_writer :created_at
 
       # DataPathPort specifies the data path port number for data traffic. Acceptable
@@ -80,10 +80,10 @@ module DockerEngineRuby
 
       # Date and time at which the swarm was last updated in
       # [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
-      sig { returns(T.nilable(String)) }
+      sig { returns(T.nilable(Time)) }
       attr_reader :updated_at
 
-      sig { params(updated_at: String).void }
+      sig { params(updated_at: Time).void }
       attr_writer :updated_at
 
       # The version number of the object such as node, service, etc. This is needed to
@@ -103,7 +103,7 @@ module DockerEngineRuby
 
       sig do
         params(
-          created_at: String,
+          created_at: Time,
           data_path_port: Integer,
           default_addr_pool: T::Array[String],
           id: String,
@@ -112,7 +112,7 @@ module DockerEngineRuby
           spec: DockerEngineRuby::Spec::OrHash,
           subnet_size: Integer,
           tls_info: DockerEngineRuby::SwarmAPI::TlsInfo::OrHash,
-          updated_at: String,
+          updated_at: Time,
           version: DockerEngineRuby::SwarmAPI::Version::OrHash
         ).returns(T.attached_class)
       end
@@ -159,7 +159,7 @@ module DockerEngineRuby
       sig do
         override.returns(
           {
-            created_at: String,
+            created_at: Time,
             data_path_port: Integer,
             default_addr_pool: T::Array[String],
             id: String,
@@ -168,7 +168,7 @@ module DockerEngineRuby
             spec: DockerEngineRuby::Spec,
             subnet_size: Integer,
             tls_info: DockerEngineRuby::SwarmAPI::TlsInfo,
-            updated_at: String,
+            updated_at: Time,
             version: DockerEngineRuby::SwarmAPI::Version
           }
         )

@@ -2,7 +2,7 @@ module DockerEngineRuby
   module Resources
     class Services
       def create: (
-        spec: DockerEngineRuby::ServiceCreateParams::Spec,
+        spec: DockerEngineRuby::Spec,
         ?x_registry_auth: String,
         ?request_options: DockerEngineRuby::request_opts
       ) -> DockerEngineRuby::CreateResponse
@@ -10,7 +10,7 @@ module DockerEngineRuby
       def update: (
         String id,
         version: Integer,
-        spec: DockerEngineRuby::ServiceUpdateParams::Spec,
+        spec: DockerEngineRuby::Spec,
         ?registry_auth_from: DockerEngineRuby::Models::ServiceUpdateParams::registry_auth_from,
         ?rollback: String,
         ?x_registry_auth: String,

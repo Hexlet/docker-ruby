@@ -3,12 +3,11 @@
 module DockerEngineRuby
   module Resources
     class Exec
-      # Return low-level information about an exec instance.
+      # Inspect an exec instance
       #
       # @overload inspect_(id, request_options: {})
       #
-      # @param id [String] Exec instance ID
-      #
+      # @param id [String]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [DockerEngineRuby::Models::ExecInspectResponse]
@@ -23,17 +22,13 @@ module DockerEngineRuby
         )
       end
 
-      # Resize the TTY session used by an exec instance. This endpoint only works if
-      # `tty` was specified as part of creating and starting the exec instance.
+      # Resize an exec instance
       #
       # @overload resize(id, h:, w:, request_options: {})
       #
-      # @param id [String] Exec instance ID
-      #
-      # @param h [Integer] Height of the TTY session in characters
-      #
-      # @param w [Integer] Width of the TTY session in characters
-      #
+      # @param id [String]
+      # @param h [Integer]
+      # @param w [Integer]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [nil]
@@ -50,20 +45,14 @@ module DockerEngineRuby
         )
       end
 
-      # Starts a previously set up exec instance. If detach is true, this endpoint
-      # returns immediately after starting the command. Otherwise, it sets up an
-      # interactive session with the command.
+      # Start an exec instance
       #
       # @overload start(id, console_size: nil, detach: nil, tty: nil, request_options: {})
       #
-      # @param id [String] Exec instance ID
-      #
-      # @param console_size [Array<Integer>, nil] Initial console size, as an `[height, width]` array.
-      #
-      # @param detach [Boolean] Detach from the command.
-      #
-      # @param tty [Boolean] Allocate a pseudo-TTY.
-      #
+      # @param id [String]
+      # @param console_size [Array<Integer>, nil]
+      # @param detach [Boolean]
+      # @param tty [Boolean]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [nil]

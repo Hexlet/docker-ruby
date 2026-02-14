@@ -3,26 +3,22 @@ module DockerEngineRuby
     type connect_request =
       {
         container: String,
-        endpoint_config: DockerEngineRuby::ConnectRequest::EndpointConfig
+        endpoint_config: DockerEngineRuby::ConnectRequest::EndpointConfig?
       }
 
     class ConnectRequest < DockerEngineRuby::Internal::Type::BaseModel
       attr_accessor container: String
 
-      attr_reader endpoint_config: DockerEngineRuby::ConnectRequest::EndpointConfig?
-
-      def endpoint_config=: (
-        DockerEngineRuby::ConnectRequest::EndpointConfig
-      ) -> DockerEngineRuby::ConnectRequest::EndpointConfig
+      attr_accessor endpoint_config: DockerEngineRuby::ConnectRequest::EndpointConfig?
 
       def initialize: (
         container: String,
-        ?endpoint_config: DockerEngineRuby::ConnectRequest::EndpointConfig
+        ?endpoint_config: DockerEngineRuby::ConnectRequest::EndpointConfig?
       ) -> void
 
       def to_hash: -> {
         container: String,
-        endpoint_config: DockerEngineRuby::ConnectRequest::EndpointConfig
+        endpoint_config: DockerEngineRuby::ConnectRequest::EndpointConfig?
       }
 
       type endpoint_config =
@@ -36,7 +32,7 @@ module DockerEngineRuby
           :global_i_pv6_prefix_len => Integer,
           gw_priority: Integer,
           ip_address: String,
-          ipam_config: DockerEngineRuby::ConnectRequest::EndpointConfig::IpamConfig?,
+          ipam_config: DockerEngineRuby::ConnectRequest::EndpointConfig::IpamConfig,
           ip_prefix_len: Integer,
           :i_pv6_gateway => String,
           links: ::Array[String],
@@ -79,7 +75,11 @@ module DockerEngineRuby
 
         def ip_address=: (String) -> String
 
-        attr_accessor ipam_config: DockerEngineRuby::ConnectRequest::EndpointConfig::IpamConfig?
+        attr_reader ipam_config: DockerEngineRuby::ConnectRequest::EndpointConfig::IpamConfig?
+
+        def ipam_config=: (
+          DockerEngineRuby::ConnectRequest::EndpointConfig::IpamConfig
+        ) -> DockerEngineRuby::ConnectRequest::EndpointConfig::IpamConfig
 
         attr_reader ip_prefix_len: Integer?
 
@@ -111,7 +111,7 @@ module DockerEngineRuby
           ?global_i_pv6_prefix_len: Integer,
           ?gw_priority: Integer,
           ?ip_address: String,
-          ?ipam_config: DockerEngineRuby::ConnectRequest::EndpointConfig::IpamConfig?,
+          ?ipam_config: DockerEngineRuby::ConnectRequest::EndpointConfig::IpamConfig,
           ?ip_prefix_len: Integer,
           ?i_pv6_gateway: String,
           ?links: ::Array[String],
@@ -129,7 +129,7 @@ module DockerEngineRuby
           :global_i_pv6_prefix_len => Integer,
           gw_priority: Integer,
           ip_address: String,
-          ipam_config: DockerEngineRuby::ConnectRequest::EndpointConfig::IpamConfig?,
+          ipam_config: DockerEngineRuby::ConnectRequest::EndpointConfig::IpamConfig,
           ip_prefix_len: Integer,
           :i_pv6_gateway => String,
           links: ::Array[String],
