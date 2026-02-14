@@ -14,7 +14,6 @@ module DockerEngineRuby
           )
         end
 
-      # Resource in the container’s filesystem to archive.
       sig { returns(String) }
       attr_accessor :path
 
@@ -24,11 +23,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # Resource in the container’s filesystem to archive.
-        path:,
-        request_options: {}
-      )
+      def self.new(path:, request_options: {})
       end
 
       sig do

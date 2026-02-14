@@ -14,7 +14,6 @@ module DockerEngineRuby
           )
         end
 
-      # Return the size of container as fields `SizeRw` and `SizeRootFs`
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :size
 
@@ -27,11 +26,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # Return the size of container as fields `SizeRw` and `SizeRootFs`
-        size: nil,
-        request_options: {}
-      )
+      def self.new(size: nil, request_options: {})
       end
 
       sig do

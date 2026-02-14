@@ -2,7 +2,7 @@ module DockerEngineRuby
   module Models
     type swarm_api =
       {
-        created_at: String,
+        created_at: Time,
         data_path_port: Integer,
         default_addr_pool: ::Array[String],
         id: String,
@@ -11,14 +11,14 @@ module DockerEngineRuby
         spec: DockerEngineRuby::Spec,
         subnet_size: Integer,
         tls_info: DockerEngineRuby::SwarmAPI::TlsInfo,
-        updated_at: String,
+        updated_at: Time,
         version: DockerEngineRuby::SwarmAPI::Version
       }
 
     class SwarmAPI < DockerEngineRuby::Internal::Type::BaseModel
-      attr_reader created_at: String?
+      attr_reader created_at: Time?
 
-      def created_at=: (String) -> String
+      def created_at=: (Time) -> Time
 
       attr_reader data_path_port: Integer?
 
@@ -56,9 +56,9 @@ module DockerEngineRuby
         DockerEngineRuby::SwarmAPI::TlsInfo
       ) -> DockerEngineRuby::SwarmAPI::TlsInfo
 
-      attr_reader updated_at: String?
+      attr_reader updated_at: Time?
 
-      def updated_at=: (String) -> String
+      def updated_at=: (Time) -> Time
 
       attr_reader version: DockerEngineRuby::SwarmAPI::Version?
 
@@ -67,7 +67,7 @@ module DockerEngineRuby
       ) -> DockerEngineRuby::SwarmAPI::Version
 
       def initialize: (
-        ?created_at: String,
+        ?created_at: Time,
         ?data_path_port: Integer,
         ?default_addr_pool: ::Array[String],
         ?id: String,
@@ -76,12 +76,12 @@ module DockerEngineRuby
         ?spec: DockerEngineRuby::Spec,
         ?subnet_size: Integer,
         ?tls_info: DockerEngineRuby::SwarmAPI::TlsInfo,
-        ?updated_at: String,
+        ?updated_at: Time,
         ?version: DockerEngineRuby::SwarmAPI::Version
       ) -> void
 
       def to_hash: -> {
-        created_at: String,
+        created_at: Time,
         data_path_port: Integer,
         default_addr_pool: ::Array[String],
         id: String,
@@ -90,7 +90,7 @@ module DockerEngineRuby
         spec: DockerEngineRuby::Spec,
         subnet_size: Integer,
         tls_info: DockerEngineRuby::SwarmAPI::TlsInfo,
-        updated_at: String,
+        updated_at: Time,
         version: DockerEngineRuby::SwarmAPI::Version
       }
 

@@ -11,14 +11,12 @@ module DockerEngineRuby
           )
         end
 
-      # Container IDs that were deleted
       sig { returns(T.nilable(T::Array[String])) }
       attr_reader :containers_deleted
 
       sig { params(containers_deleted: T::Array[String]).void }
       attr_writer :containers_deleted
 
-      # Disk space reclaimed in bytes
       sig { returns(T.nilable(Integer)) }
       attr_reader :space_reclaimed
 
@@ -31,12 +29,7 @@ module DockerEngineRuby
           space_reclaimed: Integer
         ).returns(T.attached_class)
       end
-      def self.new(
-        # Container IDs that were deleted
-        containers_deleted: nil,
-        # Disk space reclaimed in bytes
-        space_reclaimed: nil
-      )
+      def self.new(containers_deleted: nil, space_reclaimed: nil)
       end
 
       sig do

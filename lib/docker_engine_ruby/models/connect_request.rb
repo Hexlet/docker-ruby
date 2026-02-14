@@ -15,7 +15,8 @@ module DockerEngineRuby
       #   @return [DockerEngineRuby::Models::ConnectRequest::EndpointConfig, nil]
       optional :endpoint_config,
                -> { DockerEngineRuby::ConnectRequest::EndpointConfig },
-               api_name: :EndpointConfig
+               api_name: :EndpointConfig,
+               nil?: true
 
       # @!method initialize(container:, endpoint_config: nil)
       #   NetworkConnectRequest represents the data to be used to connect a container to a
@@ -23,7 +24,7 @@ module DockerEngineRuby
       #
       #   @param container [String] The ID or name of the container to connect to the network.
       #
-      #   @param endpoint_config [DockerEngineRuby::Models::ConnectRequest::EndpointConfig] Configuration for a network endpoint.
+      #   @param endpoint_config [DockerEngineRuby::Models::ConnectRequest::EndpointConfig, nil] Configuration for a network endpoint.
 
       # @see DockerEngineRuby::Models::ConnectRequest#endpoint_config
       class EndpointConfig < DockerEngineRuby::Internal::Type::BaseModel
@@ -99,8 +100,7 @@ module DockerEngineRuby
         #   @return [DockerEngineRuby::Models::ConnectRequest::EndpointConfig::IpamConfig, nil]
         optional :ipam_config,
                  -> { DockerEngineRuby::ConnectRequest::EndpointConfig::IpamConfig },
-                 api_name: :IPAMConfig,
-                 nil?: true
+                 api_name: :IPAMConfig
 
         # @!attribute ip_prefix_len
         #   Mask length of the IPv4 address.
@@ -156,7 +156,7 @@ module DockerEngineRuby
         #
         #   @param ip_address [String] IPv4 address.
         #
-        #   @param ipam_config [DockerEngineRuby::Models::ConnectRequest::EndpointConfig::IpamConfig, nil] EndpointIPAMConfig represents an endpoint's IPAM configuration.
+        #   @param ipam_config [DockerEngineRuby::Models::ConnectRequest::EndpointConfig::IpamConfig] EndpointIPAMConfig represents an endpoint's IPAM configuration.
         #
         #   @param ip_prefix_len [Integer] Mask length of the IPv4 address.
         #

@@ -8,14 +8,12 @@ module DockerEngineRuby
       include DockerEngineRuby::Internal::Type::RequestParameters
 
       # @!attribute insert_defaults
-      #   Fill empty fields with default values.
       #
       #   @return [Boolean, nil]
       optional :insert_defaults, DockerEngineRuby::Internal::Type::Boolean
 
       # @!method initialize(insert_defaults: nil, request_options: {})
-      #   @param insert_defaults [Boolean] Fill empty fields with default values.
-      #
+      #   @param insert_defaults [Boolean]
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]
     end
   end

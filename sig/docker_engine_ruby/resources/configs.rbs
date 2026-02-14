@@ -2,14 +2,14 @@ module DockerEngineRuby
   module Resources
     class Configs
       def create: (
-        ?spec: DockerEngineRuby::ConfigCreateParams::Spec,
+        spec: DockerEngineRuby::Spec,
         ?request_options: DockerEngineRuby::request_opts
       ) -> DockerEngineRuby::Models::ConfigCreateResponse
 
       def update: (
         String id,
         version: Integer,
-        ?spec: DockerEngineRuby::Spec,
+        spec: DockerEngineRuby::Spec,
         ?request_options: DockerEngineRuby::request_opts
       ) -> nil
 

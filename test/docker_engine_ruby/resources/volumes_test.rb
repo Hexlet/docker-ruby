@@ -21,8 +21,8 @@ class DockerEngineRuby::Test::Resources::VolumesTest < DockerEngineRuby::Test::R
         options: ^(DockerEngineRuby::Internal::Type::HashOf[String]),
         scope: DockerEngineRuby::Volume::Scope,
         cluster_volume: DockerEngineRuby::Volume::ClusterVolume | nil,
-        created_at: String | nil,
-        status: ^(DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown]) | nil,
+        created_at: Time | nil,
+        status: ^(DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown]]) | nil,
         usage_data: DockerEngineRuby::Volume::UsageData | nil
       }
     end
@@ -83,8 +83,8 @@ class DockerEngineRuby::Test::Resources::VolumesTest < DockerEngineRuby::Test::R
         options: ^(DockerEngineRuby::Internal::Type::HashOf[String]),
         scope: DockerEngineRuby::Volume::Scope,
         cluster_volume: DockerEngineRuby::Volume::ClusterVolume | nil,
-        created_at: String | nil,
-        status: ^(DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown]) | nil,
+        created_at: Time | nil,
+        status: ^(DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown]]) | nil,
         usage_data: DockerEngineRuby::Volume::UsageData | nil
       }
     end

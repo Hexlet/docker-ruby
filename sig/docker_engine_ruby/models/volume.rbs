@@ -9,8 +9,8 @@ module DockerEngineRuby
         options: ::Hash[Symbol, String],
         scope: DockerEngineRuby::Models::Volume::scope,
         cluster_volume: DockerEngineRuby::Volume::ClusterVolume,
-        created_at: String,
-        status: ::Hash[Symbol, top],
+        created_at: Time,
+        status: ::Hash[Symbol, ::Hash[Symbol, top]],
         usage_data: DockerEngineRuby::Volume::UsageData?
       }
 
@@ -33,13 +33,15 @@ module DockerEngineRuby
         DockerEngineRuby::Volume::ClusterVolume
       ) -> DockerEngineRuby::Volume::ClusterVolume
 
-      attr_reader created_at: String?
+      attr_reader created_at: Time?
 
-      def created_at=: (String) -> String
+      def created_at=: (Time) -> Time
 
-      attr_reader status: ::Hash[Symbol, top]?
+      attr_reader status: ::Hash[Symbol, ::Hash[Symbol, top]]?
 
-      def status=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+      def status=: (
+        ::Hash[Symbol, ::Hash[Symbol, top]]
+      ) -> ::Hash[Symbol, ::Hash[Symbol, top]]
 
       attr_accessor usage_data: DockerEngineRuby::Volume::UsageData?
 
@@ -51,8 +53,8 @@ module DockerEngineRuby
         options: ::Hash[Symbol, String],
         scope: DockerEngineRuby::Models::Volume::scope,
         ?cluster_volume: DockerEngineRuby::Volume::ClusterVolume,
-        ?created_at: String,
-        ?status: ::Hash[Symbol, top],
+        ?created_at: Time,
+        ?status: ::Hash[Symbol, ::Hash[Symbol, top]],
         ?usage_data: DockerEngineRuby::Volume::UsageData?
       ) -> void
 
@@ -64,8 +66,8 @@ module DockerEngineRuby
         options: ::Hash[Symbol, String],
         scope: DockerEngineRuby::Models::Volume::scope,
         cluster_volume: DockerEngineRuby::Volume::ClusterVolume,
-        created_at: String,
-        status: ::Hash[Symbol, top],
+        created_at: Time,
+        status: ::Hash[Symbol, ::Hash[Symbol, top]],
         usage_data: DockerEngineRuby::Volume::UsageData?
       }
 
@@ -82,19 +84,19 @@ module DockerEngineRuby
 
       type cluster_volume =
         {
-          created_at: String,
+          created_at: Time,
           id: String,
           info: DockerEngineRuby::Volume::ClusterVolume::Info,
           publish_status: ::Array[DockerEngineRuby::Volume::ClusterVolume::PublishStatus],
           spec: DockerEngineRuby::Volume::ClusterVolume::Spec,
-          updated_at: String,
+          updated_at: Time,
           version: DockerEngineRuby::Volume::ClusterVolume::Version
         }
 
       class ClusterVolume < DockerEngineRuby::Internal::Type::BaseModel
-        attr_reader created_at: String?
+        attr_reader created_at: Time?
 
-        def created_at=: (String) -> String
+        def created_at=: (Time) -> Time
 
         attr_reader id: String?
 
@@ -118,9 +120,9 @@ module DockerEngineRuby
           DockerEngineRuby::Volume::ClusterVolume::Spec
         ) -> DockerEngineRuby::Volume::ClusterVolume::Spec
 
-        attr_reader updated_at: String?
+        attr_reader updated_at: Time?
 
-        def updated_at=: (String) -> String
+        def updated_at=: (Time) -> Time
 
         attr_reader version: DockerEngineRuby::Volume::ClusterVolume::Version?
 
@@ -129,22 +131,22 @@ module DockerEngineRuby
         ) -> DockerEngineRuby::Volume::ClusterVolume::Version
 
         def initialize: (
-          ?created_at: String,
+          ?created_at: Time,
           ?id: String,
           ?info: DockerEngineRuby::Volume::ClusterVolume::Info,
           ?publish_status: ::Array[DockerEngineRuby::Volume::ClusterVolume::PublishStatus],
           ?spec: DockerEngineRuby::Volume::ClusterVolume::Spec,
-          ?updated_at: String,
+          ?updated_at: Time,
           ?version: DockerEngineRuby::Volume::ClusterVolume::Version
         ) -> void
 
         def to_hash: -> {
-          created_at: String,
+          created_at: Time,
           id: String,
           info: DockerEngineRuby::Volume::ClusterVolume::Info,
           publish_status: ::Array[DockerEngineRuby::Volume::ClusterVolume::PublishStatus],
           spec: DockerEngineRuby::Volume::ClusterVolume::Spec,
-          updated_at: String,
+          updated_at: Time,
           version: DockerEngineRuby::Volume::ClusterVolume::Version
         }
 
@@ -278,7 +280,7 @@ module DockerEngineRuby
               accessibility_requirements: DockerEngineRuby::Volume::ClusterVolume::Spec::AccessMode::AccessibilityRequirements,
               availability: DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::availability,
               capacity_range: DockerEngineRuby::Volume::ClusterVolume::Spec::AccessMode::CapacityRange,
-              mount_volume: top,
+              mount_volume: ::Hash[Symbol, top],
               scope: DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::scope,
               secrets: ::Array[DockerEngineRuby::Volume::ClusterVolume::Spec::AccessMode::Secret],
               sharing: DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::sharing
@@ -303,9 +305,9 @@ module DockerEngineRuby
               DockerEngineRuby::Volume::ClusterVolume::Spec::AccessMode::CapacityRange
             ) -> DockerEngineRuby::Volume::ClusterVolume::Spec::AccessMode::CapacityRange
 
-            attr_reader mount_volume: top?
+            attr_reader mount_volume: ::Hash[Symbol, top]?
 
-            def mount_volume=: (top) -> top
+            def mount_volume=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
 
             attr_reader scope: DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::scope?
 
@@ -329,7 +331,7 @@ module DockerEngineRuby
               ?accessibility_requirements: DockerEngineRuby::Volume::ClusterVolume::Spec::AccessMode::AccessibilityRequirements,
               ?availability: DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::availability,
               ?capacity_range: DockerEngineRuby::Volume::ClusterVolume::Spec::AccessMode::CapacityRange,
-              ?mount_volume: top,
+              ?mount_volume: ::Hash[Symbol, top],
               ?scope: DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::scope,
               ?secrets: ::Array[DockerEngineRuby::Volume::ClusterVolume::Spec::AccessMode::Secret],
               ?sharing: DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::sharing
@@ -339,7 +341,7 @@ module DockerEngineRuby
               accessibility_requirements: DockerEngineRuby::Volume::ClusterVolume::Spec::AccessMode::AccessibilityRequirements,
               availability: DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::availability,
               capacity_range: DockerEngineRuby::Volume::ClusterVolume::Spec::AccessMode::CapacityRange,
-              mount_volume: top,
+              mount_volume: ::Hash[Symbol, top],
               scope: DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::scope,
               secrets: ::Array[DockerEngineRuby::Volume::ClusterVolume::Spec::AccessMode::Secret],
               sharing: DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::sharing

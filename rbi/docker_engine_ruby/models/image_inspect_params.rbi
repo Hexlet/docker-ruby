@@ -14,7 +14,6 @@ module DockerEngineRuby
           )
         end
 
-      # Include Manifests in the image summary.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :manifests
 
@@ -27,11 +26,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # Include Manifests in the image summary.
-        manifests: nil,
-        request_options: {}
-      )
+      def self.new(manifests: nil, request_options: {})
       end
 
       sig do

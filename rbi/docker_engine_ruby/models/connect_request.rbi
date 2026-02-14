@@ -24,7 +24,7 @@ module DockerEngineRuby
       sig do
         params(
           endpoint_config:
-            DockerEngineRuby::ConnectRequest::EndpointConfig::OrHash
+            T.nilable(DockerEngineRuby::ConnectRequest::EndpointConfig::OrHash)
         ).void
       end
       attr_writer :endpoint_config
@@ -35,7 +35,7 @@ module DockerEngineRuby
         params(
           container: String,
           endpoint_config:
-            DockerEngineRuby::ConnectRequest::EndpointConfig::OrHash
+            T.nilable(DockerEngineRuby::ConnectRequest::EndpointConfig::OrHash)
         ).returns(T.attached_class)
       end
       def self.new(
@@ -50,7 +50,8 @@ module DockerEngineRuby
         override.returns(
           {
             container: String,
-            endpoint_config: DockerEngineRuby::ConnectRequest::EndpointConfig
+            endpoint_config:
+              T.nilable(DockerEngineRuby::ConnectRequest::EndpointConfig)
           }
         )
       end
@@ -148,9 +149,7 @@ module DockerEngineRuby
         sig do
           params(
             ipam_config:
-              T.nilable(
-                DockerEngineRuby::ConnectRequest::EndpointConfig::IpamConfig::OrHash
-              )
+              DockerEngineRuby::ConnectRequest::EndpointConfig::IpamConfig::OrHash
           ).void
         end
         attr_writer :ipam_config
@@ -203,9 +202,7 @@ module DockerEngineRuby
             gw_priority: Integer,
             ip_address: String,
             ipam_config:
-              T.nilable(
-                DockerEngineRuby::ConnectRequest::EndpointConfig::IpamConfig::OrHash
-              ),
+              DockerEngineRuby::ConnectRequest::EndpointConfig::IpamConfig::OrHash,
             ip_prefix_len: Integer,
             i_pv6_gateway: String,
             links: T::Array[String],
@@ -269,9 +266,7 @@ module DockerEngineRuby
               gw_priority: Integer,
               ip_address: String,
               ipam_config:
-                T.nilable(
-                  DockerEngineRuby::ConnectRequest::EndpointConfig::IpamConfig
-                ),
+                DockerEngineRuby::ConnectRequest::EndpointConfig::IpamConfig,
               ip_prefix_len: Integer,
               i_pv6_gateway: String,
               links: T::Array[String],

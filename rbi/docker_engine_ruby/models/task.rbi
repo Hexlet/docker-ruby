@@ -8,8 +8,6 @@ module DockerEngineRuby
           T.any(DockerEngineRuby::Task, DockerEngineRuby::Internal::AnyHash)
         end
 
-      # User-defined resources can be either Integer resources (e.g, `SSD=3`) or String
-      # resources (e.g, `GPU=UUID1`).
       sig do
         returns(
           T.nilable(T::Array[DockerEngineRuby::Task::AssignedGenericResource])
@@ -25,10 +23,10 @@ module DockerEngineRuby
       end
       attr_writer :assigned_generic_resources
 
-      sig { returns(T.nilable(String)) }
+      sig { returns(T.nilable(Time)) }
       attr_reader :created_at
 
-      sig { params(created_at: String).void }
+      sig { params(created_at: Time).void }
       attr_writer :created_at
 
       sig do
@@ -115,10 +113,10 @@ module DockerEngineRuby
       sig { params(status: DockerEngineRuby::Task::Status::OrHash).void }
       attr_writer :status
 
-      sig { returns(T.nilable(String)) }
+      sig { returns(T.nilable(Time)) }
       attr_reader :updated_at
 
-      sig { params(updated_at: String).void }
+      sig { params(updated_at: Time).void }
       attr_writer :updated_at
 
       # The version number of the object such as node, service, etc. This is needed to
@@ -140,7 +138,7 @@ module DockerEngineRuby
         params(
           assigned_generic_resources:
             T::Array[DockerEngineRuby::Task::AssignedGenericResource::OrHash],
-          created_at: String,
+          created_at: Time,
           desired_state: DockerEngineRuby::Task::DesiredState::OrSymbol,
           id: String,
           job_iteration: DockerEngineRuby::Task::JobIteration::OrHash,
@@ -151,13 +149,11 @@ module DockerEngineRuby
           slot: Integer,
           spec: DockerEngineRuby::Spec::OrHash,
           status: DockerEngineRuby::Task::Status::OrHash,
-          updated_at: String,
+          updated_at: Time,
           version: DockerEngineRuby::Task::Version::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
-        # User-defined resources can be either Integer resources (e.g, `SSD=3`) or String
-        # resources (e.g, `GPU=UUID1`).
         assigned_generic_resources: nil,
         created_at: nil,
         desired_state: nil,
@@ -205,7 +201,7 @@ module DockerEngineRuby
           {
             assigned_generic_resources:
               T::Array[DockerEngineRuby::Task::AssignedGenericResource],
-            created_at: String,
+            created_at: Time,
             desired_state: DockerEngineRuby::Task::DesiredState::TaggedSymbol,
             id: String,
             job_iteration: DockerEngineRuby::Task::JobIteration,
@@ -216,7 +212,7 @@ module DockerEngineRuby
             slot: Integer,
             spec: DockerEngineRuby::Spec,
             status: DockerEngineRuby::Task::Status,
-            updated_at: String,
+            updated_at: Time,
             version: DockerEngineRuby::Task::Version
           }
         )
@@ -490,10 +486,10 @@ module DockerEngineRuby
         end
         attr_writer :state
 
-        sig { returns(T.nilable(String)) }
+        sig { returns(T.nilable(Time)) }
         attr_reader :timestamp
 
-        sig { params(timestamp: String).void }
+        sig { params(timestamp: Time).void }
         attr_writer :timestamp
 
         # represents the status of a task.
@@ -505,7 +501,7 @@ module DockerEngineRuby
             message: String,
             port_status: DockerEngineRuby::Task::Status::PortStatus::OrHash,
             state: DockerEngineRuby::Task::Status::State::OrSymbol,
-            timestamp: String
+            timestamp: Time
           ).returns(T.attached_class)
         end
         def self.new(
@@ -529,7 +525,7 @@ module DockerEngineRuby
               message: String,
               port_status: DockerEngineRuby::Task::Status::PortStatus,
               state: DockerEngineRuby::Task::Status::State::TaggedSymbol,
-              timestamp: String
+              timestamp: Time
             }
           )
         end

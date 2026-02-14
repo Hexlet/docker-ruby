@@ -8,14 +8,12 @@ module DockerEngineRuby
       include DockerEngineRuby::Internal::Type::RequestParameters
 
       # @!attribute path
-      #   Resource in the container’s filesystem to archive.
       #
       #   @return [String]
       required :path, String
 
       # @!method initialize(path:, request_options: {})
-      #   @param path [String] Resource in the container’s filesystem to archive.
-      #
+      #   @param path [String]
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]
     end
   end

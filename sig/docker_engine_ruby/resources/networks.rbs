@@ -31,7 +31,7 @@ module DockerEngineRuby
       def connect: (
         String id,
         container: String,
-        ?endpoint_config: DockerEngineRuby::ConnectRequest::EndpointConfig,
+        ?endpoint_config: DockerEngineRuby::ConnectRequest::EndpointConfig?,
         ?request_options: DockerEngineRuby::request_opts
       ) -> nil
 

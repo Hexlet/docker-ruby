@@ -59,7 +59,6 @@ module DockerEngineRuby
       sig { params(open_stdout: T::Boolean).void }
       attr_writer :open_stdout
 
-      # The system process ID for the exec process.
       sig { returns(T.nilable(Integer)) }
       attr_reader :pid
 
@@ -104,7 +103,6 @@ module DockerEngineRuby
         open_stderr: nil,
         open_stdin: nil,
         open_stdout: nil,
-        # The system process ID for the exec process.
         pid: nil,
         process_config: nil,
         running: nil

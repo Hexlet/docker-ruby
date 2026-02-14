@@ -5,7 +5,6 @@ module DockerEngineRuby
     # @see DockerEngineRuby::Resources::Containers#prune
     class ContainerPruneResponse < DockerEngineRuby::Internal::Type::BaseModel
       # @!attribute containers_deleted
-      #   Container IDs that were deleted
       #
       #   @return [Array<String>, nil]
       optional :containers_deleted,
@@ -13,15 +12,13 @@ module DockerEngineRuby
                api_name: :ContainersDeleted
 
       # @!attribute space_reclaimed
-      #   Disk space reclaimed in bytes
       #
       #   @return [Integer, nil]
       optional :space_reclaimed, Integer, api_name: :SpaceReclaimed
 
       # @!method initialize(containers_deleted: nil, space_reclaimed: nil)
-      #   @param containers_deleted [Array<String>] Container IDs that were deleted
-      #
-      #   @param space_reclaimed [Integer] Disk space reclaimed in bytes
+      #   @param containers_deleted [Array<String>]
+      #   @param space_reclaimed [Integer]
     end
   end
 end

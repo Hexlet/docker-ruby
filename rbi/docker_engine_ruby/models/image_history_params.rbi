@@ -14,16 +14,6 @@ module DockerEngineRuby
           )
         end
 
-      # JSON-encoded OCI platform to select the platform-variant. If omitted, it
-      # defaults to any locally available platform, prioritizing the daemon's host
-      # platform.
-      #
-      # If the daemon provides a multi-platform image store, this selects the
-      # platform-variant to show the history for. If the image is a single-platform
-      # image, or if the multi-platform image does not provide a variant matching the
-      # given platform, an error is returned.
-      #
-      # Example: `{"os": "linux", "architecture": "arm", "variant": "v5"}`
       sig { returns(T.nilable(String)) }
       attr_reader :platform
 
@@ -36,20 +26,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # JSON-encoded OCI platform to select the platform-variant. If omitted, it
-        # defaults to any locally available platform, prioritizing the daemon's host
-        # platform.
-        #
-        # If the daemon provides a multi-platform image store, this selects the
-        # platform-variant to show the history for. If the image is a single-platform
-        # image, or if the multi-platform image does not provide a variant matching the
-        # given platform, an error is returned.
-        #
-        # Example: `{"os": "linux", "architecture": "arm", "variant": "v5"}`
-        platform: nil,
-        request_options: {}
-      )
+      def self.new(platform: nil, request_options: {})
       end
 
       sig do

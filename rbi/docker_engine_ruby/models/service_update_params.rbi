@@ -14,24 +14,9 @@ module DockerEngineRuby
           )
         end
 
-      # The version number of the service object being updated. This is required to
-      # avoid conflicting writes. This version number should be the value as currently
-      # set on the service _before_ the update. You can find the current version by
-      # calling `GET /services/{id}`
       sig { returns(Integer) }
       attr_accessor :version
 
-      # User modifiable configuration for a service.
-      sig { returns(DockerEngineRuby::ServiceUpdateParams::Spec) }
-      attr_reader :spec
-
-      sig do
-        params(spec: DockerEngineRuby::ServiceUpdateParams::Spec::OrHash).void
-      end
-      attr_writer :spec
-
-      # If the `X-Registry-Auth` header is not specified, this parameter indicates where
-      # to find registry authorization credentials.
       sig do
         returns(
           T.nilable(
@@ -49,8 +34,6 @@ module DockerEngineRuby
       end
       attr_writer :registry_auth_from
 
-      # Set to this parameter to `previous` to cause a server-side rollback to the
-      # previous service spec. The supplied spec will be ignored in this case.
       sig { returns(T.nilable(String)) }
       attr_reader :rollback
 
@@ -66,7 +49,6 @@ module DockerEngineRuby
       sig do
         params(
           version: Integer,
-          spec: DockerEngineRuby::ServiceUpdateParams::Spec::OrHash,
           registry_auth_from:
             DockerEngineRuby::ServiceUpdateParams::RegistryAuthFrom::OrSymbol,
           rollback: String,
@@ -75,18 +57,8 @@ module DockerEngineRuby
         ).returns(T.attached_class)
       end
       def self.new(
-        # The version number of the service object being updated. This is required to
-        # avoid conflicting writes. This version number should be the value as currently
-        # set on the service _before_ the update. You can find the current version by
-        # calling `GET /services/{id}`
         version:,
-        # User modifiable configuration for a service.
-        spec:,
-        # If the `X-Registry-Auth` header is not specified, this parameter indicates where
-        # to find registry authorization credentials.
         registry_auth_from: nil,
-        # Set to this parameter to `previous` to cause a server-side rollback to the
-        # previous service spec. The supplied spec will be ignored in this case.
         rollback: nil,
         x_registry_auth: nil,
         request_options: {}
@@ -97,7 +69,6 @@ module DockerEngineRuby
         override.returns(
           {
             version: Integer,
-            spec: DockerEngineRuby::ServiceUpdateParams::Spec,
             registry_auth_from:
               DockerEngineRuby::ServiceUpdateParams::RegistryAuthFrom::OrSymbol,
             rollback: String,
@@ -109,27 +80,6 @@ module DockerEngineRuby
       def to_hash
       end
 
-      class Spec < DockerEngineRuby::Models::Spec
-        OrHash =
-          T.type_alias do
-            T.any(
-              DockerEngineRuby::ServiceUpdateParams::Spec,
-              DockerEngineRuby::Internal::AnyHash
-            )
-          end
-
-        # User modifiable configuration for a service.
-        sig { returns(T.attached_class) }
-        def self.new
-        end
-
-        sig { override.returns({}) }
-        def to_hash
-        end
-      end
-
-      # If the `X-Registry-Auth` header is not specified, this parameter indicates where
-      # to find registry authorization credentials.
       module RegistryAuthFrom
         extend DockerEngineRuby::Internal::Type::Enum
 

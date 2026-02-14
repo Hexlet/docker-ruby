@@ -89,7 +89,9 @@ module DockerEngineRuby
       sig do
         params(
           image_manifest_descriptor:
-            DockerEngineRuby::Summary::ImageManifestDescriptor::OrHash
+            T.nilable(
+              DockerEngineRuby::Summary::ImageManifestDescriptor::OrHash
+            )
         ).void
       end
       attr_writer :image_manifest_descriptor
@@ -179,7 +181,9 @@ module DockerEngineRuby
           image: String,
           image_id: String,
           image_manifest_descriptor:
-            DockerEngineRuby::Summary::ImageManifestDescriptor::OrHash,
+            T.nilable(
+              DockerEngineRuby::Summary::ImageManifestDescriptor::OrHash
+            ),
           labels: T::Hash[Symbol, String],
           mounts: T::Array[DockerEngineRuby::Summary::Mount::OrHash],
           names: T::Array[String],
@@ -271,7 +275,7 @@ module DockerEngineRuby
             image: String,
             image_id: String,
             image_manifest_descriptor:
-              DockerEngineRuby::Summary::ImageManifestDescriptor,
+              T.nilable(DockerEngineRuby::Summary::ImageManifestDescriptor),
             labels: T::Hash[Symbol, String],
             mounts: T::Array[DockerEngineRuby::Summary::Mount],
             names: T::Array[String],
@@ -296,14 +300,12 @@ module DockerEngineRuby
             )
           end
 
-        # FailingStreak is the number of consecutive failures
         sig { returns(T.nilable(Integer)) }
         attr_reader :failing_streak
 
         sig { params(failing_streak: Integer).void }
         attr_writer :failing_streak
 
-        # the health status of the container
         sig do
           returns(
             T.nilable(DockerEngineRuby::Summary::Health::Status::TaggedSymbol)
@@ -329,12 +331,7 @@ module DockerEngineRuby
             status: DockerEngineRuby::Summary::Health::Status::OrSymbol
           ).returns(T.attached_class)
         end
-        def self.new(
-          # FailingStreak is the number of consecutive failures
-          failing_streak: nil,
-          # the health status of the container
-          status: nil
-        )
+        def self.new(failing_streak: nil, status: nil)
         end
 
         sig do
@@ -348,7 +345,6 @@ module DockerEngineRuby
         def to_hash
         end
 
-        # the health status of the container
         module Status
           extend DockerEngineRuby::Internal::Type::Enum
 
@@ -398,16 +394,9 @@ module DockerEngineRuby
             )
           end
 
-        # Arbitrary key-value metadata attached to the container.
         sig { returns(T.nilable(T::Hash[Symbol, String])) }
         attr_accessor :annotations
 
-        # Networking mode (`host`, `none`, `container:<id>`) or name of the primary
-        # network the container is using.
-        #
-        # This field is primarily for backward compatibility. The container can be
-        # connected to multiple networks for which information can be found in the
-        # `NetworkSettings.Networks` field, which enumerates settings per network.
         sig { returns(T.nilable(String)) }
         attr_reader :network_mode
 
@@ -423,17 +412,7 @@ module DockerEngineRuby
             network_mode: String
           ).returns(T.attached_class)
         end
-        def self.new(
-          # Arbitrary key-value metadata attached to the container.
-          annotations: nil,
-          # Networking mode (`host`, `none`, `container:<id>`) or name of the primary
-          # network the container is using.
-          #
-          # This field is primarily for backward compatibility. The container can be
-          # connected to multiple networks for which information can be found in the
-          # `NetworkSettings.Networks` field, which enumerates settings per network.
-          network_mode: nil
-        )
+        def self.new(annotations: nil, network_mode: nil)
         end
 
         sig do
@@ -500,9 +479,7 @@ module DockerEngineRuby
         sig do
           params(
             platform:
-              T.nilable(
-                DockerEngineRuby::Summary::ImageManifestDescriptor::Platform::OrHash
-              )
+              DockerEngineRuby::Summary::ImageManifestDescriptor::Platform::OrHash
           ).void
         end
         attr_writer :platform
@@ -528,9 +505,7 @@ module DockerEngineRuby
             digest: String,
             media_type: String,
             platform:
-              T.nilable(
-                DockerEngineRuby::Summary::ImageManifestDescriptor::Platform::OrHash
-              ),
+              DockerEngineRuby::Summary::ImageManifestDescriptor::Platform::OrHash,
             size: Integer,
             urls: T.nilable(T::Array[String])
           ).returns(T.attached_class)
@@ -568,9 +543,7 @@ module DockerEngineRuby
               digest: String,
               media_type: String,
               platform:
-                T.nilable(
-                  DockerEngineRuby::Summary::ImageManifestDescriptor::Platform
-                ),
+                DockerEngineRuby::Summary::ImageManifestDescriptor::Platform,
               size: Integer,
               urls: T.nilable(T::Array[String])
             }
@@ -885,7 +858,6 @@ module DockerEngineRuby
             )
           end
 
-        # Summary of network-settings for each network the container is attached to.
         sig do
           returns(
             T.nilable(
@@ -919,10 +891,7 @@ module DockerEngineRuby
               ]
           ).returns(T.attached_class)
         end
-        def self.new(
-          # Summary of network-settings for each network the container is attached to.
-          networks: nil
-        )
+        def self.new(networks: nil)
         end
 
         sig do
@@ -1030,9 +999,7 @@ module DockerEngineRuby
           sig do
             params(
               ipam_config:
-                T.nilable(
-                  DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig::OrHash
-                )
+                DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig::OrHash
             ).void
           end
           attr_writer :ipam_config
@@ -1085,9 +1052,7 @@ module DockerEngineRuby
               gw_priority: Integer,
               ip_address: String,
               ipam_config:
-                T.nilable(
-                  DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig::OrHash
-                ),
+                DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig::OrHash,
               ip_prefix_len: Integer,
               i_pv6_gateway: String,
               links: T::Array[String],
@@ -1151,9 +1116,7 @@ module DockerEngineRuby
                 gw_priority: Integer,
                 ip_address: String,
                 ipam_config:
-                  T.nilable(
-                    DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig
-                  ),
+                  DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig,
                 ip_prefix_len: Integer,
                 i_pv6_gateway: String,
                 links: T::Array[String],

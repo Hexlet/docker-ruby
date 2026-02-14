@@ -62,9 +62,9 @@ module DockerEngineRuby
       #
       #   `{"<port>/<tcp|udp|sctp>": {}}`
       #
-      #   @return [Hash{Symbol=>Object}, nil]
+      #   @return [Hash{Symbol=>Hash{Symbol=>Object}}, nil]
       optional :exposed_ports,
-               DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown],
+               DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown]],
                api_name: :ExposedPorts,
                nil?: true
 
@@ -158,9 +158,9 @@ module DockerEngineRuby
       # @!attribute volumes
       #   An object mapping mount point paths inside the container to empty objects.
       #
-      #   @return [Hash{Symbol=>Object}, nil]
+      #   @return [Hash{Symbol=>Hash{Symbol=>Object}}, nil]
       optional :volumes,
-               DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown],
+               DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown]],
                api_name: :Volumes
 
       # @!attribute working_dir
@@ -191,7 +191,7 @@ module DockerEngineRuby
       #
       #   @param env [Array<String>] A list of environment variables to set inside the container in the
       #
-      #   @param exposed_ports [Hash{Symbol=>Object}, nil] An object mapping ports to an empty object in the form:
+      #   @param exposed_ports [Hash{Symbol=>Hash{Symbol=>Object}}, nil] An object mapping ports to an empty object in the form:
       #
       #   @param healthcheck [DockerEngineRuby::Models::Config::Healthcheck] A test to perform to check that the container is healthy.
       #
@@ -219,7 +219,7 @@ module DockerEngineRuby
       #
       #   @param user [String] Commands run as this user inside the container. If omitted, commands
       #
-      #   @param volumes [Hash{Symbol=>Object}] An object mapping mount point paths inside the container to empty
+      #   @param volumes [Hash{Symbol=>Hash{Symbol=>Object}}] An object mapping mount point paths inside the container to empty
       #
       #   @param working_dir [String] The working directory for commands to run in.
 

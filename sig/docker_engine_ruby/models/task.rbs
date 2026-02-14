@@ -3,7 +3,7 @@ module DockerEngineRuby
     type task =
       {
         assigned_generic_resources: ::Array[DockerEngineRuby::Task::AssignedGenericResource],
-        created_at: String,
+        created_at: Time,
         desired_state: DockerEngineRuby::Models::Task::desired_state,
         id: String,
         job_iteration: DockerEngineRuby::Task::JobIteration,
@@ -14,7 +14,7 @@ module DockerEngineRuby
         slot: Integer,
         spec: DockerEngineRuby::Spec,
         status: DockerEngineRuby::Task::Status,
-        updated_at: String,
+        updated_at: Time,
         version: DockerEngineRuby::Task::Version
       }
 
@@ -25,9 +25,9 @@ module DockerEngineRuby
         ::Array[DockerEngineRuby::Task::AssignedGenericResource]
       ) -> ::Array[DockerEngineRuby::Task::AssignedGenericResource]
 
-      attr_reader created_at: String?
+      attr_reader created_at: Time?
 
-      def created_at=: (String) -> String
+      def created_at=: (Time) -> Time
 
       attr_reader desired_state: DockerEngineRuby::Models::Task::desired_state?
 
@@ -75,9 +75,9 @@ module DockerEngineRuby
         DockerEngineRuby::Task::Status
       ) -> DockerEngineRuby::Task::Status
 
-      attr_reader updated_at: String?
+      attr_reader updated_at: Time?
 
-      def updated_at=: (String) -> String
+      def updated_at=: (Time) -> Time
 
       attr_reader version: DockerEngineRuby::Task::Version?
 
@@ -87,7 +87,7 @@ module DockerEngineRuby
 
       def initialize: (
         ?assigned_generic_resources: ::Array[DockerEngineRuby::Task::AssignedGenericResource],
-        ?created_at: String,
+        ?created_at: Time,
         ?desired_state: DockerEngineRuby::Models::Task::desired_state,
         ?id: String,
         ?job_iteration: DockerEngineRuby::Task::JobIteration,
@@ -98,13 +98,13 @@ module DockerEngineRuby
         ?slot: Integer,
         ?spec: DockerEngineRuby::Spec,
         ?status: DockerEngineRuby::Task::Status,
-        ?updated_at: String,
+        ?updated_at: Time,
         ?version: DockerEngineRuby::Task::Version
       ) -> void
 
       def to_hash: -> {
         assigned_generic_resources: ::Array[DockerEngineRuby::Task::AssignedGenericResource],
-        created_at: String,
+        created_at: Time,
         desired_state: DockerEngineRuby::Models::Task::desired_state,
         id: String,
         job_iteration: DockerEngineRuby::Task::JobIteration,
@@ -115,7 +115,7 @@ module DockerEngineRuby
         slot: Integer,
         spec: DockerEngineRuby::Spec,
         status: DockerEngineRuby::Task::Status,
-        updated_at: String,
+        updated_at: Time,
         version: DockerEngineRuby::Task::Version
       }
 
@@ -239,7 +239,7 @@ module DockerEngineRuby
           message: String,
           port_status: DockerEngineRuby::Task::Status::PortStatus,
           state: DockerEngineRuby::Models::Task::Status::state,
-          timestamp: String
+          timestamp: Time
         }
 
       class Status < DockerEngineRuby::Internal::Type::BaseModel
@@ -269,9 +269,9 @@ module DockerEngineRuby
           DockerEngineRuby::Models::Task::Status::state
         ) -> DockerEngineRuby::Models::Task::Status::state
 
-        attr_reader timestamp: String?
+        attr_reader timestamp: Time?
 
-        def timestamp=: (String) -> String
+        def timestamp=: (Time) -> Time
 
         def initialize: (
           ?container_status: DockerEngineRuby::Task::Status::ContainerStatus,
@@ -279,7 +279,7 @@ module DockerEngineRuby
           ?message: String,
           ?port_status: DockerEngineRuby::Task::Status::PortStatus,
           ?state: DockerEngineRuby::Models::Task::Status::state,
-          ?timestamp: String
+          ?timestamp: Time
         ) -> void
 
         def to_hash: -> {
@@ -288,7 +288,7 @@ module DockerEngineRuby
           message: String,
           port_status: DockerEngineRuby::Task::Status::PortStatus,
           state: DockerEngineRuby::Models::Task::Status::state,
-          timestamp: String
+          timestamp: Time
         }
 
         type container_status =

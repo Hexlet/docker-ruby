@@ -6,7 +6,7 @@ module DockerEngineRuby
         cdi_spec_dirs: ::Array[String],
         cgroup_driver: DockerEngineRuby::Models::Info::cgroup_driver,
         cgroup_version: DockerEngineRuby::Models::Info::cgroup_version,
-        containerd: DockerEngineRuby::Info::Containerd?,
+        containerd: DockerEngineRuby::Info::Containerd,
         containerd_commit: DockerEngineRuby::Info::ContainerdCommit,
         containers: Integer,
         containers_paused: Integer,
@@ -24,7 +24,7 @@ module DockerEngineRuby
         driver: String,
         driver_status: ::Array[::Array[String]],
         experimental_build: bool,
-        firewall_backend: DockerEngineRuby::Info::FirewallBackend?,
+        firewall_backend: DockerEngineRuby::Info::FirewallBackend,
         generic_resources: ::Array[DockerEngineRuby::Info::GenericResource],
         http_proxy: String,
         https_proxy: String,
@@ -47,7 +47,7 @@ module DockerEngineRuby
         n_fd: Integer,
         n_goroutines: Integer,
         no_proxy: String,
-        nri: DockerEngineRuby::Info::Nri?,
+        nri: DockerEngineRuby::Info::Nri,
         oom_kill_disable: bool,
         operating_system: String,
         os_type: String,
@@ -55,7 +55,7 @@ module DockerEngineRuby
         pids_limit: bool,
         plugins: DockerEngineRuby::Info::Plugins,
         product_license: String,
-        registry_config: DockerEngineRuby::Info::RegistryConfig?,
+        registry_config: DockerEngineRuby::Info::RegistryConfig,
         runc_commit: DockerEngineRuby::Info::RuncCommit,
         runtimes: ::Hash[Symbol, DockerEngineRuby::Info::Runtime],
         security_options: ::Array[String],
@@ -87,7 +87,11 @@ module DockerEngineRuby
         DockerEngineRuby::Models::Info::cgroup_version
       ) -> DockerEngineRuby::Models::Info::cgroup_version
 
-      attr_accessor containerd: DockerEngineRuby::Info::Containerd?
+      attr_reader containerd: DockerEngineRuby::Info::Containerd?
+
+      def containerd=: (
+        DockerEngineRuby::Info::Containerd
+      ) -> DockerEngineRuby::Info::Containerd
 
       attr_reader containerd_commit: DockerEngineRuby::Info::ContainerdCommit?
 
@@ -163,7 +167,11 @@ module DockerEngineRuby
 
       def experimental_build=: (bool) -> bool
 
-      attr_accessor firewall_backend: DockerEngineRuby::Info::FirewallBackend?
+      attr_reader firewall_backend: DockerEngineRuby::Info::FirewallBackend?
+
+      def firewall_backend=: (
+        DockerEngineRuby::Info::FirewallBackend
+      ) -> DockerEngineRuby::Info::FirewallBackend
 
       attr_reader generic_resources: ::Array[DockerEngineRuby::Info::GenericResource]?
 
@@ -259,7 +267,9 @@ module DockerEngineRuby
 
       def no_proxy=: (String) -> String
 
-      attr_accessor nri: DockerEngineRuby::Info::Nri?
+      attr_reader nri: DockerEngineRuby::Info::Nri?
+
+      def nri=: (DockerEngineRuby::Info::Nri) -> DockerEngineRuby::Info::Nri
 
       attr_reader oom_kill_disable: bool?
 
@@ -291,7 +301,11 @@ module DockerEngineRuby
 
       def product_license=: (String) -> String
 
-      attr_accessor registry_config: DockerEngineRuby::Info::RegistryConfig?
+      attr_reader registry_config: DockerEngineRuby::Info::RegistryConfig?
+
+      def registry_config=: (
+        DockerEngineRuby::Info::RegistryConfig
+      ) -> DockerEngineRuby::Info::RegistryConfig
 
       attr_reader runc_commit: DockerEngineRuby::Info::RuncCommit?
 
@@ -336,7 +350,7 @@ module DockerEngineRuby
         ?cdi_spec_dirs: ::Array[String],
         ?cgroup_driver: DockerEngineRuby::Models::Info::cgroup_driver,
         ?cgroup_version: DockerEngineRuby::Models::Info::cgroup_version,
-        ?containerd: DockerEngineRuby::Info::Containerd?,
+        ?containerd: DockerEngineRuby::Info::Containerd,
         ?containerd_commit: DockerEngineRuby::Info::ContainerdCommit,
         ?containers: Integer,
         ?containers_paused: Integer,
@@ -354,7 +368,7 @@ module DockerEngineRuby
         ?driver: String,
         ?driver_status: ::Array[::Array[String]],
         ?experimental_build: bool,
-        ?firewall_backend: DockerEngineRuby::Info::FirewallBackend?,
+        ?firewall_backend: DockerEngineRuby::Info::FirewallBackend,
         ?generic_resources: ::Array[DockerEngineRuby::Info::GenericResource],
         ?http_proxy: String,
         ?https_proxy: String,
@@ -377,7 +391,7 @@ module DockerEngineRuby
         ?n_fd: Integer,
         ?n_goroutines: Integer,
         ?no_proxy: String,
-        ?nri: DockerEngineRuby::Info::Nri?,
+        ?nri: DockerEngineRuby::Info::Nri,
         ?oom_kill_disable: bool,
         ?operating_system: String,
         ?os_type: String,
@@ -385,7 +399,7 @@ module DockerEngineRuby
         ?pids_limit: bool,
         ?plugins: DockerEngineRuby::Info::Plugins,
         ?product_license: String,
-        ?registry_config: DockerEngineRuby::Info::RegistryConfig?,
+        ?registry_config: DockerEngineRuby::Info::RegistryConfig,
         ?runc_commit: DockerEngineRuby::Info::RuncCommit,
         ?runtimes: ::Hash[Symbol, DockerEngineRuby::Info::Runtime],
         ?security_options: ::Array[String],
@@ -401,7 +415,7 @@ module DockerEngineRuby
         cdi_spec_dirs: ::Array[String],
         cgroup_driver: DockerEngineRuby::Models::Info::cgroup_driver,
         cgroup_version: DockerEngineRuby::Models::Info::cgroup_version,
-        containerd: DockerEngineRuby::Info::Containerd?,
+        containerd: DockerEngineRuby::Info::Containerd,
         containerd_commit: DockerEngineRuby::Info::ContainerdCommit,
         containers: Integer,
         containers_paused: Integer,
@@ -419,7 +433,7 @@ module DockerEngineRuby
         driver: String,
         driver_status: ::Array[::Array[String]],
         experimental_build: bool,
-        firewall_backend: DockerEngineRuby::Info::FirewallBackend?,
+        firewall_backend: DockerEngineRuby::Info::FirewallBackend,
         generic_resources: ::Array[DockerEngineRuby::Info::GenericResource],
         http_proxy: String,
         https_proxy: String,
@@ -442,7 +456,7 @@ module DockerEngineRuby
         n_fd: Integer,
         n_goroutines: Integer,
         no_proxy: String,
-        nri: DockerEngineRuby::Info::Nri?,
+        nri: DockerEngineRuby::Info::Nri,
         oom_kill_disable: bool,
         operating_system: String,
         os_type: String,
@@ -450,7 +464,7 @@ module DockerEngineRuby
         pids_limit: bool,
         plugins: DockerEngineRuby::Info::Plugins,
         product_license: String,
-        registry_config: DockerEngineRuby::Info::RegistryConfig?,
+        registry_config: DockerEngineRuby::Info::RegistryConfig,
         runc_commit: DockerEngineRuby::Info::RuncCommit,
         runtimes: ::Hash[Symbol, DockerEngineRuby::Info::Runtime],
         security_options: ::Array[String],
@@ -732,17 +746,17 @@ module DockerEngineRuby
 
       type registry_config =
         {
-          index_configs: ::Hash[Symbol, DockerEngineRuby::Info::RegistryConfig::IndexConfig?],
+          index_configs: ::Hash[Symbol, DockerEngineRuby::Info::RegistryConfig::IndexConfig],
           insecure_registry_cid_rs: ::Array[String],
           mirrors: ::Array[String]
         }
 
       class RegistryConfig < DockerEngineRuby::Internal::Type::BaseModel
-        attr_reader index_configs: ::Hash[Symbol, DockerEngineRuby::Info::RegistryConfig::IndexConfig?]?
+        attr_reader index_configs: ::Hash[Symbol, DockerEngineRuby::Info::RegistryConfig::IndexConfig]?
 
         def index_configs=: (
-          ::Hash[Symbol, DockerEngineRuby::Info::RegistryConfig::IndexConfig?]
-        ) -> ::Hash[Symbol, DockerEngineRuby::Info::RegistryConfig::IndexConfig?]
+          ::Hash[Symbol, DockerEngineRuby::Info::RegistryConfig::IndexConfig]
+        ) -> ::Hash[Symbol, DockerEngineRuby::Info::RegistryConfig::IndexConfig]
 
         attr_reader insecure_registry_cid_rs: ::Array[String]?
 
@@ -753,13 +767,13 @@ module DockerEngineRuby
         def mirrors=: (::Array[String]) -> ::Array[String]
 
         def initialize: (
-          ?index_configs: ::Hash[Symbol, DockerEngineRuby::Info::RegistryConfig::IndexConfig?],
+          ?index_configs: ::Hash[Symbol, DockerEngineRuby::Info::RegistryConfig::IndexConfig],
           ?insecure_registry_cid_rs: ::Array[String],
           ?mirrors: ::Array[String]
         ) -> void
 
         def to_hash: -> {
-          index_configs: ::Hash[Symbol, DockerEngineRuby::Info::RegistryConfig::IndexConfig?],
+          index_configs: ::Hash[Symbol, DockerEngineRuby::Info::RegistryConfig::IndexConfig],
           insecure_registry_cid_rs: ::Array[String],
           mirrors: ::Array[String]
         }
@@ -848,7 +862,7 @@ module DockerEngineRuby
 
       type swarm =
         {
-          cluster: DockerEngineRuby::Info::Swarm::Cluster?,
+          cluster: DockerEngineRuby::Info::Swarm::Cluster,
           control_available: bool,
           error: String,
           local_node_state: DockerEngineRuby::Models::Info::Swarm::local_node_state,
@@ -860,7 +874,11 @@ module DockerEngineRuby
         }
 
       class Swarm < DockerEngineRuby::Internal::Type::BaseModel
-        attr_accessor cluster: DockerEngineRuby::Info::Swarm::Cluster?
+        attr_reader cluster: DockerEngineRuby::Info::Swarm::Cluster?
+
+        def cluster=: (
+          DockerEngineRuby::Info::Swarm::Cluster
+        ) -> DockerEngineRuby::Info::Swarm::Cluster
 
         attr_reader control_available: bool?
 
@@ -891,7 +909,7 @@ module DockerEngineRuby
         attr_accessor remote_managers: ::Array[DockerEngineRuby::Info::Swarm::RemoteManager]?
 
         def initialize: (
-          ?cluster: DockerEngineRuby::Info::Swarm::Cluster?,
+          ?cluster: DockerEngineRuby::Info::Swarm::Cluster,
           ?control_available: bool,
           ?error: String,
           ?local_node_state: DockerEngineRuby::Models::Info::Swarm::local_node_state,
@@ -903,7 +921,7 @@ module DockerEngineRuby
         ) -> void
 
         def to_hash: -> {
-          cluster: DockerEngineRuby::Info::Swarm::Cluster?,
+          cluster: DockerEngineRuby::Info::Swarm::Cluster,
           control_available: bool,
           error: String,
           local_node_state: DockerEngineRuby::Models::Info::Swarm::local_node_state,
@@ -916,7 +934,7 @@ module DockerEngineRuby
 
         type cluster =
           {
-            created_at: String,
+            created_at: Time,
             data_path_port: Integer,
             default_addr_pool: ::Array[String],
             id: String,
@@ -924,14 +942,14 @@ module DockerEngineRuby
             spec: DockerEngineRuby::Spec,
             subnet_size: Integer,
             tls_info: DockerEngineRuby::Info::Swarm::Cluster::TlsInfo,
-            updated_at: String,
+            updated_at: Time,
             version: DockerEngineRuby::Info::Swarm::Cluster::Version
           }
 
         class Cluster < DockerEngineRuby::Internal::Type::BaseModel
-          attr_reader created_at: String?
+          attr_reader created_at: Time?
 
-          def created_at=: (String) -> String
+          def created_at=: (Time) -> Time
 
           attr_reader data_path_port: Integer?
 
@@ -963,9 +981,9 @@ module DockerEngineRuby
             DockerEngineRuby::Info::Swarm::Cluster::TlsInfo
           ) -> DockerEngineRuby::Info::Swarm::Cluster::TlsInfo
 
-          attr_reader updated_at: String?
+          attr_reader updated_at: Time?
 
-          def updated_at=: (String) -> String
+          def updated_at=: (Time) -> Time
 
           attr_reader version: DockerEngineRuby::Info::Swarm::Cluster::Version?
 
@@ -974,7 +992,7 @@ module DockerEngineRuby
           ) -> DockerEngineRuby::Info::Swarm::Cluster::Version
 
           def initialize: (
-            ?created_at: String,
+            ?created_at: Time,
             ?data_path_port: Integer,
             ?default_addr_pool: ::Array[String],
             ?id: String,
@@ -982,12 +1000,12 @@ module DockerEngineRuby
             ?spec: DockerEngineRuby::Spec,
             ?subnet_size: Integer,
             ?tls_info: DockerEngineRuby::Info::Swarm::Cluster::TlsInfo,
-            ?updated_at: String,
+            ?updated_at: Time,
             ?version: DockerEngineRuby::Info::Swarm::Cluster::Version
           ) -> void
 
           def to_hash: -> {
-            created_at: String,
+            created_at: Time,
             data_path_port: Integer,
             default_addr_pool: ::Array[String],
             id: String,
@@ -995,7 +1013,7 @@ module DockerEngineRuby
             spec: DockerEngineRuby::Spec,
             subnet_size: Integer,
             tls_info: DockerEngineRuby::Info::Swarm::Cluster::TlsInfo,
-            updated_at: String,
+            updated_at: Time,
             version: DockerEngineRuby::Info::Swarm::Cluster::Version
           }
 

@@ -17,7 +17,6 @@ module DockerEngineRuby
       sig { params(caches_deleted: T::Array[String]).void }
       attr_writer :caches_deleted
 
-      # Disk space reclaimed in bytes
       sig { returns(T.nilable(Integer)) }
       attr_reader :space_reclaimed
 
@@ -30,11 +29,7 @@ module DockerEngineRuby
           space_reclaimed: Integer
         ).returns(T.attached_class)
       end
-      def self.new(
-        caches_deleted: nil,
-        # Disk space reclaimed in bytes
-        space_reclaimed: nil
-      )
+      def self.new(caches_deleted: nil, space_reclaimed: nil)
       end
 
       sig do

@@ -14,8 +14,6 @@ module DockerEngineRuby
           )
         end
 
-      # The name of the plugin. The `:latest` tag is optional, and is the default if
-      # omitted.
       sig { returns(String) }
       attr_accessor :remote
 
@@ -25,12 +23,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # The name of the plugin. The `:latest` tag is optional, and is the default if
-        # omitted.
-        remote:,
-        request_options: {}
-      )
+      def self.new(remote:, request_options: {})
       end
 
       sig do

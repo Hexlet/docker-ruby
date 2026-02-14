@@ -3,17 +3,12 @@
 module DockerEngineRuby
   module Resources
     class System
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::SystemDataUsageParams} for more details.
-      #
       # Get data usage information
       #
       # @overload data_usage(type: nil, verbose: nil, request_options: {})
       #
-      # @param type [Array<Symbol, DockerEngineRuby::Models::SystemDataUsageParams::Type>] Object types, for which to compute and return data.
-      #
-      # @param verbose [Boolean] Show detailed information on space usage.
-      #
+      # @param type [Symbol, Array<Symbol, DockerEngineRuby::Models::SystemDataUsageParams::Type::UnionMember1>, DockerEngineRuby::Models::SystemDataUsageParams::Type]
+      # @param verbose [Boolean]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [DockerEngineRuby::Models::SystemDataUsageResponse]
@@ -30,47 +25,13 @@ module DockerEngineRuby
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::SystemEventsParams} for more details.
-      #
-      # Stream real-time events from the server.
-      #
-      # Various objects within Docker report events when something happens to them.
-      #
-      # Containers report these events: `attach`, `commit`, `copy`, `create`, `destroy`,
-      # `detach`, `die`, `exec_create`, `exec_detach`, `exec_start`, `exec_die`,
-      # `export`, `health_status`, `kill`, `oom`, `pause`, `rename`, `resize`,
-      # `restart`, `start`, `stop`, `top`, `unpause`, `update`, and `prune`
-      #
-      # Images report these events: `create`, `delete`, `import`, `load`, `pull`,
-      # `push`, `save`, `tag`, `untag`, and `prune`
-      #
-      # Volumes report these events: `create`, `mount`, `unmount`, `destroy`, and
-      # `prune`
-      #
-      # Networks report these events: `create`, `connect`, `disconnect`, `destroy`,
-      # `update`, `remove`, and `prune`
-      #
-      # The Docker daemon reports these events: `reload`
-      #
-      # Services report these events: `create`, `update`, and `remove`
-      #
-      # Nodes report these events: `create`, `update`, and `remove`
-      #
-      # Secrets report these events: `create`, `update`, and `remove`
-      #
-      # Configs report these events: `create`, `update`, and `remove`
-      #
-      # The Builder reports `prune` events
+      # Monitor events
       #
       # @overload events(filters: nil, since: nil, until_: nil, request_options: {})
       #
-      # @param filters [String] A JSON encoded value of filters (a `map[string][]string`) to process on the even
-      #
-      # @param since [String] Show events created since this timestamp then stream new events.
-      #
-      # @param until_ [String] Show events created until this timestamp then stop streaming.
-      #
+      # @param filters [String]
+      # @param since [String]
+      # @param until_ [String]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [DockerEngineRuby::Models::SystemEventsResponse]
@@ -82,7 +43,6 @@ module DockerEngineRuby
           method: :get,
           path: "events",
           query: parsed.transform_keys(until_: "until"),
-          headers: {"accept" => "application/json-seq"},
           model: DockerEngineRuby::Models::SystemEventsResponse,
           options: options
         )
@@ -106,7 +66,7 @@ module DockerEngineRuby
         )
       end
 
-      # This is a dummy endpoint you can use to test if the server is accessible.
+      # Ping
       #
       # @overload ping(request_options: {})
       #
@@ -125,8 +85,7 @@ module DockerEngineRuby
         )
       end
 
-      # Returns the version of Docker that is running and various information about the
-      # system that Docker is running on.
+      # Get version
       #
       # @overload version(request_options: {})
       #

@@ -8,8 +8,6 @@ module DockerEngineRuby
       include DockerEngineRuby::Internal::Type::RequestParameters
 
       # @!attribute name
-      #   The name of the plugin. The `:latest` tag is optional, and is the default if
-      #   omitted.
       #
       #   @return [String]
       required :name, String
@@ -20,13 +18,8 @@ module DockerEngineRuby
       required :body, DockerEngineRuby::Internal::Type::FileInput
 
       # @!method initialize(name:, body:, request_options: {})
-      #   Some parameter documentations has been truncated, see
-      #   {DockerEngineRuby::Models::PluginCreateParams} for more details.
-      #
-      #   @param name [String] The name of the plugin. The `:latest` tag is optional, and is the
-      #
+      #   @param name [String]
       #   @param body [Pathname, StringIO, IO, String, DockerEngineRuby::FilePart]
-      #
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]
     end
   end

@@ -27,8 +27,7 @@ module DockerEngineRuby
 
       sig do
         params(
-          blkio_stats:
-            T.nilable(DockerEngineRuby::StatsResponse::BlkioStats::OrHash)
+          blkio_stats: DockerEngineRuby::StatsResponse::BlkioStats::OrHash
         ).void
       end
       attr_writer :blkio_stats
@@ -39,8 +38,7 @@ module DockerEngineRuby
 
       sig do
         params(
-          cpu_stats:
-            T.nilable(DockerEngineRuby::StatsResponse::CPUStats::OrHash)
+          cpu_stats: DockerEngineRuby::StatsResponse::CPUStats::OrHash
         ).void
       end
       attr_writer :cpu_stats
@@ -64,7 +62,11 @@ module DockerEngineRuby
       # Network statistics for the container per interface.
       #
       # This field is omitted if the container has no networking enabled.
-      sig { returns(T.nilable(T.anything)) }
+      sig do
+        returns(
+          T.nilable(T::Hash[Symbol, DockerEngineRuby::StatsResponse::Network])
+        )
+      end
       attr_accessor :networks
 
       # The number of processors on the system.
@@ -89,8 +91,7 @@ module DockerEngineRuby
 
       sig do
         params(
-          pids_stats:
-            T.nilable(DockerEngineRuby::StatsResponse::PidsStats::OrHash)
+          pids_stats: DockerEngineRuby::StatsResponse::PidsStats::OrHash
         ).void
       end
       attr_writer :pids_stats
@@ -101,8 +102,7 @@ module DockerEngineRuby
 
       sig do
         params(
-          precpu_stats:
-            T.nilable(DockerEngineRuby::StatsResponse::PrecpuStats::OrHash)
+          precpu_stats: DockerEngineRuby::StatsResponse::PrecpuStats::OrHash
         ).void
       end
       attr_writer :precpu_stats
@@ -136,8 +136,7 @@ module DockerEngineRuby
 
       sig do
         params(
-          storage_stats:
-            T.nilable(DockerEngineRuby::StatsResponse::StorageStats::OrHash)
+          storage_stats: DockerEngineRuby::StatsResponse::StorageStats::OrHash
         ).void
       end
       attr_writer :storage_stats
@@ -146,23 +145,21 @@ module DockerEngineRuby
       sig do
         params(
           id: T.nilable(String),
-          blkio_stats:
-            T.nilable(DockerEngineRuby::StatsResponse::BlkioStats::OrHash),
-          cpu_stats:
-            T.nilable(DockerEngineRuby::StatsResponse::CPUStats::OrHash),
+          blkio_stats: DockerEngineRuby::StatsResponse::BlkioStats::OrHash,
+          cpu_stats: DockerEngineRuby::StatsResponse::CPUStats::OrHash,
           memory_stats: DockerEngineRuby::StatsResponse::MemoryStats::OrHash,
           name: T.nilable(String),
-          networks: T.nilable(T.anything),
+          networks:
+            T.nilable(
+              T::Hash[Symbol, DockerEngineRuby::StatsResponse::Network::OrHash]
+            ),
           num_procs: Integer,
           os_type: T.nilable(String),
-          pids_stats:
-            T.nilable(DockerEngineRuby::StatsResponse::PidsStats::OrHash),
-          precpu_stats:
-            T.nilable(DockerEngineRuby::StatsResponse::PrecpuStats::OrHash),
+          pids_stats: DockerEngineRuby::StatsResponse::PidsStats::OrHash,
+          precpu_stats: DockerEngineRuby::StatsResponse::PrecpuStats::OrHash,
           preread: Time,
           read: Time,
-          storage_stats:
-            T.nilable(DockerEngineRuby::StatsResponse::StorageStats::OrHash)
+          storage_stats: DockerEngineRuby::StatsResponse::StorageStats::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
@@ -222,20 +219,21 @@ module DockerEngineRuby
         override.returns(
           {
             id: T.nilable(String),
-            blkio_stats: T.nilable(DockerEngineRuby::StatsResponse::BlkioStats),
-            cpu_stats: T.nilable(DockerEngineRuby::StatsResponse::CPUStats),
+            blkio_stats: DockerEngineRuby::StatsResponse::BlkioStats,
+            cpu_stats: DockerEngineRuby::StatsResponse::CPUStats,
             memory_stats: DockerEngineRuby::StatsResponse::MemoryStats,
             name: T.nilable(String),
-            networks: T.nilable(T.anything),
+            networks:
+              T.nilable(
+                T::Hash[Symbol, DockerEngineRuby::StatsResponse::Network]
+              ),
             num_procs: Integer,
             os_type: T.nilable(String),
-            pids_stats: T.nilable(DockerEngineRuby::StatsResponse::PidsStats),
-            precpu_stats:
-              T.nilable(DockerEngineRuby::StatsResponse::PrecpuStats),
+            pids_stats: DockerEngineRuby::StatsResponse::PidsStats,
+            precpu_stats: DockerEngineRuby::StatsResponse::PrecpuStats,
             preread: Time,
             read: Time,
-            storage_stats:
-              T.nilable(DockerEngineRuby::StatsResponse::StorageStats)
+            storage_stats: DockerEngineRuby::StatsResponse::StorageStats
           }
         )
       end
@@ -257,9 +255,7 @@ module DockerEngineRuby
           returns(
             T.nilable(
               T::Array[
-                T.nilable(
-                  DockerEngineRuby::StatsResponse::BlkioStats::IoMergedRecursive
-                )
+                DockerEngineRuby::StatsResponse::BlkioStats::IoMergedRecursive
               ]
             )
           )
@@ -272,9 +268,7 @@ module DockerEngineRuby
           returns(
             T.nilable(
               T::Array[
-                T.nilable(
-                  DockerEngineRuby::StatsResponse::BlkioStats::IoQueueRecursive
-                )
+                DockerEngineRuby::StatsResponse::BlkioStats::IoQueueRecursive
               ]
             )
           )
@@ -285,9 +279,7 @@ module DockerEngineRuby
           returns(
             T.nilable(
               T::Array[
-                T.nilable(
-                  DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive
-                )
+                DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive
               ]
             )
           )
@@ -298,9 +290,7 @@ module DockerEngineRuby
           params(
             io_service_bytes_recursive:
               T::Array[
-                T.nilable(
-                  DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive::OrHash
-                )
+                DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive::OrHash
               ]
           ).void
         end
@@ -312,9 +302,7 @@ module DockerEngineRuby
           returns(
             T.nilable(
               T::Array[
-                T.nilable(
-                  DockerEngineRuby::StatsResponse::BlkioStats::IoServiceTimeRecursive
-                )
+                DockerEngineRuby::StatsResponse::BlkioStats::IoServiceTimeRecursive
               ]
             )
           )
@@ -327,9 +315,7 @@ module DockerEngineRuby
           returns(
             T.nilable(
               T::Array[
-                T.nilable(
-                  DockerEngineRuby::StatsResponse::BlkioStats::IoServicedRecursive
-                )
+                DockerEngineRuby::StatsResponse::BlkioStats::IoServicedRecursive
               ]
             )
           )
@@ -342,9 +328,7 @@ module DockerEngineRuby
           returns(
             T.nilable(
               T::Array[
-                T.nilable(
-                  DockerEngineRuby::StatsResponse::BlkioStats::IoTimeRecursive
-                )
+                DockerEngineRuby::StatsResponse::BlkioStats::IoTimeRecursive
               ]
             )
           )
@@ -357,9 +341,7 @@ module DockerEngineRuby
           returns(
             T.nilable(
               T::Array[
-                T.nilable(
-                  DockerEngineRuby::StatsResponse::BlkioStats::IoWaitTimeRecursive
-                )
+                DockerEngineRuby::StatsResponse::BlkioStats::IoWaitTimeRecursive
               ]
             )
           )
@@ -372,9 +354,7 @@ module DockerEngineRuby
           returns(
             T.nilable(
               T::Array[
-                T.nilable(
-                  DockerEngineRuby::StatsResponse::BlkioStats::SectorsRecursive
-                )
+                DockerEngineRuby::StatsResponse::BlkioStats::SectorsRecursive
               ]
             )
           )
@@ -393,63 +373,47 @@ module DockerEngineRuby
             io_merged_recursive:
               T.nilable(
                 T::Array[
-                  T.nilable(
-                    DockerEngineRuby::StatsResponse::BlkioStats::IoMergedRecursive::OrHash
-                  )
+                  DockerEngineRuby::StatsResponse::BlkioStats::IoMergedRecursive::OrHash
                 ]
               ),
             io_queue_recursive:
               T.nilable(
                 T::Array[
-                  T.nilable(
-                    DockerEngineRuby::StatsResponse::BlkioStats::IoQueueRecursive::OrHash
-                  )
+                  DockerEngineRuby::StatsResponse::BlkioStats::IoQueueRecursive::OrHash
                 ]
               ),
             io_service_bytes_recursive:
               T::Array[
-                T.nilable(
-                  DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive::OrHash
-                )
+                DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive::OrHash
               ],
             io_service_time_recursive:
               T.nilable(
                 T::Array[
-                  T.nilable(
-                    DockerEngineRuby::StatsResponse::BlkioStats::IoServiceTimeRecursive::OrHash
-                  )
+                  DockerEngineRuby::StatsResponse::BlkioStats::IoServiceTimeRecursive::OrHash
                 ]
               ),
             io_serviced_recursive:
               T.nilable(
                 T::Array[
-                  T.nilable(
-                    DockerEngineRuby::StatsResponse::BlkioStats::IoServicedRecursive::OrHash
-                  )
+                  DockerEngineRuby::StatsResponse::BlkioStats::IoServicedRecursive::OrHash
                 ]
               ),
             io_time_recursive:
               T.nilable(
                 T::Array[
-                  T.nilable(
-                    DockerEngineRuby::StatsResponse::BlkioStats::IoTimeRecursive::OrHash
-                  )
+                  DockerEngineRuby::StatsResponse::BlkioStats::IoTimeRecursive::OrHash
                 ]
               ),
             io_wait_time_recursive:
               T.nilable(
                 T::Array[
-                  T.nilable(
-                    DockerEngineRuby::StatsResponse::BlkioStats::IoWaitTimeRecursive::OrHash
-                  )
+                  DockerEngineRuby::StatsResponse::BlkioStats::IoWaitTimeRecursive::OrHash
                 ]
               ),
             sectors_recursive:
               T.nilable(
                 T::Array[
-                  T.nilable(
-                    DockerEngineRuby::StatsResponse::BlkioStats::SectorsRecursive::OrHash
-                  )
+                  DockerEngineRuby::StatsResponse::BlkioStats::SectorsRecursive::OrHash
                 ]
               )
           ).returns(T.attached_class)
@@ -486,63 +450,47 @@ module DockerEngineRuby
               io_merged_recursive:
                 T.nilable(
                   T::Array[
-                    T.nilable(
-                      DockerEngineRuby::StatsResponse::BlkioStats::IoMergedRecursive
-                    )
+                    DockerEngineRuby::StatsResponse::BlkioStats::IoMergedRecursive
                   ]
                 ),
               io_queue_recursive:
                 T.nilable(
                   T::Array[
-                    T.nilable(
-                      DockerEngineRuby::StatsResponse::BlkioStats::IoQueueRecursive
-                    )
+                    DockerEngineRuby::StatsResponse::BlkioStats::IoQueueRecursive
                   ]
                 ),
               io_service_bytes_recursive:
                 T::Array[
-                  T.nilable(
-                    DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive
-                  )
+                  DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive
                 ],
               io_service_time_recursive:
                 T.nilable(
                   T::Array[
-                    T.nilable(
-                      DockerEngineRuby::StatsResponse::BlkioStats::IoServiceTimeRecursive
-                    )
+                    DockerEngineRuby::StatsResponse::BlkioStats::IoServiceTimeRecursive
                   ]
                 ),
               io_serviced_recursive:
                 T.nilable(
                   T::Array[
-                    T.nilable(
-                      DockerEngineRuby::StatsResponse::BlkioStats::IoServicedRecursive
-                    )
+                    DockerEngineRuby::StatsResponse::BlkioStats::IoServicedRecursive
                   ]
                 ),
               io_time_recursive:
                 T.nilable(
                   T::Array[
-                    T.nilable(
-                      DockerEngineRuby::StatsResponse::BlkioStats::IoTimeRecursive
-                    )
+                    DockerEngineRuby::StatsResponse::BlkioStats::IoTimeRecursive
                   ]
                 ),
               io_wait_time_recursive:
                 T.nilable(
                   T::Array[
-                    T.nilable(
-                      DockerEngineRuby::StatsResponse::BlkioStats::IoWaitTimeRecursive
-                    )
+                    DockerEngineRuby::StatsResponse::BlkioStats::IoWaitTimeRecursive
                   ]
                 ),
               sectors_recursive:
                 T.nilable(
                   T::Array[
-                    T.nilable(
-                      DockerEngineRuby::StatsResponse::BlkioStats::SectorsRecursive
-                    )
+                    DockerEngineRuby::StatsResponse::BlkioStats::SectorsRecursive
                   ]
                 )
             }
@@ -1020,9 +968,7 @@ module DockerEngineRuby
         sig do
           params(
             cpu_usage:
-              T.nilable(
-                DockerEngineRuby::StatsResponse::CPUStats::CPUUsage::OrHash
-              )
+              DockerEngineRuby::StatsResponse::CPUStats::CPUUsage::OrHash
           ).void
         end
         attr_writer :cpu_usage
@@ -1052,9 +998,7 @@ module DockerEngineRuby
         sig do
           params(
             throttling_data:
-              T.nilable(
-                DockerEngineRuby::StatsResponse::CPUStats::ThrottlingData::OrHash
-              )
+              DockerEngineRuby::StatsResponse::CPUStats::ThrottlingData::OrHash
           ).void
         end
         attr_writer :throttling_data
@@ -1063,15 +1007,11 @@ module DockerEngineRuby
         sig do
           params(
             cpu_usage:
-              T.nilable(
-                DockerEngineRuby::StatsResponse::CPUStats::CPUUsage::OrHash
-              ),
+              DockerEngineRuby::StatsResponse::CPUStats::CPUUsage::OrHash,
             online_cpus: T.nilable(Integer),
             system_cpu_usage: T.nilable(Integer),
             throttling_data:
-              T.nilable(
-                DockerEngineRuby::StatsResponse::CPUStats::ThrottlingData::OrHash
-              )
+              DockerEngineRuby::StatsResponse::CPUStats::ThrottlingData::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
@@ -1095,14 +1035,11 @@ module DockerEngineRuby
         sig do
           override.returns(
             {
-              cpu_usage:
-                T.nilable(DockerEngineRuby::StatsResponse::CPUStats::CPUUsage),
+              cpu_usage: DockerEngineRuby::StatsResponse::CPUStats::CPUUsage,
               online_cpus: T.nilable(Integer),
               system_cpu_usage: T.nilable(Integer),
               throttling_data:
-                T.nilable(
-                  DockerEngineRuby::StatsResponse::CPUStats::ThrottlingData
-                )
+                DockerEngineRuby::StatsResponse::CPUStats::ThrottlingData
             }
           )
         end
@@ -1402,6 +1339,154 @@ module DockerEngineRuby
         end
       end
 
+      class Network < DockerEngineRuby::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              DockerEngineRuby::StatsResponse::Network,
+              DockerEngineRuby::Internal::AnyHash
+            )
+          end
+
+        # Endpoint ID. Not used on Linux.
+        #
+        # This field is Windows-specific and omitted for Linux containers.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :endpoint_id
+
+        # Instance ID. Not used on Linux.
+        #
+        # This field is Windows-specific and omitted for Linux containers.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :instance_id
+
+        # Bytes received. Windows and Linux.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :rx_bytes
+
+        sig { params(rx_bytes: Integer).void }
+        attr_writer :rx_bytes
+
+        # Incoming packets dropped. Windows and Linux.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :rx_dropped
+
+        sig { params(rx_dropped: Integer).void }
+        attr_writer :rx_dropped
+
+        # Received errors. Not used on Windows.
+        #
+        # This field is Linux-specific and always zero for Windows containers.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :rx_errors
+
+        sig { params(rx_errors: Integer).void }
+        attr_writer :rx_errors
+
+        # Packets received. Windows and Linux.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :rx_packets
+
+        sig { params(rx_packets: Integer).void }
+        attr_writer :rx_packets
+
+        # Bytes sent. Windows and Linux.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :tx_bytes
+
+        sig { params(tx_bytes: Integer).void }
+        attr_writer :tx_bytes
+
+        # Outgoing packets dropped. Windows and Linux.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :tx_dropped
+
+        sig { params(tx_dropped: Integer).void }
+        attr_writer :tx_dropped
+
+        # Sent errors. Not used on Windows.
+        #
+        # This field is Linux-specific and always zero for Windows containers.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :tx_errors
+
+        sig { params(tx_errors: Integer).void }
+        attr_writer :tx_errors
+
+        # Packets sent. Windows and Linux.
+        sig { returns(T.nilable(Integer)) }
+        attr_reader :tx_packets
+
+        sig { params(tx_packets: Integer).void }
+        attr_writer :tx_packets
+
+        # Aggregates the network stats of one container
+        sig do
+          params(
+            endpoint_id: T.nilable(String),
+            instance_id: T.nilable(String),
+            rx_bytes: Integer,
+            rx_dropped: Integer,
+            rx_errors: Integer,
+            rx_packets: Integer,
+            tx_bytes: Integer,
+            tx_dropped: Integer,
+            tx_errors: Integer,
+            tx_packets: Integer
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # Endpoint ID. Not used on Linux.
+          #
+          # This field is Windows-specific and omitted for Linux containers.
+          endpoint_id: nil,
+          # Instance ID. Not used on Linux.
+          #
+          # This field is Windows-specific and omitted for Linux containers.
+          instance_id: nil,
+          # Bytes received. Windows and Linux.
+          rx_bytes: nil,
+          # Incoming packets dropped. Windows and Linux.
+          rx_dropped: nil,
+          # Received errors. Not used on Windows.
+          #
+          # This field is Linux-specific and always zero for Windows containers.
+          rx_errors: nil,
+          # Packets received. Windows and Linux.
+          rx_packets: nil,
+          # Bytes sent. Windows and Linux.
+          tx_bytes: nil,
+          # Outgoing packets dropped. Windows and Linux.
+          tx_dropped: nil,
+          # Sent errors. Not used on Windows.
+          #
+          # This field is Linux-specific and always zero for Windows containers.
+          tx_errors: nil,
+          # Packets sent. Windows and Linux.
+          tx_packets: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              endpoint_id: T.nilable(String),
+              instance_id: T.nilable(String),
+              rx_bytes: Integer,
+              rx_dropped: Integer,
+              rx_errors: Integer,
+              rx_packets: Integer,
+              tx_bytes: Integer,
+              tx_dropped: Integer,
+              tx_errors: Integer,
+              tx_packets: Integer
+            }
+          )
+        end
+        def to_hash
+        end
+      end
+
       class PidsStats < DockerEngineRuby::Internal::Type::BaseModel
         OrHash =
           T.type_alias do
@@ -1467,9 +1552,7 @@ module DockerEngineRuby
         sig do
           params(
             cpu_usage:
-              T.nilable(
-                DockerEngineRuby::StatsResponse::PrecpuStats::CPUUsage::OrHash
-              )
+              DockerEngineRuby::StatsResponse::PrecpuStats::CPUUsage::OrHash
           ).void
         end
         attr_writer :cpu_usage
@@ -1501,9 +1584,7 @@ module DockerEngineRuby
         sig do
           params(
             throttling_data:
-              T.nilable(
-                DockerEngineRuby::StatsResponse::PrecpuStats::ThrottlingData::OrHash
-              )
+              DockerEngineRuby::StatsResponse::PrecpuStats::ThrottlingData::OrHash
           ).void
         end
         attr_writer :throttling_data
@@ -1512,15 +1593,11 @@ module DockerEngineRuby
         sig do
           params(
             cpu_usage:
-              T.nilable(
-                DockerEngineRuby::StatsResponse::PrecpuStats::CPUUsage::OrHash
-              ),
+              DockerEngineRuby::StatsResponse::PrecpuStats::CPUUsage::OrHash,
             online_cpus: T.nilable(Integer),
             system_cpu_usage: T.nilable(Integer),
             throttling_data:
-              T.nilable(
-                DockerEngineRuby::StatsResponse::PrecpuStats::ThrottlingData::OrHash
-              )
+              DockerEngineRuby::StatsResponse::PrecpuStats::ThrottlingData::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
@@ -1544,16 +1621,11 @@ module DockerEngineRuby
         sig do
           override.returns(
             {
-              cpu_usage:
-                T.nilable(
-                  DockerEngineRuby::StatsResponse::PrecpuStats::CPUUsage
-                ),
+              cpu_usage: DockerEngineRuby::StatsResponse::PrecpuStats::CPUUsage,
               online_cpus: T.nilable(Integer),
               system_cpu_usage: T.nilable(Integer),
               throttling_data:
-                T.nilable(
-                  DockerEngineRuby::StatsResponse::PrecpuStats::ThrottlingData
-                )
+                DockerEngineRuby::StatsResponse::PrecpuStats::ThrottlingData
             }
           )
         end

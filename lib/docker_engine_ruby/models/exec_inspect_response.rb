@@ -45,7 +45,6 @@ module DockerEngineRuby
       optional :open_stdout, DockerEngineRuby::Internal::Type::Boolean, api_name: :OpenStdout
 
       # @!attribute pid
-      #   The system process ID for the exec process.
       #
       #   @return [Integer, nil]
       optional :pid, Integer, api_name: :Pid
@@ -62,25 +61,15 @@ module DockerEngineRuby
 
       # @!method initialize(can_remove: nil, container_id: nil, detach_keys: nil, exit_code: nil, id: nil, open_stderr: nil, open_stdin: nil, open_stdout: nil, pid: nil, process_config: nil, running: nil)
       #   @param can_remove [Boolean]
-      #
       #   @param container_id [String]
-      #
       #   @param detach_keys [String]
-      #
       #   @param exit_code [Integer]
-      #
       #   @param id [String]
-      #
       #   @param open_stderr [Boolean]
-      #
       #   @param open_stdin [Boolean]
-      #
       #   @param open_stdout [Boolean]
-      #
-      #   @param pid [Integer] The system process ID for the exec process.
-      #
+      #   @param pid [Integer]
       #   @param process_config [DockerEngineRuby::Models::InspectResponse]
-      #
       #   @param running [Boolean]
     end
   end

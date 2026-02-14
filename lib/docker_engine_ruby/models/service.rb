@@ -6,8 +6,8 @@ module DockerEngineRuby
     class Service < DockerEngineRuby::Internal::Type::BaseModel
       # @!attribute created_at
       #
-      #   @return [String, nil]
-      optional :created_at, String, api_name: :CreatedAt
+      #   @return [Time, nil]
+      optional :created_at, Time, api_name: :CreatedAt
 
       # @!attribute endpoint
       #
@@ -43,8 +43,8 @@ module DockerEngineRuby
 
       # @!attribute updated_at
       #
-      #   @return [String, nil]
-      optional :updated_at, String, api_name: :UpdatedAt
+      #   @return [Time, nil]
+      optional :updated_at, Time, api_name: :UpdatedAt
 
       # @!attribute update_status
       #   The status of a service update.
@@ -70,7 +70,7 @@ module DockerEngineRuby
       #   Some parameter documentations has been truncated, see
       #   {DockerEngineRuby::Models::Service} for more details.
       #
-      #   @param created_at [String]
+      #   @param created_at [Time]
       #
       #   @param endpoint [DockerEngineRuby::Models::Service::Endpoint]
       #
@@ -82,7 +82,7 @@ module DockerEngineRuby
       #
       #   @param spec [DockerEngineRuby::Models::Spec] User modifiable configuration for a service.
       #
-      #   @param updated_at [String]
+      #   @param updated_at [Time]
       #
       #   @param update_status [DockerEngineRuby::Models::Service::UpdateStatus] The status of a service update.
       #
@@ -374,10 +374,9 @@ module DockerEngineRuby
                  api_name: :JobIteration
 
         # @!attribute last_execution
-        #   The last time, as observed by the server, that this job was started.
         #
-        #   @return [String, nil]
-        optional :last_execution, String, api_name: :LastExecution
+        #   @return [Time, nil]
+        optional :last_execution, Time, api_name: :LastExecution
 
         # @!method initialize(job_iteration: nil, last_execution: nil)
         #   Some parameter documentations has been truncated, see
@@ -390,7 +389,7 @@ module DockerEngineRuby
         #
         #   @param job_iteration [DockerEngineRuby::Models::Service::JobStatus::JobIteration] The version number of the object such as node, service, etc. This is needed
         #
-        #   @param last_execution [String] The last time, as observed by the server, that this job was
+        #   @param last_execution [Time]
 
         # @see DockerEngineRuby::Models::Service::JobStatus#job_iteration
         class JobIteration < DockerEngineRuby::Internal::Type::BaseModel
@@ -417,49 +416,35 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::Service#service_status
       class ServiceStatus < DockerEngineRuby::Internal::Type::BaseModel
         # @!attribute completed_tasks
-        #   The number of tasks for a job that are in the Completed state. This field must
-        #   be cross-referenced with the service type, as the value of 0 may mean the
-        #   service is not in a job mode, or it may mean the job-mode service has no tasks
-        #   yet Completed.
         #
         #   @return [Integer, nil]
         optional :completed_tasks, Integer, api_name: :CompletedTasks
 
         # @!attribute desired_tasks
-        #   The number of tasks for the service desired to be running. For replicated
-        #   services, this is the replica count from the service spec. For global services,
-        #   this is computed by taking count of all tasks for the service with a Desired
-        #   State other than Shutdown.
         #
         #   @return [Integer, nil]
         optional :desired_tasks, Integer, api_name: :DesiredTasks
 
         # @!attribute running_tasks
-        #   The number of tasks for the service currently in the Running state.
         #
         #   @return [Integer, nil]
         optional :running_tasks, Integer, api_name: :RunningTasks
 
         # @!method initialize(completed_tasks: nil, desired_tasks: nil, running_tasks: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {DockerEngineRuby::Models::Service::ServiceStatus} for more details.
-        #
         #   The status of the service's tasks. Provided only when requested as part of a
         #   ServiceList operation.
         #
-        #   @param completed_tasks [Integer] The number of tasks for a job that are in the Completed state.
-        #
-        #   @param desired_tasks [Integer] The number of tasks for the service desired to be running.
-        #
-        #   @param running_tasks [Integer] The number of tasks for the service currently in the Running state.
+        #   @param completed_tasks [Integer]
+        #   @param desired_tasks [Integer]
+        #   @param running_tasks [Integer]
       end
 
       # @see DockerEngineRuby::Models::Service#update_status
       class UpdateStatus < DockerEngineRuby::Internal::Type::BaseModel
         # @!attribute completed_at
         #
-        #   @return [String, nil]
-        optional :completed_at, String, api_name: :CompletedAt
+        #   @return [Time, nil]
+        optional :completed_at, Time, api_name: :CompletedAt
 
         # @!attribute message
         #
@@ -468,8 +453,8 @@ module DockerEngineRuby
 
         # @!attribute started_at
         #
-        #   @return [String, nil]
-        optional :started_at, String, api_name: :StartedAt
+        #   @return [Time, nil]
+        optional :started_at, Time, api_name: :StartedAt
 
         # @!attribute state
         #
@@ -479,9 +464,9 @@ module DockerEngineRuby
         # @!method initialize(completed_at: nil, message: nil, started_at: nil, state: nil)
         #   The status of a service update.
         #
-        #   @param completed_at [String]
+        #   @param completed_at [Time]
         #   @param message [String]
-        #   @param started_at [String]
+        #   @param started_at [Time]
         #   @param state [Symbol, DockerEngineRuby::Models::Service::UpdateStatus::State]
 
         # @see DockerEngineRuby::Models::Service::UpdateStatus#state

@@ -17,11 +17,6 @@ module DockerEngineRuby
       sig { params(description: String).void }
       attr_writer :description
 
-      # Whether this repository has automated builds enabled.
-      #
-      # <p><br /></p>
-      #
-      # > **Deprecated**: This field is deprecated and will always be "false".
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :is_automated
 
@@ -57,11 +52,6 @@ module DockerEngineRuby
       end
       def self.new(
         description: nil,
-        # Whether this repository has automated builds enabled.
-        #
-        # <p><br /></p>
-        #
-        # > **Deprecated**: This field is deprecated and will always be "false".
         is_automated: nil,
         is_official: nil,
         name: nil,

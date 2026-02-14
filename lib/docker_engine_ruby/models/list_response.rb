@@ -19,9 +19,6 @@ module DockerEngineRuby
       optional :warnings, DockerEngineRuby::Internal::Type::ArrayOf[String], api_name: :Warnings
 
       # @!method initialize(volumes: nil, warnings: nil)
-      #   Some parameter documentations has been truncated, see
-      #   {DockerEngineRuby::Models::ListResponse} for more details.
-      #
       #   Volume list response
       #
       #   @param volumes [Array<DockerEngineRuby::Models::Volume>] List of volumes

@@ -27,10 +27,9 @@ module DockerEngineRuby
         ).void
       end
       def update(
-        # Path param: The name or ID of the volume
+        # Path param
         name,
-        # Query param: The version number of the volume being updated. This is required to
-        # avoid conflicting writes. Found in the volume's `ClusterVolume` field.
+        # Query param
         version:,
         # Body param: Cluster-specific options used to create the volume.
         spec: nil,
@@ -45,23 +44,10 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(DockerEngineRuby::ListResponse)
       end
-      def list(
-        # JSON encoded value of the filters (a `map[string][]string`) to process on the
-        # volumes list. Available filters:
-        #
-        # - `dangling=<boolean>` When set to `true` (or `1`), returns all volumes that are
-        #   not in use by a container. When set to `false` (or `0`), only volumes that are
-        #   in use by one or more containers are returned.
-        # - `driver=<volume-driver-name>` Matches volumes based on their driver.
-        # - `label=<key>` or `label=<key>:<value>` Matches volumes based on the presence
-        #   of a `label` alone or a `label` and a value.
-        # - `name=<volume-name>` Matches all or part of a volume name.
-        filters: nil,
-        request_options: {}
-      )
+      def list(filters: nil, request_options: {})
       end
 
-      # Instruct the driver to remove the volume.
+      # Remove a volume
       sig do
         params(
           name: String,
@@ -69,13 +55,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).void
       end
-      def delete(
-        # Volume name or ID
-        name,
-        # Force the removal of the volume
-        force: nil,
-        request_options: {}
-      )
+      def delete(name, force: nil, request_options: {})
       end
 
       # Inspect a volume
@@ -85,11 +65,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(DockerEngineRuby::Volume)
       end
-      def inspect_(
-        # Volume name or ID
-        name,
-        request_options: {}
-      )
+      def inspect_(name, request_options: {})
       end
 
       # Delete unused volumes
@@ -99,19 +75,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(DockerEngineRuby::Models::VolumePruneResponse)
       end
-      def prune(
-        # Filters to process on the prune list, encoded as JSON (a `map[string][]string`).
-        #
-        # Available filters:
-        #
-        # - `label` (`label=<key>`, `label=<key>=<value>`, `label!=<key>`, or
-        #   `label!=<key>=<value>`) Prune volumes with (or without, in case `label!=...`
-        #   is used) the specified labels.
-        # - `all` (`all=true`) - Consider all (local) volumes for pruning and not just
-        #   anonymous volumes.
-        filters: nil,
-        request_options: {}
-      )
+      def prune(filters: nil, request_options: {})
       end
 
       # @api private

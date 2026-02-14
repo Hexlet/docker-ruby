@@ -8,24 +8,14 @@ module DockerEngineRuby
       include DockerEngineRuby::Internal::Type::RequestParameters
 
       # @!attribute condition
-      #   Wait until a container state reaches the given condition.
-      #
-      #   Defaults to `not-running` if omitted or empty.
       #
       #   @return [Symbol, DockerEngineRuby::Models::ContainerWaitParams::Condition, nil]
       optional :condition, enum: -> { DockerEngineRuby::ContainerWaitParams::Condition }
 
       # @!method initialize(condition: nil, request_options: {})
-      #   Some parameter documentations has been truncated, see
-      #   {DockerEngineRuby::Models::ContainerWaitParams} for more details.
-      #
-      #   @param condition [Symbol, DockerEngineRuby::Models::ContainerWaitParams::Condition] Wait until a container state reaches the given condition.
-      #
+      #   @param condition [Symbol, DockerEngineRuby::Models::ContainerWaitParams::Condition]
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]
 
-      # Wait until a container state reaches the given condition.
-      #
-      # Defaults to `not-running` if omitted or empty.
       module Condition
         extend DockerEngineRuby::Internal::Type::Enum
 

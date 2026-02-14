@@ -14,11 +14,9 @@ module DockerEngineRuby
           )
         end
 
-      # Height of the TTY session in characters
       sig { returns(Integer) }
       attr_accessor :h
 
-      # Width of the TTY session in characters
       sig { returns(Integer) }
       attr_accessor :w
 
@@ -29,13 +27,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # Height of the TTY session in characters
-        h:,
-        # Width of the TTY session in characters
-        w:,
-        request_options: {}
-      )
+      def self.new(h:, w:, request_options: {})
       end
 
       sig do

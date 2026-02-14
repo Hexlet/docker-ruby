@@ -14,8 +14,6 @@ module DockerEngineRuby
           )
         end
 
-      # The version number of the node object being updated. This is required to avoid
-      # conflicting writes.
       sig { returns(Integer) }
       attr_accessor :version
 
@@ -25,12 +23,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # The version number of the node object being updated. This is required to avoid
-        # conflicting writes.
-        version:,
-        request_options: {}
-      )
+      def self.new(version:, request_options: {})
       end
 
       sig do

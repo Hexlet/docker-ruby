@@ -14,16 +14,6 @@ module DockerEngineRuby
           )
         end
 
-      # Filters to process on the nodes list, encoded as JSON (a `map[string][]string`).
-      #
-      # Available filters:
-      #
-      # - `id=<node id>`
-      # - `label=<engine label>`
-      # - `membership=`(`accepted`|`pending`)`
-      # - `name=<node name>`
-      # - `node.label=<node label>`
-      # - `role=`(`manager`|`worker`)`
       sig { returns(T.nilable(String)) }
       attr_reader :filters
 
@@ -36,20 +26,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # Filters to process on the nodes list, encoded as JSON (a `map[string][]string`).
-        #
-        # Available filters:
-        #
-        # - `id=<node id>`
-        # - `label=<engine label>`
-        # - `membership=`(`accepted`|`pending`)`
-        # - `name=<node name>`
-        # - `node.label=<node label>`
-        # - `role=`(`manager`|`worker`)`
-        filters: nil,
-        request_options: {}
-      )
+      def self.new(filters: nil, request_options: {})
       end
 
       sig do

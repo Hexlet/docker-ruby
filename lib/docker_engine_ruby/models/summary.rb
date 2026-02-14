@@ -72,7 +72,8 @@ module DockerEngineRuby
       #   @return [DockerEngineRuby::Models::Summary::ImageManifestDescriptor, nil]
       optional :image_manifest_descriptor,
                -> { DockerEngineRuby::Summary::ImageManifestDescriptor },
-               api_name: :ImageManifestDescriptor
+               api_name: :ImageManifestDescriptor,
+               nil?: true
 
       # @!attribute labels
       #   User-defined key/value metadata.
@@ -164,7 +165,7 @@ module DockerEngineRuby
       #
       #   @param image_id [String] The ID (digest) of the image that this container was created from.
       #
-      #   @param image_manifest_descriptor [DockerEngineRuby::Models::Summary::ImageManifestDescriptor] A descriptor struct containing digest, media type, and size, as defined in
+      #   @param image_manifest_descriptor [DockerEngineRuby::Models::Summary::ImageManifestDescriptor, nil] A descriptor struct containing digest, media type, and size, as defined in
       #
       #   @param labels [Hash{Symbol=>String}] User-defined key/value metadata.
       #
@@ -187,13 +188,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::Summary#health
       class Health < DockerEngineRuby::Internal::Type::BaseModel
         # @!attribute failing_streak
-        #   FailingStreak is the number of consecutive failures
         #
         #   @return [Integer, nil]
         optional :failing_streak, Integer, api_name: :FailingStreak
 
         # @!attribute status
-        #   the health status of the container
         #
         #   @return [Symbol, DockerEngineRuby::Models::Summary::Health::Status, nil]
         optional :status, enum: -> { DockerEngineRuby::Summary::Health::Status }, api_name: :Status
@@ -205,12 +204,9 @@ module DockerEngineRuby
         #   After this attribute introduced, it includes containers with no health checks
         #   configured, or containers that are not running with none
         #
-        #   @param failing_streak [Integer] FailingStreak is the number of consecutive failures
-        #
-        #   @param status [Symbol, DockerEngineRuby::Models::Summary::Health::Status] the health status of the container
+        #   @param failing_streak [Integer]
+        #   @param status [Symbol, DockerEngineRuby::Models::Summary::Health::Status]
 
-        # the health status of the container
-        #
         # @see DockerEngineRuby::Models::Summary::Health#status
         module Status
           extend DockerEngineRuby::Internal::Type::Enum
@@ -228,7 +224,6 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::Summary#host_config
       class HostConfig < DockerEngineRuby::Internal::Type::BaseModel
         # @!attribute annotations
-        #   Arbitrary key-value metadata attached to the container.
         #
         #   @return [Hash{Symbol=>String}, nil]
         optional :annotations,
@@ -237,27 +232,17 @@ module DockerEngineRuby
                  nil?: true
 
         # @!attribute network_mode
-        #   Networking mode (`host`, `none`, `container:<id>`) or name of the primary
-        #   network the container is using.
-        #
-        #   This field is primarily for backward compatibility. The container can be
-        #   connected to multiple networks for which information can be found in the
-        #   `NetworkSettings.Networks` field, which enumerates settings per network.
         #
         #   @return [String, nil]
         optional :network_mode, String, api_name: :NetworkMode
 
         # @!method initialize(annotations: nil, network_mode: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {DockerEngineRuby::Models::Summary::HostConfig} for more details.
-        #
         #   Summary of host-specific runtime information of the container. This is a reduced
         #   set of information in the container's "HostConfig" as available in the container
         #   "inspect" response.
         #
-        #   @param annotations [Hash{Symbol=>String}, nil] Arbitrary key-value metadata attached to the container.
-        #
-        #   @param network_mode [String] Networking mode (`host`, `none`, `container:<id>`) or name of the
+        #   @param annotations [Hash{Symbol=>String}, nil]
+        #   @param network_mode [String]
       end
 
       # @see DockerEngineRuby::Models::Summary#image_manifest_descriptor
@@ -300,7 +285,7 @@ module DockerEngineRuby
         #   [OCI Image Index Specification](https://github.com/opencontainers/image-spec/blob/v1.0.1/image-index.md).
         #
         #   @return [DockerEngineRuby::Models::Summary::ImageManifestDescriptor::Platform, nil]
-        optional :platform, -> { DockerEngineRuby::Summary::ImageManifestDescriptor::Platform }, nil?: true
+        optional :platform, -> { DockerEngineRuby::Summary::ImageManifestDescriptor::Platform }
 
         # @!attribute size
         #   The size in bytes of the blob.
@@ -331,7 +316,7 @@ module DockerEngineRuby
         #
         #   @param media_type [String] The media type of the object this schema refers to.
         #
-        #   @param platform [DockerEngineRuby::Models::Summary::ImageManifestDescriptor::Platform, nil] Describes the platform which the image in the manifest runs on, as defined
+        #   @param platform [DockerEngineRuby::Models::Summary::ImageManifestDescriptor::Platform] Describes the platform which the image in the manifest runs on, as defined
         #
         #   @param size [Integer] The size in bytes of the blob.
         #
@@ -513,7 +498,6 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::Summary#network_settings
       class NetworkSettings < DockerEngineRuby::Internal::Type::BaseModel
         # @!attribute networks
-        #   Summary of network-settings for each network the container is attached to.
         #
         #   @return [Hash{Symbol=>DockerEngineRuby::Models::Summary::NetworkSettings::Network}, nil]
         optional :networks,
@@ -523,12 +507,9 @@ module DockerEngineRuby
                  api_name: :Networks
 
         # @!method initialize(networks: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {DockerEngineRuby::Models::Summary::NetworkSettings} for more details.
-        #
         #   Summary of the container's network settings
         #
-        #   @param networks [Hash{Symbol=>DockerEngineRuby::Models::Summary::NetworkSettings::Network}] Summary of network-settings for each network the container is
+        #   @param networks [Hash{Symbol=>DockerEngineRuby::Models::Summary::NetworkSettings::Network}]
 
         class Network < DockerEngineRuby::Internal::Type::BaseModel
           # @!attribute aliases
@@ -603,8 +584,7 @@ module DockerEngineRuby
           #   @return [DockerEngineRuby::Models::Summary::NetworkSettings::Network::IpamConfig, nil]
           optional :ipam_config,
                    -> { DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig },
-                   api_name: :IPAMConfig,
-                   nil?: true
+                   api_name: :IPAMConfig
 
           # @!attribute ip_prefix_len
           #   Mask length of the IPv4 address.
@@ -660,7 +640,7 @@ module DockerEngineRuby
           #
           #   @param ip_address [String] IPv4 address.
           #
-          #   @param ipam_config [DockerEngineRuby::Models::Summary::NetworkSettings::Network::IpamConfig, nil] EndpointIPAMConfig represents an endpoint's IPAM configuration.
+          #   @param ipam_config [DockerEngineRuby::Models::Summary::NetworkSettings::Network::IpamConfig] EndpointIPAMConfig represents an endpoint's IPAM configuration.
           #
           #   @param ip_prefix_len [Integer] Mask length of the IPv4 address.
           #

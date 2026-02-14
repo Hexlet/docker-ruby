@@ -14,7 +14,6 @@ module DockerEngineRuby
           )
         end
 
-      # Set the HTTP client timeout (in seconds)
       sig { returns(T.nilable(Integer)) }
       attr_reader :timeout
 
@@ -27,11 +26,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # Set the HTTP client timeout (in seconds)
-        timeout: nil,
-        request_options: {}
-      )
+      def self.new(timeout: nil, request_options: {})
       end
 
       sig do

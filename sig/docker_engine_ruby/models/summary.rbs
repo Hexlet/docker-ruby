@@ -9,7 +9,7 @@ module DockerEngineRuby
         id: String,
         image: String,
         image_id: String,
-        image_manifest_descriptor: DockerEngineRuby::Summary::ImageManifestDescriptor,
+        image_manifest_descriptor: DockerEngineRuby::Summary::ImageManifestDescriptor?,
         labels: ::Hash[Symbol, String],
         mounts: ::Array[DockerEngineRuby::Summary::Mount],
         names: ::Array[String],
@@ -54,11 +54,7 @@ module DockerEngineRuby
 
       def image_id=: (String) -> String
 
-      attr_reader image_manifest_descriptor: DockerEngineRuby::Summary::ImageManifestDescriptor?
-
-      def image_manifest_descriptor=: (
-        DockerEngineRuby::Summary::ImageManifestDescriptor
-      ) -> DockerEngineRuby::Summary::ImageManifestDescriptor
+      attr_accessor image_manifest_descriptor: DockerEngineRuby::Summary::ImageManifestDescriptor?
 
       attr_reader labels: ::Hash[Symbol, String]?
 
@@ -108,7 +104,7 @@ module DockerEngineRuby
         ?id: String,
         ?image: String,
         ?image_id: String,
-        ?image_manifest_descriptor: DockerEngineRuby::Summary::ImageManifestDescriptor,
+        ?image_manifest_descriptor: DockerEngineRuby::Summary::ImageManifestDescriptor?,
         ?labels: ::Hash[Symbol, String],
         ?mounts: ::Array[DockerEngineRuby::Summary::Mount],
         ?names: ::Array[String],
@@ -128,7 +124,7 @@ module DockerEngineRuby
         id: String,
         image: String,
         image_id: String,
-        image_manifest_descriptor: DockerEngineRuby::Summary::ImageManifestDescriptor,
+        image_manifest_descriptor: DockerEngineRuby::Summary::ImageManifestDescriptor?,
         labels: ::Hash[Symbol, String],
         mounts: ::Array[DockerEngineRuby::Summary::Mount],
         names: ::Array[String],
@@ -209,7 +205,7 @@ module DockerEngineRuby
           data: String?,
           digest: String,
           media_type: String,
-          platform: DockerEngineRuby::Summary::ImageManifestDescriptor::Platform?,
+          platform: DockerEngineRuby::Summary::ImageManifestDescriptor::Platform,
           size: Integer,
           urls: ::Array[String]?
         }
@@ -229,7 +225,11 @@ module DockerEngineRuby
 
         def media_type=: (String) -> String
 
-        attr_accessor platform: DockerEngineRuby::Summary::ImageManifestDescriptor::Platform?
+        attr_reader platform: DockerEngineRuby::Summary::ImageManifestDescriptor::Platform?
+
+        def platform=: (
+          DockerEngineRuby::Summary::ImageManifestDescriptor::Platform
+        ) -> DockerEngineRuby::Summary::ImageManifestDescriptor::Platform
 
         attr_reader size: Integer?
 
@@ -243,7 +243,7 @@ module DockerEngineRuby
           ?data: String?,
           ?digest: String,
           ?media_type: String,
-          ?platform: DockerEngineRuby::Summary::ImageManifestDescriptor::Platform?,
+          ?platform: DockerEngineRuby::Summary::ImageManifestDescriptor::Platform,
           ?size: Integer,
           ?urls: ::Array[String]?
         ) -> void
@@ -254,7 +254,7 @@ module DockerEngineRuby
           data: String?,
           digest: String,
           media_type: String,
-          platform: DockerEngineRuby::Summary::ImageManifestDescriptor::Platform?,
+          platform: DockerEngineRuby::Summary::ImageManifestDescriptor::Platform,
           size: Integer,
           urls: ::Array[String]?
         }
@@ -423,7 +423,7 @@ module DockerEngineRuby
             :global_i_pv6_prefix_len => Integer,
             gw_priority: Integer,
             ip_address: String,
-            ipam_config: DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig?,
+            ipam_config: DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig,
             ip_prefix_len: Integer,
             :i_pv6_gateway => String,
             links: ::Array[String],
@@ -466,7 +466,11 @@ module DockerEngineRuby
 
           def ip_address=: (String) -> String
 
-          attr_accessor ipam_config: DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig?
+          attr_reader ipam_config: DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig?
+
+          def ipam_config=: (
+            DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig
+          ) -> DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig
 
           attr_reader ip_prefix_len: Integer?
 
@@ -498,7 +502,7 @@ module DockerEngineRuby
             ?global_i_pv6_prefix_len: Integer,
             ?gw_priority: Integer,
             ?ip_address: String,
-            ?ipam_config: DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig?,
+            ?ipam_config: DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig,
             ?ip_prefix_len: Integer,
             ?i_pv6_gateway: String,
             ?links: ::Array[String],
@@ -516,7 +520,7 @@ module DockerEngineRuby
             :global_i_pv6_prefix_len => Integer,
             gw_priority: Integer,
             ip_address: String,
-            ipam_config: DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig?,
+            ipam_config: DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig,
             ip_prefix_len: Integer,
             :i_pv6_gateway => String,
             links: ::Array[String],

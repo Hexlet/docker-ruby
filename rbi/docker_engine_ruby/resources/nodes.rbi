@@ -13,13 +13,12 @@ module DockerEngineRuby
         ).void
       end
       def update(
-        # Path param: The ID of the node
+        # Path param
         id,
-        # Query param: The version number of the node object being updated. This is
-        # required to avoid conflicting writes.
+        # Query param
         version:,
         # Body param
-        spec: nil,
+        spec:,
         request_options: {}
       )
       end
@@ -31,20 +30,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T::Array[DockerEngineRuby::Node])
       end
-      def list(
-        # Filters to process on the nodes list, encoded as JSON (a `map[string][]string`).
-        #
-        # Available filters:
-        #
-        # - `id=<node id>`
-        # - `label=<engine label>`
-        # - `membership=`(`accepted`|`pending`)`
-        # - `name=<node name>`
-        # - `node.label=<node label>`
-        # - `role=`(`manager`|`worker`)`
-        filters: nil,
-        request_options: {}
-      )
+      def list(filters: nil, request_options: {})
       end
 
       # Delete a node
@@ -55,13 +41,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).void
       end
-      def delete(
-        # The ID or name of the node
-        id,
-        # Force remove a node from the swarm
-        force: nil,
-        request_options: {}
-      )
+      def delete(id, force: nil, request_options: {})
       end
 
       # Inspect a node
@@ -71,11 +51,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(DockerEngineRuby::Node)
       end
-      def inspect_(
-        # The ID or name of the node
-        id,
-        request_options: {}
-      )
+      def inspect_(id, request_options: {})
       end
 
       # @api private

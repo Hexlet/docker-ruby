@@ -8,8 +8,8 @@ module DockerEngineRuby
       #   Date and time at which the node was added to the swarm in
       #   [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
       #
-      #   @return [String, nil]
-      optional :created_at, String, api_name: :CreatedAt
+      #   @return [Time, nil]
+      optional :created_at, Time, api_name: :CreatedAt
 
       # @!attribute description
       #   NodeDescription encapsulates the properties of the Node as reported by the
@@ -30,10 +30,7 @@ module DockerEngineRuby
       #   manager.
       #
       #   @return [DockerEngineRuby::Models::Node::ManagerStatus, nil]
-      optional :manager_status,
-               -> { DockerEngineRuby::Node::ManagerStatus },
-               api_name: :ManagerStatus,
-               nil?: true
+      optional :manager_status, -> { DockerEngineRuby::Node::ManagerStatus }, api_name: :ManagerStatus
 
       # @!attribute spec
       #
@@ -52,8 +49,8 @@ module DockerEngineRuby
       #   Date and time at which the node was last updated in
       #   [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
       #
-      #   @return [String, nil]
-      optional :updated_at, String, api_name: :UpdatedAt
+      #   @return [Time, nil]
+      optional :updated_at, Time, api_name: :UpdatedAt
 
       # @!attribute version
       #   The version number of the object such as node, service, etc. This is needed to
@@ -73,19 +70,19 @@ module DockerEngineRuby
       #   Some parameter documentations has been truncated, see
       #   {DockerEngineRuby::Models::Node} for more details.
       #
-      #   @param created_at [String] Date and time at which the node was added to the swarm in
+      #   @param created_at [Time] Date and time at which the node was added to the swarm in
       #
       #   @param description [DockerEngineRuby::Models::Node::Description] NodeDescription encapsulates the properties of the Node as reported by the
       #
       #   @param id [String]
       #
-      #   @param manager_status [DockerEngineRuby::Models::Node::ManagerStatus, nil] ManagerStatus represents the status of a manager.
+      #   @param manager_status [DockerEngineRuby::Models::Node::ManagerStatus] ManagerStatus represents the status of a manager.
       #
       #   @param spec [DockerEngineRuby::Models::Spec]
       #
       #   @param status [DockerEngineRuby::Models::Node::Status] NodeStatus represents the status of a node.
       #
-      #   @param updated_at [String] Date and time at which the node was last updated in
+      #   @param updated_at [Time] Date and time at which the node was last updated in
       #
       #   @param version [DockerEngineRuby::Models::Node::Version] The version number of the object such as node, service, etc. This is needed
 
@@ -212,8 +209,6 @@ module DockerEngineRuby
         # @see DockerEngineRuby::Models::Node::Description#resources
         class Resources < DockerEngineRuby::Internal::Type::BaseModel
           # @!attribute generic_resources
-          #   User-defined resources can be either Integer resources (e.g, `SSD=3`) or String
-          #   resources (e.g, `GPU=UUID1`).
           #
           #   @return [Array<DockerEngineRuby::Models::Node::Description::Resources::GenericResource>, nil]
           optional :generic_resources,
@@ -233,16 +228,11 @@ module DockerEngineRuby
           optional :nano_cpus, Integer, api_name: :NanoCPUs
 
           # @!method initialize(generic_resources: nil, memory_bytes: nil, nano_cpus: nil)
-          #   Some parameter documentations has been truncated, see
-          #   {DockerEngineRuby::Models::Node::Description::Resources} for more details.
-          #
           #   An object describing the resources which can be advertised by a node and
           #   requested by a task.
           #
-          #   @param generic_resources [Array<DockerEngineRuby::Models::Node::Description::Resources::GenericResource>] User-defined resources can be either Integer resources (e.g, `SSD=3`) or
-          #
+          #   @param generic_resources [Array<DockerEngineRuby::Models::Node::Description::Resources::GenericResource>]
           #   @param memory_bytes [Integer]
-          #
           #   @param nano_cpus [Integer]
 
           class GenericResource < DockerEngineRuby::Internal::Type::BaseModel
@@ -361,9 +351,6 @@ module DockerEngineRuby
                  api_name: :Reachability
 
         # @!method initialize(addr: nil, leader: nil, reachability: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {DockerEngineRuby::Models::Node::ManagerStatus} for more details.
-        #
         #   ManagerStatus represents the status of a manager.
         #
         #   It provides the current status of a node's manager component, if the node is a

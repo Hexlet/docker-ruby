@@ -3,8 +3,7 @@
 module DockerEngineRuby
   module Resources
     class Auth
-      # Validate credentials for a registry and, if available, get an identity token for
-      # accessing the registry without password.
+      # Check auth configuration
       #
       # @overload login(password: nil, serveraddress: nil, username: nil, request_options: {})
       #

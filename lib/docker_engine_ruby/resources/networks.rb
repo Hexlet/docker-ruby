@@ -10,31 +10,31 @@ module DockerEngineRuby
       #
       # @overload create(name:, attachable: nil, config_from: nil, config_only: nil, driver: nil, enable_i_pv4: nil, enable_i_pv6: nil, ingress: nil, internal: nil, ipam: nil, labels: nil, options: nil, scope: nil, request_options: {})
       #
-      # @param name [String] The network's name.
+      # @param name [String]
       #
-      # @param attachable [Boolean] Globally scoped network is manually attachable by regular
+      # @param attachable [Boolean]
       #
       # @param config_from [DockerEngineRuby::Models::NetworkCreateParams::ConfigFrom] The config-only network source to provide the configuration for
       #
-      # @param config_only [Boolean] Creates a config-only network. Config-only networks are placeholder
+      # @param config_only [Boolean]
       #
-      # @param driver [String] Name of the network driver plugin to use.
+      # @param driver [String]
       #
-      # @param enable_i_pv4 [Boolean] Enable IPv4 on the network.
+      # @param enable_i_pv4 [Boolean]
       #
-      # @param enable_i_pv6 [Boolean] Enable IPv6 on the network.
+      # @param enable_i_pv6 [Boolean]
       #
-      # @param ingress [Boolean] Ingress network is the network which provides the routing-mesh
+      # @param ingress [Boolean]
       #
-      # @param internal [Boolean] Restrict external access to the network.
+      # @param internal [Boolean]
       #
       # @param ipam [DockerEngineRuby::Models::NetworkCreateParams::Ipam]
       #
-      # @param labels [Hash{Symbol=>String}] User-defined key/value metadata.
+      # @param labels [Hash{Symbol=>String}]
       #
-      # @param options [Hash{Symbol=>String}] Network specific options to be used by the drivers.
+      # @param options [Hash{Symbol=>String}]
       #
-      # @param scope [String] The level at which the network exists (e.g. `swarm` for cluster-wide
+      # @param scope [String]
       #
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -52,20 +52,11 @@ module DockerEngineRuby
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::NetworkListParams} for more details.
-      #
-      # Returns a list of networks. For details on the format, see the
-      # [network inspect endpoint](#operation/NetworkInspect).
-      #
-      # Note that it uses a different, smaller representation of a network than
-      # inspecting a single network. For example, the list of containers attached to the
-      # network is not propagated in API versions 1.28 and up.
+      # List networks
       #
       # @overload list(filters: nil, request_options: {})
       #
-      # @param filters [String] JSON encoded value of the filters (a `map[string][]string`) to process
-      #
+      # @param filters [String]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Array<DockerEngineRuby::Models::Summary>]
@@ -86,8 +77,7 @@ module DockerEngineRuby
       #
       # @overload delete(id, request_options: {})
       #
-      # @param id [String] Network ID or name
-      #
+      # @param id [String]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [nil]
@@ -102,17 +92,15 @@ module DockerEngineRuby
         )
       end
 
-      # The network must be either a local-scoped network or a swarm-scoped network with
-      # the `attachable` option set. A network cannot be re-attached to a running
-      # container
+      # Connect a container to a network
       #
       # @overload connect(id, container:, endpoint_config: nil, request_options: {})
       #
-      # @param id [String] Network ID or name
+      # @param id [String]
       #
       # @param container [String] The ID or name of the container to connect to the network.
       #
-      # @param endpoint_config [DockerEngineRuby::Models::ConnectRequest::EndpointConfig] Configuration for a network endpoint.
+      # @param endpoint_config [DockerEngineRuby::Models::ConnectRequest::EndpointConfig, nil] Configuration for a network endpoint.
       #
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -134,7 +122,7 @@ module DockerEngineRuby
       #
       # @overload disconnect(id, container:, force: nil, request_options: {})
       #
-      # @param id [String] Network ID or name
+      # @param id [String]
       #
       # @param container [String] The ID or name of the container to disconnect from the network.
       #
@@ -160,12 +148,9 @@ module DockerEngineRuby
       #
       # @overload inspect_(id, scope: nil, verbose: nil, request_options: {})
       #
-      # @param id [String] Network ID or name
-      #
-      # @param scope [String] Filter the network by scope (swarm, global, or local)
-      #
-      # @param verbose [Boolean] Detailed inspect output for troubleshooting
-      #
+      # @param id [String]
+      # @param scope [String]
+      # @param verbose [Boolean]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [DockerEngineRuby::Models::NetworkInspectResponse]
@@ -182,15 +167,11 @@ module DockerEngineRuby
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::NetworkPruneParams} for more details.
-      #
       # Delete unused networks
       #
       # @overload prune(filters: nil, request_options: {})
       #
-      # @param filters [String] Filters to process on the prune list, encoded as JSON (a `map[string][]string`).
-      #
+      # @param filters [String]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [DockerEngineRuby::Models::NetworkPruneResponse]

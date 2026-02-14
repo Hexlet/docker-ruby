@@ -37,9 +37,6 @@ module DockerEngineRuby
                api_name: :VolumesDiskUsage
 
       # @!method initialize(build_cache_disk_usage: nil, containers_disk_usage: nil, images_disk_usage: nil, volumes_disk_usage: nil)
-      #   Some parameter documentations has been truncated, see
-      #   {DockerEngineRuby::Models::SystemDataUsageResponse} for more details.
-      #
       #   @param build_cache_disk_usage [DockerEngineRuby::Models::SystemDataUsageResponse::BuildCacheDiskUsage] represents system data usage for build cache resources.
       #
       #   @param containers_disk_usage [DockerEngineRuby::Models::SystemDataUsageResponse::ContainersDiskUsage] represents system data usage information for container resources.
@@ -83,10 +80,6 @@ module DockerEngineRuby
         optional :total_size, Integer, api_name: :TotalSize
 
         # @!method initialize(active_count: nil, items: nil, reclaimable: nil, total_count: nil, total_size: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {DockerEngineRuby::Models::SystemDataUsageResponse::BuildCacheDiskUsage} for
-        #   more details.
-        #
         #   represents system data usage for build cache resources.
         #
         #   @param active_count [Integer] Count of active build cache records.
@@ -135,10 +128,6 @@ module DockerEngineRuby
         optional :total_size, Integer, api_name: :TotalSize
 
         # @!method initialize(active_count: nil, items: nil, reclaimable: nil, total_count: nil, total_size: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {DockerEngineRuby::Models::SystemDataUsageResponse::ContainersDiskUsage} for
-        #   more details.
-        #
         #   represents system data usage information for container resources.
         #
         #   @param active_count [Integer] Count of active containers.
@@ -187,10 +176,6 @@ module DockerEngineRuby
         optional :total_size, Integer, api_name: :TotalSize
 
         # @!method initialize(active_count: nil, items: nil, reclaimable: nil, total_count: nil, total_size: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {DockerEngineRuby::Models::SystemDataUsageResponse::ImagesDiskUsage} for more
-        #   details.
-        #
         #   represents system data usage for image resources.
         #
         #   @param active_count [Integer] Count of active images.
@@ -239,10 +224,6 @@ module DockerEngineRuby
         optional :total_size, Integer, api_name: :TotalSize
 
         # @!method initialize(active_count: nil, items: nil, reclaimable: nil, total_count: nil, total_size: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {DockerEngineRuby::Models::SystemDataUsageResponse::VolumesDiskUsage} for more
-        #   details.
-        #
         #   represents system data usage for volume resources.
         #
         #   @param active_count [Integer] Count of active volumes.

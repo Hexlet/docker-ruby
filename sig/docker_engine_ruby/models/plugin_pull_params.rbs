@@ -3,8 +3,8 @@ module DockerEngineRuby
     type plugin_pull_params =
       {
         remote: String,
-        name: String,
         body: ::Array[DockerEngineRuby::Privilege],
+        name: String,
         x_registry_auth: String
       }
       & DockerEngineRuby::Internal::Type::request_parameters
@@ -15,15 +15,11 @@ module DockerEngineRuby
 
       attr_accessor remote: String
 
+      attr_accessor body: ::Array[DockerEngineRuby::Privilege]
+
       attr_reader name: String?
 
       def name=: (String) -> String
-
-      attr_reader body: ::Array[DockerEngineRuby::Privilege]?
-
-      def body=: (
-        ::Array[DockerEngineRuby::Privilege]
-      ) -> ::Array[DockerEngineRuby::Privilege]
 
       attr_reader x_registry_auth: String?
 
@@ -31,16 +27,16 @@ module DockerEngineRuby
 
       def initialize: (
         remote: String,
+        body: ::Array[DockerEngineRuby::Privilege],
         ?name: String,
-        ?body: ::Array[DockerEngineRuby::Privilege],
         ?x_registry_auth: String,
         ?request_options: DockerEngineRuby::request_opts
       ) -> void
 
       def to_hash: -> {
         remote: String,
-        name: String,
         body: ::Array[DockerEngineRuby::Privilege],
+        name: String,
         x_registry_auth: String,
         request_options: DockerEngineRuby::RequestOptions
       }

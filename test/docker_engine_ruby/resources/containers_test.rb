@@ -126,7 +126,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
         app_armor_profile: String | nil,
         args: ^(DockerEngineRuby::Internal::Type::ArrayOf[String]) | nil,
         config: DockerEngineRuby::Config | nil,
-        created: String | nil,
+        created: Time | nil,
         driver: String | nil,
         exec_ids: ^(DockerEngineRuby::Internal::Type::ArrayOf[String]) | nil,
         graph_driver: DockerEngineRuby::Container::GraphDriver | nil,
@@ -165,7 +165,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
   end
 
   def test_logs
-    skip("Prism tests are disabled")
+    skip("Prism doesn't support application/octet-stream responses")
 
     response = @docker.containers.logs("id")
 
@@ -257,7 +257,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
         cpu_stats: DockerEngineRuby::StatsResponse::CPUStats | nil,
         memory_stats: DockerEngineRuby::StatsResponse::MemoryStats | nil,
         name: String | nil,
-        networks: DockerEngineRuby::Internal::Type::Unknown | nil,
+        networks: ^(DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::StatsResponse::Network]) | nil,
         num_procs: Integer | nil,
         os_type: String | nil,
         pids_stats: DockerEngineRuby::StatsResponse::PidsStats | nil,

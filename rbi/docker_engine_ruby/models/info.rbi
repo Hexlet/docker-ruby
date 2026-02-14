@@ -70,9 +70,7 @@ module DockerEngineRuby
       attr_reader :containerd
 
       sig do
-        params(
-          containerd: T.nilable(DockerEngineRuby::Info::Containerd::OrHash)
-        ).void
+        params(containerd: DockerEngineRuby::Info::Containerd::OrHash).void
       end
       attr_writer :containerd
 
@@ -245,14 +243,11 @@ module DockerEngineRuby
 
       sig do
         params(
-          firewall_backend:
-            T.nilable(DockerEngineRuby::Info::FirewallBackend::OrHash)
+          firewall_backend: DockerEngineRuby::Info::FirewallBackend::OrHash
         ).void
       end
       attr_writer :firewall_backend
 
-      # User-defined resources can be either Integer resources (e.g, `SSD=3`) or String
-      # resources (e.g, `GPU=UUID1`).
       sig do
         returns(T.nilable(T::Array[DockerEngineRuby::Info::GenericResource]))
       end
@@ -483,7 +478,7 @@ module DockerEngineRuby
       sig { returns(T.nilable(DockerEngineRuby::Info::Nri)) }
       attr_reader :nri
 
-      sig { params(nri: T.nilable(DockerEngineRuby::Info::Nri::OrHash)).void }
+      sig { params(nri: DockerEngineRuby::Info::Nri::OrHash).void }
       attr_writer :nri
 
       # Indicates if OOM killer disable is supported on the host.
@@ -562,8 +557,7 @@ module DockerEngineRuby
 
       sig do
         params(
-          registry_config:
-            T.nilable(DockerEngineRuby::Info::RegistryConfig::OrHash)
+          registry_config: DockerEngineRuby::Info::RegistryConfig::OrHash
         ).void
       end
       attr_writer :registry_config
@@ -655,7 +649,7 @@ module DockerEngineRuby
           cdi_spec_dirs: T::Array[String],
           cgroup_driver: DockerEngineRuby::Info::CgroupDriver::OrSymbol,
           cgroup_version: DockerEngineRuby::Info::CgroupVersion::OrSymbol,
-          containerd: T.nilable(DockerEngineRuby::Info::Containerd::OrHash),
+          containerd: DockerEngineRuby::Info::Containerd::OrHash,
           containerd_commit: DockerEngineRuby::Info::ContainerdCommit::OrHash,
           containers: Integer,
           containers_paused: Integer,
@@ -675,8 +669,7 @@ module DockerEngineRuby
           driver: String,
           driver_status: T::Array[T::Array[String]],
           experimental_build: T::Boolean,
-          firewall_backend:
-            T.nilable(DockerEngineRuby::Info::FirewallBackend::OrHash),
+          firewall_backend: DockerEngineRuby::Info::FirewallBackend::OrHash,
           generic_resources:
             T::Array[DockerEngineRuby::Info::GenericResource::OrHash],
           http_proxy: String,
@@ -700,7 +693,7 @@ module DockerEngineRuby
           n_fd: Integer,
           n_goroutines: Integer,
           no_proxy: String,
-          nri: T.nilable(DockerEngineRuby::Info::Nri::OrHash),
+          nri: DockerEngineRuby::Info::Nri::OrHash,
           oom_kill_disable: T::Boolean,
           operating_system: String,
           os_type: String,
@@ -708,8 +701,7 @@ module DockerEngineRuby
           pids_limit: T::Boolean,
           plugins: DockerEngineRuby::Info::Plugins::OrHash,
           product_license: String,
-          registry_config:
-            T.nilable(DockerEngineRuby::Info::RegistryConfig::OrHash),
+          registry_config: DockerEngineRuby::Info::RegistryConfig::OrHash,
           runc_commit: DockerEngineRuby::Info::RuncCommit::OrHash,
           runtimes: T::Hash[Symbol, DockerEngineRuby::Info::Runtime::OrHash],
           security_options: T::Array[String],
@@ -810,8 +802,6 @@ module DockerEngineRuby
         #
         # This field is currently only used on Linux, and omitted on other platforms.
         firewall_backend: nil,
-        # User-defined resources can be either Integer resources (e.g, `SSD=3`) or String
-        # resources (e.g, `GPU=UUID1`).
         generic_resources: nil,
         # HTTP-proxy configured for the daemon. This value is obtained from the
         # [`HTTP_PROXY`](https://www.gnu.org/software/wget/manual/html_node/Proxies.html)
@@ -997,7 +987,7 @@ module DockerEngineRuby
             cdi_spec_dirs: T::Array[String],
             cgroup_driver: DockerEngineRuby::Info::CgroupDriver::TaggedSymbol,
             cgroup_version: DockerEngineRuby::Info::CgroupVersion::TaggedSymbol,
-            containerd: T.nilable(DockerEngineRuby::Info::Containerd),
+            containerd: DockerEngineRuby::Info::Containerd,
             containerd_commit: DockerEngineRuby::Info::ContainerdCommit,
             containers: Integer,
             containers_paused: Integer,
@@ -1017,8 +1007,7 @@ module DockerEngineRuby
             driver: String,
             driver_status: T::Array[T::Array[String]],
             experimental_build: T::Boolean,
-            firewall_backend:
-              T.nilable(DockerEngineRuby::Info::FirewallBackend),
+            firewall_backend: DockerEngineRuby::Info::FirewallBackend,
             generic_resources:
               T::Array[DockerEngineRuby::Info::GenericResource],
             http_proxy: String,
@@ -1042,7 +1031,7 @@ module DockerEngineRuby
             n_fd: Integer,
             n_goroutines: Integer,
             no_proxy: String,
-            nri: T.nilable(DockerEngineRuby::Info::Nri),
+            nri: DockerEngineRuby::Info::Nri,
             oom_kill_disable: T::Boolean,
             operating_system: String,
             os_type: String,
@@ -1050,7 +1039,7 @@ module DockerEngineRuby
             pids_limit: T::Boolean,
             plugins: DockerEngineRuby::Info::Plugins,
             product_license: String,
-            registry_config: T.nilable(DockerEngineRuby::Info::RegistryConfig),
+            registry_config: DockerEngineRuby::Info::RegistryConfig,
             runc_commit: DockerEngineRuby::Info::RuncCommit,
             runtimes: T::Hash[Symbol, DockerEngineRuby::Info::Runtime],
             security_options: T::Array[String],
@@ -1189,22 +1178,12 @@ module DockerEngineRuby
               )
             end
 
-          # The default containerd namespace used for containers managed by the daemon.
-          #
-          # The default namespace for containers is "moby", but will be suffixed with the
-          # `<uid>.<gid>` of the remapped `root` if user-namespaces are enabled and the
-          # containerd image-store is used.
           sig { returns(T.nilable(String)) }
           attr_reader :containers
 
           sig { params(containers: String).void }
           attr_writer :containers
 
-          # The default containerd namespace used for plugins managed by the daemon.
-          #
-          # The default namespace for plugins is "plugins.moby", but will be suffixed with
-          # the `<uid>.<gid>` of the remapped `root` if user-namespaces are enabled and the
-          # containerd image-store is used.
           sig { returns(T.nilable(String)) }
           attr_reader :plugins
 
@@ -1224,20 +1203,7 @@ module DockerEngineRuby
               T.attached_class
             )
           end
-          def self.new(
-            # The default containerd namespace used for containers managed by the daemon.
-            #
-            # The default namespace for containers is "moby", but will be suffixed with the
-            # `<uid>.<gid>` of the remapped `root` if user-namespaces are enabled and the
-            # containerd image-store is used.
-            containers: nil,
-            # The default containerd namespace used for plugins managed by the daemon.
-            #
-            # The default namespace for plugins is "plugins.moby", but will be suffixed with
-            # the `<uid>.<gid>` of the remapped `root` if user-namespaces are enabled and the
-            # containerd image-store is used.
-            plugins: nil
-          )
+          def self.new(containers: nil, plugins: nil)
           end
 
           sig { override.returns({ containers: String, plugins: String }) }
@@ -1285,14 +1251,12 @@ module DockerEngineRuby
             )
           end
 
-        # The network address in CIDR format
         sig { returns(T.nilable(String)) }
         attr_reader :base
 
         sig { params(base: String).void }
         attr_writer :base
 
-        # The network pool size
         sig { returns(T.nilable(Integer)) }
         attr_reader :size
 
@@ -1300,12 +1264,7 @@ module DockerEngineRuby
         attr_writer :size
 
         sig { params(base: String, size: Integer).returns(T.attached_class) }
-        def self.new(
-          # The network address in CIDR format
-          base: nil,
-          # The network pool size
-          size: nil
-        )
+        def self.new(base: nil, size: nil)
         end
 
         sig { override.returns({ base: String, size: Integer }) }
@@ -1736,7 +1695,7 @@ module DockerEngineRuby
             T.nilable(
               T::Hash[
                 Symbol,
-                T.nilable(DockerEngineRuby::Info::RegistryConfig::IndexConfig)
+                DockerEngineRuby::Info::RegistryConfig::IndexConfig
               ]
             )
           )
@@ -1748,9 +1707,7 @@ module DockerEngineRuby
             index_configs:
               T::Hash[
                 Symbol,
-                T.nilable(
-                  DockerEngineRuby::Info::RegistryConfig::IndexConfig::OrHash
-                )
+                DockerEngineRuby::Info::RegistryConfig::IndexConfig::OrHash
               ]
           ).void
         end
@@ -1796,9 +1753,7 @@ module DockerEngineRuby
             index_configs:
               T::Hash[
                 Symbol,
-                T.nilable(
-                  DockerEngineRuby::Info::RegistryConfig::IndexConfig::OrHash
-                )
+                DockerEngineRuby::Info::RegistryConfig::IndexConfig::OrHash
               ],
             insecure_registry_cid_rs: T::Array[String],
             mirrors: T::Array[String]
@@ -1839,7 +1794,7 @@ module DockerEngineRuby
               index_configs:
                 T::Hash[
                   Symbol,
-                  T.nilable(DockerEngineRuby::Info::RegistryConfig::IndexConfig)
+                  DockerEngineRuby::Info::RegistryConfig::IndexConfig
                 ],
               insecure_registry_cid_rs: T::Array[String],
               mirrors: T::Array[String]
@@ -2076,9 +2031,7 @@ module DockerEngineRuby
         attr_reader :cluster
 
         sig do
-          params(
-            cluster: T.nilable(DockerEngineRuby::Info::Swarm::Cluster::OrHash)
-          ).void
+          params(cluster: DockerEngineRuby::Info::Swarm::Cluster::OrHash).void
         end
         attr_writer :cluster
 
@@ -2145,7 +2098,7 @@ module DockerEngineRuby
         # Represents generic information about swarm.
         sig do
           params(
-            cluster: T.nilable(DockerEngineRuby::Info::Swarm::Cluster::OrHash),
+            cluster: DockerEngineRuby::Info::Swarm::Cluster::OrHash,
             control_available: T::Boolean,
             error: String,
             local_node_state:
@@ -2184,7 +2137,7 @@ module DockerEngineRuby
         sig do
           override.returns(
             {
-              cluster: T.nilable(DockerEngineRuby::Info::Swarm::Cluster),
+              cluster: DockerEngineRuby::Info::Swarm::Cluster,
               control_available: T::Boolean,
               error: String,
               local_node_state:
@@ -2214,10 +2167,10 @@ module DockerEngineRuby
 
           # Date and time at which the swarm was initialised in
           # [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
-          sig { returns(T.nilable(String)) }
+          sig { returns(T.nilable(Time)) }
           attr_reader :created_at
 
-          sig { params(created_at: String).void }
+          sig { params(created_at: Time).void }
           attr_writer :created_at
 
           # DataPathPort specifies the data path port number for data traffic. Acceptable
@@ -2281,10 +2234,10 @@ module DockerEngineRuby
 
           # Date and time at which the swarm was last updated in
           # [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
-          sig { returns(T.nilable(String)) }
+          sig { returns(T.nilable(Time)) }
           attr_reader :updated_at
 
-          sig { params(updated_at: String).void }
+          sig { params(updated_at: Time).void }
           attr_writer :updated_at
 
           # The version number of the object such as node, service, etc. This is needed to
@@ -2312,7 +2265,7 @@ module DockerEngineRuby
           # endpoint. Join-tokens are not included.
           sig do
             params(
-              created_at: String,
+              created_at: Time,
               data_path_port: Integer,
               default_addr_pool: T::Array[String],
               id: String,
@@ -2320,7 +2273,7 @@ module DockerEngineRuby
               spec: DockerEngineRuby::Spec::OrHash,
               subnet_size: Integer,
               tls_info: DockerEngineRuby::Info::Swarm::Cluster::TlsInfo::OrHash,
-              updated_at: String,
+              updated_at: Time,
               version: DockerEngineRuby::Info::Swarm::Cluster::Version::OrHash
             ).returns(T.attached_class)
           end
@@ -2365,7 +2318,7 @@ module DockerEngineRuby
           sig do
             override.returns(
               {
-                created_at: String,
+                created_at: Time,
                 data_path_port: Integer,
                 default_addr_pool: T::Array[String],
                 id: String,
@@ -2373,7 +2326,7 @@ module DockerEngineRuby
                 spec: DockerEngineRuby::Spec,
                 subnet_size: Integer,
                 tls_info: DockerEngineRuby::Info::Swarm::Cluster::TlsInfo,
-                updated_at: String,
+                updated_at: Time,
                 version: DockerEngineRuby::Info::Swarm::Cluster::Version
               }
             )

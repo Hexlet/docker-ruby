@@ -5,10 +5,10 @@ module DockerEngineRuby
         app_armor_profile: String,
         args: ::Array[String],
         config: DockerEngineRuby::Config,
-        created: String?,
+        created: Time?,
         driver: String,
         exec_ids: ::Array[String]?,
-        graph_driver: DockerEngineRuby::Container::GraphDriver,
+        graph_driver: DockerEngineRuby::Container::GraphDriver?,
         host_config: DockerEngineRuby::Container::HostConfig,
         hostname_path: String,
         hosts_path: String,
@@ -27,8 +27,8 @@ module DockerEngineRuby
         restart_count: Integer,
         size_root_fs: Integer?,
         size_rw: Integer?,
-        state: DockerEngineRuby::Container::State?,
-        storage: DockerEngineRuby::Container::Storage
+        state: DockerEngineRuby::Container::State,
+        storage: DockerEngineRuby::Container::Storage?
       }
 
     class Container < DockerEngineRuby::Internal::Type::BaseModel
@@ -44,7 +44,7 @@ module DockerEngineRuby
 
       def config=: (DockerEngineRuby::Config) -> DockerEngineRuby::Config
 
-      attr_accessor created: String?
+      attr_accessor created: Time?
 
       attr_reader driver: String?
 
@@ -52,11 +52,7 @@ module DockerEngineRuby
 
       attr_accessor exec_ids: ::Array[String]?
 
-      attr_reader graph_driver: DockerEngineRuby::Container::GraphDriver?
-
-      def graph_driver=: (
-        DockerEngineRuby::Container::GraphDriver
-      ) -> DockerEngineRuby::Container::GraphDriver
+      attr_accessor graph_driver: DockerEngineRuby::Container::GraphDriver?
 
       attr_reader host_config: DockerEngineRuby::Container::HostConfig?
 
@@ -132,22 +128,22 @@ module DockerEngineRuby
 
       attr_accessor size_rw: Integer?
 
-      attr_accessor state: DockerEngineRuby::Container::State?
+      attr_reader state: DockerEngineRuby::Container::State?
 
-      attr_reader storage: DockerEngineRuby::Container::Storage?
+      def state=: (
+        DockerEngineRuby::Container::State
+      ) -> DockerEngineRuby::Container::State
 
-      def storage=: (
-        DockerEngineRuby::Container::Storage
-      ) -> DockerEngineRuby::Container::Storage
+      attr_accessor storage: DockerEngineRuby::Container::Storage?
 
       def initialize: (
         ?app_armor_profile: String,
         ?args: ::Array[String],
         ?config: DockerEngineRuby::Config,
-        ?created: String?,
+        ?created: Time?,
         ?driver: String,
         ?exec_ids: ::Array[String]?,
-        ?graph_driver: DockerEngineRuby::Container::GraphDriver,
+        ?graph_driver: DockerEngineRuby::Container::GraphDriver?,
         ?host_config: DockerEngineRuby::Container::HostConfig,
         ?hostname_path: String,
         ?hosts_path: String,
@@ -166,18 +162,18 @@ module DockerEngineRuby
         ?restart_count: Integer,
         ?size_root_fs: Integer?,
         ?size_rw: Integer?,
-        ?state: DockerEngineRuby::Container::State?,
-        ?storage: DockerEngineRuby::Container::Storage
+        ?state: DockerEngineRuby::Container::State,
+        ?storage: DockerEngineRuby::Container::Storage?
       ) -> void
 
       def to_hash: -> {
         app_armor_profile: String,
         args: ::Array[String],
         config: DockerEngineRuby::Config,
-        created: String?,
+        created: Time?,
         driver: String,
         exec_ids: ::Array[String]?,
-        graph_driver: DockerEngineRuby::Container::GraphDriver,
+        graph_driver: DockerEngineRuby::Container::GraphDriver?,
         host_config: DockerEngineRuby::Container::HostConfig,
         hostname_path: String,
         hosts_path: String,
@@ -196,8 +192,8 @@ module DockerEngineRuby
         restart_count: Integer,
         size_root_fs: Integer?,
         size_rw: Integer?,
-        state: DockerEngineRuby::Container::State?,
-        storage: DockerEngineRuby::Container::Storage
+        state: DockerEngineRuby::Container::State,
+        storage: DockerEngineRuby::Container::Storage?
       }
 
       type graph_driver = { data: ::Hash[Symbol, String], name: String }
@@ -1329,7 +1325,7 @@ module DockerEngineRuby
           data: String?,
           digest: String,
           media_type: String,
-          platform: DockerEngineRuby::Container::ImageManifestDescriptor::Platform?,
+          platform: DockerEngineRuby::Container::ImageManifestDescriptor::Platform,
           size: Integer,
           urls: ::Array[String]?
         }
@@ -1349,7 +1345,11 @@ module DockerEngineRuby
 
         def media_type=: (String) -> String
 
-        attr_accessor platform: DockerEngineRuby::Container::ImageManifestDescriptor::Platform?
+        attr_reader platform: DockerEngineRuby::Container::ImageManifestDescriptor::Platform?
+
+        def platform=: (
+          DockerEngineRuby::Container::ImageManifestDescriptor::Platform
+        ) -> DockerEngineRuby::Container::ImageManifestDescriptor::Platform
 
         attr_reader size: Integer?
 
@@ -1363,7 +1363,7 @@ module DockerEngineRuby
           ?data: String?,
           ?digest: String,
           ?media_type: String,
-          ?platform: DockerEngineRuby::Container::ImageManifestDescriptor::Platform?,
+          ?platform: DockerEngineRuby::Container::ImageManifestDescriptor::Platform,
           ?size: Integer,
           ?urls: ::Array[String]?
         ) -> void
@@ -1374,7 +1374,7 @@ module DockerEngineRuby
           data: String?,
           digest: String,
           media_type: String,
-          platform: DockerEngineRuby::Container::ImageManifestDescriptor::Platform?,
+          platform: DockerEngineRuby::Container::ImageManifestDescriptor::Platform,
           size: Integer,
           urls: ::Array[String]?
         }
@@ -1566,7 +1566,7 @@ module DockerEngineRuby
             :global_i_pv6_prefix_len => Integer,
             gw_priority: Integer,
             ip_address: String,
-            ipam_config: DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig?,
+            ipam_config: DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig,
             ip_prefix_len: Integer,
             :i_pv6_gateway => String,
             links: ::Array[String],
@@ -1609,7 +1609,11 @@ module DockerEngineRuby
 
           def ip_address=: (String) -> String
 
-          attr_accessor ipam_config: DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig?
+          attr_reader ipam_config: DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig?
+
+          def ipam_config=: (
+            DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig
+          ) -> DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig
 
           attr_reader ip_prefix_len: Integer?
 
@@ -1641,7 +1645,7 @@ module DockerEngineRuby
             ?global_i_pv6_prefix_len: Integer,
             ?gw_priority: Integer,
             ?ip_address: String,
-            ?ipam_config: DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig?,
+            ?ipam_config: DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig,
             ?ip_prefix_len: Integer,
             ?i_pv6_gateway: String,
             ?links: ::Array[String],
@@ -1659,7 +1663,7 @@ module DockerEngineRuby
             :global_i_pv6_prefix_len => Integer,
             gw_priority: Integer,
             ip_address: String,
-            ipam_config: DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig?,
+            ipam_config: DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig,
             ip_prefix_len: Integer,
             :i_pv6_gateway => String,
             links: ::Array[String],
@@ -1724,7 +1728,7 @@ module DockerEngineRuby
           error: String,
           exit_code: Integer,
           finished_at: String,
-          health: DockerEngineRuby::Container::State::Health?,
+          health: DockerEngineRuby::Container::State::Health,
           oom_killed: bool,
           paused: bool,
           pid: Integer,
@@ -1751,7 +1755,11 @@ module DockerEngineRuby
 
         def finished_at=: (String) -> String
 
-        attr_accessor health: DockerEngineRuby::Container::State::Health?
+        attr_reader health: DockerEngineRuby::Container::State::Health?
+
+        def health=: (
+          DockerEngineRuby::Container::State::Health
+        ) -> DockerEngineRuby::Container::State::Health
 
         attr_reader oom_killed: bool?
 
@@ -1788,7 +1796,7 @@ module DockerEngineRuby
           ?error: String,
           ?exit_code: Integer,
           ?finished_at: String,
-          ?health: DockerEngineRuby::Container::State::Health?,
+          ?health: DockerEngineRuby::Container::State::Health,
           ?oom_killed: bool,
           ?paused: bool,
           ?pid: Integer,
@@ -1803,7 +1811,7 @@ module DockerEngineRuby
           error: String,
           exit_code: Integer,
           finished_at: String,
-          health: DockerEngineRuby::Container::State::Health?,
+          health: DockerEngineRuby::Container::State::Health,
           oom_killed: bool,
           paused: bool,
           pid: Integer,
@@ -1816,7 +1824,7 @@ module DockerEngineRuby
         type health =
           {
             failing_streak: Integer,
-            log: ::Array[DockerEngineRuby::Container::State::Health::Log?],
+            log: ::Array[DockerEngineRuby::Container::State::Health::Log],
             status: DockerEngineRuby::Models::Container::State::Health::status
           }
 
@@ -1825,11 +1833,11 @@ module DockerEngineRuby
 
           def failing_streak=: (Integer) -> Integer
 
-          attr_reader log: ::Array[DockerEngineRuby::Container::State::Health::Log?]?
+          attr_reader log: ::Array[DockerEngineRuby::Container::State::Health::Log]?
 
           def log=: (
-            ::Array[DockerEngineRuby::Container::State::Health::Log?]
-          ) -> ::Array[DockerEngineRuby::Container::State::Health::Log?]
+            ::Array[DockerEngineRuby::Container::State::Health::Log]
+          ) -> ::Array[DockerEngineRuby::Container::State::Health::Log]
 
           attr_reader status: DockerEngineRuby::Models::Container::State::Health::status?
 
@@ -1839,23 +1847,23 @@ module DockerEngineRuby
 
           def initialize: (
             ?failing_streak: Integer,
-            ?log: ::Array[DockerEngineRuby::Container::State::Health::Log?],
+            ?log: ::Array[DockerEngineRuby::Container::State::Health::Log],
             ?status: DockerEngineRuby::Models::Container::State::Health::status
           ) -> void
 
           def to_hash: -> {
             failing_streak: Integer,
-            log: ::Array[DockerEngineRuby::Container::State::Health::Log?],
+            log: ::Array[DockerEngineRuby::Container::State::Health::Log],
             status: DockerEngineRuby::Models::Container::State::Health::status
           }
 
           type log =
-            { end_: String, exit_code: Integer, output: String, start: Time }
+            { end_: Time, exit_code: Integer, output: String, start: Time }
 
           class Log < DockerEngineRuby::Internal::Type::BaseModel
-            attr_reader end_: String?
+            attr_reader end_: Time?
 
-            def end_=: (String) -> String
+            def end_=: (Time) -> Time
 
             attr_reader exit_code: Integer?
 
@@ -1870,14 +1878,14 @@ module DockerEngineRuby
             def start=: (Time) -> Time
 
             def initialize: (
-              ?end_: String,
+              ?end_: Time,
               ?exit_code: Integer,
               ?output: String,
               ?start: Time
             ) -> void
 
             def to_hash: -> {
-              end_: String,
+              end_: Time,
               exit_code: Integer,
               output: String,
               start: Time
@@ -1922,39 +1930,31 @@ module DockerEngineRuby
         end
       end
 
-      type storage = { root_fs: DockerEngineRuby::Container::Storage::RootFs }
+      type storage = { root_fs: DockerEngineRuby::Container::Storage::RootFs? }
 
       class Storage < DockerEngineRuby::Internal::Type::BaseModel
-        attr_reader root_fs: DockerEngineRuby::Container::Storage::RootFs?
-
-        def root_fs=: (
-          DockerEngineRuby::Container::Storage::RootFs
-        ) -> DockerEngineRuby::Container::Storage::RootFs
+        attr_accessor root_fs: DockerEngineRuby::Container::Storage::RootFs?
 
         def initialize: (
-          ?root_fs: DockerEngineRuby::Container::Storage::RootFs
+          ?root_fs: DockerEngineRuby::Container::Storage::RootFs?
         ) -> void
 
         def to_hash: -> {
-          root_fs: DockerEngineRuby::Container::Storage::RootFs
+          root_fs: DockerEngineRuby::Container::Storage::RootFs?
         }
 
         type root_fs =
-          { snapshot: DockerEngineRuby::Container::Storage::RootFs::Snapshot }
+          { snapshot: DockerEngineRuby::Container::Storage::RootFs::Snapshot? }
 
         class RootFs < DockerEngineRuby::Internal::Type::BaseModel
-          attr_reader snapshot: DockerEngineRuby::Container::Storage::RootFs::Snapshot?
-
-          def snapshot=: (
-            DockerEngineRuby::Container::Storage::RootFs::Snapshot
-          ) -> DockerEngineRuby::Container::Storage::RootFs::Snapshot
+          attr_accessor snapshot: DockerEngineRuby::Container::Storage::RootFs::Snapshot?
 
           def initialize: (
-            ?snapshot: DockerEngineRuby::Container::Storage::RootFs::Snapshot
+            ?snapshot: DockerEngineRuby::Container::Storage::RootFs::Snapshot?
           ) -> void
 
           def to_hash: -> {
-            snapshot: DockerEngineRuby::Container::Storage::RootFs::Snapshot
+            snapshot: DockerEngineRuby::Container::Storage::RootFs::Snapshot?
           }
 
           type snapshot = { name: String }

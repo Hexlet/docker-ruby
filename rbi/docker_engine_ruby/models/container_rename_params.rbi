@@ -14,7 +14,6 @@ module DockerEngineRuby
           )
         end
 
-      # New name for the container
       sig { returns(String) }
       attr_accessor :name
 
@@ -24,11 +23,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # New name for the container
-        name:,
-        request_options: {}
-      )
+      def self.new(name:, request_options: {})
       end
 
       sig do

@@ -46,10 +46,10 @@ module DockerEngineRuby
       attr_writer :cluster_volume
 
       # Date/Time the volume was created.
-      sig { returns(T.nilable(String)) }
+      sig { returns(T.nilable(Time)) }
       attr_reader :created_at
 
-      sig { params(created_at: String).void }
+      sig { params(created_at: Time).void }
       attr_writer :created_at
 
       # Low-level details about the volume, provided by the volume driver. Details are
@@ -57,10 +57,10 @@ module DockerEngineRuby
       #
       # The `Status` field is optional, and is omitted if the volume driver does not
       # support this feature.
-      sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
+      sig { returns(T.nilable(T::Hash[Symbol, T::Hash[Symbol, T.anything]])) }
       attr_reader :status
 
-      sig { params(status: T::Hash[Symbol, T.anything]).void }
+      sig { params(status: T::Hash[Symbol, T::Hash[Symbol, T.anything]]).void }
       attr_writer :status
 
       # Usage details about the volume. This information is used by the `GET /system/df`
@@ -84,8 +84,8 @@ module DockerEngineRuby
           options: T::Hash[Symbol, String],
           scope: DockerEngineRuby::Volume::Scope::OrSymbol,
           cluster_volume: DockerEngineRuby::Volume::ClusterVolume::OrHash,
-          created_at: String,
-          status: T::Hash[Symbol, T.anything],
+          created_at: Time,
+          status: T::Hash[Symbol, T::Hash[Symbol, T.anything]],
           usage_data: T.nilable(DockerEngineRuby::Volume::UsageData::OrHash)
         ).returns(T.attached_class)
       end
@@ -130,8 +130,8 @@ module DockerEngineRuby
             options: T::Hash[Symbol, String],
             scope: DockerEngineRuby::Volume::Scope::TaggedSymbol,
             cluster_volume: DockerEngineRuby::Volume::ClusterVolume,
-            created_at: String,
-            status: T::Hash[Symbol, T.anything],
+            created_at: Time,
+            status: T::Hash[Symbol, T::Hash[Symbol, T.anything]],
             usage_data: T.nilable(DockerEngineRuby::Volume::UsageData)
           }
         )
@@ -169,10 +169,10 @@ module DockerEngineRuby
             )
           end
 
-        sig { returns(T.nilable(String)) }
+        sig { returns(T.nilable(Time)) }
         attr_reader :created_at
 
-        sig { params(created_at: String).void }
+        sig { params(created_at: Time).void }
         attr_writer :created_at
 
         # The Swarm ID of this volume. Because cluster volumes are Swarm objects, they
@@ -231,10 +231,10 @@ module DockerEngineRuby
         end
         attr_writer :spec
 
-        sig { returns(T.nilable(String)) }
+        sig { returns(T.nilable(Time)) }
         attr_reader :updated_at
 
-        sig { params(updated_at: String).void }
+        sig { params(updated_at: Time).void }
         attr_writer :updated_at
 
         # The version number of the object such as node, service, etc. This is needed to
@@ -262,7 +262,7 @@ module DockerEngineRuby
         # volumes.
         sig do
           params(
-            created_at: String,
+            created_at: Time,
             id: String,
             info: DockerEngineRuby::Volume::ClusterVolume::Info::OrHash,
             publish_status:
@@ -270,7 +270,7 @@ module DockerEngineRuby
                 DockerEngineRuby::Volume::ClusterVolume::PublishStatus::OrHash
               ],
             spec: DockerEngineRuby::Volume::ClusterVolume::Spec::OrHash,
-            updated_at: String,
+            updated_at: Time,
             version: DockerEngineRuby::Volume::ClusterVolume::Version::OrHash
           ).returns(T.attached_class)
         end
@@ -304,7 +304,7 @@ module DockerEngineRuby
         sig do
           override.returns(
             {
-              created_at: String,
+              created_at: Time,
               id: String,
               info: DockerEngineRuby::Volume::ClusterVolume::Info,
               publish_status:
@@ -312,7 +312,7 @@ module DockerEngineRuby
                   DockerEngineRuby::Volume::ClusterVolume::PublishStatus
                 ],
               spec: DockerEngineRuby::Volume::ClusterVolume::Spec,
-              updated_at: String,
+              updated_at: Time,
               version: DockerEngineRuby::Volume::ClusterVolume::Version
             }
           )
@@ -329,7 +329,6 @@ module DockerEngineRuby
               )
             end
 
-          # The topology this volume is actually accessible from.
           sig { returns(T.nilable(T::Array[T::Hash[Symbol, String]])) }
           attr_reader :accessible_topology
 
@@ -338,26 +337,18 @@ module DockerEngineRuby
           end
           attr_writer :accessible_topology
 
-          # The capacity of the volume in bytes. A value of 0 indicates that the capacity is
-          # unknown.
           sig { returns(T.nilable(Integer)) }
           attr_reader :capacity_bytes
 
           sig { params(capacity_bytes: Integer).void }
           attr_writer :capacity_bytes
 
-          # A map of strings to strings returned from the storage plugin when the volume is
-          # created.
           sig { returns(T.nilable(T::Hash[Symbol, String])) }
           attr_reader :volume_context
 
           sig { params(volume_context: T::Hash[Symbol, String]).void }
           attr_writer :volume_context
 
-          # The ID of the volume as returned by the CSI storage plugin. This is distinct
-          # from the volume's ID as provided by Docker. This ID is never used by the user
-          # when communicating with Docker to refer to this volume. If the ID is blank, then
-          # the Volume has not been successfully created in the plugin yet.
           sig { returns(T.nilable(String)) }
           attr_reader :volume_id
 
@@ -374,18 +365,9 @@ module DockerEngineRuby
             ).returns(T.attached_class)
           end
           def self.new(
-            # The topology this volume is actually accessible from.
             accessible_topology: nil,
-            # The capacity of the volume in bytes. A value of 0 indicates that the capacity is
-            # unknown.
             capacity_bytes: nil,
-            # A map of strings to strings returned from the storage plugin when the volume is
-            # created.
             volume_context: nil,
-            # The ID of the volume as returned by the CSI storage plugin. This is distinct
-            # from the volume's ID as provided by Docker. This ID is never used by the user
-            # when communicating with Docker to refer to this volume. If the ID is blank, then
-            # the Volume has not been successfully created in the plugin yet.
             volume_id: nil
           )
           end
@@ -413,30 +395,18 @@ module DockerEngineRuby
               )
             end
 
-          # The ID of the Swarm node the volume is published on.
           sig { returns(T.nilable(String)) }
           attr_reader :node_id
 
           sig { params(node_id: String).void }
           attr_writer :node_id
 
-          # A map of strings to strings returned by the CSI controller plugin when a volume
-          # is published.
           sig { returns(T.nilable(T::Hash[Symbol, String])) }
           attr_reader :publish_context
 
           sig { params(publish_context: T::Hash[Symbol, String]).void }
           attr_writer :publish_context
 
-          # The published state of the volume.
-          #
-          # - `pending-publish` The volume should be published to this node, but the call to
-          #   the controller plugin to do so has not yet been successfully completed.
-          # - `published` The volume is published successfully to the node.
-          # - `pending-node-unpublish` The volume should be unpublished from the node, and
-          #   the manager is awaiting confirmation from the worker that it has done so.
-          # - `pending-controller-unpublish` The volume is successfully unpublished from the
-          #   node, but has not yet been successfully unpublished on the controller.
           sig do
             returns(
               T.nilable(
@@ -462,23 +432,7 @@ module DockerEngineRuby
                 DockerEngineRuby::Volume::ClusterVolume::PublishStatus::State::OrSymbol
             ).returns(T.attached_class)
           end
-          def self.new(
-            # The ID of the Swarm node the volume is published on.
-            node_id: nil,
-            # A map of strings to strings returned by the CSI controller plugin when a volume
-            # is published.
-            publish_context: nil,
-            # The published state of the volume.
-            #
-            # - `pending-publish` The volume should be published to this node, but the call to
-            #   the controller plugin to do so has not yet been successfully completed.
-            # - `published` The volume is published successfully to the node.
-            # - `pending-node-unpublish` The volume should be unpublished from the node, and
-            #   the manager is awaiting confirmation from the worker that it has done so.
-            # - `pending-controller-unpublish` The volume is successfully unpublished from the
-            #   node, but has not yet been successfully unpublished on the controller.
-            state: nil
-          )
+          def self.new(node_id: nil, publish_context: nil, state: nil)
           end
 
           sig do
@@ -494,15 +448,6 @@ module DockerEngineRuby
           def to_hash
           end
 
-          # The published state of the volume.
-          #
-          # - `pending-publish` The volume should be published to this node, but the call to
-          #   the controller plugin to do so has not yet been successfully completed.
-          # - `published` The volume is published successfully to the node.
-          # - `pending-node-unpublish` The volume should be unpublished from the node, and
-          #   the manager is awaiting confirmation from the worker that it has done so.
-          # - `pending-controller-unpublish` The volume is successfully unpublished from the
-          #   node, but has not yet been successfully unpublished on the controller.
           module State
             extend DockerEngineRuby::Internal::Type::Enum
 
@@ -627,9 +572,6 @@ module DockerEngineRuby
                 )
               end
 
-            # Requirements for the accessible topology of the volume. These fields are
-            # optional. For an in-depth description of what these fields mean, see the CSI
-            # specification.
             sig do
               returns(
                 T.nilable(
@@ -647,13 +589,6 @@ module DockerEngineRuby
             end
             attr_writer :accessibility_requirements
 
-            # The availability of the volume for use in tasks.
-            #
-            # - `active` The volume is fully available for scheduling on the cluster
-            # - `pause` No new workloads should use the volume, but existing workloads are not
-            #   stopped.
-            # - `drain` All workloads using this volume should be stopped and rescheduled, and
-            #   no new ones should be started.
             sig do
               returns(
                 T.nilable(
@@ -671,8 +606,6 @@ module DockerEngineRuby
             end
             attr_writer :availability
 
-            # The desired capacity that the volume should be created with. If empty, the
-            # plugin will decide the capacity.
             sig do
               returns(
                 T.nilable(
@@ -690,27 +623,12 @@ module DockerEngineRuby
             end
             attr_writer :capacity_range
 
-            # Options for using this volume as a Mount-type volume.
-            #
-            #     Either MountVolume or BlockVolume, but not both, must be
-            #     present.
-            #
-            # properties: FsType: type: "string" description: | Specifies the filesystem type
-            # for the mount volume. Optional. MountFlags: type: "array" description: | Flags
-            # to pass when mounting the volume. Optional. items: type: "string" BlockVolume:
-            # type: "object" description: | Options for using this volume as a Block-type
-            # volume. Intentionally empty.
-            sig { returns(T.nilable(T.anything)) }
+            sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
             attr_reader :mount_volume
 
-            sig { params(mount_volume: T.anything).void }
+            sig { params(mount_volume: T::Hash[Symbol, T.anything]).void }
             attr_writer :mount_volume
 
-            # The set of nodes this volume can be used on at one time.
-            #
-            # - `single` The volume may only be scheduled to one node at a time.
-            # - `multi` the volume may be scheduled to any supported number of nodes at a
-            #   time.
             sig do
               returns(
                 T.nilable(
@@ -728,8 +646,6 @@ module DockerEngineRuby
             end
             attr_writer :scope
 
-            # Swarm Secrets that are passed to the CSI storage plugin when operating on this
-            # volume.
             sig do
               returns(
                 T.nilable(
@@ -751,14 +667,6 @@ module DockerEngineRuby
             end
             attr_writer :secrets
 
-            # The number and way that different tasks can use this volume at one time.
-            #
-            # - `none` The volume may only be used by one task at a time.
-            # - `readonly` The volume may be used by any number of tasks, but they all must
-            #   mount the volume as readonly
-            # - `onewriter` The volume may be used by any number of tasks, but only one may
-            #   mount it as read/write.
-            # - `all` The volume may have any number of readers and writers.
             sig do
               returns(
                 T.nilable(
@@ -785,7 +693,7 @@ module DockerEngineRuby
                   DockerEngineRuby::Volume::ClusterVolume::Spec::AccessMode::Availability::OrSymbol,
                 capacity_range:
                   DockerEngineRuby::Volume::ClusterVolume::Spec::AccessMode::CapacityRange::OrHash,
-                mount_volume: T.anything,
+                mount_volume: T::Hash[Symbol, T.anything],
                 scope:
                   DockerEngineRuby::Volume::ClusterVolume::Spec::AccessMode::Scope::OrSymbol,
                 secrets:
@@ -797,49 +705,12 @@ module DockerEngineRuby
               ).returns(T.attached_class)
             end
             def self.new(
-              # Requirements for the accessible topology of the volume. These fields are
-              # optional. For an in-depth description of what these fields mean, see the CSI
-              # specification.
               accessibility_requirements: nil,
-              # The availability of the volume for use in tasks.
-              #
-              # - `active` The volume is fully available for scheduling on the cluster
-              # - `pause` No new workloads should use the volume, but existing workloads are not
-              #   stopped.
-              # - `drain` All workloads using this volume should be stopped and rescheduled, and
-              #   no new ones should be started.
               availability: nil,
-              # The desired capacity that the volume should be created with. If empty, the
-              # plugin will decide the capacity.
               capacity_range: nil,
-              # Options for using this volume as a Mount-type volume.
-              #
-              #     Either MountVolume or BlockVolume, but not both, must be
-              #     present.
-              #
-              # properties: FsType: type: "string" description: | Specifies the filesystem type
-              # for the mount volume. Optional. MountFlags: type: "array" description: | Flags
-              # to pass when mounting the volume. Optional. items: type: "string" BlockVolume:
-              # type: "object" description: | Options for using this volume as a Block-type
-              # volume. Intentionally empty.
               mount_volume: nil,
-              # The set of nodes this volume can be used on at one time.
-              #
-              # - `single` The volume may only be scheduled to one node at a time.
-              # - `multi` the volume may be scheduled to any supported number of nodes at a
-              #   time.
               scope: nil,
-              # Swarm Secrets that are passed to the CSI storage plugin when operating on this
-              # volume.
               secrets: nil,
-              # The number and way that different tasks can use this volume at one time.
-              #
-              # - `none` The volume may only be used by one task at a time.
-              # - `readonly` The volume may be used by any number of tasks, but they all must
-              #   mount the volume as readonly
-              # - `onewriter` The volume may be used by any number of tasks, but only one may
-              #   mount it as read/write.
-              # - `all` The volume may have any number of readers and writers.
               sharing: nil
             )
             end
@@ -853,7 +724,7 @@ module DockerEngineRuby
                     DockerEngineRuby::Volume::ClusterVolume::Spec::AccessMode::Availability::TaggedSymbol,
                   capacity_range:
                     DockerEngineRuby::Volume::ClusterVolume::Spec::AccessMode::CapacityRange,
-                  mount_volume: T.anything,
+                  mount_volume: T::Hash[Symbol, T.anything],
                   scope:
                     DockerEngineRuby::Volume::ClusterVolume::Spec::AccessMode::Scope::TaggedSymbol,
                   secrets:
@@ -877,37 +748,25 @@ module DockerEngineRuby
                   )
                 end
 
-              # A list of topologies that the volume should attempt to be provisioned in.
               sig { returns(T.nilable(T::Array[T::Hash[Symbol, String]])) }
               attr_reader :preferred
 
               sig { params(preferred: T::Array[T::Hash[Symbol, String]]).void }
               attr_writer :preferred
 
-              # A list of required topologies, at least one of which the volume must be
-              # accessible from.
               sig { returns(T.nilable(T::Array[T::Hash[Symbol, String]])) }
               attr_reader :requisite
 
               sig { params(requisite: T::Array[T::Hash[Symbol, String]]).void }
               attr_writer :requisite
 
-              # Requirements for the accessible topology of the volume. These fields are
-              # optional. For an in-depth description of what these fields mean, see the CSI
-              # specification.
               sig do
                 params(
                   preferred: T::Array[T::Hash[Symbol, String]],
                   requisite: T::Array[T::Hash[Symbol, String]]
                 ).returns(T.attached_class)
               end
-              def self.new(
-                # A list of topologies that the volume should attempt to be provisioned in.
-                preferred: nil,
-                # A list of required topologies, at least one of which the volume must be
-                # accessible from.
-                requisite: nil
-              )
+              def self.new(preferred: nil, requisite: nil)
               end
 
               sig do
@@ -922,13 +781,6 @@ module DockerEngineRuby
               end
             end
 
-            # The availability of the volume for use in tasks.
-            #
-            # - `active` The volume is fully available for scheduling on the cluster
-            # - `pause` No new workloads should use the volume, but existing workloads are not
-            #   stopped.
-            # - `drain` All workloads using this volume should be stopped and rescheduled, and
-            #   no new ones should be started.
             module Availability
               extend DockerEngineRuby::Internal::Type::Enum
 
@@ -977,37 +829,24 @@ module DockerEngineRuby
                   )
                 end
 
-              # The volume must not be bigger than this. The value of 0 indicates an unspecified
-              # maximum.
               sig { returns(T.nilable(Integer)) }
               attr_reader :limit_bytes
 
               sig { params(limit_bytes: Integer).void }
               attr_writer :limit_bytes
 
-              # The volume must be at least this big. The value of 0 indicates an unspecified
-              # minimum
               sig { returns(T.nilable(Integer)) }
               attr_reader :required_bytes
 
               sig { params(required_bytes: Integer).void }
               attr_writer :required_bytes
 
-              # The desired capacity that the volume should be created with. If empty, the
-              # plugin will decide the capacity.
               sig do
                 params(limit_bytes: Integer, required_bytes: Integer).returns(
                   T.attached_class
                 )
               end
-              def self.new(
-                # The volume must not be bigger than this. The value of 0 indicates an unspecified
-                # maximum.
-                limit_bytes: nil,
-                # The volume must be at least this big. The value of 0 indicates an unspecified
-                # minimum
-                required_bytes: nil
-              )
+              def self.new(limit_bytes: nil, required_bytes: nil)
               end
 
               sig do
@@ -1019,11 +858,6 @@ module DockerEngineRuby
               end
             end
 
-            # The set of nodes this volume can be used on at one time.
-            #
-            # - `single` The volume may only be scheduled to one node at a time.
-            # - `multi` the volume may be scheduled to any supported number of nodes at a
-            #   time.
             module Scope
               extend DockerEngineRuby::Internal::Type::Enum
 
@@ -1067,35 +901,22 @@ module DockerEngineRuby
                   )
                 end
 
-              # Key is the name of the key of the key-value pair passed to the plugin.
               sig { returns(T.nilable(String)) }
               attr_reader :key
 
               sig { params(key: String).void }
               attr_writer :key
 
-              # Secret is the swarm Secret object from which to read data. This can be a Secret
-              # name or ID. The Secret data is retrieved by swarm and used as the value of the
-              # key-value pair passed to the plugin.
               sig { returns(T.nilable(String)) }
               attr_reader :secret
 
               sig { params(secret: String).void }
               attr_writer :secret
 
-              # One cluster volume secret entry. Defines a key-value pair that is passed to the
-              # plugin.
               sig do
                 params(key: String, secret: String).returns(T.attached_class)
               end
-              def self.new(
-                # Key is the name of the key of the key-value pair passed to the plugin.
-                key: nil,
-                # Secret is the swarm Secret object from which to read data. This can be a Secret
-                # name or ID. The Secret data is retrieved by swarm and used as the value of the
-                # key-value pair passed to the plugin.
-                secret: nil
-              )
+              def self.new(key: nil, secret: nil)
               end
 
               sig { override.returns({ key: String, secret: String }) }
@@ -1103,14 +924,6 @@ module DockerEngineRuby
               end
             end
 
-            # The number and way that different tasks can use this volume at one time.
-            #
-            # - `none` The volume may only be used by one task at a time.
-            # - `readonly` The volume may be used by any number of tasks, but they all must
-            #   mount the volume as readonly
-            # - `onewriter` The volume may be used by any number of tasks, but only one may
-            #   mount it as read/write.
-            # - `all` The volume may have any number of readers and writers.
             module Sharing
               extend DockerEngineRuby::Internal::Type::Enum
 
@@ -1200,14 +1013,9 @@ module DockerEngineRuby
             )
           end
 
-        # The number of containers referencing this volume. This field is set to `-1` if
-        # the reference-count is not available.
         sig { returns(Integer) }
         attr_accessor :ref_count
 
-        # Amount of disk space used by the volume (in bytes). This information is only
-        # available for volumes created with the `"local"` volume driver. For volumes
-        # created with other volume drivers, this field is set to `-1` ("not available")
         sig { returns(Integer) }
         attr_accessor :size
 
@@ -1216,15 +1024,7 @@ module DockerEngineRuby
         sig do
           params(ref_count: Integer, size: Integer).returns(T.attached_class)
         end
-        def self.new(
-          # The number of containers referencing this volume. This field is set to `-1` if
-          # the reference-count is not available.
-          ref_count:,
-          # Amount of disk space used by the volume (in bytes). This information is only
-          # available for volumes created with the `"local"` volume driver. For volumes
-          # created with other volume drivers, this field is set to `-1` ("not available")
-          size:
-        )
+        def self.new(ref_count:, size:)
         end
 
         sig { override.returns({ ref_count: Integer, size: Integer }) }
