@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    docker-engine (0.2.0)
+    docker-engine-api (0.2.1)
       cgi
       connection_pool
 
@@ -205,7 +205,7 @@ PLATFORMS
 
 DEPENDENCIES
   async
-  docker-engine!
+  docker-engine-api!
   minitest
   minitest-focus
   minitest-hooks

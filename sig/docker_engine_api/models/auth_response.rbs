@@ -1,0 +1,17 @@
+module DockerEngineAPI
+  module Models
+    type auth_response = { status: String, identity_token: String }
+
+    class AuthResponse < DockerEngineAPI::Internal::Type::BaseModel
+      attr_accessor status: String
+
+      attr_reader identity_token: String?
+
+      def identity_token=: (String) -> String
+
+      def initialize: (status: String, ?identity_token: String) -> void
+
+      def to_hash: -> { status: String, identity_token: String }
+    end
+  end
+end

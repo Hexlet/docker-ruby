@@ -1,0 +1,40 @@
+module DockerEngineAPI
+  module Resources
+    class Volumes
+      def create: (
+        create_request: DockerEngineAPI::CreateRequest,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> DockerEngineAPI::Volume
+
+      def update: (
+        String name,
+        version: Integer,
+        ?spec: DockerEngineAPI::VolumeUpdateParams::Spec,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> nil
+
+      def list: (
+        ?filters: String,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> DockerEngineAPI::ListResponse
+
+      def delete: (
+        String name,
+        ?force: bool,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> nil
+
+      def inspect_: (
+        String name,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> DockerEngineAPI::Volume
+
+      def prune: (
+        ?filters: String,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> DockerEngineAPI::Models::VolumePruneResponse
+
+      def initialize: (client: DockerEngineAPI::Client) -> void
+    end
+  end
+end

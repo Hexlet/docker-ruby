@@ -1,0 +1,7 @@
+module DockerEngineAPI
+  module Models
+    type container_list_response = ::Array[DockerEngineAPI::Summary]
+
+    ContainerListResponse: DockerEngineAPI::Internal::Type::Converter
+  end
+end

@@ -1,0 +1,15 @@
+module DockerEngineAPI
+  module Models
+    type update_response = { warnings: ::Array[String] }
+
+    class UpdateResponse < DockerEngineAPI::Internal::Type::BaseModel
+      attr_reader warnings: ::Array[String]?
+
+      def warnings=: (::Array[String]) -> ::Array[String]
+
+      def initialize: (?warnings: ::Array[String]) -> void
+
+      def to_hash: -> { warnings: ::Array[String] }
+    end
+  end
+end

@@ -1,0 +1,25 @@
+module DockerEngineAPI
+  module Models
+    type network_list_params =
+      { filters: String } & DockerEngineAPI::Internal::Type::request_parameters
+
+    class NetworkListParams < DockerEngineAPI::Internal::Type::BaseModel
+      extend DockerEngineAPI::Internal::Type::RequestParameters::Converter
+      include DockerEngineAPI::Internal::Type::RequestParameters
+
+      attr_reader filters: String?
+
+      def filters=: (String) -> String
+
+      def initialize: (
+        ?filters: String,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        filters: String,
+        request_options: DockerEngineAPI::RequestOptions
+      }
+    end
+  end
+end

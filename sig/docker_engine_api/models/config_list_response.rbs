@@ -1,0 +1,7 @@
+module DockerEngineAPI
+  module Models
+    type config_list_response = ::Array[DockerEngineAPI::Config]
+
+    ConfigListResponse: DockerEngineAPI::Internal::Type::Converter
+  end
+end

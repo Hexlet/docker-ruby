@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.1 (2026-02-14)
+
+Full Changelog: [v0.2.0...v0.2.1](https://github.com/Hexlet/docker-ruby/compare/v0.2.0...v0.2.1)
+
+### Chores
+
+* update SDK settings ([d4a64ea](https://github.com/Hexlet/docker-ruby/commit/d4a64eacb06ee0242a1163730b7062194b09df4c))
+
 ## 0.2.0 (2026-02-14)
 
 Full Changelog: [v0.1.1...v0.2.0](https://github.com/Hexlet/docker-ruby/compare/v0.1.1...v0.2.0)

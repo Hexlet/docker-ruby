@@ -1,0 +1,47 @@
+module DockerEngineAPI
+  module Models
+    type swarm_update_params =
+      {
+        version: Integer,
+        rotate_manager_token: bool,
+        rotate_manager_unlock_key: bool,
+        rotate_worker_token: bool
+      }
+      & DockerEngineAPI::Internal::Type::request_parameters
+
+    class SwarmUpdateParams < DockerEngineAPI::Internal::Type::BaseModel
+      extend DockerEngineAPI::Internal::Type::RequestParameters::Converter
+      include DockerEngineAPI::Internal::Type::RequestParameters
+
+      attr_accessor version: Integer
+
+      attr_reader rotate_manager_token: bool?
+
+      def rotate_manager_token=: (bool) -> bool
+
+      attr_reader rotate_manager_unlock_key: bool?
+
+      def rotate_manager_unlock_key=: (bool) -> bool
+
+      attr_reader rotate_worker_token: bool?
+
+      def rotate_worker_token=: (bool) -> bool
+
+      def initialize: (
+        version: Integer,
+        ?rotate_manager_token: bool,
+        ?rotate_manager_unlock_key: bool,
+        ?rotate_worker_token: bool,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        version: Integer,
+        rotate_manager_token: bool,
+        rotate_manager_unlock_key: bool,
+        rotate_worker_token: bool,
+        request_options: DockerEngineAPI::RequestOptions
+      }
+    end
+  end
+end

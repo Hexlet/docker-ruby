@@ -1,0 +1,509 @@
+module DockerEngineAPI
+  module Models
+    type plugin =
+      {
+        config: DockerEngineAPI::Plugin::Config,
+        enabled: bool,
+        name: String,
+        settings: DockerEngineAPI::Plugin::Settings,
+        id: String,
+        plugin_reference: String
+      }
+
+    class Plugin < DockerEngineAPI::Internal::Type::BaseModel
+      attr_accessor config: DockerEngineAPI::Plugin::Config
+
+      attr_accessor enabled: bool
+
+      attr_accessor name: String
+
+      attr_accessor settings: DockerEngineAPI::Plugin::Settings
+
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      attr_reader plugin_reference: String?
+
+      def plugin_reference=: (String) -> String
+
+      def initialize: (
+        config: DockerEngineAPI::Plugin::Config,
+        enabled: bool,
+        name: String,
+        settings: DockerEngineAPI::Plugin::Settings,
+        ?id: String,
+        ?plugin_reference: String
+      ) -> void
+
+      def to_hash: -> {
+        config: DockerEngineAPI::Plugin::Config,
+        enabled: bool,
+        name: String,
+        settings: DockerEngineAPI::Plugin::Settings,
+        id: String,
+        plugin_reference: String
+      }
+
+      type config =
+        {
+          args: DockerEngineAPI::Plugin::Config::Args,
+          description: String,
+          documentation: String,
+          entrypoint: ::Array[String],
+          env: ::Array[DockerEngineAPI::Plugin::Config::Env],
+          interface: DockerEngineAPI::Plugin::Config::Interface,
+          ipc_host: bool,
+          linux: DockerEngineAPI::Plugin::Config::Linux,
+          mounts: ::Array[DockerEngineAPI::Plugin::Config::Mount],
+          network: DockerEngineAPI::Plugin::Config::Network,
+          pid_host: bool,
+          propagated_mount: String,
+          work_dir: String,
+          rootfs: DockerEngineAPI::Plugin::Config::Rootfs,
+          user: DockerEngineAPI::Plugin::Config::User
+        }
+
+      class Config < DockerEngineAPI::Internal::Type::BaseModel
+        attr_accessor args: DockerEngineAPI::Plugin::Config::Args
+
+        attr_accessor description: String
+
+        attr_accessor documentation: String
+
+        attr_accessor entrypoint: ::Array[String]
+
+        attr_accessor env: ::Array[DockerEngineAPI::Plugin::Config::Env]
+
+        attr_accessor interface: DockerEngineAPI::Plugin::Config::Interface
+
+        attr_accessor ipc_host: bool
+
+        attr_accessor linux: DockerEngineAPI::Plugin::Config::Linux
+
+        attr_accessor mounts: ::Array[DockerEngineAPI::Plugin::Config::Mount]
+
+        attr_accessor network: DockerEngineAPI::Plugin::Config::Network
+
+        attr_accessor pid_host: bool
+
+        attr_accessor propagated_mount: String
+
+        attr_accessor work_dir: String
+
+        attr_reader rootfs: DockerEngineAPI::Plugin::Config::Rootfs?
+
+        def rootfs=: (
+          DockerEngineAPI::Plugin::Config::Rootfs
+        ) -> DockerEngineAPI::Plugin::Config::Rootfs
+
+        attr_reader user: DockerEngineAPI::Plugin::Config::User?
+
+        def user=: (
+          DockerEngineAPI::Plugin::Config::User
+        ) -> DockerEngineAPI::Plugin::Config::User
+
+        def initialize: (
+          args: DockerEngineAPI::Plugin::Config::Args,
+          description: String,
+          documentation: String,
+          entrypoint: ::Array[String],
+          env: ::Array[DockerEngineAPI::Plugin::Config::Env],
+          interface: DockerEngineAPI::Plugin::Config::Interface,
+          ipc_host: bool,
+          linux: DockerEngineAPI::Plugin::Config::Linux,
+          mounts: ::Array[DockerEngineAPI::Plugin::Config::Mount],
+          network: DockerEngineAPI::Plugin::Config::Network,
+          pid_host: bool,
+          propagated_mount: String,
+          work_dir: String,
+          ?rootfs: DockerEngineAPI::Plugin::Config::Rootfs,
+          ?user: DockerEngineAPI::Plugin::Config::User
+        ) -> void
+
+        def to_hash: -> {
+          args: DockerEngineAPI::Plugin::Config::Args,
+          description: String,
+          documentation: String,
+          entrypoint: ::Array[String],
+          env: ::Array[DockerEngineAPI::Plugin::Config::Env],
+          interface: DockerEngineAPI::Plugin::Config::Interface,
+          ipc_host: bool,
+          linux: DockerEngineAPI::Plugin::Config::Linux,
+          mounts: ::Array[DockerEngineAPI::Plugin::Config::Mount],
+          network: DockerEngineAPI::Plugin::Config::Network,
+          pid_host: bool,
+          propagated_mount: String,
+          work_dir: String,
+          rootfs: DockerEngineAPI::Plugin::Config::Rootfs,
+          user: DockerEngineAPI::Plugin::Config::User
+        }
+
+        type args =
+          {
+            description: String,
+            name: String,
+            settable: ::Array[String],
+            value: ::Array[String]
+          }
+
+        class Args < DockerEngineAPI::Internal::Type::BaseModel
+          attr_accessor description: String
+
+          attr_accessor name: String
+
+          attr_accessor settable: ::Array[String]
+
+          attr_accessor value: ::Array[String]
+
+          def initialize: (
+            description: String,
+            name: String,
+            settable: ::Array[String],
+            value: ::Array[String]
+          ) -> void
+
+          def to_hash: -> {
+            description: String,
+            name: String,
+            settable: ::Array[String],
+            value: ::Array[String]
+          }
+        end
+
+        type env =
+          {
+            description: String,
+            name: String,
+            settable: ::Array[String],
+            value: String
+          }
+
+        class Env < DockerEngineAPI::Internal::Type::BaseModel
+          attr_accessor description: String
+
+          attr_accessor name: String
+
+          attr_accessor settable: ::Array[String]
+
+          attr_accessor value: String
+
+          def initialize: (
+            description: String,
+            name: String,
+            settable: ::Array[String],
+            value: String
+          ) -> void
+
+          def to_hash: -> {
+            description: String,
+            name: String,
+            settable: ::Array[String],
+            value: String
+          }
+        end
+
+        type interface_ =
+          {
+            socket: String,
+            types: ::Array[String],
+            protocol_scheme: DockerEngineAPI::Models::Plugin::Config::Interface::protocol_scheme
+          }
+
+        class Interface < DockerEngineAPI::Internal::Type::BaseModel
+          attr_accessor socket: String
+
+          attr_accessor types: ::Array[String]
+
+          attr_reader protocol_scheme: DockerEngineAPI::Models::Plugin::Config::Interface::protocol_scheme?
+
+          def protocol_scheme=: (
+            DockerEngineAPI::Models::Plugin::Config::Interface::protocol_scheme
+          ) -> DockerEngineAPI::Models::Plugin::Config::Interface::protocol_scheme
+
+          def initialize: (
+            socket: String,
+            types: ::Array[String],
+            ?protocol_scheme: DockerEngineAPI::Models::Plugin::Config::Interface::protocol_scheme
+          ) -> void
+
+          def to_hash: -> {
+            socket: String,
+            types: ::Array[String],
+            protocol_scheme: DockerEngineAPI::Models::Plugin::Config::Interface::protocol_scheme
+          }
+
+          type protocol_scheme = :"" | :"moby.plugins.http/v1"
+
+          module ProtocolScheme
+            extend DockerEngineAPI::Internal::Type::Enum
+
+            EMPTY: :""
+            MOBY_PLUGINS_HTTP_V1: :"moby.plugins.http/v1"
+
+            def self?.values: -> ::Array[DockerEngineAPI::Models::Plugin::Config::Interface::protocol_scheme]
+          end
+        end
+
+        type linux =
+          {
+            allow_all_devices: bool,
+            capabilities: ::Array[String],
+            devices: ::Array[DockerEngineAPI::Plugin::Config::Linux::Device]
+          }
+
+        class Linux < DockerEngineAPI::Internal::Type::BaseModel
+          attr_accessor allow_all_devices: bool
+
+          attr_accessor capabilities: ::Array[String]
+
+          attr_accessor devices: ::Array[DockerEngineAPI::Plugin::Config::Linux::Device]
+
+          def initialize: (
+            allow_all_devices: bool,
+            capabilities: ::Array[String],
+            devices: ::Array[DockerEngineAPI::Plugin::Config::Linux::Device]
+          ) -> void
+
+          def to_hash: -> {
+            allow_all_devices: bool,
+            capabilities: ::Array[String],
+            devices: ::Array[DockerEngineAPI::Plugin::Config::Linux::Device]
+          }
+
+          type device =
+            {
+              description: String,
+              name: String,
+              path: String,
+              settable: ::Array[String]
+            }
+
+          class Device < DockerEngineAPI::Internal::Type::BaseModel
+            attr_accessor description: String
+
+            attr_accessor name: String
+
+            attr_accessor path: String
+
+            attr_accessor settable: ::Array[String]
+
+            def initialize: (
+              description: String,
+              name: String,
+              path: String,
+              settable: ::Array[String]
+            ) -> void
+
+            def to_hash: -> {
+              description: String,
+              name: String,
+              path: String,
+              settable: ::Array[String]
+            }
+          end
+        end
+
+        type mount =
+          {
+            description: String,
+            destination: String,
+            name: String,
+            options: ::Array[String],
+            settable: ::Array[String],
+            source: String,
+            type: String
+          }
+
+        class Mount < DockerEngineAPI::Internal::Type::BaseModel
+          attr_accessor description: String
+
+          attr_accessor destination: String
+
+          attr_accessor name: String
+
+          attr_accessor options: ::Array[String]
+
+          attr_accessor settable: ::Array[String]
+
+          attr_accessor source: String
+
+          attr_accessor type: String
+
+          def initialize: (
+            description: String,
+            destination: String,
+            name: String,
+            options: ::Array[String],
+            settable: ::Array[String],
+            source: String,
+            type: String
+          ) -> void
+
+          def to_hash: -> {
+            description: String,
+            destination: String,
+            name: String,
+            options: ::Array[String],
+            settable: ::Array[String],
+            source: String,
+            type: String
+          }
+        end
+
+        type network = { type: String }
+
+        class Network < DockerEngineAPI::Internal::Type::BaseModel
+          attr_accessor type: String
+
+          def initialize: (type: String) -> void
+
+          def to_hash: -> { type: String }
+        end
+
+        type rootfs = { diff_ids: ::Array[String], type: String }
+
+        class Rootfs < DockerEngineAPI::Internal::Type::BaseModel
+          attr_reader diff_ids: ::Array[String]?
+
+          def diff_ids=: (::Array[String]) -> ::Array[String]
+
+          attr_reader type: String?
+
+          def type=: (String) -> String
+
+          def initialize: (?diff_ids: ::Array[String], ?type: String) -> void
+
+          def to_hash: -> { diff_ids: ::Array[String], type: String }
+        end
+
+        type user = { gid: Integer, uid: Integer }
+
+        class User < DockerEngineAPI::Internal::Type::BaseModel
+          attr_reader gid: Integer?
+
+          def gid=: (Integer) -> Integer
+
+          attr_reader uid: Integer?
+
+          def uid=: (Integer) -> Integer
+
+          def initialize: (?gid: Integer, ?uid: Integer) -> void
+
+          def to_hash: -> { gid: Integer, uid: Integer }
+        end
+      end
+
+      type settings =
+        {
+          args: ::Array[String],
+          devices: ::Array[DockerEngineAPI::Plugin::Settings::Device],
+          env: ::Array[String],
+          mounts: ::Array[DockerEngineAPI::Plugin::Settings::Mount]
+        }
+
+      class Settings < DockerEngineAPI::Internal::Type::BaseModel
+        attr_accessor args: ::Array[String]
+
+        attr_accessor devices: ::Array[DockerEngineAPI::Plugin::Settings::Device]
+
+        attr_accessor env: ::Array[String]
+
+        attr_accessor mounts: ::Array[DockerEngineAPI::Plugin::Settings::Mount]
+
+        def initialize: (
+          args: ::Array[String],
+          devices: ::Array[DockerEngineAPI::Plugin::Settings::Device],
+          env: ::Array[String],
+          mounts: ::Array[DockerEngineAPI::Plugin::Settings::Mount]
+        ) -> void
+
+        def to_hash: -> {
+          args: ::Array[String],
+          devices: ::Array[DockerEngineAPI::Plugin::Settings::Device],
+          env: ::Array[String],
+          mounts: ::Array[DockerEngineAPI::Plugin::Settings::Mount]
+        }
+
+        type device =
+          {
+            description: String,
+            name: String,
+            path: String,
+            settable: ::Array[String]
+          }
+
+        class Device < DockerEngineAPI::Internal::Type::BaseModel
+          attr_accessor description: String
+
+          attr_accessor name: String
+
+          attr_accessor path: String
+
+          attr_accessor settable: ::Array[String]
+
+          def initialize: (
+            description: String,
+            name: String,
+            path: String,
+            settable: ::Array[String]
+          ) -> void
+
+          def to_hash: -> {
+            description: String,
+            name: String,
+            path: String,
+            settable: ::Array[String]
+          }
+        end
+
+        type mount =
+          {
+            description: String,
+            destination: String,
+            name: String,
+            options: ::Array[String],
+            settable: ::Array[String],
+            source: String,
+            type: String
+          }
+
+        class Mount < DockerEngineAPI::Internal::Type::BaseModel
+          attr_accessor description: String
+
+          attr_accessor destination: String
+
+          attr_accessor name: String
+
+          attr_accessor options: ::Array[String]
+
+          attr_accessor settable: ::Array[String]
+
+          attr_accessor source: String
+
+          attr_accessor type: String
+
+          def initialize: (
+            description: String,
+            destination: String,
+            name: String,
+            options: ::Array[String],
+            settable: ::Array[String],
+            source: String,
+            type: String
+          ) -> void
+
+          def to_hash: -> {
+            description: String,
+            destination: String,
+            name: String,
+            options: ::Array[String],
+            settable: ::Array[String],
+            source: String,
+            type: String
+          }
+        end
+      end
+    end
+  end
+end

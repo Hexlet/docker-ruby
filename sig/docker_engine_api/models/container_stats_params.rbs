@@ -1,0 +1,32 @@
+module DockerEngineAPI
+  module Models
+    type container_stats_params =
+      { one_shot: bool, stream: bool }
+      & DockerEngineAPI::Internal::Type::request_parameters
+
+    class ContainerStatsParams < DockerEngineAPI::Internal::Type::BaseModel
+      extend DockerEngineAPI::Internal::Type::RequestParameters::Converter
+      include DockerEngineAPI::Internal::Type::RequestParameters
+
+      attr_reader one_shot: bool?
+
+      def one_shot=: (bool) -> bool
+
+      attr_reader stream: bool?
+
+      def stream=: (bool) -> bool
+
+      def initialize: (
+        ?one_shot: bool,
+        ?stream: bool,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        one_shot: bool,
+        stream: bool,
+        request_options: DockerEngineAPI::RequestOptions
+      }
+    end
+  end
+end

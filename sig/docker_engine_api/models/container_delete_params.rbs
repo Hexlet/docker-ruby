@@ -1,0 +1,38 @@
+module DockerEngineAPI
+  module Models
+    type container_delete_params =
+      { force: bool, link: bool, v: bool }
+      & DockerEngineAPI::Internal::Type::request_parameters
+
+    class ContainerDeleteParams < DockerEngineAPI::Internal::Type::BaseModel
+      extend DockerEngineAPI::Internal::Type::RequestParameters::Converter
+      include DockerEngineAPI::Internal::Type::RequestParameters
+
+      attr_reader force: bool?
+
+      def force=: (bool) -> bool
+
+      attr_reader link: bool?
+
+      def link=: (bool) -> bool
+
+      attr_reader v: bool?
+
+      def v=: (bool) -> bool
+
+      def initialize: (
+        ?force: bool,
+        ?link: bool,
+        ?v: bool,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        force: bool,
+        link: bool,
+        v: bool,
+        request_options: DockerEngineAPI::RequestOptions
+      }
+    end
+  end
+end

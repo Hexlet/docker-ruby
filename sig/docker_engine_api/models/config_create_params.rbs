@@ -1,0 +1,36 @@
+module DockerEngineAPI
+  module Models
+    type config_create_params =
+      { spec: DockerEngineAPI::ConfigCreateParams::Spec }
+      & DockerEngineAPI::Internal::Type::request_parameters
+
+    class ConfigCreateParams < DockerEngineAPI::Internal::Type::BaseModel
+      extend DockerEngineAPI::Internal::Type::RequestParameters::Converter
+      include DockerEngineAPI::Internal::Type::RequestParameters
+
+      attr_reader spec: DockerEngineAPI::ConfigCreateParams::Spec?
+
+      def spec=: (
+        DockerEngineAPI::ConfigCreateParams::Spec
+      ) -> DockerEngineAPI::ConfigCreateParams::Spec
+
+      def initialize: (
+        ?spec: DockerEngineAPI::ConfigCreateParams::Spec,
+        ?request_options: DockerEngineAPI::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        spec: DockerEngineAPI::ConfigCreateParams::Spec,
+        request_options: DockerEngineAPI::RequestOptions
+      }
+
+      type spec = {  }
+
+      class Spec < DockerEngineAPI::Models::Spec
+        def initialize: -> void
+
+        def to_hash: -> {  }
+      end
+    end
+  end
+end
