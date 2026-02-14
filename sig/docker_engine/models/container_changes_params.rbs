@@ -1,0 +1,15 @@
+module DockerEngine
+  module Models
+    type container_changes_params =
+      {  } & DockerEngine::Internal::Type::request_parameters
+
+    class ContainerChangesParams < DockerEngine::Internal::Type::BaseModel
+      extend DockerEngine::Internal::Type::RequestParameters::Converter
+      include DockerEngine::Internal::Type::RequestParameters
+
+      def initialize: (?request_options: DockerEngine::request_opts) -> void
+
+      def to_hash: -> { request_options: DockerEngine::RequestOptions }
+    end
+  end
+end

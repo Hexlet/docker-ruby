@@ -1,0 +1,28 @@
+module DockerEngine
+  module Models
+    type list_response =
+      { volumes: ::Array[DockerEngine::Volume], warnings: ::Array[String] }
+
+    class ListResponse < DockerEngine::Internal::Type::BaseModel
+      attr_reader volumes: ::Array[DockerEngine::Volume]?
+
+      def volumes=: (
+        ::Array[DockerEngine::Volume]
+      ) -> ::Array[DockerEngine::Volume]
+
+      attr_reader warnings: ::Array[String]?
+
+      def warnings=: (::Array[String]) -> ::Array[String]
+
+      def initialize: (
+        ?volumes: ::Array[DockerEngine::Volume],
+        ?warnings: ::Array[String]
+      ) -> void
+
+      def to_hash: -> {
+        volumes: ::Array[DockerEngine::Volume],
+        warnings: ::Array[String]
+      }
+    end
+  end
+end

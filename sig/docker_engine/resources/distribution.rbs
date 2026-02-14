@@ -1,0 +1,12 @@
+module DockerEngine
+  module Resources
+    class Distribution
+      def inspect_: (
+        String name,
+        ?request_options: DockerEngine::request_opts
+      ) -> DockerEngine::Inspect
+
+      def initialize: (client: DockerEngine::Client) -> void
+    end
+  end
+end

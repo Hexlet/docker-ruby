@@ -1,0 +1,15 @@
+module DockerEngine
+  module Models
+    type swarm_unlock_key_response = { unlock_key: String }
+
+    class SwarmUnlockKeyResponse < DockerEngine::Internal::Type::BaseModel
+      attr_reader unlock_key: String?
+
+      def unlock_key=: (String) -> String
+
+      def initialize: (?unlock_key: String) -> void
+
+      def to_hash: -> { unlock_key: String }
+    end
+  end
+end

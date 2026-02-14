@@ -38,7 +38,7 @@ module DockerEngine
       #
       # @param request_options [DockerEngine::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [DockerEngine::Models::NetworkCreateResponse]
+      # @return [DockerEngine::Models::CreateResponse]
       #
       # @see DockerEngine::Models::NetworkCreateParams
       def create(params)
@@ -47,7 +47,7 @@ module DockerEngine
           method: :post,
           path: "networks/create",
           body: parsed,
-          model: DockerEngine::Models::NetworkCreateResponse,
+          model: DockerEngine::CreateResponse,
           options: options
         )
       end
@@ -102,6 +102,60 @@ module DockerEngine
         )
       end
 
+      # The network must be either a local-scoped network or a swarm-scoped network with
+      # the `attachable` option set. A network cannot be re-attached to a running
+      # container
+      #
+      # @overload connect(id, container:, endpoint_config: nil, request_options: {})
+      #
+      # @param id [String] Network ID or name
+      #
+      # @param container [String] The ID or name of the container to connect to the network.
+      #
+      # @param endpoint_config [DockerEngine::Models::ConnectRequest::EndpointConfig] Configuration for a network endpoint.
+      #
+      # @param request_options [DockerEngine::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [nil]
+      #
+      # @see DockerEngine::Models::NetworkConnectParams
+      def connect(id, params)
+        parsed, options = DockerEngine::NetworkConnectParams.dump_request(params)
+        @client.request(
+          method: :post,
+          path: ["networks/%1$s/connect", id],
+          body: parsed,
+          model: NilClass,
+          options: options
+        )
+      end
+
+      # Disconnect a container from a network
+      #
+      # @overload disconnect(id, container:, force: nil, request_options: {})
+      #
+      # @param id [String] Network ID or name
+      #
+      # @param container [String] The ID or name of the container to disconnect from the network.
+      #
+      # @param force [Boolean] Force the container to disconnect from the network.
+      #
+      # @param request_options [DockerEngine::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [nil]
+      #
+      # @see DockerEngine::Models::NetworkDisconnectParams
+      def disconnect(id, params)
+        parsed, options = DockerEngine::NetworkDisconnectParams.dump_request(params)
+        @client.request(
+          method: :post,
+          path: ["networks/%1$s/disconnect", id],
+          body: parsed,
+          model: NilClass,
+          options: options
+        )
+      end
+
       # Inspect a network
       #
       # @overload inspect_(id, scope: nil, verbose: nil, request_options: {})
@@ -124,6 +178,31 @@ module DockerEngine
           path: ["networks/%1$s", id],
           query: parsed,
           model: DockerEngine::Models::NetworkInspectResponse,
+          options: options
+        )
+      end
+
+      # Some parameter documentations has been truncated, see
+      # {DockerEngine::Models::NetworkPruneParams} for more details.
+      #
+      # Delete unused networks
+      #
+      # @overload prune(filters: nil, request_options: {})
+      #
+      # @param filters [String] Filters to process on the prune list, encoded as JSON (a `map[string][]string`).
+      #
+      # @param request_options [DockerEngine::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [DockerEngine::Models::NetworkPruneResponse]
+      #
+      # @see DockerEngine::Models::NetworkPruneParams
+      def prune(params = {})
+        parsed, options = DockerEngine::NetworkPruneParams.dump_request(params)
+        @client.request(
+          method: :post,
+          path: "networks/prune",
+          query: parsed,
+          model: DockerEngine::Models::NetworkPruneResponse,
           options: options
         )
       end

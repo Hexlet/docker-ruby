@@ -9,7 +9,7 @@ class DockerEngine::Test::Resources::NetworksTest < DockerEngine::Test::Resource
     response = @docker.networks.create(name: "my_network")
 
     assert_pattern do
-      response => DockerEngine::Models::NetworkCreateResponse
+      response => DockerEngine::CreateResponse
     end
 
     assert_pattern do
@@ -40,6 +40,26 @@ class DockerEngine::Test::Resources::NetworksTest < DockerEngine::Test::Resource
     end
   end
 
+  def test_connect_required_params
+    skip("Prism tests are disabled")
+
+    response = @docker.networks.connect("id", container: "3613f73ba0e4")
+
+    assert_pattern do
+      response => nil
+    end
+  end
+
+  def test_disconnect_required_params
+    skip("Prism tests are disabled")
+
+    response = @docker.networks.disconnect("id", container: "3613f73ba0e4")
+
+    assert_pattern do
+      response => nil
+    end
+  end
+
   def test_inspect_
     skip("Prism tests are disabled")
 
@@ -47,6 +67,22 @@ class DockerEngine::Test::Resources::NetworksTest < DockerEngine::Test::Resource
 
     assert_pattern do
       response => DockerEngine::Models::NetworkInspectResponse
+    end
+  end
+
+  def test_prune
+    skip("Prism tests are disabled")
+
+    response = @docker.networks.prune
+
+    assert_pattern do
+      response => DockerEngine::Models::NetworkPruneResponse
+    end
+
+    assert_pattern do
+      response => {
+        networks_deleted: ^(DockerEngine::Internal::Type::ArrayOf[String]) | nil
+      }
     end
   end
 end

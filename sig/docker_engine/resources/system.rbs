@@ -1,15 +1,28 @@
 module DockerEngine
   module Resources
     class System
+      def data_usage: (
+        ?type: ::Array[DockerEngine::Models::SystemDataUsageParams::type_],
+        ?verbose: bool,
+        ?request_options: DockerEngine::request_opts
+      ) -> DockerEngine::Models::SystemDataUsageResponse
+
+      def events: (
+        ?filters: String,
+        ?since: String,
+        ?until_: String,
+        ?request_options: DockerEngine::request_opts
+      ) -> DockerEngine::Models::SystemEventsResponse
+
       def info: (
         ?request_options: DockerEngine::request_opts
-      ) -> DockerEngine::Models::SystemInfoResponse
+      ) -> DockerEngine::Info
 
       def ping: (?request_options: DockerEngine::request_opts) -> String
 
       def version: (
         ?request_options: DockerEngine::request_opts
-      ) -> DockerEngine::Models::SystemVersionResponse
+      ) -> DockerEngine::Version
 
       def initialize: (client: DockerEngine::Client) -> void
     end

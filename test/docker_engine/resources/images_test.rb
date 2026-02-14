@@ -19,7 +19,80 @@ class DockerEngine::Test::Resources::ImagesTest < DockerEngine::Test::ResourceTe
     response = @docker.images.delete("name")
 
     assert_pattern do
-      response => ^(DockerEngine::Internal::Type::ArrayOf[DockerEngine::Models::ImageDeleteResponseItem])
+      response => ^(DockerEngine::Internal::Type::ArrayOf[DockerEngine::DeleteItem])
+    end
+  end
+
+  def test_build_required_params
+    skip("Prism tests are disabled")
+
+    response = @docker.images.build(body: Pathname(__FILE__))
+
+    assert_pattern do
+      response => nil
+    end
+  end
+
+  def test_build_prune
+    skip("Prism tests are disabled")
+
+    response = @docker.images.build_prune
+
+    assert_pattern do
+      response => DockerEngine::Models::ImageBuildPruneResponse
+    end
+
+    assert_pattern do
+      response => {
+        caches_deleted: ^(DockerEngine::Internal::Type::ArrayOf[String]) | nil,
+        space_reclaimed: Integer | nil
+      }
+    end
+  end
+
+  def test_commit
+    skip("Prism tests are disabled")
+
+    response = @docker.images.commit
+
+    assert_pattern do
+      response => DockerEngine::Models::ImageCommitResponse
+    end
+
+    assert_pattern do
+      response => {
+        id: String
+      }
+    end
+  end
+
+  def test_get
+    skip("Prism doesn't support application/x-tar responses")
+
+    response = @docker.images.get("name")
+
+    assert_pattern do
+      response => StringIO
+    end
+  end
+
+  def test_get_all
+    skip("Prism doesn't support application/x-tar responses")
+
+    response = @docker.images.get_all
+
+    assert_pattern do
+      response => StringIO
+    end
+  end
+
+  def test_history
+    skip("Prism tests are disabled")
+
+    response = @docker.images.history("name")
+
+    assert_pattern do
+      response => ^(DockerEngine::Internal::Type::ArrayOf[DockerEngine::HistoryItem])
     end
   end
 
@@ -56,10 +129,67 @@ class DockerEngine::Test::Resources::ImagesTest < DockerEngine::Test::ResourceTe
     end
   end
 
+  def test_load__required_params
+    skip("Prism tests are disabled")
+
+    response = @docker.images.load_(body: Pathname(__FILE__))
+
+    assert_pattern do
+      response => nil
+    end
+  end
+
+  def test_prune
+    skip("Prism tests are disabled")
+
+    response = @docker.images.prune
+
+    assert_pattern do
+      response => DockerEngine::Models::ImagePruneResponse
+    end
+
+    assert_pattern do
+      response => {
+        images_deleted: ^(DockerEngine::Internal::Type::ArrayOf[DockerEngine::DeleteItem]) | nil,
+        space_reclaimed: Integer | nil
+      }
+    end
+  end
+
   def test_pull
     skip("Prism tests are disabled")
 
     response = @docker.images.pull
+
+    assert_pattern do
+      response => nil
+    end
+  end
+
+  def test_push_required_params
+    skip("Prism tests are disabled")
+
+    response = @docker.images.push("name", x_registry_auth: "X-Registry-Auth")
+
+    assert_pattern do
+      response => nil
+    end
+  end
+
+  def test_search_required_params
+    skip("Prism tests are disabled")
+
+    response = @docker.images.search(term: "term")
+
+    assert_pattern do
+      response => ^(DockerEngine::Internal::Type::ArrayOf[DockerEngine::Models::ImageSearchResponseItem])
+    end
+  end
+
+  def test_tag
+    skip("Prism tests are disabled")
+
+    response = @docker.images.tag("name")
 
     assert_pattern do
       response => nil

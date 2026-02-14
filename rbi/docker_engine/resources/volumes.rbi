@@ -17,12 +17,33 @@ module DockerEngine
       )
       end
 
+      # "Update a volume. Valid only for Swarm cluster volumes"
+      sig do
+        params(
+          name: String,
+          version: Integer,
+          spec: DockerEngine::VolumeUpdateParams::Spec::OrHash,
+          request_options: DockerEngine::RequestOptions::OrHash
+        ).void
+      end
+      def update(
+        # Path param: The name or ID of the volume
+        name,
+        # Query param: The version number of the volume being updated. This is required to
+        # avoid conflicting writes. Found in the volume's `ClusterVolume` field.
+        version:,
+        # Body param: Cluster-specific options used to create the volume.
+        spec: nil,
+        request_options: {}
+      )
+      end
+
       # List volumes
       sig do
         params(
           filters: String,
           request_options: DockerEngine::RequestOptions::OrHash
-        ).returns(DockerEngine::Models::VolumeListResponse)
+        ).returns(DockerEngine::ListResponse)
       end
       def list(
         # JSON encoded value of the filters (a `map[string][]string`) to process on the
@@ -67,6 +88,28 @@ module DockerEngine
       def inspect_(
         # Volume name or ID
         name,
+        request_options: {}
+      )
+      end
+
+      # Delete unused volumes
+      sig do
+        params(
+          filters: String,
+          request_options: DockerEngine::RequestOptions::OrHash
+        ).returns(DockerEngine::Models::VolumePruneResponse)
+      end
+      def prune(
+        # Filters to process on the prune list, encoded as JSON (a `map[string][]string`).
+        #
+        # Available filters:
+        #
+        # - `label` (`label=<key>`, `label=<key>=<value>`, `label!=<key>`, or
+        #   `label!=<key>=<value>`) Prune volumes with (or without, in case `label!=...`
+        #   is used) the specified labels.
+        # - `all` (`all=true`) - Consider all (local) volumes for pruning and not just
+        #   anonymous volumes.
+        filters: nil,
         request_options: {}
       )
       end

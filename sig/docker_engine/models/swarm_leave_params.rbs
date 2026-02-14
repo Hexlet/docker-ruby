@@ -1,0 +1,25 @@
+module DockerEngine
+  module Models
+    type swarm_leave_params =
+      { force: bool } & DockerEngine::Internal::Type::request_parameters
+
+    class SwarmLeaveParams < DockerEngine::Internal::Type::BaseModel
+      extend DockerEngine::Internal::Type::RequestParameters::Converter
+      include DockerEngine::Internal::Type::RequestParameters
+
+      attr_reader force: bool?
+
+      def force=: (bool) -> bool
+
+      def initialize: (
+        ?force: bool,
+        ?request_options: DockerEngine::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        force: bool,
+        request_options: DockerEngine::RequestOptions
+      }
+    end
+  end
+end

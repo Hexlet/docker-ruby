@@ -1,0 +1,73 @@
+module DockerEngine
+  module Models
+    type service_update_params =
+      {
+        version: Integer,
+        spec: DockerEngine::ServiceUpdateParams::Spec,
+        registry_auth_from: DockerEngine::Models::ServiceUpdateParams::registry_auth_from,
+        rollback: String,
+        x_registry_auth: String
+      }
+      & DockerEngine::Internal::Type::request_parameters
+
+    class ServiceUpdateParams < DockerEngine::Internal::Type::BaseModel
+      extend DockerEngine::Internal::Type::RequestParameters::Converter
+      include DockerEngine::Internal::Type::RequestParameters
+
+      attr_accessor version: Integer
+
+      attr_accessor spec: DockerEngine::ServiceUpdateParams::Spec
+
+      attr_reader registry_auth_from: DockerEngine::Models::ServiceUpdateParams::registry_auth_from?
+
+      def registry_auth_from=: (
+        DockerEngine::Models::ServiceUpdateParams::registry_auth_from
+      ) -> DockerEngine::Models::ServiceUpdateParams::registry_auth_from
+
+      attr_reader rollback: String?
+
+      def rollback=: (String) -> String
+
+      attr_reader x_registry_auth: String?
+
+      def x_registry_auth=: (String) -> String
+
+      def initialize: (
+        version: Integer,
+        spec: DockerEngine::ServiceUpdateParams::Spec,
+        ?registry_auth_from: DockerEngine::Models::ServiceUpdateParams::registry_auth_from,
+        ?rollback: String,
+        ?x_registry_auth: String,
+        ?request_options: DockerEngine::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        version: Integer,
+        spec: DockerEngine::ServiceUpdateParams::Spec,
+        registry_auth_from: DockerEngine::Models::ServiceUpdateParams::registry_auth_from,
+        rollback: String,
+        x_registry_auth: String,
+        request_options: DockerEngine::RequestOptions
+      }
+
+      type spec = {  }
+
+      class Spec < DockerEngine::Models::Spec
+        def initialize: -> void
+
+        def to_hash: -> {  }
+      end
+
+      type registry_auth_from = :spec | :"previous-spec"
+
+      module RegistryAuthFrom
+        extend DockerEngine::Internal::Type::Enum
+
+        SPEC: :spec
+        PREVIOUS_SPEC: :"previous-spec"
+
+        def self?.values: -> ::Array[DockerEngine::Models::ServiceUpdateParams::registry_auth_from]
+      end
+    end
+  end
+end
