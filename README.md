@@ -28,7 +28,9 @@ gem "docker-engine-ruby", "~> 0.4.0"
 require "bundler/setup"
 require "docker_engine_ruby"
 
-docker = DockerEngineRuby::Client.new
+docker = DockerEngineRuby::Client.new(
+  environment: "production_tls" # defaults to "production"
+)
 
 create_response = docker.containers.create(name: "sample-container")
 

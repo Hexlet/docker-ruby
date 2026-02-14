@@ -27,6 +27,13 @@ class DockerEngineRubyTest < Minitest::Test
     super
   end
 
+  def test_raises_on_unknown_environment
+    e = assert_raises(ArgumentError) do
+      DockerEngineRuby::Client.new(environment: "wrong")
+    end
+    assert_match(/environment must be one of/, e.message)
+  end
+
   def test_client_default_request_default_retry_attempts
     stub_request(:get, "http://localhost/containers/json").to_return_json(status: 500, body: {})
 
