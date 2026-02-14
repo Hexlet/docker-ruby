@@ -28,8 +28,8 @@ module DockerEngineRuby
       #   Date and time at which the network was created in
       #   [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
       #
-      #   @return [String, nil]
-      optional :created, String, api_name: :Created
+      #   @return [Time, nil]
+      optional :created, Time, api_name: :Created
 
       # @!attribute driver
       #   The name of the driver used to create the network (e.g. `bridge`, `overlay`).
@@ -68,6 +68,7 @@ module DockerEngineRuby
       optional :internal, DockerEngineRuby::Internal::Type::Boolean, api_name: :Internal
 
       # @!attribute ipam
+      #   The network's IP Address Management.
       #
       #   @return [DockerEngineRuby::Models::Network::Ipam, nil]
       optional :ipam, -> { DockerEngineRuby::Network::Ipam }, api_name: :IPAM
@@ -116,7 +117,7 @@ module DockerEngineRuby
       #
       #   @param config_only [Boolean] Whether the network is a config-only network. Config-only networks are
       #
-      #   @param created [String] Date and time at which the network was created in
+      #   @param created [Time] Date and time at which the network was created in
       #
       #   @param driver [String] The name of the driver used to create the network (e.g. `bridge`,
       #
@@ -130,7 +131,7 @@ module DockerEngineRuby
       #
       #   @param internal [Boolean] Whether the network is created to only allow internal networking
       #
-      #   @param ipam [DockerEngineRuby::Models::Network::Ipam]
+      #   @param ipam [DockerEngineRuby::Models::Network::Ipam] The network's IP Address Management.
       #
       #   @param labels [Hash{Symbol=>String}] Metadata specific to the network being created.
       #
@@ -190,6 +191,8 @@ module DockerEngineRuby
         # @!method initialize(config: nil, driver: nil, options: nil)
         #   Some parameter documentations has been truncated, see
         #   {DockerEngineRuby::Models::Network::Ipam} for more details.
+        #
+        #   The network's IP Address Management.
         #
         #   @param config [Array<DockerEngineRuby::Models::Network::Ipam::Config>] List of IPAM configuration options, specified as a map:
         #

@@ -3,16 +3,13 @@
 module DockerEngineRuby
   module Resources
     class Nodes
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::NodeUpdateParams} for more details.
-      #
       # Update a node
       #
-      # @overload update(id, version:, spec: nil, request_options: {})
+      # @overload update(id, version:, spec:, request_options: {})
       #
-      # @param id [String] Path param: The ID of the node
+      # @param id [String] Path param
       #
-      # @param version [Integer] Query param: The version number of the node object being updated. This is requir
+      # @param version [Integer] Query param
       #
       # @param spec [DockerEngineRuby::Models::Spec] Body param
       #
@@ -33,15 +30,11 @@ module DockerEngineRuby
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::NodeListParams} for more details.
-      #
       # List nodes
       #
       # @overload list(filters: nil, request_options: {})
       #
-      # @param filters [String] Filters to process on the nodes list, encoded as JSON (a `map[string][]string`).
-      #
+      # @param filters [String]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Array<DockerEngineRuby::Models::Node>]
@@ -62,10 +55,8 @@ module DockerEngineRuby
       #
       # @overload delete(id, force: nil, request_options: {})
       #
-      # @param id [String] The ID or name of the node
-      #
-      # @param force [Boolean] Force remove a node from the swarm
-      #
+      # @param id [String]
+      # @param force [Boolean]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [nil]
@@ -86,8 +77,7 @@ module DockerEngineRuby
       #
       # @overload inspect_(id, request_options: {})
       #
-      # @param id [String] The ID or name of the node
-      #
+      # @param id [String]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [DockerEngineRuby::Models::Node]

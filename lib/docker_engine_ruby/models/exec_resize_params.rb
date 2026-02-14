@@ -8,22 +8,18 @@ module DockerEngineRuby
       include DockerEngineRuby::Internal::Type::RequestParameters
 
       # @!attribute h
-      #   Height of the TTY session in characters
       #
       #   @return [Integer]
       required :h, Integer
 
       # @!attribute w
-      #   Width of the TTY session in characters
       #
       #   @return [Integer]
       required :w, Integer
 
       # @!method initialize(h:, w:, request_options: {})
-      #   @param h [Integer] Height of the TTY session in characters
-      #
-      #   @param w [Integer] Width of the TTY session in characters
-      #
+      #   @param h [Integer]
+      #   @param w [Integer]
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]
     end
   end

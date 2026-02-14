@@ -1,36 +1,15 @@
 module DockerEngineRuby
   module Models
     type config_create_params =
-      { spec: DockerEngineRuby::ConfigCreateParams::Spec }
-      & DockerEngineRuby::Internal::Type::request_parameters
+      {  } & DockerEngineRuby::Internal::Type::request_parameters
 
     class ConfigCreateParams < DockerEngineRuby::Internal::Type::BaseModel
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
-      attr_reader spec: DockerEngineRuby::ConfigCreateParams::Spec?
+      def initialize: (?request_options: DockerEngineRuby::request_opts) -> void
 
-      def spec=: (
-        DockerEngineRuby::ConfigCreateParams::Spec
-      ) -> DockerEngineRuby::ConfigCreateParams::Spec
-
-      def initialize: (
-        ?spec: DockerEngineRuby::ConfigCreateParams::Spec,
-        ?request_options: DockerEngineRuby::request_opts
-      ) -> void
-
-      def to_hash: -> {
-        spec: DockerEngineRuby::ConfigCreateParams::Spec,
-        request_options: DockerEngineRuby::RequestOptions
-      }
-
-      type spec = {  }
-
-      class Spec < DockerEngineRuby::Models::Spec
-        def initialize: -> void
-
-        def to_hash: -> {  }
-      end
+      def to_hash: -> { request_options: DockerEngineRuby::RequestOptions }
     end
   end
 end

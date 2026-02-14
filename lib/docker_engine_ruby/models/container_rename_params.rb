@@ -8,14 +8,12 @@ module DockerEngineRuby
       include DockerEngineRuby::Internal::Type::RequestParameters
 
       # @!attribute name
-      #   New name for the container
       #
       #   @return [String]
       required :name, String
 
       # @!method initialize(name:, request_options: {})
-      #   @param name [String] New name for the container
-      #
+      #   @param name [String]
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]
     end
   end

@@ -37,7 +37,7 @@ module DockerEngineRuby
       #
       # This information is only available if present in the image, and omitted
       # otherwise.
-      sig { returns(T.nilable(String)) }
+      sig { returns(T.nilable(Time)) }
       attr_accessor :created
 
       # A descriptor struct containing digest, media type, and size, as defined in the
@@ -46,7 +46,9 @@ module DockerEngineRuby
       attr_reader :descriptor
 
       sig do
-        params(descriptor: DockerEngineRuby::Image::Descriptor::OrHash).void
+        params(
+          descriptor: T.nilable(DockerEngineRuby::Image::Descriptor::OrHash)
+        ).void
       end
       attr_writer :descriptor
 
@@ -56,7 +58,9 @@ module DockerEngineRuby
       attr_reader :graph_driver
 
       sig do
-        params(graph_driver: DockerEngineRuby::Image::GraphDriver::OrHash).void
+        params(
+          graph_driver: T.nilable(DockerEngineRuby::Image::GraphDriver::OrHash)
+        ).void
       end
       attr_writer :graph_driver
 
@@ -79,7 +83,11 @@ module DockerEngineRuby
       sig { returns(T.nilable(DockerEngineRuby::Image::Identity)) }
       attr_reader :identity
 
-      sig { params(identity: DockerEngineRuby::Image::Identity::OrHash).void }
+      sig do
+        params(
+          identity: T.nilable(DockerEngineRuby::Image::Identity::OrHash)
+        ).void
+      end
       attr_writer :identity
 
       # Manifests is a list of image manifests available in this image. It provides a
@@ -161,11 +169,11 @@ module DockerEngineRuby
           author: T.nilable(String),
           comment: T.nilable(String),
           config: DockerEngineRuby::Image::Config::OrHash,
-          created: T.nilable(String),
-          descriptor: DockerEngineRuby::Image::Descriptor::OrHash,
-          graph_driver: DockerEngineRuby::Image::GraphDriver::OrHash,
+          created: T.nilable(Time),
+          descriptor: T.nilable(DockerEngineRuby::Image::Descriptor::OrHash),
+          graph_driver: T.nilable(DockerEngineRuby::Image::GraphDriver::OrHash),
           id: String,
-          identity: DockerEngineRuby::Image::Identity::OrHash,
+          identity: T.nilable(DockerEngineRuby::Image::Identity::OrHash),
           manifests:
             T.nilable(T::Array[DockerEngineRuby::Image::Manifest::OrHash]),
           metadata: DockerEngineRuby::Image::Metadata::OrHash,
@@ -259,11 +267,11 @@ module DockerEngineRuby
             author: T.nilable(String),
             comment: T.nilable(String),
             config: DockerEngineRuby::Image::Config,
-            created: T.nilable(String),
-            descriptor: DockerEngineRuby::Image::Descriptor,
-            graph_driver: DockerEngineRuby::Image::GraphDriver,
+            created: T.nilable(Time),
+            descriptor: T.nilable(DockerEngineRuby::Image::Descriptor),
+            graph_driver: T.nilable(DockerEngineRuby::Image::GraphDriver),
             id: String,
-            identity: DockerEngineRuby::Image::Identity,
+            identity: T.nilable(DockerEngineRuby::Image::Identity),
             manifests: T.nilable(T::Array[DockerEngineRuby::Image::Manifest]),
             metadata: DockerEngineRuby::Image::Metadata,
             os: String,
@@ -322,7 +330,7 @@ module DockerEngineRuby
         # An object mapping ports to an empty object in the form:
         #
         # `{"<port>/<tcp|udp|sctp>": {}}`
-        sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
+        sig { returns(T.nilable(T::Hash[Symbol, T::Hash[Symbol, T.anything]])) }
         attr_accessor :exposed_ports
 
         # A test to perform to check that the container is healthy. Healthcheck commands
@@ -364,10 +372,12 @@ module DockerEngineRuby
         attr_writer :user
 
         # An object mapping mount point paths inside the container to empty objects.
-        sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
+        sig { returns(T.nilable(T::Hash[Symbol, T::Hash[Symbol, T.anything]])) }
         attr_reader :volumes
 
-        sig { params(volumes: T::Hash[Symbol, T.anything]).void }
+        sig do
+          params(volumes: T::Hash[Symbol, T::Hash[Symbol, T.anything]]).void
+        end
         attr_writer :volumes
 
         # The working directory for commands to run in.
@@ -385,14 +395,15 @@ module DockerEngineRuby
             cmd: T::Array[String],
             entrypoint: T::Array[String],
             env: T::Array[String],
-            exposed_ports: T.nilable(T::Hash[Symbol, T.anything]),
+            exposed_ports:
+              T.nilable(T::Hash[Symbol, T::Hash[Symbol, T.anything]]),
             healthcheck: DockerEngineRuby::Image::Config::Healthcheck::OrHash,
             labels: T::Hash[Symbol, String],
             on_build: T.nilable(T::Array[String]),
             shell: T.nilable(T::Array[String]),
             stop_signal: T.nilable(String),
             user: String,
-            volumes: T::Hash[Symbol, T.anything],
+            volumes: T::Hash[Symbol, T::Hash[Symbol, T.anything]],
             working_dir: String
           ).returns(T.attached_class)
         end
@@ -442,14 +453,15 @@ module DockerEngineRuby
               cmd: T::Array[String],
               entrypoint: T::Array[String],
               env: T::Array[String],
-              exposed_ports: T.nilable(T::Hash[Symbol, T.anything]),
+              exposed_ports:
+                T.nilable(T::Hash[Symbol, T::Hash[Symbol, T.anything]]),
               healthcheck: DockerEngineRuby::Image::Config::Healthcheck,
               labels: T::Hash[Symbol, String],
               on_build: T.nilable(T::Array[String]),
               shell: T.nilable(T::Array[String]),
               stop_signal: T.nilable(String),
               user: String,
-              volumes: T::Hash[Symbol, T.anything],
+              volumes: T::Hash[Symbol, T::Hash[Symbol, T.anything]],
               working_dir: String
             }
           )
@@ -644,8 +656,7 @@ module DockerEngineRuby
 
         sig do
           params(
-            platform:
-              T.nilable(DockerEngineRuby::Image::Descriptor::Platform::OrHash)
+            platform: DockerEngineRuby::Image::Descriptor::Platform::OrHash
           ).void
         end
         attr_writer :platform
@@ -670,8 +681,7 @@ module DockerEngineRuby
             data: T.nilable(String),
             digest: String,
             media_type: String,
-            platform:
-              T.nilable(DockerEngineRuby::Image::Descriptor::Platform::OrHash),
+            platform: DockerEngineRuby::Image::Descriptor::Platform::OrHash,
             size: Integer,
             urls: T.nilable(T::Array[String])
           ).returns(T.attached_class)
@@ -708,8 +718,7 @@ module DockerEngineRuby
               data: T.nilable(String),
               digest: String,
               media_type: String,
-              platform:
-                T.nilable(DockerEngineRuby::Image::Descriptor::Platform),
+              platform: DockerEngineRuby::Image::Descriptor::Platform,
               size: Integer,
               urls: T.nilable(T::Array[String])
             }
@@ -1797,9 +1806,7 @@ module DockerEngineRuby
           sig do
             params(
               platform:
-                T.nilable(
-                  DockerEngineRuby::Image::Manifest::Descriptor::Platform::OrHash
-                )
+                DockerEngineRuby::Image::Manifest::Descriptor::Platform::OrHash
             ).void
           end
           attr_writer :platform
@@ -1825,9 +1832,7 @@ module DockerEngineRuby
               digest: String,
               media_type: String,
               platform:
-                T.nilable(
-                  DockerEngineRuby::Image::Manifest::Descriptor::Platform::OrHash
-                ),
+                DockerEngineRuby::Image::Manifest::Descriptor::Platform::OrHash,
               size: Integer,
               urls: T.nilable(T::Array[String])
             ).returns(T.attached_class)
@@ -1865,9 +1870,7 @@ module DockerEngineRuby
                 digest: String,
                 media_type: String,
                 platform:
-                  T.nilable(
-                    DockerEngineRuby::Image::Manifest::Descriptor::Platform
-                  ),
+                  DockerEngineRuby::Image::Manifest::Descriptor::Platform,
                 size: Integer,
                 urls: T.nilable(T::Array[String])
               }
@@ -2014,37 +2017,16 @@ module DockerEngineRuby
               )
             end
 
-          # Content is the size (in bytes) of all the locally present content in the content
-          # store (e.g. image config, layers) referenced by this manifest and its children.
-          # This only includes blobs in the content store.
           sig { returns(Integer) }
           attr_accessor :content
 
-          # Total is the total size (in bytes) of all the locally present data (both
-          # distributable and non-distributable) that's related to this manifest and its
-          # children. This equal to the sum of [Content] size AND all the sizes in the
-          # [Size] struct present in the Kind-specific data struct. For example, for an
-          # image kind (Kind == "image") this would include the size of the image content
-          # and unpacked image snapshots ([Size.Content] + [ImageData.Size.Unpacked]).
           sig { returns(Integer) }
           attr_accessor :total
 
           sig do
             params(content: Integer, total: Integer).returns(T.attached_class)
           end
-          def self.new(
-            # Content is the size (in bytes) of all the locally present content in the content
-            # store (e.g. image config, layers) referenced by this manifest and its children.
-            # This only includes blobs in the content store.
-            content:,
-            # Total is the total size (in bytes) of all the locally present data (both
-            # distributable and non-distributable) that's related to this manifest and its
-            # children. This equal to the sum of [Content] size AND all the sizes in the
-            # [Size] struct present in the Kind-specific data struct. For example, for an
-            # image kind (Kind == "image") this would include the size of the image content
-            # and unpacked image snapshots ([Size.Content] + [ImageData.Size.Unpacked]).
-            total:
-          )
+          def self.new(content:, total:)
           end
 
           sig { override.returns({ content: Integer, total: Integer }) }
@@ -2061,17 +2043,13 @@ module DockerEngineRuby
               )
             end
 
-          # The digest of the image manifest that this attestation is for.
           sig { returns(String) }
           attr_accessor :for_
 
           # The image data for the attestation manifest. This field is only populated when
           # Kind is "attestation".
           sig { params(for_: String).returns(T.attached_class) }
-          def self.new(
-            # The digest of the image manifest that this attestation is for.
-            for_:
-          )
+          def self.new(for_:)
           end
 
           sig { override.returns({ for_: String }) }
@@ -2088,7 +2066,6 @@ module DockerEngineRuby
               )
             end
 
-          # The IDs of the containers that are using this image.
           sig { returns(T::Array[String]) }
           attr_accessor :containers
 
@@ -2096,18 +2073,14 @@ module DockerEngineRuby
           # the
           # [OCI Image Index Specification](https://github.com/opencontainers/image-spec/blob/v1.0.1/image-index.md).
           sig do
-            returns(
-              T.nilable(DockerEngineRuby::Image::Manifest::ImageData::Platform)
-            )
+            returns(DockerEngineRuby::Image::Manifest::ImageData::Platform)
           end
           attr_reader :platform
 
           sig do
             params(
               platform:
-                T.nilable(
-                  DockerEngineRuby::Image::Manifest::ImageData::Platform::OrHash
-                )
+                DockerEngineRuby::Image::Manifest::ImageData::Platform::OrHash
             ).void
           end
           attr_writer :platform
@@ -2128,14 +2101,11 @@ module DockerEngineRuby
             params(
               containers: T::Array[String],
               platform:
-                T.nilable(
-                  DockerEngineRuby::Image::Manifest::ImageData::Platform::OrHash
-                ),
+                DockerEngineRuby::Image::Manifest::ImageData::Platform::OrHash,
               size: DockerEngineRuby::Image::Manifest::ImageData::Size::OrHash
             ).returns(T.attached_class)
           end
           def self.new(
-            # The IDs of the containers that are using this image.
             containers:,
             # Describes the platform which the image in the manifest runs on, as defined in
             # the
@@ -2150,9 +2120,7 @@ module DockerEngineRuby
               {
                 containers: T::Array[String],
                 platform:
-                  T.nilable(
-                    DockerEngineRuby::Image::Manifest::ImageData::Platform
-                  ),
+                  DockerEngineRuby::Image::Manifest::ImageData::Platform,
                 size: DockerEngineRuby::Image::Manifest::ImageData::Size
               }
             )
@@ -2260,23 +2228,11 @@ module DockerEngineRuby
                 )
               end
 
-            # Unpacked is the size (in bytes) of the locally unpacked (uncompressed) image
-            # content that's directly usable by the containers running this image. It's
-            # independent of the distributable content - e.g. the image might still have an
-            # unpacked data that's still used by some container even when the
-            # distributable/compressed content is already gone.
             sig { returns(Integer) }
             attr_accessor :unpacked
 
             sig { params(unpacked: Integer).returns(T.attached_class) }
-            def self.new(
-              # Unpacked is the size (in bytes) of the locally unpacked (uncompressed) image
-              # content that's directly usable by the containers running this image. It's
-              # independent of the distributable content - e.g. the image might still have an
-              # unpacked data that's still used by some container even when the
-              # distributable/compressed content is already gone.
-              unpacked:
-            )
+            def self.new(unpacked:)
             end
 
             sig { override.returns({ unpacked: Integer }) }
@@ -2295,30 +2251,16 @@ module DockerEngineRuby
             )
           end
 
-        # Date and time at which the image was last tagged in
-        # [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
-        #
-        # This information is only available if the image was tagged locally, and omitted
-        # otherwise.
-        sig { returns(T.nilable(String)) }
+        sig { returns(T.nilable(Time)) }
         attr_accessor :last_tag_time
 
         # Additional metadata of the image in the local cache. This information is local
         # to the daemon, and not part of the image itself.
-        sig do
-          params(last_tag_time: T.nilable(String)).returns(T.attached_class)
-        end
-        def self.new(
-          # Date and time at which the image was last tagged in
-          # [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
-          #
-          # This information is only available if the image was tagged locally, and omitted
-          # otherwise.
-          last_tag_time: nil
-        )
+        sig { params(last_tag_time: T.nilable(Time)).returns(T.attached_class) }
+        def self.new(last_tag_time: nil)
         end
 
-        sig { override.returns({ last_tag_time: T.nilable(String) }) }
+        sig { override.returns({ last_tag_time: T.nilable(Time) }) }
         def to_hash
         end
       end

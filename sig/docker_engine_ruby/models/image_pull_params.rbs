@@ -2,6 +2,7 @@ module DockerEngineRuby
   module Models
     type image_pull_params =
       {
+        body: String,
         changes: ::Array[String],
         from_image: String,
         from_src: String,
@@ -9,7 +10,6 @@ module DockerEngineRuby
         platform: String,
         repo: String,
         tag: String,
-        body: String,
         x_registry_auth: String
       }
       & DockerEngineRuby::Internal::Type::request_parameters
@@ -17,6 +17,8 @@ module DockerEngineRuby
     class ImagePullParams < DockerEngineRuby::Internal::Type::BaseModel
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_accessor body: String
 
       attr_reader changes: ::Array[String]?
 
@@ -46,15 +48,12 @@ module DockerEngineRuby
 
       def tag=: (String) -> String
 
-      attr_reader body: String?
-
-      def body=: (String) -> String
-
       attr_reader x_registry_auth: String?
 
       def x_registry_auth=: (String) -> String
 
       def initialize: (
+        body: String,
         ?changes: ::Array[String],
         ?from_image: String,
         ?from_src: String,
@@ -62,12 +61,12 @@ module DockerEngineRuby
         ?platform: String,
         ?repo: String,
         ?tag: String,
-        ?body: String,
         ?x_registry_auth: String,
         ?request_options: DockerEngineRuby::request_opts
       ) -> void
 
       def to_hash: -> {
+        body: String,
         changes: ::Array[String],
         from_image: String,
         from_src: String,
@@ -75,7 +74,6 @@ module DockerEngineRuby
         platform: String,
         repo: String,
         tag: String,
-        body: String,
         x_registry_auth: String,
         request_options: DockerEngineRuby::RequestOptions
       }

@@ -3,26 +3,34 @@ module DockerEngineRuby
     type stats_response =
       {
         id: String?,
-        blkio_stats: DockerEngineRuby::StatsResponse::BlkioStats?,
-        cpu_stats: DockerEngineRuby::StatsResponse::CPUStats?,
+        blkio_stats: DockerEngineRuby::StatsResponse::BlkioStats,
+        cpu_stats: DockerEngineRuby::StatsResponse::CPUStats,
         memory_stats: DockerEngineRuby::StatsResponse::MemoryStats,
         name: String?,
-        networks: top?,
+        networks: ::Hash[Symbol, DockerEngineRuby::StatsResponse::Network]?,
         num_procs: Integer,
         os_type: String?,
-        pids_stats: DockerEngineRuby::StatsResponse::PidsStats?,
-        precpu_stats: DockerEngineRuby::StatsResponse::PrecpuStats?,
+        pids_stats: DockerEngineRuby::StatsResponse::PidsStats,
+        precpu_stats: DockerEngineRuby::StatsResponse::PrecpuStats,
         preread: Time,
         read: Time,
-        storage_stats: DockerEngineRuby::StatsResponse::StorageStats?
+        storage_stats: DockerEngineRuby::StatsResponse::StorageStats
       }
 
     class StatsResponse < DockerEngineRuby::Internal::Type::BaseModel
       attr_accessor id: String?
 
-      attr_accessor blkio_stats: DockerEngineRuby::StatsResponse::BlkioStats?
+      attr_reader blkio_stats: DockerEngineRuby::StatsResponse::BlkioStats?
 
-      attr_accessor cpu_stats: DockerEngineRuby::StatsResponse::CPUStats?
+      def blkio_stats=: (
+        DockerEngineRuby::StatsResponse::BlkioStats
+      ) -> DockerEngineRuby::StatsResponse::BlkioStats
+
+      attr_reader cpu_stats: DockerEngineRuby::StatsResponse::CPUStats?
+
+      def cpu_stats=: (
+        DockerEngineRuby::StatsResponse::CPUStats
+      ) -> DockerEngineRuby::StatsResponse::CPUStats
 
       attr_reader memory_stats: DockerEngineRuby::StatsResponse::MemoryStats?
 
@@ -32,7 +40,7 @@ module DockerEngineRuby
 
       attr_accessor name: String?
 
-      attr_accessor networks: top?
+      attr_accessor networks: ::Hash[Symbol, DockerEngineRuby::StatsResponse::Network]?
 
       attr_reader num_procs: Integer?
 
@@ -40,9 +48,17 @@ module DockerEngineRuby
 
       attr_accessor os_type: String?
 
-      attr_accessor pids_stats: DockerEngineRuby::StatsResponse::PidsStats?
+      attr_reader pids_stats: DockerEngineRuby::StatsResponse::PidsStats?
 
-      attr_accessor precpu_stats: DockerEngineRuby::StatsResponse::PrecpuStats?
+      def pids_stats=: (
+        DockerEngineRuby::StatsResponse::PidsStats
+      ) -> DockerEngineRuby::StatsResponse::PidsStats
+
+      attr_reader precpu_stats: DockerEngineRuby::StatsResponse::PrecpuStats?
+
+      def precpu_stats=: (
+        DockerEngineRuby::StatsResponse::PrecpuStats
+      ) -> DockerEngineRuby::StatsResponse::PrecpuStats
 
       attr_reader preread: Time?
 
@@ -52,93 +68,97 @@ module DockerEngineRuby
 
       def read=: (Time) -> Time
 
-      attr_accessor storage_stats: DockerEngineRuby::StatsResponse::StorageStats?
+      attr_reader storage_stats: DockerEngineRuby::StatsResponse::StorageStats?
+
+      def storage_stats=: (
+        DockerEngineRuby::StatsResponse::StorageStats
+      ) -> DockerEngineRuby::StatsResponse::StorageStats
 
       def initialize: (
         ?id: String?,
-        ?blkio_stats: DockerEngineRuby::StatsResponse::BlkioStats?,
-        ?cpu_stats: DockerEngineRuby::StatsResponse::CPUStats?,
+        ?blkio_stats: DockerEngineRuby::StatsResponse::BlkioStats,
+        ?cpu_stats: DockerEngineRuby::StatsResponse::CPUStats,
         ?memory_stats: DockerEngineRuby::StatsResponse::MemoryStats,
         ?name: String?,
-        ?networks: top?,
+        ?networks: ::Hash[Symbol, DockerEngineRuby::StatsResponse::Network]?,
         ?num_procs: Integer,
         ?os_type: String?,
-        ?pids_stats: DockerEngineRuby::StatsResponse::PidsStats?,
-        ?precpu_stats: DockerEngineRuby::StatsResponse::PrecpuStats?,
+        ?pids_stats: DockerEngineRuby::StatsResponse::PidsStats,
+        ?precpu_stats: DockerEngineRuby::StatsResponse::PrecpuStats,
         ?preread: Time,
         ?read: Time,
-        ?storage_stats: DockerEngineRuby::StatsResponse::StorageStats?
+        ?storage_stats: DockerEngineRuby::StatsResponse::StorageStats
       ) -> void
 
       def to_hash: -> {
         id: String?,
-        blkio_stats: DockerEngineRuby::StatsResponse::BlkioStats?,
-        cpu_stats: DockerEngineRuby::StatsResponse::CPUStats?,
+        blkio_stats: DockerEngineRuby::StatsResponse::BlkioStats,
+        cpu_stats: DockerEngineRuby::StatsResponse::CPUStats,
         memory_stats: DockerEngineRuby::StatsResponse::MemoryStats,
         name: String?,
-        networks: top?,
+        networks: ::Hash[Symbol, DockerEngineRuby::StatsResponse::Network]?,
         num_procs: Integer,
         os_type: String?,
-        pids_stats: DockerEngineRuby::StatsResponse::PidsStats?,
-        precpu_stats: DockerEngineRuby::StatsResponse::PrecpuStats?,
+        pids_stats: DockerEngineRuby::StatsResponse::PidsStats,
+        precpu_stats: DockerEngineRuby::StatsResponse::PrecpuStats,
         preread: Time,
         read: Time,
-        storage_stats: DockerEngineRuby::StatsResponse::StorageStats?
+        storage_stats: DockerEngineRuby::StatsResponse::StorageStats
       }
 
       type blkio_stats =
         {
-          io_merged_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoMergedRecursive?]?,
-          io_queue_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoQueueRecursive?]?,
-          io_service_bytes_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive?],
-          io_service_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceTimeRecursive?]?,
-          io_serviced_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServicedRecursive?]?,
-          io_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoTimeRecursive?]?,
-          io_wait_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoWaitTimeRecursive?]?,
-          sectors_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::SectorsRecursive?]?
+          io_merged_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoMergedRecursive]?,
+          io_queue_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoQueueRecursive]?,
+          io_service_bytes_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive],
+          io_service_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceTimeRecursive]?,
+          io_serviced_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServicedRecursive]?,
+          io_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoTimeRecursive]?,
+          io_wait_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoWaitTimeRecursive]?,
+          sectors_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::SectorsRecursive]?
         }
 
       class BlkioStats < DockerEngineRuby::Internal::Type::BaseModel
-        attr_accessor io_merged_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoMergedRecursive?]?
+        attr_accessor io_merged_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoMergedRecursive]?
 
-        attr_accessor io_queue_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoQueueRecursive?]?
+        attr_accessor io_queue_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoQueueRecursive]?
 
-        attr_reader io_service_bytes_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive?]?
+        attr_reader io_service_bytes_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive]?
 
         def io_service_bytes_recursive=: (
-          ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive?]
-        ) -> ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive?]
+          ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive]
+        ) -> ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive]
 
-        attr_accessor io_service_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceTimeRecursive?]?
+        attr_accessor io_service_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceTimeRecursive]?
 
-        attr_accessor io_serviced_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServicedRecursive?]?
+        attr_accessor io_serviced_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServicedRecursive]?
 
-        attr_accessor io_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoTimeRecursive?]?
+        attr_accessor io_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoTimeRecursive]?
 
-        attr_accessor io_wait_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoWaitTimeRecursive?]?
+        attr_accessor io_wait_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoWaitTimeRecursive]?
 
-        attr_accessor sectors_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::SectorsRecursive?]?
+        attr_accessor sectors_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::SectorsRecursive]?
 
         def initialize: (
-          ?io_merged_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoMergedRecursive?]?,
-          ?io_queue_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoQueueRecursive?]?,
-          ?io_service_bytes_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive?],
-          ?io_service_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceTimeRecursive?]?,
-          ?io_serviced_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServicedRecursive?]?,
-          ?io_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoTimeRecursive?]?,
-          ?io_wait_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoWaitTimeRecursive?]?,
-          ?sectors_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::SectorsRecursive?]?
+          ?io_merged_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoMergedRecursive]?,
+          ?io_queue_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoQueueRecursive]?,
+          ?io_service_bytes_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive],
+          ?io_service_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceTimeRecursive]?,
+          ?io_serviced_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServicedRecursive]?,
+          ?io_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoTimeRecursive]?,
+          ?io_wait_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoWaitTimeRecursive]?,
+          ?sectors_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::SectorsRecursive]?
         ) -> void
 
         def to_hash: -> {
-          io_merged_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoMergedRecursive?]?,
-          io_queue_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoQueueRecursive?]?,
-          io_service_bytes_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive?],
-          io_service_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceTimeRecursive?]?,
-          io_serviced_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServicedRecursive?]?,
-          io_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoTimeRecursive?]?,
-          io_wait_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoWaitTimeRecursive?]?,
-          sectors_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::SectorsRecursive?]?
+          io_merged_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoMergedRecursive]?,
+          io_queue_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoQueueRecursive]?,
+          io_service_bytes_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceBytesRecursive],
+          io_service_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServiceTimeRecursive]?,
+          io_serviced_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoServicedRecursive]?,
+          io_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoTimeRecursive]?,
+          io_wait_time_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::IoWaitTimeRecursive]?,
+          sectors_recursive: ::Array[DockerEngineRuby::StatsResponse::BlkioStats::SectorsRecursive]?
         }
 
         type io_merged_recursive =
@@ -424,33 +444,41 @@ module DockerEngineRuby
 
       type cpu_stats =
         {
-          cpu_usage: DockerEngineRuby::StatsResponse::CPUStats::CPUUsage?,
+          cpu_usage: DockerEngineRuby::StatsResponse::CPUStats::CPUUsage,
           online_cpus: Integer?,
           system_cpu_usage: Integer?,
-          throttling_data: DockerEngineRuby::StatsResponse::CPUStats::ThrottlingData?
+          throttling_data: DockerEngineRuby::StatsResponse::CPUStats::ThrottlingData
         }
 
       class CPUStats < DockerEngineRuby::Internal::Type::BaseModel
-        attr_accessor cpu_usage: DockerEngineRuby::StatsResponse::CPUStats::CPUUsage?
+        attr_reader cpu_usage: DockerEngineRuby::StatsResponse::CPUStats::CPUUsage?
+
+        def cpu_usage=: (
+          DockerEngineRuby::StatsResponse::CPUStats::CPUUsage
+        ) -> DockerEngineRuby::StatsResponse::CPUStats::CPUUsage
 
         attr_accessor online_cpus: Integer?
 
         attr_accessor system_cpu_usage: Integer?
 
-        attr_accessor throttling_data: DockerEngineRuby::StatsResponse::CPUStats::ThrottlingData?
+        attr_reader throttling_data: DockerEngineRuby::StatsResponse::CPUStats::ThrottlingData?
+
+        def throttling_data=: (
+          DockerEngineRuby::StatsResponse::CPUStats::ThrottlingData
+        ) -> DockerEngineRuby::StatsResponse::CPUStats::ThrottlingData
 
         def initialize: (
-          ?cpu_usage: DockerEngineRuby::StatsResponse::CPUStats::CPUUsage?,
+          ?cpu_usage: DockerEngineRuby::StatsResponse::CPUStats::CPUUsage,
           ?online_cpus: Integer?,
           ?system_cpu_usage: Integer?,
-          ?throttling_data: DockerEngineRuby::StatsResponse::CPUStats::ThrottlingData?
+          ?throttling_data: DockerEngineRuby::StatsResponse::CPUStats::ThrottlingData
         ) -> void
 
         def to_hash: -> {
-          cpu_usage: DockerEngineRuby::StatsResponse::CPUStats::CPUUsage?,
+          cpu_usage: DockerEngineRuby::StatsResponse::CPUStats::CPUUsage,
           online_cpus: Integer?,
           system_cpu_usage: Integer?,
-          throttling_data: DockerEngineRuby::StatsResponse::CPUStats::ThrottlingData?
+          throttling_data: DockerEngineRuby::StatsResponse::CPUStats::ThrottlingData
         }
 
         type cpu_usage =
@@ -579,6 +607,84 @@ module DockerEngineRuby
         }
       end
 
+      type network =
+        {
+          endpoint_id: String?,
+          instance_id: String?,
+          rx_bytes: Integer,
+          rx_dropped: Integer,
+          rx_errors: Integer,
+          rx_packets: Integer,
+          tx_bytes: Integer,
+          tx_dropped: Integer,
+          tx_errors: Integer,
+          tx_packets: Integer
+        }
+
+      class Network < DockerEngineRuby::Internal::Type::BaseModel
+        attr_accessor endpoint_id: String?
+
+        attr_accessor instance_id: String?
+
+        attr_reader rx_bytes: Integer?
+
+        def rx_bytes=: (Integer) -> Integer
+
+        attr_reader rx_dropped: Integer?
+
+        def rx_dropped=: (Integer) -> Integer
+
+        attr_reader rx_errors: Integer?
+
+        def rx_errors=: (Integer) -> Integer
+
+        attr_reader rx_packets: Integer?
+
+        def rx_packets=: (Integer) -> Integer
+
+        attr_reader tx_bytes: Integer?
+
+        def tx_bytes=: (Integer) -> Integer
+
+        attr_reader tx_dropped: Integer?
+
+        def tx_dropped=: (Integer) -> Integer
+
+        attr_reader tx_errors: Integer?
+
+        def tx_errors=: (Integer) -> Integer
+
+        attr_reader tx_packets: Integer?
+
+        def tx_packets=: (Integer) -> Integer
+
+        def initialize: (
+          ?endpoint_id: String?,
+          ?instance_id: String?,
+          ?rx_bytes: Integer,
+          ?rx_dropped: Integer,
+          ?rx_errors: Integer,
+          ?rx_packets: Integer,
+          ?tx_bytes: Integer,
+          ?tx_dropped: Integer,
+          ?tx_errors: Integer,
+          ?tx_packets: Integer
+        ) -> void
+
+        def to_hash: -> {
+          endpoint_id: String?,
+          instance_id: String?,
+          rx_bytes: Integer,
+          rx_dropped: Integer,
+          rx_errors: Integer,
+          rx_packets: Integer,
+          tx_bytes: Integer,
+          tx_dropped: Integer,
+          tx_errors: Integer,
+          tx_packets: Integer
+        }
+      end
+
       type pids_stats = { current: Integer?, limit: Integer? }
 
       class PidsStats < DockerEngineRuby::Internal::Type::BaseModel
@@ -593,33 +699,41 @@ module DockerEngineRuby
 
       type precpu_stats =
         {
-          cpu_usage: DockerEngineRuby::StatsResponse::PrecpuStats::CPUUsage?,
+          cpu_usage: DockerEngineRuby::StatsResponse::PrecpuStats::CPUUsage,
           online_cpus: Integer?,
           system_cpu_usage: Integer?,
-          throttling_data: DockerEngineRuby::StatsResponse::PrecpuStats::ThrottlingData?
+          throttling_data: DockerEngineRuby::StatsResponse::PrecpuStats::ThrottlingData
         }
 
       class PrecpuStats < DockerEngineRuby::Internal::Type::BaseModel
-        attr_accessor cpu_usage: DockerEngineRuby::StatsResponse::PrecpuStats::CPUUsage?
+        attr_reader cpu_usage: DockerEngineRuby::StatsResponse::PrecpuStats::CPUUsage?
+
+        def cpu_usage=: (
+          DockerEngineRuby::StatsResponse::PrecpuStats::CPUUsage
+        ) -> DockerEngineRuby::StatsResponse::PrecpuStats::CPUUsage
 
         attr_accessor online_cpus: Integer?
 
         attr_accessor system_cpu_usage: Integer?
 
-        attr_accessor throttling_data: DockerEngineRuby::StatsResponse::PrecpuStats::ThrottlingData?
+        attr_reader throttling_data: DockerEngineRuby::StatsResponse::PrecpuStats::ThrottlingData?
+
+        def throttling_data=: (
+          DockerEngineRuby::StatsResponse::PrecpuStats::ThrottlingData
+        ) -> DockerEngineRuby::StatsResponse::PrecpuStats::ThrottlingData
 
         def initialize: (
-          ?cpu_usage: DockerEngineRuby::StatsResponse::PrecpuStats::CPUUsage?,
+          ?cpu_usage: DockerEngineRuby::StatsResponse::PrecpuStats::CPUUsage,
           ?online_cpus: Integer?,
           ?system_cpu_usage: Integer?,
-          ?throttling_data: DockerEngineRuby::StatsResponse::PrecpuStats::ThrottlingData?
+          ?throttling_data: DockerEngineRuby::StatsResponse::PrecpuStats::ThrottlingData
         ) -> void
 
         def to_hash: -> {
-          cpu_usage: DockerEngineRuby::StatsResponse::PrecpuStats::CPUUsage?,
+          cpu_usage: DockerEngineRuby::StatsResponse::PrecpuStats::CPUUsage,
           online_cpus: Integer?,
           system_cpu_usage: Integer?,
-          throttling_data: DockerEngineRuby::StatsResponse::PrecpuStats::ThrottlingData?
+          throttling_data: DockerEngineRuby::StatsResponse::PrecpuStats::ThrottlingData
         }
 
         type cpu_usage =

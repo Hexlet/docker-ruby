@@ -3,14 +3,11 @@
 module DockerEngineRuby
   module Resources
     class Plugins
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::PluginCreateParams} for more details.
-      #
       # Create a plugin
       #
       # @overload create(name:, body:, request_options: {})
       #
-      # @param name [String] Query param: The name of the plugin. The `:latest` tag is optional, and is the
+      # @param name [String] Query param
       #
       # @param body [Pathname, StringIO, IO, String, DockerEngineRuby::FilePart] Body param
       #
@@ -25,22 +22,18 @@ module DockerEngineRuby
           method: :post,
           path: "plugins/create",
           query: parsed.except(:body),
-          headers: {"content-type" => "application/x-tar"},
+          headers: {"content-type" => "application/octet-stream"},
           body: parsed[:body],
           model: NilClass,
           options: options
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::PluginListParams} for more details.
-      #
-      # Returns information about installed plugins.
+      # List plugins
       #
       # @overload list(filters: nil, request_options: {})
       #
-      # @param filters [String] A JSON encoded value of the filters (a `map[string][]string`) to
-      #
+      # @param filters [String]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Array<DockerEngineRuby::Models::Plugin>]
@@ -57,17 +50,12 @@ module DockerEngineRuby
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::PluginDeleteParams} for more details.
-      #
       # Remove a plugin
       #
       # @overload delete(name, force: nil, request_options: {})
       #
-      # @param name [String] The name of the plugin. The `:latest` tag is optional, and is the
-      #
-      # @param force [Boolean] Disable the plugin before removing. This may result in issues if the
-      #
+      # @param name [String]
+      # @param force [Boolean]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [DockerEngineRuby::Models::Plugin]
@@ -84,17 +72,12 @@ module DockerEngineRuby
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::PluginDisableParams} for more details.
-      #
       # Disable a plugin
       #
       # @overload disable(name, force: nil, request_options: {})
       #
-      # @param name [String] The name of the plugin. The `:latest` tag is optional, and is the
-      #
-      # @param force [Boolean] Force disable a plugin even if still in use.
-      #
+      # @param name [String]
+      # @param force [Boolean]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [nil]
@@ -111,17 +94,12 @@ module DockerEngineRuby
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::PluginEnableParams} for more details.
-      #
       # Enable a plugin
       #
       # @overload enable(name, timeout: nil, request_options: {})
       #
-      # @param name [String] The name of the plugin. The `:latest` tag is optional, and is the
-      #
-      # @param timeout [Integer] Set the HTTP client timeout (in seconds)
-      #
+      # @param name [String]
+      # @param timeout [Integer]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [nil]
@@ -138,15 +116,11 @@ module DockerEngineRuby
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::PluginInspectParams} for more details.
-      #
       # Inspect a plugin
       #
       # @overload inspect_(name, request_options: {})
       #
-      # @param name [String] The name of the plugin. The `:latest` tag is optional, and is the
-      #
+      # @param name [String]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [DockerEngineRuby::Models::Plugin]
@@ -161,15 +135,11 @@ module DockerEngineRuby
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::PluginPrivilegesParams} for more details.
-      #
       # Get plugin privileges
       #
       # @overload privileges(remote:, request_options: {})
       #
-      # @param remote [String] The name of the plugin. The `:latest` tag is optional, and is the
-      #
+      # @param remote [String]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Array<DockerEngineRuby::Models::Privilege>]
@@ -186,22 +156,17 @@ module DockerEngineRuby
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::PluginPullParams} for more details.
+      # Install a plugin
       #
-      # Pulls and installs a plugin. After the plugin is installed, it can be enabled
-      # using the
-      # [`POST /plugins/{name}/enable` endpoint](#operation/PostPluginsEnable).
+      # @overload pull(remote:, body:, name: nil, x_registry_auth: nil, request_options: {})
       #
-      # @overload pull(remote:, name: nil, body: nil, x_registry_auth: nil, request_options: {})
-      #
-      # @param remote [String] Query param: Remote reference for plugin to install.
-      #
-      # @param name [String] Query param: Local name for the pulled plugin.
+      # @param remote [String] Query param
       #
       # @param body [Array<DockerEngineRuby::Models::Privilege>] Body param
       #
-      # @param x_registry_auth [String] Header param: A base64url-encoded auth configuration to use when pulling a plugi
+      # @param name [String] Query param
+      #
+      # @param x_registry_auth [String] Header param
       #
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -222,15 +187,11 @@ module DockerEngineRuby
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::PluginPushParams} for more details.
-      #
-      # Push a plugin to the registry.
+      # Push a plugin
       #
       # @overload push(name, request_options: {})
       #
-      # @param name [String] The name of the plugin. The `:latest` tag is optional, and is the
-      #
+      # @param name [String]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [nil]
@@ -245,23 +206,18 @@ module DockerEngineRuby
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::PluginSetParams} for more details.
-      #
       # Configure a plugin
       #
-      # @overload set(name, body: nil, request_options: {})
+      # @overload set(name, body:, request_options: {})
       #
-      # @param name [String] The name of the plugin. The `:latest` tag is optional, and is the
-      #
+      # @param name [String]
       # @param body [Array<String>]
-      #
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [nil]
       #
       # @see DockerEngineRuby::Models::PluginSetParams
-      def set(name, params = {})
+      def set(name, params)
         parsed, options = DockerEngineRuby::PluginSetParams.dump_request(params)
         @client.request(
           method: :post,
@@ -272,20 +228,17 @@ module DockerEngineRuby
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::PluginUpgradeParams} for more details.
-      #
       # Upgrade a plugin
       #
-      # @overload upgrade(name, remote:, body: nil, x_registry_auth: nil, request_options: {})
+      # @overload upgrade(name, remote:, body:, x_registry_auth: nil, request_options: {})
       #
-      # @param name [String] Path param: The name of the plugin. The `:latest` tag is optional, and is the
+      # @param name [String] Path param
       #
-      # @param remote [String] Query param: Remote reference to upgrade to.
+      # @param remote [String] Query param
       #
       # @param body [Array<DockerEngineRuby::Models::Privilege>] Body param
       #
-      # @param x_registry_auth [String] Header param: A base64url-encoded auth configuration to use when pulling a plugi
+      # @param x_registry_auth [String] Header param
       #
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #

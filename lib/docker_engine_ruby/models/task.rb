@@ -5,8 +5,6 @@ module DockerEngineRuby
     # @see DockerEngineRuby::Resources::Tasks#inspect_
     class Task < DockerEngineRuby::Internal::Type::BaseModel
       # @!attribute assigned_generic_resources
-      #   User-defined resources can be either Integer resources (e.g, `SSD=3`) or String
-      #   resources (e.g, `GPU=UUID1`).
       #
       #   @return [Array<DockerEngineRuby::Models::Task::AssignedGenericResource>, nil]
       optional :assigned_generic_resources,
@@ -17,8 +15,8 @@ module DockerEngineRuby
 
       # @!attribute created_at
       #
-      #   @return [String, nil]
-      optional :created_at, String, api_name: :CreatedAt
+      #   @return [Time, nil]
+      optional :created_at, Time, api_name: :CreatedAt
 
       # @!attribute desired_state
       #
@@ -88,8 +86,8 @@ module DockerEngineRuby
 
       # @!attribute updated_at
       #
-      #   @return [String, nil]
-      optional :updated_at, String, api_name: :UpdatedAt
+      #   @return [Time, nil]
+      optional :updated_at, Time, api_name: :UpdatedAt
 
       # @!attribute version
       #   The version number of the object such as node, service, etc. This is needed to
@@ -109,9 +107,9 @@ module DockerEngineRuby
       #   Some parameter documentations has been truncated, see
       #   {DockerEngineRuby::Models::Task} for more details.
       #
-      #   @param assigned_generic_resources [Array<DockerEngineRuby::Models::Task::AssignedGenericResource>] User-defined resources can be either Integer resources (e.g, `SSD=3`) or
+      #   @param assigned_generic_resources [Array<DockerEngineRuby::Models::Task::AssignedGenericResource>]
       #
-      #   @param created_at [String]
+      #   @param created_at [Time]
       #
       #   @param desired_state [Symbol, DockerEngineRuby::Models::Task::DesiredState]
       #
@@ -133,7 +131,7 @@ module DockerEngineRuby
       #
       #   @param status [DockerEngineRuby::Models::Task::Status] represents the status of a task.
       #
-      #   @param updated_at [String]
+      #   @param updated_at [Time]
       #
       #   @param version [DockerEngineRuby::Models::Task::Version] The version number of the object such as node, service, etc. This is needed
 
@@ -270,8 +268,8 @@ module DockerEngineRuby
 
         # @!attribute timestamp
         #
-        #   @return [String, nil]
-        optional :timestamp, String, api_name: :Timestamp
+        #   @return [Time, nil]
+        optional :timestamp, Time, api_name: :Timestamp
 
         # @!method initialize(container_status: nil, err: nil, message: nil, port_status: nil, state: nil, timestamp: nil)
         #   Some parameter documentations has been truncated, see
@@ -289,7 +287,7 @@ module DockerEngineRuby
         #
         #   @param state [Symbol, DockerEngineRuby::Models::Task::Status::State]
         #
-        #   @param timestamp [String]
+        #   @param timestamp [Time]
 
         # @see DockerEngineRuby::Models::Task::Status#container_status
         class ContainerStatus < DockerEngineRuby::Internal::Type::BaseModel

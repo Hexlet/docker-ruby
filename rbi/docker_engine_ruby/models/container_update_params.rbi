@@ -342,25 +342,6 @@ module DockerEngineRuby
       sig { returns(T.nilable(Integer)) }
       attr_accessor :pids_limit
 
-      # The behavior to apply when the container exits. The default is not to restart.
-      #
-      # An ever increasing delay (double the previous delay, starting at 100ms) is added
-      # before each restart to prevent flooding the server.
-      sig do
-        returns(
-          T.nilable(DockerEngineRuby::ContainerUpdateParams::RestartPolicy)
-        )
-      end
-      attr_reader :restart_policy
-
-      sig do
-        params(
-          restart_policy:
-            DockerEngineRuby::ContainerUpdateParams::RestartPolicy::OrHash
-        ).void
-      end
-      attr_writer :restart_policy
-
       # A list of resource limits to set in the container. For example:
       #
       # ```
@@ -431,8 +412,6 @@ module DockerEngineRuby
           nano_cpus: Integer,
           oom_kill_disable: T::Boolean,
           pids_limit: T.nilable(Integer),
-          restart_policy:
-            DockerEngineRuby::ContainerUpdateParams::RestartPolicy::OrHash,
           ulimits:
             T::Array[DockerEngineRuby::ContainerUpdateParams::Ulimit::OrHash],
           request_options: DockerEngineRuby::RequestOptions::OrHash
@@ -535,11 +514,6 @@ module DockerEngineRuby
         # Tune a container's PIDs limit. Set `0` or `-1` for unlimited, or `null` to not
         # change.
         pids_limit: nil,
-        # The behavior to apply when the container exits. The default is not to restart.
-        #
-        # An ever increasing delay (double the previous delay, starting at 100ms) is added
-        # before each restart to prevent flooding the server.
-        restart_policy: nil,
         # A list of resource limits to set in the container. For example:
         #
         # ```
@@ -598,8 +572,6 @@ module DockerEngineRuby
             nano_cpus: Integer,
             oom_kill_disable: T::Boolean,
             pids_limit: T.nilable(Integer),
-            restart_policy:
-              DockerEngineRuby::ContainerUpdateParams::RestartPolicy,
             ulimits: T::Array[DockerEngineRuby::ContainerUpdateParams::Ulimit],
             request_options: DockerEngineRuby::RequestOptions
           }
@@ -940,137 +912,6 @@ module DockerEngineRuby
         end
       end
 
-      class RestartPolicy < DockerEngineRuby::Internal::Type::BaseModel
-        OrHash =
-          T.type_alias do
-            T.any(
-              DockerEngineRuby::ContainerUpdateParams::RestartPolicy,
-              DockerEngineRuby::Internal::AnyHash
-            )
-          end
-
-        # If `on-failure` is used, the number of times to retry before giving up.
-        sig { returns(T.nilable(Integer)) }
-        attr_reader :maximum_retry_count
-
-        sig { params(maximum_retry_count: Integer).void }
-        attr_writer :maximum_retry_count
-
-        # - Empty string means not to restart
-        # - `no` Do not automatically restart
-        # - `always` Always restart
-        # - `unless-stopped` Restart always except when the user has manually stopped the
-        #   container
-        # - `on-failure` Restart only when the container exit code is non-zero
-        sig do
-          returns(
-            T.nilable(
-              DockerEngineRuby::ContainerUpdateParams::RestartPolicy::Name::OrSymbol
-            )
-          )
-        end
-        attr_reader :name
-
-        sig do
-          params(
-            name:
-              DockerEngineRuby::ContainerUpdateParams::RestartPolicy::Name::OrSymbol
-          ).void
-        end
-        attr_writer :name
-
-        # The behavior to apply when the container exits. The default is not to restart.
-        #
-        # An ever increasing delay (double the previous delay, starting at 100ms) is added
-        # before each restart to prevent flooding the server.
-        sig do
-          params(
-            maximum_retry_count: Integer,
-            name:
-              DockerEngineRuby::ContainerUpdateParams::RestartPolicy::Name::OrSymbol
-          ).returns(T.attached_class)
-        end
-        def self.new(
-          # If `on-failure` is used, the number of times to retry before giving up.
-          maximum_retry_count: nil,
-          # - Empty string means not to restart
-          # - `no` Do not automatically restart
-          # - `always` Always restart
-          # - `unless-stopped` Restart always except when the user has manually stopped the
-          #   container
-          # - `on-failure` Restart only when the container exit code is non-zero
-          name: nil
-        )
-        end
-
-        sig do
-          override.returns(
-            {
-              maximum_retry_count: Integer,
-              name:
-                DockerEngineRuby::ContainerUpdateParams::RestartPolicy::Name::OrSymbol
-            }
-          )
-        end
-        def to_hash
-        end
-
-        # - Empty string means not to restart
-        # - `no` Do not automatically restart
-        # - `always` Always restart
-        # - `unless-stopped` Restart always except when the user has manually stopped the
-        #   container
-        # - `on-failure` Restart only when the container exit code is non-zero
-        module Name
-          extend DockerEngineRuby::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                DockerEngineRuby::ContainerUpdateParams::RestartPolicy::Name
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          EMPTY =
-            T.let(
-              :"",
-              DockerEngineRuby::ContainerUpdateParams::RestartPolicy::Name::TaggedSymbol
-            )
-          NO =
-            T.let(
-              :no,
-              DockerEngineRuby::ContainerUpdateParams::RestartPolicy::Name::TaggedSymbol
-            )
-          ALWAYS =
-            T.let(
-              :always,
-              DockerEngineRuby::ContainerUpdateParams::RestartPolicy::Name::TaggedSymbol
-            )
-          UNLESS_STOPPED =
-            T.let(
-              :"unless-stopped",
-              DockerEngineRuby::ContainerUpdateParams::RestartPolicy::Name::TaggedSymbol
-            )
-          ON_FAILURE =
-            T.let(
-              :"on-failure",
-              DockerEngineRuby::ContainerUpdateParams::RestartPolicy::Name::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                DockerEngineRuby::ContainerUpdateParams::RestartPolicy::Name::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
-        end
-      end
-
       class Ulimit < DockerEngineRuby::Internal::Type::BaseModel
         OrHash =
           T.type_alias do
@@ -1080,21 +921,18 @@ module DockerEngineRuby
             )
           end
 
-        # Hard limit
         sig { returns(T.nilable(Integer)) }
         attr_reader :hard
 
         sig { params(hard: Integer).void }
         attr_writer :hard
 
-        # Name of ulimit
         sig { returns(T.nilable(String)) }
         attr_reader :name
 
         sig { params(name: String).void }
         attr_writer :name
 
-        # Soft limit
         sig { returns(T.nilable(Integer)) }
         attr_reader :soft
 
@@ -1106,14 +944,7 @@ module DockerEngineRuby
             T.attached_class
           )
         end
-        def self.new(
-          # Hard limit
-          hard: nil,
-          # Name of ulimit
-          name: nil,
-          # Soft limit
-          soft: nil
-        )
+        def self.new(hard: nil, name: nil, soft: nil)
         end
 
         sig { override.returns({ hard: Integer, name: String, soft: Integer }) }

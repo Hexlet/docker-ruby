@@ -37,22 +37,22 @@ module DockerEngineRuby
       #   This information is only available if present in the image, and omitted
       #   otherwise.
       #
-      #   @return [String, nil]
-      optional :created, String, api_name: :Created, nil?: true
+      #   @return [Time, nil]
+      optional :created, Time, api_name: :Created, nil?: true
 
       # @!attribute descriptor
       #   A descriptor struct containing digest, media type, and size, as defined in the
       #   [OCI Content Descriptors Specification](https://github.com/opencontainers/image-spec/blob/v1.0.1/descriptor.md).
       #
       #   @return [DockerEngineRuby::Models::Image::Descriptor, nil]
-      optional :descriptor, -> { DockerEngineRuby::Image::Descriptor }, api_name: :Descriptor
+      optional :descriptor, -> { DockerEngineRuby::Image::Descriptor }, api_name: :Descriptor, nil?: true
 
       # @!attribute graph_driver
       #   Information about the storage driver used to store the container's and image's
       #   filesystem.
       #
       #   @return [DockerEngineRuby::Models::Image::GraphDriver, nil]
-      optional :graph_driver, -> { DockerEngineRuby::Image::GraphDriver }, api_name: :GraphDriver
+      optional :graph_driver, -> { DockerEngineRuby::Image::GraphDriver }, api_name: :GraphDriver, nil?: true
 
       # @!attribute id
       #   ID is the content-addressable ID of an image.
@@ -72,7 +72,7 @@ module DockerEngineRuby
       #   image to a different name.
       #
       #   @return [DockerEngineRuby::Models::Image::Identity, nil]
-      optional :identity, -> { DockerEngineRuby::Image::Identity }, api_name: :Identity
+      optional :identity, -> { DockerEngineRuby::Image::Identity }, api_name: :Identity, nil?: true
 
       # @!attribute manifests
       #   Manifests is a list of image manifests available in this image. It provides a
@@ -163,15 +163,15 @@ module DockerEngineRuby
       #
       #   @param config [DockerEngineRuby::Models::Image::Config] Configuration of the image. These fields are used as defaults
       #
-      #   @param created [String, nil] Date and time at which the image was created, formatted in
+      #   @param created [Time, nil] Date and time at which the image was created, formatted in
       #
-      #   @param descriptor [DockerEngineRuby::Models::Image::Descriptor] A descriptor struct containing digest, media type, and size, as defined in
+      #   @param descriptor [DockerEngineRuby::Models::Image::Descriptor, nil] A descriptor struct containing digest, media type, and size, as defined in
       #
-      #   @param graph_driver [DockerEngineRuby::Models::Image::GraphDriver] Information about the storage driver used to store the container's and
+      #   @param graph_driver [DockerEngineRuby::Models::Image::GraphDriver, nil] Information about the storage driver used to store the container's and
       #
       #   @param id [String] ID is the content-addressable ID of an image.
       #
-      #   @param identity [DockerEngineRuby::Models::Image::Identity] Identity holds information about the identity and origin of the image.
+      #   @param identity [DockerEngineRuby::Models::Image::Identity, nil] Identity holds information about the identity and origin of the image.
       #
       #   @param manifests [Array<DockerEngineRuby::Models::Image::Manifest>, nil] Manifests is a list of image manifests available in this image. It
       #
@@ -228,9 +228,9 @@ module DockerEngineRuby
         #
         #   `{"<port>/<tcp|udp|sctp>": {}}`
         #
-        #   @return [Hash{Symbol=>Object}, nil]
+        #   @return [Hash{Symbol=>Hash{Symbol=>Object}}, nil]
         optional :exposed_ports,
-                 DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown],
+                 DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown]],
                  api_name: :ExposedPorts,
                  nil?: true
 
@@ -274,9 +274,9 @@ module DockerEngineRuby
         # @!attribute volumes
         #   An object mapping mount point paths inside the container to empty objects.
         #
-        #   @return [Hash{Symbol=>Object}, nil]
+        #   @return [Hash{Symbol=>Hash{Symbol=>Object}}, nil]
         optional :volumes,
-                 DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown],
+                 DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown]],
                  api_name: :Volumes
 
         # @!attribute working_dir
@@ -300,7 +300,7 @@ module DockerEngineRuby
         #
         #   @param env [Array<String>] A list of environment variables to set inside the container in the
         #
-        #   @param exposed_ports [Hash{Symbol=>Object}, nil] An object mapping ports to an empty object in the form:
+        #   @param exposed_ports [Hash{Symbol=>Hash{Symbol=>Object}}, nil] An object mapping ports to an empty object in the form:
         #
         #   @param healthcheck [DockerEngineRuby::Models::Image::Config::Healthcheck] A test to perform to check that the container is healthy.
         #
@@ -314,7 +314,7 @@ module DockerEngineRuby
         #
         #   @param user [String] The user that commands are run as inside the container.
         #
-        #   @param volumes [Hash{Symbol=>Object}] An object mapping mount point paths inside the container to empty
+        #   @param volumes [Hash{Symbol=>Hash{Symbol=>Object}}] An object mapping mount point paths inside the container to empty
         #
         #   @param working_dir [String] The working directory for commands to run in.
 
@@ -439,7 +439,7 @@ module DockerEngineRuby
         #   [OCI Image Index Specification](https://github.com/opencontainers/image-spec/blob/v1.0.1/image-index.md).
         #
         #   @return [DockerEngineRuby::Models::Image::Descriptor::Platform, nil]
-        optional :platform, -> { DockerEngineRuby::Image::Descriptor::Platform }, nil?: true
+        optional :platform, -> { DockerEngineRuby::Image::Descriptor::Platform }
 
         # @!attribute size
         #   The size in bytes of the blob.
@@ -470,7 +470,7 @@ module DockerEngineRuby
         #
         #   @param media_type [String] The media type of the object this schema refers to.
         #
-        #   @param platform [DockerEngineRuby::Models::Image::Descriptor::Platform, nil] Describes the platform which the image in the manifest runs on, as defined
+        #   @param platform [DockerEngineRuby::Models::Image::Descriptor::Platform] Describes the platform which the image in the manifest runs on, as defined
         #
         #   @param size [Integer] The size in bytes of the blob.
         #
@@ -1075,7 +1075,7 @@ module DockerEngineRuby
           #   [OCI Image Index Specification](https://github.com/opencontainers/image-spec/blob/v1.0.1/image-index.md).
           #
           #   @return [DockerEngineRuby::Models::Image::Manifest::Descriptor::Platform, nil]
-          optional :platform, -> { DockerEngineRuby::Image::Manifest::Descriptor::Platform }, nil?: true
+          optional :platform, -> { DockerEngineRuby::Image::Manifest::Descriptor::Platform }
 
           # @!attribute size
           #   The size in bytes of the blob.
@@ -1106,7 +1106,7 @@ module DockerEngineRuby
           #
           #   @param media_type [String] The media type of the object this schema refers to.
           #
-          #   @param platform [DockerEngineRuby::Models::Image::Manifest::Descriptor::Platform, nil] Describes the platform which the image in the manifest runs on, as defined
+          #   @param platform [DockerEngineRuby::Models::Image::Manifest::Descriptor::Platform] Describes the platform which the image in the manifest runs on, as defined
           #
           #   @param size [Integer] The size in bytes of the blob.
           #
@@ -1190,55 +1190,37 @@ module DockerEngineRuby
         # @see DockerEngineRuby::Models::Image::Manifest#size
         class Size < DockerEngineRuby::Internal::Type::BaseModel
           # @!attribute content
-          #   Content is the size (in bytes) of all the locally present content in the content
-          #   store (e.g. image config, layers) referenced by this manifest and its children.
-          #   This only includes blobs in the content store.
           #
           #   @return [Integer]
           required :content, Integer, api_name: :Content
 
           # @!attribute total
-          #   Total is the total size (in bytes) of all the locally present data (both
-          #   distributable and non-distributable) that's related to this manifest and its
-          #   children. This equal to the sum of [Content] size AND all the sizes in the
-          #   [Size] struct present in the Kind-specific data struct. For example, for an
-          #   image kind (Kind == "image") this would include the size of the image content
-          #   and unpacked image snapshots ([Size.Content] + [ImageData.Size.Unpacked]).
           #
           #   @return [Integer]
           required :total, Integer, api_name: :Total
 
           # @!method initialize(content:, total:)
-          #   Some parameter documentations has been truncated, see
-          #   {DockerEngineRuby::Models::Image::Manifest::Size} for more details.
-          #
-          #   @param content [Integer] Content is the size (in bytes) of all the locally present
-          #
-          #   @param total [Integer] Total is the total size (in bytes) of all the locally present
+          #   @param content [Integer]
+          #   @param total [Integer]
         end
 
         # @see DockerEngineRuby::Models::Image::Manifest#attestation_data
         class AttestationData < DockerEngineRuby::Internal::Type::BaseModel
           # @!attribute for_
-          #   The digest of the image manifest that this attestation is for.
           #
           #   @return [String]
           required :for_, String, api_name: :For
 
           # @!method initialize(for_:)
-          #   Some parameter documentations has been truncated, see
-          #   {DockerEngineRuby::Models::Image::Manifest::AttestationData} for more details.
-          #
           #   The image data for the attestation manifest. This field is only populated when
           #   Kind is "attestation".
           #
-          #   @param for_ [String] The digest of the image manifest that this attestation is for.
+          #   @param for_ [String]
         end
 
         # @see DockerEngineRuby::Models::Image::Manifest#image_data
         class ImageData < DockerEngineRuby::Internal::Type::BaseModel
           # @!attribute containers
-          #   The IDs of the containers that are using this image.
           #
           #   @return [Array<String>]
           required :containers, DockerEngineRuby::Internal::Type::ArrayOf[String], api_name: :Containers
@@ -1248,11 +1230,12 @@ module DockerEngineRuby
           #   the
           #   [OCI Image Index Specification](https://github.com/opencontainers/image-spec/blob/v1.0.1/image-index.md).
           #
-          #   @return [DockerEngineRuby::Models::Image::Manifest::ImageData::Platform, nil]
+          #   @return [DockerEngineRuby::Models::Image::Manifest::ImageData::Platform]
           required :platform,
-                   -> { DockerEngineRuby::Image::Manifest::ImageData::Platform },
-                   api_name: :Platform,
-                   nil?: true
+                   -> {
+                     DockerEngineRuby::Image::Manifest::ImageData::Platform
+                   },
+                   api_name: :Platform
 
           # @!attribute size
           #
@@ -1266,9 +1249,9 @@ module DockerEngineRuby
           #   The image data for the image manifest. This field is only populated when Kind is
           #   "image".
           #
-          #   @param containers [Array<String>] The IDs of the containers that are using this image.
+          #   @param containers [Array<String>]
           #
-          #   @param platform [DockerEngineRuby::Models::Image::Manifest::ImageData::Platform, nil] Describes the platform which the image in the manifest runs on, as defined
+          #   @param platform [DockerEngineRuby::Models::Image::Manifest::ImageData::Platform] Describes the platform which the image in the manifest runs on, as defined
           #
           #   @param size [DockerEngineRuby::Models::Image::Manifest::ImageData::Size]
 
@@ -1330,20 +1313,12 @@ module DockerEngineRuby
           # @see DockerEngineRuby::Models::Image::Manifest::ImageData#size
           class Size < DockerEngineRuby::Internal::Type::BaseModel
             # @!attribute unpacked
-            #   Unpacked is the size (in bytes) of the locally unpacked (uncompressed) image
-            #   content that's directly usable by the containers running this image. It's
-            #   independent of the distributable content - e.g. the image might still have an
-            #   unpacked data that's still used by some container even when the
-            #   distributable/compressed content is already gone.
             #
             #   @return [Integer]
             required :unpacked, Integer, api_name: :Unpacked
 
             # @!method initialize(unpacked:)
-            #   Some parameter documentations has been truncated, see
-            #   {DockerEngineRuby::Models::Image::Manifest::ImageData::Size} for more details.
-            #
-            #   @param unpacked [Integer] Unpacked is the size (in bytes) of the locally unpacked
+            #   @param unpacked [Integer]
           end
         end
       end
@@ -1351,23 +1326,15 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::Image#metadata
       class Metadata < DockerEngineRuby::Internal::Type::BaseModel
         # @!attribute last_tag_time
-        #   Date and time at which the image was last tagged in
-        #   [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
         #
-        #   This information is only available if the image was tagged locally, and omitted
-        #   otherwise.
-        #
-        #   @return [String, nil]
-        optional :last_tag_time, String, api_name: :LastTagTime, nil?: true
+        #   @return [Time, nil]
+        optional :last_tag_time, Time, api_name: :LastTagTime, nil?: true
 
         # @!method initialize(last_tag_time: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {DockerEngineRuby::Models::Image::Metadata} for more details.
-        #
         #   Additional metadata of the image in the local cache. This information is local
         #   to the daemon, and not part of the image itself.
         #
-        #   @param last_tag_time [String, nil] Date and time at which the image was last tagged in
+        #   @param last_tag_time [Time, nil]
       end
 
       # @see DockerEngineRuby::Models::Image#root_fs

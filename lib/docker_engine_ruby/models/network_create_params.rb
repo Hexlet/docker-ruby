@@ -8,14 +8,11 @@ module DockerEngineRuby
       include DockerEngineRuby::Internal::Type::RequestParameters
 
       # @!attribute name
-      #   The network's name.
       #
       #   @return [String]
       required :name, String, api_name: :Name
 
       # @!attribute attachable
-      #   Globally scoped network is manually attachable by regular containers from
-      #   workers in swarm mode.
       #
       #   @return [Boolean, nil]
       optional :attachable, DockerEngineRuby::Internal::Type::Boolean, api_name: :Attachable
@@ -27,39 +24,31 @@ module DockerEngineRuby
       optional :config_from, -> { DockerEngineRuby::NetworkCreateParams::ConfigFrom }, api_name: :ConfigFrom
 
       # @!attribute config_only
-      #   Creates a config-only network. Config-only networks are placeholder networks for
-      #   network configurations to be used by other networks. Config-only networks cannot
-      #   be used directly to run containers or services.
       #
       #   @return [Boolean, nil]
       optional :config_only, DockerEngineRuby::Internal::Type::Boolean, api_name: :ConfigOnly
 
       # @!attribute driver
-      #   Name of the network driver plugin to use.
       #
       #   @return [String, nil]
       optional :driver, String, api_name: :Driver
 
       # @!attribute enable_i_pv4
-      #   Enable IPv4 on the network.
       #
       #   @return [Boolean, nil]
       optional :enable_i_pv4, DockerEngineRuby::Internal::Type::Boolean, api_name: :EnableIPv4
 
       # @!attribute enable_i_pv6
-      #   Enable IPv6 on the network.
       #
       #   @return [Boolean, nil]
       optional :enable_i_pv6, DockerEngineRuby::Internal::Type::Boolean, api_name: :EnableIPv6
 
       # @!attribute ingress
-      #   Ingress network is the network which provides the routing-mesh in swarm mode.
       #
       #   @return [Boolean, nil]
       optional :ingress, DockerEngineRuby::Internal::Type::Boolean, api_name: :Ingress
 
       # @!attribute internal
-      #   Restrict external access to the network.
       #
       #   @return [Boolean, nil]
       optional :internal, DockerEngineRuby::Internal::Type::Boolean, api_name: :Internal
@@ -70,20 +59,16 @@ module DockerEngineRuby
       optional :ipam, -> { DockerEngineRuby::NetworkCreateParams::Ipam }, api_name: :IPAM
 
       # @!attribute labels
-      #   User-defined key/value metadata.
       #
       #   @return [Hash{Symbol=>String}, nil]
       optional :labels, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Labels
 
       # @!attribute options
-      #   Network specific options to be used by the drivers.
       #
       #   @return [Hash{Symbol=>String}, nil]
       optional :options, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Options
 
       # @!attribute scope
-      #   The level at which the network exists (e.g. `swarm` for cluster-wide or `local`
-      #   for machine level).
       #
       #   @return [String, nil]
       optional :scope, String, api_name: :Scope
@@ -92,31 +77,31 @@ module DockerEngineRuby
       #   Some parameter documentations has been truncated, see
       #   {DockerEngineRuby::Models::NetworkCreateParams} for more details.
       #
-      #   @param name [String] The network's name.
+      #   @param name [String]
       #
-      #   @param attachable [Boolean] Globally scoped network is manually attachable by regular
+      #   @param attachable [Boolean]
       #
       #   @param config_from [DockerEngineRuby::Models::NetworkCreateParams::ConfigFrom] The config-only network source to provide the configuration for
       #
-      #   @param config_only [Boolean] Creates a config-only network. Config-only networks are placeholder
+      #   @param config_only [Boolean]
       #
-      #   @param driver [String] Name of the network driver plugin to use.
+      #   @param driver [String]
       #
-      #   @param enable_i_pv4 [Boolean] Enable IPv4 on the network.
+      #   @param enable_i_pv4 [Boolean]
       #
-      #   @param enable_i_pv6 [Boolean] Enable IPv6 on the network.
+      #   @param enable_i_pv6 [Boolean]
       #
-      #   @param ingress [Boolean] Ingress network is the network which provides the routing-mesh
+      #   @param ingress [Boolean]
       #
-      #   @param internal [Boolean] Restrict external access to the network.
+      #   @param internal [Boolean]
       #
       #   @param ipam [DockerEngineRuby::Models::NetworkCreateParams::Ipam]
       #
-      #   @param labels [Hash{Symbol=>String}] User-defined key/value metadata.
+      #   @param labels [Hash{Symbol=>String}]
       #
-      #   @param options [Hash{Symbol=>String}] Network specific options to be used by the drivers.
+      #   @param options [Hash{Symbol=>String}]
       #
-      #   @param scope [String] The level at which the network exists (e.g. `swarm` for cluster-wide
+      #   @param scope [String]
       #
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]
 

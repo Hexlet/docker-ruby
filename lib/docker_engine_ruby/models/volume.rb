@@ -51,8 +51,8 @@ module DockerEngineRuby
       # @!attribute created_at
       #   Date/Time the volume was created.
       #
-      #   @return [String, nil]
-      optional :created_at, String, api_name: :CreatedAt
+      #   @return [Time, nil]
+      optional :created_at, Time, api_name: :CreatedAt
 
       # @!attribute status
       #   Low-level details about the volume, provided by the volume driver. Details are
@@ -61,9 +61,9 @@ module DockerEngineRuby
       #   The `Status` field is optional, and is omitted if the volume driver does not
       #   support this feature.
       #
-      #   @return [Hash{Symbol=>Object}, nil]
+      #   @return [Hash{Symbol=>Hash{Symbol=>Object}}, nil]
       optional :status,
-               DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown],
+               DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown]],
                api_name: :Status
 
       # @!attribute usage_data
@@ -91,9 +91,9 @@ module DockerEngineRuby
       #
       #   @param cluster_volume [DockerEngineRuby::Models::Volume::ClusterVolume] Options and information specific to, and only present on, Swarm CSI
       #
-      #   @param created_at [String] Date/Time the volume was created.
+      #   @param created_at [Time] Date/Time the volume was created.
       #
-      #   @param status [Hash{Symbol=>Object}] Low-level details about the volume, provided by the volume driver.
+      #   @param status [Hash{Symbol=>Hash{Symbol=>Object}}] Low-level details about the volume, provided by the volume driver.
       #
       #   @param usage_data [DockerEngineRuby::Models::Volume::UsageData, nil] Usage details about the volume. This information is used by the
 
@@ -115,8 +115,8 @@ module DockerEngineRuby
       class ClusterVolume < DockerEngineRuby::Internal::Type::BaseModel
         # @!attribute created_at
         #
-        #   @return [String, nil]
-        optional :created_at, String, api_name: :CreatedAt
+        #   @return [Time, nil]
+        optional :created_at, Time, api_name: :CreatedAt
 
         # @!attribute id
         #   The Swarm ID of this volume. Because cluster volumes are Swarm objects, they
@@ -151,8 +151,8 @@ module DockerEngineRuby
 
         # @!attribute updated_at
         #
-        #   @return [String, nil]
-        optional :updated_at, String, api_name: :UpdatedAt
+        #   @return [Time, nil]
+        optional :updated_at, Time, api_name: :UpdatedAt
 
         # @!attribute version
         #   The version number of the object such as node, service, etc. This is needed to
@@ -175,7 +175,7 @@ module DockerEngineRuby
         #   Options and information specific to, and only present on, Swarm CSI cluster
         #   volumes.
         #
-        #   @param created_at [String]
+        #   @param created_at [Time]
         #
         #   @param id [String] The Swarm ID of this volume. Because cluster volumes are Swarm
         #
@@ -185,14 +185,13 @@ module DockerEngineRuby
         #
         #   @param spec [DockerEngineRuby::Models::Volume::ClusterVolume::Spec] Cluster-specific options used to create the volume.
         #
-        #   @param updated_at [String]
+        #   @param updated_at [Time]
         #
         #   @param version [DockerEngineRuby::Models::Volume::ClusterVolume::Version] The version number of the object such as node, service, etc. This is needed
 
         # @see DockerEngineRuby::Models::Volume::ClusterVolume#info
         class Info < DockerEngineRuby::Internal::Type::BaseModel
           # @!attribute accessible_topology
-          #   The topology this volume is actually accessible from.
           #
           #   @return [Array<Hash{Symbol=>String}>, nil]
           optional :accessible_topology,
@@ -200,53 +199,36 @@ module DockerEngineRuby
                    api_name: :AccessibleTopology
 
           # @!attribute capacity_bytes
-          #   The capacity of the volume in bytes. A value of 0 indicates that the capacity is
-          #   unknown.
           #
           #   @return [Integer, nil]
           optional :capacity_bytes, Integer, api_name: :CapacityBytes
 
           # @!attribute volume_context
-          #   A map of strings to strings returned from the storage plugin when the volume is
-          #   created.
           #
           #   @return [Hash{Symbol=>String}, nil]
           optional :volume_context, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :VolumeContext
 
           # @!attribute volume_id
-          #   The ID of the volume as returned by the CSI storage plugin. This is distinct
-          #   from the volume's ID as provided by Docker. This ID is never used by the user
-          #   when communicating with Docker to refer to this volume. If the ID is blank, then
-          #   the Volume has not been successfully created in the plugin yet.
           #
           #   @return [String, nil]
           optional :volume_id, String, api_name: :VolumeID
 
           # @!method initialize(accessible_topology: nil, capacity_bytes: nil, volume_context: nil, volume_id: nil)
-          #   Some parameter documentations has been truncated, see
-          #   {DockerEngineRuby::Models::Volume::ClusterVolume::Info} for more details.
-          #
           #   Information about the global status of the volume.
           #
-          #   @param accessible_topology [Array<Hash{Symbol=>String}>] The topology this volume is actually accessible from.
-          #
-          #   @param capacity_bytes [Integer] The capacity of the volume in bytes. A value of 0 indicates that
-          #
-          #   @param volume_context [Hash{Symbol=>String}] A map of strings to strings returned from the storage plugin when
-          #
-          #   @param volume_id [String] The ID of the volume as returned by the CSI storage plugin. This
+          #   @param accessible_topology [Array<Hash{Symbol=>String}>]
+          #   @param capacity_bytes [Integer]
+          #   @param volume_context [Hash{Symbol=>String}]
+          #   @param volume_id [String]
         end
 
         class PublishStatus < DockerEngineRuby::Internal::Type::BaseModel
           # @!attribute node_id
-          #   The ID of the Swarm node the volume is published on.
           #
           #   @return [String, nil]
           optional :node_id, String, api_name: :NodeID
 
           # @!attribute publish_context
-          #   A map of strings to strings returned by the CSI controller plugin when a volume
-          #   is published.
           #
           #   @return [Hash{Symbol=>String}, nil]
           optional :publish_context,
@@ -254,15 +236,6 @@ module DockerEngineRuby
                    api_name: :PublishContext
 
           # @!attribute state
-          #   The published state of the volume.
-          #
-          #   - `pending-publish` The volume should be published to this node, but the call to
-          #     the controller plugin to do so has not yet been successfully completed.
-          #   - `published` The volume is published successfully to the node.
-          #   - `pending-node-unpublish` The volume should be unpublished from the node, and
-          #     the manager is awaiting confirmation from the worker that it has done so.
-          #   - `pending-controller-unpublish` The volume is successfully unpublished from the
-          #     node, but has not yet been successfully unpublished on the controller.
           #
           #   @return [Symbol, DockerEngineRuby::Models::Volume::ClusterVolume::PublishStatus::State, nil]
           optional :state,
@@ -270,26 +243,10 @@ module DockerEngineRuby
                    api_name: :State
 
           # @!method initialize(node_id: nil, publish_context: nil, state: nil)
-          #   Some parameter documentations has been truncated, see
-          #   {DockerEngineRuby::Models::Volume::ClusterVolume::PublishStatus} for more
-          #   details.
-          #
-          #   @param node_id [String] The ID of the Swarm node the volume is published on.
-          #
-          #   @param publish_context [Hash{Symbol=>String}] A map of strings to strings returned by the CSI controller
-          #
-          #   @param state [Symbol, DockerEngineRuby::Models::Volume::ClusterVolume::PublishStatus::State] The published state of the volume.
+          #   @param node_id [String]
+          #   @param publish_context [Hash{Symbol=>String}]
+          #   @param state [Symbol, DockerEngineRuby::Models::Volume::ClusterVolume::PublishStatus::State]
 
-          # The published state of the volume.
-          #
-          # - `pending-publish` The volume should be published to this node, but the call to
-          #   the controller plugin to do so has not yet been successfully completed.
-          # - `published` The volume is published successfully to the node.
-          # - `pending-node-unpublish` The volume should be unpublished from the node, and
-          #   the manager is awaiting confirmation from the worker that it has done so.
-          # - `pending-controller-unpublish` The volume is successfully unpublished from the
-          #   node, but has not yet been successfully unpublished on the controller.
-          #
           # @see DockerEngineRuby::Models::Volume::ClusterVolume::PublishStatus#state
           module State
             extend DockerEngineRuby::Internal::Type::Enum
@@ -337,9 +294,6 @@ module DockerEngineRuby
           # @see DockerEngineRuby::Models::Volume::ClusterVolume::Spec#access_mode
           class AccessMode < DockerEngineRuby::Internal::Type::BaseModel
             # @!attribute accessibility_requirements
-            #   Requirements for the accessible topology of the volume. These fields are
-            #   optional. For an in-depth description of what these fields mean, see the CSI
-            #   specification.
             #
             #   @return [DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::AccessibilityRequirements, nil]
             optional :accessibility_requirements,
@@ -349,13 +303,6 @@ module DockerEngineRuby
                      api_name: :AccessibilityRequirements
 
             # @!attribute availability
-            #   The availability of the volume for use in tasks.
-            #
-            #   - `active` The volume is fully available for scheduling on the cluster
-            #   - `pause` No new workloads should use the volume, but existing workloads are not
-            #     stopped.
-            #   - `drain` All workloads using this volume should be stopped and rescheduled, and
-            #     no new ones should be started.
             #
             #   @return [Symbol, DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::Availability, nil]
             optional :availability,
@@ -363,8 +310,6 @@ module DockerEngineRuby
                      api_name: :Availability
 
             # @!attribute capacity_range
-            #   The desired capacity that the volume should be created with. If empty, the
-            #   plugin will decide the capacity.
             #
             #   @return [DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::CapacityRange, nil]
             optional :capacity_range,
@@ -372,26 +317,13 @@ module DockerEngineRuby
                      api_name: :CapacityRange
 
             # @!attribute mount_volume
-            #   Options for using this volume as a Mount-type volume.
             #
-            #       Either MountVolume or BlockVolume, but not both, must be
-            #       present.
-            #
-            #   properties: FsType: type: "string" description: | Specifies the filesystem type
-            #   for the mount volume. Optional. MountFlags: type: "array" description: | Flags
-            #   to pass when mounting the volume. Optional. items: type: "string" BlockVolume:
-            #   type: "object" description: | Options for using this volume as a Block-type
-            #   volume. Intentionally empty.
-            #
-            #   @return [Object, nil]
-            optional :mount_volume, DockerEngineRuby::Internal::Type::Unknown, api_name: :MountVolume
+            #   @return [Hash{Symbol=>Object}, nil]
+            optional :mount_volume,
+                     DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown],
+                     api_name: :MountVolume
 
             # @!attribute scope
-            #   The set of nodes this volume can be used on at one time.
-            #
-            #   - `single` The volume may only be scheduled to one node at a time.
-            #   - `multi` the volume may be scheduled to any supported number of nodes at a
-            #     time.
             #
             #   @return [Symbol, DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::Scope, nil]
             optional :scope,
@@ -399,8 +331,6 @@ module DockerEngineRuby
                      api_name: :Scope
 
             # @!attribute secrets
-            #   Swarm Secrets that are passed to the CSI storage plugin when operating on this
-            #   volume.
             #
             #   @return [Array<DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::Secret>, nil]
             optional :secrets,
@@ -410,14 +340,6 @@ module DockerEngineRuby
                      api_name: :Secrets
 
             # @!attribute sharing
-            #   The number and way that different tasks can use this volume at one time.
-            #
-            #   - `none` The volume may only be used by one task at a time.
-            #   - `readonly` The volume may be used by any number of tasks, but they all must
-            #     mount the volume as readonly
-            #   - `onewriter` The volume may be used by any number of tasks, but only one may
-            #     mount it as read/write.
-            #   - `all` The volume may have any number of readers and writers.
             #
             #   @return [Symbol, DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::Sharing, nil]
             optional :sharing,
@@ -425,30 +347,19 @@ module DockerEngineRuby
                      api_name: :Sharing
 
             # @!method initialize(accessibility_requirements: nil, availability: nil, capacity_range: nil, mount_volume: nil, scope: nil, secrets: nil, sharing: nil)
-            #   Some parameter documentations has been truncated, see
-            #   {DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode} for more
-            #   details.
-            #
             #   Defines how the volume is used by tasks.
             #
-            #   @param accessibility_requirements [DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::AccessibilityRequirements] Requirements for the accessible topology of the volume. These
-            #
-            #   @param availability [Symbol, DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::Availability] The availability of the volume for use in tasks.
-            #
-            #   @param capacity_range [DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::CapacityRange] The desired capacity that the volume should be created with. If
-            #
-            #   @param mount_volume [Object] Options for using this volume as a Mount-type volume.
-            #
-            #   @param scope [Symbol, DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::Scope] The set of nodes this volume can be used on at one time.
-            #
-            #   @param secrets [Array<DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::Secret>] Swarm Secrets that are passed to the CSI storage plugin when
-            #
-            #   @param sharing [Symbol, DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::Sharing] The number and way that different tasks can use this volume
+            #   @param accessibility_requirements [DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::AccessibilityRequirements]
+            #   @param availability [Symbol, DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::Availability]
+            #   @param capacity_range [DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::CapacityRange]
+            #   @param mount_volume [Hash{Symbol=>Object}]
+            #   @param scope [Symbol, DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::Scope]
+            #   @param secrets [Array<DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::Secret>]
+            #   @param sharing [Symbol, DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::Sharing]
 
             # @see DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode#accessibility_requirements
             class AccessibilityRequirements < DockerEngineRuby::Internal::Type::BaseModel
               # @!attribute preferred
-              #   A list of topologies that the volume should attempt to be provisioned in.
               #
               #   @return [Array<Hash{Symbol=>String}>, nil]
               optional :preferred,
@@ -456,8 +367,6 @@ module DockerEngineRuby
                        api_name: :Preferred
 
               # @!attribute requisite
-              #   A list of required topologies, at least one of which the volume must be
-              #   accessible from.
               #
               #   @return [Array<Hash{Symbol=>String}>, nil]
               optional :requisite,
@@ -465,27 +374,10 @@ module DockerEngineRuby
                        api_name: :Requisite
 
               # @!method initialize(preferred: nil, requisite: nil)
-              #   Some parameter documentations has been truncated, see
-              #   {DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::AccessibilityRequirements}
-              #   for more details.
-              #
-              #   Requirements for the accessible topology of the volume. These fields are
-              #   optional. For an in-depth description of what these fields mean, see the CSI
-              #   specification.
-              #
-              #   @param preferred [Array<Hash{Symbol=>String}>] A list of topologies that the volume should attempt to be
-              #
-              #   @param requisite [Array<Hash{Symbol=>String}>] A list of required topologies, at least one of which the
+              #   @param preferred [Array<Hash{Symbol=>String}>]
+              #   @param requisite [Array<Hash{Symbol=>String}>]
             end
 
-            # The availability of the volume for use in tasks.
-            #
-            # - `active` The volume is fully available for scheduling on the cluster
-            # - `pause` No new workloads should use the volume, but existing workloads are not
-            #   stopped.
-            # - `drain` All workloads using this volume should be stopped and rescheduled, and
-            #   no new ones should be started.
-            #
             # @see DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode#availability
             module Availability
               extend DockerEngineRuby::Internal::Type::Enum
@@ -501,38 +393,20 @@ module DockerEngineRuby
             # @see DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode#capacity_range
             class CapacityRange < DockerEngineRuby::Internal::Type::BaseModel
               # @!attribute limit_bytes
-              #   The volume must not be bigger than this. The value of 0 indicates an unspecified
-              #   maximum.
               #
               #   @return [Integer, nil]
               optional :limit_bytes, Integer, api_name: :LimitBytes
 
               # @!attribute required_bytes
-              #   The volume must be at least this big. The value of 0 indicates an unspecified
-              #   minimum
               #
               #   @return [Integer, nil]
               optional :required_bytes, Integer, api_name: :RequiredBytes
 
               # @!method initialize(limit_bytes: nil, required_bytes: nil)
-              #   Some parameter documentations has been truncated, see
-              #   {DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::CapacityRange}
-              #   for more details.
-              #
-              #   The desired capacity that the volume should be created with. If empty, the
-              #   plugin will decide the capacity.
-              #
-              #   @param limit_bytes [Integer] The volume must not be bigger than this. The value of 0
-              #
-              #   @param required_bytes [Integer] The volume must be at least this big. The value of 0
+              #   @param limit_bytes [Integer]
+              #   @param required_bytes [Integer]
             end
 
-            # The set of nodes this volume can be used on at one time.
-            #
-            # - `single` The volume may only be scheduled to one node at a time.
-            # - `multi` the volume may be scheduled to any supported number of nodes at a
-            #   time.
-            #
             # @see DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode#scope
             module Scope
               extend DockerEngineRuby::Internal::Type::Enum
@@ -546,41 +420,20 @@ module DockerEngineRuby
 
             class Secret < DockerEngineRuby::Internal::Type::BaseModel
               # @!attribute key
-              #   Key is the name of the key of the key-value pair passed to the plugin.
               #
               #   @return [String, nil]
               optional :key, String, api_name: :Key
 
               # @!attribute secret
-              #   Secret is the swarm Secret object from which to read data. This can be a Secret
-              #   name or ID. The Secret data is retrieved by swarm and used as the value of the
-              #   key-value pair passed to the plugin.
               #
               #   @return [String, nil]
               optional :secret, String, api_name: :Secret
 
               # @!method initialize(key: nil, secret: nil)
-              #   Some parameter documentations has been truncated, see
-              #   {DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode::Secret} for
-              #   more details.
-              #
-              #   One cluster volume secret entry. Defines a key-value pair that is passed to the
-              #   plugin.
-              #
-              #   @param key [String] Key is the name of the key of the key-value pair passed to
-              #
-              #   @param secret [String] Secret is the swarm Secret object from which to read data.
+              #   @param key [String]
+              #   @param secret [String]
             end
 
-            # The number and way that different tasks can use this volume at one time.
-            #
-            # - `none` The volume may only be used by one task at a time.
-            # - `readonly` The volume may be used by any number of tasks, but they all must
-            #   mount the volume as readonly
-            # - `onewriter` The volume may be used by any number of tasks, but only one may
-            #   mount it as read/write.
-            # - `all` The volume may have any number of readers and writers.
-            #
             # @see DockerEngineRuby::Models::Volume::ClusterVolume::Spec::AccessMode#sharing
             module Sharing
               extend DockerEngineRuby::Internal::Type::Enum
@@ -621,30 +474,21 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::Volume#usage_data
       class UsageData < DockerEngineRuby::Internal::Type::BaseModel
         # @!attribute ref_count
-        #   The number of containers referencing this volume. This field is set to `-1` if
-        #   the reference-count is not available.
         #
         #   @return [Integer]
         required :ref_count, Integer, api_name: :RefCount
 
         # @!attribute size
-        #   Amount of disk space used by the volume (in bytes). This information is only
-        #   available for volumes created with the `"local"` volume driver. For volumes
-        #   created with other volume drivers, this field is set to `-1` ("not available")
         #
         #   @return [Integer]
         required :size, Integer, api_name: :Size
 
         # @!method initialize(ref_count:, size:)
-        #   Some parameter documentations has been truncated, see
-        #   {DockerEngineRuby::Models::Volume::UsageData} for more details.
-        #
         #   Usage details about the volume. This information is used by the `GET /system/df`
         #   endpoint, and omitted in other endpoints.
         #
-        #   @param ref_count [Integer] The number of containers referencing this volume. This field
-        #
-        #   @param size [Integer] Amount of disk space used by the volume (in bytes). This information
+        #   @param ref_count [Integer]
+        #   @param size [Integer]
       end
     end
   end

@@ -87,7 +87,6 @@ module DockerEngineRuby
                  api_name: :Env
 
         # @!attribute interface
-        #   The interface between Docker and the plugin
         #
         #   @return [DockerEngineRuby::Models::Plugin::Config::Interface]
         required :interface, -> { DockerEngineRuby::Plugin::Config::Interface }, api_name: :Interface
@@ -143,33 +142,19 @@ module DockerEngineRuby
         #   The config of a plugin.
         #
         #   @param args [DockerEngineRuby::Models::Plugin::Config::Args]
-        #
         #   @param description [String]
-        #
         #   @param documentation [String]
-        #
         #   @param entrypoint [Array<String>]
-        #
         #   @param env [Array<DockerEngineRuby::Models::Plugin::Config::Env>]
-        #
-        #   @param interface [DockerEngineRuby::Models::Plugin::Config::Interface] The interface between Docker and the plugin
-        #
+        #   @param interface [DockerEngineRuby::Models::Plugin::Config::Interface]
         #   @param ipc_host [Boolean]
-        #
         #   @param linux [DockerEngineRuby::Models::Plugin::Config::Linux]
-        #
         #   @param mounts [Array<DockerEngineRuby::Models::Plugin::Config::Mount>]
-        #
         #   @param network [DockerEngineRuby::Models::Plugin::Config::Network]
-        #
         #   @param pid_host [Boolean]
-        #
         #   @param propagated_mount [String]
-        #
         #   @param work_dir [String]
-        #
         #   @param rootfs [DockerEngineRuby::Models::Plugin::Config::Rootfs]
-        #
         #   @param user [DockerEngineRuby::Models::Plugin::Config::User]
 
         # @see DockerEngineRuby::Models::Plugin::Config#args
@@ -242,7 +227,6 @@ module DockerEngineRuby
           required :types, DockerEngineRuby::Internal::Type::ArrayOf[String], api_name: :Types
 
           # @!attribute protocol_scheme
-          #   Protocol to use for clients connecting to the plugin.
           #
           #   @return [Symbol, DockerEngineRuby::Models::Plugin::Config::Interface::ProtocolScheme, nil]
           optional :protocol_scheme,
@@ -250,16 +234,10 @@ module DockerEngineRuby
                    api_name: :ProtocolScheme
 
           # @!method initialize(socket:, types:, protocol_scheme: nil)
-          #   The interface between Docker and the plugin
-          #
           #   @param socket [String]
-          #
           #   @param types [Array<String>]
-          #
-          #   @param protocol_scheme [Symbol, DockerEngineRuby::Models::Plugin::Config::Interface::ProtocolScheme] Protocol to use for clients connecting to the plugin.
+          #   @param protocol_scheme [Symbol, DockerEngineRuby::Models::Plugin::Config::Interface::ProtocolScheme]
 
-          # Protocol to use for clients connecting to the plugin.
-          #
           # @see DockerEngineRuby::Models::Plugin::Config::Interface#protocol_scheme
           module ProtocolScheme
             extend DockerEngineRuby::Internal::Type::Enum

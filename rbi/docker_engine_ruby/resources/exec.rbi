@@ -3,22 +3,17 @@
 module DockerEngineRuby
   module Resources
     class Exec
-      # Return low-level information about an exec instance.
+      # Inspect an exec instance
       sig do
         params(
           id: String,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(DockerEngineRuby::Models::ExecInspectResponse)
       end
-      def inspect_(
-        # Exec instance ID
-        id,
-        request_options: {}
-      )
+      def inspect_(id, request_options: {})
       end
 
-      # Resize the TTY session used by an exec instance. This endpoint only works if
-      # `tty` was specified as part of creating and starting the exec instance.
+      # Resize an exec instance
       sig do
         params(
           id: String,
@@ -27,20 +22,10 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).void
       end
-      def resize(
-        # Exec instance ID
-        id,
-        # Height of the TTY session in characters
-        h:,
-        # Width of the TTY session in characters
-        w:,
-        request_options: {}
-      )
+      def resize(id, h:, w:, request_options: {})
       end
 
-      # Starts a previously set up exec instance. If detach is true, this endpoint
-      # returns immediately after starting the command. Otherwise, it sets up an
-      # interactive session with the command.
+      # Start an exec instance
       sig do
         params(
           id: String,
@@ -51,13 +36,9 @@ module DockerEngineRuby
         ).void
       end
       def start(
-        # Exec instance ID
         id,
-        # Initial console size, as an `[height, width]` array.
         console_size: nil,
-        # Detach from the command.
         detach: nil,
-        # Allocate a pseudo-TTY.
         tty: nil,
         request_options: {}
       )

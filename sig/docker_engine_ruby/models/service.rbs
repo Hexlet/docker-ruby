@@ -2,21 +2,21 @@ module DockerEngineRuby
   module Models
     type service =
       {
-        created_at: String,
+        created_at: Time,
         endpoint: DockerEngineRuby::Service::Endpoint,
         id: String,
         job_status: DockerEngineRuby::Service::JobStatus,
         service_status: DockerEngineRuby::Service::ServiceStatus,
         spec: DockerEngineRuby::Spec,
-        updated_at: String,
+        updated_at: Time,
         update_status: DockerEngineRuby::Service::UpdateStatus,
         version: DockerEngineRuby::Service::Version
       }
 
     class Service < DockerEngineRuby::Internal::Type::BaseModel
-      attr_reader created_at: String?
+      attr_reader created_at: Time?
 
-      def created_at=: (String) -> String
+      def created_at=: (Time) -> Time
 
       attr_reader endpoint: DockerEngineRuby::Service::Endpoint?
 
@@ -44,9 +44,9 @@ module DockerEngineRuby
 
       def spec=: (DockerEngineRuby::Spec) -> DockerEngineRuby::Spec
 
-      attr_reader updated_at: String?
+      attr_reader updated_at: Time?
 
-      def updated_at=: (String) -> String
+      def updated_at=: (Time) -> Time
 
       attr_reader update_status: DockerEngineRuby::Service::UpdateStatus?
 
@@ -61,25 +61,25 @@ module DockerEngineRuby
       ) -> DockerEngineRuby::Service::Version
 
       def initialize: (
-        ?created_at: String,
+        ?created_at: Time,
         ?endpoint: DockerEngineRuby::Service::Endpoint,
         ?id: String,
         ?job_status: DockerEngineRuby::Service::JobStatus,
         ?service_status: DockerEngineRuby::Service::ServiceStatus,
         ?spec: DockerEngineRuby::Spec,
-        ?updated_at: String,
+        ?updated_at: Time,
         ?update_status: DockerEngineRuby::Service::UpdateStatus,
         ?version: DockerEngineRuby::Service::Version
       ) -> void
 
       def to_hash: -> {
-        created_at: String,
+        created_at: Time,
         endpoint: DockerEngineRuby::Service::Endpoint,
         id: String,
         job_status: DockerEngineRuby::Service::JobStatus,
         service_status: DockerEngineRuby::Service::ServiceStatus,
         spec: DockerEngineRuby::Spec,
-        updated_at: String,
+        updated_at: Time,
         update_status: DockerEngineRuby::Service::UpdateStatus,
         version: DockerEngineRuby::Service::Version
       }
@@ -331,7 +331,7 @@ module DockerEngineRuby
       type job_status =
         {
           job_iteration: DockerEngineRuby::Service::JobStatus::JobIteration,
-          last_execution: String
+          last_execution: Time
         }
 
       class JobStatus < DockerEngineRuby::Internal::Type::BaseModel
@@ -341,18 +341,18 @@ module DockerEngineRuby
           DockerEngineRuby::Service::JobStatus::JobIteration
         ) -> DockerEngineRuby::Service::JobStatus::JobIteration
 
-        attr_reader last_execution: String?
+        attr_reader last_execution: Time?
 
-        def last_execution=: (String) -> String
+        def last_execution=: (Time) -> Time
 
         def initialize: (
           ?job_iteration: DockerEngineRuby::Service::JobStatus::JobIteration,
-          ?last_execution: String
+          ?last_execution: Time
         ) -> void
 
         def to_hash: -> {
           job_iteration: DockerEngineRuby::Service::JobStatus::JobIteration,
-          last_execution: String
+          last_execution: Time
         }
 
         type job_iteration = { index: Integer }
@@ -403,24 +403,24 @@ module DockerEngineRuby
 
       type update_status =
         {
-          completed_at: String,
+          completed_at: Time,
           message: String,
-          started_at: String,
+          started_at: Time,
           state: DockerEngineRuby::Models::Service::UpdateStatus::state
         }
 
       class UpdateStatus < DockerEngineRuby::Internal::Type::BaseModel
-        attr_reader completed_at: String?
+        attr_reader completed_at: Time?
 
-        def completed_at=: (String) -> String
+        def completed_at=: (Time) -> Time
 
         attr_reader message: String?
 
         def message=: (String) -> String
 
-        attr_reader started_at: String?
+        attr_reader started_at: Time?
 
-        def started_at=: (String) -> String
+        def started_at=: (Time) -> Time
 
         attr_reader state: DockerEngineRuby::Models::Service::UpdateStatus::state?
 
@@ -429,16 +429,16 @@ module DockerEngineRuby
         ) -> DockerEngineRuby::Models::Service::UpdateStatus::state
 
         def initialize: (
-          ?completed_at: String,
+          ?completed_at: Time,
           ?message: String,
-          ?started_at: String,
+          ?started_at: Time,
           ?state: DockerEngineRuby::Models::Service::UpdateStatus::state
         ) -> void
 
         def to_hash: -> {
-          completed_at: String,
+          completed_at: Time,
           message: String,
-          started_at: String,
+          started_at: Time,
           state: DockerEngineRuby::Models::Service::UpdateStatus::state
         }
 

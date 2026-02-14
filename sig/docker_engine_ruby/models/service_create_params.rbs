@@ -1,41 +1,26 @@
 module DockerEngineRuby
   module Models
     type service_create_params =
-      {
-        spec: DockerEngineRuby::ServiceCreateParams::Spec,
-        x_registry_auth: String
-      }
+      { x_registry_auth: String }
       & DockerEngineRuby::Internal::Type::request_parameters
 
     class ServiceCreateParams < DockerEngineRuby::Internal::Type::BaseModel
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
-      attr_accessor spec: DockerEngineRuby::ServiceCreateParams::Spec
-
       attr_reader x_registry_auth: String?
 
       def x_registry_auth=: (String) -> String
 
       def initialize: (
-        spec: DockerEngineRuby::ServiceCreateParams::Spec,
         ?x_registry_auth: String,
         ?request_options: DockerEngineRuby::request_opts
       ) -> void
 
       def to_hash: -> {
-        spec: DockerEngineRuby::ServiceCreateParams::Spec,
         x_registry_auth: String,
         request_options: DockerEngineRuby::RequestOptions
       }
-
-      type spec = {  }
-
-      class Spec < DockerEngineRuby::Models::Spec
-        def initialize: -> void
-
-        def to_hash: -> {  }
-      end
     end
   end
 end

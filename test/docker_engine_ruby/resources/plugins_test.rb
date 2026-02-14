@@ -98,7 +98,7 @@ class DockerEngineRuby::Test::Resources::PluginsTest < DockerEngineRuby::Test::R
   def test_pull_required_params
     skip("Prism tests are disabled")
 
-    response = @docker.plugins.pull(remote: "remote")
+    response = @docker.plugins.pull(remote: "remote", body: [{}])
 
     assert_pattern do
       response => nil
@@ -115,10 +115,10 @@ class DockerEngineRuby::Test::Resources::PluginsTest < DockerEngineRuby::Test::R
     end
   end
 
-  def test_set
+  def test_set_required_params
     skip("Prism tests are disabled")
 
-    response = @docker.plugins.set("name")
+    response = @docker.plugins.set("name", body: ["string"])
 
     assert_pattern do
       response => nil
@@ -128,7 +128,7 @@ class DockerEngineRuby::Test::Resources::PluginsTest < DockerEngineRuby::Test::R
   def test_upgrade_required_params
     skip("Prism tests are disabled")
 
-    response = @docker.plugins.upgrade("name", remote: "remote")
+    response = @docker.plugins.upgrade("name", remote: "remote", body: [{}])
 
     assert_pattern do
       response => nil

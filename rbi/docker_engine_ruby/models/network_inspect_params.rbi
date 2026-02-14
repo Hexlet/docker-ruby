@@ -14,14 +14,12 @@ module DockerEngineRuby
           )
         end
 
-      # Filter the network by scope (swarm, global, or local)
       sig { returns(T.nilable(String)) }
       attr_reader :scope
 
       sig { params(scope: String).void }
       attr_writer :scope
 
-      # Detailed inspect output for troubleshooting
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :verbose
 
@@ -35,13 +33,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # Filter the network by scope (swarm, global, or local)
-        scope: nil,
-        # Detailed inspect output for troubleshooting
-        verbose: nil,
-        request_options: {}
-      )
+      def self.new(scope: nil, verbose: nil, request_options: {})
       end
 
       sig do

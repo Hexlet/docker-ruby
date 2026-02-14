@@ -5,15 +5,15 @@ module DockerEngineRuby
     class Secrets
       # Create a secret
       #
-      # @overload create(spec: nil, request_options: {})
+      # @overload create(spec:, request_options: {})
       #
-      # @param spec [DockerEngineRuby::Models::SecretCreateParams::Spec]
+      # @param spec [DockerEngineRuby::Models::Spec]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [DockerEngineRuby::Models::SecretCreateResponse]
       #
       # @see DockerEngineRuby::Models::SecretCreateParams
-      def create(params = {})
+      def create(params)
         parsed, options = DockerEngineRuby::SecretCreateParams.dump_request(params)
         @client.request(
           method: :post,
@@ -24,16 +24,13 @@ module DockerEngineRuby
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::SecretUpdateParams} for more details.
-      #
       # Update a Secret
       #
-      # @overload update(id, version:, spec: nil, request_options: {})
+      # @overload update(id, version:, spec:, request_options: {})
       #
-      # @param id [String] Path param: The ID or name of the secret
+      # @param id [String] Path param
       #
-      # @param version [Integer] Query param: The version number of the secret object being updated. This is
+      # @param version [Integer] Query param
       #
       # @param spec [DockerEngineRuby::Models::Spec] Body param
       #
@@ -54,15 +51,11 @@ module DockerEngineRuby
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::SecretListParams} for more details.
-      #
       # List secrets
       #
       # @overload list(filters: nil, request_options: {})
       #
-      # @param filters [String] A JSON encoded value of the filters (a `map[string][]string`) to
-      #
+      # @param filters [String]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Array<DockerEngineRuby::Models::Secret>]
@@ -83,8 +76,7 @@ module DockerEngineRuby
       #
       # @overload delete(id, request_options: {})
       #
-      # @param id [String] ID of the secret
-      #
+      # @param id [String]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [nil]
@@ -103,8 +95,7 @@ module DockerEngineRuby
       #
       # @overload inspect_(id, request_options: {})
       #
-      # @param id [String] ID of the secret
-      #
+      # @param id [String]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [DockerEngineRuby::Models::Secret]

@@ -11,7 +11,6 @@ module DockerEngineRuby
           )
         end
 
-      # The swarm's unlock key.
       sig { returns(T.nilable(String)) }
       attr_reader :unlock_key
 
@@ -19,10 +18,7 @@ module DockerEngineRuby
       attr_writer :unlock_key
 
       sig { params(unlock_key: String).returns(T.attached_class) }
-      def self.new(
-        # The swarm's unlock key.
-        unlock_key: nil
-      )
+      def self.new(unlock_key: nil)
       end
 
       sig { override.returns({ unlock_key: String }) }

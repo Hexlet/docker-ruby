@@ -74,7 +74,7 @@ module DockerEngineRuby
         ?domainname: String,
         ?entrypoint: ::Array[String],
         ?env: ::Array[String],
-        ?exposed_ports: ::Hash[Symbol, top]?,
+        ?exposed_ports: ::Hash[Symbol, ::Hash[Symbol, top]]?,
         ?healthcheck: DockerEngineRuby::Config::Healthcheck,
         ?hostname: String,
         ?image: String,
@@ -88,7 +88,7 @@ module DockerEngineRuby
         ?stop_timeout: Integer?,
         ?tty: bool,
         ?user: String,
-        ?volumes: ::Hash[Symbol, top],
+        ?volumes: ::Hash[Symbol, ::Hash[Symbol, top]],
         ?working_dir: String,
         ?request_options: DockerEngineRuby::request_opts
       ) -> DockerEngineRuby::Models::ImageCommitResponse
@@ -130,6 +130,7 @@ module DockerEngineRuby
       ) -> DockerEngineRuby::Models::ImagePruneResponse
 
       def pull: (
+        body: String,
         ?changes: ::Array[String],
         ?from_image: String,
         ?from_src: String,
@@ -137,7 +138,6 @@ module DockerEngineRuby
         ?platform: String,
         ?repo: String,
         ?tag: String,
-        ?body: String,
         ?x_registry_auth: String,
         ?request_options: DockerEngineRuby::request_opts
       ) -> nil

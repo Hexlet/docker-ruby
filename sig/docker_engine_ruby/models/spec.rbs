@@ -192,20 +192,20 @@ module DockerEngineRuby
 
       type mode =
         {
-          global: top,
-          global_job: top,
+          global: ::Hash[Symbol, top],
+          global_job: ::Hash[Symbol, top],
           replicated: DockerEngineRuby::Spec::Mode::Replicated,
           replicated_job: DockerEngineRuby::Spec::Mode::ReplicatedJob
         }
 
       class Mode < DockerEngineRuby::Internal::Type::BaseModel
-        attr_reader global: top?
+        attr_reader global: ::Hash[Symbol, top]?
 
-        def global=: (top) -> top
+        def global=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
 
-        attr_reader global_job: top?
+        attr_reader global_job: ::Hash[Symbol, top]?
 
-        def global_job=: (top) -> top
+        def global_job=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
 
         attr_reader replicated: DockerEngineRuby::Spec::Mode::Replicated?
 
@@ -220,15 +220,15 @@ module DockerEngineRuby
         ) -> DockerEngineRuby::Spec::Mode::ReplicatedJob
 
         def initialize: (
-          ?global: top,
-          ?global_job: top,
+          ?global: ::Hash[Symbol, top],
+          ?global_job: ::Hash[Symbol, top],
           ?replicated: DockerEngineRuby::Spec::Mode::Replicated,
           ?replicated_job: DockerEngineRuby::Spec::Mode::ReplicatedJob
         ) -> void
 
         def to_hash: -> {
-          global: top,
-          global_job: top,
+          global: ::Hash[Symbol, top],
+          global_job: ::Hash[Symbol, top],
           replicated: DockerEngineRuby::Spec::Mode::Replicated,
           replicated_job: DockerEngineRuby::Spec::Mode::ReplicatedJob
         }

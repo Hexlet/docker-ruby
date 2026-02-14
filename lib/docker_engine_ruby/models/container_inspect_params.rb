@@ -8,14 +8,12 @@ module DockerEngineRuby
       include DockerEngineRuby::Internal::Type::RequestParameters
 
       # @!attribute size
-      #   Return the size of container as fields `SizeRw` and `SizeRootFs`
       #
       #   @return [Boolean, nil]
       optional :size, DockerEngineRuby::Internal::Type::Boolean
 
       # @!method initialize(size: nil, request_options: {})
-      #   @param size [Boolean] Return the size of container as fields `SizeRw` and `SizeRootFs`
-      #
+      #   @param size [Boolean]
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]
     end
   end

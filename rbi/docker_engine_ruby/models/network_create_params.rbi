@@ -14,12 +14,9 @@ module DockerEngineRuby
           )
         end
 
-      # The network's name.
       sig { returns(String) }
       attr_accessor :name
 
-      # Globally scoped network is manually attachable by regular containers from
-      # workers in swarm mode.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :attachable
 
@@ -39,44 +36,36 @@ module DockerEngineRuby
       end
       attr_writer :config_from
 
-      # Creates a config-only network. Config-only networks are placeholder networks for
-      # network configurations to be used by other networks. Config-only networks cannot
-      # be used directly to run containers or services.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :config_only
 
       sig { params(config_only: T::Boolean).void }
       attr_writer :config_only
 
-      # Name of the network driver plugin to use.
       sig { returns(T.nilable(String)) }
       attr_reader :driver
 
       sig { params(driver: String).void }
       attr_writer :driver
 
-      # Enable IPv4 on the network.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :enable_i_pv4
 
       sig { params(enable_i_pv4: T::Boolean).void }
       attr_writer :enable_i_pv4
 
-      # Enable IPv6 on the network.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :enable_i_pv6
 
       sig { params(enable_i_pv6: T::Boolean).void }
       attr_writer :enable_i_pv6
 
-      # Ingress network is the network which provides the routing-mesh in swarm mode.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :ingress
 
       sig { params(ingress: T::Boolean).void }
       attr_writer :ingress
 
-      # Restrict external access to the network.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :internal
 
@@ -91,22 +80,18 @@ module DockerEngineRuby
       end
       attr_writer :ipam
 
-      # User-defined key/value metadata.
       sig { returns(T.nilable(T::Hash[Symbol, String])) }
       attr_reader :labels
 
       sig { params(labels: T::Hash[Symbol, String]).void }
       attr_writer :labels
 
-      # Network specific options to be used by the drivers.
       sig { returns(T.nilable(T::Hash[Symbol, String])) }
       attr_reader :options
 
       sig { params(options: T::Hash[Symbol, String]).void }
       attr_writer :options
 
-      # The level at which the network exists (e.g. `swarm` for cluster-wide or `local`
-      # for machine level).
       sig { returns(T.nilable(String)) }
       attr_reader :scope
 
@@ -133,34 +118,19 @@ module DockerEngineRuby
         ).returns(T.attached_class)
       end
       def self.new(
-        # The network's name.
         name:,
-        # Globally scoped network is manually attachable by regular containers from
-        # workers in swarm mode.
         attachable: nil,
         # The config-only network source to provide the configuration for this network.
         config_from: nil,
-        # Creates a config-only network. Config-only networks are placeholder networks for
-        # network configurations to be used by other networks. Config-only networks cannot
-        # be used directly to run containers or services.
         config_only: nil,
-        # Name of the network driver plugin to use.
         driver: nil,
-        # Enable IPv4 on the network.
         enable_i_pv4: nil,
-        # Enable IPv6 on the network.
         enable_i_pv6: nil,
-        # Ingress network is the network which provides the routing-mesh in swarm mode.
         ingress: nil,
-        # Restrict external access to the network.
         internal: nil,
         ipam: nil,
-        # User-defined key/value metadata.
         labels: nil,
-        # Network specific options to be used by the drivers.
         options: nil,
-        # The level at which the network exists (e.g. `swarm` for cluster-wide or `local`
-        # for machine level).
         scope: nil,
         request_options: {}
       )

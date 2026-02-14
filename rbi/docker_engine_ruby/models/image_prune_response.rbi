@@ -11,7 +11,6 @@ module DockerEngineRuby
           )
         end
 
-      # Images that were deleted
       sig { returns(T.nilable(T::Array[DockerEngineRuby::DeleteItem])) }
       attr_reader :images_deleted
 
@@ -22,7 +21,6 @@ module DockerEngineRuby
       end
       attr_writer :images_deleted
 
-      # Disk space reclaimed in bytes
       sig { returns(T.nilable(Integer)) }
       attr_reader :space_reclaimed
 
@@ -35,12 +33,7 @@ module DockerEngineRuby
           space_reclaimed: Integer
         ).returns(T.attached_class)
       end
-      def self.new(
-        # Images that were deleted
-        images_deleted: nil,
-        # Disk space reclaimed in bytes
-        space_reclaimed: nil
-      )
+      def self.new(images_deleted: nil, space_reclaimed: nil)
       end
 
       sig do

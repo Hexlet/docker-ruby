@@ -249,17 +249,6 @@ module DockerEngineRuby
       #   @return [Integer, nil]
       optional :pids_limit, Integer, api_name: :PidsLimit, nil?: true
 
-      # @!attribute restart_policy
-      #   The behavior to apply when the container exits. The default is not to restart.
-      #
-      #   An ever increasing delay (double the previous delay, starting at 100ms) is added
-      #   before each restart to prevent flooding the server.
-      #
-      #   @return [DockerEngineRuby::Models::ContainerUpdateParams::RestartPolicy, nil]
-      optional :restart_policy,
-               -> { DockerEngineRuby::ContainerUpdateParams::RestartPolicy },
-               api_name: :RestartPolicy
-
       # @!attribute ulimits
       #   A list of resource limits to set in the container. For example:
       #
@@ -274,7 +263,7 @@ module DockerEngineRuby
                },
                api_name: :Ulimits
 
-      # @!method initialize(blkio_device_read_bps: nil, blkio_device_read_i_ops: nil, blkio_device_write_bps: nil, blkio_device_write_i_ops: nil, blkio_weight: nil, blkio_weight_device: nil, cgroup_parent: nil, cpu_count: nil, cpu_percent: nil, cpu_period: nil, cpu_quota: nil, cpu_realtime_period: nil, cpu_realtime_runtime: nil, cpuset_cpus: nil, cpuset_mems: nil, cpu_shares: nil, device_cgroup_rules: nil, device_requests: nil, devices: nil, init: nil, io_maximum_bandwidth: nil, io_maximum_i_ops: nil, memory: nil, memory_reservation: nil, memory_swap: nil, memory_swappiness: nil, nano_cpus: nil, oom_kill_disable: nil, pids_limit: nil, restart_policy: nil, ulimits: nil, request_options: {})
+      # @!method initialize(blkio_device_read_bps: nil, blkio_device_read_i_ops: nil, blkio_device_write_bps: nil, blkio_device_write_i_ops: nil, blkio_weight: nil, blkio_weight_device: nil, cgroup_parent: nil, cpu_count: nil, cpu_percent: nil, cpu_period: nil, cpu_quota: nil, cpu_realtime_period: nil, cpu_realtime_runtime: nil, cpuset_cpus: nil, cpuset_mems: nil, cpu_shares: nil, device_cgroup_rules: nil, device_requests: nil, devices: nil, init: nil, io_maximum_bandwidth: nil, io_maximum_i_ops: nil, memory: nil, memory_reservation: nil, memory_swap: nil, memory_swappiness: nil, nano_cpus: nil, oom_kill_disable: nil, pids_limit: nil, ulimits: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {DockerEngineRuby::Models::ContainerUpdateParams} for more details.
       #
@@ -335,8 +324,6 @@ module DockerEngineRuby
       #   @param oom_kill_disable [Boolean] Disable OOM Killer for the container.
       #
       #   @param pids_limit [Integer, nil] Tune a container's PIDs limit. Set `0` or `-1` for unlimited, or `null`
-      #
-      #   @param restart_policy [DockerEngineRuby::Models::ContainerUpdateParams::RestartPolicy] The behavior to apply when the container exits. The default is not to
       #
       #   @param ulimits [Array<DockerEngineRuby::Models::ContainerUpdateParams::Ulimit>] A list of resource limits to set in the container. For example:
       #
@@ -517,89 +504,26 @@ module DockerEngineRuby
         #   @param path_on_host [String]
       end
 
-      class RestartPolicy < DockerEngineRuby::Internal::Type::BaseModel
-        # @!attribute maximum_retry_count
-        #   If `on-failure` is used, the number of times to retry before giving up.
-        #
-        #   @return [Integer, nil]
-        optional :maximum_retry_count, Integer, api_name: :MaximumRetryCount
-
-        # @!attribute name
-        #   - Empty string means not to restart
-        #   - `no` Do not automatically restart
-        #   - `always` Always restart
-        #   - `unless-stopped` Restart always except when the user has manually stopped the
-        #     container
-        #   - `on-failure` Restart only when the container exit code is non-zero
-        #
-        #   @return [Symbol, DockerEngineRuby::Models::ContainerUpdateParams::RestartPolicy::Name, nil]
-        optional :name,
-                 enum: -> {
-                   DockerEngineRuby::ContainerUpdateParams::RestartPolicy::Name
-                 },
-                 api_name: :Name
-
-        # @!method initialize(maximum_retry_count: nil, name: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {DockerEngineRuby::Models::ContainerUpdateParams::RestartPolicy} for more
-        #   details.
-        #
-        #   The behavior to apply when the container exits. The default is not to restart.
-        #
-        #   An ever increasing delay (double the previous delay, starting at 100ms) is added
-        #   before each restart to prevent flooding the server.
-        #
-        #   @param maximum_retry_count [Integer] If `on-failure` is used, the number of times to retry before giving up.
-        #
-        #   @param name [Symbol, DockerEngineRuby::Models::ContainerUpdateParams::RestartPolicy::Name] - Empty string means not to restart
-
-        # - Empty string means not to restart
-        # - `no` Do not automatically restart
-        # - `always` Always restart
-        # - `unless-stopped` Restart always except when the user has manually stopped the
-        #   container
-        # - `on-failure` Restart only when the container exit code is non-zero
-        #
-        # @see DockerEngineRuby::Models::ContainerUpdateParams::RestartPolicy#name
-        module Name
-          extend DockerEngineRuby::Internal::Type::Enum
-
-          EMPTY = :""
-          NO = :no
-          ALWAYS = :always
-          UNLESS_STOPPED = :"unless-stopped"
-          ON_FAILURE = :"on-failure"
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
-      end
-
       class Ulimit < DockerEngineRuby::Internal::Type::BaseModel
         # @!attribute hard
-        #   Hard limit
         #
         #   @return [Integer, nil]
         optional :hard, Integer, api_name: :Hard
 
         # @!attribute name
-        #   Name of ulimit
         #
         #   @return [String, nil]
         optional :name, String, api_name: :Name
 
         # @!attribute soft
-        #   Soft limit
         #
         #   @return [Integer, nil]
         optional :soft, Integer, api_name: :Soft
 
         # @!method initialize(hard: nil, name: nil, soft: nil)
-        #   @param hard [Integer] Hard limit
-        #
-        #   @param name [String] Name of ulimit
-        #
-        #   @param soft [Integer] Soft limit
+        #   @param hard [Integer]
+        #   @param name [String]
+        #   @param soft [Integer]
       end
     end
   end

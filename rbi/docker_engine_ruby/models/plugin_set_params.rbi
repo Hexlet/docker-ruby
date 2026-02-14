@@ -14,11 +14,8 @@ module DockerEngineRuby
           )
         end
 
-      sig { returns(T.nilable(T::Array[String])) }
-      attr_reader :body
-
-      sig { params(body: T::Array[String]).void }
-      attr_writer :body
+      sig { returns(T::Array[String]) }
+      attr_accessor :body
 
       sig do
         params(
@@ -26,7 +23,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(body: nil, request_options: {})
+      def self.new(body:, request_options: {})
       end
 
       sig do

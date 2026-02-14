@@ -14,9 +14,6 @@ module DockerEngineRuby
           )
         end
 
-      # Wait until a container state reaches the given condition.
-      #
-      # Defaults to `not-running` if omitted or empty.
       sig do
         returns(
           T.nilable(DockerEngineRuby::ContainerWaitParams::Condition::OrSymbol)
@@ -37,13 +34,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # Wait until a container state reaches the given condition.
-        #
-        # Defaults to `not-running` if omitted or empty.
-        condition: nil,
-        request_options: {}
-      )
+      def self.new(condition: nil, request_options: {})
       end
 
       sig do
@@ -58,9 +49,6 @@ module DockerEngineRuby
       def to_hash
       end
 
-      # Wait until a container state reaches the given condition.
-      #
-      # Defaults to `not-running` if omitted or empty.
       module Condition
         extend DockerEngineRuby::Internal::Type::Enum
 

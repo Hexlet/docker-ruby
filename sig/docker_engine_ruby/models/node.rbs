@@ -2,20 +2,20 @@ module DockerEngineRuby
   module Models
     type node =
       {
-        created_at: String,
+        created_at: Time,
         description: DockerEngineRuby::Node::Description,
         id: String,
-        manager_status: DockerEngineRuby::Node::ManagerStatus?,
+        manager_status: DockerEngineRuby::Node::ManagerStatus,
         spec: DockerEngineRuby::Spec,
         status: DockerEngineRuby::Node::Status,
-        updated_at: String,
+        updated_at: Time,
         version: DockerEngineRuby::Node::Version
       }
 
     class Node < DockerEngineRuby::Internal::Type::BaseModel
-      attr_reader created_at: String?
+      attr_reader created_at: Time?
 
-      def created_at=: (String) -> String
+      def created_at=: (Time) -> Time
 
       attr_reader description: DockerEngineRuby::Node::Description?
 
@@ -27,7 +27,11 @@ module DockerEngineRuby
 
       def id=: (String) -> String
 
-      attr_accessor manager_status: DockerEngineRuby::Node::ManagerStatus?
+      attr_reader manager_status: DockerEngineRuby::Node::ManagerStatus?
+
+      def manager_status=: (
+        DockerEngineRuby::Node::ManagerStatus
+      ) -> DockerEngineRuby::Node::ManagerStatus
 
       attr_reader spec: DockerEngineRuby::Spec?
 
@@ -39,9 +43,9 @@ module DockerEngineRuby
         DockerEngineRuby::Node::Status
       ) -> DockerEngineRuby::Node::Status
 
-      attr_reader updated_at: String?
+      attr_reader updated_at: Time?
 
-      def updated_at=: (String) -> String
+      def updated_at=: (Time) -> Time
 
       attr_reader version: DockerEngineRuby::Node::Version?
 
@@ -50,24 +54,24 @@ module DockerEngineRuby
       ) -> DockerEngineRuby::Node::Version
 
       def initialize: (
-        ?created_at: String,
+        ?created_at: Time,
         ?description: DockerEngineRuby::Node::Description,
         ?id: String,
-        ?manager_status: DockerEngineRuby::Node::ManagerStatus?,
+        ?manager_status: DockerEngineRuby::Node::ManagerStatus,
         ?spec: DockerEngineRuby::Spec,
         ?status: DockerEngineRuby::Node::Status,
-        ?updated_at: String,
+        ?updated_at: Time,
         ?version: DockerEngineRuby::Node::Version
       ) -> void
 
       def to_hash: -> {
-        created_at: String,
+        created_at: Time,
         description: DockerEngineRuby::Node::Description,
         id: String,
-        manager_status: DockerEngineRuby::Node::ManagerStatus?,
+        manager_status: DockerEngineRuby::Node::ManagerStatus,
         spec: DockerEngineRuby::Spec,
         status: DockerEngineRuby::Node::Status,
-        updated_at: String,
+        updated_at: Time,
         version: DockerEngineRuby::Node::Version
       }
 

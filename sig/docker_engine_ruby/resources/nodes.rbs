@@ -4,7 +4,7 @@ module DockerEngineRuby
       def update: (
         String id,
         version: Integer,
-        ?spec: DockerEngineRuby::Spec,
+        spec: DockerEngineRuby::Spec,
         ?request_options: DockerEngineRuby::request_opts
       ) -> nil
 

@@ -113,7 +113,6 @@ module DockerEngineRuby
         sig { returns(T::Array[DockerEngineRuby::Plugin::Config::Env]) }
         attr_accessor :env
 
-        # The interface between Docker and the plugin
         sig { returns(DockerEngineRuby::Plugin::Config::Interface) }
         attr_reader :interface
 
@@ -199,7 +198,6 @@ module DockerEngineRuby
           documentation:,
           entrypoint:,
           env:,
-          # The interface between Docker and the plugin
           interface:,
           ipc_host:,
           linux:,
@@ -344,7 +342,6 @@ module DockerEngineRuby
           sig { returns(T::Array[String]) }
           attr_accessor :types
 
-          # Protocol to use for clients connecting to the plugin.
           sig do
             returns(
               T.nilable(
@@ -362,7 +359,6 @@ module DockerEngineRuby
           end
           attr_writer :protocol_scheme
 
-          # The interface between Docker and the plugin
           sig do
             params(
               socket: String,
@@ -371,12 +367,7 @@ module DockerEngineRuby
                 DockerEngineRuby::Plugin::Config::Interface::ProtocolScheme::OrSymbol
             ).returns(T.attached_class)
           end
-          def self.new(
-            socket:,
-            types:,
-            # Protocol to use for clients connecting to the plugin.
-            protocol_scheme: nil
-          )
+          def self.new(socket:, types:, protocol_scheme: nil)
           end
 
           sig do
@@ -392,7 +383,6 @@ module DockerEngineRuby
           def to_hash
           end
 
-          # Protocol to use for clients connecting to the plugin.
           module ProtocolScheme
             extend DockerEngineRuby::Internal::Type::Enum
 

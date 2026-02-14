@@ -14,23 +14,18 @@ module DockerEngineRuby
           )
         end
 
-      # Remove the image even if it is being used by stopped containers or has other
-      # tags
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :force
 
       sig { params(force: T::Boolean).void }
       attr_writer :force
 
-      # Do not delete untagged parent images
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :noprune
 
       sig { params(noprune: T::Boolean).void }
       attr_writer :noprune
 
-      # Select platform-specific content to delete. Multiple values are accepted. Each
-      # platform is a OCI platform encoded as a JSON string.
       sig { returns(T.nilable(T::Array[String])) }
       attr_reader :platforms
 
@@ -46,13 +41,8 @@ module DockerEngineRuby
         ).returns(T.attached_class)
       end
       def self.new(
-        # Remove the image even if it is being used by stopped containers or has other
-        # tags
         force: nil,
-        # Do not delete untagged parent images
         noprune: nil,
-        # Select platform-specific content to delete. Multiple values are accepted. Each
-        # platform is a OCI platform encoded as a JSON string.
         platforms: nil,
         request_options: {}
       )

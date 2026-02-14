@@ -42,8 +42,8 @@ module DockerEngineRuby
 
       def pull: (
         remote: String,
+        body: ::Array[DockerEngineRuby::Privilege],
         ?name: String,
-        ?body: ::Array[DockerEngineRuby::Privilege],
         ?x_registry_auth: String,
         ?request_options: DockerEngineRuby::request_opts
       ) -> nil
@@ -55,14 +55,14 @@ module DockerEngineRuby
 
       def set: (
         String name,
-        ?body: ::Array[String],
+        body: ::Array[String],
         ?request_options: DockerEngineRuby::request_opts
       ) -> nil
 
       def upgrade: (
         String name,
         remote: String,
-        ?body: ::Array[DockerEngineRuby::Privilege],
+        body: ::Array[DockerEngineRuby::Privilege],
         ?x_registry_auth: String,
         ?request_options: DockerEngineRuby::request_opts
       ) -> nil

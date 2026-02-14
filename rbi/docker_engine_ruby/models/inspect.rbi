@@ -19,7 +19,7 @@ module DockerEngineRuby
       attr_writer :descriptor
 
       # An array containing all platforms supported by the image.
-      sig { returns(T::Array[T.nilable(DockerEngineRuby::Inspect::Platform)]) }
+      sig { returns(T::Array[DockerEngineRuby::Inspect::Platform]) }
       attr_accessor :platforms
 
       # Describes the result obtained from contacting the registry to retrieve image
@@ -27,8 +27,7 @@ module DockerEngineRuby
       sig do
         params(
           descriptor: DockerEngineRuby::Inspect::Descriptor::OrHash,
-          platforms:
-            T::Array[T.nilable(DockerEngineRuby::Inspect::Platform::OrHash)]
+          platforms: T::Array[DockerEngineRuby::Inspect::Platform::OrHash]
         ).returns(T.attached_class)
       end
       def self.new(
@@ -44,7 +43,7 @@ module DockerEngineRuby
         override.returns(
           {
             descriptor: DockerEngineRuby::Inspect::Descriptor,
-            platforms: T::Array[T.nilable(DockerEngineRuby::Inspect::Platform)]
+            platforms: T::Array[DockerEngineRuby::Inspect::Platform]
           }
         )
       end
@@ -98,8 +97,7 @@ module DockerEngineRuby
 
         sig do
           params(
-            platform:
-              T.nilable(DockerEngineRuby::Inspect::Descriptor::Platform::OrHash)
+            platform: DockerEngineRuby::Inspect::Descriptor::Platform::OrHash
           ).void
         end
         attr_writer :platform
@@ -124,10 +122,7 @@ module DockerEngineRuby
             data: T.nilable(String),
             digest: String,
             media_type: String,
-            platform:
-              T.nilable(
-                DockerEngineRuby::Inspect::Descriptor::Platform::OrHash
-              ),
+            platform: DockerEngineRuby::Inspect::Descriptor::Platform::OrHash,
             size: Integer,
             urls: T.nilable(T::Array[String])
           ).returns(T.attached_class)
@@ -164,8 +159,7 @@ module DockerEngineRuby
               data: T.nilable(String),
               digest: String,
               media_type: String,
-              platform:
-                T.nilable(DockerEngineRuby::Inspect::Descriptor::Platform),
+              platform: DockerEngineRuby::Inspect::Descriptor::Platform,
               size: Integer,
               urls: T.nilable(T::Array[String])
             }

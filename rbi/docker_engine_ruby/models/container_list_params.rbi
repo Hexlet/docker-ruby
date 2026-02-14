@@ -14,49 +14,24 @@ module DockerEngineRuby
           )
         end
 
-      # Return all containers. By default, only running containers are shown.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :all
 
       sig { params(all: T::Boolean).void }
       attr_writer :all
 
-      # Filters to process on the container list, encoded as JSON (a
-      # `map[string][]string`). For example, `{"status": ["paused"]}` will only return
-      # paused containers.
-      #
-      # Available filters:
-      #
-      # - `ancestor`=(`<image-name>[:<tag>]`, `<image id>`, or `<image@digest>`)
-      # - `before`=(`<container id>` or `<container name>`)
-      # - `expose`=(`<port>[/<proto>]`|`<startport-endport>/[<proto>]`)
-      # - `exited=<int>` containers with exit code of `<int>`
-      # - `health`=(`starting`|`healthy`|`unhealthy`|`none`)
-      # - `id=<ID>` a container's ID
-      # - `isolation=`(`default`|`process`|`hyperv`) (Windows daemon only)
-      # - `is-task=`(`true`|`false`)
-      # - `label=key` or `label="key=value"` of a container label
-      # - `name=<name>` a container's name
-      # - `network`=(`<network id>` or `<network name>`)
-      # - `publish`=(`<port>[/<proto>]`|`<startport-endport>/[<proto>]`)
-      # - `since`=(`<container id>` or `<container name>`)
-      # - `status=`(`created`|`restarting`|`running`|`removing`|`paused`|`exited`|`dead`)
-      # - `volume`=(`<volume name>` or `<mount point destination>`)
       sig { returns(T.nilable(String)) }
       attr_reader :filters
 
       sig { params(filters: String).void }
       attr_writer :filters
 
-      # Return this number of most recently created containers, including non-running
-      # ones.
       sig { returns(T.nilable(Integer)) }
       attr_reader :limit
 
       sig { params(limit: Integer).void }
       attr_writer :limit
 
-      # Return the size of container as fields `SizeRw` and `SizeRootFs`.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :size
 
@@ -73,34 +48,9 @@ module DockerEngineRuby
         ).returns(T.attached_class)
       end
       def self.new(
-        # Return all containers. By default, only running containers are shown.
         all: nil,
-        # Filters to process on the container list, encoded as JSON (a
-        # `map[string][]string`). For example, `{"status": ["paused"]}` will only return
-        # paused containers.
-        #
-        # Available filters:
-        #
-        # - `ancestor`=(`<image-name>[:<tag>]`, `<image id>`, or `<image@digest>`)
-        # - `before`=(`<container id>` or `<container name>`)
-        # - `expose`=(`<port>[/<proto>]`|`<startport-endport>/[<proto>]`)
-        # - `exited=<int>` containers with exit code of `<int>`
-        # - `health`=(`starting`|`healthy`|`unhealthy`|`none`)
-        # - `id=<ID>` a container's ID
-        # - `isolation=`(`default`|`process`|`hyperv`) (Windows daemon only)
-        # - `is-task=`(`true`|`false`)
-        # - `label=key` or `label="key=value"` of a container label
-        # - `name=<name>` a container's name
-        # - `network`=(`<network id>` or `<network name>`)
-        # - `publish`=(`<port>[/<proto>]`|`<startport-endport>/[<proto>]`)
-        # - `since`=(`<container id>` or `<container name>`)
-        # - `status=`(`created`|`restarting`|`running`|`removing`|`paused`|`exited`|`dead`)
-        # - `volume`=(`<volume name>` or `<mount point destination>`)
         filters: nil,
-        # Return this number of most recently created containers, including non-running
-        # ones.
         limit: nil,
-        # Return the size of container as fields `SizeRw` and `SizeRootFs`.
         size: nil,
         request_options: {}
       )

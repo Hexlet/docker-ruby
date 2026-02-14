@@ -8,14 +8,12 @@ module DockerEngineRuby
       include DockerEngineRuby::Internal::Type::RequestParameters
 
       # @!attribute timeout
-      #   Set the HTTP client timeout (in seconds)
       #
       #   @return [Integer, nil]
       optional :timeout, Integer
 
       # @!method initialize(timeout: nil, request_options: {})
-      #   @param timeout [Integer] Set the HTTP client timeout (in seconds)
-      #
+      #   @param timeout [Integer]
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]
     end
   end

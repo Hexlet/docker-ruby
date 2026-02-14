@@ -49,7 +49,7 @@ module DockerEngineRuby
       #   daemon. This is included for debugging purposes only.
       #
       #   @return [DockerEngineRuby::Models::Info::Containerd, nil]
-      optional :containerd, -> { DockerEngineRuby::Info::Containerd }, api_name: :Containerd, nil?: true
+      optional :containerd, -> { DockerEngineRuby::Info::Containerd }, api_name: :Containerd
 
       # @!attribute containerd_commit
       #   Commit holds the Git-commit (SHA1) that a binary was built from, as reported in
@@ -193,14 +193,9 @@ module DockerEngineRuby
       #   This field is currently only used on Linux, and omitted on other platforms.
       #
       #   @return [DockerEngineRuby::Models::Info::FirewallBackend, nil]
-      optional :firewall_backend,
-               -> { DockerEngineRuby::Info::FirewallBackend },
-               api_name: :FirewallBackend,
-               nil?: true
+      optional :firewall_backend, -> { DockerEngineRuby::Info::FirewallBackend }, api_name: :FirewallBackend
 
       # @!attribute generic_resources
-      #   User-defined resources can be either Integer resources (e.g, `SSD=3`) or String
-      #   resources (e.g, `GPU=UUID1`).
       #
       #   @return [Array<DockerEngineRuby::Models::Info::GenericResource>, nil]
       optional :generic_resources,
@@ -397,7 +392,7 @@ module DockerEngineRuby
       #   This field is only present if NRI is enabled.
       #
       #   @return [DockerEngineRuby::Models::Info::Nri, nil]
-      optional :nri, -> { DockerEngineRuby::Info::Nri }, api_name: :NRI, nil?: true
+      optional :nri, -> { DockerEngineRuby::Info::Nri }, api_name: :NRI
 
       # @!attribute oom_kill_disable
       #   Indicates if OOM killer disable is supported on the host.
@@ -466,10 +461,7 @@ module DockerEngineRuby
       #   RegistryServiceConfig stores daemon registry services configuration.
       #
       #   @return [DockerEngineRuby::Models::Info::RegistryConfig, nil]
-      optional :registry_config,
-               -> { DockerEngineRuby::Info::RegistryConfig },
-               api_name: :RegistryConfig,
-               nil?: true
+      optional :registry_config, -> { DockerEngineRuby::Info::RegistryConfig }, api_name: :RegistryConfig
 
       # @!attribute runc_commit
       #   Commit holds the Git-commit (SHA1) that a binary was built from, as reported in
@@ -552,7 +544,7 @@ module DockerEngineRuby
       #
       #   @param cgroup_version [Symbol, DockerEngineRuby::Models::Info::CgroupVersion] The version of the cgroup.
       #
-      #   @param containerd [DockerEngineRuby::Models::Info::Containerd, nil] Information for connecting to the containerd instance that is used by the daemon
+      #   @param containerd [DockerEngineRuby::Models::Info::Containerd] Information for connecting to the containerd instance that is used by the daemon
       #
       #   @param containerd_commit [DockerEngineRuby::Models::Info::ContainerdCommit] Commit holds the Git-commit (SHA1) that a binary was built from, as
       #
@@ -588,9 +580,9 @@ module DockerEngineRuby
       #
       #   @param experimental_build [Boolean] Indicates if experimental features are enabled on the daemon.
       #
-      #   @param firewall_backend [DockerEngineRuby::Models::Info::FirewallBackend, nil] Information about the daemon's firewalling configuration.
+      #   @param firewall_backend [DockerEngineRuby::Models::Info::FirewallBackend] Information about the daemon's firewalling configuration.
       #
-      #   @param generic_resources [Array<DockerEngineRuby::Models::Info::GenericResource>] User-defined resources can be either Integer resources (e.g, `SSD=3`) or
+      #   @param generic_resources [Array<DockerEngineRuby::Models::Info::GenericResource>]
       #
       #   @param http_proxy [String] HTTP-proxy configured for the daemon. This value is obtained from the
       #
@@ -634,7 +626,7 @@ module DockerEngineRuby
       #
       #   @param no_proxy [String] Comma-separated list of domain extensions for which no proxy should be
       #
-      #   @param nri [DockerEngineRuby::Models::Info::Nri, nil] Information about the Node Resource Interface (NRI).
+      #   @param nri [DockerEngineRuby::Models::Info::Nri] Information about the Node Resource Interface (NRI).
       #
       #   @param oom_kill_disable [Boolean] Indicates if OOM killer disable is supported on the host.
       #
@@ -650,7 +642,7 @@ module DockerEngineRuby
       #
       #   @param product_license [String] Reports a summary of the product license on the daemon.
       #
-      #   @param registry_config [DockerEngineRuby::Models::Info::RegistryConfig, nil] RegistryServiceConfig stores daemon registry services configuration.
+      #   @param registry_config [DockerEngineRuby::Models::Info::RegistryConfig] RegistryServiceConfig stores daemon registry services configuration.
       #
       #   @param runc_commit [DockerEngineRuby::Models::Info::RuncCommit] Commit holds the Git-commit (SHA1) that a binary was built from, as
       #
@@ -730,29 +722,16 @@ module DockerEngineRuby
         # @see DockerEngineRuby::Models::Info::Containerd#namespaces
         class Namespaces < DockerEngineRuby::Internal::Type::BaseModel
           # @!attribute containers
-          #   The default containerd namespace used for containers managed by the daemon.
-          #
-          #   The default namespace for containers is "moby", but will be suffixed with the
-          #   `<uid>.<gid>` of the remapped `root` if user-namespaces are enabled and the
-          #   containerd image-store is used.
           #
           #   @return [String, nil]
           optional :containers, String, api_name: :Containers
 
           # @!attribute plugins
-          #   The default containerd namespace used for plugins managed by the daemon.
-          #
-          #   The default namespace for plugins is "plugins.moby", but will be suffixed with
-          #   the `<uid>.<gid>` of the remapped `root` if user-namespaces are enabled and the
-          #   containerd image-store is used.
           #
           #   @return [String, nil]
           optional :plugins, String, api_name: :Plugins
 
           # @!method initialize(containers: nil, plugins: nil)
-          #   Some parameter documentations has been truncated, see
-          #   {DockerEngineRuby::Models::Info::Containerd::Namespaces} for more details.
-          #
           #   The namespaces that the daemon uses for running containers and plugins in
           #   containerd. These namespaces can be configured in the daemon configuration, and
           #   are considered to be used exclusively by the daemon, Tampering with the
@@ -762,9 +741,8 @@ module DockerEngineRuby
           #   is not recommended to change these values, or to change them to a value that is
           #   used by other systems, such as cri-containerd.
           #
-          #   @param containers [String] The default containerd namespace used for containers managed
-          #
-          #   @param plugins [String] The default containerd namespace used for plugins managed by
+          #   @param containers [String]
+          #   @param plugins [String]
         end
       end
 
@@ -785,21 +763,18 @@ module DockerEngineRuby
 
       class DefaultAddressPool < DockerEngineRuby::Internal::Type::BaseModel
         # @!attribute base
-        #   The network address in CIDR format
         #
         #   @return [String, nil]
         optional :base, String, api_name: :Base
 
         # @!attribute size
-        #   The network pool size
         #
         #   @return [Integer, nil]
         optional :size, Integer, api_name: :Size
 
         # @!method initialize(base: nil, size: nil)
-        #   @param base [String] The network address in CIDR format
-        #
-        #   @param size [Integer] The network pool size
+        #   @param base [String]
+        #   @param size [Integer]
       end
 
       class DiscoveredDevice < DockerEngineRuby::Internal::Type::BaseModel
@@ -1027,11 +1002,10 @@ module DockerEngineRuby
       class RegistryConfig < DockerEngineRuby::Internal::Type::BaseModel
         # @!attribute index_configs
         #
-        #   @return [Hash{Symbol=>DockerEngineRuby::Models::Info::RegistryConfig::IndexConfig, nil}, nil]
+        #   @return [Hash{Symbol=>DockerEngineRuby::Models::Info::RegistryConfig::IndexConfig}, nil]
         optional :index_configs,
                  -> {
-                   DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Info::RegistryConfig::IndexConfig,
-                                                            nil?: true]
+                   DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Info::RegistryConfig::IndexConfig]
                  },
                  api_name: :IndexConfigs
 
@@ -1075,7 +1049,7 @@ module DockerEngineRuby
         #
         #   RegistryServiceConfig stores daemon registry services configuration.
         #
-        #   @param index_configs [Hash{Symbol=>DockerEngineRuby::Models::Info::RegistryConfig::IndexConfig, nil}]
+        #   @param index_configs [Hash{Symbol=>DockerEngineRuby::Models::Info::RegistryConfig::IndexConfig}]
         #
         #   @param insecure_registry_cid_rs [Array<String>] List of IP ranges of insecure registries, using the CIDR syntax
         #
@@ -1208,7 +1182,7 @@ module DockerEngineRuby
         #   endpoint. Join-tokens are not included.
         #
         #   @return [DockerEngineRuby::Models::Info::Swarm::Cluster, nil]
-        optional :cluster, -> { DockerEngineRuby::Info::Swarm::Cluster }, api_name: :Cluster, nil?: true
+        optional :cluster, -> { DockerEngineRuby::Info::Swarm::Cluster }, api_name: :Cluster
 
         # @!attribute control_available
         #
@@ -1269,7 +1243,7 @@ module DockerEngineRuby
         #
         #   Represents generic information about swarm.
         #
-        #   @param cluster [DockerEngineRuby::Models::Info::Swarm::Cluster, nil] ClusterInfo represents information about the swarm as is returned by the
+        #   @param cluster [DockerEngineRuby::Models::Info::Swarm::Cluster] ClusterInfo represents information about the swarm as is returned by the
         #
         #   @param control_available [Boolean]
         #
@@ -1293,8 +1267,8 @@ module DockerEngineRuby
           #   Date and time at which the swarm was initialised in
           #   [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
           #
-          #   @return [String, nil]
-          optional :created_at, String, api_name: :CreatedAt
+          #   @return [Time, nil]
+          optional :created_at, Time, api_name: :CreatedAt
 
           # @!attribute data_path_port
           #   DataPathPort specifies the data path port number for data traffic. Acceptable
@@ -1350,8 +1324,8 @@ module DockerEngineRuby
           #   Date and time at which the swarm was last updated in
           #   [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
           #
-          #   @return [String, nil]
-          optional :updated_at, String, api_name: :UpdatedAt
+          #   @return [Time, nil]
+          optional :updated_at, Time, api_name: :UpdatedAt
 
           # @!attribute version
           #   The version number of the object such as node, service, etc. This is needed to
@@ -1374,7 +1348,7 @@ module DockerEngineRuby
           #   ClusterInfo represents information about the swarm as is returned by the "/info"
           #   endpoint. Join-tokens are not included.
           #
-          #   @param created_at [String] Date and time at which the swarm was initialised in
+          #   @param created_at [Time] Date and time at which the swarm was initialised in
           #
           #   @param data_path_port [Integer] DataPathPort specifies the data path port number for data traffic.
           #
@@ -1390,7 +1364,7 @@ module DockerEngineRuby
           #
           #   @param tls_info [DockerEngineRuby::Models::Info::Swarm::Cluster::TlsInfo] Information about the issuer of leaf TLS certificates and the trusted root
           #
-          #   @param updated_at [String] Date and time at which the swarm was last updated in
+          #   @param updated_at [Time] Date and time at which the swarm was last updated in
           #
           #   @param version [DockerEngineRuby::Models::Info::Swarm::Cluster::Version] The version number of the object such as node, service, etc. This is needed
 
@@ -1481,9 +1455,6 @@ module DockerEngineRuby
           optional :node_id, String, api_name: :NodeID
 
           # @!method initialize(addr: nil, node_id: nil)
-          #   Some parameter documentations has been truncated, see
-          #   {DockerEngineRuby::Models::Info::Swarm::RemoteManager} for more details.
-          #
           #   Represents a peer-node in the swarm
           #
           #   @param addr [String] IP address and ports at which this node can be reached.

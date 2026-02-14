@@ -80,7 +80,7 @@ module DockerEngineRuby
             accessibility_requirements: DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::AccessibilityRequirements,
             availability: DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::availability,
             capacity_range: DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::CapacityRange,
-            mount_volume: top,
+            mount_volume: ::Hash[Symbol, top],
             scope: DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::scope,
             secrets: ::Array[DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::Secret],
             sharing: DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::sharing
@@ -105,9 +105,9 @@ module DockerEngineRuby
             DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::CapacityRange
           ) -> DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::CapacityRange
 
-          attr_reader mount_volume: top?
+          attr_reader mount_volume: ::Hash[Symbol, top]?
 
-          def mount_volume=: (top) -> top
+          def mount_volume=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
 
           attr_reader scope: DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::scope?
 
@@ -131,7 +131,7 @@ module DockerEngineRuby
             ?accessibility_requirements: DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::AccessibilityRequirements,
             ?availability: DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::availability,
             ?capacity_range: DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::CapacityRange,
-            ?mount_volume: top,
+            ?mount_volume: ::Hash[Symbol, top],
             ?scope: DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::scope,
             ?secrets: ::Array[DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::Secret],
             ?sharing: DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::sharing
@@ -141,7 +141,7 @@ module DockerEngineRuby
             accessibility_requirements: DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::AccessibilityRequirements,
             availability: DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::availability,
             capacity_range: DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::CapacityRange,
-            mount_volume: top,
+            mount_volume: ::Hash[Symbol, top],
             scope: DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::scope,
             secrets: ::Array[DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::Secret],
             sharing: DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::sharing

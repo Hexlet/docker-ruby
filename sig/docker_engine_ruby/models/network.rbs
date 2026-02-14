@@ -5,7 +5,7 @@ module DockerEngineRuby
         attachable: bool,
         config_from: DockerEngineRuby::Network::ConfigFrom,
         config_only: bool,
-        created: String,
+        created: Time,
         driver: String,
         :enable_i_pv4 => bool,
         :enable_i_pv6 => bool,
@@ -35,9 +35,9 @@ module DockerEngineRuby
 
       def config_only=: (bool) -> bool
 
-      attr_reader created: String?
+      attr_reader created: Time?
 
-      def created=: (String) -> String
+      def created=: (Time) -> Time
 
       attr_reader driver: String?
 
@@ -95,7 +95,7 @@ module DockerEngineRuby
         ?attachable: bool,
         ?config_from: DockerEngineRuby::Network::ConfigFrom,
         ?config_only: bool,
-        ?created: String,
+        ?created: Time,
         ?driver: String,
         ?enable_i_pv4: bool,
         ?enable_i_pv6: bool,
@@ -114,7 +114,7 @@ module DockerEngineRuby
         attachable: bool,
         config_from: DockerEngineRuby::Network::ConfigFrom,
         config_only: bool,
-        created: String,
+        created: Time,
         driver: String,
         :enable_i_pv4 => bool,
         :enable_i_pv6 => bool,

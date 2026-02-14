@@ -36,10 +36,10 @@ module DockerEngineRuby
 
       # Date and time at which the network was created in
       # [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.
-      sig { returns(T.nilable(String)) }
+      sig { returns(T.nilable(Time)) }
       attr_reader :created
 
-      sig { params(created: String).void }
+      sig { params(created: Time).void }
       attr_writer :created
 
       # The name of the driver used to create the network (e.g. `bridge`, `overlay`).
@@ -84,6 +84,7 @@ module DockerEngineRuby
       sig { params(internal: T::Boolean).void }
       attr_writer :internal
 
+      # The network's IP Address Management.
       sig { returns(T.nilable(DockerEngineRuby::Network::Ipam)) }
       attr_reader :ipam
 
@@ -134,7 +135,7 @@ module DockerEngineRuby
           attachable: T::Boolean,
           config_from: DockerEngineRuby::Network::ConfigFrom::OrHash,
           config_only: T::Boolean,
-          created: String,
+          created: Time,
           driver: String,
           enable_i_pv4: T::Boolean,
           enable_i_pv6: T::Boolean,
@@ -174,6 +175,7 @@ module DockerEngineRuby
         ingress: nil,
         # Whether the network is created to only allow internal networking connectivity.
         internal: nil,
+        # The network's IP Address Management.
         ipam: nil,
         # Metadata specific to the network being created.
         labels: nil,
@@ -196,7 +198,7 @@ module DockerEngineRuby
             attachable: T::Boolean,
             config_from: DockerEngineRuby::Network::ConfigFrom,
             config_only: T::Boolean,
-            created: String,
+            created: Time,
             driver: String,
             enable_i_pv4: T::Boolean,
             enable_i_pv6: T::Boolean,
@@ -288,6 +290,7 @@ module DockerEngineRuby
         sig { params(options: T::Hash[Symbol, String]).void }
         attr_writer :options
 
+        # The network's IP Address Management.
         sig do
           params(
             config: T::Array[DockerEngineRuby::Network::Ipam::Config::OrHash],

@@ -14,7 +14,6 @@ module DockerEngineRuby
           )
         end
 
-      # The swarm's unlock key.
       sig { returns(T.nilable(String)) }
       attr_reader :unlock_key
 
@@ -27,11 +26,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # The swarm's unlock key.
-        unlock_key: nil,
-        request_options: {}
-      )
+      def self.new(unlock_key: nil, request_options: {})
       end
 
       sig do

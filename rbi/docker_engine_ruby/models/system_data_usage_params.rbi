@@ -14,11 +14,15 @@ module DockerEngineRuby
           )
         end
 
-      # Object types, for which to compute and return data.
       sig do
         returns(
           T.nilable(
-            T::Array[DockerEngineRuby::SystemDataUsageParams::Type::OrSymbol]
+            T.any(
+              DockerEngineRuby::SystemDataUsageParams::Type::OrSymbol,
+              T::Array[
+                DockerEngineRuby::SystemDataUsageParams::Type::UnionMember1::OrSymbol
+              ]
+            )
           )
         )
       end
@@ -27,12 +31,16 @@ module DockerEngineRuby
       sig do
         params(
           type:
-            T::Array[DockerEngineRuby::SystemDataUsageParams::Type::OrSymbol]
+            T.any(
+              DockerEngineRuby::SystemDataUsageParams::Type::OrSymbol,
+              T::Array[
+                DockerEngineRuby::SystemDataUsageParams::Type::UnionMember1::OrSymbol
+              ]
+            )
         ).void
       end
       attr_writer :type
 
-      # Show detailed information on space usage.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :verbose
 
@@ -42,25 +50,29 @@ module DockerEngineRuby
       sig do
         params(
           type:
-            T::Array[DockerEngineRuby::SystemDataUsageParams::Type::OrSymbol],
+            T.any(
+              DockerEngineRuby::SystemDataUsageParams::Type::OrSymbol,
+              T::Array[
+                DockerEngineRuby::SystemDataUsageParams::Type::UnionMember1::OrSymbol
+              ]
+            ),
           verbose: T::Boolean,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # Object types, for which to compute and return data.
-        type: nil,
-        # Show detailed information on space usage.
-        verbose: nil,
-        request_options: {}
-      )
+      def self.new(type: nil, verbose: nil, request_options: {})
       end
 
       sig do
         override.returns(
           {
             type:
-              T::Array[DockerEngineRuby::SystemDataUsageParams::Type::OrSymbol],
+              T.any(
+                DockerEngineRuby::SystemDataUsageParams::Type::OrSymbol,
+                T::Array[
+                  DockerEngineRuby::SystemDataUsageParams::Type::UnionMember1::OrSymbol
+                ]
+              ),
             verbose: T::Boolean,
             request_options: DockerEngineRuby::RequestOptions
           }
@@ -70,7 +82,54 @@ module DockerEngineRuby
       end
 
       module Type
-        extend DockerEngineRuby::Internal::Type::Enum
+        extend DockerEngineRuby::Internal::Type::Union
+
+        Variants =
+          T.type_alias do
+            T.any(
+              DockerEngineRuby::SystemDataUsageParams::Type::TaggedSymbol,
+              T::Array[
+                DockerEngineRuby::SystemDataUsageParams::Type::UnionMember1::TaggedSymbol
+              ]
+            )
+          end
+
+        module UnionMember1
+          extend DockerEngineRuby::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                DockerEngineRuby::SystemDataUsageParams::Type::UnionMember1
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          BUILD_CACHE =
+            T.let(
+              :"build-cache",
+              DockerEngineRuby::SystemDataUsageParams::Type::UnionMember1::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                DockerEngineRuby::SystemDataUsageParams::Type::UnionMember1::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
+        sig do
+          override.returns(
+            T::Array[DockerEngineRuby::SystemDataUsageParams::Type::Variants]
+          )
+        end
+        def self.variants
+        end
 
         TaggedSymbol =
           T.type_alias do
@@ -93,21 +152,14 @@ module DockerEngineRuby
             :volume,
             DockerEngineRuby::SystemDataUsageParams::Type::TaggedSymbol
           )
-        BUILD_CACHE =
-          T.let(
-            :"build-cache",
-            DockerEngineRuby::SystemDataUsageParams::Type::TaggedSymbol
-          )
 
-        sig do
-          override.returns(
-            T::Array[
-              DockerEngineRuby::SystemDataUsageParams::Type::TaggedSymbol
-            ]
+        UnionMember1Array =
+          T.let(
+            DockerEngineRuby::Internal::Type::ArrayOf[
+              enum: DockerEngineRuby::SystemDataUsageParams::Type::UnionMember1
+            ],
+            DockerEngineRuby::Internal::Type::Converter
           )
-        end
-        def self.values
-        end
       end
     end
   end

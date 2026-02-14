@@ -15,8 +15,7 @@ class DockerEngineRuby::Test::Resources::DistributionTest < DockerEngineRuby::Te
     assert_pattern do
       response => {
         descriptor: DockerEngineRuby::Inspect::Descriptor,
-        platforms: ^(DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Inspect::Platform,
-                                                               nil?: true])
+        platforms: ^(DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Inspect::Platform])
       }
     end
   end

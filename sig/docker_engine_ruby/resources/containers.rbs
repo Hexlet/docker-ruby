@@ -2,7 +2,7 @@ module DockerEngineRuby
   module Resources
     class Containers
       def create: (
-        config: DockerEngineRuby::ContainerCreateParams::Config,
+        config: DockerEngineRuby::Config,
         ?name: String,
         ?platform: String,
         ?request_options: DockerEngineRuby::request_opts
@@ -39,7 +39,6 @@ module DockerEngineRuby
         ?nano_cpus: Integer,
         ?oom_kill_disable: bool,
         ?pids_limit: Integer?,
-        ?restart_policy: DockerEngineRuby::ContainerUpdateParams::RestartPolicy,
         ?ulimits: ::Array[DockerEngineRuby::ContainerUpdateParams::Ulimit],
         ?request_options: DockerEngineRuby::request_opts
       ) -> DockerEngineRuby::UpdateResponse

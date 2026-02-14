@@ -18,7 +18,7 @@ module DockerEngineRuby
       # - `0`: Modified ("C")
       # - `1`: Added ("A")
       # - `2`: Deleted ("D")
-      sig { returns(DockerEngineRuby::FilesystemChange::Kind::TaggedInteger) }
+      sig { returns(DockerEngineRuby::FilesystemChange::Kind::TaggedFloat) }
       attr_accessor :kind
 
       # Path to file or directory that has changed.
@@ -28,7 +28,7 @@ module DockerEngineRuby
       # Change in the container's filesystem.
       sig do
         params(
-          kind: DockerEngineRuby::FilesystemChange::Kind::OrInteger,
+          kind: DockerEngineRuby::FilesystemChange::Kind::OrFloat,
           path: String
         ).returns(T.attached_class)
       end
@@ -49,7 +49,7 @@ module DockerEngineRuby
       sig do
         override.returns(
           {
-            kind: DockerEngineRuby::FilesystemChange::Kind::TaggedInteger,
+            kind: DockerEngineRuby::FilesystemChange::Kind::TaggedFloat,
             path: String
           }
         )
@@ -67,22 +67,19 @@ module DockerEngineRuby
       module Kind
         extend DockerEngineRuby::Internal::Type::Enum
 
-        TaggedInteger =
+        TaggedFloat =
           T.type_alias do
-            T.all(Integer, DockerEngineRuby::FilesystemChange::Kind)
+            T.all(Float, DockerEngineRuby::FilesystemChange::Kind)
           end
-        OrInteger = T.type_alias { Integer }
+        OrFloat = T.type_alias { Float }
 
-        KIND_0 =
-          T.let(0, DockerEngineRuby::FilesystemChange::Kind::TaggedInteger)
-        KIND_1 =
-          T.let(1, DockerEngineRuby::FilesystemChange::Kind::TaggedInteger)
-        KIND_2 =
-          T.let(2, DockerEngineRuby::FilesystemChange::Kind::TaggedInteger)
+        KIND_0 = T.let(0, DockerEngineRuby::FilesystemChange::Kind::TaggedFloat)
+        KIND_1 = T.let(1, DockerEngineRuby::FilesystemChange::Kind::TaggedFloat)
+        KIND_2 = T.let(2, DockerEngineRuby::FilesystemChange::Kind::TaggedFloat)
 
         sig do
           override.returns(
-            T::Array[DockerEngineRuby::FilesystemChange::Kind::TaggedInteger]
+            T::Array[DockerEngineRuby::FilesystemChange::Kind::TaggedFloat]
           )
         end
         def self.values

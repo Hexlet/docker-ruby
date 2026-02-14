@@ -14,17 +14,11 @@ module DockerEngineRuby
           )
         end
 
-      # Remote reference to upgrade to.
-      #
-      # The `:latest` tag is optional, and is used as the default if omitted.
       sig { returns(String) }
       attr_accessor :remote
 
-      sig { returns(T.nilable(T::Array[DockerEngineRuby::Privilege])) }
-      attr_reader :body
-
-      sig { params(body: T::Array[DockerEngineRuby::Privilege::OrHash]).void }
-      attr_writer :body
+      sig { returns(T::Array[DockerEngineRuby::Privilege]) }
+      attr_accessor :body
 
       sig { returns(T.nilable(String)) }
       attr_reader :x_registry_auth
@@ -40,15 +34,7 @@ module DockerEngineRuby
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(
-        # Remote reference to upgrade to.
-        #
-        # The `:latest` tag is optional, and is used as the default if omitted.
-        remote:,
-        body: nil,
-        x_registry_auth: nil,
-        request_options: {}
-      )
+      def self.new(remote:, body:, x_registry_auth: nil, request_options: {})
       end
 
       sig do

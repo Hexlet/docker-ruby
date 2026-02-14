@@ -9,10 +9,10 @@ module DockerEngineRuby
 
       # @!attribute body
       #
-      #   @return [Array<String>, nil]
-      optional :body, DockerEngineRuby::Internal::Type::ArrayOf[String]
+      #   @return [Array<String>]
+      required :body, DockerEngineRuby::Internal::Type::ArrayOf[String]
 
-      # @!method initialize(body: nil, request_options: {})
+      # @!method initialize(body:, request_options: {})
       #   @param body [Array<String>]
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]
     end

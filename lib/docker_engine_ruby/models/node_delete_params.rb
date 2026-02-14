@@ -8,14 +8,12 @@ module DockerEngineRuby
       include DockerEngineRuby::Internal::Type::RequestParameters
 
       # @!attribute force
-      #   Force remove a node from the swarm
       #
       #   @return [Boolean, nil]
       optional :force, DockerEngineRuby::Internal::Type::Boolean
 
       # @!method initialize(force: nil, request_options: {})
-      #   @param force [Boolean] Force remove a node from the swarm
-      #
+      #   @param force [Boolean]
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]
     end
   end

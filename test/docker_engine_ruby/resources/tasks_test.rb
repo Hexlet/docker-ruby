@@ -25,7 +25,7 @@ class DockerEngineRuby::Test::Resources::TasksTest < DockerEngineRuby::Test::Res
     assert_pattern do
       response => {
         assigned_generic_resources: ^(DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Task::AssignedGenericResource]) | nil,
-        created_at: String | nil,
+        created_at: Time | nil,
         desired_state: DockerEngineRuby::Task::DesiredState | nil,
         id: String | nil,
         job_iteration: DockerEngineRuby::Task::JobIteration | nil,
@@ -36,14 +36,14 @@ class DockerEngineRuby::Test::Resources::TasksTest < DockerEngineRuby::Test::Res
         slot: Integer | nil,
         spec: DockerEngineRuby::Spec | nil,
         status: DockerEngineRuby::Task::Status | nil,
-        updated_at: String | nil,
+        updated_at: Time | nil,
         version: DockerEngineRuby::Task::Version | nil
       }
     end
   end
 
   def test_logs
-    skip("Prism tests are disabled")
+    skip("Prism doesn't support application/octet-stream responses")
 
     response = @docker.tasks.logs("id")
 

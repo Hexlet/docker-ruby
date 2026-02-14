@@ -14,26 +14,21 @@ module DockerEngineRuby
           )
         end
 
-      # The version number of the swarm object being updated. This is required to avoid
-      # conflicting writes.
       sig { returns(Integer) }
       attr_accessor :version
 
-      # Rotate the manager join token.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :rotate_manager_token
 
       sig { params(rotate_manager_token: T::Boolean).void }
       attr_writer :rotate_manager_token
 
-      # Rotate the manager unlock key.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :rotate_manager_unlock_key
 
       sig { params(rotate_manager_unlock_key: T::Boolean).void }
       attr_writer :rotate_manager_unlock_key
 
-      # Rotate the worker join token.
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :rotate_worker_token
 
@@ -50,14 +45,9 @@ module DockerEngineRuby
         ).returns(T.attached_class)
       end
       def self.new(
-        # The version number of the swarm object being updated. This is required to avoid
-        # conflicting writes.
         version:,
-        # Rotate the manager join token.
         rotate_manager_token: nil,
-        # Rotate the manager unlock key.
         rotate_manager_unlock_key: nil,
-        # Rotate the worker join token.
         rotate_worker_token: nil,
         request_options: {}
       )

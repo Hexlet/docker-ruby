@@ -3,18 +3,14 @@
 module DockerEngineRuby
   module Resources
     class Distribution
-      # Return image digest and platform information by contacting the registry.
+      # Get image information from the registry
       sig do
         params(
           name: String,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(DockerEngineRuby::Inspect)
       end
-      def inspect_(
-        # Image name or id
-        name,
-        request_options: {}
-      )
+      def inspect_(name, request_options: {})
       end
 
       # @api private

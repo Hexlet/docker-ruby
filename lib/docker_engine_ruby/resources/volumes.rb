@@ -25,16 +25,13 @@ module DockerEngineRuby
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::VolumeUpdateParams} for more details.
-      #
       # "Update a volume. Valid only for Swarm cluster volumes"
       #
       # @overload update(name, version:, spec: nil, request_options: {})
       #
-      # @param name [String] Path param: The name or ID of the volume
+      # @param name [String] Path param
       #
-      # @param version [Integer] Query param: The version number of the volume being updated. This is required to
+      # @param version [Integer] Query param
       #
       # @param spec [DockerEngineRuby::Models::VolumeUpdateParams::Spec] Body param: Cluster-specific options used to create the volume.
       #
@@ -56,15 +53,11 @@ module DockerEngineRuby
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::VolumeListParams} for more details.
-      #
       # List volumes
       #
       # @overload list(filters: nil, request_options: {})
       #
-      # @param filters [String] JSON encoded value of the filters (a `map[string][]string`) to
-      #
+      # @param filters [String]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [DockerEngineRuby::Models::ListResponse]
@@ -81,14 +74,12 @@ module DockerEngineRuby
         )
       end
 
-      # Instruct the driver to remove the volume.
+      # Remove a volume
       #
       # @overload delete(name, force: nil, request_options: {})
       #
-      # @param name [String] Volume name or ID
-      #
-      # @param force [Boolean] Force the removal of the volume
-      #
+      # @param name [String]
+      # @param force [Boolean]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [nil]
@@ -109,8 +100,7 @@ module DockerEngineRuby
       #
       # @overload inspect_(name, request_options: {})
       #
-      # @param name [String] Volume name or ID
-      #
+      # @param name [String]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [DockerEngineRuby::Models::Volume]
@@ -125,15 +115,11 @@ module DockerEngineRuby
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {DockerEngineRuby::Models::VolumePruneParams} for more details.
-      #
       # Delete unused volumes
       #
       # @overload prune(filters: nil, request_options: {})
       #
-      # @param filters [String] Filters to process on the prune list, encoded as JSON (a `map[string][]string`).
-      #
+      # @param filters [String]
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [DockerEngineRuby::Models::VolumePruneResponse]
