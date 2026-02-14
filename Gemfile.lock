@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    docker-engine-api (0.2.0)
+    docker-engine-api (0.2.1)
       cgi
       connection_pool
 
