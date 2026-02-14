@@ -1,0 +1,7 @@
+module DockerEngine
+  module Models
+    type container_changes_response = ::Array[DockerEngine::FilesystemChange]
+
+    ContainerChangesResponse: DockerEngine::Internal::Type::Converter
+  end
+end

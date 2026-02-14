@@ -1,0 +1,239 @@
+module DockerEngine
+  module Models
+    type system_data_usage_response =
+      {
+        build_cache_disk_usage: DockerEngine::Models::SystemDataUsageResponse::BuildCacheDiskUsage,
+        containers_disk_usage: DockerEngine::Models::SystemDataUsageResponse::ContainersDiskUsage,
+        images_disk_usage: DockerEngine::Models::SystemDataUsageResponse::ImagesDiskUsage,
+        volumes_disk_usage: DockerEngine::Models::SystemDataUsageResponse::VolumesDiskUsage
+      }
+
+    class SystemDataUsageResponse < DockerEngine::Internal::Type::BaseModel
+      attr_reader build_cache_disk_usage: DockerEngine::Models::SystemDataUsageResponse::BuildCacheDiskUsage?
+
+      def build_cache_disk_usage=: (
+        DockerEngine::Models::SystemDataUsageResponse::BuildCacheDiskUsage
+      ) -> DockerEngine::Models::SystemDataUsageResponse::BuildCacheDiskUsage
+
+      attr_reader containers_disk_usage: DockerEngine::Models::SystemDataUsageResponse::ContainersDiskUsage?
+
+      def containers_disk_usage=: (
+        DockerEngine::Models::SystemDataUsageResponse::ContainersDiskUsage
+      ) -> DockerEngine::Models::SystemDataUsageResponse::ContainersDiskUsage
+
+      attr_reader images_disk_usage: DockerEngine::Models::SystemDataUsageResponse::ImagesDiskUsage?
+
+      def images_disk_usage=: (
+        DockerEngine::Models::SystemDataUsageResponse::ImagesDiskUsage
+      ) -> DockerEngine::Models::SystemDataUsageResponse::ImagesDiskUsage
+
+      attr_reader volumes_disk_usage: DockerEngine::Models::SystemDataUsageResponse::VolumesDiskUsage?
+
+      def volumes_disk_usage=: (
+        DockerEngine::Models::SystemDataUsageResponse::VolumesDiskUsage
+      ) -> DockerEngine::Models::SystemDataUsageResponse::VolumesDiskUsage
+
+      def initialize: (
+        ?build_cache_disk_usage: DockerEngine::Models::SystemDataUsageResponse::BuildCacheDiskUsage,
+        ?containers_disk_usage: DockerEngine::Models::SystemDataUsageResponse::ContainersDiskUsage,
+        ?images_disk_usage: DockerEngine::Models::SystemDataUsageResponse::ImagesDiskUsage,
+        ?volumes_disk_usage: DockerEngine::Models::SystemDataUsageResponse::VolumesDiskUsage
+      ) -> void
+
+      def to_hash: -> {
+        build_cache_disk_usage: DockerEngine::Models::SystemDataUsageResponse::BuildCacheDiskUsage,
+        containers_disk_usage: DockerEngine::Models::SystemDataUsageResponse::ContainersDiskUsage,
+        images_disk_usage: DockerEngine::Models::SystemDataUsageResponse::ImagesDiskUsage,
+        volumes_disk_usage: DockerEngine::Models::SystemDataUsageResponse::VolumesDiskUsage
+      }
+
+      type build_cache_disk_usage =
+        {
+          active_count: Integer,
+          items: ::Array[top],
+          reclaimable: Integer,
+          total_count: Integer,
+          total_size: Integer
+        }
+
+      class BuildCacheDiskUsage < DockerEngine::Internal::Type::BaseModel
+        attr_reader active_count: Integer?
+
+        def active_count=: (Integer) -> Integer
+
+        attr_reader items: ::Array[top]?
+
+        def items=: (::Array[top]) -> ::Array[top]
+
+        attr_reader reclaimable: Integer?
+
+        def reclaimable=: (Integer) -> Integer
+
+        attr_reader total_count: Integer?
+
+        def total_count=: (Integer) -> Integer
+
+        attr_reader total_size: Integer?
+
+        def total_size=: (Integer) -> Integer
+
+        def initialize: (
+          ?active_count: Integer,
+          ?items: ::Array[top],
+          ?reclaimable: Integer,
+          ?total_count: Integer,
+          ?total_size: Integer
+        ) -> void
+
+        def to_hash: -> {
+          active_count: Integer,
+          items: ::Array[top],
+          reclaimable: Integer,
+          total_count: Integer,
+          total_size: Integer
+        }
+      end
+
+      type containers_disk_usage =
+        {
+          active_count: Integer,
+          items: ::Array[top],
+          reclaimable: Integer,
+          total_count: Integer,
+          total_size: Integer
+        }
+
+      class ContainersDiskUsage < DockerEngine::Internal::Type::BaseModel
+        attr_reader active_count: Integer?
+
+        def active_count=: (Integer) -> Integer
+
+        attr_reader items: ::Array[top]?
+
+        def items=: (::Array[top]) -> ::Array[top]
+
+        attr_reader reclaimable: Integer?
+
+        def reclaimable=: (Integer) -> Integer
+
+        attr_reader total_count: Integer?
+
+        def total_count=: (Integer) -> Integer
+
+        attr_reader total_size: Integer?
+
+        def total_size=: (Integer) -> Integer
+
+        def initialize: (
+          ?active_count: Integer,
+          ?items: ::Array[top],
+          ?reclaimable: Integer,
+          ?total_count: Integer,
+          ?total_size: Integer
+        ) -> void
+
+        def to_hash: -> {
+          active_count: Integer,
+          items: ::Array[top],
+          reclaimable: Integer,
+          total_count: Integer,
+          total_size: Integer
+        }
+      end
+
+      type images_disk_usage =
+        {
+          active_count: Integer,
+          items: ::Array[top],
+          reclaimable: Integer,
+          total_count: Integer,
+          total_size: Integer
+        }
+
+      class ImagesDiskUsage < DockerEngine::Internal::Type::BaseModel
+        attr_reader active_count: Integer?
+
+        def active_count=: (Integer) -> Integer
+
+        attr_reader items: ::Array[top]?
+
+        def items=: (::Array[top]) -> ::Array[top]
+
+        attr_reader reclaimable: Integer?
+
+        def reclaimable=: (Integer) -> Integer
+
+        attr_reader total_count: Integer?
+
+        def total_count=: (Integer) -> Integer
+
+        attr_reader total_size: Integer?
+
+        def total_size=: (Integer) -> Integer
+
+        def initialize: (
+          ?active_count: Integer,
+          ?items: ::Array[top],
+          ?reclaimable: Integer,
+          ?total_count: Integer,
+          ?total_size: Integer
+        ) -> void
+
+        def to_hash: -> {
+          active_count: Integer,
+          items: ::Array[top],
+          reclaimable: Integer,
+          total_count: Integer,
+          total_size: Integer
+        }
+      end
+
+      type volumes_disk_usage =
+        {
+          active_count: Integer,
+          items: ::Array[top],
+          reclaimable: Integer,
+          total_count: Integer,
+          total_size: Integer
+        }
+
+      class VolumesDiskUsage < DockerEngine::Internal::Type::BaseModel
+        attr_reader active_count: Integer?
+
+        def active_count=: (Integer) -> Integer
+
+        attr_reader items: ::Array[top]?
+
+        def items=: (::Array[top]) -> ::Array[top]
+
+        attr_reader reclaimable: Integer?
+
+        def reclaimable=: (Integer) -> Integer
+
+        attr_reader total_count: Integer?
+
+        def total_count=: (Integer) -> Integer
+
+        attr_reader total_size: Integer?
+
+        def total_size=: (Integer) -> Integer
+
+        def initialize: (
+          ?active_count: Integer,
+          ?items: ::Array[top],
+          ?reclaimable: Integer,
+          ?total_count: Integer,
+          ?total_size: Integer
+        ) -> void
+
+        def to_hash: -> {
+          active_count: Integer,
+          items: ::Array[top],
+          reclaimable: Integer,
+          total_count: Integer,
+          total_size: Integer
+        }
+      end
+    end
+  end
+end

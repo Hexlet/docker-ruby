@@ -24,6 +24,9 @@ module DockerEngine
     # @return [DockerEngine::Resources::Containers]
     attr_reader :containers
 
+    # @return [DockerEngine::Resources::Exec]
+    attr_reader :exec_
+
     # @return [DockerEngine::Resources::Images]
     attr_reader :images
 
@@ -35,6 +38,27 @@ module DockerEngine
 
     # @return [DockerEngine::Resources::Services]
     attr_reader :services
+
+    # @return [DockerEngine::Resources::Configs]
+    attr_reader :configs
+
+    # @return [DockerEngine::Resources::Secrets]
+    attr_reader :secrets
+
+    # @return [DockerEngine::Resources::Nodes]
+    attr_reader :nodes
+
+    # @return [DockerEngine::Resources::Swarm]
+    attr_reader :swarm
+
+    # @return [DockerEngine::Resources::Tasks]
+    attr_reader :tasks
+
+    # @return [DockerEngine::Resources::Plugins]
+    attr_reader :plugins
+
+    # @return [DockerEngine::Resources::Distribution]
+    attr_reader :distribution
 
     # Creates and returns a new client for interacting with the API.
     #
@@ -68,10 +92,18 @@ module DockerEngine
       @auth = DockerEngine::Resources::Auth.new(client: self)
       @system_ = DockerEngine::Resources::System.new(client: self)
       @containers = DockerEngine::Resources::Containers.new(client: self)
+      @exec_ = DockerEngine::Resources::Exec.new(client: self)
       @images = DockerEngine::Resources::Images.new(client: self)
       @networks = DockerEngine::Resources::Networks.new(client: self)
       @volumes = DockerEngine::Resources::Volumes.new(client: self)
       @services = DockerEngine::Resources::Services.new(client: self)
+      @configs = DockerEngine::Resources::Configs.new(client: self)
+      @secrets = DockerEngine::Resources::Secrets.new(client: self)
+      @nodes = DockerEngine::Resources::Nodes.new(client: self)
+      @swarm = DockerEngine::Resources::Swarm.new(client: self)
+      @tasks = DockerEngine::Resources::Tasks.new(client: self)
+      @plugins = DockerEngine::Resources::Plugins.new(client: self)
+      @distribution = DockerEngine::Resources::Distribution.new(client: self)
     end
   end
 end

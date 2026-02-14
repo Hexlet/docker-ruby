@@ -19,6 +19,9 @@ module DockerEngine
     sig { returns(DockerEngine::Resources::Containers) }
     attr_reader :containers
 
+    sig { returns(DockerEngine::Resources::Exec) }
+    attr_reader :exec_
+
     sig { returns(DockerEngine::Resources::Images) }
     attr_reader :images
 
@@ -30,6 +33,27 @@ module DockerEngine
 
     sig { returns(DockerEngine::Resources::Services) }
     attr_reader :services
+
+    sig { returns(DockerEngine::Resources::Configs) }
+    attr_reader :configs
+
+    sig { returns(DockerEngine::Resources::Secrets) }
+    attr_reader :secrets
+
+    sig { returns(DockerEngine::Resources::Nodes) }
+    attr_reader :nodes
+
+    sig { returns(DockerEngine::Resources::Swarm) }
+    attr_reader :swarm
+
+    sig { returns(DockerEngine::Resources::Tasks) }
+    attr_reader :tasks
+
+    sig { returns(DockerEngine::Resources::Plugins) }
+    attr_reader :plugins
+
+    sig { returns(DockerEngine::Resources::Distribution) }
+    attr_reader :distribution
 
     # Creates and returns a new client for interacting with the API.
     sig do

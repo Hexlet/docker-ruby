@@ -6,10 +6,17 @@ module DockerEngine
         ?request_options: DockerEngine::request_opts
       ) -> DockerEngine::Volume
 
+      def update: (
+        String name,
+        version: Integer,
+        ?spec: DockerEngine::VolumeUpdateParams::Spec,
+        ?request_options: DockerEngine::request_opts
+      ) -> nil
+
       def list: (
         ?filters: String,
         ?request_options: DockerEngine::request_opts
-      ) -> DockerEngine::Models::VolumeListResponse
+      ) -> DockerEngine::ListResponse
 
       def delete: (
         String name,
@@ -21,6 +28,11 @@ module DockerEngine
         String name,
         ?request_options: DockerEngine::request_opts
       ) -> DockerEngine::Volume
+
+      def prune: (
+        ?filters: String,
+        ?request_options: DockerEngine::request_opts
+      ) -> DockerEngine::Models::VolumePruneResponse
 
       def initialize: (client: DockerEngine::Client) -> void
     end

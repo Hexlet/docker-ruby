@@ -1,0 +1,56 @@
+module DockerEngine
+  module Models
+    type swarm_join_params =
+      {
+        advertise_addr: String,
+        data_path_addr: String,
+        join_token: String,
+        listen_addr: String,
+        remote_addrs: ::Array[String]
+      }
+      & DockerEngine::Internal::Type::request_parameters
+
+    class SwarmJoinParams < DockerEngine::Internal::Type::BaseModel
+      extend DockerEngine::Internal::Type::RequestParameters::Converter
+      include DockerEngine::Internal::Type::RequestParameters
+
+      attr_reader advertise_addr: String?
+
+      def advertise_addr=: (String) -> String
+
+      attr_reader data_path_addr: String?
+
+      def data_path_addr=: (String) -> String
+
+      attr_reader join_token: String?
+
+      def join_token=: (String) -> String
+
+      attr_reader listen_addr: String?
+
+      def listen_addr=: (String) -> String
+
+      attr_reader remote_addrs: ::Array[String]?
+
+      def remote_addrs=: (::Array[String]) -> ::Array[String]
+
+      def initialize: (
+        ?advertise_addr: String,
+        ?data_path_addr: String,
+        ?join_token: String,
+        ?listen_addr: String,
+        ?remote_addrs: ::Array[String],
+        ?request_options: DockerEngine::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        advertise_addr: String,
+        data_path_addr: String,
+        join_token: String,
+        listen_addr: String,
+        remote_addrs: ::Array[String],
+        request_options: DockerEngine::RequestOptions
+      }
+    end
+  end
+end

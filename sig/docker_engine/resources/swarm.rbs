@@ -1,0 +1,55 @@
+module DockerEngine
+  module Resources
+    class Swarm
+      def update: (
+        version: Integer,
+        spec: DockerEngine::Spec,
+        ?rotate_manager_token: bool,
+        ?rotate_manager_unlock_key: bool,
+        ?rotate_worker_token: bool,
+        ?request_options: DockerEngine::request_opts
+      ) -> nil
+
+      def init: (
+        ?advertise_addr: String,
+        ?data_path_addr: String,
+        ?data_path_port: Integer,
+        ?default_addr_pool: ::Array[String],
+        ?force_new_cluster: bool,
+        ?listen_addr: String,
+        ?spec: DockerEngine::Spec,
+        ?subnet_size: Integer,
+        ?request_options: DockerEngine::request_opts
+      ) -> String
+
+      def inspect_: (
+        ?request_options: DockerEngine::request_opts
+      ) -> DockerEngine::SwarmAPI
+
+      def join: (
+        ?advertise_addr: String,
+        ?data_path_addr: String,
+        ?join_token: String,
+        ?listen_addr: String,
+        ?remote_addrs: ::Array[String],
+        ?request_options: DockerEngine::request_opts
+      ) -> nil
+
+      def leave: (
+        ?force: bool,
+        ?request_options: DockerEngine::request_opts
+      ) -> nil
+
+      def unlock: (
+        ?unlock_key: String,
+        ?request_options: DockerEngine::request_opts
+      ) -> nil
+
+      def unlock_key: (
+        ?request_options: DockerEngine::request_opts
+      ) -> DockerEngine::Models::SwarmUnlockKeyResponse
+
+      def initialize: (client: DockerEngine::Client) -> void
+    end
+  end
+end

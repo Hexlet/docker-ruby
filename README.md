@@ -17,7 +17,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "docker-engine", "~> 0.1.1"
+gem "docker-engine", "~> 0.2.0"
 ```
 
 <!-- x-release-please-end -->
@@ -194,23 +194,25 @@ docker.containers.create(**params)
 Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::Enum`](https://sorbet.org/docs/tenum) instances. Instead, we provide "tagged symbols" instead, which is always a primitive at runtime:
 
 ```ruby
-# :created
-puts(DockerEngine::Summary::State::CREATED)
+# :"not-running"
+puts(DockerEngine::ContainerWaitParams::Condition::NOT_RUNNING)
 
-# Revealed type: `T.all(DockerEngine::Summary::State, Symbol)`
-T.reveal_type(DockerEngine::Summary::State::CREATED)
+# Revealed type: `T.all(DockerEngine::ContainerWaitParams::Condition, Symbol)`
+T.reveal_type(DockerEngine::ContainerWaitParams::Condition::NOT_RUNNING)
 ```
 
 Enum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:
 
 ```ruby
-DockerEngine::Summary.new(
-  state: DockerEngine::Summary::State::CREATED,
+# Using the enum constants preserves the tagged type information:
+docker.containers.wait(
+  condition: DockerEngine::ContainerWaitParams::Condition::NOT_RUNNING,
   # …
 )
 
-DockerEngine::Summary.new(
-  state: :created,
+# Literal values are also permissible:
+docker.containers.wait(
+  condition: :"not-running",
   # …
 )
 ```

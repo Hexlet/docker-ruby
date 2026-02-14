@@ -5,7 +5,17 @@ module DockerEngine
         spec: DockerEngine::ServiceCreateParams::Spec,
         ?x_registry_auth: String,
         ?request_options: DockerEngine::request_opts
-      ) -> DockerEngine::Models::ServiceCreateResponse
+      ) -> DockerEngine::CreateResponse
+
+      def update: (
+        String id,
+        version: Integer,
+        spec: DockerEngine::ServiceUpdateParams::Spec,
+        ?registry_auth_from: DockerEngine::Models::ServiceUpdateParams::registry_auth_from,
+        ?rollback: String,
+        ?x_registry_auth: String,
+        ?request_options: DockerEngine::request_opts
+      ) -> DockerEngine::UpdateResponse
 
       def list: (
         ?filters: String,
@@ -23,6 +33,18 @@ module DockerEngine
         ?insert_defaults: bool,
         ?request_options: DockerEngine::request_opts
       ) -> DockerEngine::Service
+
+      def logs: (
+        String id,
+        ?details: bool,
+        ?follow: bool,
+        ?since: Integer,
+        ?stderr: bool,
+        ?stdout: bool,
+        ?tail: String,
+        ?timestamps: bool,
+        ?request_options: DockerEngine::request_opts
+      ) -> StringIO
 
       def initialize: (client: DockerEngine::Client) -> void
     end

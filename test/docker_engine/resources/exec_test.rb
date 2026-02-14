@@ -1,0 +1,51 @@
+# frozen_string_literal: true
+
+require_relative "../test_helper"
+
+class DockerEngine::Test::Resources::ExecTest < DockerEngine::Test::ResourceTest
+  def test_inspect_
+    skip("Prism tests are disabled")
+
+    response = @docker.exec_.inspect_("id")
+
+    assert_pattern do
+      response => DockerEngine::Models::ExecInspectResponse
+    end
+
+    assert_pattern do
+      response => {
+        can_remove: DockerEngine::Internal::Type::Boolean | nil,
+        container_id: String | nil,
+        detach_keys: String | nil,
+        exit_code: Integer | nil,
+        id: String | nil,
+        open_stderr: DockerEngine::Internal::Type::Boolean | nil,
+        open_stdin: DockerEngine::Internal::Type::Boolean | nil,
+        open_stdout: DockerEngine::Internal::Type::Boolean | nil,
+        pid: Integer | nil,
+        process_config: DockerEngine::InspectResponse | nil,
+        running: DockerEngine::Internal::Type::Boolean | nil
+      }
+    end
+  end
+
+  def test_resize_required_params
+    skip("Prism tests are disabled")
+
+    response = @docker.exec_.resize("id", h: 0, w: 0)
+
+    assert_pattern do
+      response => nil
+    end
+  end
+
+  def test_start
+    skip("Prism tests are disabled")
+
+    response = @docker.exec_.start("id")
+
+    assert_pattern do
+      response => nil
+    end
+  end
+end

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0 (2026-02-14)
+
+Full Changelog: [v0.1.1...v0.2.0](https://github.com/Hexlet/docker-ruby/compare/v0.1.1...v0.2.0)
+
+### Features
+
+* **api:** api update ([7ae51a5](https://github.com/Hexlet/docker-ruby/commit/7ae51a536c0dde06bdff5dc54ad67039368b0ac9))
+
 ## 0.1.1 (2026-02-14)
 
 Full Changelog: [v0.1.0...v0.1.1](https://github.com/Hexlet/docker-ruby/compare/v0.1.0...v0.1.1)

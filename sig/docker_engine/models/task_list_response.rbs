@@ -1,0 +1,7 @@
+module DockerEngine
+  module Models
+    type task_list_response = ::Array[DockerEngine::Task]
+
+    TaskListResponse: DockerEngine::Internal::Type::Converter
+  end
+end
