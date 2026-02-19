@@ -132,7 +132,7 @@ module DockerEngineRuby
         type engine =
           {
             engine_version: String,
-            labels: ::Hash[Symbol, String],
+            labels: top,
             plugins: ::Array[DockerEngineRuby::Node::Description::Engine::Plugin]
           }
 
@@ -141,9 +141,9 @@ module DockerEngineRuby
 
           def engine_version=: (String) -> String
 
-          attr_reader labels: ::Hash[Symbol, String]?
+          attr_reader labels: top?
 
-          def labels=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+          def labels=: (top) -> top
 
           attr_reader plugins: ::Array[DockerEngineRuby::Node::Description::Engine::Plugin]?
 
@@ -153,13 +153,13 @@ module DockerEngineRuby
 
           def initialize: (
             ?engine_version: String,
-            ?labels: ::Hash[Symbol, String],
+            ?labels: top,
             ?plugins: ::Array[DockerEngineRuby::Node::Description::Engine::Plugin]
           ) -> void
 
           def to_hash: -> {
             engine_version: String,
-            labels: ::Hash[Symbol, String],
+            labels: top,
             plugins: ::Array[DockerEngineRuby::Node::Description::Engine::Plugin]
           }
 

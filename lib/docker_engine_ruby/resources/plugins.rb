@@ -9,7 +9,7 @@ module DockerEngineRuby
       #
       # @param name [String] Query param
       #
-      # @param body [Pathname, StringIO, IO, String, DockerEngineRuby::FilePart] Body param
+      # @param body [Object] Body param
       #
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #

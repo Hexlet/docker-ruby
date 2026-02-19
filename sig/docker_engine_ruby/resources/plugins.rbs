@@ -3,7 +3,7 @@ module DockerEngineRuby
     class Plugins
       def create: (
         name: String,
-        body: DockerEngineRuby::Internal::file_input,
+        body: top,
         ?request_options: DockerEngineRuby::request_opts
       ) -> nil
 

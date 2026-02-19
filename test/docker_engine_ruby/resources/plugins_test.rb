@@ -6,7 +6,7 @@ class DockerEngineRuby::Test::Resources::PluginsTest < DockerEngineRuby::Test::R
   def test_create_required_params
     skip("Prism tests are disabled")
 
-    response = @docker.plugins.create(name: "name", body: Pathname(__FILE__))
+    response = @docker.plugins.create(name: "name", body: {})
 
     assert_pattern do
       response => nil

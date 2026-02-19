@@ -17,13 +17,13 @@ module DockerEngineRuby
       sig { returns(String) }
       attr_accessor :name
 
-      sig { returns(DockerEngineRuby::Internal::FileInput) }
+      sig { returns(T.anything) }
       attr_accessor :body
 
       sig do
         params(
           name: String,
-          body: DockerEngineRuby::Internal::FileInput,
+          body: T.anything,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -34,7 +34,7 @@ module DockerEngineRuby
         override.returns(
           {
             name: String,
-            body: DockerEngineRuby::Internal::FileInput,
+            body: T.anything,
             request_options: DockerEngineRuby::RequestOptions
           }
         )

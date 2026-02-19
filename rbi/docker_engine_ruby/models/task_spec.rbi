@@ -349,10 +349,10 @@ module DockerEngineRuby
         end
         attr_writer :isolation
 
-        sig { returns(T.nilable(T::Hash[Symbol, String])) }
+        sig { returns(T.nilable(T.anything)) }
         attr_reader :labels
 
-        sig { params(labels: T::Hash[Symbol, String]).void }
+        sig { params(labels: T.anything).void }
         attr_writer :labels
 
         sig do
@@ -436,10 +436,10 @@ module DockerEngineRuby
         sig { params(stop_signal: String).void }
         attr_writer :stop_signal
 
-        sig { returns(T.nilable(T::Hash[Symbol, String])) }
+        sig { returns(T.nilable(T.anything)) }
         attr_reader :sysctls
 
-        sig { params(sysctls: T::Hash[Symbol, String]).void }
+        sig { params(sysctls: T.anything).void }
         attr_writer :sysctls
 
         sig { returns(T.nilable(T::Boolean)) }
@@ -503,7 +503,7 @@ module DockerEngineRuby
             init: T.nilable(T::Boolean),
             isolation:
               DockerEngineRuby::TaskSpec::ContainerSpec::Isolation::OrSymbol,
-            labels: T::Hash[Symbol, String],
+            labels: T.anything,
             mounts:
               T::Array[
                 DockerEngineRuby::TaskSpec::ContainerSpec::Mount::OrHash
@@ -519,7 +519,7 @@ module DockerEngineRuby
               ],
             stop_grace_period: Integer,
             stop_signal: String,
-            sysctls: T::Hash[Symbol, String],
+            sysctls: T.anything,
             tty: T::Boolean,
             ulimits:
               T::Array[
@@ -583,7 +583,7 @@ module DockerEngineRuby
               init: T.nilable(T::Boolean),
               isolation:
                 DockerEngineRuby::TaskSpec::ContainerSpec::Isolation::OrSymbol,
-              labels: T::Hash[Symbol, String],
+              labels: T.anything,
               mounts:
                 T::Array[DockerEngineRuby::TaskSpec::ContainerSpec::Mount],
               oom_score_adj: Integer,
@@ -594,7 +594,7 @@ module DockerEngineRuby
                 T::Array[DockerEngineRuby::TaskSpec::ContainerSpec::Secret],
               stop_grace_period: Integer,
               stop_signal: String,
-              sysctls: T::Hash[Symbol, String],
+              sysctls: T.anything,
               tty: T::Boolean,
               ulimits:
                 T::Array[DockerEngineRuby::TaskSpec::ContainerSpec::Ulimit],
@@ -641,10 +641,10 @@ module DockerEngineRuby
           end
           attr_writer :file
 
-          sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
+          sig { returns(T.nilable(T.anything)) }
           attr_reader :runtime
 
-          sig { params(runtime: T::Hash[Symbol, T.anything]).void }
+          sig { params(runtime: T.anything).void }
           attr_writer :runtime
 
           sig do
@@ -653,7 +653,7 @@ module DockerEngineRuby
               config_name: String,
               file:
                 DockerEngineRuby::TaskSpec::ContainerSpec::Config::File::OrHash,
-              runtime: T::Hash[Symbol, T.anything]
+              runtime: T.anything
             ).returns(T.attached_class)
           end
           def self.new(
@@ -670,7 +670,7 @@ module DockerEngineRuby
                 config_id: String,
                 config_name: String,
                 file: DockerEngineRuby::TaskSpec::ContainerSpec::Config::File,
-                runtime: T::Hash[Symbol, T.anything]
+                runtime: T.anything
               }
             )
           end
@@ -1484,10 +1484,10 @@ module DockerEngineRuby
             end
             attr_writer :driver_config
 
-            sig { returns(T.nilable(T::Hash[Symbol, String])) }
+            sig { returns(T.nilable(T.anything)) }
             attr_reader :labels
 
-            sig { params(labels: T::Hash[Symbol, String]).void }
+            sig { params(labels: T.anything).void }
             attr_writer :labels
 
             sig { returns(T.nilable(T::Boolean)) }
@@ -1507,7 +1507,7 @@ module DockerEngineRuby
               params(
                 driver_config:
                   DockerEngineRuby::TaskSpec::ContainerSpec::Mount::VolumeOptions::DriverConfig::OrHash,
-                labels: T::Hash[Symbol, String],
+                labels: T.anything,
                 no_copy: T::Boolean,
                 subpath: String
               ).returns(T.attached_class)
@@ -1525,7 +1525,7 @@ module DockerEngineRuby
                 {
                   driver_config:
                     DockerEngineRuby::TaskSpec::ContainerSpec::Mount::VolumeOptions::DriverConfig,
-                  labels: T::Hash[Symbol, String],
+                  labels: T.anything,
                   no_copy: T::Boolean,
                   subpath: String
                 }
@@ -1549,25 +1549,21 @@ module DockerEngineRuby
               sig { params(name: String).void }
               attr_writer :name
 
-              sig { returns(T.nilable(T::Hash[Symbol, String])) }
+              sig { returns(T.nilable(T.anything)) }
               attr_reader :options
 
-              sig { params(options: T::Hash[Symbol, String]).void }
+              sig { params(options: T.anything).void }
               attr_writer :options
 
               sig do
-                params(name: String, options: T::Hash[Symbol, String]).returns(
+                params(name: String, options: T.anything).returns(
                   T.attached_class
                 )
               end
               def self.new(name: nil, options: nil)
               end
 
-              sig do
-                override.returns(
-                  { name: String, options: T::Hash[Symbol, String] }
-                )
-              end
+              sig { override.returns({ name: String, options: T.anything }) }
               def to_hash
               end
             end
@@ -2160,26 +2156,22 @@ module DockerEngineRuby
         sig { params(name: String).void }
         attr_writer :name
 
-        sig { returns(T.nilable(T::Hash[Symbol, String])) }
+        sig { returns(T.nilable(T.anything)) }
         attr_reader :options
 
-        sig { params(options: T::Hash[Symbol, String]).void }
+        sig { params(options: T.anything).void }
         attr_writer :options
 
         # Specifies the log driver to use for tasks created from this spec. If not
         # present, the default one for the swarm will be used, finally falling back to the
         # engine default if not specified.
         sig do
-          params(name: String, options: T::Hash[Symbol, String]).returns(
-            T.attached_class
-          )
+          params(name: String, options: T.anything).returns(T.attached_class)
         end
         def self.new(name: nil, options: nil)
         end
 
-        sig do
-          override.returns({ name: String, options: T::Hash[Symbol, String] })
-        end
+        sig { override.returns({ name: String, options: T.anything }) }
         def to_hash
         end
       end
@@ -2232,10 +2224,10 @@ module DockerEngineRuby
         attr_writer :aliases
 
         # Driver attachment options for the network target.
-        sig { returns(T.nilable(T::Hash[Symbol, String])) }
+        sig { returns(T.nilable(T.anything)) }
         attr_reader :driver_opts
 
-        sig { params(driver_opts: T::Hash[Symbol, String]).void }
+        sig { params(driver_opts: T.anything).void }
         attr_writer :driver_opts
 
         # The target network for attachment. Must be a network name or ID.
@@ -2249,7 +2241,7 @@ module DockerEngineRuby
         sig do
           params(
             aliases: T::Array[String],
-            driver_opts: T::Hash[Symbol, String],
+            driver_opts: T.anything,
             target: String
           ).returns(T.attached_class)
         end
@@ -2267,7 +2259,7 @@ module DockerEngineRuby
           override.returns(
             {
               aliases: T::Array[String],
-              driver_opts: T::Hash[Symbol, String],
+              driver_opts: T.anything,
               target: String
             }
           )

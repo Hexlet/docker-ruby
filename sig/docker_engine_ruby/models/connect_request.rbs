@@ -25,7 +25,7 @@ module DockerEngineRuby
         {
           aliases: ::Array[String],
           dns_names: ::Array[String],
-          driver_opts: ::Hash[Symbol, String]?,
+          driver_opts: top?,
           endpoint_id: String,
           gateway: String,
           :global_i_pv6_address => String,
@@ -49,7 +49,7 @@ module DockerEngineRuby
 
         def dns_names=: (::Array[String]) -> ::Array[String]
 
-        attr_accessor driver_opts: ::Hash[Symbol, String]?
+        attr_accessor driver_opts: top?
 
         attr_reader endpoint_id: String?
 
@@ -104,7 +104,7 @@ module DockerEngineRuby
         def initialize: (
           ?aliases: ::Array[String],
           ?dns_names: ::Array[String],
-          ?driver_opts: ::Hash[Symbol, String]?,
+          ?driver_opts: top?,
           ?endpoint_id: String,
           ?gateway: String,
           ?global_i_pv6_address: String,
@@ -122,7 +122,7 @@ module DockerEngineRuby
         def to_hash: -> {
           aliases: ::Array[String],
           dns_names: ::Array[String],
-          driver_opts: ::Hash[Symbol, String]?,
+          driver_opts: top?,
           endpoint_id: String,
           gateway: String,
           :global_i_pv6_address => String,

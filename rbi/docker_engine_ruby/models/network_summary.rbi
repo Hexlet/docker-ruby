@@ -97,10 +97,10 @@ module DockerEngineRuby
       attr_writer :ipam
 
       # Metadata specific to the network being created.
-      sig { returns(T.nilable(T::Hash[Symbol, String])) }
+      sig { returns(T.nilable(T.anything)) }
       attr_reader :labels
 
-      sig { params(labels: T::Hash[Symbol, String]).void }
+      sig { params(labels: T.anything).void }
       attr_writer :labels
 
       # Name of the network.
@@ -111,10 +111,10 @@ module DockerEngineRuby
       attr_writer :name
 
       # Network-specific options uses when creating the network.
-      sig { returns(T.nilable(T::Hash[Symbol, String])) }
+      sig { returns(T.nilable(T.anything)) }
       attr_reader :options
 
-      sig { params(options: T::Hash[Symbol, String]).void }
+      sig { params(options: T.anything).void }
       attr_writer :options
 
       # List of peer nodes for an overlay network. This field is only present for
@@ -153,9 +153,9 @@ module DockerEngineRuby
           ingress: T::Boolean,
           internal: T::Boolean,
           ipam: DockerEngineRuby::NetworkSummary::Ipam::OrHash,
-          labels: T::Hash[Symbol, String],
+          labels: T.anything,
           name: String,
-          options: T::Hash[Symbol, String],
+          options: T.anything,
           peers: T::Array[DockerEngineRuby::NetworkSummary::Peer::OrHash],
           scope: String
         ).returns(T.attached_class)
@@ -216,9 +216,9 @@ module DockerEngineRuby
             ingress: T::Boolean,
             internal: T::Boolean,
             ipam: DockerEngineRuby::NetworkSummary::Ipam,
-            labels: T::Hash[Symbol, String],
+            labels: T.anything,
             name: String,
-            options: T::Hash[Symbol, String],
+            options: T.anything,
             peers: T::Array[DockerEngineRuby::NetworkSummary::Peer],
             scope: String
           }
@@ -297,10 +297,10 @@ module DockerEngineRuby
         attr_writer :driver
 
         # Driver-specific options, specified as a map.
-        sig { returns(T.nilable(T::Hash[Symbol, String])) }
+        sig { returns(T.nilable(T.anything)) }
         attr_reader :options
 
-        sig { params(options: T::Hash[Symbol, String]).void }
+        sig { params(options: T.anything).void }
         attr_writer :options
 
         # The network's IP Address Management.
@@ -309,7 +309,7 @@ module DockerEngineRuby
             config:
               T::Array[DockerEngineRuby::NetworkSummary::Ipam::Config::OrHash],
             driver: String,
-            options: T::Hash[Symbol, String]
+            options: T.anything
           ).returns(T.attached_class)
         end
         def self.new(
@@ -331,7 +331,7 @@ module DockerEngineRuby
             {
               config: T::Array[DockerEngineRuby::NetworkSummary::Ipam::Config],
               driver: String,
-              options: T::Hash[Symbol, String]
+              options: T.anything
             }
           )
         end
@@ -347,10 +347,10 @@ module DockerEngineRuby
               )
             end
 
-          sig { returns(T.nilable(T::Hash[Symbol, String])) }
+          sig { returns(T.nilable(T.anything)) }
           attr_reader :auxiliary_addresses
 
-          sig { params(auxiliary_addresses: T::Hash[Symbol, String]).void }
+          sig { params(auxiliary_addresses: T.anything).void }
           attr_writer :auxiliary_addresses
 
           sig { returns(T.nilable(String)) }
@@ -373,7 +373,7 @@ module DockerEngineRuby
 
           sig do
             params(
-              auxiliary_addresses: T::Hash[Symbol, String],
+              auxiliary_addresses: T.anything,
               gateway: String,
               ip_range: String,
               subnet: String
@@ -390,7 +390,7 @@ module DockerEngineRuby
           sig do
             override.returns(
               {
-                auxiliary_addresses: T::Hash[Symbol, String],
+                auxiliary_addresses: T.anything,
                 gateway: String,
                 ip_range: String,
                 subnet: String

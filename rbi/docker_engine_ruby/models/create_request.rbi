@@ -34,17 +34,17 @@ module DockerEngineRuby
 
       # A mapping of driver options and values. These options are passed directly to the
       # driver and are driver specific.
-      sig { returns(T.nilable(T::Hash[Symbol, String])) }
+      sig { returns(T.nilable(T.anything)) }
       attr_reader :driver_opts
 
-      sig { params(driver_opts: T::Hash[Symbol, String]).void }
+      sig { params(driver_opts: T.anything).void }
       attr_writer :driver_opts
 
       # User-defined key/value metadata.
-      sig { returns(T.nilable(T::Hash[Symbol, String])) }
+      sig { returns(T.nilable(T.anything)) }
       attr_reader :labels
 
-      sig { params(labels: T::Hash[Symbol, String]).void }
+      sig { params(labels: T.anything).void }
       attr_writer :labels
 
       # The new volume's name. If not specified, Docker generates a name.
@@ -60,8 +60,8 @@ module DockerEngineRuby
           cluster_volume_spec:
             DockerEngineRuby::CreateRequest::ClusterVolumeSpec::OrHash,
           driver: String,
-          driver_opts: T::Hash[Symbol, String],
-          labels: T::Hash[Symbol, String],
+          driver_opts: T.anything,
+          labels: T.anything,
           name: String
         ).returns(T.attached_class)
       end
@@ -86,8 +86,8 @@ module DockerEngineRuby
             cluster_volume_spec:
               DockerEngineRuby::CreateRequest::ClusterVolumeSpec,
             driver: String,
-            driver_opts: T::Hash[Symbol, String],
-            labels: T::Hash[Symbol, String],
+            driver_opts: T.anything,
+            labels: T.anything,
             name: String
           }
         )
@@ -225,10 +225,10 @@ module DockerEngineRuby
           end
           attr_writer :capacity_range
 
-          sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
+          sig { returns(T.nilable(T.anything)) }
           attr_reader :mount_volume
 
-          sig { params(mount_volume: T::Hash[Symbol, T.anything]).void }
+          sig { params(mount_volume: T.anything).void }
           attr_writer :mount_volume
 
           sig do
@@ -295,7 +295,7 @@ module DockerEngineRuby
                 DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::Availability::OrSymbol,
               capacity_range:
                 DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::CapacityRange::OrHash,
-              mount_volume: T::Hash[Symbol, T.anything],
+              mount_volume: T.anything,
               scope:
                 DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::Scope::OrSymbol,
               secrets:
@@ -326,7 +326,7 @@ module DockerEngineRuby
                   DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::Availability::OrSymbol,
                 capacity_range:
                   DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::CapacityRange,
-                mount_volume: T::Hash[Symbol, T.anything],
+                mount_volume: T.anything,
                 scope:
                   DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::Scope::OrSymbol,
                 secrets:
@@ -350,22 +350,22 @@ module DockerEngineRuby
                 )
               end
 
-            sig { returns(T.nilable(T::Array[T::Hash[Symbol, String]])) }
+            sig { returns(T.nilable(T::Array[T.anything])) }
             attr_reader :preferred
 
-            sig { params(preferred: T::Array[T::Hash[Symbol, String]]).void }
+            sig { params(preferred: T::Array[T.anything]).void }
             attr_writer :preferred
 
-            sig { returns(T.nilable(T::Array[T::Hash[Symbol, String]])) }
+            sig { returns(T.nilable(T::Array[T.anything])) }
             attr_reader :requisite
 
-            sig { params(requisite: T::Array[T::Hash[Symbol, String]]).void }
+            sig { params(requisite: T::Array[T.anything]).void }
             attr_writer :requisite
 
             sig do
               params(
-                preferred: T::Array[T::Hash[Symbol, String]],
-                requisite: T::Array[T::Hash[Symbol, String]]
+                preferred: T::Array[T.anything],
+                requisite: T::Array[T.anything]
               ).returns(T.attached_class)
             end
             def self.new(preferred: nil, requisite: nil)
@@ -374,8 +374,8 @@ module DockerEngineRuby
             sig do
               override.returns(
                 {
-                  preferred: T::Array[T::Hash[Symbol, String]],
-                  requisite: T::Array[T::Hash[Symbol, String]]
+                  preferred: T::Array[T.anything],
+                  requisite: T::Array[T.anything]
                 }
               )
             end

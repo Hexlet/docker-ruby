@@ -17,8 +17,8 @@ module DockerEngineRuby
           ingress: T::Boolean,
           internal: T::Boolean,
           ipam: DockerEngineRuby::NetworkCreateParams::Ipam::OrHash,
-          labels: T::Hash[Symbol, String],
-          options: T::Hash[Symbol, String],
+          labels: T.anything,
+          options: T.anything,
           scope: String,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(DockerEngineRuby::NetworkCreateResponse)

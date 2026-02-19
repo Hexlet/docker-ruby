@@ -22,10 +22,10 @@ module DockerEngineRuby
       attr_writer :availability
 
       # User-defined key/value metadata.
-      sig { returns(T.nilable(T::Hash[Symbol, String])) }
+      sig { returns(T.nilable(T.anything)) }
       attr_reader :labels
 
-      sig { params(labels: T::Hash[Symbol, String]).void }
+      sig { params(labels: T.anything).void }
       attr_writer :labels
 
       # Name for the node.
@@ -45,7 +45,7 @@ module DockerEngineRuby
       sig do
         params(
           availability: DockerEngineRuby::NodeSpec::Availability::OrSymbol,
-          labels: T::Hash[Symbol, String],
+          labels: T.anything,
           name: String,
           role: DockerEngineRuby::NodeSpec::Role::OrSymbol
         ).returns(T.attached_class)
@@ -66,7 +66,7 @@ module DockerEngineRuby
         override.returns(
           {
             availability: DockerEngineRuby::NodeSpec::Availability::OrSymbol,
-            labels: T::Hash[Symbol, String],
+            labels: T.anything,
             name: String,
             role: DockerEngineRuby::NodeSpec::Role::OrSymbol
           }

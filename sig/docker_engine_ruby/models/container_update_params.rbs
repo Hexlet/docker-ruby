@@ -325,7 +325,7 @@ module DockerEngineRuby
           count: Integer,
           device_ids: ::Array[String],
           driver: String,
-          options: ::Hash[Symbol, String]
+          options: top
         }
 
       class DeviceRequest < DockerEngineRuby::Internal::Type::BaseModel
@@ -347,16 +347,16 @@ module DockerEngineRuby
 
         def driver=: (String) -> String
 
-        attr_reader options: ::Hash[Symbol, String]?
+        attr_reader options: top?
 
-        def options=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+        def options=: (top) -> top
 
         def initialize: (
           ?capabilities: ::Array[::Array[String]],
           ?count: Integer,
           ?device_ids: ::Array[String],
           ?driver: String,
-          ?options: ::Hash[Symbol, String]
+          ?options: top
         ) -> void
 
         def to_hash: -> {
@@ -364,7 +364,7 @@ module DockerEngineRuby
           count: Integer,
           device_ids: ::Array[String],
           driver: String,
-          options: ::Hash[Symbol, String]
+          options: top
         }
       end
 

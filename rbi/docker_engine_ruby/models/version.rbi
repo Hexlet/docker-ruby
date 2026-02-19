@@ -191,14 +191,14 @@ module DockerEngineRuby
         sig { returns(String) }
         attr_accessor :version
 
-        sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
+        sig { returns(T.nilable(T.anything)) }
         attr_accessor :details
 
         sig do
           params(
             name: String,
             version: String,
-            details: T.nilable(T::Hash[Symbol, T.anything])
+            details: T.nilable(T.anything)
           ).returns(T.attached_class)
         end
         def self.new(name:, version:, details: nil)
@@ -206,11 +206,7 @@ module DockerEngineRuby
 
         sig do
           override.returns(
-            {
-              name: String,
-              version: String,
-              details: T.nilable(T::Hash[Symbol, T.anything])
-            }
+            { name: String, version: String, details: T.nilable(T.anything) }
           )
         end
         def to_hash

@@ -181,10 +181,10 @@ module DockerEngineRuby
           end
           attr_writer :capacity_range
 
-          sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
+          sig { returns(T.nilable(T.anything)) }
           attr_reader :mount_volume
 
-          sig { params(mount_volume: T::Hash[Symbol, T.anything]).void }
+          sig { params(mount_volume: T.anything).void }
           attr_writer :mount_volume
 
           sig do
@@ -251,7 +251,7 @@ module DockerEngineRuby
                 DockerEngineRuby::VolumeUpdateParams::Spec::AccessMode::Availability::OrSymbol,
               capacity_range:
                 DockerEngineRuby::VolumeUpdateParams::Spec::AccessMode::CapacityRange::OrHash,
-              mount_volume: T::Hash[Symbol, T.anything],
+              mount_volume: T.anything,
               scope:
                 DockerEngineRuby::VolumeUpdateParams::Spec::AccessMode::Scope::OrSymbol,
               secrets:
@@ -282,7 +282,7 @@ module DockerEngineRuby
                   DockerEngineRuby::VolumeUpdateParams::Spec::AccessMode::Availability::OrSymbol,
                 capacity_range:
                   DockerEngineRuby::VolumeUpdateParams::Spec::AccessMode::CapacityRange,
-                mount_volume: T::Hash[Symbol, T.anything],
+                mount_volume: T.anything,
                 scope:
                   DockerEngineRuby::VolumeUpdateParams::Spec::AccessMode::Scope::OrSymbol,
                 secrets:
@@ -306,22 +306,22 @@ module DockerEngineRuby
                 )
               end
 
-            sig { returns(T.nilable(T::Array[T::Hash[Symbol, String]])) }
+            sig { returns(T.nilable(T::Array[T.anything])) }
             attr_reader :preferred
 
-            sig { params(preferred: T::Array[T::Hash[Symbol, String]]).void }
+            sig { params(preferred: T::Array[T.anything]).void }
             attr_writer :preferred
 
-            sig { returns(T.nilable(T::Array[T::Hash[Symbol, String]])) }
+            sig { returns(T.nilable(T::Array[T.anything])) }
             attr_reader :requisite
 
-            sig { params(requisite: T::Array[T::Hash[Symbol, String]]).void }
+            sig { params(requisite: T::Array[T.anything]).void }
             attr_writer :requisite
 
             sig do
               params(
-                preferred: T::Array[T::Hash[Symbol, String]],
-                requisite: T::Array[T::Hash[Symbol, String]]
+                preferred: T::Array[T.anything],
+                requisite: T::Array[T.anything]
               ).returns(T.attached_class)
             end
             def self.new(preferred: nil, requisite: nil)
@@ -330,8 +330,8 @@ module DockerEngineRuby
             sig do
               override.returns(
                 {
-                  preferred: T::Array[T::Hash[Symbol, String]],
-                  requisite: T::Array[T::Hash[Symbol, String]]
+                  preferred: T::Array[T.anything],
+                  requisite: T::Array[T.anything]
                 }
               )
             end

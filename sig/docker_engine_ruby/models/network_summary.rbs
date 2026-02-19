@@ -13,9 +13,9 @@ module DockerEngineRuby
         ingress: bool,
         internal: bool,
         ipam: DockerEngineRuby::NetworkSummary::Ipam,
-        labels: ::Hash[Symbol, String],
+        labels: top,
         name: String,
-        options: ::Hash[Symbol, String],
+        options: top,
         peers: ::Array[DockerEngineRuby::NetworkSummary::Peer],
         scope: String
       }
@@ -69,17 +69,17 @@ module DockerEngineRuby
         DockerEngineRuby::NetworkSummary::Ipam
       ) -> DockerEngineRuby::NetworkSummary::Ipam
 
-      attr_reader labels: ::Hash[Symbol, String]?
+      attr_reader labels: top?
 
-      def labels=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+      def labels=: (top) -> top
 
       attr_reader name: String?
 
       def name=: (String) -> String
 
-      attr_reader options: ::Hash[Symbol, String]?
+      attr_reader options: top?
 
-      def options=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+      def options=: (top) -> top
 
       attr_reader peers: ::Array[DockerEngineRuby::NetworkSummary::Peer]?
 
@@ -103,9 +103,9 @@ module DockerEngineRuby
         ?ingress: bool,
         ?internal: bool,
         ?ipam: DockerEngineRuby::NetworkSummary::Ipam,
-        ?labels: ::Hash[Symbol, String],
+        ?labels: top,
         ?name: String,
-        ?options: ::Hash[Symbol, String],
+        ?options: top,
         ?peers: ::Array[DockerEngineRuby::NetworkSummary::Peer],
         ?scope: String
       ) -> void
@@ -122,9 +122,9 @@ module DockerEngineRuby
         ingress: bool,
         internal: bool,
         ipam: DockerEngineRuby::NetworkSummary::Ipam,
-        labels: ::Hash[Symbol, String],
+        labels: top,
         name: String,
-        options: ::Hash[Symbol, String],
+        options: top,
         peers: ::Array[DockerEngineRuby::NetworkSummary::Peer],
         scope: String
       }
@@ -145,7 +145,7 @@ module DockerEngineRuby
         {
           config: ::Array[DockerEngineRuby::NetworkSummary::Ipam::Config],
           driver: String,
-          options: ::Hash[Symbol, String]
+          options: top
         }
 
       class Ipam < DockerEngineRuby::Internal::Type::BaseModel
@@ -159,36 +159,34 @@ module DockerEngineRuby
 
         def driver=: (String) -> String
 
-        attr_reader options: ::Hash[Symbol, String]?
+        attr_reader options: top?
 
-        def options=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+        def options=: (top) -> top
 
         def initialize: (
           ?config: ::Array[DockerEngineRuby::NetworkSummary::Ipam::Config],
           ?driver: String,
-          ?options: ::Hash[Symbol, String]
+          ?options: top
         ) -> void
 
         def to_hash: -> {
           config: ::Array[DockerEngineRuby::NetworkSummary::Ipam::Config],
           driver: String,
-          options: ::Hash[Symbol, String]
+          options: top
         }
 
         type config =
           {
-            auxiliary_addresses: ::Hash[Symbol, String],
+            auxiliary_addresses: top,
             gateway: String,
             ip_range: String,
             subnet: String
           }
 
         class Config < DockerEngineRuby::Internal::Type::BaseModel
-          attr_reader auxiliary_addresses: ::Hash[Symbol, String]?
+          attr_reader auxiliary_addresses: top?
 
-          def auxiliary_addresses=: (
-            ::Hash[Symbol, String]
-          ) -> ::Hash[Symbol, String]
+          def auxiliary_addresses=: (top) -> top
 
           attr_reader gateway: String?
 
@@ -203,14 +201,14 @@ module DockerEngineRuby
           def subnet=: (String) -> String
 
           def initialize: (
-            ?auxiliary_addresses: ::Hash[Symbol, String],
+            ?auxiliary_addresses: top,
             ?gateway: String,
             ?ip_range: String,
             ?subnet: String
           ) -> void
 
           def to_hash: -> {
-            auxiliary_addresses: ::Hash[Symbol, String],
+            auxiliary_addresses: top,
             gateway: String,
             ip_range: String,
             subnet: String

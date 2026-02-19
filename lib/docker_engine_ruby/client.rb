@@ -20,6 +20,19 @@ module DockerEngineRuby
     ENVIRONMENTS = {production: "http://localhost:2375", production_tls: "https://localhost:2376"}
     # rubocop:enable Style/MutableConstant
 
+    # Path to the trusted CA certificate file (PEM) used to verify the Docker daemon
+    # certificate.
+    # @return [String, nil]
+    attr_reader :tls_ca_cert_path
+
+    # Path to the client TLS certificate file (PEM).
+    # @return [String, nil]
+    attr_reader :tls_client_cert_path
+
+    # Path to the client TLS private key file (PEM).
+    # @return [String, nil]
+    attr_reader :tls_client_key_path
+
     # @return [DockerEngineRuby::Resources::Auth]
     attr_reader :auth
 
@@ -67,6 +80,15 @@ module DockerEngineRuby
 
     # Creates and returns a new client for interacting with the API.
     #
+    # @param tls_ca_cert_path [String, nil] Path to the trusted CA certificate file (PEM) used to verify the Docker daemon
+    # certificate. Defaults to `ENV["DOCKER_TLS_CA_CERT_PATH"]`
+    #
+    # @param tls_client_cert_path [String, nil] Path to the client TLS certificate file (PEM). Defaults to
+    # `ENV["DOCKER_TLS_CLIENT_CERT_PATH"]`
+    #
+    # @param tls_client_key_path [String, nil] Path to the client TLS private key file (PEM). Defaults to
+    # `ENV["DOCKER_TLS_CLIENT_KEY_PATH"]`
+    #
     # @param environment [:production, :production_tls, nil] Specifies the environment to use for the API.
     #
     # Each environment maps to a different base URL:
@@ -85,6 +107,9 @@ module DockerEngineRuby
     #
     # @param max_retry_delay [Float]
     def initialize(
+      tls_ca_cert_path: ENV["DOCKER_TLS_CA_CERT_PATH"],
+      tls_client_cert_path: ENV["DOCKER_TLS_CLIENT_CERT_PATH"],
+      tls_client_key_path: ENV["DOCKER_TLS_CLIENT_KEY_PATH"],
       environment: nil,
       base_url: ENV["DOCKER_BASE_URL"],
       max_retries: self.class::DEFAULT_MAX_RETRIES,
@@ -96,6 +121,10 @@ module DockerEngineRuby
         message = "environment must be one of #{DockerEngineRuby::Client::ENVIRONMENTS.keys}, got #{environment}"
         raise ArgumentError.new(message)
       end
+
+      @tls_ca_cert_path = tls_ca_cert_path&.to_s
+      @tls_client_cert_path = tls_client_cert_path&.to_s
+      @tls_client_key_path = tls_client_key_path&.to_s
 
       super(
         base_url: base_url,

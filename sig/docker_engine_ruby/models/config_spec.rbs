@@ -3,7 +3,7 @@ module DockerEngineRuby
     type config_spec =
       {
         data: String,
-        labels: ::Hash[Symbol, String],
+        labels: top,
         name: String,
         templating: DockerEngineRuby::ConfigSpec::Templating
       }
@@ -13,9 +13,9 @@ module DockerEngineRuby
 
       def data=: (String) -> String
 
-      attr_reader labels: ::Hash[Symbol, String]?
+      attr_reader labels: top?
 
-      def labels=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+      def labels=: (top) -> top
 
       attr_reader name: String?
 
@@ -29,30 +29,30 @@ module DockerEngineRuby
 
       def initialize: (
         ?data: String,
-        ?labels: ::Hash[Symbol, String],
+        ?labels: top,
         ?name: String,
         ?templating: DockerEngineRuby::ConfigSpec::Templating
       ) -> void
 
       def to_hash: -> {
         data: String,
-        labels: ::Hash[Symbol, String],
+        labels: top,
         name: String,
         templating: DockerEngineRuby::ConfigSpec::Templating
       }
 
-      type templating = { name: String, options: ::Hash[Symbol, String] }
+      type templating = { name: String, options: top }
 
       class Templating < DockerEngineRuby::Internal::Type::BaseModel
         attr_accessor name: String
 
-        attr_reader options: ::Hash[Symbol, String]?
+        attr_reader options: top?
 
-        def options=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+        def options=: (top) -> top
 
-        def initialize: (name: String, ?options: ::Hash[Symbol, String]) -> void
+        def initialize: (name: String, ?options: top) -> void
 
-        def to_hash: -> { name: String, options: ::Hash[Symbol, String] }
+        def to_hash: -> { name: String, options: top }
       end
     end
   end

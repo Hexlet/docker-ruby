@@ -78,8 +78,8 @@ module DockerEngineRuby
       # @!attribute labels
       #   User-defined key/value metadata.
       #
-      #   @return [Hash{Symbol=>String}, nil]
-      optional :labels, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Labels
+      #   @return [Object, nil]
+      optional :labels, DockerEngineRuby::Internal::Type::Unknown, api_name: :Labels
 
       # @!attribute mounts
       #   List of mounts used by the container.
@@ -167,7 +167,7 @@ module DockerEngineRuby
       #
       #   @param image_manifest_descriptor [DockerEngineRuby::Models::Summary::ImageManifestDescriptor, nil] A descriptor struct containing digest, media type, and size, as defined in
       #
-      #   @param labels [Hash{Symbol=>String}] User-defined key/value metadata.
+      #   @param labels [Object] User-defined key/value metadata.
       #
       #   @param mounts [Array<DockerEngineRuby::Models::Summary::Mount>] List of mounts used by the container.
       #
@@ -225,11 +225,8 @@ module DockerEngineRuby
       class HostConfig < DockerEngineRuby::Internal::Type::BaseModel
         # @!attribute annotations
         #
-        #   @return [Hash{Symbol=>String}, nil]
-        optional :annotations,
-                 DockerEngineRuby::Internal::Type::HashOf[String],
-                 api_name: :Annotations,
-                 nil?: true
+        #   @return [Object, nil]
+        optional :annotations, DockerEngineRuby::Internal::Type::Unknown, api_name: :Annotations, nil?: true
 
         # @!attribute network_mode
         #
@@ -241,7 +238,7 @@ module DockerEngineRuby
         #   set of information in the container's "HostConfig" as available in the container
         #   "inspect" response.
         #
-        #   @param annotations [Hash{Symbol=>String}, nil]
+        #   @param annotations [Object, nil]
         #   @param network_mode [String]
       end
 
@@ -250,8 +247,8 @@ module DockerEngineRuby
         # @!attribute annotations
         #   Arbitrary metadata relating to the targeted content.
         #
-        #   @return [Hash{Symbol=>String}, nil]
-        optional :annotations, DockerEngineRuby::Internal::Type::HashOf[String], nil?: true
+        #   @return [Object, nil]
+        optional :annotations, DockerEngineRuby::Internal::Type::Unknown, nil?: true
 
         # @!attribute artifact_type
         #   ArtifactType is the IANA media type of this artifact.
@@ -306,7 +303,7 @@ module DockerEngineRuby
         #   A descriptor struct containing digest, media type, and size, as defined in the
         #   [OCI Content Descriptors Specification](https://github.com/opencontainers/image-spec/blob/v1.0.1/descriptor.md).
         #
-        #   @param annotations [Hash{Symbol=>String}, nil] Arbitrary metadata relating to the targeted content.
+        #   @param annotations [Object, nil] Arbitrary metadata relating to the targeted content.
         #
         #   @param artifact_type [String, nil] ArtifactType is the IANA media type of this artifact.
         #
@@ -499,186 +496,13 @@ module DockerEngineRuby
       class NetworkSettings < DockerEngineRuby::Internal::Type::BaseModel
         # @!attribute networks
         #
-        #   @return [Hash{Symbol=>DockerEngineRuby::Models::Summary::NetworkSettings::Network}, nil]
-        optional :networks,
-                 -> {
-                   DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Summary::NetworkSettings::Network]
-                 },
-                 api_name: :Networks
+        #   @return [Object, nil]
+        optional :networks, DockerEngineRuby::Internal::Type::Unknown, api_name: :Networks
 
         # @!method initialize(networks: nil)
         #   Summary of the container's network settings
         #
-        #   @param networks [Hash{Symbol=>DockerEngineRuby::Models::Summary::NetworkSettings::Network}]
-
-        class Network < DockerEngineRuby::Internal::Type::BaseModel
-          # @!attribute aliases
-          #
-          #   @return [Array<String>, nil]
-          optional :aliases, DockerEngineRuby::Internal::Type::ArrayOf[String], api_name: :Aliases
-
-          # @!attribute dns_names
-          #   List of all DNS names an endpoint has on a specific network. This list is based
-          #   on the container name, network aliases, container short ID, and hostname.
-          #
-          #   These DNS names are non-fully qualified but can contain several dots. You can
-          #   get fully qualified DNS names by appending `.<network-name>`. For instance, if
-          #   container name is `my.ctr` and the network is named `testnet`, `DNSNames` will
-          #   contain `my.ctr` and the FQDN will be `my.ctr.testnet`.
-          #
-          #   @return [Array<String>, nil]
-          optional :dns_names, DockerEngineRuby::Internal::Type::ArrayOf[String], api_name: :DNSNames
-
-          # @!attribute driver_opts
-          #   DriverOpts is a mapping of driver options and values. These options are passed
-          #   directly to the driver and are driver specific.
-          #
-          #   @return [Hash{Symbol=>String}, nil]
-          optional :driver_opts,
-                   DockerEngineRuby::Internal::Type::HashOf[String],
-                   api_name: :DriverOpts,
-                   nil?: true
-
-          # @!attribute endpoint_id
-          #   Unique ID for the service endpoint in a Sandbox.
-          #
-          #   @return [String, nil]
-          optional :endpoint_id, String, api_name: :EndpointID
-
-          # @!attribute gateway
-          #   Gateway address for this network.
-          #
-          #   @return [String, nil]
-          optional :gateway, String, api_name: :Gateway
-
-          # @!attribute global_i_pv6_address
-          #   Global IPv6 address.
-          #
-          #   @return [String, nil]
-          optional :global_i_pv6_address, String, api_name: :GlobalIPv6Address
-
-          # @!attribute global_i_pv6_prefix_len
-          #   Mask length of the global IPv6 address.
-          #
-          #   @return [Integer, nil]
-          optional :global_i_pv6_prefix_len, Integer, api_name: :GlobalIPv6PrefixLen
-
-          # @!attribute gw_priority
-          #   This property determines which endpoint will provide the default gateway for a
-          #   container. The endpoint with the highest priority will be used. If multiple
-          #   endpoints have the same priority, endpoints are lexicographically sorted based
-          #   on their network name, and the one that sorts first is picked.
-          #
-          #   @return [Integer, nil]
-          optional :gw_priority, Integer, api_name: :GwPriority
-
-          # @!attribute ip_address
-          #   IPv4 address.
-          #
-          #   @return [String, nil]
-          optional :ip_address, String, api_name: :IPAddress
-
-          # @!attribute ipam_config
-          #   EndpointIPAMConfig represents an endpoint's IPAM configuration.
-          #
-          #   @return [DockerEngineRuby::Models::Summary::NetworkSettings::Network::IpamConfig, nil]
-          optional :ipam_config,
-                   -> { DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig },
-                   api_name: :IPAMConfig
-
-          # @!attribute ip_prefix_len
-          #   Mask length of the IPv4 address.
-          #
-          #   @return [Integer, nil]
-          optional :ip_prefix_len, Integer, api_name: :IPPrefixLen
-
-          # @!attribute i_pv6_gateway
-          #   IPv6 gateway address.
-          #
-          #   @return [String, nil]
-          optional :i_pv6_gateway, String, api_name: :IPv6Gateway
-
-          # @!attribute links
-          #
-          #   @return [Array<String>, nil]
-          optional :links, DockerEngineRuby::Internal::Type::ArrayOf[String], api_name: :Links
-
-          # @!attribute mac_address
-          #   MAC address for the endpoint on this network. The network driver might ignore
-          #   this parameter.
-          #
-          #   @return [String, nil]
-          optional :mac_address, String, api_name: :MacAddress
-
-          # @!attribute network_id
-          #   Unique ID of the network.
-          #
-          #   @return [String, nil]
-          optional :network_id, String, api_name: :NetworkID
-
-          # @!method initialize(aliases: nil, dns_names: nil, driver_opts: nil, endpoint_id: nil, gateway: nil, global_i_pv6_address: nil, global_i_pv6_prefix_len: nil, gw_priority: nil, ip_address: nil, ipam_config: nil, ip_prefix_len: nil, i_pv6_gateway: nil, links: nil, mac_address: nil, network_id: nil)
-          #   Some parameter documentations has been truncated, see
-          #   {DockerEngineRuby::Models::Summary::NetworkSettings::Network} for more details.
-          #
-          #   Configuration for a network endpoint.
-          #
-          #   @param aliases [Array<String>]
-          #
-          #   @param dns_names [Array<String>] List of all DNS names an endpoint has on a specific network. This
-          #
-          #   @param driver_opts [Hash{Symbol=>String}, nil] DriverOpts is a mapping of driver options and values. These options
-          #
-          #   @param endpoint_id [String] Unique ID for the service endpoint in a Sandbox.
-          #
-          #   @param gateway [String] Gateway address for this network.
-          #
-          #   @param global_i_pv6_address [String] Global IPv6 address.
-          #
-          #   @param global_i_pv6_prefix_len [Integer] Mask length of the global IPv6 address.
-          #
-          #   @param gw_priority [Integer] This property determines which endpoint will provide the default
-          #
-          #   @param ip_address [String] IPv4 address.
-          #
-          #   @param ipam_config [DockerEngineRuby::Models::Summary::NetworkSettings::Network::IpamConfig] EndpointIPAMConfig represents an endpoint's IPAM configuration.
-          #
-          #   @param ip_prefix_len [Integer] Mask length of the IPv4 address.
-          #
-          #   @param i_pv6_gateway [String] IPv6 gateway address.
-          #
-          #   @param links [Array<String>]
-          #
-          #   @param mac_address [String] MAC address for the endpoint on this network. The network driver might ignore th
-          #
-          #   @param network_id [String] Unique ID of the network.
-
-          # @see DockerEngineRuby::Models::Summary::NetworkSettings::Network#ipam_config
-          class IpamConfig < DockerEngineRuby::Internal::Type::BaseModel
-            # @!attribute i_pv4_address
-            #
-            #   @return [String, nil]
-            optional :i_pv4_address, String, api_name: :IPv4Address
-
-            # @!attribute i_pv6_address
-            #
-            #   @return [String, nil]
-            optional :i_pv6_address, String, api_name: :IPv6Address
-
-            # @!attribute link_local_ips
-            #
-            #   @return [Array<String>, nil]
-            optional :link_local_ips,
-                     DockerEngineRuby::Internal::Type::ArrayOf[String],
-                     api_name: :LinkLocalIPs
-
-            # @!method initialize(i_pv4_address: nil, i_pv6_address: nil, link_local_ips: nil)
-            #   EndpointIPAMConfig represents an endpoint's IPAM configuration.
-            #
-            #   @param i_pv4_address [String]
-            #   @param i_pv6_address [String]
-            #   @param link_local_ips [Array<String>]
-          end
-        end
+        #   @param networks [Object]
       end
 
       class Port < DockerEngineRuby::Internal::Type::BaseModel

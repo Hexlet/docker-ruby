@@ -257,7 +257,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
         cpu_stats: DockerEngineRuby::StatsResponse::CPUStats | nil,
         memory_stats: DockerEngineRuby::StatsResponse::MemoryStats | nil,
         name: String | nil,
-        networks: ^(DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::StatsResponse::Network]) | nil,
+        networks: DockerEngineRuby::Internal::Type::Unknown | nil,
         num_procs: Integer | nil,
         os_type: String | nil,
         pids_stats: DockerEngineRuby::StatsResponse::PidsStats | nil,

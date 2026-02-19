@@ -23,10 +23,10 @@ module DockerEngineRuby
       attr_writer :endpoint_spec
 
       # User-defined key/value metadata.
-      sig { returns(T.nilable(T::Hash[Symbol, String])) }
+      sig { returns(T.nilable(T.anything)) }
       attr_reader :labels
 
-      sig { params(labels: T::Hash[Symbol, String]).void }
+      sig { params(labels: T.anything).void }
       attr_writer :labels
 
       # Scheduling mode for the service.
@@ -92,7 +92,7 @@ module DockerEngineRuby
       sig do
         params(
           endpoint_spec: DockerEngineRuby::ServiceSpec::EndpointSpec::OrHash,
-          labels: T::Hash[Symbol, String],
+          labels: T.anything,
           mode: DockerEngineRuby::ServiceSpec::Mode::OrHash,
           name: String,
           networks: T::Array[DockerEngineRuby::ServiceSpec::Network::OrHash],
@@ -129,7 +129,7 @@ module DockerEngineRuby
         override.returns(
           {
             endpoint_spec: DockerEngineRuby::ServiceSpec::EndpointSpec,
-            labels: T::Hash[Symbol, String],
+            labels: T.anything,
             mode: DockerEngineRuby::ServiceSpec::Mode,
             name: String,
             networks: T::Array[DockerEngineRuby::ServiceSpec::Network],
@@ -460,16 +460,16 @@ module DockerEngineRuby
             )
           end
 
-        sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
+        sig { returns(T.nilable(T.anything)) }
         attr_reader :global
 
-        sig { params(global: T::Hash[Symbol, T.anything]).void }
+        sig { params(global: T.anything).void }
         attr_writer :global
 
-        sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
+        sig { returns(T.nilable(T.anything)) }
         attr_reader :global_job
 
-        sig { params(global_job: T::Hash[Symbol, T.anything]).void }
+        sig { params(global_job: T.anything).void }
         attr_writer :global_job
 
         sig do
@@ -500,8 +500,8 @@ module DockerEngineRuby
         # Scheduling mode for the service.
         sig do
           params(
-            global: T::Hash[Symbol, T.anything],
-            global_job: T::Hash[Symbol, T.anything],
+            global: T.anything,
+            global_job: T.anything,
             replicated: DockerEngineRuby::ServiceSpec::Mode::Replicated::OrHash,
             replicated_job:
               DockerEngineRuby::ServiceSpec::Mode::ReplicatedJob::OrHash
@@ -518,8 +518,8 @@ module DockerEngineRuby
         sig do
           override.returns(
             {
-              global: T::Hash[Symbol, T.anything],
-              global_job: T::Hash[Symbol, T.anything],
+              global: T.anything,
+              global_job: T.anything,
               replicated: DockerEngineRuby::ServiceSpec::Mode::Replicated,
               replicated_job: DockerEngineRuby::ServiceSpec::Mode::ReplicatedJob
             }
@@ -608,10 +608,10 @@ module DockerEngineRuby
         attr_writer :aliases
 
         # Driver attachment options for the network target.
-        sig { returns(T.nilable(T::Hash[Symbol, String])) }
+        sig { returns(T.nilable(T.anything)) }
         attr_reader :driver_opts
 
-        sig { params(driver_opts: T::Hash[Symbol, String]).void }
+        sig { params(driver_opts: T.anything).void }
         attr_writer :driver_opts
 
         # The target network for attachment. Must be a network name or ID.
@@ -625,7 +625,7 @@ module DockerEngineRuby
         sig do
           params(
             aliases: T::Array[String],
-            driver_opts: T::Hash[Symbol, String],
+            driver_opts: T.anything,
             target: String
           ).returns(T.attached_class)
         end
@@ -643,7 +643,7 @@ module DockerEngineRuby
           override.returns(
             {
               aliases: T::Array[String],
-              driver_opts: T::Hash[Symbol, String],
+              driver_opts: T.anything,
               target: String
             }
           )

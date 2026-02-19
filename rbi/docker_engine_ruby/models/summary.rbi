@@ -97,10 +97,10 @@ module DockerEngineRuby
       attr_writer :image_manifest_descriptor
 
       # User-defined key/value metadata.
-      sig { returns(T.nilable(T::Hash[Symbol, String])) }
+      sig { returns(T.nilable(T.anything)) }
       attr_reader :labels
 
-      sig { params(labels: T::Hash[Symbol, String]).void }
+      sig { params(labels: T.anything).void }
       attr_writer :labels
 
       # List of mounts used by the container.
@@ -184,7 +184,7 @@ module DockerEngineRuby
             T.nilable(
               DockerEngineRuby::Summary::ImageManifestDescriptor::OrHash
             ),
-          labels: T::Hash[Symbol, String],
+          labels: T.anything,
           mounts: T::Array[DockerEngineRuby::Summary::Mount::OrHash],
           names: T::Array[String],
           network_settings: DockerEngineRuby::Summary::NetworkSettings::OrHash,
@@ -276,7 +276,7 @@ module DockerEngineRuby
             image_id: String,
             image_manifest_descriptor:
               T.nilable(DockerEngineRuby::Summary::ImageManifestDescriptor),
-            labels: T::Hash[Symbol, String],
+            labels: T.anything,
             mounts: T::Array[DockerEngineRuby::Summary::Mount],
             names: T::Array[String],
             network_settings: DockerEngineRuby::Summary::NetworkSettings,
@@ -394,7 +394,7 @@ module DockerEngineRuby
             )
           end
 
-        sig { returns(T.nilable(T::Hash[Symbol, String])) }
+        sig { returns(T.nilable(T.anything)) }
         attr_accessor :annotations
 
         sig { returns(T.nilable(String)) }
@@ -408,7 +408,7 @@ module DockerEngineRuby
         # "inspect" response.
         sig do
           params(
-            annotations: T.nilable(T::Hash[Symbol, String]),
+            annotations: T.nilable(T.anything),
             network_mode: String
           ).returns(T.attached_class)
         end
@@ -417,10 +417,7 @@ module DockerEngineRuby
 
         sig do
           override.returns(
-            {
-              annotations: T.nilable(T::Hash[Symbol, String]),
-              network_mode: String
-            }
+            { annotations: T.nilable(T.anything), network_mode: String }
           )
         end
         def to_hash
@@ -437,7 +434,7 @@ module DockerEngineRuby
           end
 
         # Arbitrary metadata relating to the targeted content.
-        sig { returns(T.nilable(T::Hash[Symbol, String])) }
+        sig { returns(T.nilable(T.anything)) }
         attr_accessor :annotations
 
         # ArtifactType is the IANA media type of this artifact.
@@ -499,7 +496,7 @@ module DockerEngineRuby
         # [OCI Content Descriptors Specification](https://github.com/opencontainers/image-spec/blob/v1.0.1/descriptor.md).
         sig do
           params(
-            annotations: T.nilable(T::Hash[Symbol, String]),
+            annotations: T.nilable(T.anything),
             artifact_type: T.nilable(String),
             data: T.nilable(String),
             digest: String,
@@ -537,7 +534,7 @@ module DockerEngineRuby
         sig do
           override.returns(
             {
-              annotations: T.nilable(T::Hash[Symbol, String]),
+              annotations: T.nilable(T.anything),
               artifact_type: T.nilable(String),
               data: T.nilable(String),
               digest: String,
@@ -858,330 +855,19 @@ module DockerEngineRuby
             )
           end
 
-        sig do
-          returns(
-            T.nilable(
-              T::Hash[
-                Symbol,
-                DockerEngineRuby::Summary::NetworkSettings::Network
-              ]
-            )
-          )
-        end
+        sig { returns(T.nilable(T.anything)) }
         attr_reader :networks
 
-        sig do
-          params(
-            networks:
-              T::Hash[
-                Symbol,
-                DockerEngineRuby::Summary::NetworkSettings::Network::OrHash
-              ]
-          ).void
-        end
+        sig { params(networks: T.anything).void }
         attr_writer :networks
 
         # Summary of the container's network settings
-        sig do
-          params(
-            networks:
-              T::Hash[
-                Symbol,
-                DockerEngineRuby::Summary::NetworkSettings::Network::OrHash
-              ]
-          ).returns(T.attached_class)
-        end
+        sig { params(networks: T.anything).returns(T.attached_class) }
         def self.new(networks: nil)
         end
 
-        sig do
-          override.returns(
-            {
-              networks:
-                T::Hash[
-                  Symbol,
-                  DockerEngineRuby::Summary::NetworkSettings::Network
-                ]
-            }
-          )
-        end
+        sig { override.returns({ networks: T.anything }) }
         def to_hash
-        end
-
-        class Network < DockerEngineRuby::Internal::Type::BaseModel
-          OrHash =
-            T.type_alias do
-              T.any(
-                DockerEngineRuby::Summary::NetworkSettings::Network,
-                DockerEngineRuby::Internal::AnyHash
-              )
-            end
-
-          sig { returns(T.nilable(T::Array[String])) }
-          attr_reader :aliases
-
-          sig { params(aliases: T::Array[String]).void }
-          attr_writer :aliases
-
-          # List of all DNS names an endpoint has on a specific network. This list is based
-          # on the container name, network aliases, container short ID, and hostname.
-          #
-          # These DNS names are non-fully qualified but can contain several dots. You can
-          # get fully qualified DNS names by appending `.<network-name>`. For instance, if
-          # container name is `my.ctr` and the network is named `testnet`, `DNSNames` will
-          # contain `my.ctr` and the FQDN will be `my.ctr.testnet`.
-          sig { returns(T.nilable(T::Array[String])) }
-          attr_reader :dns_names
-
-          sig { params(dns_names: T::Array[String]).void }
-          attr_writer :dns_names
-
-          # DriverOpts is a mapping of driver options and values. These options are passed
-          # directly to the driver and are driver specific.
-          sig { returns(T.nilable(T::Hash[Symbol, String])) }
-          attr_accessor :driver_opts
-
-          # Unique ID for the service endpoint in a Sandbox.
-          sig { returns(T.nilable(String)) }
-          attr_reader :endpoint_id
-
-          sig { params(endpoint_id: String).void }
-          attr_writer :endpoint_id
-
-          # Gateway address for this network.
-          sig { returns(T.nilable(String)) }
-          attr_reader :gateway
-
-          sig { params(gateway: String).void }
-          attr_writer :gateway
-
-          # Global IPv6 address.
-          sig { returns(T.nilable(String)) }
-          attr_reader :global_i_pv6_address
-
-          sig { params(global_i_pv6_address: String).void }
-          attr_writer :global_i_pv6_address
-
-          # Mask length of the global IPv6 address.
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :global_i_pv6_prefix_len
-
-          sig { params(global_i_pv6_prefix_len: Integer).void }
-          attr_writer :global_i_pv6_prefix_len
-
-          # This property determines which endpoint will provide the default gateway for a
-          # container. The endpoint with the highest priority will be used. If multiple
-          # endpoints have the same priority, endpoints are lexicographically sorted based
-          # on their network name, and the one that sorts first is picked.
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :gw_priority
-
-          sig { params(gw_priority: Integer).void }
-          attr_writer :gw_priority
-
-          # IPv4 address.
-          sig { returns(T.nilable(String)) }
-          attr_reader :ip_address
-
-          sig { params(ip_address: String).void }
-          attr_writer :ip_address
-
-          # EndpointIPAMConfig represents an endpoint's IPAM configuration.
-          sig do
-            returns(
-              T.nilable(
-                DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig
-              )
-            )
-          end
-          attr_reader :ipam_config
-
-          sig do
-            params(
-              ipam_config:
-                DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig::OrHash
-            ).void
-          end
-          attr_writer :ipam_config
-
-          # Mask length of the IPv4 address.
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :ip_prefix_len
-
-          sig { params(ip_prefix_len: Integer).void }
-          attr_writer :ip_prefix_len
-
-          # IPv6 gateway address.
-          sig { returns(T.nilable(String)) }
-          attr_reader :i_pv6_gateway
-
-          sig { params(i_pv6_gateway: String).void }
-          attr_writer :i_pv6_gateway
-
-          sig { returns(T.nilable(T::Array[String])) }
-          attr_reader :links
-
-          sig { params(links: T::Array[String]).void }
-          attr_writer :links
-
-          # MAC address for the endpoint on this network. The network driver might ignore
-          # this parameter.
-          sig { returns(T.nilable(String)) }
-          attr_reader :mac_address
-
-          sig { params(mac_address: String).void }
-          attr_writer :mac_address
-
-          # Unique ID of the network.
-          sig { returns(T.nilable(String)) }
-          attr_reader :network_id
-
-          sig { params(network_id: String).void }
-          attr_writer :network_id
-
-          # Configuration for a network endpoint.
-          sig do
-            params(
-              aliases: T::Array[String],
-              dns_names: T::Array[String],
-              driver_opts: T.nilable(T::Hash[Symbol, String]),
-              endpoint_id: String,
-              gateway: String,
-              global_i_pv6_address: String,
-              global_i_pv6_prefix_len: Integer,
-              gw_priority: Integer,
-              ip_address: String,
-              ipam_config:
-                DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig::OrHash,
-              ip_prefix_len: Integer,
-              i_pv6_gateway: String,
-              links: T::Array[String],
-              mac_address: String,
-              network_id: String
-            ).returns(T.attached_class)
-          end
-          def self.new(
-            aliases: nil,
-            # List of all DNS names an endpoint has on a specific network. This list is based
-            # on the container name, network aliases, container short ID, and hostname.
-            #
-            # These DNS names are non-fully qualified but can contain several dots. You can
-            # get fully qualified DNS names by appending `.<network-name>`. For instance, if
-            # container name is `my.ctr` and the network is named `testnet`, `DNSNames` will
-            # contain `my.ctr` and the FQDN will be `my.ctr.testnet`.
-            dns_names: nil,
-            # DriverOpts is a mapping of driver options and values. These options are passed
-            # directly to the driver and are driver specific.
-            driver_opts: nil,
-            # Unique ID for the service endpoint in a Sandbox.
-            endpoint_id: nil,
-            # Gateway address for this network.
-            gateway: nil,
-            # Global IPv6 address.
-            global_i_pv6_address: nil,
-            # Mask length of the global IPv6 address.
-            global_i_pv6_prefix_len: nil,
-            # This property determines which endpoint will provide the default gateway for a
-            # container. The endpoint with the highest priority will be used. If multiple
-            # endpoints have the same priority, endpoints are lexicographically sorted based
-            # on their network name, and the one that sorts first is picked.
-            gw_priority: nil,
-            # IPv4 address.
-            ip_address: nil,
-            # EndpointIPAMConfig represents an endpoint's IPAM configuration.
-            ipam_config: nil,
-            # Mask length of the IPv4 address.
-            ip_prefix_len: nil,
-            # IPv6 gateway address.
-            i_pv6_gateway: nil,
-            links: nil,
-            # MAC address for the endpoint on this network. The network driver might ignore
-            # this parameter.
-            mac_address: nil,
-            # Unique ID of the network.
-            network_id: nil
-          )
-          end
-
-          sig do
-            override.returns(
-              {
-                aliases: T::Array[String],
-                dns_names: T::Array[String],
-                driver_opts: T.nilable(T::Hash[Symbol, String]),
-                endpoint_id: String,
-                gateway: String,
-                global_i_pv6_address: String,
-                global_i_pv6_prefix_len: Integer,
-                gw_priority: Integer,
-                ip_address: String,
-                ipam_config:
-                  DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig,
-                ip_prefix_len: Integer,
-                i_pv6_gateway: String,
-                links: T::Array[String],
-                mac_address: String,
-                network_id: String
-              }
-            )
-          end
-          def to_hash
-          end
-
-          class IpamConfig < DockerEngineRuby::Internal::Type::BaseModel
-            OrHash =
-              T.type_alias do
-                T.any(
-                  DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig,
-                  DockerEngineRuby::Internal::AnyHash
-                )
-              end
-
-            sig { returns(T.nilable(String)) }
-            attr_reader :i_pv4_address
-
-            sig { params(i_pv4_address: String).void }
-            attr_writer :i_pv4_address
-
-            sig { returns(T.nilable(String)) }
-            attr_reader :i_pv6_address
-
-            sig { params(i_pv6_address: String).void }
-            attr_writer :i_pv6_address
-
-            sig { returns(T.nilable(T::Array[String])) }
-            attr_reader :link_local_ips
-
-            sig { params(link_local_ips: T::Array[String]).void }
-            attr_writer :link_local_ips
-
-            # EndpointIPAMConfig represents an endpoint's IPAM configuration.
-            sig do
-              params(
-                i_pv4_address: String,
-                i_pv6_address: String,
-                link_local_ips: T::Array[String]
-              ).returns(T.attached_class)
-            end
-            def self.new(
-              i_pv4_address: nil,
-              i_pv6_address: nil,
-              link_local_ips: nil
-            )
-            end
-
-            sig do
-              override.returns(
-                {
-                  i_pv4_address: String,
-                  i_pv6_address: String,
-                  link_local_ips: T::Array[String]
-                }
-              )
-            end
-            def to_hash
-            end
-          end
         end
       end
 
