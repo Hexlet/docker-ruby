@@ -20,18 +20,6 @@ module DockerEngineRuby
     ENVIRONMENTS = {production: "http://localhost:2375", production_tls: "https://localhost:2376"}
     # rubocop:enable Style/MutableConstant
 
-    # Docker daemon URL, e.g. https://localhost:2376
-    # @return [String, nil]
-    attr_reader :docker_host
-
-    # Directory with ca.pem, cert.pem, key.pem
-    # @return [String, nil]
-    attr_reader :docker_cert_path
-
-    # Set to 1 to enable TLS verification
-    # @return [String, nil]
-    attr_reader :docker_tls_verify
-
     # @return [DockerEngineRuby::Resources::Auth]
     attr_reader :auth
 
@@ -79,12 +67,6 @@ module DockerEngineRuby
 
     # Creates and returns a new client for interacting with the API.
     #
-    # @param docker_host [String, nil] Docker daemon URL, e.g. https://localhost:2376 Defaults to `ENV["DOCKER_HOST"]`
-    #
-    # @param docker_cert_path [String, nil] Directory with ca.pem, cert.pem, key.pem Defaults to `ENV["DOCKER_CERT_PATH"]`
-    #
-    # @param docker_tls_verify [String, nil] Set to 1 to enable TLS verification Defaults to `ENV["DOCKER_TLS_VERIFY"]`
-    #
     # @param environment [:production, :production_tls, nil] Specifies the environment to use for the API.
     #
     # Each environment maps to a different base URL:
@@ -103,9 +85,6 @@ module DockerEngineRuby
     #
     # @param max_retry_delay [Float]
     def initialize(
-      docker_host: ENV["DOCKER_HOST"],
-      docker_cert_path: ENV["DOCKER_CERT_PATH"],
-      docker_tls_verify: ENV["DOCKER_TLS_VERIFY"],
       environment: nil,
       base_url: ENV["DOCKER_BASE_URL"],
       max_retries: self.class::DEFAULT_MAX_RETRIES,
@@ -117,10 +96,6 @@ module DockerEngineRuby
         message = "environment must be one of #{DockerEngineRuby::Client::ENVIRONMENTS.keys}, got #{environment}"
         raise ArgumentError.new(message)
       end
-
-      @docker_host = docker_host&.to_s
-      @docker_cert_path = docker_cert_path&.to_s
-      @docker_tls_verify = docker_tls_verify&.to_s
 
       super(
         base_url: base_url,

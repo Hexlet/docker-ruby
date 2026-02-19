@@ -13,12 +13,6 @@ module DockerEngineRuby
       production_tls: "https://localhost:2376"
     }
 
-    attr_reader docker_host: String?
-
-    attr_reader docker_cert_path: String?
-
-    attr_reader docker_tls_verify: String?
-
     attr_reader auth: DockerEngineRuby::Resources::Auth
 
     attr_reader system_: DockerEngineRuby::Resources::System
@@ -50,9 +44,6 @@ module DockerEngineRuby
     attr_reader distribution: DockerEngineRuby::Resources::Distribution
 
     def initialize: (
-      ?docker_host: String?,
-      ?docker_cert_path: String?,
-      ?docker_tls_verify: String?,
       ?environment: :production | :production_tls | nil,
       ?base_url: String?,
       ?max_retries: Integer,
