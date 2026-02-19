@@ -1,4 +1,4 @@
 configured_endpoints: 102
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/hexlet%2Fdocker-5c1628e02513666357a2c903392b7b623bdfee14944ba2d1b7b17d5da82de67b.yml
-openapi_spec_hash: 2a49592907fe275ad63f5caca002f67d
-config_hash: a99984c9833fe266fa6d364b41644537
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/hexlet%2Fdocker-b18f498bf99e9229bb0ff698d03200fcffdaffab6662fef00879a5828556e15c.yml
+openapi_spec_hash: 469a89a54b0fa089fe5dc3a5eb948004
+config_hash: f1aba41624590b647a055510a93104aa
