@@ -19,18 +19,6 @@ module DockerEngineRuby
         T::Hash[Symbol, String]
       )
 
-    # Docker daemon URL, e.g. https://localhost:2376
-    sig { returns(T.nilable(String)) }
-    attr_reader :docker_host
-
-    # Directory with ca.pem, cert.pem, key.pem
-    sig { returns(T.nilable(String)) }
-    attr_reader :docker_cert_path
-
-    # Set to 1 to enable TLS verification
-    sig { returns(T.nilable(String)) }
-    attr_reader :docker_tls_verify
-
     sig { returns(DockerEngineRuby::Resources::Auth) }
     attr_reader :auth
 
@@ -79,9 +67,6 @@ module DockerEngineRuby
     # Creates and returns a new client for interacting with the API.
     sig do
       params(
-        docker_host: T.nilable(String),
-        docker_cert_path: T.nilable(String),
-        docker_tls_verify: T.nilable(String),
         environment: T.nilable(T.any(Symbol, String)),
         base_url: T.nilable(String),
         max_retries: Integer,
@@ -91,12 +76,6 @@ module DockerEngineRuby
       ).returns(T.attached_class)
     end
     def self.new(
-      # Docker daemon URL, e.g. https://localhost:2376 Defaults to `ENV["DOCKER_HOST"]`
-      docker_host: ENV["DOCKER_HOST"],
-      # Directory with ca.pem, cert.pem, key.pem Defaults to `ENV["DOCKER_CERT_PATH"]`
-      docker_cert_path: ENV["DOCKER_CERT_PATH"],
-      # Set to 1 to enable TLS verification Defaults to `ENV["DOCKER_TLS_VERIFY"]`
-      docker_tls_verify: ENV["DOCKER_TLS_VERIFY"],
       # Specifies the environment to use for the API.
       #
       # Each environment maps to a different base URL:
