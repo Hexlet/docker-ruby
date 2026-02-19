@@ -62,11 +62,7 @@ module DockerEngineRuby
       # Network statistics for the container per interface.
       #
       # This field is omitted if the container has no networking enabled.
-      sig do
-        returns(
-          T.nilable(T::Hash[Symbol, DockerEngineRuby::StatsResponse::Network])
-        )
-      end
+      sig { returns(T.nilable(T.anything)) }
       attr_accessor :networks
 
       # The number of processors on the system.
@@ -149,10 +145,7 @@ module DockerEngineRuby
           cpu_stats: DockerEngineRuby::StatsResponse::CPUStats::OrHash,
           memory_stats: DockerEngineRuby::StatsResponse::MemoryStats::OrHash,
           name: T.nilable(String),
-          networks:
-            T.nilable(
-              T::Hash[Symbol, DockerEngineRuby::StatsResponse::Network::OrHash]
-            ),
+          networks: T.nilable(T.anything),
           num_procs: Integer,
           os_type: T.nilable(String),
           pids_stats: DockerEngineRuby::StatsResponse::PidsStats::OrHash,
@@ -223,10 +216,7 @@ module DockerEngineRuby
             cpu_stats: DockerEngineRuby::StatsResponse::CPUStats,
             memory_stats: DockerEngineRuby::StatsResponse::MemoryStats,
             name: T.nilable(String),
-            networks:
-              T.nilable(
-                T::Hash[Symbol, DockerEngineRuby::StatsResponse::Network]
-              ),
+            networks: T.nilable(T.anything),
             num_procs: Integer,
             os_type: T.nilable(String),
             pids_stats: DockerEngineRuby::StatsResponse::PidsStats,
@@ -1255,10 +1245,10 @@ module DockerEngineRuby
         # fields such as `file`, `anon`, `inactive_file` are available.
         #
         # This field is Linux-specific and omitted for Windows containers.
-        sig { returns(T.nilable(T::Hash[Symbol, Integer])) }
+        sig { returns(T.nilable(T.anything)) }
         attr_reader :stats
 
-        sig { params(stats: T::Hash[Symbol, Integer]).void }
+        sig { params(stats: T.anything).void }
         attr_writer :stats
 
         # Current `res_counter` usage for memory.
@@ -1277,7 +1267,7 @@ module DockerEngineRuby
             limit: T.nilable(Integer),
             max_usage: T.nilable(Integer),
             privateworkingset: T.nilable(Integer),
-            stats: T::Hash[Symbol, Integer],
+            stats: T.anything,
             usage: T.nilable(Integer)
           ).returns(T.attached_class)
         end
@@ -1330,156 +1320,8 @@ module DockerEngineRuby
               limit: T.nilable(Integer),
               max_usage: T.nilable(Integer),
               privateworkingset: T.nilable(Integer),
-              stats: T::Hash[Symbol, Integer],
+              stats: T.anything,
               usage: T.nilable(Integer)
-            }
-          )
-        end
-        def to_hash
-        end
-      end
-
-      class Network < DockerEngineRuby::Internal::Type::BaseModel
-        OrHash =
-          T.type_alias do
-            T.any(
-              DockerEngineRuby::StatsResponse::Network,
-              DockerEngineRuby::Internal::AnyHash
-            )
-          end
-
-        # Endpoint ID. Not used on Linux.
-        #
-        # This field is Windows-specific and omitted for Linux containers.
-        sig { returns(T.nilable(String)) }
-        attr_accessor :endpoint_id
-
-        # Instance ID. Not used on Linux.
-        #
-        # This field is Windows-specific and omitted for Linux containers.
-        sig { returns(T.nilable(String)) }
-        attr_accessor :instance_id
-
-        # Bytes received. Windows and Linux.
-        sig { returns(T.nilable(Integer)) }
-        attr_reader :rx_bytes
-
-        sig { params(rx_bytes: Integer).void }
-        attr_writer :rx_bytes
-
-        # Incoming packets dropped. Windows and Linux.
-        sig { returns(T.nilable(Integer)) }
-        attr_reader :rx_dropped
-
-        sig { params(rx_dropped: Integer).void }
-        attr_writer :rx_dropped
-
-        # Received errors. Not used on Windows.
-        #
-        # This field is Linux-specific and always zero for Windows containers.
-        sig { returns(T.nilable(Integer)) }
-        attr_reader :rx_errors
-
-        sig { params(rx_errors: Integer).void }
-        attr_writer :rx_errors
-
-        # Packets received. Windows and Linux.
-        sig { returns(T.nilable(Integer)) }
-        attr_reader :rx_packets
-
-        sig { params(rx_packets: Integer).void }
-        attr_writer :rx_packets
-
-        # Bytes sent. Windows and Linux.
-        sig { returns(T.nilable(Integer)) }
-        attr_reader :tx_bytes
-
-        sig { params(tx_bytes: Integer).void }
-        attr_writer :tx_bytes
-
-        # Outgoing packets dropped. Windows and Linux.
-        sig { returns(T.nilable(Integer)) }
-        attr_reader :tx_dropped
-
-        sig { params(tx_dropped: Integer).void }
-        attr_writer :tx_dropped
-
-        # Sent errors. Not used on Windows.
-        #
-        # This field is Linux-specific and always zero for Windows containers.
-        sig { returns(T.nilable(Integer)) }
-        attr_reader :tx_errors
-
-        sig { params(tx_errors: Integer).void }
-        attr_writer :tx_errors
-
-        # Packets sent. Windows and Linux.
-        sig { returns(T.nilable(Integer)) }
-        attr_reader :tx_packets
-
-        sig { params(tx_packets: Integer).void }
-        attr_writer :tx_packets
-
-        # Aggregates the network stats of one container
-        sig do
-          params(
-            endpoint_id: T.nilable(String),
-            instance_id: T.nilable(String),
-            rx_bytes: Integer,
-            rx_dropped: Integer,
-            rx_errors: Integer,
-            rx_packets: Integer,
-            tx_bytes: Integer,
-            tx_dropped: Integer,
-            tx_errors: Integer,
-            tx_packets: Integer
-          ).returns(T.attached_class)
-        end
-        def self.new(
-          # Endpoint ID. Not used on Linux.
-          #
-          # This field is Windows-specific and omitted for Linux containers.
-          endpoint_id: nil,
-          # Instance ID. Not used on Linux.
-          #
-          # This field is Windows-specific and omitted for Linux containers.
-          instance_id: nil,
-          # Bytes received. Windows and Linux.
-          rx_bytes: nil,
-          # Incoming packets dropped. Windows and Linux.
-          rx_dropped: nil,
-          # Received errors. Not used on Windows.
-          #
-          # This field is Linux-specific and always zero for Windows containers.
-          rx_errors: nil,
-          # Packets received. Windows and Linux.
-          rx_packets: nil,
-          # Bytes sent. Windows and Linux.
-          tx_bytes: nil,
-          # Outgoing packets dropped. Windows and Linux.
-          tx_dropped: nil,
-          # Sent errors. Not used on Windows.
-          #
-          # This field is Linux-specific and always zero for Windows containers.
-          tx_errors: nil,
-          # Packets sent. Windows and Linux.
-          tx_packets: nil
-        )
-        end
-
-        sig do
-          override.returns(
-            {
-              endpoint_id: T.nilable(String),
-              instance_id: T.nilable(String),
-              rx_bytes: Integer,
-              rx_dropped: Integer,
-              rx_errors: Integer,
-              rx_packets: Integer,
-              tx_bytes: Integer,
-              tx_dropped: Integer,
-              tx_errors: Integer,
-              tx_packets: Integer
             }
           )
         end

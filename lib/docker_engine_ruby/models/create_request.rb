@@ -21,14 +21,14 @@ module DockerEngineRuby
       #   A mapping of driver options and values. These options are passed directly to the
       #   driver and are driver specific.
       #
-      #   @return [Hash{Symbol=>String}, nil]
-      optional :driver_opts, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :DriverOpts
+      #   @return [Object, nil]
+      optional :driver_opts, DockerEngineRuby::Internal::Type::Unknown, api_name: :DriverOpts
 
       # @!attribute labels
       #   User-defined key/value metadata.
       #
-      #   @return [Hash{Symbol=>String}, nil]
-      optional :labels, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Labels
+      #   @return [Object, nil]
+      optional :labels, DockerEngineRuby::Internal::Type::Unknown, api_name: :Labels
 
       # @!attribute name
       #   The new volume's name. If not specified, Docker generates a name.
@@ -46,9 +46,9 @@ module DockerEngineRuby
       #
       #   @param driver [String] Name of the volume driver to use.
       #
-      #   @param driver_opts [Hash{Symbol=>String}] A mapping of driver options and values. These options are
+      #   @param driver_opts [Object] A mapping of driver options and values. These options are
       #
-      #   @param labels [Hash{Symbol=>String}] User-defined key/value metadata.
+      #   @param labels [Object] User-defined key/value metadata.
       #
       #   @param name [String] The new volume's name. If not specified, Docker generates a name.
 
@@ -109,10 +109,8 @@ module DockerEngineRuby
 
           # @!attribute mount_volume
           #
-          #   @return [Hash{Symbol=>Object}, nil]
-          optional :mount_volume,
-                   DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown],
-                   api_name: :MountVolume
+          #   @return [Object, nil]
+          optional :mount_volume, DockerEngineRuby::Internal::Type::Unknown, api_name: :MountVolume
 
           # @!attribute scope
           #
@@ -143,7 +141,7 @@ module DockerEngineRuby
           #   @param accessibility_requirements [DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::AccessibilityRequirements]
           #   @param availability [Symbol, DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::Availability]
           #   @param capacity_range [DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::CapacityRange]
-          #   @param mount_volume [Hash{Symbol=>Object}]
+          #   @param mount_volume [Object]
           #   @param scope [Symbol, DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::Scope]
           #   @param secrets [Array<DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::Secret>]
           #   @param sharing [Symbol, DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::Sharing]
@@ -152,21 +150,21 @@ module DockerEngineRuby
           class AccessibilityRequirements < DockerEngineRuby::Internal::Type::BaseModel
             # @!attribute preferred
             #
-            #   @return [Array<Hash{Symbol=>String}>, nil]
+            #   @return [Array<Object>, nil]
             optional :preferred,
-                     DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Internal::Type::HashOf[String]],
+                     DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Internal::Type::Unknown],
                      api_name: :Preferred
 
             # @!attribute requisite
             #
-            #   @return [Array<Hash{Symbol=>String}>, nil]
+            #   @return [Array<Object>, nil]
             optional :requisite,
-                     DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Internal::Type::HashOf[String]],
+                     DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Internal::Type::Unknown],
                      api_name: :Requisite
 
             # @!method initialize(preferred: nil, requisite: nil)
-            #   @param preferred [Array<Hash{Symbol=>String}>]
-            #   @param requisite [Array<Hash{Symbol=>String}>]
+            #   @param preferred [Array<Object>]
+            #   @param requisite [Array<Object>]
           end
 
           # @see DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode#availability

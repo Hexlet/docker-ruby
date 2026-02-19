@@ -34,8 +34,8 @@ module DockerEngineRuby
       # @!attribute labels
       #   User-defined key/value metadata.
       #
-      #   @return [Hash{Symbol=>String}]
-      required :labels, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Labels
+      #   @return [Object]
+      required :labels, DockerEngineRuby::Internal::Type::Unknown, api_name: :Labels
 
       # @!attribute parent_id
       #   ID of the parent image.
@@ -118,7 +118,7 @@ module DockerEngineRuby
       #
       #   @param id [String] ID is the content-addressable ID of an image.
       #
-      #   @param labels [Hash{Symbol=>String}] User-defined key/value metadata.
+      #   @param labels [Object] User-defined key/value metadata.
       #
       #   @param parent_id [String] ID of the parent image.
       #
@@ -139,8 +139,8 @@ module DockerEngineRuby
         # @!attribute annotations
         #   Arbitrary metadata relating to the targeted content.
         #
-        #   @return [Hash{Symbol=>String}, nil]
-        optional :annotations, DockerEngineRuby::Internal::Type::HashOf[String], nil?: true
+        #   @return [Object, nil]
+        optional :annotations, DockerEngineRuby::Internal::Type::Unknown, nil?: true
 
         # @!attribute artifact_type
         #   ArtifactType is the IANA media type of this artifact.
@@ -195,7 +195,7 @@ module DockerEngineRuby
         #   A descriptor struct containing digest, media type, and size, as defined in the
         #   [OCI Content Descriptors Specification](https://github.com/opencontainers/image-spec/blob/v1.0.1/descriptor.md).
         #
-        #   @param annotations [Hash{Symbol=>String}, nil] Arbitrary metadata relating to the targeted content.
+        #   @param annotations [Object, nil] Arbitrary metadata relating to the targeted content.
         #
         #   @param artifact_type [String, nil] ArtifactType is the IANA media type of this artifact.
         #
@@ -353,8 +353,8 @@ module DockerEngineRuby
           # @!attribute annotations
           #   Arbitrary metadata relating to the targeted content.
           #
-          #   @return [Hash{Symbol=>String}, nil]
-          optional :annotations, DockerEngineRuby::Internal::Type::HashOf[String], nil?: true
+          #   @return [Object, nil]
+          optional :annotations, DockerEngineRuby::Internal::Type::Unknown, nil?: true
 
           # @!attribute artifact_type
           #   ArtifactType is the IANA media type of this artifact.
@@ -409,7 +409,7 @@ module DockerEngineRuby
           #   A descriptor struct containing digest, media type, and size, as defined in the
           #   [OCI Content Descriptors Specification](https://github.com/opencontainers/image-spec/blob/v1.0.1/descriptor.md).
           #
-          #   @param annotations [Hash{Symbol=>String}, nil] Arbitrary metadata relating to the targeted content.
+          #   @param annotations [Object, nil] Arbitrary metadata relating to the targeted content.
           #
           #   @param artifact_type [String, nil] ArtifactType is the IANA media type of this artifact.
           #

@@ -12,8 +12,8 @@ module DockerEngineRuby
       # @!attribute labels
       #   User-defined key/value metadata.
       #
-      #   @return [Hash{Symbol=>String}, nil]
-      optional :labels, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Labels
+      #   @return [Object, nil]
+      optional :labels, DockerEngineRuby::Internal::Type::Unknown, api_name: :Labels
 
       # @!attribute name
       #   Name for the node.
@@ -30,7 +30,7 @@ module DockerEngineRuby
       # @!method initialize(availability: nil, labels: nil, name: nil, role: nil)
       #   @param availability [Symbol, DockerEngineRuby::Models::NodeSpec::Availability] Availability of the node.
       #
-      #   @param labels [Hash{Symbol=>String}] User-defined key/value metadata.
+      #   @param labels [Object] User-defined key/value metadata.
       #
       #   @param name [String] Name for the node.
       #

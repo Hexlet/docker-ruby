@@ -131,14 +131,14 @@ module DockerEngineRuby
           cmd: ::Array[String],
           entrypoint: ::Array[String],
           env: ::Array[String],
-          exposed_ports: ::Hash[Symbol, ::Hash[Symbol, top]]?,
+          exposed_ports: top?,
           healthcheck: DockerEngineRuby::Image::Config::Healthcheck,
-          labels: ::Hash[Symbol, String],
+          labels: top,
           on_build: ::Array[String]?,
           shell: ::Array[String]?,
           stop_signal: String?,
           user: String,
-          volumes: ::Hash[Symbol, ::Hash[Symbol, top]],
+          volumes: top,
           working_dir: String
         }
 
@@ -157,7 +157,7 @@ module DockerEngineRuby
 
         def env=: (::Array[String]) -> ::Array[String]
 
-        attr_accessor exposed_ports: ::Hash[Symbol, ::Hash[Symbol, top]]?
+        attr_accessor exposed_ports: top?
 
         attr_reader healthcheck: DockerEngineRuby::Image::Config::Healthcheck?
 
@@ -165,9 +165,9 @@ module DockerEngineRuby
           DockerEngineRuby::Image::Config::Healthcheck
         ) -> DockerEngineRuby::Image::Config::Healthcheck
 
-        attr_reader labels: ::Hash[Symbol, String]?
+        attr_reader labels: top?
 
-        def labels=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+        def labels=: (top) -> top
 
         attr_accessor on_build: ::Array[String]?
 
@@ -179,11 +179,9 @@ module DockerEngineRuby
 
         def user=: (String) -> String
 
-        attr_reader volumes: ::Hash[Symbol, ::Hash[Symbol, top]]?
+        attr_reader volumes: top?
 
-        def volumes=: (
-          ::Hash[Symbol, ::Hash[Symbol, top]]
-        ) -> ::Hash[Symbol, ::Hash[Symbol, top]]
+        def volumes=: (top) -> top
 
         attr_reader working_dir: String?
 
@@ -194,14 +192,14 @@ module DockerEngineRuby
           ?cmd: ::Array[String],
           ?entrypoint: ::Array[String],
           ?env: ::Array[String],
-          ?exposed_ports: ::Hash[Symbol, ::Hash[Symbol, top]]?,
+          ?exposed_ports: top?,
           ?healthcheck: DockerEngineRuby::Image::Config::Healthcheck,
-          ?labels: ::Hash[Symbol, String],
+          ?labels: top,
           ?on_build: ::Array[String]?,
           ?shell: ::Array[String]?,
           ?stop_signal: String?,
           ?user: String,
-          ?volumes: ::Hash[Symbol, ::Hash[Symbol, top]],
+          ?volumes: top,
           ?working_dir: String
         ) -> void
 
@@ -210,14 +208,14 @@ module DockerEngineRuby
           cmd: ::Array[String],
           entrypoint: ::Array[String],
           env: ::Array[String],
-          exposed_ports: ::Hash[Symbol, ::Hash[Symbol, top]]?,
+          exposed_ports: top?,
           healthcheck: DockerEngineRuby::Image::Config::Healthcheck,
-          labels: ::Hash[Symbol, String],
+          labels: top,
           on_build: ::Array[String]?,
           shell: ::Array[String]?,
           stop_signal: String?,
           user: String,
-          volumes: ::Hash[Symbol, ::Hash[Symbol, top]],
+          volumes: top,
           working_dir: String
         }
 
@@ -278,7 +276,7 @@ module DockerEngineRuby
 
       type descriptor =
         {
-          annotations: ::Hash[Symbol, String]?,
+          annotations: top?,
           artifact_type: String?,
           data: String?,
           digest: String,
@@ -289,7 +287,7 @@ module DockerEngineRuby
         }
 
       class Descriptor < DockerEngineRuby::Internal::Type::BaseModel
-        attr_accessor annotations: ::Hash[Symbol, String]?
+        attr_accessor annotations: top?
 
         attr_accessor artifact_type: String?
 
@@ -316,7 +314,7 @@ module DockerEngineRuby
         attr_accessor urls: ::Array[String]?
 
         def initialize: (
-          ?annotations: ::Hash[Symbol, String]?,
+          ?annotations: top?,
           ?artifact_type: String?,
           ?data: String?,
           ?digest: String,
@@ -327,7 +325,7 @@ module DockerEngineRuby
         ) -> void
 
         def to_hash: -> {
-          annotations: ::Hash[Symbol, String]?,
+          annotations: top?,
           artifact_type: String?,
           data: String?,
           digest: String,
@@ -385,16 +383,16 @@ module DockerEngineRuby
         end
       end
 
-      type graph_driver = { data: ::Hash[Symbol, String], name: String }
+      type graph_driver = { data: top, name: String }
 
       class GraphDriver < DockerEngineRuby::Internal::Type::BaseModel
-        attr_accessor data: ::Hash[Symbol, String]
+        attr_accessor data: top
 
         attr_accessor name: String
 
-        def initialize: (data: ::Hash[Symbol, String], name: String) -> void
+        def initialize: (data: top, name: String) -> void
 
-        def to_hash: -> { data: ::Hash[Symbol, String], name: String }
+        def to_hash: -> { data: top, name: String }
       end
 
       type identity =
@@ -786,7 +784,7 @@ module DockerEngineRuby
 
         type descriptor =
           {
-            annotations: ::Hash[Symbol, String]?,
+            annotations: top?,
             artifact_type: String?,
             data: String?,
             digest: String,
@@ -797,7 +795,7 @@ module DockerEngineRuby
           }
 
         class Descriptor < DockerEngineRuby::Internal::Type::BaseModel
-          attr_accessor annotations: ::Hash[Symbol, String]?
+          attr_accessor annotations: top?
 
           attr_accessor artifact_type: String?
 
@@ -824,7 +822,7 @@ module DockerEngineRuby
           attr_accessor urls: ::Array[String]?
 
           def initialize: (
-            ?annotations: ::Hash[Symbol, String]?,
+            ?annotations: top?,
             ?artifact_type: String?,
             ?data: String?,
             ?digest: String,
@@ -835,7 +833,7 @@ module DockerEngineRuby
           ) -> void
 
           def to_hash: -> {
-            annotations: ::Hash[Symbol, String]?,
+            annotations: top?,
             artifact_type: String?,
             data: String?,
             digest: String,

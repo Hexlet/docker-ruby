@@ -421,7 +421,7 @@ module DockerEngineRuby
         #
         # This information is driver-specific, and depends on the storage-driver in use,
         # and should be used for informational purposes only.
-        sig { returns(T::Hash[Symbol, String]) }
+        sig { returns(T.anything) }
         attr_accessor :data
 
         # Name of the storage driver.
@@ -430,11 +430,7 @@ module DockerEngineRuby
 
         # Information about the storage driver used to store the container's and image's
         # filesystem.
-        sig do
-          params(data: T::Hash[Symbol, String], name: String).returns(
-            T.attached_class
-          )
-        end
+        sig { params(data: T.anything, name: String).returns(T.attached_class) }
         def self.new(
           # Low-level storage metadata, provided as key/value pairs.
           #
@@ -446,9 +442,7 @@ module DockerEngineRuby
         )
         end
 
-        sig do
-          override.returns({ data: T::Hash[Symbol, String], name: String })
-        end
+        sig { override.returns({ data: T.anything, name: String }) }
         def to_hash
         end
       end
@@ -464,10 +458,10 @@ module DockerEngineRuby
 
         # Arbitrary non-identifying metadata attached to container and provided to the
         # runtime when the container is started.
-        sig { returns(T.nilable(T::Hash[Symbol, String])) }
+        sig { returns(T.nilable(T.anything)) }
         attr_reader :annotations
 
-        sig { params(annotations: T::Hash[Symbol, String]).void }
+        sig { params(annotations: T.anything).void }
         attr_writer :annotations
 
         # Automatically remove the container when the container's process exits. This has
@@ -1050,29 +1044,10 @@ module DockerEngineRuby
         sig { returns(T.nilable(Integer)) }
         attr_accessor :pids_limit
 
-        sig do
-          returns(
-            T.nilable(
-              T::Hash[
-                Symbol,
-                T::Array[DockerEngineRuby::Container::HostConfig::PortBinding]
-              ]
-            )
-          )
-        end
+        sig { returns(T.nilable(T.anything)) }
         attr_reader :port_bindings
 
-        sig do
-          params(
-            port_bindings:
-              T::Hash[
-                Symbol,
-                T::Array[
-                  DockerEngineRuby::Container::HostConfig::PortBinding::OrHash
-                ]
-              ]
-          ).void
-        end
+        sig { params(port_bindings: T.anything).void }
         attr_writer :port_bindings
 
         # Gives the container full access to the host.
@@ -1149,16 +1124,16 @@ module DockerEngineRuby
         attr_writer :shm_size
 
         # Storage driver options for this container, in the form `{"size": "120G"}`.
-        sig { returns(T.nilable(T::Hash[Symbol, String])) }
+        sig { returns(T.nilable(T.anything)) }
         attr_reader :storage_opt
 
-        sig { params(storage_opt: T::Hash[Symbol, String]).void }
+        sig { params(storage_opt: T.anything).void }
         attr_writer :storage_opt
 
         # A list of kernel parameters (sysctls) to set in the container.
         #
         # This field is omitted if not set.
-        sig { returns(T.nilable(T::Hash[Symbol, String])) }
+        sig { returns(T.nilable(T.anything)) }
         attr_accessor :sysctls
 
         # A map of container directories which should be replaced by tmpfs mounts, and
@@ -1167,10 +1142,10 @@ module DockerEngineRuby
         # ```
         # { "/run": "rw,noexec,nosuid,size=65536k" }
         # ```
-        sig { returns(T.nilable(T::Hash[Symbol, String])) }
+        sig { returns(T.nilable(T.anything)) }
         attr_reader :tmpfs
 
-        sig { params(tmpfs: T::Hash[Symbol, String]).void }
+        sig { params(tmpfs: T.anything).void }
         attr_writer :tmpfs
 
         # A list of resource limits to set in the container. For example:
@@ -1226,7 +1201,7 @@ module DockerEngineRuby
         # Container configuration that depends on the host we are running on
         sig do
           params(
-            annotations: T::Hash[Symbol, String],
+            annotations: T.anything,
             auto_remove: T::Boolean,
             binds: T::Array[String],
             blkio_device_read_bps:
@@ -1301,13 +1276,7 @@ module DockerEngineRuby
             oom_score_adj: Integer,
             pid_mode: String,
             pids_limit: T.nilable(Integer),
-            port_bindings:
-              T::Hash[
-                Symbol,
-                T::Array[
-                  DockerEngineRuby::Container::HostConfig::PortBinding::OrHash
-                ]
-              ],
+            port_bindings: T.anything,
             privileged: T::Boolean,
             publish_all_ports: T::Boolean,
             readonly_paths: T::Array[String],
@@ -1317,9 +1286,9 @@ module DockerEngineRuby
             runtime: T.nilable(String),
             security_opt: T::Array[String],
             shm_size: Integer,
-            storage_opt: T::Hash[Symbol, String],
-            sysctls: T.nilable(T::Hash[Symbol, String]),
-            tmpfs: T::Hash[Symbol, String],
+            storage_opt: T.anything,
+            sysctls: T.nilable(T.anything),
+            tmpfs: T.anything,
             ulimits:
               T::Array[DockerEngineRuby::Container::HostConfig::Ulimit::OrHash],
             userns_mode: String,
@@ -1594,7 +1563,7 @@ module DockerEngineRuby
         sig do
           override.returns(
             {
-              annotations: T::Hash[Symbol, String],
+              annotations: T.anything,
               auto_remove: T::Boolean,
               binds: T::Array[String],
               blkio_device_read_bps:
@@ -1667,11 +1636,7 @@ module DockerEngineRuby
               oom_score_adj: Integer,
               pid_mode: String,
               pids_limit: T.nilable(Integer),
-              port_bindings:
-                T::Hash[
-                  Symbol,
-                  T::Array[DockerEngineRuby::Container::HostConfig::PortBinding]
-                ],
+              port_bindings: T.anything,
               privileged: T::Boolean,
               publish_all_ports: T::Boolean,
               readonly_paths: T::Array[String],
@@ -1681,9 +1646,9 @@ module DockerEngineRuby
               runtime: T.nilable(String),
               security_opt: T::Array[String],
               shm_size: Integer,
-              storage_opt: T::Hash[Symbol, String],
-              sysctls: T.nilable(T::Hash[Symbol, String]),
-              tmpfs: T::Hash[Symbol, String],
+              storage_opt: T.anything,
+              sysctls: T.nilable(T.anything),
+              tmpfs: T.anything,
               ulimits:
                 T::Array[DockerEngineRuby::Container::HostConfig::Ulimit],
               userns_mode: String,
@@ -1963,10 +1928,10 @@ module DockerEngineRuby
 
           # Driver-specific options, specified as a key/value pairs. These options are
           # passed directly to the driver.
-          sig { returns(T.nilable(T::Hash[Symbol, String])) }
+          sig { returns(T.nilable(T.anything)) }
           attr_reader :options
 
-          sig { params(options: T::Hash[Symbol, String]).void }
+          sig { params(options: T.anything).void }
           attr_writer :options
 
           # A request for devices to be sent to device drivers
@@ -1976,7 +1941,7 @@ module DockerEngineRuby
               count: Integer,
               device_ids: T::Array[String],
               driver: String,
-              options: T::Hash[Symbol, String]
+              options: T.anything
             ).returns(T.attached_class)
           end
           def self.new(
@@ -2008,7 +1973,7 @@ module DockerEngineRuby
                 count: Integer,
                 device_ids: T::Array[String],
                 driver: String,
-                options: T::Hash[Symbol, String]
+                options: T.anything
               }
             )
           end
@@ -2122,10 +2087,10 @@ module DockerEngineRuby
               )
             end
 
-          sig { returns(T.nilable(T::Hash[Symbol, String])) }
+          sig { returns(T.nilable(T.anything)) }
           attr_reader :config
 
-          sig { params(config: T::Hash[Symbol, String]).void }
+          sig { params(config: T.anything).void }
           attr_writer :config
 
           sig do
@@ -2148,7 +2113,7 @@ module DockerEngineRuby
           # The logging configuration for this container
           sig do
             params(
-              config: T::Hash[Symbol, String],
+              config: T.anything,
               type:
                 DockerEngineRuby::Container::HostConfig::LogConfig::Type::OrSymbol
             ).returns(T.attached_class)
@@ -2159,7 +2124,7 @@ module DockerEngineRuby
           sig do
             override.returns(
               {
-                config: T::Hash[Symbol, String],
+                config: T.anything,
                 type:
                   DockerEngineRuby::Container::HostConfig::LogConfig::Type::TaggedSymbol
               }
@@ -2763,10 +2728,10 @@ module DockerEngineRuby
             end
             attr_writer :driver_config
 
-            sig { returns(T.nilable(T::Hash[Symbol, String])) }
+            sig { returns(T.nilable(T.anything)) }
             attr_reader :labels
 
-            sig { params(labels: T::Hash[Symbol, String]).void }
+            sig { params(labels: T.anything).void }
             attr_writer :labels
 
             sig { returns(T.nilable(T::Boolean)) }
@@ -2786,7 +2751,7 @@ module DockerEngineRuby
               params(
                 driver_config:
                   DockerEngineRuby::Container::HostConfig::Mount::VolumeOptions::DriverConfig::OrHash,
-                labels: T::Hash[Symbol, String],
+                labels: T.anything,
                 no_copy: T::Boolean,
                 subpath: String
               ).returns(T.attached_class)
@@ -2804,7 +2769,7 @@ module DockerEngineRuby
                 {
                   driver_config:
                     DockerEngineRuby::Container::HostConfig::Mount::VolumeOptions::DriverConfig,
-                  labels: T::Hash[Symbol, String],
+                  labels: T.anything,
                   no_copy: T::Boolean,
                   subpath: String
                 }
@@ -2828,68 +2793,24 @@ module DockerEngineRuby
               sig { params(name: String).void }
               attr_writer :name
 
-              sig { returns(T.nilable(T::Hash[Symbol, String])) }
+              sig { returns(T.nilable(T.anything)) }
               attr_reader :options
 
-              sig { params(options: T::Hash[Symbol, String]).void }
+              sig { params(options: T.anything).void }
               attr_writer :options
 
               sig do
-                params(name: String, options: T::Hash[Symbol, String]).returns(
+                params(name: String, options: T.anything).returns(
                   T.attached_class
                 )
               end
               def self.new(name: nil, options: nil)
               end
 
-              sig do
-                override.returns(
-                  { name: String, options: T::Hash[Symbol, String] }
-                )
-              end
+              sig { override.returns({ name: String, options: T.anything }) }
               def to_hash
               end
             end
-          end
-        end
-
-        class PortBinding < DockerEngineRuby::Internal::Type::BaseModel
-          OrHash =
-            T.type_alias do
-              T.any(
-                DockerEngineRuby::Container::HostConfig::PortBinding,
-                DockerEngineRuby::Internal::AnyHash
-              )
-            end
-
-          # Host IP address that the container's port is mapped to.
-          sig { returns(T.nilable(String)) }
-          attr_reader :host_ip
-
-          sig { params(host_ip: String).void }
-          attr_writer :host_ip
-
-          # Host port number that the container's port is mapped to.
-          sig { returns(T.nilable(String)) }
-          attr_reader :host_port
-
-          sig { params(host_port: String).void }
-          attr_writer :host_port
-
-          # PortBinding represents a binding between a host IP address and a host port.
-          sig do
-            params(host_ip: String, host_port: String).returns(T.attached_class)
-          end
-          def self.new(
-            # Host IP address that the container's port is mapped to.
-            host_ip: nil,
-            # Host port number that the container's port is mapped to.
-            host_port: nil
-          )
-          end
-
-          sig { override.returns({ host_ip: String, host_port: String }) }
-          def to_hash
           end
         end
 
@@ -3077,7 +2998,7 @@ module DockerEngineRuby
           end
 
         # Arbitrary metadata relating to the targeted content.
-        sig { returns(T.nilable(T::Hash[Symbol, String])) }
+        sig { returns(T.nilable(T.anything)) }
         attr_accessor :annotations
 
         # ArtifactType is the IANA media type of this artifact.
@@ -3139,7 +3060,7 @@ module DockerEngineRuby
         # [OCI Content Descriptors Specification](https://github.com/opencontainers/image-spec/blob/v1.0.1/descriptor.md).
         sig do
           params(
-            annotations: T.nilable(T::Hash[Symbol, String]),
+            annotations: T.nilable(T.anything),
             artifact_type: T.nilable(String),
             data: T.nilable(String),
             digest: String,
@@ -3177,7 +3098,7 @@ module DockerEngineRuby
         sig do
           override.returns(
             {
-              annotations: T.nilable(T::Hash[Symbol, String]),
+              annotations: T.nilable(T.anything),
               artifact_type: T.nilable(String),
               data: T.nilable(String),
               digest: String,
@@ -3511,52 +3432,16 @@ module DockerEngineRuby
           end
 
         # Information about all networks that the container is connected to.
-        sig do
-          returns(
-            T.nilable(
-              T::Hash[
-                Symbol,
-                DockerEngineRuby::Container::NetworkSettings::Network
-              ]
-            )
-          )
-        end
+        sig { returns(T.nilable(T.anything)) }
         attr_reader :networks
 
-        sig do
-          params(
-            networks:
-              T::Hash[
-                Symbol,
-                DockerEngineRuby::Container::NetworkSettings::Network::OrHash
-              ]
-          ).void
-        end
+        sig { params(networks: T.anything).void }
         attr_writer :networks
 
-        sig do
-          returns(
-            T.nilable(
-              T::Hash[
-                Symbol,
-                T::Array[DockerEngineRuby::Container::NetworkSettings::Port]
-              ]
-            )
-          )
-        end
+        sig { returns(T.nilable(T.anything)) }
         attr_reader :ports
 
-        sig do
-          params(
-            ports:
-              T::Hash[
-                Symbol,
-                T::Array[
-                  DockerEngineRuby::Container::NetworkSettings::Port::OrHash
-                ]
-              ]
-          ).void
-        end
+        sig { params(ports: T.anything).void }
         attr_writer :ports
 
         # SandboxID uniquely represents a container's network stack.
@@ -3576,18 +3461,8 @@ module DockerEngineRuby
         # NetworkSettings exposes the network settings in the API
         sig do
           params(
-            networks:
-              T::Hash[
-                Symbol,
-                DockerEngineRuby::Container::NetworkSettings::Network::OrHash
-              ],
-            ports:
-              T::Hash[
-                Symbol,
-                T::Array[
-                  DockerEngineRuby::Container::NetworkSettings::Port::OrHash
-                ]
-              ],
+            networks: T.anything,
+            ports: T.anything,
             sandbox_id: String,
             sandbox_key: String
           ).returns(T.attached_class)
@@ -3606,338 +3481,14 @@ module DockerEngineRuby
         sig do
           override.returns(
             {
-              networks:
-                T::Hash[
-                  Symbol,
-                  DockerEngineRuby::Container::NetworkSettings::Network
-                ],
-              ports:
-                T::Hash[
-                  Symbol,
-                  T::Array[DockerEngineRuby::Container::NetworkSettings::Port]
-                ],
+              networks: T.anything,
+              ports: T.anything,
               sandbox_id: String,
               sandbox_key: String
             }
           )
         end
         def to_hash
-        end
-
-        class Network < DockerEngineRuby::Internal::Type::BaseModel
-          OrHash =
-            T.type_alias do
-              T.any(
-                DockerEngineRuby::Container::NetworkSettings::Network,
-                DockerEngineRuby::Internal::AnyHash
-              )
-            end
-
-          sig { returns(T.nilable(T::Array[String])) }
-          attr_reader :aliases
-
-          sig { params(aliases: T::Array[String]).void }
-          attr_writer :aliases
-
-          # List of all DNS names an endpoint has on a specific network. This list is based
-          # on the container name, network aliases, container short ID, and hostname.
-          #
-          # These DNS names are non-fully qualified but can contain several dots. You can
-          # get fully qualified DNS names by appending `.<network-name>`. For instance, if
-          # container name is `my.ctr` and the network is named `testnet`, `DNSNames` will
-          # contain `my.ctr` and the FQDN will be `my.ctr.testnet`.
-          sig { returns(T.nilable(T::Array[String])) }
-          attr_reader :dns_names
-
-          sig { params(dns_names: T::Array[String]).void }
-          attr_writer :dns_names
-
-          # DriverOpts is a mapping of driver options and values. These options are passed
-          # directly to the driver and are driver specific.
-          sig { returns(T.nilable(T::Hash[Symbol, String])) }
-          attr_accessor :driver_opts
-
-          # Unique ID for the service endpoint in a Sandbox.
-          sig { returns(T.nilable(String)) }
-          attr_reader :endpoint_id
-
-          sig { params(endpoint_id: String).void }
-          attr_writer :endpoint_id
-
-          # Gateway address for this network.
-          sig { returns(T.nilable(String)) }
-          attr_reader :gateway
-
-          sig { params(gateway: String).void }
-          attr_writer :gateway
-
-          # Global IPv6 address.
-          sig { returns(T.nilable(String)) }
-          attr_reader :global_i_pv6_address
-
-          sig { params(global_i_pv6_address: String).void }
-          attr_writer :global_i_pv6_address
-
-          # Mask length of the global IPv6 address.
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :global_i_pv6_prefix_len
-
-          sig { params(global_i_pv6_prefix_len: Integer).void }
-          attr_writer :global_i_pv6_prefix_len
-
-          # This property determines which endpoint will provide the default gateway for a
-          # container. The endpoint with the highest priority will be used. If multiple
-          # endpoints have the same priority, endpoints are lexicographically sorted based
-          # on their network name, and the one that sorts first is picked.
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :gw_priority
-
-          sig { params(gw_priority: Integer).void }
-          attr_writer :gw_priority
-
-          # IPv4 address.
-          sig { returns(T.nilable(String)) }
-          attr_reader :ip_address
-
-          sig { params(ip_address: String).void }
-          attr_writer :ip_address
-
-          # EndpointIPAMConfig represents an endpoint's IPAM configuration.
-          sig do
-            returns(
-              T.nilable(
-                DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig
-              )
-            )
-          end
-          attr_reader :ipam_config
-
-          sig do
-            params(
-              ipam_config:
-                DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig::OrHash
-            ).void
-          end
-          attr_writer :ipam_config
-
-          # Mask length of the IPv4 address.
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :ip_prefix_len
-
-          sig { params(ip_prefix_len: Integer).void }
-          attr_writer :ip_prefix_len
-
-          # IPv6 gateway address.
-          sig { returns(T.nilable(String)) }
-          attr_reader :i_pv6_gateway
-
-          sig { params(i_pv6_gateway: String).void }
-          attr_writer :i_pv6_gateway
-
-          sig { returns(T.nilable(T::Array[String])) }
-          attr_reader :links
-
-          sig { params(links: T::Array[String]).void }
-          attr_writer :links
-
-          # MAC address for the endpoint on this network. The network driver might ignore
-          # this parameter.
-          sig { returns(T.nilable(String)) }
-          attr_reader :mac_address
-
-          sig { params(mac_address: String).void }
-          attr_writer :mac_address
-
-          # Unique ID of the network.
-          sig { returns(T.nilable(String)) }
-          attr_reader :network_id
-
-          sig { params(network_id: String).void }
-          attr_writer :network_id
-
-          # Configuration for a network endpoint.
-          sig do
-            params(
-              aliases: T::Array[String],
-              dns_names: T::Array[String],
-              driver_opts: T.nilable(T::Hash[Symbol, String]),
-              endpoint_id: String,
-              gateway: String,
-              global_i_pv6_address: String,
-              global_i_pv6_prefix_len: Integer,
-              gw_priority: Integer,
-              ip_address: String,
-              ipam_config:
-                DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig::OrHash,
-              ip_prefix_len: Integer,
-              i_pv6_gateway: String,
-              links: T::Array[String],
-              mac_address: String,
-              network_id: String
-            ).returns(T.attached_class)
-          end
-          def self.new(
-            aliases: nil,
-            # List of all DNS names an endpoint has on a specific network. This list is based
-            # on the container name, network aliases, container short ID, and hostname.
-            #
-            # These DNS names are non-fully qualified but can contain several dots. You can
-            # get fully qualified DNS names by appending `.<network-name>`. For instance, if
-            # container name is `my.ctr` and the network is named `testnet`, `DNSNames` will
-            # contain `my.ctr` and the FQDN will be `my.ctr.testnet`.
-            dns_names: nil,
-            # DriverOpts is a mapping of driver options and values. These options are passed
-            # directly to the driver and are driver specific.
-            driver_opts: nil,
-            # Unique ID for the service endpoint in a Sandbox.
-            endpoint_id: nil,
-            # Gateway address for this network.
-            gateway: nil,
-            # Global IPv6 address.
-            global_i_pv6_address: nil,
-            # Mask length of the global IPv6 address.
-            global_i_pv6_prefix_len: nil,
-            # This property determines which endpoint will provide the default gateway for a
-            # container. The endpoint with the highest priority will be used. If multiple
-            # endpoints have the same priority, endpoints are lexicographically sorted based
-            # on their network name, and the one that sorts first is picked.
-            gw_priority: nil,
-            # IPv4 address.
-            ip_address: nil,
-            # EndpointIPAMConfig represents an endpoint's IPAM configuration.
-            ipam_config: nil,
-            # Mask length of the IPv4 address.
-            ip_prefix_len: nil,
-            # IPv6 gateway address.
-            i_pv6_gateway: nil,
-            links: nil,
-            # MAC address for the endpoint on this network. The network driver might ignore
-            # this parameter.
-            mac_address: nil,
-            # Unique ID of the network.
-            network_id: nil
-          )
-          end
-
-          sig do
-            override.returns(
-              {
-                aliases: T::Array[String],
-                dns_names: T::Array[String],
-                driver_opts: T.nilable(T::Hash[Symbol, String]),
-                endpoint_id: String,
-                gateway: String,
-                global_i_pv6_address: String,
-                global_i_pv6_prefix_len: Integer,
-                gw_priority: Integer,
-                ip_address: String,
-                ipam_config:
-                  DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig,
-                ip_prefix_len: Integer,
-                i_pv6_gateway: String,
-                links: T::Array[String],
-                mac_address: String,
-                network_id: String
-              }
-            )
-          end
-          def to_hash
-          end
-
-          class IpamConfig < DockerEngineRuby::Internal::Type::BaseModel
-            OrHash =
-              T.type_alias do
-                T.any(
-                  DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig,
-                  DockerEngineRuby::Internal::AnyHash
-                )
-              end
-
-            sig { returns(T.nilable(String)) }
-            attr_reader :i_pv4_address
-
-            sig { params(i_pv4_address: String).void }
-            attr_writer :i_pv4_address
-
-            sig { returns(T.nilable(String)) }
-            attr_reader :i_pv6_address
-
-            sig { params(i_pv6_address: String).void }
-            attr_writer :i_pv6_address
-
-            sig { returns(T.nilable(T::Array[String])) }
-            attr_reader :link_local_ips
-
-            sig { params(link_local_ips: T::Array[String]).void }
-            attr_writer :link_local_ips
-
-            # EndpointIPAMConfig represents an endpoint's IPAM configuration.
-            sig do
-              params(
-                i_pv4_address: String,
-                i_pv6_address: String,
-                link_local_ips: T::Array[String]
-              ).returns(T.attached_class)
-            end
-            def self.new(
-              i_pv4_address: nil,
-              i_pv6_address: nil,
-              link_local_ips: nil
-            )
-            end
-
-            sig do
-              override.returns(
-                {
-                  i_pv4_address: String,
-                  i_pv6_address: String,
-                  link_local_ips: T::Array[String]
-                }
-              )
-            end
-            def to_hash
-            end
-          end
-        end
-
-        class Port < DockerEngineRuby::Internal::Type::BaseModel
-          OrHash =
-            T.type_alias do
-              T.any(
-                DockerEngineRuby::Container::NetworkSettings::Port,
-                DockerEngineRuby::Internal::AnyHash
-              )
-            end
-
-          # Host IP address that the container's port is mapped to.
-          sig { returns(T.nilable(String)) }
-          attr_reader :host_ip
-
-          sig { params(host_ip: String).void }
-          attr_writer :host_ip
-
-          # Host port number that the container's port is mapped to.
-          sig { returns(T.nilable(String)) }
-          attr_reader :host_port
-
-          sig { params(host_port: String).void }
-          attr_writer :host_port
-
-          # PortBinding represents a binding between a host IP address and a host port.
-          sig do
-            params(host_ip: String, host_port: String).returns(T.attached_class)
-          end
-          def self.new(
-            # Host IP address that the container's port is mapped to.
-            host_ip: nil,
-            # Host port number that the container's port is mapped to.
-            host_port: nil
-          )
-          end
-
-          sig { override.returns({ host_ip: String, host_port: String }) }
-          def to_hash
-          end
         end
       end
 

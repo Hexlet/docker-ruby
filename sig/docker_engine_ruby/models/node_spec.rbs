@@ -3,7 +3,7 @@ module DockerEngineRuby
     type node_spec =
       {
         availability: DockerEngineRuby::Models::NodeSpec::availability,
-        labels: ::Hash[Symbol, String],
+        labels: top,
         name: String,
         role: DockerEngineRuby::Models::NodeSpec::role
       }
@@ -15,9 +15,9 @@ module DockerEngineRuby
         DockerEngineRuby::Models::NodeSpec::availability
       ) -> DockerEngineRuby::Models::NodeSpec::availability
 
-      attr_reader labels: ::Hash[Symbol, String]?
+      attr_reader labels: top?
 
-      def labels=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+      def labels=: (top) -> top
 
       attr_reader name: String?
 
@@ -31,14 +31,14 @@ module DockerEngineRuby
 
       def initialize: (
         ?availability: DockerEngineRuby::Models::NodeSpec::availability,
-        ?labels: ::Hash[Symbol, String],
+        ?labels: top,
         ?name: String,
         ?role: DockerEngineRuby::Models::NodeSpec::role
       ) -> void
 
       def to_hash: -> {
         availability: DockerEngineRuby::Models::NodeSpec::availability,
-        labels: ::Hash[Symbol, String],
+        labels: top,
         name: String,
         role: DockerEngineRuby::Models::NodeSpec::role
       }

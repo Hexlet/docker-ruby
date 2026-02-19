@@ -128,16 +128,13 @@ module DockerEngineRuby
 
         # @!attribute details
         #
-        #   @return [Hash{Symbol=>Object}, nil]
-        optional :details,
-                 DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown],
-                 api_name: :Details,
-                 nil?: true
+        #   @return [Object, nil]
+        optional :details, DockerEngineRuby::Internal::Type::Unknown, api_name: :Details, nil?: true
 
         # @!method initialize(name:, version:, details: nil)
         #   @param name [String]
         #   @param version [String]
-        #   @param details [Hash{Symbol=>Object}, nil]
+        #   @param details [Object, nil]
       end
 
       # @see DockerEngineRuby::Models::Version#platform

@@ -459,8 +459,8 @@ module DockerEngineRuby
         #   Driver-specific options, specified as a key/value pairs. These options are
         #   passed directly to the driver.
         #
-        #   @return [Hash{Symbol=>String}, nil]
-        optional :options, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Options
+        #   @return [Object, nil]
+        optional :options, DockerEngineRuby::Internal::Type::Unknown, api_name: :Options
 
         # @!method initialize(capabilities: nil, count: nil, device_ids: nil, driver: nil, options: nil)
         #   Some parameter documentations has been truncated, see
@@ -477,7 +477,7 @@ module DockerEngineRuby
         #
         #   @param driver [String] The name of the device driver to use for this request.
         #
-        #   @param options [Hash{Symbol=>String}] Driver-specific options, specified as a key/value pairs. These options
+        #   @param options [Object] Driver-specific options, specified as a key/value pairs. These options
       end
 
       class Device < DockerEngineRuby::Internal::Type::BaseModel

@@ -30,9 +30,9 @@ module DockerEngineRuby
       #
       # @param ipam [DockerEngineRuby::Models::NetworkCreateParams::Ipam]
       #
-      # @param labels [Hash{Symbol=>String}]
+      # @param labels [Object]
       #
-      # @param options [Hash{Symbol=>String}]
+      # @param options [Object]
       #
       # @param scope [String]
       #

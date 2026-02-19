@@ -60,13 +60,13 @@ module DockerEngineRuby
 
       # @!attribute labels
       #
-      #   @return [Hash{Symbol=>String}, nil]
-      optional :labels, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Labels
+      #   @return [Object, nil]
+      optional :labels, DockerEngineRuby::Internal::Type::Unknown, api_name: :Labels
 
       # @!attribute options
       #
-      #   @return [Hash{Symbol=>String}, nil]
-      optional :options, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Options
+      #   @return [Object, nil]
+      optional :options, DockerEngineRuby::Internal::Type::Unknown, api_name: :Options
 
       # @!attribute scope
       #
@@ -97,9 +97,9 @@ module DockerEngineRuby
       #
       #   @param ipam [DockerEngineRuby::Models::NetworkCreateParams::Ipam]
       #
-      #   @param labels [Hash{Symbol=>String}]
+      #   @param labels [Object]
       #
-      #   @param options [Hash{Symbol=>String}]
+      #   @param options [Object]
       #
       #   @param scope [String]
       #
@@ -147,8 +147,8 @@ module DockerEngineRuby
         # @!attribute options
         #   Driver-specific options, specified as a map.
         #
-        #   @return [Hash{Symbol=>String}, nil]
-        optional :options, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Options
+        #   @return [Object, nil]
+        optional :options, DockerEngineRuby::Internal::Type::Unknown, api_name: :Options
 
         # @!method initialize(config: nil, driver: nil, options: nil)
         #   Some parameter documentations has been truncated, see
@@ -158,14 +158,14 @@ module DockerEngineRuby
         #
         #   @param driver [String] Name of the IPAM driver to use.
         #
-        #   @param options [Hash{Symbol=>String}] Driver-specific options, specified as a map.
+        #   @param options [Object] Driver-specific options, specified as a map.
 
         class Config < DockerEngineRuby::Internal::Type::BaseModel
           # @!attribute auxiliary_addresses
           #
-          #   @return [Hash{Symbol=>String}, nil]
+          #   @return [Object, nil]
           optional :auxiliary_addresses,
-                   DockerEngineRuby::Internal::Type::HashOf[String],
+                   DockerEngineRuby::Internal::Type::Unknown,
                    api_name: :AuxiliaryAddresses
 
           # @!attribute gateway
@@ -184,7 +184,7 @@ module DockerEngineRuby
           optional :subnet, String, api_name: :Subnet
 
           # @!method initialize(auxiliary_addresses: nil, gateway: nil, ip_range: nil, subnet: nil)
-          #   @param auxiliary_addresses [Hash{Symbol=>String}]
+          #   @param auxiliary_addresses [Object]
           #   @param gateway [String]
           #   @param ip_range [String]
           #   @param subnet [String]

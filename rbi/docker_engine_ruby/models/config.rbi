@@ -70,7 +70,7 @@ module DockerEngineRuby
       # An object mapping ports to an empty object in the form:
       #
       # `{"<port>/<tcp|udp|sctp>": {}}`
-      sig { returns(T.nilable(T::Hash[Symbol, T::Hash[Symbol, T.anything]])) }
+      sig { returns(T.nilable(T.anything)) }
       attr_accessor :exposed_ports
 
       # A test to perform to check that the container is healthy. Healthcheck commands
@@ -99,10 +99,10 @@ module DockerEngineRuby
       attr_writer :image
 
       # User-defined key/value metadata.
-      sig { returns(T.nilable(T::Hash[Symbol, String])) }
+      sig { returns(T.nilable(T.anything)) }
       attr_reader :labels
 
-      sig { params(labels: T::Hash[Symbol, String]).void }
+      sig { params(labels: T.anything).void }
       attr_writer :labels
 
       # Disable networking for the container.
@@ -158,10 +158,10 @@ module DockerEngineRuby
       attr_writer :user
 
       # An object mapping mount point paths inside the container to empty objects.
-      sig { returns(T.nilable(T::Hash[Symbol, T::Hash[Symbol, T.anything]])) }
+      sig { returns(T.nilable(T.anything)) }
       attr_reader :volumes
 
-      sig { params(volumes: T::Hash[Symbol, T::Hash[Symbol, T.anything]]).void }
+      sig { params(volumes: T.anything).void }
       attr_writer :volumes
 
       # The working directory for commands to run in.
@@ -182,12 +182,11 @@ module DockerEngineRuby
           domainname: String,
           entrypoint: T::Array[String],
           env: T::Array[String],
-          exposed_ports:
-            T.nilable(T::Hash[Symbol, T::Hash[Symbol, T.anything]]),
+          exposed_ports: T.nilable(T.anything),
           healthcheck: DockerEngineRuby::Config::Healthcheck::OrHash,
           hostname: String,
           image: String,
-          labels: T::Hash[Symbol, String],
+          labels: T.anything,
           network_disabled: T.nilable(T::Boolean),
           on_build: T.nilable(T::Array[String]),
           open_stdin: T::Boolean,
@@ -197,7 +196,7 @@ module DockerEngineRuby
           stop_timeout: T.nilable(Integer),
           tty: T::Boolean,
           user: String,
-          volumes: T::Hash[Symbol, T::Hash[Symbol, T.anything]],
+          volumes: T.anything,
           working_dir: String
         ).returns(T.attached_class)
       end
@@ -278,12 +277,11 @@ module DockerEngineRuby
             domainname: String,
             entrypoint: T::Array[String],
             env: T::Array[String],
-            exposed_ports:
-              T.nilable(T::Hash[Symbol, T::Hash[Symbol, T.anything]]),
+            exposed_ports: T.nilable(T.anything),
             healthcheck: DockerEngineRuby::Config::Healthcheck,
             hostname: String,
             image: String,
-            labels: T::Hash[Symbol, String],
+            labels: T.anything,
             network_disabled: T.nilable(T::Boolean),
             on_build: T.nilable(T::Array[String]),
             open_stdin: T::Boolean,
@@ -293,7 +291,7 @@ module DockerEngineRuby
             stop_timeout: T.nilable(Integer),
             tty: T::Boolean,
             user: String,
-            volumes: T::Hash[Symbol, T::Hash[Symbol, T.anything]],
+            volumes: T.anything,
             working_dir: String
           }
         )

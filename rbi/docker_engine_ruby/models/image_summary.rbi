@@ -34,7 +34,7 @@ module DockerEngineRuby
       attr_accessor :id
 
       # User-defined key/value metadata.
-      sig { returns(T::Hash[Symbol, String]) }
+      sig { returns(T.anything) }
       attr_accessor :labels
 
       # ID of the parent image.
@@ -109,7 +109,7 @@ module DockerEngineRuby
           containers: Integer,
           created: Integer,
           id: String,
-          labels: T::Hash[Symbol, String],
+          labels: T.anything,
           parent_id: String,
           repo_digests: T::Array[String],
           repo_tags: T::Array[String],
@@ -184,7 +184,7 @@ module DockerEngineRuby
             containers: Integer,
             created: Integer,
             id: String,
-            labels: T::Hash[Symbol, String],
+            labels: T.anything,
             parent_id: String,
             repo_digests: T::Array[String],
             repo_tags: T::Array[String],
@@ -208,7 +208,7 @@ module DockerEngineRuby
           end
 
         # Arbitrary metadata relating to the targeted content.
-        sig { returns(T.nilable(T::Hash[Symbol, String])) }
+        sig { returns(T.nilable(T.anything)) }
         attr_accessor :annotations
 
         # ArtifactType is the IANA media type of this artifact.
@@ -268,7 +268,7 @@ module DockerEngineRuby
         # [OCI Content Descriptors Specification](https://github.com/opencontainers/image-spec/blob/v1.0.1/descriptor.md).
         sig do
           params(
-            annotations: T.nilable(T::Hash[Symbol, String]),
+            annotations: T.nilable(T.anything),
             artifact_type: T.nilable(String),
             data: T.nilable(String),
             digest: String,
@@ -306,7 +306,7 @@ module DockerEngineRuby
         sig do
           override.returns(
             {
-              annotations: T.nilable(T::Hash[Symbol, String]),
+              annotations: T.nilable(T.anything),
               artifact_type: T.nilable(String),
               data: T.nilable(String),
               digest: String,
@@ -580,7 +580,7 @@ module DockerEngineRuby
             end
 
           # Arbitrary metadata relating to the targeted content.
-          sig { returns(T.nilable(T::Hash[Symbol, String])) }
+          sig { returns(T.nilable(T.anything)) }
           attr_accessor :annotations
 
           # ArtifactType is the IANA media type of this artifact.
@@ -642,7 +642,7 @@ module DockerEngineRuby
           # [OCI Content Descriptors Specification](https://github.com/opencontainers/image-spec/blob/v1.0.1/descriptor.md).
           sig do
             params(
-              annotations: T.nilable(T::Hash[Symbol, String]),
+              annotations: T.nilable(T.anything),
               artifact_type: T.nilable(String),
               data: T.nilable(String),
               digest: String,
@@ -680,7 +680,7 @@ module DockerEngineRuby
           sig do
             override.returns(
               {
-                annotations: T.nilable(T::Hash[Symbol, String]),
+                annotations: T.nilable(T.anything),
                 artifact_type: T.nilable(String),
                 data: T.nilable(String),
                 digest: String,

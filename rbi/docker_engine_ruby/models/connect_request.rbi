@@ -88,7 +88,7 @@ module DockerEngineRuby
 
         # DriverOpts is a mapping of driver options and values. These options are passed
         # directly to the driver and are driver specific.
-        sig { returns(T.nilable(T::Hash[Symbol, String])) }
+        sig { returns(T.nilable(T.anything)) }
         attr_accessor :driver_opts
 
         # Unique ID for the service endpoint in a Sandbox.
@@ -194,7 +194,7 @@ module DockerEngineRuby
           params(
             aliases: T::Array[String],
             dns_names: T::Array[String],
-            driver_opts: T.nilable(T::Hash[Symbol, String]),
+            driver_opts: T.nilable(T.anything),
             endpoint_id: String,
             gateway: String,
             global_i_pv6_address: String,
@@ -258,7 +258,7 @@ module DockerEngineRuby
             {
               aliases: T::Array[String],
               dns_names: T::Array[String],
-              driver_opts: T.nilable(T::Hash[Symbol, String]),
+              driver_opts: T.nilable(T.anything),
               endpoint_id: String,
               gateway: String,
               global_i_pv6_address: String,

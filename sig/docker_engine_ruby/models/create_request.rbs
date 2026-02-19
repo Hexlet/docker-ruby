@@ -4,8 +4,8 @@ module DockerEngineRuby
       {
         cluster_volume_spec: DockerEngineRuby::CreateRequest::ClusterVolumeSpec,
         driver: String,
-        driver_opts: ::Hash[Symbol, String],
-        labels: ::Hash[Symbol, String],
+        driver_opts: top,
+        labels: top,
         name: String
       }
 
@@ -20,13 +20,13 @@ module DockerEngineRuby
 
       def driver=: (String) -> String
 
-      attr_reader driver_opts: ::Hash[Symbol, String]?
+      attr_reader driver_opts: top?
 
-      def driver_opts=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+      def driver_opts=: (top) -> top
 
-      attr_reader labels: ::Hash[Symbol, String]?
+      attr_reader labels: top?
 
-      def labels=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+      def labels=: (top) -> top
 
       attr_reader name: String?
 
@@ -35,16 +35,16 @@ module DockerEngineRuby
       def initialize: (
         ?cluster_volume_spec: DockerEngineRuby::CreateRequest::ClusterVolumeSpec,
         ?driver: String,
-        ?driver_opts: ::Hash[Symbol, String],
-        ?labels: ::Hash[Symbol, String],
+        ?driver_opts: top,
+        ?labels: top,
         ?name: String
       ) -> void
 
       def to_hash: -> {
         cluster_volume_spec: DockerEngineRuby::CreateRequest::ClusterVolumeSpec,
         driver: String,
-        driver_opts: ::Hash[Symbol, String],
-        labels: ::Hash[Symbol, String],
+        driver_opts: top,
+        labels: top,
         name: String
       }
 
@@ -80,7 +80,7 @@ module DockerEngineRuby
             accessibility_requirements: DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::AccessibilityRequirements,
             availability: DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::availability,
             capacity_range: DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::CapacityRange,
-            mount_volume: ::Hash[Symbol, top],
+            mount_volume: top,
             scope: DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::scope,
             secrets: ::Array[DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::Secret],
             sharing: DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::sharing
@@ -105,9 +105,9 @@ module DockerEngineRuby
             DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::CapacityRange
           ) -> DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::CapacityRange
 
-          attr_reader mount_volume: ::Hash[Symbol, top]?
+          attr_reader mount_volume: top?
 
-          def mount_volume=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+          def mount_volume=: (top) -> top
 
           attr_reader scope: DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::scope?
 
@@ -131,7 +131,7 @@ module DockerEngineRuby
             ?accessibility_requirements: DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::AccessibilityRequirements,
             ?availability: DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::availability,
             ?capacity_range: DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::CapacityRange,
-            ?mount_volume: ::Hash[Symbol, top],
+            ?mount_volume: top,
             ?scope: DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::scope,
             ?secrets: ::Array[DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::Secret],
             ?sharing: DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::sharing
@@ -141,40 +141,30 @@ module DockerEngineRuby
             accessibility_requirements: DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::AccessibilityRequirements,
             availability: DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::availability,
             capacity_range: DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::CapacityRange,
-            mount_volume: ::Hash[Symbol, top],
+            mount_volume: top,
             scope: DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::scope,
             secrets: ::Array[DockerEngineRuby::CreateRequest::ClusterVolumeSpec::AccessMode::Secret],
             sharing: DockerEngineRuby::Models::CreateRequest::ClusterVolumeSpec::AccessMode::sharing
           }
 
           type accessibility_requirements =
-            {
-              preferred: ::Array[::Hash[Symbol, String]],
-              requisite: ::Array[::Hash[Symbol, String]]
-            }
+            { preferred: ::Array[top], requisite: ::Array[top] }
 
           class AccessibilityRequirements < DockerEngineRuby::Internal::Type::BaseModel
-            attr_reader preferred: ::Array[::Hash[Symbol, String]]?
+            attr_reader preferred: ::Array[top]?
 
-            def preferred=: (
-              ::Array[::Hash[Symbol, String]]
-            ) -> ::Array[::Hash[Symbol, String]]
+            def preferred=: (::Array[top]) -> ::Array[top]
 
-            attr_reader requisite: ::Array[::Hash[Symbol, String]]?
+            attr_reader requisite: ::Array[top]?
 
-            def requisite=: (
-              ::Array[::Hash[Symbol, String]]
-            ) -> ::Array[::Hash[Symbol, String]]
+            def requisite=: (::Array[top]) -> ::Array[top]
 
             def initialize: (
-              ?preferred: ::Array[::Hash[Symbol, String]],
-              ?requisite: ::Array[::Hash[Symbol, String]]
+              ?preferred: ::Array[top],
+              ?requisite: ::Array[top]
             ) -> void
 
-            def to_hash: -> {
-              preferred: ::Array[::Hash[Symbol, String]],
-              requisite: ::Array[::Hash[Symbol, String]]
-            }
+            def to_hash: -> { preferred: ::Array[top], requisite: ::Array[top] }
           end
 
           type availability = :active | :pause | :drain

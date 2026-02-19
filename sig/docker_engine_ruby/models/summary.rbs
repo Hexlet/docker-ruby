@@ -10,7 +10,7 @@ module DockerEngineRuby
         image: String,
         image_id: String,
         image_manifest_descriptor: DockerEngineRuby::Summary::ImageManifestDescriptor?,
-        labels: ::Hash[Symbol, String],
+        labels: top,
         mounts: ::Array[DockerEngineRuby::Summary::Mount],
         names: ::Array[String],
         network_settings: DockerEngineRuby::Summary::NetworkSettings,
@@ -56,9 +56,9 @@ module DockerEngineRuby
 
       attr_accessor image_manifest_descriptor: DockerEngineRuby::Summary::ImageManifestDescriptor?
 
-      attr_reader labels: ::Hash[Symbol, String]?
+      attr_reader labels: top?
 
-      def labels=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+      def labels=: (top) -> top
 
       attr_reader mounts: ::Array[DockerEngineRuby::Summary::Mount]?
 
@@ -105,7 +105,7 @@ module DockerEngineRuby
         ?image: String,
         ?image_id: String,
         ?image_manifest_descriptor: DockerEngineRuby::Summary::ImageManifestDescriptor?,
-        ?labels: ::Hash[Symbol, String],
+        ?labels: top,
         ?mounts: ::Array[DockerEngineRuby::Summary::Mount],
         ?names: ::Array[String],
         ?network_settings: DockerEngineRuby::Summary::NetworkSettings,
@@ -125,7 +125,7 @@ module DockerEngineRuby
         image: String,
         image_id: String,
         image_manifest_descriptor: DockerEngineRuby::Summary::ImageManifestDescriptor?,
-        labels: ::Hash[Symbol, String],
+        labels: top,
         mounts: ::Array[DockerEngineRuby::Summary::Mount],
         names: ::Array[String],
         network_settings: DockerEngineRuby::Summary::NetworkSettings,
@@ -177,30 +177,23 @@ module DockerEngineRuby
         end
       end
 
-      type host_config =
-        { annotations: ::Hash[Symbol, String]?, network_mode: String }
+      type host_config = { annotations: top?, network_mode: String }
 
       class HostConfig < DockerEngineRuby::Internal::Type::BaseModel
-        attr_accessor annotations: ::Hash[Symbol, String]?
+        attr_accessor annotations: top?
 
         attr_reader network_mode: String?
 
         def network_mode=: (String) -> String
 
-        def initialize: (
-          ?annotations: ::Hash[Symbol, String]?,
-          ?network_mode: String
-        ) -> void
+        def initialize: (?annotations: top?, ?network_mode: String) -> void
 
-        def to_hash: -> {
-          annotations: ::Hash[Symbol, String]?,
-          network_mode: String
-        }
+        def to_hash: -> { annotations: top?, network_mode: String }
       end
 
       type image_manifest_descriptor =
         {
-          annotations: ::Hash[Symbol, String]?,
+          annotations: top?,
           artifact_type: String?,
           data: String?,
           digest: String,
@@ -211,7 +204,7 @@ module DockerEngineRuby
         }
 
       class ImageManifestDescriptor < DockerEngineRuby::Internal::Type::BaseModel
-        attr_accessor annotations: ::Hash[Symbol, String]?
+        attr_accessor annotations: top?
 
         attr_accessor artifact_type: String?
 
@@ -238,7 +231,7 @@ module DockerEngineRuby
         attr_accessor urls: ::Array[String]?
 
         def initialize: (
-          ?annotations: ::Hash[Symbol, String]?,
+          ?annotations: top?,
           ?artifact_type: String?,
           ?data: String?,
           ?digest: String,
@@ -249,7 +242,7 @@ module DockerEngineRuby
         ) -> void
 
         def to_hash: -> {
-          annotations: ::Hash[Symbol, String]?,
+          annotations: top?,
           artifact_type: String?,
           data: String?,
           digest: String,
@@ -392,175 +385,16 @@ module DockerEngineRuby
         end
       end
 
-      type network_settings =
-        {
-          networks: ::Hash[Symbol, DockerEngineRuby::Summary::NetworkSettings::Network]
-        }
+      type network_settings = { networks: top }
 
       class NetworkSettings < DockerEngineRuby::Internal::Type::BaseModel
-        attr_reader networks: ::Hash[Symbol, DockerEngineRuby::Summary::NetworkSettings::Network]?
+        attr_reader networks: top?
 
-        def networks=: (
-          ::Hash[Symbol, DockerEngineRuby::Summary::NetworkSettings::Network]
-        ) -> ::Hash[Symbol, DockerEngineRuby::Summary::NetworkSettings::Network]
+        def networks=: (top) -> top
 
-        def initialize: (
-          ?networks: ::Hash[Symbol, DockerEngineRuby::Summary::NetworkSettings::Network]
-        ) -> void
+        def initialize: (?networks: top) -> void
 
-        def to_hash: -> {
-          networks: ::Hash[Symbol, DockerEngineRuby::Summary::NetworkSettings::Network]
-        }
-
-        type network =
-          {
-            aliases: ::Array[String],
-            dns_names: ::Array[String],
-            driver_opts: ::Hash[Symbol, String]?,
-            endpoint_id: String,
-            gateway: String,
-            :global_i_pv6_address => String,
-            :global_i_pv6_prefix_len => Integer,
-            gw_priority: Integer,
-            ip_address: String,
-            ipam_config: DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig,
-            ip_prefix_len: Integer,
-            :i_pv6_gateway => String,
-            links: ::Array[String],
-            mac_address: String,
-            network_id: String
-          }
-
-        class Network < DockerEngineRuby::Internal::Type::BaseModel
-          attr_reader aliases: ::Array[String]?
-
-          def aliases=: (::Array[String]) -> ::Array[String]
-
-          attr_reader dns_names: ::Array[String]?
-
-          def dns_names=: (::Array[String]) -> ::Array[String]
-
-          attr_accessor driver_opts: ::Hash[Symbol, String]?
-
-          attr_reader endpoint_id: String?
-
-          def endpoint_id=: (String) -> String
-
-          attr_reader gateway: String?
-
-          def gateway=: (String) -> String
-
-          attr_reader global_i_pv6_address: String?
-
-          def global_i_pv6_address=: (String) -> String
-
-          attr_reader global_i_pv6_prefix_len: Integer?
-
-          def global_i_pv6_prefix_len=: (Integer) -> Integer
-
-          attr_reader gw_priority: Integer?
-
-          def gw_priority=: (Integer) -> Integer
-
-          attr_reader ip_address: String?
-
-          def ip_address=: (String) -> String
-
-          attr_reader ipam_config: DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig?
-
-          def ipam_config=: (
-            DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig
-          ) -> DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig
-
-          attr_reader ip_prefix_len: Integer?
-
-          def ip_prefix_len=: (Integer) -> Integer
-
-          attr_reader i_pv6_gateway: String?
-
-          def i_pv6_gateway=: (String) -> String
-
-          attr_reader links: ::Array[String]?
-
-          def links=: (::Array[String]) -> ::Array[String]
-
-          attr_reader mac_address: String?
-
-          def mac_address=: (String) -> String
-
-          attr_reader network_id: String?
-
-          def network_id=: (String) -> String
-
-          def initialize: (
-            ?aliases: ::Array[String],
-            ?dns_names: ::Array[String],
-            ?driver_opts: ::Hash[Symbol, String]?,
-            ?endpoint_id: String,
-            ?gateway: String,
-            ?global_i_pv6_address: String,
-            ?global_i_pv6_prefix_len: Integer,
-            ?gw_priority: Integer,
-            ?ip_address: String,
-            ?ipam_config: DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig,
-            ?ip_prefix_len: Integer,
-            ?i_pv6_gateway: String,
-            ?links: ::Array[String],
-            ?mac_address: String,
-            ?network_id: String
-          ) -> void
-
-          def to_hash: -> {
-            aliases: ::Array[String],
-            dns_names: ::Array[String],
-            driver_opts: ::Hash[Symbol, String]?,
-            endpoint_id: String,
-            gateway: String,
-            :global_i_pv6_address => String,
-            :global_i_pv6_prefix_len => Integer,
-            gw_priority: Integer,
-            ip_address: String,
-            ipam_config: DockerEngineRuby::Summary::NetworkSettings::Network::IpamConfig,
-            ip_prefix_len: Integer,
-            :i_pv6_gateway => String,
-            links: ::Array[String],
-            mac_address: String,
-            network_id: String
-          }
-
-          type ipam_config =
-            {
-              :i_pv4_address => String,
-              :i_pv6_address => String,
-              link_local_ips: ::Array[String]
-            }
-
-          class IpamConfig < DockerEngineRuby::Internal::Type::BaseModel
-            attr_reader i_pv4_address: String?
-
-            def i_pv4_address=: (String) -> String
-
-            attr_reader i_pv6_address: String?
-
-            def i_pv6_address=: (String) -> String
-
-            attr_reader link_local_ips: ::Array[String]?
-
-            def link_local_ips=: (::Array[String]) -> ::Array[String]
-
-            def initialize: (
-              ?i_pv4_address: String,
-              ?i_pv6_address: String,
-              ?link_local_ips: ::Array[String]
-            ) -> void
-
-            def to_hash: -> {
-              :i_pv4_address => String,
-              :i_pv6_address => String,
-              link_local_ips: ::Array[String]
-            }
-          end
-        end
+        def to_hash: -> { networks: top }
       end
 
       type port =

@@ -22,8 +22,8 @@ module DockerEngineRuby
       # @!attribute labels
       #   User-defined key/value metadata.
       #
-      #   @return [Hash{Symbol=>String}, nil]
-      optional :labels, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Labels
+      #   @return [Object, nil]
+      optional :labels, DockerEngineRuby::Internal::Type::Unknown, api_name: :Labels
 
       # @!attribute name
       #   User-defined name of the secret.
@@ -45,7 +45,7 @@ module DockerEngineRuby
       #
       #   @param driver [DockerEngineRuby::Models::SecretSpec::Driver] Driver represents a driver (network, logging, secrets).
       #
-      #   @param labels [Hash{Symbol=>String}] User-defined key/value metadata.
+      #   @param labels [Object] User-defined key/value metadata.
       #
       #   @param name [String] User-defined name of the secret.
       #
@@ -62,15 +62,15 @@ module DockerEngineRuby
         # @!attribute options
         #   Key/value map of driver-specific options.
         #
-        #   @return [Hash{Symbol=>String}, nil]
-        optional :options, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Options
+        #   @return [Object, nil]
+        optional :options, DockerEngineRuby::Internal::Type::Unknown, api_name: :Options
 
         # @!method initialize(name:, options: nil)
         #   Driver represents a driver (network, logging, secrets).
         #
         #   @param name [String] Name of the driver.
         #
-        #   @param options [Hash{Symbol=>String}] Key/value map of driver-specific options.
+        #   @param options [Object] Key/value map of driver-specific options.
       end
 
       # @see DockerEngineRuby::Models::SecretSpec#templating
@@ -84,15 +84,15 @@ module DockerEngineRuby
         # @!attribute options
         #   Key/value map of driver-specific options.
         #
-        #   @return [Hash{Symbol=>String}, nil]
-        optional :options, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Options
+        #   @return [Object, nil]
+        optional :options, DockerEngineRuby::Internal::Type::Unknown, api_name: :Options
 
         # @!method initialize(name:, options: nil)
         #   Driver represents a driver (network, logging, secrets).
         #
         #   @param name [String] Name of the driver.
         #
-        #   @param options [Hash{Symbol=>String}] Key/value map of driver-specific options.
+        #   @param options [Object] Key/value map of driver-specific options.
       end
     end
   end

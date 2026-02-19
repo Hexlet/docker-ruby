@@ -29,7 +29,7 @@ class DockerEngineRuby::Test::Resources::TasksTest < DockerEngineRuby::Test::Res
         desired_state: DockerEngineRuby::Task::DesiredState | nil,
         id: String | nil,
         job_iteration: DockerEngineRuby::Task::JobIteration | nil,
-        labels: ^(DockerEngineRuby::Internal::Type::HashOf[String]) | nil,
+        labels: DockerEngineRuby::Internal::Type::Unknown | nil,
         name: String | nil,
         node_id: String | nil,
         service_id: String | nil,

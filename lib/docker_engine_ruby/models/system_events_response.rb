@@ -65,8 +65,8 @@ module DockerEngineRuby
         # @!attribute attributes
         #   Various key/value attributes of the object, depending on its type.
         #
-        #   @return [Hash{Symbol=>String}, nil]
-        optional :attributes, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Attributes
+        #   @return [Object, nil]
+        optional :attributes, DockerEngineRuby::Internal::Type::Unknown, api_name: :Attributes
 
         # @!attribute id
         #   The ID of the object emitting the event
@@ -78,7 +78,7 @@ module DockerEngineRuby
         #   Actor describes something that generates events, like a container, network, or a
         #   volume.
         #
-        #   @param attributes [Hash{Symbol=>String}] Various key/value attributes of the object, depending on its type.
+        #   @param attributes [Object] Various key/value attributes of the object, depending on its type.
         #
         #   @param id [String] The ID of the object emitting the event
       end

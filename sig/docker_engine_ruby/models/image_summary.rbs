@@ -5,7 +5,7 @@ module DockerEngineRuby
         containers: Integer,
         created: Integer,
         id: String,
-        labels: ::Hash[Symbol, String],
+        labels: top,
         parent_id: String,
         repo_digests: ::Array[String],
         repo_tags: ::Array[String],
@@ -22,7 +22,7 @@ module DockerEngineRuby
 
       attr_accessor id: String
 
-      attr_accessor labels: ::Hash[Symbol, String]
+      attr_accessor labels: top
 
       attr_accessor parent_id: String
 
@@ -46,7 +46,7 @@ module DockerEngineRuby
         containers: Integer,
         created: Integer,
         id: String,
-        labels: ::Hash[Symbol, String],
+        labels: top,
         parent_id: String,
         repo_digests: ::Array[String],
         repo_tags: ::Array[String],
@@ -60,7 +60,7 @@ module DockerEngineRuby
         containers: Integer,
         created: Integer,
         id: String,
-        labels: ::Hash[Symbol, String],
+        labels: top,
         parent_id: String,
         repo_digests: ::Array[String],
         repo_tags: ::Array[String],
@@ -72,7 +72,7 @@ module DockerEngineRuby
 
       type descriptor =
         {
-          annotations: ::Hash[Symbol, String]?,
+          annotations: top?,
           artifact_type: String?,
           data: String?,
           digest: String,
@@ -83,7 +83,7 @@ module DockerEngineRuby
         }
 
       class Descriptor < DockerEngineRuby::Internal::Type::BaseModel
-        attr_accessor annotations: ::Hash[Symbol, String]?
+        attr_accessor annotations: top?
 
         attr_accessor artifact_type: String?
 
@@ -110,7 +110,7 @@ module DockerEngineRuby
         attr_accessor urls: ::Array[String]?
 
         def initialize: (
-          ?annotations: ::Hash[Symbol, String]?,
+          ?annotations: top?,
           ?artifact_type: String?,
           ?data: String?,
           ?digest: String,
@@ -121,7 +121,7 @@ module DockerEngineRuby
         ) -> void
 
         def to_hash: -> {
-          annotations: ::Hash[Symbol, String]?,
+          annotations: top?,
           artifact_type: String?,
           data: String?,
           digest: String,
@@ -227,7 +227,7 @@ module DockerEngineRuby
 
         type descriptor =
           {
-            annotations: ::Hash[Symbol, String]?,
+            annotations: top?,
             artifact_type: String?,
             data: String?,
             digest: String,
@@ -238,7 +238,7 @@ module DockerEngineRuby
           }
 
         class Descriptor < DockerEngineRuby::Internal::Type::BaseModel
-          attr_accessor annotations: ::Hash[Symbol, String]?
+          attr_accessor annotations: top?
 
           attr_accessor artifact_type: String?
 
@@ -265,7 +265,7 @@ module DockerEngineRuby
           attr_accessor urls: ::Array[String]?
 
           def initialize: (
-            ?annotations: ::Hash[Symbol, String]?,
+            ?annotations: top?,
             ?artifact_type: String?,
             ?data: String?,
             ?digest: String,
@@ -276,7 +276,7 @@ module DockerEngineRuby
           ) -> void
 
           def to_hash: -> {
-            annotations: ::Hash[Symbol, String]?,
+            annotations: top?,
             artifact_type: String?,
             data: String?,
             digest: String,

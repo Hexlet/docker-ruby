@@ -15,14 +15,14 @@ class DockerEngineRuby::Test::Resources::VolumesTest < DockerEngineRuby::Test::R
     assert_pattern do
       response => {
         driver: String,
-        labels: ^(DockerEngineRuby::Internal::Type::HashOf[String]),
+        labels: DockerEngineRuby::Internal::Type::Unknown,
         mountpoint: String,
         name: String,
-        options: ^(DockerEngineRuby::Internal::Type::HashOf[String]),
+        options: DockerEngineRuby::Internal::Type::Unknown,
         scope: DockerEngineRuby::Volume::Scope,
         cluster_volume: DockerEngineRuby::Volume::ClusterVolume | nil,
         created_at: Time | nil,
-        status: ^(DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown]]) | nil,
+        status: DockerEngineRuby::Internal::Type::Unknown | nil,
         usage_data: DockerEngineRuby::Volume::UsageData | nil
       }
     end
@@ -77,14 +77,14 @@ class DockerEngineRuby::Test::Resources::VolumesTest < DockerEngineRuby::Test::R
     assert_pattern do
       response => {
         driver: String,
-        labels: ^(DockerEngineRuby::Internal::Type::HashOf[String]),
+        labels: DockerEngineRuby::Internal::Type::Unknown,
         mountpoint: String,
         name: String,
-        options: ^(DockerEngineRuby::Internal::Type::HashOf[String]),
+        options: DockerEngineRuby::Internal::Type::Unknown,
         scope: DockerEngineRuby::Volume::Scope,
         cluster_volume: DockerEngineRuby::Volume::ClusterVolume | nil,
         created_at: Time | nil,
-        status: ^(DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown]]) | nil,
+        status: DockerEngineRuby::Internal::Type::Unknown | nil,
         usage_data: DockerEngineRuby::Volume::UsageData | nil
       }
     end

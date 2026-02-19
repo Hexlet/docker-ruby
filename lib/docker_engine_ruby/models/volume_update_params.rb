@@ -79,10 +79,8 @@ module DockerEngineRuby
 
           # @!attribute mount_volume
           #
-          #   @return [Hash{Symbol=>Object}, nil]
-          optional :mount_volume,
-                   DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown],
-                   api_name: :MountVolume
+          #   @return [Object, nil]
+          optional :mount_volume, DockerEngineRuby::Internal::Type::Unknown, api_name: :MountVolume
 
           # @!attribute scope
           #
@@ -113,7 +111,7 @@ module DockerEngineRuby
           #   @param accessibility_requirements [DockerEngineRuby::Models::VolumeUpdateParams::Spec::AccessMode::AccessibilityRequirements]
           #   @param availability [Symbol, DockerEngineRuby::Models::VolumeUpdateParams::Spec::AccessMode::Availability]
           #   @param capacity_range [DockerEngineRuby::Models::VolumeUpdateParams::Spec::AccessMode::CapacityRange]
-          #   @param mount_volume [Hash{Symbol=>Object}]
+          #   @param mount_volume [Object]
           #   @param scope [Symbol, DockerEngineRuby::Models::VolumeUpdateParams::Spec::AccessMode::Scope]
           #   @param secrets [Array<DockerEngineRuby::Models::VolumeUpdateParams::Spec::AccessMode::Secret>]
           #   @param sharing [Symbol, DockerEngineRuby::Models::VolumeUpdateParams::Spec::AccessMode::Sharing]
@@ -122,21 +120,21 @@ module DockerEngineRuby
           class AccessibilityRequirements < DockerEngineRuby::Internal::Type::BaseModel
             # @!attribute preferred
             #
-            #   @return [Array<Hash{Symbol=>String}>, nil]
+            #   @return [Array<Object>, nil]
             optional :preferred,
-                     DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Internal::Type::HashOf[String]],
+                     DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Internal::Type::Unknown],
                      api_name: :Preferred
 
             # @!attribute requisite
             #
-            #   @return [Array<Hash{Symbol=>String}>, nil]
+            #   @return [Array<Object>, nil]
             optional :requisite,
-                     DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Internal::Type::HashOf[String]],
+                     DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Internal::Type::Unknown],
                      api_name: :Requisite
 
             # @!method initialize(preferred: nil, requisite: nil)
-            #   @param preferred [Array<Hash{Symbol=>String}>]
-            #   @param requisite [Array<Hash{Symbol=>String}>]
+            #   @param preferred [Array<Object>]
+            #   @param requisite [Array<Object>]
           end
 
           # @see DockerEngineRuby::Models::VolumeUpdateParams::Spec::AccessMode#availability
