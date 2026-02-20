@@ -328,6 +328,20 @@ class DockerEngineRubyTest < Minitest::Test
     end
   end
 
+  def test_images_pull_with_json_lines_response_returns_nil
+    stub_request(:post, "http://localhost/images/create").to_return(
+      status: 200,
+      headers: {"content-type" => "application/json"},
+      body: "{\"status\":\"Pulling from library/alpine\"}\n{\"status\":\"Digest: sha256:abc\"}\n"
+    )
+
+    docker = DockerEngineRuby::Client.new(base_url: "http://localhost")
+
+    response = docker.images.pull(body: "body")
+
+    assert_nil(response)
+  end
+
   def test_default_headers
     stub_request(:get, "http://localhost/containers/json").to_return_json(status: 200, body: {})
 

@@ -502,6 +502,15 @@ module DockerEngineRuby
           )
 
           headers = DockerEngineRuby::Internal::Util.normalized_headers(response.each_header.to_h)
+
+          # Some Docker endpoints return non-JSON streaming payloads while generated
+          # resource methods intentionally model their response as `nil`.
+          # In that case, drain the response body and return early.
+          if model == NilClass && !req.key?(:stream) && !req.key?(:page)
+            stream&.each { next }
+            return nil
+          end
+
           decoded = DockerEngineRuby::Internal::Util.decode_content(headers, stream: stream)
           case req
           in {stream: Class => st}
