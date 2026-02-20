@@ -481,8 +481,10 @@ module DockerEngineRuby
       #   The default runtime is `runc`, and automatically configured. Additional runtimes
       #   can be configured by the user and will be listed here.
       #
-      #   @return [Object, nil]
-      optional :runtimes, DockerEngineRuby::Internal::Type::Unknown, api_name: :Runtimes
+      #   @return [Hash{Symbol=>DockerEngineRuby::Models::Info::Runtime}, nil]
+      optional :runtimes,
+               -> { DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Info::Runtime] },
+               api_name: :Runtimes
 
       # @!attribute security_options
       #   List of security features that are enabled on the daemon, such as apparmor,
@@ -644,7 +646,7 @@ module DockerEngineRuby
       #
       #   @param runc_commit [DockerEngineRuby::Models::Info::RuncCommit] Commit holds the Git-commit (SHA1) that a binary was built from, as
       #
-      #   @param runtimes [Object] List of [OCI compliant](https://github.com/opencontainers/runtime-spec)
+      #   @param runtimes [Hash{Symbol=>DockerEngineRuby::Models::Info::Runtime}] List of [OCI compliant](https://github.com/opencontainers/runtime-spec)
       #
       #   @param security_options [Array<String>] List of security features that are enabled on the daemon, such as
       #
@@ -1000,8 +1002,12 @@ module DockerEngineRuby
       class RegistryConfig < DockerEngineRuby::Internal::Type::BaseModel
         # @!attribute index_configs
         #
-        #   @return [Object, nil]
-        optional :index_configs, DockerEngineRuby::Internal::Type::Unknown, api_name: :IndexConfigs
+        #   @return [Hash{Symbol=>DockerEngineRuby::Models::Info::RegistryConfig::IndexConfig}, nil]
+        optional :index_configs,
+                 -> {
+                   DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Info::RegistryConfig::IndexConfig]
+                 },
+                 api_name: :IndexConfigs
 
         # @!attribute insecure_registry_cid_rs
         #   List of IP ranges of insecure registries, using the CIDR syntax
@@ -1043,11 +1049,60 @@ module DockerEngineRuby
         #
         #   RegistryServiceConfig stores daemon registry services configuration.
         #
-        #   @param index_configs [Object]
+        #   @param index_configs [Hash{Symbol=>DockerEngineRuby::Models::Info::RegistryConfig::IndexConfig}]
         #
         #   @param insecure_registry_cid_rs [Array<String>] List of IP ranges of insecure registries, using the CIDR syntax
         #
         #   @param mirrors [Array<String>] List of registry URLs that act as a mirror for the official
+
+        class IndexConfig < DockerEngineRuby::Internal::Type::BaseModel
+          # @!attribute mirrors
+          #   List of mirrors, expressed as URIs.
+          #
+          #   @return [Array<String>, nil]
+          optional :mirrors, DockerEngineRuby::Internal::Type::ArrayOf[String], api_name: :Mirrors
+
+          # @!attribute name
+          #   Name of the registry, such as "docker.io".
+          #
+          #   @return [String, nil]
+          optional :name, String, api_name: :Name
+
+          # @!attribute official
+          #   Indicates whether this is an official registry (i.e., Docker Hub / docker.io)
+          #
+          #   @return [Boolean, nil]
+          optional :official, DockerEngineRuby::Internal::Type::Boolean, api_name: :Official
+
+          # @!attribute secure
+          #   Indicates if the registry is part of the list of insecure registries.
+          #
+          #   If `false`, the registry is insecure. Insecure registries accept un-encrypted
+          #   (HTTP) and/or untrusted (HTTPS with certificates from unknown CAs)
+          #   communication.
+          #
+          #   > **Warning**: Insecure registries can be useful when running a local registry.
+          #   > However, because its use creates security vulnerabilities it should ONLY be
+          #   > enabled for testing purposes. For increased security, users should add their
+          #   > CA to their system's list of trusted CAs instead of enabling this option.
+          #
+          #   @return [Boolean, nil]
+          optional :secure, DockerEngineRuby::Internal::Type::Boolean, api_name: :Secure
+
+          # @!method initialize(mirrors: nil, name: nil, official: nil, secure: nil)
+          #   Some parameter documentations has been truncated, see
+          #   {DockerEngineRuby::Models::Info::RegistryConfig::IndexConfig} for more details.
+          #
+          #   IndexInfo contains information about a registry.
+          #
+          #   @param mirrors [Array<String>] List of mirrors, expressed as URIs.
+          #
+          #   @param name [String] Name of the registry, such as "docker.io".
+          #
+          #   @param official [Boolean] Indicates whether this is an official registry (i.e., Docker Hub / docker.io)
+          #
+          #   @param secure [Boolean] Indicates if the registry is part of the list of insecure
+        end
       end
 
       # @see DockerEngineRuby::Models::Info#runc_commit
@@ -1063,6 +1118,61 @@ module DockerEngineRuby
         #   the version-string of external tools, such as `containerd`, or `runC`.
         #
         #   @param id [String] Actual commit ID of external tool.
+      end
+
+      class Runtime < DockerEngineRuby::Internal::Type::BaseModel
+        # @!attribute path
+        #   Name and, optional, path, of the OCI executable binary.
+        #
+        #   If the path is omitted, the daemon searches the host's `$PATH` for the binary
+        #   and uses the first result.
+        #
+        #   @return [String, nil]
+        optional :path, String
+
+        # @!attribute runtime_args
+        #   List of command-line arguments to pass to the runtime when invoked.
+        #
+        #   @return [Array<String>, nil]
+        optional :runtime_args,
+                 DockerEngineRuby::Internal::Type::ArrayOf[String],
+                 api_name: :runtimeArgs,
+                 nil?: true
+
+        # @!attribute status
+        #   Information specific to the runtime.
+        #
+        #   While this API specification does not define data provided by runtimes, the
+        #   following well-known properties may be provided by runtimes:
+        #
+        #   `org.opencontainers.runtime-spec.features`: features structure as defined in the
+        #   [OCI Runtime Specification](https://github.com/opencontainers/runtime-spec/blob/main/features.md),
+        #   in a JSON string representation.
+        #
+        #   <p><br /></p>
+        #
+        #   > **Note**: The information returned in this field, including the formatting of
+        #   > values and labels, should not be considered stable, and may change without
+        #   > notice.
+        #
+        #   @return [Hash{Symbol=>String}, nil]
+        optional :status, DockerEngineRuby::Internal::Type::HashOf[String], nil?: true
+
+        # @!method initialize(path: nil, runtime_args: nil, status: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {DockerEngineRuby::Models::Info::Runtime} for more details.
+        #
+        #   Runtime describes an
+        #   [OCI compliant](https://github.com/opencontainers/runtime-spec) runtime.
+        #
+        #   The runtime is invoked by the daemon via the `containerd` daemon. OCI runtimes
+        #   act as an interface to the Linux kernel namespaces, cgroups, and SELinux.
+        #
+        #   @param path [String] Name and, optional, path, of the OCI executable binary.
+        #
+        #   @param runtime_args [Array<String>, nil] List of command-line arguments to pass to the runtime when invoked.
+        #
+        #   @param status [Hash{Symbol=>String}, nil] Information specific to the runtime.
       end
 
       # @see DockerEngineRuby::Models::Info#swarm

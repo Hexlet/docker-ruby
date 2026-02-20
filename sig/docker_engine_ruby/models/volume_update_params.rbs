@@ -60,7 +60,7 @@ module DockerEngineRuby
             accessibility_requirements: DockerEngineRuby::VolumeUpdateParams::Spec::AccessMode::AccessibilityRequirements,
             availability: DockerEngineRuby::Models::VolumeUpdateParams::Spec::AccessMode::availability,
             capacity_range: DockerEngineRuby::VolumeUpdateParams::Spec::AccessMode::CapacityRange,
-            mount_volume: top,
+            mount_volume: ::Hash[Symbol, top],
             scope: DockerEngineRuby::Models::VolumeUpdateParams::Spec::AccessMode::scope,
             secrets: ::Array[DockerEngineRuby::VolumeUpdateParams::Spec::AccessMode::Secret],
             sharing: DockerEngineRuby::Models::VolumeUpdateParams::Spec::AccessMode::sharing
@@ -85,9 +85,9 @@ module DockerEngineRuby
             DockerEngineRuby::VolumeUpdateParams::Spec::AccessMode::CapacityRange
           ) -> DockerEngineRuby::VolumeUpdateParams::Spec::AccessMode::CapacityRange
 
-          attr_reader mount_volume: top?
+          attr_reader mount_volume: ::Hash[Symbol, top]?
 
-          def mount_volume=: (top) -> top
+          def mount_volume=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
 
           attr_reader scope: DockerEngineRuby::Models::VolumeUpdateParams::Spec::AccessMode::scope?
 
@@ -111,7 +111,7 @@ module DockerEngineRuby
             ?accessibility_requirements: DockerEngineRuby::VolumeUpdateParams::Spec::AccessMode::AccessibilityRequirements,
             ?availability: DockerEngineRuby::Models::VolumeUpdateParams::Spec::AccessMode::availability,
             ?capacity_range: DockerEngineRuby::VolumeUpdateParams::Spec::AccessMode::CapacityRange,
-            ?mount_volume: top,
+            ?mount_volume: ::Hash[Symbol, top],
             ?scope: DockerEngineRuby::Models::VolumeUpdateParams::Spec::AccessMode::scope,
             ?secrets: ::Array[DockerEngineRuby::VolumeUpdateParams::Spec::AccessMode::Secret],
             ?sharing: DockerEngineRuby::Models::VolumeUpdateParams::Spec::AccessMode::sharing
@@ -121,30 +121,40 @@ module DockerEngineRuby
             accessibility_requirements: DockerEngineRuby::VolumeUpdateParams::Spec::AccessMode::AccessibilityRequirements,
             availability: DockerEngineRuby::Models::VolumeUpdateParams::Spec::AccessMode::availability,
             capacity_range: DockerEngineRuby::VolumeUpdateParams::Spec::AccessMode::CapacityRange,
-            mount_volume: top,
+            mount_volume: ::Hash[Symbol, top],
             scope: DockerEngineRuby::Models::VolumeUpdateParams::Spec::AccessMode::scope,
             secrets: ::Array[DockerEngineRuby::VolumeUpdateParams::Spec::AccessMode::Secret],
             sharing: DockerEngineRuby::Models::VolumeUpdateParams::Spec::AccessMode::sharing
           }
 
           type accessibility_requirements =
-            { preferred: ::Array[top], requisite: ::Array[top] }
+            {
+              preferred: ::Array[::Hash[Symbol, String]],
+              requisite: ::Array[::Hash[Symbol, String]]
+            }
 
           class AccessibilityRequirements < DockerEngineRuby::Internal::Type::BaseModel
-            attr_reader preferred: ::Array[top]?
+            attr_reader preferred: ::Array[::Hash[Symbol, String]]?
 
-            def preferred=: (::Array[top]) -> ::Array[top]
+            def preferred=: (
+              ::Array[::Hash[Symbol, String]]
+            ) -> ::Array[::Hash[Symbol, String]]
 
-            attr_reader requisite: ::Array[top]?
+            attr_reader requisite: ::Array[::Hash[Symbol, String]]?
 
-            def requisite=: (::Array[top]) -> ::Array[top]
+            def requisite=: (
+              ::Array[::Hash[Symbol, String]]
+            ) -> ::Array[::Hash[Symbol, String]]
 
             def initialize: (
-              ?preferred: ::Array[top],
-              ?requisite: ::Array[top]
+              ?preferred: ::Array[::Hash[Symbol, String]],
+              ?requisite: ::Array[::Hash[Symbol, String]]
             ) -> void
 
-            def to_hash: -> { preferred: ::Array[top], requisite: ::Array[top] }
+            def to_hash: -> {
+              preferred: ::Array[::Hash[Symbol, String]],
+              requisite: ::Array[::Hash[Symbol, String]]
+            }
           end
 
           type availability = :active | :pause | :drain

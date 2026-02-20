@@ -13,7 +13,7 @@ module DockerEngineRuby
       attr_accessor :driver
 
       # User-defined key/value metadata.
-      sig { returns(T.anything) }
+      sig { returns(T::Hash[Symbol, String]) }
       attr_accessor :labels
 
       # Mount path of the volume on the host.
@@ -25,7 +25,7 @@ module DockerEngineRuby
       attr_accessor :name
 
       # The driver specific options used when creating the volume.
-      sig { returns(T.anything) }
+      sig { returns(T::Hash[Symbol, String]) }
       attr_accessor :options
 
       # The level at which the volume exists. Either `global` for cluster-wide, or
@@ -57,10 +57,10 @@ module DockerEngineRuby
       #
       # The `Status` field is optional, and is omitted if the volume driver does not
       # support this feature.
-      sig { returns(T.nilable(T.anything)) }
+      sig { returns(T.nilable(T::Hash[Symbol, T::Hash[Symbol, T.anything]])) }
       attr_reader :status
 
-      sig { params(status: T.anything).void }
+      sig { params(status: T::Hash[Symbol, T::Hash[Symbol, T.anything]]).void }
       attr_writer :status
 
       # Usage details about the volume. This information is used by the `GET /system/df`
@@ -78,14 +78,14 @@ module DockerEngineRuby
       sig do
         params(
           driver: String,
-          labels: T.anything,
+          labels: T::Hash[Symbol, String],
           mountpoint: String,
           name: String,
-          options: T.anything,
+          options: T::Hash[Symbol, String],
           scope: DockerEngineRuby::Volume::Scope::OrSymbol,
           cluster_volume: DockerEngineRuby::Volume::ClusterVolume::OrHash,
           created_at: Time,
-          status: T.anything,
+          status: T::Hash[Symbol, T::Hash[Symbol, T.anything]],
           usage_data: T.nilable(DockerEngineRuby::Volume::UsageData::OrHash)
         ).returns(T.attached_class)
       end
@@ -124,14 +124,14 @@ module DockerEngineRuby
         override.returns(
           {
             driver: String,
-            labels: T.anything,
+            labels: T::Hash[Symbol, String],
             mountpoint: String,
             name: String,
-            options: T.anything,
+            options: T::Hash[Symbol, String],
             scope: DockerEngineRuby::Volume::Scope::TaggedSymbol,
             cluster_volume: DockerEngineRuby::Volume::ClusterVolume,
             created_at: Time,
-            status: T.anything,
+            status: T::Hash[Symbol, T::Hash[Symbol, T.anything]],
             usage_data: T.nilable(DockerEngineRuby::Volume::UsageData)
           }
         )
@@ -329,10 +329,12 @@ module DockerEngineRuby
               )
             end
 
-          sig { returns(T.nilable(T::Array[T.anything])) }
+          sig { returns(T.nilable(T::Array[T::Hash[Symbol, String]])) }
           attr_reader :accessible_topology
 
-          sig { params(accessible_topology: T::Array[T.anything]).void }
+          sig do
+            params(accessible_topology: T::Array[T::Hash[Symbol, String]]).void
+          end
           attr_writer :accessible_topology
 
           sig { returns(T.nilable(Integer)) }
@@ -341,10 +343,10 @@ module DockerEngineRuby
           sig { params(capacity_bytes: Integer).void }
           attr_writer :capacity_bytes
 
-          sig { returns(T.nilable(T.anything)) }
+          sig { returns(T.nilable(T::Hash[Symbol, String])) }
           attr_reader :volume_context
 
-          sig { params(volume_context: T.anything).void }
+          sig { params(volume_context: T::Hash[Symbol, String]).void }
           attr_writer :volume_context
 
           sig { returns(T.nilable(String)) }
@@ -356,9 +358,9 @@ module DockerEngineRuby
           # Information about the global status of the volume.
           sig do
             params(
-              accessible_topology: T::Array[T.anything],
+              accessible_topology: T::Array[T::Hash[Symbol, String]],
               capacity_bytes: Integer,
-              volume_context: T.anything,
+              volume_context: T::Hash[Symbol, String],
               volume_id: String
             ).returns(T.attached_class)
           end
@@ -373,9 +375,9 @@ module DockerEngineRuby
           sig do
             override.returns(
               {
-                accessible_topology: T::Array[T.anything],
+                accessible_topology: T::Array[T::Hash[Symbol, String]],
                 capacity_bytes: Integer,
-                volume_context: T.anything,
+                volume_context: T::Hash[Symbol, String],
                 volume_id: String
               }
             )
@@ -399,10 +401,10 @@ module DockerEngineRuby
           sig { params(node_id: String).void }
           attr_writer :node_id
 
-          sig { returns(T.nilable(T.anything)) }
+          sig { returns(T.nilable(T::Hash[Symbol, String])) }
           attr_reader :publish_context
 
-          sig { params(publish_context: T.anything).void }
+          sig { params(publish_context: T::Hash[Symbol, String]).void }
           attr_writer :publish_context
 
           sig do
@@ -425,7 +427,7 @@ module DockerEngineRuby
           sig do
             params(
               node_id: String,
-              publish_context: T.anything,
+              publish_context: T::Hash[Symbol, String],
               state:
                 DockerEngineRuby::Volume::ClusterVolume::PublishStatus::State::OrSymbol
             ).returns(T.attached_class)
@@ -437,7 +439,7 @@ module DockerEngineRuby
             override.returns(
               {
                 node_id: String,
-                publish_context: T.anything,
+                publish_context: T::Hash[Symbol, String],
                 state:
                   DockerEngineRuby::Volume::ClusterVolume::PublishStatus::State::TaggedSymbol
               }
@@ -621,10 +623,10 @@ module DockerEngineRuby
             end
             attr_writer :capacity_range
 
-            sig { returns(T.nilable(T.anything)) }
+            sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
             attr_reader :mount_volume
 
-            sig { params(mount_volume: T.anything).void }
+            sig { params(mount_volume: T::Hash[Symbol, T.anything]).void }
             attr_writer :mount_volume
 
             sig do
@@ -691,7 +693,7 @@ module DockerEngineRuby
                   DockerEngineRuby::Volume::ClusterVolume::Spec::AccessMode::Availability::OrSymbol,
                 capacity_range:
                   DockerEngineRuby::Volume::ClusterVolume::Spec::AccessMode::CapacityRange::OrHash,
-                mount_volume: T.anything,
+                mount_volume: T::Hash[Symbol, T.anything],
                 scope:
                   DockerEngineRuby::Volume::ClusterVolume::Spec::AccessMode::Scope::OrSymbol,
                 secrets:
@@ -722,7 +724,7 @@ module DockerEngineRuby
                     DockerEngineRuby::Volume::ClusterVolume::Spec::AccessMode::Availability::TaggedSymbol,
                   capacity_range:
                     DockerEngineRuby::Volume::ClusterVolume::Spec::AccessMode::CapacityRange,
-                  mount_volume: T.anything,
+                  mount_volume: T::Hash[Symbol, T.anything],
                   scope:
                     DockerEngineRuby::Volume::ClusterVolume::Spec::AccessMode::Scope::TaggedSymbol,
                   secrets:
@@ -746,22 +748,22 @@ module DockerEngineRuby
                   )
                 end
 
-              sig { returns(T.nilable(T::Array[T.anything])) }
+              sig { returns(T.nilable(T::Array[T::Hash[Symbol, String]])) }
               attr_reader :preferred
 
-              sig { params(preferred: T::Array[T.anything]).void }
+              sig { params(preferred: T::Array[T::Hash[Symbol, String]]).void }
               attr_writer :preferred
 
-              sig { returns(T.nilable(T::Array[T.anything])) }
+              sig { returns(T.nilable(T::Array[T::Hash[Symbol, String]])) }
               attr_reader :requisite
 
-              sig { params(requisite: T::Array[T.anything]).void }
+              sig { params(requisite: T::Array[T::Hash[Symbol, String]]).void }
               attr_writer :requisite
 
               sig do
                 params(
-                  preferred: T::Array[T.anything],
-                  requisite: T::Array[T.anything]
+                  preferred: T::Array[T::Hash[Symbol, String]],
+                  requisite: T::Array[T::Hash[Symbol, String]]
                 ).returns(T.attached_class)
               end
               def self.new(preferred: nil, requisite: nil)
@@ -770,8 +772,8 @@ module DockerEngineRuby
               sig do
                 override.returns(
                   {
-                    preferred: T::Array[T.anything],
-                    requisite: T::Array[T.anything]
+                    preferred: T::Array[T::Hash[Symbol, String]],
+                    requisite: T::Array[T::Hash[Symbol, String]]
                   }
                 )
               end

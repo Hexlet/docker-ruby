@@ -46,7 +46,7 @@ module DockerEngineRuby
       # Build an image
       sig do
         params(
-          body: T.anything,
+          body: DockerEngineRuby::Internal::FileInput,
           buildargs: String,
           cachefrom: String,
           cpuperiod: Integer,
@@ -174,11 +174,12 @@ module DockerEngineRuby
           domainname: String,
           entrypoint: T::Array[String],
           env: T::Array[String],
-          exposed_ports: T.nilable(T.anything),
+          exposed_ports:
+            T.nilable(T::Hash[Symbol, T::Hash[Symbol, T.anything]]),
           healthcheck: DockerEngineRuby::Config::Healthcheck::OrHash,
           hostname: String,
           image: String,
-          labels: T.anything,
+          labels: T::Hash[Symbol, String],
           network_disabled: T.nilable(T::Boolean),
           on_build: T.nilable(T::Array[String]),
           open_stdin: T::Boolean,
@@ -188,7 +189,7 @@ module DockerEngineRuby
           stop_timeout: T.nilable(Integer),
           tty: T::Boolean,
           user: String,
-          volumes: T.anything,
+          volumes: T::Hash[Symbol, T::Hash[Symbol, T.anything]],
           working_dir: String,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(DockerEngineRuby::Models::ImageCommitResponse)
@@ -324,7 +325,7 @@ module DockerEngineRuby
       # Import images
       sig do
         params(
-          body: T.anything,
+          body: DockerEngineRuby::Internal::FileInput,
           platform: T::Array[String],
           quiet: T::Boolean,
           request_options: DockerEngineRuby::RequestOptions::OrHash

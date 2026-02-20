@@ -145,8 +145,8 @@ module DockerEngineRuby
 
           # @!attribute labels
           #
-          #   @return [Object, nil]
-          optional :labels, DockerEngineRuby::Internal::Type::Unknown, api_name: :Labels
+          #   @return [Hash{Symbol=>String}, nil]
+          optional :labels, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Labels
 
           # @!attribute plugins
           #
@@ -161,7 +161,7 @@ module DockerEngineRuby
           #   EngineDescription provides information about an engine.
           #
           #   @param engine_version [String]
-          #   @param labels [Object]
+          #   @param labels [Hash{Symbol=>String}]
           #   @param plugins [Array<DockerEngineRuby::Models::Node::Description::Engine::Plugin>]
 
           class Plugin < DockerEngineRuby::Internal::Type::BaseModel

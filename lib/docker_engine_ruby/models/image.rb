@@ -228,9 +228,9 @@ module DockerEngineRuby
         #
         #   `{"<port>/<tcp|udp|sctp>": {}}`
         #
-        #   @return [Object, nil]
+        #   @return [Hash{Symbol=>Hash{Symbol=>Object}}, nil]
         optional :exposed_ports,
-                 DockerEngineRuby::Internal::Type::Unknown,
+                 DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown]],
                  api_name: :ExposedPorts,
                  nil?: true
 
@@ -244,8 +244,8 @@ module DockerEngineRuby
         # @!attribute labels
         #   User-defined key/value metadata.
         #
-        #   @return [Object, nil]
-        optional :labels, DockerEngineRuby::Internal::Type::Unknown, api_name: :Labels
+        #   @return [Hash{Symbol=>String}, nil]
+        optional :labels, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Labels
 
         # @!attribute on_build
         #   `ONBUILD` metadata that were defined in the image's `Dockerfile`.
@@ -274,8 +274,10 @@ module DockerEngineRuby
         # @!attribute volumes
         #   An object mapping mount point paths inside the container to empty objects.
         #
-        #   @return [Object, nil]
-        optional :volumes, DockerEngineRuby::Internal::Type::Unknown, api_name: :Volumes
+        #   @return [Hash{Symbol=>Hash{Symbol=>Object}}, nil]
+        optional :volumes,
+                 DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown]],
+                 api_name: :Volumes
 
         # @!attribute working_dir
         #   The working directory for commands to run in.
@@ -298,11 +300,11 @@ module DockerEngineRuby
         #
         #   @param env [Array<String>] A list of environment variables to set inside the container in the
         #
-        #   @param exposed_ports [Object, nil] An object mapping ports to an empty object in the form:
+        #   @param exposed_ports [Hash{Symbol=>Hash{Symbol=>Object}}, nil] An object mapping ports to an empty object in the form:
         #
         #   @param healthcheck [DockerEngineRuby::Models::Image::Config::Healthcheck] A test to perform to check that the container is healthy.
         #
-        #   @param labels [Object] User-defined key/value metadata.
+        #   @param labels [Hash{Symbol=>String}] User-defined key/value metadata.
         #
         #   @param on_build [Array<String>, nil] `ONBUILD` metadata that were defined in the image's `Dockerfile`.
         #
@@ -312,7 +314,7 @@ module DockerEngineRuby
         #
         #   @param user [String] The user that commands are run as inside the container.
         #
-        #   @param volumes [Object] An object mapping mount point paths inside the container to empty
+        #   @param volumes [Hash{Symbol=>Hash{Symbol=>Object}}] An object mapping mount point paths inside the container to empty
         #
         #   @param working_dir [String] The working directory for commands to run in.
 
@@ -402,8 +404,8 @@ module DockerEngineRuby
         # @!attribute annotations
         #   Arbitrary metadata relating to the targeted content.
         #
-        #   @return [Object, nil]
-        optional :annotations, DockerEngineRuby::Internal::Type::Unknown, nil?: true
+        #   @return [Hash{Symbol=>String}, nil]
+        optional :annotations, DockerEngineRuby::Internal::Type::HashOf[String], nil?: true
 
         # @!attribute artifact_type
         #   ArtifactType is the IANA media type of this artifact.
@@ -458,7 +460,7 @@ module DockerEngineRuby
         #   A descriptor struct containing digest, media type, and size, as defined in the
         #   [OCI Content Descriptors Specification](https://github.com/opencontainers/image-spec/blob/v1.0.1/descriptor.md).
         #
-        #   @param annotations [Object, nil] Arbitrary metadata relating to the targeted content.
+        #   @param annotations [Hash{Symbol=>String}, nil] Arbitrary metadata relating to the targeted content.
         #
         #   @param artifact_type [String, nil] ArtifactType is the IANA media type of this artifact.
         #
@@ -537,8 +539,8 @@ module DockerEngineRuby
         #   This information is driver-specific, and depends on the storage-driver in use,
         #   and should be used for informational purposes only.
         #
-        #   @return [Object]
-        required :data, DockerEngineRuby::Internal::Type::Unknown, api_name: :Data
+        #   @return [Hash{Symbol=>String}]
+        required :data, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Data
 
         # @!attribute name
         #   Name of the storage driver.
@@ -553,7 +555,7 @@ module DockerEngineRuby
         #   Information about the storage driver used to store the container's and image's
         #   filesystem.
         #
-        #   @param data [Object] Low-level storage metadata, provided as key/value pairs.
+        #   @param data [Hash{Symbol=>String}] Low-level storage metadata, provided as key/value pairs.
         #
         #   @param name [String] Name of the storage driver.
       end
@@ -1038,8 +1040,8 @@ module DockerEngineRuby
           # @!attribute annotations
           #   Arbitrary metadata relating to the targeted content.
           #
-          #   @return [Object, nil]
-          optional :annotations, DockerEngineRuby::Internal::Type::Unknown, nil?: true
+          #   @return [Hash{Symbol=>String}, nil]
+          optional :annotations, DockerEngineRuby::Internal::Type::HashOf[String], nil?: true
 
           # @!attribute artifact_type
           #   ArtifactType is the IANA media type of this artifact.
@@ -1094,7 +1096,7 @@ module DockerEngineRuby
           #   A descriptor struct containing digest, media type, and size, as defined in the
           #   [OCI Content Descriptors Specification](https://github.com/opencontainers/image-spec/blob/v1.0.1/descriptor.md).
           #
-          #   @param annotations [Object, nil] Arbitrary metadata relating to the targeted content.
+          #   @param annotations [Hash{Symbol=>String}, nil] Arbitrary metadata relating to the targeted content.
           #
           #   @param artifact_type [String, nil] ArtifactType is the IANA media type of this artifact.
           #

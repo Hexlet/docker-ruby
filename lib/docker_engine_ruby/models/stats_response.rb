@@ -46,8 +46,10 @@ module DockerEngineRuby
       #
       #   This field is omitted if the container has no networking enabled.
       #
-      #   @return [Object, nil]
-      optional :networks, DockerEngineRuby::Internal::Type::Unknown, nil?: true
+      #   @return [Hash{Symbol=>DockerEngineRuby::Models::StatsResponse::Network}, nil]
+      optional :networks,
+               -> { DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::StatsResponse::Network] },
+               nil?: true
 
       # @!attribute num_procs
       #   The number of processors on the system.
@@ -121,7 +123,7 @@ module DockerEngineRuby
       #
       #   @param name [String, nil] Name of the container for which the stats were collected.
       #
-      #   @param networks [Object, nil] Network statistics for the container per interface.
+      #   @param networks [Hash{Symbol=>DockerEngineRuby::Models::StatsResponse::Network}, nil] Network statistics for the container per interface.
       #
       #   @param num_procs [Integer] The number of processors on the system.
       #
@@ -698,8 +700,8 @@ module DockerEngineRuby
         #
         #   This field is Linux-specific and omitted for Windows containers.
         #
-        #   @return [Object, nil]
-        optional :stats, DockerEngineRuby::Internal::Type::Unknown
+        #   @return [Hash{Symbol=>Integer}, nil]
+        optional :stats, DockerEngineRuby::Internal::Type::HashOf[Integer]
 
         # @!attribute usage
         #   Current `res_counter` usage for memory.
@@ -728,9 +730,105 @@ module DockerEngineRuby
         #
         #   @param privateworkingset [Integer, nil] Private working set.
         #
-        #   @param stats [Object] All the stats exported via memory.stat.
+        #   @param stats [Hash{Symbol=>Integer}] All the stats exported via memory.stat.
         #
         #   @param usage [Integer, nil] Current `res_counter` usage for memory.
+      end
+
+      class Network < DockerEngineRuby::Internal::Type::BaseModel
+        # @!attribute endpoint_id
+        #   Endpoint ID. Not used on Linux.
+        #
+        #   This field is Windows-specific and omitted for Linux containers.
+        #
+        #   @return [String, nil]
+        optional :endpoint_id, String, nil?: true
+
+        # @!attribute instance_id
+        #   Instance ID. Not used on Linux.
+        #
+        #   This field is Windows-specific and omitted for Linux containers.
+        #
+        #   @return [String, nil]
+        optional :instance_id, String, nil?: true
+
+        # @!attribute rx_bytes
+        #   Bytes received. Windows and Linux.
+        #
+        #   @return [Integer, nil]
+        optional :rx_bytes, Integer
+
+        # @!attribute rx_dropped
+        #   Incoming packets dropped. Windows and Linux.
+        #
+        #   @return [Integer, nil]
+        optional :rx_dropped, Integer
+
+        # @!attribute rx_errors
+        #   Received errors. Not used on Windows.
+        #
+        #   This field is Linux-specific and always zero for Windows containers.
+        #
+        #   @return [Integer, nil]
+        optional :rx_errors, Integer
+
+        # @!attribute rx_packets
+        #   Packets received. Windows and Linux.
+        #
+        #   @return [Integer, nil]
+        optional :rx_packets, Integer
+
+        # @!attribute tx_bytes
+        #   Bytes sent. Windows and Linux.
+        #
+        #   @return [Integer, nil]
+        optional :tx_bytes, Integer
+
+        # @!attribute tx_dropped
+        #   Outgoing packets dropped. Windows and Linux.
+        #
+        #   @return [Integer, nil]
+        optional :tx_dropped, Integer
+
+        # @!attribute tx_errors
+        #   Sent errors. Not used on Windows.
+        #
+        #   This field is Linux-specific and always zero for Windows containers.
+        #
+        #   @return [Integer, nil]
+        optional :tx_errors, Integer
+
+        # @!attribute tx_packets
+        #   Packets sent. Windows and Linux.
+        #
+        #   @return [Integer, nil]
+        optional :tx_packets, Integer
+
+        # @!method initialize(endpoint_id: nil, instance_id: nil, rx_bytes: nil, rx_dropped: nil, rx_errors: nil, rx_packets: nil, tx_bytes: nil, tx_dropped: nil, tx_errors: nil, tx_packets: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {DockerEngineRuby::Models::StatsResponse::Network} for more details.
+        #
+        #   Aggregates the network stats of one container
+        #
+        #   @param endpoint_id [String, nil] Endpoint ID. Not used on Linux.
+        #
+        #   @param instance_id [String, nil] Instance ID. Not used on Linux.
+        #
+        #   @param rx_bytes [Integer] Bytes received. Windows and Linux.
+        #
+        #   @param rx_dropped [Integer] Incoming packets dropped. Windows and Linux.
+        #
+        #   @param rx_errors [Integer] Received errors. Not used on Windows.
+        #
+        #   @param rx_packets [Integer] Packets received. Windows and Linux.
+        #
+        #   @param tx_bytes [Integer] Bytes sent. Windows and Linux.
+        #
+        #   @param tx_dropped [Integer] Outgoing packets dropped. Windows and Linux.
+        #
+        #   @param tx_errors [Integer] Sent errors. Not used on Windows.
+        #
+        #   @param tx_packets [Integer] Packets sent. Windows and Linux.
       end
 
       # @see DockerEngineRuby::Models::StatsResponse#pids_stats

@@ -59,20 +59,23 @@ module DockerEngineRuby
         type: DockerEngineRuby::Models::SystemEventsResponse::type_
       }
 
-      type actor = { attributes: top, id: String }
+      type actor = { attributes: ::Hash[Symbol, String], id: String }
 
       class Actor < DockerEngineRuby::Internal::Type::BaseModel
-        attr_reader attributes: top?
+        attr_reader attributes: ::Hash[Symbol, String]?
 
-        def attributes=: (top) -> top
+        def attributes=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
         attr_reader id: String?
 
         def id=: (String) -> String
 
-        def initialize: (?attributes: top, ?id: String) -> void
+        def initialize: (
+          ?attributes: ::Hash[Symbol, String],
+          ?id: String
+        ) -> void
 
-        def to_hash: -> { attributes: top, id: String }
+        def to_hash: -> { attributes: ::Hash[Symbol, String], id: String }
       end
 
       type scope = :local | :swarm

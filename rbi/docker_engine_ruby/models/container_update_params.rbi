@@ -804,10 +804,10 @@ module DockerEngineRuby
 
         # Driver-specific options, specified as a key/value pairs. These options are
         # passed directly to the driver.
-        sig { returns(T.nilable(T.anything)) }
+        sig { returns(T.nilable(T::Hash[Symbol, String])) }
         attr_reader :options
 
-        sig { params(options: T.anything).void }
+        sig { params(options: T::Hash[Symbol, String]).void }
         attr_writer :options
 
         # A request for devices to be sent to device drivers
@@ -817,7 +817,7 @@ module DockerEngineRuby
             count: Integer,
             device_ids: T::Array[String],
             driver: String,
-            options: T.anything
+            options: T::Hash[Symbol, String]
           ).returns(T.attached_class)
         end
         def self.new(
@@ -849,7 +849,7 @@ module DockerEngineRuby
               count: Integer,
               device_ids: T::Array[String],
               driver: String,
-              options: T.anything
+              options: T::Hash[Symbol, String]
             }
           )
         end

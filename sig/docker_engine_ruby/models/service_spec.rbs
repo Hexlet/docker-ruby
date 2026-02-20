@@ -3,7 +3,7 @@ module DockerEngineRuby
     type service_spec =
       {
         endpoint_spec: DockerEngineRuby::ServiceSpec::EndpointSpec,
-        labels: top,
+        labels: ::Hash[Symbol, String],
         mode: DockerEngineRuby::ServiceSpec::Mode,
         name: String,
         networks: ::Array[DockerEngineRuby::ServiceSpec::Network],
@@ -19,9 +19,9 @@ module DockerEngineRuby
         DockerEngineRuby::ServiceSpec::EndpointSpec
       ) -> DockerEngineRuby::ServiceSpec::EndpointSpec
 
-      attr_reader labels: top?
+      attr_reader labels: ::Hash[Symbol, String]?
 
-      def labels=: (top) -> top
+      def labels=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
       attr_reader mode: DockerEngineRuby::ServiceSpec::Mode?
 
@@ -59,7 +59,7 @@ module DockerEngineRuby
 
       def initialize: (
         ?endpoint_spec: DockerEngineRuby::ServiceSpec::EndpointSpec,
-        ?labels: top,
+        ?labels: ::Hash[Symbol, String],
         ?mode: DockerEngineRuby::ServiceSpec::Mode,
         ?name: String,
         ?networks: ::Array[DockerEngineRuby::ServiceSpec::Network],
@@ -70,7 +70,7 @@ module DockerEngineRuby
 
       def to_hash: -> {
         endpoint_spec: DockerEngineRuby::ServiceSpec::EndpointSpec,
-        labels: top,
+        labels: ::Hash[Symbol, String],
         mode: DockerEngineRuby::ServiceSpec::Mode,
         name: String,
         networks: ::Array[DockerEngineRuby::ServiceSpec::Network],
@@ -196,20 +196,20 @@ module DockerEngineRuby
 
       type mode =
         {
-          global: top,
-          global_job: top,
+          global: ::Hash[Symbol, top],
+          global_job: ::Hash[Symbol, top],
           replicated: DockerEngineRuby::ServiceSpec::Mode::Replicated,
           replicated_job: DockerEngineRuby::ServiceSpec::Mode::ReplicatedJob
         }
 
       class Mode < DockerEngineRuby::Internal::Type::BaseModel
-        attr_reader global: top?
+        attr_reader global: ::Hash[Symbol, top]?
 
-        def global=: (top) -> top
+        def global=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
 
-        attr_reader global_job: top?
+        attr_reader global_job: ::Hash[Symbol, top]?
 
-        def global_job=: (top) -> top
+        def global_job=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
 
         attr_reader replicated: DockerEngineRuby::ServiceSpec::Mode::Replicated?
 
@@ -224,15 +224,15 @@ module DockerEngineRuby
         ) -> DockerEngineRuby::ServiceSpec::Mode::ReplicatedJob
 
         def initialize: (
-          ?global: top,
-          ?global_job: top,
+          ?global: ::Hash[Symbol, top],
+          ?global_job: ::Hash[Symbol, top],
           ?replicated: DockerEngineRuby::ServiceSpec::Mode::Replicated,
           ?replicated_job: DockerEngineRuby::ServiceSpec::Mode::ReplicatedJob
         ) -> void
 
         def to_hash: -> {
-          global: top,
-          global_job: top,
+          global: ::Hash[Symbol, top],
+          global_job: ::Hash[Symbol, top],
           replicated: DockerEngineRuby::ServiceSpec::Mode::Replicated,
           replicated_job: DockerEngineRuby::ServiceSpec::Mode::ReplicatedJob
         }
@@ -274,16 +274,20 @@ module DockerEngineRuby
       end
 
       type network =
-        { aliases: ::Array[String], driver_opts: top, target: String }
+        {
+          aliases: ::Array[String],
+          driver_opts: ::Hash[Symbol, String],
+          target: String
+        }
 
       class Network < DockerEngineRuby::Internal::Type::BaseModel
         attr_reader aliases: ::Array[String]?
 
         def aliases=: (::Array[String]) -> ::Array[String]
 
-        attr_reader driver_opts: top?
+        attr_reader driver_opts: ::Hash[Symbol, String]?
 
-        def driver_opts=: (top) -> top
+        def driver_opts=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
         attr_reader target: String?
 
@@ -291,13 +295,13 @@ module DockerEngineRuby
 
         def initialize: (
           ?aliases: ::Array[String],
-          ?driver_opts: top,
+          ?driver_opts: ::Hash[Symbol, String],
           ?target: String
         ) -> void
 
         def to_hash: -> {
           aliases: ::Array[String],
-          driver_opts: top,
+          driver_opts: ::Hash[Symbol, String],
           target: String
         }
       end

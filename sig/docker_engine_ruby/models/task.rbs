@@ -7,7 +7,7 @@ module DockerEngineRuby
         desired_state: DockerEngineRuby::Models::Task::desired_state,
         id: String,
         job_iteration: DockerEngineRuby::Task::JobIteration,
-        labels: top,
+        labels: ::Hash[Symbol, String],
         name: String,
         node_id: String,
         service_id: String,
@@ -45,9 +45,9 @@ module DockerEngineRuby
         DockerEngineRuby::Task::JobIteration
       ) -> DockerEngineRuby::Task::JobIteration
 
-      attr_reader labels: top?
+      attr_reader labels: ::Hash[Symbol, String]?
 
-      def labels=: (top) -> top
+      def labels=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
       attr_reader name: String?
 
@@ -91,7 +91,7 @@ module DockerEngineRuby
         ?desired_state: DockerEngineRuby::Models::Task::desired_state,
         ?id: String,
         ?job_iteration: DockerEngineRuby::Task::JobIteration,
-        ?labels: top,
+        ?labels: ::Hash[Symbol, String],
         ?name: String,
         ?node_id: String,
         ?service_id: String,
@@ -108,7 +108,7 @@ module DockerEngineRuby
         desired_state: DockerEngineRuby::Models::Task::desired_state,
         id: String,
         job_iteration: DockerEngineRuby::Task::JobIteration,
-        labels: top,
+        labels: ::Hash[Symbol, String],
         name: String,
         node_id: String,
         service_id: String,

@@ -66,10 +66,10 @@ module DockerEngineRuby
       attr_writer :job_iteration
 
       # User-defined key/value metadata.
-      sig { returns(T.nilable(T.anything)) }
+      sig { returns(T.nilable(T::Hash[Symbol, String])) }
       attr_reader :labels
 
-      sig { params(labels: T.anything).void }
+      sig { params(labels: T::Hash[Symbol, String]).void }
       attr_writer :labels
 
       # Name of the task.
@@ -142,7 +142,7 @@ module DockerEngineRuby
           desired_state: DockerEngineRuby::Task::DesiredState::OrSymbol,
           id: String,
           job_iteration: DockerEngineRuby::Task::JobIteration::OrHash,
-          labels: T.anything,
+          labels: T::Hash[Symbol, String],
           name: String,
           node_id: String,
           service_id: String,
@@ -205,7 +205,7 @@ module DockerEngineRuby
             desired_state: DockerEngineRuby::Task::DesiredState::TaggedSymbol,
             id: String,
             job_iteration: DockerEngineRuby::Task::JobIteration,
-            labels: T.anything,
+            labels: T::Hash[Symbol, String],
             name: String,
             node_id: String,
             service_id: String,

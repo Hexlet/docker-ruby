@@ -5,7 +5,7 @@ module DockerEngineRuby
         ca_config: DockerEngineRuby::SwarmSpec::CaConfig?,
         dispatcher: DockerEngineRuby::SwarmSpec::Dispatcher?,
         encryption_config: DockerEngineRuby::SwarmSpec::EncryptionConfig,
-        labels: top,
+        labels: ::Hash[Symbol, String],
         name: String,
         orchestration: DockerEngineRuby::SwarmSpec::Orchestration?,
         raft: DockerEngineRuby::SwarmSpec::Raft,
@@ -23,9 +23,9 @@ module DockerEngineRuby
         DockerEngineRuby::SwarmSpec::EncryptionConfig
       ) -> DockerEngineRuby::SwarmSpec::EncryptionConfig
 
-      attr_reader labels: top?
+      attr_reader labels: ::Hash[Symbol, String]?
 
-      def labels=: (top) -> top
+      def labels=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
       attr_reader name: String?
 
@@ -49,7 +49,7 @@ module DockerEngineRuby
         ?ca_config: DockerEngineRuby::SwarmSpec::CaConfig?,
         ?dispatcher: DockerEngineRuby::SwarmSpec::Dispatcher?,
         ?encryption_config: DockerEngineRuby::SwarmSpec::EncryptionConfig,
-        ?labels: top,
+        ?labels: ::Hash[Symbol, String],
         ?name: String,
         ?orchestration: DockerEngineRuby::SwarmSpec::Orchestration?,
         ?raft: DockerEngineRuby::SwarmSpec::Raft,
@@ -60,7 +60,7 @@ module DockerEngineRuby
         ca_config: DockerEngineRuby::SwarmSpec::CaConfig?,
         dispatcher: DockerEngineRuby::SwarmSpec::Dispatcher?,
         encryption_config: DockerEngineRuby::SwarmSpec::EncryptionConfig,
-        labels: top,
+        labels: ::Hash[Symbol, String],
         name: String,
         orchestration: DockerEngineRuby::SwarmSpec::Orchestration?,
         raft: DockerEngineRuby::SwarmSpec::Raft,
@@ -118,7 +118,7 @@ module DockerEngineRuby
         type external_ca =
           {
             ca_cert: String,
-            options: top,
+            options: ::Hash[Symbol, String],
             protocol: DockerEngineRuby::Models::SwarmSpec::CaConfig::ExternalCA::protocol,
             url: String
           }
@@ -128,9 +128,9 @@ module DockerEngineRuby
 
           def ca_cert=: (String) -> String
 
-          attr_reader options: top?
+          attr_reader options: ::Hash[Symbol, String]?
 
-          def options=: (top) -> top
+          def options=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
           attr_reader protocol: DockerEngineRuby::Models::SwarmSpec::CaConfig::ExternalCA::protocol?
 
@@ -144,14 +144,14 @@ module DockerEngineRuby
 
           def initialize: (
             ?ca_cert: String,
-            ?options: top,
+            ?options: ::Hash[Symbol, String],
             ?protocol: DockerEngineRuby::Models::SwarmSpec::CaConfig::ExternalCA::protocol,
             ?url: String
           ) -> void
 
           def to_hash: -> {
             ca_cert: String,
-            options: top,
+            options: ::Hash[Symbol, String],
             protocol: DockerEngineRuby::Models::SwarmSpec::CaConfig::ExternalCA::protocol,
             url: String
           }
@@ -269,20 +269,23 @@ module DockerEngineRuby
           log_driver: DockerEngineRuby::SwarmSpec::TaskDefaults::LogDriver
         }
 
-        type log_driver = { name: String, options: top }
+        type log_driver = { name: String, options: ::Hash[Symbol, String] }
 
         class LogDriver < DockerEngineRuby::Internal::Type::BaseModel
           attr_reader name: String?
 
           def name=: (String) -> String
 
-          attr_reader options: top?
+          attr_reader options: ::Hash[Symbol, String]?
 
-          def options=: (top) -> top
+          def options=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
-          def initialize: (?name: String, ?options: top) -> void
+          def initialize: (
+            ?name: String,
+            ?options: ::Hash[Symbol, String]
+          ) -> void
 
-          def to_hash: -> { name: String, options: top }
+          def to_hash: -> { name: String, options: ::Hash[Symbol, String] }
         end
       end
     end

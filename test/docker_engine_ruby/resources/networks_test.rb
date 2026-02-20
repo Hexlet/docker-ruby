@@ -82,9 +82,9 @@ class DockerEngineRuby::Test::Resources::NetworksTest < DockerEngineRuby::Test::
         ingress: DockerEngineRuby::Internal::Type::Boolean | nil,
         internal: DockerEngineRuby::Internal::Type::Boolean | nil,
         ipam: DockerEngineRuby::Models::NetworkInspectResponse::Ipam | nil,
-        labels: DockerEngineRuby::Internal::Type::Unknown | nil,
+        labels: ^(DockerEngineRuby::Internal::Type::HashOf[String]) | nil,
         name: String | nil,
-        options: DockerEngineRuby::Internal::Type::Unknown | nil,
+        options: ^(DockerEngineRuby::Internal::Type::HashOf[String]) | nil,
         peers: ^(DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Models::NetworkInspectResponse::Peer]) | nil,
         scope: String | nil
       }

@@ -12,8 +12,8 @@ module DockerEngineRuby
       # @!attribute labels
       #   User-defined key/value metadata.
       #
-      #   @return [Object, nil]
-      optional :labels, DockerEngineRuby::Internal::Type::Unknown, api_name: :Labels
+      #   @return [Hash{Symbol=>String}, nil]
+      optional :labels, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Labels
 
       # @!attribute mode
       #   Scheduling mode for the service.
@@ -68,7 +68,7 @@ module DockerEngineRuby
       #
       #   @param endpoint_spec [DockerEngineRuby::Models::ServiceSpec::EndpointSpec] Properties that can be configured to access and load balance a service.
       #
-      #   @param labels [Object] User-defined key/value metadata.
+      #   @param labels [Hash{Symbol=>String}] User-defined key/value metadata.
       #
       #   @param mode [DockerEngineRuby::Models::ServiceSpec::Mode] Scheduling mode for the service.
       #
@@ -216,13 +216,17 @@ module DockerEngineRuby
       class Mode < DockerEngineRuby::Internal::Type::BaseModel
         # @!attribute global
         #
-        #   @return [Object, nil]
-        optional :global, DockerEngineRuby::Internal::Type::Unknown, api_name: :Global
+        #   @return [Hash{Symbol=>Object}, nil]
+        optional :global,
+                 DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown],
+                 api_name: :Global
 
         # @!attribute global_job
         #
-        #   @return [Object, nil]
-        optional :global_job, DockerEngineRuby::Internal::Type::Unknown, api_name: :GlobalJob
+        #   @return [Hash{Symbol=>Object}, nil]
+        optional :global_job,
+                 DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown],
+                 api_name: :GlobalJob
 
         # @!attribute replicated
         #
@@ -239,8 +243,8 @@ module DockerEngineRuby
         # @!method initialize(global: nil, global_job: nil, replicated: nil, replicated_job: nil)
         #   Scheduling mode for the service.
         #
-        #   @param global [Object]
-        #   @param global_job [Object]
+        #   @param global [Hash{Symbol=>Object}]
+        #   @param global_job [Hash{Symbol=>Object}]
         #   @param replicated [DockerEngineRuby::Models::ServiceSpec::Mode::Replicated]
         #   @param replicated_job [DockerEngineRuby::Models::ServiceSpec::Mode::ReplicatedJob]
 
@@ -283,8 +287,8 @@ module DockerEngineRuby
         # @!attribute driver_opts
         #   Driver attachment options for the network target.
         #
-        #   @return [Object, nil]
-        optional :driver_opts, DockerEngineRuby::Internal::Type::Unknown, api_name: :DriverOpts
+        #   @return [Hash{Symbol=>String}, nil]
+        optional :driver_opts, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :DriverOpts
 
         # @!attribute target
         #   The target network for attachment. Must be a network name or ID.
@@ -297,7 +301,7 @@ module DockerEngineRuby
         #
         #   @param aliases [Array<String>] Discoverable alternate names for the service on this network.
         #
-        #   @param driver_opts [Object] Driver attachment options for the network target.
+        #   @param driver_opts [Hash{Symbol=>String}] Driver attachment options for the network target.
         #
         #   @param target [String] The target network for attachment. Must be a network name or ID.
       end

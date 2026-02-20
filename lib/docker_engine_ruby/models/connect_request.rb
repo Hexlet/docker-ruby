@@ -49,8 +49,11 @@ module DockerEngineRuby
         #   DriverOpts is a mapping of driver options and values. These options are passed
         #   directly to the driver and are driver specific.
         #
-        #   @return [Object, nil]
-        optional :driver_opts, DockerEngineRuby::Internal::Type::Unknown, api_name: :DriverOpts, nil?: true
+        #   @return [Hash{Symbol=>String}, nil]
+        optional :driver_opts,
+                 DockerEngineRuby::Internal::Type::HashOf[String],
+                 api_name: :DriverOpts,
+                 nil?: true
 
         # @!attribute endpoint_id
         #   Unique ID for the service endpoint in a Sandbox.
@@ -139,7 +142,7 @@ module DockerEngineRuby
         #
         #   @param dns_names [Array<String>] List of all DNS names an endpoint has on a specific network. This
         #
-        #   @param driver_opts [Object, nil] DriverOpts is a mapping of driver options and values. These options
+        #   @param driver_opts [Hash{Symbol=>String}, nil] DriverOpts is a mapping of driver options and values. These options
         #
         #   @param endpoint_id [String] Unique ID for the service endpoint in a Sandbox.
         #

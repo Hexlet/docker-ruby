@@ -12,8 +12,8 @@ module DockerEngineRuby
         ?ingress: bool,
         ?internal: bool,
         ?ipam: DockerEngineRuby::NetworkCreateParams::Ipam,
-        ?labels: top,
-        ?options: top,
+        ?labels: ::Hash[Symbol, String],
+        ?options: ::Hash[Symbol, String],
         ?scope: String,
         ?request_options: DockerEngineRuby::request_opts
       ) -> DockerEngineRuby::NetworkCreateResponse

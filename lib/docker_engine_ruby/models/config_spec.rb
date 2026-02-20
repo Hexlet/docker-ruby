@@ -15,8 +15,8 @@ module DockerEngineRuby
       # @!attribute labels
       #   User-defined key/value metadata.
       #
-      #   @return [Object, nil]
-      optional :labels, DockerEngineRuby::Internal::Type::Unknown, api_name: :Labels
+      #   @return [Hash{Symbol=>String}, nil]
+      optional :labels, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Labels
 
       # @!attribute name
       #   User-defined name of the config.
@@ -36,7 +36,7 @@ module DockerEngineRuby
       #
       #   @param data [String] Data is the data to store as a config, formatted as a standard base64-encoded
       #
-      #   @param labels [Object] User-defined key/value metadata.
+      #   @param labels [Hash{Symbol=>String}] User-defined key/value metadata.
       #
       #   @param name [String] User-defined name of the config.
       #
@@ -53,15 +53,15 @@ module DockerEngineRuby
         # @!attribute options
         #   Key/value map of driver-specific options.
         #
-        #   @return [Object, nil]
-        optional :options, DockerEngineRuby::Internal::Type::Unknown, api_name: :Options
+        #   @return [Hash{Symbol=>String}, nil]
+        optional :options, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Options
 
         # @!method initialize(name:, options: nil)
         #   Driver represents a driver (network, logging, secrets).
         #
         #   @param name [String] Name of the driver.
         #
-        #   @param options [Object] Key/value map of driver-specific options.
+        #   @param options [Hash{Symbol=>String}] Key/value map of driver-specific options.
       end
     end
   end

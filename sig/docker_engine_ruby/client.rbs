@@ -13,12 +13,6 @@ module DockerEngineRuby
       production_tls: "https://localhost:2376"
     }
 
-    attr_reader tls_ca_cert_path: String?
-
-    attr_reader tls_client_cert_path: String?
-
-    attr_reader tls_client_key_path: String?
-
     attr_reader auth: DockerEngineRuby::Resources::Auth
 
     attr_reader system_: DockerEngineRuby::Resources::System
@@ -50,9 +44,6 @@ module DockerEngineRuby
     attr_reader distribution: DockerEngineRuby::Resources::Distribution
 
     def initialize: (
-      ?tls_ca_cert_path: String?,
-      ?tls_client_cert_path: String?,
-      ?tls_client_key_path: String?,
       ?environment: :production | :production_tls | nil,
       ?base_url: String?,
       ?max_retries: Integer,

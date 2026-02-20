@@ -1,7 +1,7 @@
 module DockerEngineRuby
   module Models
     type plugin_create_params =
-      { name: String, body: top }
+      { name: String, body: DockerEngineRuby::Internal::file_input }
       & DockerEngineRuby::Internal::Type::request_parameters
 
     class PluginCreateParams < DockerEngineRuby::Internal::Type::BaseModel
@@ -10,17 +10,17 @@ module DockerEngineRuby
 
       attr_accessor name: String
 
-      attr_accessor body: top
+      attr_accessor body: DockerEngineRuby::Internal::file_input
 
       def initialize: (
         name: String,
-        body: top,
+        body: DockerEngineRuby::Internal::file_input,
         ?request_options: DockerEngineRuby::request_opts
       ) -> void
 
       def to_hash: -> {
         name: String,
-        body: top,
+        body: DockerEngineRuby::Internal::file_input,
         request_options: DockerEngineRuby::RequestOptions
       }
     end

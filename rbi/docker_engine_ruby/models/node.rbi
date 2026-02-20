@@ -267,10 +267,10 @@ module DockerEngineRuby
           sig { params(engine_version: String).void }
           attr_writer :engine_version
 
-          sig { returns(T.nilable(T.anything)) }
+          sig { returns(T.nilable(T::Hash[Symbol, String])) }
           attr_reader :labels
 
-          sig { params(labels: T.anything).void }
+          sig { params(labels: T::Hash[Symbol, String]).void }
           attr_writer :labels
 
           sig do
@@ -296,7 +296,7 @@ module DockerEngineRuby
           sig do
             params(
               engine_version: String,
-              labels: T.anything,
+              labels: T::Hash[Symbol, String],
               plugins:
                 T::Array[
                   DockerEngineRuby::Node::Description::Engine::Plugin::OrHash
@@ -310,7 +310,7 @@ module DockerEngineRuby
             override.returns(
               {
                 engine_version: String,
-                labels: T.anything,
+                labels: T::Hash[Symbol, String],
                 plugins:
                   T::Array[DockerEngineRuby::Node::Description::Engine::Plugin]
               }

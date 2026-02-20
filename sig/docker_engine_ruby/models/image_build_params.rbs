@@ -2,7 +2,7 @@ module DockerEngineRuby
   module Models
     type image_build_params =
       {
-        body: top,
+        body: DockerEngineRuby::Internal::file_input,
         buildargs: String,
         cachefrom: String,
         cpuperiod: Integer,
@@ -36,7 +36,7 @@ module DockerEngineRuby
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
-      attr_accessor body: top
+      attr_accessor body: DockerEngineRuby::Internal::file_input
 
       attr_reader buildargs: String?
 
@@ -145,7 +145,7 @@ module DockerEngineRuby
       def x_registry_config=: (String) -> String
 
       def initialize: (
-        body: top,
+        body: DockerEngineRuby::Internal::file_input,
         ?buildargs: String,
         ?cachefrom: String,
         ?cpuperiod: Integer,
@@ -176,7 +176,7 @@ module DockerEngineRuby
       ) -> void
 
       def to_hash: -> {
-        body: top,
+        body: DockerEngineRuby::Internal::file_input,
         buildargs: String,
         cachefrom: String,
         cpuperiod: Integer,
