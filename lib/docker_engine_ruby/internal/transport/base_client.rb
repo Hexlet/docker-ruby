@@ -11,6 +11,7 @@ module DockerEngineRuby
 
         # from whatwg fetch spec
         MAX_REDIRECTS = 20
+        REDIRECT_STATUSES = [301, 302, 303, 307, 308].freeze
 
         # rubocop:disable Style/MutableConstant
         PLATFORM_HEADERS =
@@ -65,6 +66,15 @@ module DockerEngineRuby
             else
               false
             end
+          end
+
+          # @api private
+          #
+          # @param status [Integer]
+          #
+          # @return [Boolean]
+          def redirect_status?(status)
+            REDIRECT_STATUSES.include?(status)
           end
 
           # @api private
@@ -383,7 +393,8 @@ module DockerEngineRuby
           case status
           in ..299
             [status, response, stream]
-          in 300..399 if redirect_count >= self.class::MAX_REDIRECTS
+          in Integer => status if self.class.redirect_status?(status) &&
+            redirect_count >= self.class::MAX_REDIRECTS
             self.class.reap_connection!(status, stream: stream)
 
             message = "Failed to complete the request within #{self.class::MAX_REDIRECTS} redirects."
@@ -392,7 +403,7 @@ module DockerEngineRuby
               response: response,
               message: message
             )
-          in 300..399
+          in Integer => status if self.class.redirect_status?(status)
             self.class.reap_connection!(status, stream: stream)
 
             request = self.class.follow_redirect(request, status: status, response_headers: headers)
@@ -404,7 +415,7 @@ module DockerEngineRuby
             )
           in DockerEngineRuby::Errors::APIConnectionError if retry_count >= max_retries
             raise status
-          in (400..) if retry_count >= max_retries || !self.class.should_retry?(status, headers: headers)
+          in (300..) if retry_count >= max_retries || !self.class.should_retry?(status, headers: headers)
             decoded = Kernel.then do
               DockerEngineRuby::Internal::Util.decode_content(headers, stream: stream, suppress_error: true)
             ensure
