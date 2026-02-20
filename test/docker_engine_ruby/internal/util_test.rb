@@ -200,6 +200,42 @@ class DockerEngineRuby::Test::RegexMatchTest < Minitest::Test
   end
 end
 
+class DockerEngineRuby::Test::UtilContentDecodingTest < Minitest::Test
+  def test_decode_content_json_lines_with_json_content_type
+    stream = [
+      "{\"status\":\"Pulling from library/alpine\"}\n",
+      "{\"status\":\"Digest: sha256:abc\"}\n"
+    ]
+
+    decoded = DockerEngineRuby::Internal::Util.decode_content({"content-type" => "application/json"}, stream: stream)
+
+    assert_pattern do
+      decoded => [
+        {status: "Pulling from library/alpine"},
+        {status: "Digest: sha256:abc"}
+      ]
+    end
+  end
+
+  def test_decode_content_json_stream_keeps_raw_json_on_suppress_error
+    stream = [
+      "{\"status\":\"ok\"}\n",
+      "{invalid-json}\n"
+    ]
+
+    decoded =
+      DockerEngineRuby::Internal::Util.decode_content(
+        {"content-type" => "application/json"},
+        stream: stream,
+        suppress_error: true
+      )
+
+    assert_pattern do
+      decoded => "{\"status\":\"ok\"}\n{invalid-json}\n"
+    end
+  end
+end
+
 class DockerEngineRuby::Test::UtilFormDataEncodingTest < Minitest::Test
   class FakeCGI < CGI
     def initialize(headers, io)

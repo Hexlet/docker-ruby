@@ -662,6 +662,9 @@ module DockerEngineRuby
             begin
               JSON.parse(json, symbolize_names: true)
             rescue JSON::ParserError => e
+              parsed = parse_json_lines(json)
+              return parsed if parsed
+
               raise e unless suppress_error
               json
             end
@@ -682,6 +685,23 @@ module DockerEngineRuby
             force_charset!(content_type, text: text)
             StringIO.new(text)
           end
+        end
+
+        # @api private
+        #
+        # Fallback parser for endpoints that return JSON-lines but label the
+        # response as `application/json`.
+        #
+        # @param json [String]
+        #
+        # @return [Array<Hash{Symbol=>Object}>, nil]
+        def parse_json_lines(json)
+          lines = json.split(/\r\n|\r|\n/).reject(&:empty?)
+          return nil if lines.size < 2
+
+          lines.map { JSON.parse(_1, symbolize_names: true) }
+        rescue JSON::ParserError
+          nil
         end
       end
 
