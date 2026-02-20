@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class DockerEngineRuby::Test::Resources::ExecTest < DockerEngineRuby::Test::ResourceTest
   def test_inspect_
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.exec_.inspect_("id")
 
@@ -30,7 +30,7 @@ class DockerEngineRuby::Test::Resources::ExecTest < DockerEngineRuby::Test::Reso
   end
 
   def test_resize_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.exec_.resize("id", h: 0, w: 0)
 
@@ -40,7 +40,7 @@ class DockerEngineRuby::Test::Resources::ExecTest < DockerEngineRuby::Test::Reso
   end
 
   def test_start
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.exec_.start("id")
 

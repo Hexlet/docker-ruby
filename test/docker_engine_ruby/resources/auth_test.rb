@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class DockerEngineRuby::Test::Resources::AuthTest < DockerEngineRuby::Test::ResourceTest
   def test_login
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.auth.login
 

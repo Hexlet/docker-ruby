@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class DockerEngineRuby::Test::Resources::TasksTest < DockerEngineRuby::Test::ResourceTest
   def test_list
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.tasks.list
 
@@ -14,7 +14,7 @@ class DockerEngineRuby::Test::Resources::TasksTest < DockerEngineRuby::Test::Res
   end
 
   def test_inspect_
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.tasks.inspect_("id")
 
@@ -43,7 +43,7 @@ class DockerEngineRuby::Test::Resources::TasksTest < DockerEngineRuby::Test::Res
   end
 
   def test_logs
-    skip("Prism doesn't support application/octet-stream responses")
+    skip("Mock server doesn't support application/octet-stream responses")
 
     response = @docker.tasks.logs("id")
 
