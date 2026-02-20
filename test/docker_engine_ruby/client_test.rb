@@ -282,6 +282,18 @@ class DockerEngineRubyTest < Minitest::Test
     end
   end
 
+  def test_non_redirect_304_is_treated_as_status_error
+    stub_request(:post, "http://localhost/containers/id/start").to_return(status: 304, body: "")
+
+    docker = DockerEngineRuby::Client.new(base_url: "http://localhost")
+
+    error = assert_raises(DockerEngineRuby::Errors::APIStatusError) do
+      docker.containers.start("id")
+    end
+
+    assert_equal(304, error.status)
+  end
+
   def test_default_headers
     stub_request(:get, "http://localhost/containers/json").to_return_json(status: 200, body: {})
 
