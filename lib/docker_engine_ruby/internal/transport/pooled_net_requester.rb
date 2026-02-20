@@ -8,7 +8,9 @@ module DockerEngineRuby
         extend DockerEngineRuby::Internal::Util::SorbetRuntimeSupport
 
         class UnixSocketHTTP < Net::HTTP
-          def initialize(socket_path)
+          # Net::HTTP.new forwards multiple args to #initialize.
+          # We only care about socket_path and ignore the rest.
+          def initialize(socket_path, *_rest)
             super("localhost", Net::HTTP.http_default_port)
             @socket_path = socket_path
           end
