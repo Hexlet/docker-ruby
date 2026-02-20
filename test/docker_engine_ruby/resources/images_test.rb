@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class DockerEngineRuby::Test::Resources::ImagesTest < DockerEngineRuby::Test::ResourceTest
   def test_list
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.images.list
 
@@ -14,7 +14,7 @@ class DockerEngineRuby::Test::Resources::ImagesTest < DockerEngineRuby::Test::Re
   end
 
   def test_delete
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.images.delete("name")
 
@@ -24,7 +24,7 @@ class DockerEngineRuby::Test::Resources::ImagesTest < DockerEngineRuby::Test::Re
   end
 
   def test_build_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.images.build(body: Pathname(__FILE__))
 
@@ -34,7 +34,7 @@ class DockerEngineRuby::Test::Resources::ImagesTest < DockerEngineRuby::Test::Re
   end
 
   def test_build_prune
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.images.build_prune
 
@@ -51,7 +51,7 @@ class DockerEngineRuby::Test::Resources::ImagesTest < DockerEngineRuby::Test::Re
   end
 
   def test_commit
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.images.commit
 
@@ -67,7 +67,7 @@ class DockerEngineRuby::Test::Resources::ImagesTest < DockerEngineRuby::Test::Re
   end
 
   def test_get
-    skip("Prism doesn't support application/octet-stream responses")
+    skip("Mock server tests are disabled")
 
     response = @docker.images.get("name")
 
@@ -77,7 +77,7 @@ class DockerEngineRuby::Test::Resources::ImagesTest < DockerEngineRuby::Test::Re
   end
 
   def test_get_all
-    skip("Prism doesn't support application/octet-stream responses")
+    skip("Mock server tests are disabled")
 
     response = @docker.images.get_all
 
@@ -87,7 +87,7 @@ class DockerEngineRuby::Test::Resources::ImagesTest < DockerEngineRuby::Test::Re
   end
 
   def test_history
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.images.history("name")
 
@@ -97,7 +97,7 @@ class DockerEngineRuby::Test::Resources::ImagesTest < DockerEngineRuby::Test::Re
   end
 
   def test_inspect_
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.images.inspect_("name")
 
@@ -130,7 +130,7 @@ class DockerEngineRuby::Test::Resources::ImagesTest < DockerEngineRuby::Test::Re
   end
 
   def test_load__required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.images.load_(body: Pathname(__FILE__))
 
@@ -140,7 +140,7 @@ class DockerEngineRuby::Test::Resources::ImagesTest < DockerEngineRuby::Test::Re
   end
 
   def test_prune
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.images.prune
 
@@ -157,7 +157,7 @@ class DockerEngineRuby::Test::Resources::ImagesTest < DockerEngineRuby::Test::Re
   end
 
   def test_pull_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.images.pull(body: "body")
 
@@ -167,7 +167,7 @@ class DockerEngineRuby::Test::Resources::ImagesTest < DockerEngineRuby::Test::Re
   end
 
   def test_push_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.images.push("name", x_registry_auth: "X-Registry-Auth")
 
@@ -177,7 +177,7 @@ class DockerEngineRuby::Test::Resources::ImagesTest < DockerEngineRuby::Test::Re
   end
 
   def test_search_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.images.search(term: "term")
 
@@ -187,7 +187,7 @@ class DockerEngineRuby::Test::Resources::ImagesTest < DockerEngineRuby::Test::Re
   end
 
   def test_tag
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.images.tag("name")
 

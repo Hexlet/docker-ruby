@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.7.0 (2026-02-20)
+
+Full Changelog: [v0.6.0...v0.7.0](https://github.com/Hexlet/docker-ruby/compare/v0.6.0...v0.7.0)
+
+### Features
+
+* **api:** api update ([abe0981](https://github.com/Hexlet/docker-ruby/commit/abe0981f7d13cb97149f366697e20e5162c956dc))
+* **api:** api update ([1261584](https://github.com/Hexlet/docker-ruby/commit/12615849c07a424963bb7e4860f2af35ca8797b8))
+
+
+### Chores
+
+* **internal:** remove mock server code ([b018989](https://github.com/Hexlet/docker-ruby/commit/b018989e8595f7aa84d3865f7e1799f44b9a95c2))
+* **test:** update skip reason message ([efa80f2](https://github.com/Hexlet/docker-ruby/commit/efa80f24d65e2a046fd07742a7b2e05173989ae4))
+* update mock server docs ([3583e8a](https://github.com/Hexlet/docker-ruby/commit/3583e8a73605961acce7931c8871b57c11b85a35))
+
 ## 0.6.0 (2026-02-19)
 
 Full Changelog: [v0.5.0...v0.6.0](https://github.com/Hexlet/docker-ruby/compare/v0.5.0...v0.6.0)

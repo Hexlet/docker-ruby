@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test::ResourceTest
   def test_create_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.containers.create(config: {})
 
@@ -21,7 +21,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
   end
 
   def test_update
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.containers.update("id")
 
@@ -37,7 +37,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
   end
 
   def test_list
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.containers.list
 
@@ -47,7 +47,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
   end
 
   def test_delete
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.containers.delete("id")
 
@@ -57,7 +57,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
   end
 
   def test_archive_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.containers.archive("id", path: "path")
 
@@ -67,7 +67,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
   end
 
   def test_attach
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.containers.attach("id")
 
@@ -77,7 +77,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
   end
 
   def test_changes
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.containers.changes("id")
 
@@ -87,7 +87,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
   end
 
   def test_exec_
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.containers.exec_("id")
 
@@ -103,7 +103,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
   end
 
   def test_export
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.containers.export("id")
 
@@ -113,7 +113,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
   end
 
   def test_inspect_
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.containers.inspect_("id")
 
@@ -155,7 +155,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
   end
 
   def test_kill
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.containers.kill("id")
 
@@ -165,7 +165,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
   end
 
   def test_logs
-    skip("Prism doesn't support application/octet-stream responses")
+    skip("Mock server tests are disabled")
 
     response = @docker.containers.logs("id")
 
@@ -175,7 +175,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
   end
 
   def test_pause
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.containers.pause("id")
 
@@ -185,7 +185,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
   end
 
   def test_prune
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.containers.prune
 
@@ -202,7 +202,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
   end
 
   def test_rename_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.containers.rename("id", name: "name")
 
@@ -212,7 +212,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
   end
 
   def test_resize_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.containers.resize("id", h: 0, w: 0)
 
@@ -222,7 +222,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
   end
 
   def test_restart
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.containers.restart("id")
 
@@ -232,7 +232,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
   end
 
   def test_start
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.containers.start("id")
 
@@ -242,7 +242,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
   end
 
   def test_stats
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.containers.stats("id")
 
@@ -270,7 +270,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
   end
 
   def test_stop
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.containers.stop("id")
 
@@ -280,7 +280,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
   end
 
   def test_top
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.containers.top("id")
 
@@ -297,7 +297,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
   end
 
   def test_unpause
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.containers.unpause("id")
 
@@ -307,7 +307,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
   end
 
   def test_wait
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.containers.wait("id")
 

@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class DockerEngineRuby::Test::Resources::ServicesTest < DockerEngineRuby::Test::ResourceTest
   def test_create_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.services.create(spec: {})
 
@@ -21,7 +21,7 @@ class DockerEngineRuby::Test::Resources::ServicesTest < DockerEngineRuby::Test::
   end
 
   def test_update_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.services.update("id", version: 0, spec: {})
 
@@ -37,7 +37,7 @@ class DockerEngineRuby::Test::Resources::ServicesTest < DockerEngineRuby::Test::
   end
 
   def test_list
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.services.list
 
@@ -47,7 +47,7 @@ class DockerEngineRuby::Test::Resources::ServicesTest < DockerEngineRuby::Test::
   end
 
   def test_delete
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.services.delete("id")
 
@@ -57,7 +57,7 @@ class DockerEngineRuby::Test::Resources::ServicesTest < DockerEngineRuby::Test::
   end
 
   def test_inspect_
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.services.inspect_("id")
 
@@ -81,7 +81,7 @@ class DockerEngineRuby::Test::Resources::ServicesTest < DockerEngineRuby::Test::
   end
 
   def test_logs
-    skip("Prism doesn't support application/octet-stream responses")
+    skip("Mock server tests are disabled")
 
     response = @docker.services.logs("id")
 

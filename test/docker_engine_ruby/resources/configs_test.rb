@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class DockerEngineRuby::Test::Resources::ConfigsTest < DockerEngineRuby::Test::ResourceTest
   def test_create_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.configs.create(spec: {})
 
@@ -20,7 +20,7 @@ class DockerEngineRuby::Test::Resources::ConfigsTest < DockerEngineRuby::Test::R
   end
 
   def test_update_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.configs.update("id", version: 0, spec: {})
 
@@ -30,7 +30,7 @@ class DockerEngineRuby::Test::Resources::ConfigsTest < DockerEngineRuby::Test::R
   end
 
   def test_list
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.configs.list
 
@@ -40,7 +40,7 @@ class DockerEngineRuby::Test::Resources::ConfigsTest < DockerEngineRuby::Test::R
   end
 
   def test_delete
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.configs.delete("id")
 
@@ -50,7 +50,7 @@ class DockerEngineRuby::Test::Resources::ConfigsTest < DockerEngineRuby::Test::R
   end
 
   def test_inspect_
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.configs.inspect_("id")
 
