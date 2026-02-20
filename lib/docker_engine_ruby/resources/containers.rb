@@ -483,6 +483,9 @@ module DockerEngineRuby
           model: NilClass,
           options: options
         )
+      rescue DockerEngineRuby::Errors::APIStatusError => e
+        raise e unless e.status == 304
+        nil
       end
 
       # Get container stats based on resource usage
@@ -529,6 +532,9 @@ module DockerEngineRuby
           model: NilClass,
           options: options
         )
+      rescue DockerEngineRuby::Errors::APIStatusError => e
+        raise e unless e.status == 304
+        nil
       end
 
       # List processes running inside a container
