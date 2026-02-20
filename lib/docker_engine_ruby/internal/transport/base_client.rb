@@ -212,10 +212,16 @@ module DockerEngineRuby
           tls_client_cert_path: nil,
           tls_client_key_path: nil
         )
+          parsed_base_url = DockerEngineRuby::Internal::Util.parse_uri(base_url)
+          @unix_socket_path = parsed_base_url[:scheme] == "unix" ? parsed_base_url[:path] : nil
+          if parsed_base_url[:scheme] == "unix" && @unix_socket_path.to_s.empty?
+            raise ArgumentError.new("base_url unix:// must include an absolute socket path")
+          end
           @requester = DockerEngineRuby::Internal::Transport::PooledNetRequester.new(
             tls_ca_cert_path: tls_ca_cert_path,
             tls_client_cert_path: tls_client_cert_path,
-            tls_client_key_path: tls_client_key_path
+            tls_client_key_path: tls_client_key_path,
+            unix_socket_path: @unix_socket_path
           )
           @headers = DockerEngineRuby::Internal::Util.normalized_headers(
             self.class::PLATFORM_HEADERS,
@@ -226,8 +232,13 @@ module DockerEngineRuby
             },
             headers
           )
-          @base_url_components = DockerEngineRuby::Internal::Util.parse_uri(base_url)
-          @base_url = DockerEngineRuby::Internal::Util.unparse_uri(@base_url_components)
+          @base_url_components =
+            if @unix_socket_path
+              DockerEngineRuby::Internal::Util.parse_uri("http://localhost")
+            else
+              parsed_base_url
+            end
+          @base_url = base_url
           @idempotency_header = idempotency_header&.to_s&.downcase
           @timeout = timeout
           @max_retries = max_retries
@@ -328,6 +339,7 @@ module DockerEngineRuby
           {
             method: method,
             url: url,
+            unix_socket_path: @unix_socket_path,
             headers: headers,
             body: encoded,
             max_retries: opts.fetch(:max_retries, @max_retries),
@@ -590,6 +602,7 @@ module DockerEngineRuby
             {
               method: Symbol,
               url: URI::Generic,
+              unix_socket_path: T.nilable(String),
               headers: T::Hash[String, String],
               body: T.anything,
               max_retries: Integer,
