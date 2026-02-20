@@ -107,6 +107,25 @@ On timeout, `DockerEngineRuby::Errors::APITimeoutError` is raised.
 
 Note that requests that time out are retried by default.
 
+### TLS / mTLS
+
+For Docker Engine over TLS (`https://...:2376`), you can provide CA, client certificate, and client key paths:
+
+```ruby
+docker = DockerEngineRuby::Client.new(
+  base_url: "https://localhost:2376",
+  tls_ca_cert_path: "/path/to/ca.pem",
+  tls_client_cert_path: "/path/to/cert.pem",
+  tls_client_key_path: "/path/to/key.pem"
+)
+```
+
+You can also configure these through environment variables:
+
+- `DOCKER_TLS_CA_CERT_PATH`
+- `DOCKER_TLS_CLIENT_CERT_PATH`
+- `DOCKER_TLS_CLIENT_KEY_PATH`
+
 ## Advanced concepts
 
 ### BaseModel
