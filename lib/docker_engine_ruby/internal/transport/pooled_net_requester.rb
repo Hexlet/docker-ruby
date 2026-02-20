@@ -7,6 +7,23 @@ module DockerEngineRuby
       class PooledNetRequester
         extend DockerEngineRuby::Internal::Util::SorbetRuntimeSupport
 
+        class UnixSocketHTTP < Net::HTTP
+          # Net::HTTP.new forwards multiple args to #initialize.
+          # We only care about socket_path and ignore the rest.
+          def initialize(socket_path, *_rest)
+            super("localhost", Net::HTTP.http_default_port)
+            @socket_path = socket_path
+          end
+
+          private def connect
+            raise ArgumentError.new("TLS over unix sockets is not supported") if use_ssl?
+
+            @socket = Net::BufferedIO.new(UNIXSocket.new(@socket_path))
+            @last_communicated = nil
+            on_connect
+          end
+        end
+
         # from the golang stdlib
         # https://github.com/golang/go/blob/c8eced8580028328fde7c03cbfcb720ce15b2358/src/net/http/transport.go#L49
         KEEP_ALIVE_TIMEOUT = 30
@@ -19,10 +36,17 @@ module DockerEngineRuby
           # @param cert_store [OpenSSL::X509::Store]
           # @param tls_cert [OpenSSL::X509::Certificate, nil]
           # @param tls_key [OpenSSL::PKey::PKey, nil]
+          # @param unix_socket_path [String, nil]
           # @param url [URI::Generic]
           #
           # @return [Net::HTTP]
-          def connect(cert_store:, tls_cert:, tls_key:, url:)
+          def connect(cert_store:, tls_cert:, tls_key:, unix_socket_path:, url:)
+            if unix_socket_path
+              return UnixSocketHTTP.new(unix_socket_path).tap do
+                _1.use_ssl = false
+                _1.max_retries = 0
+              end
+            end
             port =
               case [url.port, url.scheme]
               in [Integer, _]
@@ -100,18 +124,25 @@ module DockerEngineRuby
         # @api private
         #
         # @param url [URI::Generic]
+        # @param unix_socket_path [String, nil]
         # @param deadline [Float]
         # @param blk [Proc]
         #
         # @raise [Timeout::Error]
         # @yieldparam [Net::HTTP]
-        private def with_pool(url, deadline:, &blk)
-          origin = DockerEngineRuby::Internal::Util.uri_origin(url)
+        private def with_pool(url, unix_socket_path:, deadline:, &blk)
+          origin = unix_socket_path || DockerEngineRuby::Internal::Util.uri_origin(url)
           timeout = deadline - DockerEngineRuby::Internal::Util.monotonic_secs
           pool =
             @mutex.synchronize do
               @pools[origin] ||= ConnectionPool.new(size: @size) do
-                self.class.connect(cert_store: @cert_store, tls_cert: @tls_cert, tls_key: @tls_key, url: url)
+                self.class.connect(
+                  cert_store: @cert_store,
+                  tls_cert: @tls_cert,
+                  tls_key: @tls_key,
+                  unix_socket_path: unix_socket_path,
+                  url: url
+                )
               end
             end
 
@@ -135,6 +166,7 @@ module DockerEngineRuby
         # @return [Array(Integer, Net::HTTPResponse, Enumerable<String>)]
         def execute(request)
           url, deadline = request.fetch_values(:url, :deadline)
+          unix_socket_path = request.fetch(:unix_socket_path, @default_unix_socket_path)
 
           req = nil
           finished = false
@@ -143,7 +175,7 @@ module DockerEngineRuby
           enum = Enumerator.new do |y|
             next if finished
 
-            with_pool(url, deadline: deadline) do |conn|
+            with_pool(url, unix_socket_path: unix_socket_path, deadline: deadline) do |conn|
               eof = false
               closing = nil
               ::Thread.handle_interrupt(Object => :never) do
@@ -203,14 +235,17 @@ module DockerEngineRuby
         # @param tls_ca_cert_path [String, nil]
         # @param tls_client_cert_path [String, nil]
         # @param tls_client_key_path [String, nil]
+        # @param unix_socket_path [String, nil]
         def initialize(
           size: self.class::DEFAULT_MAX_CONNECTIONS,
+          unix_socket_path: nil,
           tls_ca_cert_path: nil,
           tls_client_cert_path: nil,
           tls_client_key_path: nil
         )
           @mutex = Mutex.new
           @size = size
+          @default_unix_socket_path = unix_socket_path
           @cert_store = OpenSSL::X509::Store.new.tap(&:set_default_paths)
           @cert_store.add_file(tls_ca_cert_path) if tls_ca_cert_path
 
@@ -230,7 +265,16 @@ module DockerEngineRuby
         end
 
         define_sorbet_constant!(:Request) do
-          T.type_alias { {method: Symbol, url: URI::Generic, headers: T::Hash[String, String], body: T.anything, deadline: Float} }
+          T.type_alias do
+            {
+              method: Symbol,
+              url: URI::Generic,
+              unix_socket_path: T.nilable(String),
+              headers: T::Hash[String, String],
+              body: T.anything,
+              deadline: Float
+            }
+          end
         end
       end
     end

@@ -37,6 +37,18 @@ create_response = docker.containers.create(name: "sample-container")
 puts(create_response.Id)
 ```
 
+### Using a Unix socket
+
+You can connect to a local Docker daemon over a Unix socket by setting `base_url` to a `unix:///...` path:
+
+```ruby
+docker = DockerEngineRuby::Client.new(
+  base_url: "unix:///var/run/docker.sock"
+)
+```
+
+When `base_url` uses `unix:///`, TLS-related options are not used. TLS/mTLS configuration applies to HTTPS daemon endpoints (for example, `https://localhost:2376`).
+
 ### Handling errors
 
 When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `DockerEngineRuby::Errors::APIError` will be thrown:
