@@ -165,7 +165,10 @@ module DockerEngineRuby
                   )
                 )
               ],
-            idempotency_header: T.nilable(String)
+            idempotency_header: T.nilable(String),
+            tls_ca_cert_path: T.nilable(String),
+            tls_client_cert_path: T.nilable(String),
+            tls_client_key_path: T.nilable(String)
           ).returns(T.attached_class)
         end
         def self.new(
@@ -175,7 +178,10 @@ module DockerEngineRuby
           initial_retry_delay: 0.0,
           max_retry_delay: 0.0,
           headers: {},
-          idempotency_header: nil
+          idempotency_header: nil,
+          tls_ca_cert_path: nil,
+          tls_client_cert_path: nil,
+          tls_client_key_path: nil
         )
         end
 

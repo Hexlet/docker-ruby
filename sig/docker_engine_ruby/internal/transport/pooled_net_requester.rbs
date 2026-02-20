@@ -19,6 +19,8 @@ module DockerEngineRuby
 
         def self.connect: (
           cert_store: OpenSSL::X509::Store,
+          tls_cert: OpenSSL::X509::Certificate?,
+          tls_key: OpenSSL::PKey::PKey?,
           url: URI::Generic
         ) -> top
 
@@ -41,7 +43,12 @@ module DockerEngineRuby
           DockerEngineRuby::Internal::Transport::PooledNetRequester::request request
         ) -> [Integer, top, Enumerable[String]]
 
-        def initialize: (?size: Integer) -> void
+        def initialize: (
+          ?size: Integer,
+          ?tls_ca_cert_path: String?,
+          ?tls_client_cert_path: String?,
+          ?tls_client_key_path: String?
+        ) -> void
       end
     end
   end

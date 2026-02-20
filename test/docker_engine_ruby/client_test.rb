@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "test_helper"
+require "tmpdir"
 
 class DockerEngineRubyTest < Minitest::Test
   extend Minitest::Serial
@@ -32,6 +33,51 @@ class DockerEngineRubyTest < Minitest::Test
       DockerEngineRuby::Client.new(environment: "wrong")
     end
     assert_match(/environment must be one of/, e.message)
+  end
+
+  def test_client_accepts_tls_paths
+    with_tls_files do |ca_path:, cert_path:, key_path:|
+      docker =
+        DockerEngineRuby::Client.new(
+          base_url: "https://localhost:2376",
+          tls_ca_cert_path: ca_path,
+          tls_client_cert_path: cert_path,
+          tls_client_key_path: key_path
+        )
+
+      assert_equal(ca_path, docker.tls_ca_cert_path)
+      assert_equal(cert_path, docker.tls_client_cert_path)
+      assert_equal(key_path, docker.tls_client_key_path)
+    end
+  end
+
+  def test_client_raises_when_only_one_client_tls_file_is_provided
+    e =
+      assert_raises(ArgumentError) do
+        DockerEngineRuby::Client.new(base_url: "https://localhost:2376", tls_client_cert_path: "/tmp/cert.pem")
+      end
+
+    assert_match(/must be provided together/, e.message)
+  end
+
+  def test_client_builds_requester_with_tls_materials
+    with_tls_files do |ca_path:, cert_path:, key_path:|
+      docker =
+        DockerEngineRuby::Client.new(
+          base_url: "https://localhost:2376",
+          tls_ca_cert_path: ca_path,
+          tls_client_cert_path: cert_path,
+          tls_client_key_path: key_path
+        )
+
+      requester = docker.requester
+      cert = requester.instance_variable_get(:@tls_cert)
+      key = requester.instance_variable_get(:@tls_key)
+
+      refute_nil(cert)
+      refute_nil(key)
+      assert_equal(OpenSSL::X509::Certificate, cert.class)
+    end
   end
 
   def test_client_default_request_default_retry_attempts
@@ -292,6 +338,37 @@ class DockerEngineRubyTest < Minitest::Test
     assert_requested(:any, /./) do |req|
       headers = req.headers.transform_keys(&:downcase).fetch_values("accept", "content-type")
       headers.each { refute_empty(_1) }
+    end
+  end
+
+  private def with_tls_files
+    Dir.mktmpdir("docker-ruby-tls") do |dir|
+      key = OpenSSL::PKey::RSA.new(2048)
+      cert = OpenSSL::X509::Certificate.new
+      cert.version = 2
+      cert.serial = 1
+      cert.subject = OpenSSL::X509::Name.parse("/CN=localhost")
+      cert.issuer = cert.subject
+      cert.public_key = key.public_key
+      cert.not_before = Time.now
+      cert.not_after = Time.now + 3600
+
+      extension_factory = OpenSSL::X509::ExtensionFactory.new
+      extension_factory.subject_certificate = cert
+      extension_factory.issuer_certificate = cert
+      cert.add_extension(extension_factory.create_extension("basicConstraints", "CA:TRUE", true))
+      cert.add_extension(extension_factory.create_extension("keyUsage", "keyCertSign,digitalSignature", true))
+      cert.sign(key, OpenSSL::Digest.new("SHA256"))
+
+      ca_path = File.join(dir, "ca.pem")
+      cert_path = File.join(dir, "cert.pem")
+      key_path = File.join(dir, "key.pem")
+
+      File.write(ca_path, cert.to_pem)
+      File.write(cert_path, cert.to_pem)
+      File.write(key_path, key.to_pem)
+
+      yield(ca_path: ca_path, cert_path: cert_path, key_path: key_path)
     end
   end
 end
