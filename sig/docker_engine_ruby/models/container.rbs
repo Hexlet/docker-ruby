@@ -196,21 +196,21 @@ module DockerEngineRuby
         storage: DockerEngineRuby::Container::Storage?
       }
 
-      type graph_driver = { data: top, name: String }
+      type graph_driver = { data: ::Hash[Symbol, String], name: String }
 
       class GraphDriver < DockerEngineRuby::Internal::Type::BaseModel
-        attr_accessor data: top
+        attr_accessor data: ::Hash[Symbol, String]
 
         attr_accessor name: String
 
-        def initialize: (data: top, name: String) -> void
+        def initialize: (data: ::Hash[Symbol, String], name: String) -> void
 
-        def to_hash: -> { data: top, name: String }
+        def to_hash: -> { data: ::Hash[Symbol, String], name: String }
       end
 
       type host_config =
         {
-          annotations: top,
+          annotations: ::Hash[Symbol, String],
           auto_remove: bool,
           binds: ::Array[String],
           blkio_device_read_bps: ::Array[DockerEngineRuby::Container::HostConfig::BlkioDeviceReadBp],
@@ -262,7 +262,7 @@ module DockerEngineRuby
           oom_score_adj: Integer,
           pid_mode: String,
           pids_limit: Integer?,
-          port_bindings: top,
+          port_bindings: ::Hash[Symbol, ::Array[DockerEngineRuby::Container::HostConfig::PortBinding]],
           privileged: bool,
           publish_all_ports: bool,
           readonly_paths: ::Array[String],
@@ -271,9 +271,9 @@ module DockerEngineRuby
           runtime: String?,
           security_opt: ::Array[String],
           shm_size: Integer,
-          storage_opt: top,
-          sysctls: top?,
-          tmpfs: top,
+          storage_opt: ::Hash[Symbol, String],
+          sysctls: ::Hash[Symbol, String]?,
+          tmpfs: ::Hash[Symbol, String],
           ulimits: ::Array[DockerEngineRuby::Container::HostConfig::Ulimit],
           userns_mode: String,
           uts_mode: String,
@@ -282,9 +282,9 @@ module DockerEngineRuby
         }
 
       class HostConfig < DockerEngineRuby::Internal::Type::BaseModel
-        attr_reader annotations: top?
+        attr_reader annotations: ::Hash[Symbol, String]?
 
-        def annotations=: (top) -> top
+        def annotations=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
         attr_reader auto_remove: bool?
 
@@ -506,9 +506,11 @@ module DockerEngineRuby
 
         attr_accessor pids_limit: Integer?
 
-        attr_reader port_bindings: top?
+        attr_reader port_bindings: ::Hash[Symbol, ::Array[DockerEngineRuby::Container::HostConfig::PortBinding]]?
 
-        def port_bindings=: (top) -> top
+        def port_bindings=: (
+          ::Hash[Symbol, ::Array[DockerEngineRuby::Container::HostConfig::PortBinding]]
+        ) -> ::Hash[Symbol, ::Array[DockerEngineRuby::Container::HostConfig::PortBinding]]
 
         attr_reader privileged: bool?
 
@@ -542,15 +544,15 @@ module DockerEngineRuby
 
         def shm_size=: (Integer) -> Integer
 
-        attr_reader storage_opt: top?
+        attr_reader storage_opt: ::Hash[Symbol, String]?
 
-        def storage_opt=: (top) -> top
+        def storage_opt=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
-        attr_accessor sysctls: top?
+        attr_accessor sysctls: ::Hash[Symbol, String]?
 
-        attr_reader tmpfs: top?
+        attr_reader tmpfs: ::Hash[Symbol, String]?
 
-        def tmpfs=: (top) -> top
+        def tmpfs=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
         attr_reader ulimits: ::Array[DockerEngineRuby::Container::HostConfig::Ulimit]?
 
@@ -575,7 +577,7 @@ module DockerEngineRuby
         def volumes_from=: (::Array[String]) -> ::Array[String]
 
         def initialize: (
-          ?annotations: top,
+          ?annotations: ::Hash[Symbol, String],
           ?auto_remove: bool,
           ?binds: ::Array[String],
           ?blkio_device_read_bps: ::Array[DockerEngineRuby::Container::HostConfig::BlkioDeviceReadBp],
@@ -627,7 +629,7 @@ module DockerEngineRuby
           ?oom_score_adj: Integer,
           ?pid_mode: String,
           ?pids_limit: Integer?,
-          ?port_bindings: top,
+          ?port_bindings: ::Hash[Symbol, ::Array[DockerEngineRuby::Container::HostConfig::PortBinding]],
           ?privileged: bool,
           ?publish_all_ports: bool,
           ?readonly_paths: ::Array[String],
@@ -636,9 +638,9 @@ module DockerEngineRuby
           ?runtime: String?,
           ?security_opt: ::Array[String],
           ?shm_size: Integer,
-          ?storage_opt: top,
-          ?sysctls: top?,
-          ?tmpfs: top,
+          ?storage_opt: ::Hash[Symbol, String],
+          ?sysctls: ::Hash[Symbol, String]?,
+          ?tmpfs: ::Hash[Symbol, String],
           ?ulimits: ::Array[DockerEngineRuby::Container::HostConfig::Ulimit],
           ?userns_mode: String,
           ?uts_mode: String,
@@ -647,7 +649,7 @@ module DockerEngineRuby
         ) -> void
 
         def to_hash: -> {
-          annotations: top,
+          annotations: ::Hash[Symbol, String],
           auto_remove: bool,
           binds: ::Array[String],
           blkio_device_read_bps: ::Array[DockerEngineRuby::Container::HostConfig::BlkioDeviceReadBp],
@@ -699,7 +701,7 @@ module DockerEngineRuby
           oom_score_adj: Integer,
           pid_mode: String,
           pids_limit: Integer?,
-          port_bindings: top,
+          port_bindings: ::Hash[Symbol, ::Array[DockerEngineRuby::Container::HostConfig::PortBinding]],
           privileged: bool,
           publish_all_ports: bool,
           readonly_paths: ::Array[String],
@@ -708,9 +710,9 @@ module DockerEngineRuby
           runtime: String?,
           security_opt: ::Array[String],
           shm_size: Integer,
-          storage_opt: top,
-          sysctls: top?,
-          tmpfs: top,
+          storage_opt: ::Hash[Symbol, String],
+          sysctls: ::Hash[Symbol, String]?,
+          tmpfs: ::Hash[Symbol, String],
           ulimits: ::Array[DockerEngineRuby::Container::HostConfig::Ulimit],
           userns_mode: String,
           uts_mode: String,
@@ -815,7 +817,7 @@ module DockerEngineRuby
             count: Integer,
             device_ids: ::Array[String],
             driver: String,
-            options: top
+            options: ::Hash[Symbol, String]
           }
 
         class DeviceRequest < DockerEngineRuby::Internal::Type::BaseModel
@@ -837,16 +839,16 @@ module DockerEngineRuby
 
           def driver=: (String) -> String
 
-          attr_reader options: top?
+          attr_reader options: ::Hash[Symbol, String]?
 
-          def options=: (top) -> top
+          def options=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
           def initialize: (
             ?capabilities: ::Array[::Array[String]],
             ?count: Integer,
             ?device_ids: ::Array[String],
             ?driver: String,
-            ?options: top
+            ?options: ::Hash[Symbol, String]
           ) -> void
 
           def to_hash: -> {
@@ -854,7 +856,7 @@ module DockerEngineRuby
             count: Integer,
             device_ids: ::Array[String],
             driver: String,
-            options: top
+            options: ::Hash[Symbol, String]
           }
         end
 
@@ -906,14 +908,14 @@ module DockerEngineRuby
 
         type log_config =
           {
-            config: top,
+            config: ::Hash[Symbol, String],
             type: DockerEngineRuby::Models::Container::HostConfig::LogConfig::type_
           }
 
         class LogConfig < DockerEngineRuby::Internal::Type::BaseModel
-          attr_reader config: top?
+          attr_reader config: ::Hash[Symbol, String]?
 
-          def config=: (top) -> top
+          def config=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
           attr_reader type: DockerEngineRuby::Models::Container::HostConfig::LogConfig::type_?
 
@@ -922,12 +924,12 @@ module DockerEngineRuby
           ) -> DockerEngineRuby::Models::Container::HostConfig::LogConfig::type_
 
           def initialize: (
-            ?config: top,
+            ?config: ::Hash[Symbol, String],
             ?type: DockerEngineRuby::Models::Container::HostConfig::LogConfig::type_
           ) -> void
 
           def to_hash: -> {
-            config: top,
+            config: ::Hash[Symbol, String],
             type: DockerEngineRuby::Models::Container::HostConfig::LogConfig::type_
           }
 
@@ -1173,7 +1175,7 @@ module DockerEngineRuby
           type volume_options =
             {
               driver_config: DockerEngineRuby::Container::HostConfig::Mount::VolumeOptions::DriverConfig,
-              labels: top,
+              labels: ::Hash[Symbol, String],
               no_copy: bool,
               subpath: String
             }
@@ -1185,9 +1187,9 @@ module DockerEngineRuby
               DockerEngineRuby::Container::HostConfig::Mount::VolumeOptions::DriverConfig
             ) -> DockerEngineRuby::Container::HostConfig::Mount::VolumeOptions::DriverConfig
 
-            attr_reader labels: top?
+            attr_reader labels: ::Hash[Symbol, String]?
 
-            def labels=: (top) -> top
+            def labels=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
             attr_reader no_copy: bool?
 
@@ -1199,34 +1201,54 @@ module DockerEngineRuby
 
             def initialize: (
               ?driver_config: DockerEngineRuby::Container::HostConfig::Mount::VolumeOptions::DriverConfig,
-              ?labels: top,
+              ?labels: ::Hash[Symbol, String],
               ?no_copy: bool,
               ?subpath: String
             ) -> void
 
             def to_hash: -> {
               driver_config: DockerEngineRuby::Container::HostConfig::Mount::VolumeOptions::DriverConfig,
-              labels: top,
+              labels: ::Hash[Symbol, String],
               no_copy: bool,
               subpath: String
             }
 
-            type driver_config = { name: String, options: top }
+            type driver_config =
+              { name: String, options: ::Hash[Symbol, String] }
 
             class DriverConfig < DockerEngineRuby::Internal::Type::BaseModel
               attr_reader name: String?
 
               def name=: (String) -> String
 
-              attr_reader options: top?
+              attr_reader options: ::Hash[Symbol, String]?
 
-              def options=: (top) -> top
+              def options=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
-              def initialize: (?name: String, ?options: top) -> void
+              def initialize: (
+                ?name: String,
+                ?options: ::Hash[Symbol, String]
+              ) -> void
 
-              def to_hash: -> { name: String, options: top }
+              def to_hash: -> { name: String, options: ::Hash[Symbol, String] }
             end
           end
+        end
+
+        type port_binding = { host_ip: String, host_port: String }
+
+        class PortBinding < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader host_ip: String?
+
+          def host_ip=: (String) -> String
+
+          attr_reader host_port: String?
+
+          def host_port=: (String) -> String
+
+          def initialize: (?host_ip: String, ?host_port: String) -> void
+
+          def to_hash: -> { host_ip: String, host_port: String }
         end
 
         type restart_policy =
@@ -1298,7 +1320,7 @@ module DockerEngineRuby
 
       type image_manifest_descriptor =
         {
-          annotations: top?,
+          annotations: ::Hash[Symbol, String]?,
           artifact_type: String?,
           data: String?,
           digest: String,
@@ -1309,7 +1331,7 @@ module DockerEngineRuby
         }
 
       class ImageManifestDescriptor < DockerEngineRuby::Internal::Type::BaseModel
-        attr_accessor annotations: top?
+        attr_accessor annotations: ::Hash[Symbol, String]?
 
         attr_accessor artifact_type: String?
 
@@ -1336,7 +1358,7 @@ module DockerEngineRuby
         attr_accessor urls: ::Array[String]?
 
         def initialize: (
-          ?annotations: top?,
+          ?annotations: ::Hash[Symbol, String]?,
           ?artifact_type: String?,
           ?data: String?,
           ?digest: String,
@@ -1347,7 +1369,7 @@ module DockerEngineRuby
         ) -> void
 
         def to_hash: -> {
-          annotations: top?,
+          annotations: ::Hash[Symbol, String]?,
           artifact_type: String?,
           data: String?,
           digest: String,
@@ -1491,16 +1513,25 @@ module DockerEngineRuby
       end
 
       type network_settings =
-        { networks: top, ports: top, sandbox_id: String, sandbox_key: String }
+        {
+          networks: ::Hash[Symbol, DockerEngineRuby::Container::NetworkSettings::Network],
+          ports: ::Hash[Symbol, ::Array[DockerEngineRuby::Container::NetworkSettings::Port]],
+          sandbox_id: String,
+          sandbox_key: String
+        }
 
       class NetworkSettings < DockerEngineRuby::Internal::Type::BaseModel
-        attr_reader networks: top?
+        attr_reader networks: ::Hash[Symbol, DockerEngineRuby::Container::NetworkSettings::Network]?
 
-        def networks=: (top) -> top
+        def networks=: (
+          ::Hash[Symbol, DockerEngineRuby::Container::NetworkSettings::Network]
+        ) -> ::Hash[Symbol, DockerEngineRuby::Container::NetworkSettings::Network]
 
-        attr_reader ports: top?
+        attr_reader ports: ::Hash[Symbol, ::Array[DockerEngineRuby::Container::NetworkSettings::Port]]?
 
-        def ports=: (top) -> top
+        def ports=: (
+          ::Hash[Symbol, ::Array[DockerEngineRuby::Container::NetworkSettings::Port]]
+        ) -> ::Hash[Symbol, ::Array[DockerEngineRuby::Container::NetworkSettings::Port]]
 
         attr_reader sandbox_id: String?
 
@@ -1511,18 +1542,184 @@ module DockerEngineRuby
         def sandbox_key=: (String) -> String
 
         def initialize: (
-          ?networks: top,
-          ?ports: top,
+          ?networks: ::Hash[Symbol, DockerEngineRuby::Container::NetworkSettings::Network],
+          ?ports: ::Hash[Symbol, ::Array[DockerEngineRuby::Container::NetworkSettings::Port]],
           ?sandbox_id: String,
           ?sandbox_key: String
         ) -> void
 
         def to_hash: -> {
-          networks: top,
-          ports: top,
+          networks: ::Hash[Symbol, DockerEngineRuby::Container::NetworkSettings::Network],
+          ports: ::Hash[Symbol, ::Array[DockerEngineRuby::Container::NetworkSettings::Port]],
           sandbox_id: String,
           sandbox_key: String
         }
+
+        type network =
+          {
+            aliases: ::Array[String],
+            dns_names: ::Array[String],
+            driver_opts: ::Hash[Symbol, String]?,
+            endpoint_id: String,
+            gateway: String,
+            :global_i_pv6_address => String,
+            :global_i_pv6_prefix_len => Integer,
+            gw_priority: Integer,
+            ip_address: String,
+            ipam_config: DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig,
+            ip_prefix_len: Integer,
+            :i_pv6_gateway => String,
+            links: ::Array[String],
+            mac_address: String,
+            network_id: String
+          }
+
+        class Network < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader aliases: ::Array[String]?
+
+          def aliases=: (::Array[String]) -> ::Array[String]
+
+          attr_reader dns_names: ::Array[String]?
+
+          def dns_names=: (::Array[String]) -> ::Array[String]
+
+          attr_accessor driver_opts: ::Hash[Symbol, String]?
+
+          attr_reader endpoint_id: String?
+
+          def endpoint_id=: (String) -> String
+
+          attr_reader gateway: String?
+
+          def gateway=: (String) -> String
+
+          attr_reader global_i_pv6_address: String?
+
+          def global_i_pv6_address=: (String) -> String
+
+          attr_reader global_i_pv6_prefix_len: Integer?
+
+          def global_i_pv6_prefix_len=: (Integer) -> Integer
+
+          attr_reader gw_priority: Integer?
+
+          def gw_priority=: (Integer) -> Integer
+
+          attr_reader ip_address: String?
+
+          def ip_address=: (String) -> String
+
+          attr_reader ipam_config: DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig?
+
+          def ipam_config=: (
+            DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig
+          ) -> DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig
+
+          attr_reader ip_prefix_len: Integer?
+
+          def ip_prefix_len=: (Integer) -> Integer
+
+          attr_reader i_pv6_gateway: String?
+
+          def i_pv6_gateway=: (String) -> String
+
+          attr_reader links: ::Array[String]?
+
+          def links=: (::Array[String]) -> ::Array[String]
+
+          attr_reader mac_address: String?
+
+          def mac_address=: (String) -> String
+
+          attr_reader network_id: String?
+
+          def network_id=: (String) -> String
+
+          def initialize: (
+            ?aliases: ::Array[String],
+            ?dns_names: ::Array[String],
+            ?driver_opts: ::Hash[Symbol, String]?,
+            ?endpoint_id: String,
+            ?gateway: String,
+            ?global_i_pv6_address: String,
+            ?global_i_pv6_prefix_len: Integer,
+            ?gw_priority: Integer,
+            ?ip_address: String,
+            ?ipam_config: DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig,
+            ?ip_prefix_len: Integer,
+            ?i_pv6_gateway: String,
+            ?links: ::Array[String],
+            ?mac_address: String,
+            ?network_id: String
+          ) -> void
+
+          def to_hash: -> {
+            aliases: ::Array[String],
+            dns_names: ::Array[String],
+            driver_opts: ::Hash[Symbol, String]?,
+            endpoint_id: String,
+            gateway: String,
+            :global_i_pv6_address => String,
+            :global_i_pv6_prefix_len => Integer,
+            gw_priority: Integer,
+            ip_address: String,
+            ipam_config: DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig,
+            ip_prefix_len: Integer,
+            :i_pv6_gateway => String,
+            links: ::Array[String],
+            mac_address: String,
+            network_id: String
+          }
+
+          type ipam_config =
+            {
+              :i_pv4_address => String,
+              :i_pv6_address => String,
+              link_local_ips: ::Array[String]
+            }
+
+          class IpamConfig < DockerEngineRuby::Internal::Type::BaseModel
+            attr_reader i_pv4_address: String?
+
+            def i_pv4_address=: (String) -> String
+
+            attr_reader i_pv6_address: String?
+
+            def i_pv6_address=: (String) -> String
+
+            attr_reader link_local_ips: ::Array[String]?
+
+            def link_local_ips=: (::Array[String]) -> ::Array[String]
+
+            def initialize: (
+              ?i_pv4_address: String,
+              ?i_pv6_address: String,
+              ?link_local_ips: ::Array[String]
+            ) -> void
+
+            def to_hash: -> {
+              :i_pv4_address => String,
+              :i_pv6_address => String,
+              link_local_ips: ::Array[String]
+            }
+          end
+        end
+
+        type port = { host_ip: String, host_port: String }
+
+        class Port < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader host_ip: String?
+
+          def host_ip=: (String) -> String
+
+          attr_reader host_port: String?
+
+          def host_port=: (String) -> String
+
+          def initialize: (?host_ip: String, ?host_port: String) -> void
+
+          def to_hash: -> { host_ip: String, host_port: String }
+        end
       end
 
       type state =

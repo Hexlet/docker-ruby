@@ -7,7 +7,7 @@ module DockerEngineRuby
       sig do
         params(
           name: String,
-          body: T.anything,
+          body: DockerEngineRuby::Internal::FileInput,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).void
       end

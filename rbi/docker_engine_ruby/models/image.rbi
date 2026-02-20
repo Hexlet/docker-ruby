@@ -330,7 +330,7 @@ module DockerEngineRuby
         # An object mapping ports to an empty object in the form:
         #
         # `{"<port>/<tcp|udp|sctp>": {}}`
-        sig { returns(T.nilable(T.anything)) }
+        sig { returns(T.nilable(T::Hash[Symbol, T::Hash[Symbol, T.anything]])) }
         attr_accessor :exposed_ports
 
         # A test to perform to check that the container is healthy. Healthcheck commands
@@ -346,10 +346,10 @@ module DockerEngineRuby
         attr_writer :healthcheck
 
         # User-defined key/value metadata.
-        sig { returns(T.nilable(T.anything)) }
+        sig { returns(T.nilable(T::Hash[Symbol, String])) }
         attr_reader :labels
 
-        sig { params(labels: T.anything).void }
+        sig { params(labels: T::Hash[Symbol, String]).void }
         attr_writer :labels
 
         # `ONBUILD` metadata that were defined in the image's `Dockerfile`.
@@ -372,10 +372,12 @@ module DockerEngineRuby
         attr_writer :user
 
         # An object mapping mount point paths inside the container to empty objects.
-        sig { returns(T.nilable(T.anything)) }
+        sig { returns(T.nilable(T::Hash[Symbol, T::Hash[Symbol, T.anything]])) }
         attr_reader :volumes
 
-        sig { params(volumes: T.anything).void }
+        sig do
+          params(volumes: T::Hash[Symbol, T::Hash[Symbol, T.anything]]).void
+        end
         attr_writer :volumes
 
         # The working directory for commands to run in.
@@ -393,14 +395,15 @@ module DockerEngineRuby
             cmd: T::Array[String],
             entrypoint: T::Array[String],
             env: T::Array[String],
-            exposed_ports: T.nilable(T.anything),
+            exposed_ports:
+              T.nilable(T::Hash[Symbol, T::Hash[Symbol, T.anything]]),
             healthcheck: DockerEngineRuby::Image::Config::Healthcheck::OrHash,
-            labels: T.anything,
+            labels: T::Hash[Symbol, String],
             on_build: T.nilable(T::Array[String]),
             shell: T.nilable(T::Array[String]),
             stop_signal: T.nilable(String),
             user: String,
-            volumes: T.anything,
+            volumes: T::Hash[Symbol, T::Hash[Symbol, T.anything]],
             working_dir: String
           ).returns(T.attached_class)
         end
@@ -450,14 +453,15 @@ module DockerEngineRuby
               cmd: T::Array[String],
               entrypoint: T::Array[String],
               env: T::Array[String],
-              exposed_ports: T.nilable(T.anything),
+              exposed_ports:
+                T.nilable(T::Hash[Symbol, T::Hash[Symbol, T.anything]]),
               healthcheck: DockerEngineRuby::Image::Config::Healthcheck,
-              labels: T.anything,
+              labels: T::Hash[Symbol, String],
               on_build: T.nilable(T::Array[String]),
               shell: T.nilable(T::Array[String]),
               stop_signal: T.nilable(String),
               user: String,
-              volumes: T.anything,
+              volumes: T::Hash[Symbol, T::Hash[Symbol, T.anything]],
               working_dir: String
             }
           )
@@ -615,7 +619,7 @@ module DockerEngineRuby
           end
 
         # Arbitrary metadata relating to the targeted content.
-        sig { returns(T.nilable(T.anything)) }
+        sig { returns(T.nilable(T::Hash[Symbol, String])) }
         attr_accessor :annotations
 
         # ArtifactType is the IANA media type of this artifact.
@@ -672,7 +676,7 @@ module DockerEngineRuby
         # [OCI Content Descriptors Specification](https://github.com/opencontainers/image-spec/blob/v1.0.1/descriptor.md).
         sig do
           params(
-            annotations: T.nilable(T.anything),
+            annotations: T.nilable(T::Hash[Symbol, String]),
             artifact_type: T.nilable(String),
             data: T.nilable(String),
             digest: String,
@@ -709,7 +713,7 @@ module DockerEngineRuby
         sig do
           override.returns(
             {
-              annotations: T.nilable(T.anything),
+              annotations: T.nilable(T::Hash[Symbol, String]),
               artifact_type: T.nilable(String),
               data: T.nilable(String),
               digest: String,
@@ -828,7 +832,7 @@ module DockerEngineRuby
         #
         # This information is driver-specific, and depends on the storage-driver in use,
         # and should be used for informational purposes only.
-        sig { returns(T.anything) }
+        sig { returns(T::Hash[Symbol, String]) }
         attr_accessor :data
 
         # Name of the storage driver.
@@ -837,7 +841,11 @@ module DockerEngineRuby
 
         # Information about the storage driver used to store the container's and image's
         # filesystem.
-        sig { params(data: T.anything, name: String).returns(T.attached_class) }
+        sig do
+          params(data: T::Hash[Symbol, String], name: String).returns(
+            T.attached_class
+          )
+        end
         def self.new(
           # Low-level storage metadata, provided as key/value pairs.
           #
@@ -849,7 +857,9 @@ module DockerEngineRuby
         )
         end
 
-        sig { override.returns({ data: T.anything, name: String }) }
+        sig do
+          override.returns({ data: T::Hash[Symbol, String], name: String })
+        end
         def to_hash
         end
       end
@@ -1756,7 +1766,7 @@ module DockerEngineRuby
             end
 
           # Arbitrary metadata relating to the targeted content.
-          sig { returns(T.nilable(T.anything)) }
+          sig { returns(T.nilable(T::Hash[Symbol, String])) }
           attr_accessor :annotations
 
           # ArtifactType is the IANA media type of this artifact.
@@ -1816,7 +1826,7 @@ module DockerEngineRuby
           # [OCI Content Descriptors Specification](https://github.com/opencontainers/image-spec/blob/v1.0.1/descriptor.md).
           sig do
             params(
-              annotations: T.nilable(T.anything),
+              annotations: T.nilable(T::Hash[Symbol, String]),
               artifact_type: T.nilable(String),
               data: T.nilable(String),
               digest: String,
@@ -1854,7 +1864,7 @@ module DockerEngineRuby
           sig do
             override.returns(
               {
-                annotations: T.nilable(T.anything),
+                annotations: T.nilable(T::Hash[Symbol, String]),
                 artifact_type: T.nilable(String),
                 data: T.nilable(String),
                 digest: String,

@@ -57,7 +57,7 @@ module DockerEngineRuby
         product_license: String,
         registry_config: DockerEngineRuby::Info::RegistryConfig,
         runc_commit: DockerEngineRuby::Info::RuncCommit,
-        runtimes: top,
+        runtimes: ::Hash[Symbol, DockerEngineRuby::Info::Runtime],
         security_options: ::Array[String],
         server_version: String,
         swap_limit: bool,
@@ -313,9 +313,11 @@ module DockerEngineRuby
         DockerEngineRuby::Info::RuncCommit
       ) -> DockerEngineRuby::Info::RuncCommit
 
-      attr_reader runtimes: top?
+      attr_reader runtimes: ::Hash[Symbol, DockerEngineRuby::Info::Runtime]?
 
-      def runtimes=: (top) -> top
+      def runtimes=: (
+        ::Hash[Symbol, DockerEngineRuby::Info::Runtime]
+      ) -> ::Hash[Symbol, DockerEngineRuby::Info::Runtime]
 
       attr_reader security_options: ::Array[String]?
 
@@ -399,7 +401,7 @@ module DockerEngineRuby
         ?product_license: String,
         ?registry_config: DockerEngineRuby::Info::RegistryConfig,
         ?runc_commit: DockerEngineRuby::Info::RuncCommit,
-        ?runtimes: top,
+        ?runtimes: ::Hash[Symbol, DockerEngineRuby::Info::Runtime],
         ?security_options: ::Array[String],
         ?server_version: String,
         ?swap_limit: bool,
@@ -464,7 +466,7 @@ module DockerEngineRuby
         product_license: String,
         registry_config: DockerEngineRuby::Info::RegistryConfig,
         runc_commit: DockerEngineRuby::Info::RuncCommit,
-        runtimes: top,
+        runtimes: ::Hash[Symbol, DockerEngineRuby::Info::Runtime],
         security_options: ::Array[String],
         server_version: String,
         swap_limit: bool,
@@ -744,15 +746,17 @@ module DockerEngineRuby
 
       type registry_config =
         {
-          index_configs: top,
+          index_configs: ::Hash[Symbol, DockerEngineRuby::Info::RegistryConfig::IndexConfig],
           insecure_registry_cid_rs: ::Array[String],
           mirrors: ::Array[String]
         }
 
       class RegistryConfig < DockerEngineRuby::Internal::Type::BaseModel
-        attr_reader index_configs: top?
+        attr_reader index_configs: ::Hash[Symbol, DockerEngineRuby::Info::RegistryConfig::IndexConfig]?
 
-        def index_configs=: (top) -> top
+        def index_configs=: (
+          ::Hash[Symbol, DockerEngineRuby::Info::RegistryConfig::IndexConfig]
+        ) -> ::Hash[Symbol, DockerEngineRuby::Info::RegistryConfig::IndexConfig]
 
         attr_reader insecure_registry_cid_rs: ::Array[String]?
 
@@ -763,16 +767,56 @@ module DockerEngineRuby
         def mirrors=: (::Array[String]) -> ::Array[String]
 
         def initialize: (
-          ?index_configs: top,
+          ?index_configs: ::Hash[Symbol, DockerEngineRuby::Info::RegistryConfig::IndexConfig],
           ?insecure_registry_cid_rs: ::Array[String],
           ?mirrors: ::Array[String]
         ) -> void
 
         def to_hash: -> {
-          index_configs: top,
+          index_configs: ::Hash[Symbol, DockerEngineRuby::Info::RegistryConfig::IndexConfig],
           insecure_registry_cid_rs: ::Array[String],
           mirrors: ::Array[String]
         }
+
+        type index_config =
+          {
+            mirrors: ::Array[String],
+            name: String,
+            official: bool,
+            secure: bool
+          }
+
+        class IndexConfig < DockerEngineRuby::Internal::Type::BaseModel
+          attr_reader mirrors: ::Array[String]?
+
+          def mirrors=: (::Array[String]) -> ::Array[String]
+
+          attr_reader name: String?
+
+          def name=: (String) -> String
+
+          attr_reader official: bool?
+
+          def official=: (bool) -> bool
+
+          attr_reader secure: bool?
+
+          def secure=: (bool) -> bool
+
+          def initialize: (
+            ?mirrors: ::Array[String],
+            ?name: String,
+            ?official: bool,
+            ?secure: bool
+          ) -> void
+
+          def to_hash: -> {
+            mirrors: ::Array[String],
+            name: String,
+            official: bool,
+            secure: bool
+          }
+        end
       end
 
       type runc_commit = { id: String }
@@ -785,6 +829,35 @@ module DockerEngineRuby
         def initialize: (?id: String) -> void
 
         def to_hash: -> { id: String }
+      end
+
+      type runtime =
+        {
+          path: String,
+          runtime_args: ::Array[String]?,
+          status: ::Hash[Symbol, String]?
+        }
+
+      class Runtime < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader path: String?
+
+        def path=: (String) -> String
+
+        attr_accessor runtime_args: ::Array[String]?
+
+        attr_accessor status: ::Hash[Symbol, String]?
+
+        def initialize: (
+          ?path: String,
+          ?runtime_args: ::Array[String]?,
+          ?status: ::Hash[Symbol, String]?
+        ) -> void
+
+        def to_hash: -> {
+          path: String,
+          runtime_args: ::Array[String]?,
+          status: ::Hash[Symbol, String]?
+        }
       end
 
       type swarm =

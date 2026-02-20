@@ -56,7 +56,7 @@ module DockerEngineRuby
       #
       # @overload build(body:, buildargs: nil, cachefrom: nil, cpuperiod: nil, cpuquota: nil, cpusetcpus: nil, cpushares: nil, dockerfile: nil, extrahosts: nil, forcerm: nil, labels: nil, memory: nil, memswap: nil, networkmode: nil, nocache: nil, outputs: nil, platform: nil, pull: nil, q: nil, remote: nil, rm: nil, shmsize: nil, squash: nil, t: nil, target: nil, version: nil, x_registry_config: nil, request_options: {})
       #
-      # @param body [Object] Body param
+      # @param body [Pathname, StringIO, IO, String, DockerEngineRuby::FilePart] Body param
       #
       # @param buildargs [String] Query param
       #
@@ -227,7 +227,7 @@ module DockerEngineRuby
       #
       # @param env [Array<String>] Body param: A list of environment variables to set inside the container in the
       #
-      # @param exposed_ports [Object, nil] Body param: An object mapping ports to an empty object in the form:
+      # @param exposed_ports [Hash{Symbol=>Hash{Symbol=>Object}}, nil] Body param: An object mapping ports to an empty object in the form:
       #
       # @param healthcheck [DockerEngineRuby::Models::Config::Healthcheck] Body param: A test to perform to check that the container is healthy.
       #
@@ -235,7 +235,7 @@ module DockerEngineRuby
       #
       # @param image [String] Body param: The name (or reference) of the image to use when creating the contai
       #
-      # @param labels [Object] Body param: User-defined key/value metadata.
+      # @param labels [Hash{Symbol=>String}] Body param: User-defined key/value metadata.
       #
       # @param network_disabled [Boolean, nil] Body param: Disable networking for the container.
       #
@@ -255,7 +255,7 @@ module DockerEngineRuby
       #
       # @param user [String] Body param: Commands run as this user inside the container. If omitted, commands
       #
-      # @param volumes [Object] Body param: An object mapping mount point paths inside the container to empty
+      # @param volumes [Hash{Symbol=>Hash{Symbol=>Object}}] Body param: An object mapping mount point paths inside the container to empty
       #
       # @param working_dir [String] Body param: The working directory for commands to run in.
       #
@@ -371,7 +371,7 @@ module DockerEngineRuby
       #
       # @overload load_(body:, platform: nil, quiet: nil, request_options: {})
       #
-      # @param body [Object] Body param
+      # @param body [Pathname, StringIO, IO, String, DockerEngineRuby::FilePart] Body param
       #
       # @param platform [Array<String>] Query param
       #

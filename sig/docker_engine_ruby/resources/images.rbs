@@ -19,7 +19,7 @@ module DockerEngineRuby
       ) -> DockerEngineRuby::Models::image_delete_response
 
       def build: (
-        body: top,
+        body: DockerEngineRuby::Internal::file_input,
         ?buildargs: String,
         ?cachefrom: String,
         ?cpuperiod: Integer,
@@ -74,11 +74,11 @@ module DockerEngineRuby
         ?domainname: String,
         ?entrypoint: ::Array[String],
         ?env: ::Array[String],
-        ?exposed_ports: top?,
+        ?exposed_ports: ::Hash[Symbol, ::Hash[Symbol, top]]?,
         ?healthcheck: DockerEngineRuby::Config::Healthcheck,
         ?hostname: String,
         ?image: String,
-        ?labels: top,
+        ?labels: ::Hash[Symbol, String],
         ?network_disabled: bool?,
         ?on_build: ::Array[String]?,
         ?open_stdin: bool,
@@ -88,7 +88,7 @@ module DockerEngineRuby
         ?stop_timeout: Integer?,
         ?tty: bool,
         ?user: String,
-        ?volumes: top,
+        ?volumes: ::Hash[Symbol, ::Hash[Symbol, top]],
         ?working_dir: String,
         ?request_options: DockerEngineRuby::request_opts
       ) -> DockerEngineRuby::Models::ImageCommitResponse
@@ -118,7 +118,7 @@ module DockerEngineRuby
       ) -> DockerEngineRuby::Image
 
       def load_: (
-        body: top,
+        body: DockerEngineRuby::Internal::file_input,
         ?platform: ::Array[String],
         ?quiet: bool,
         ?request_options: DockerEngineRuby::request_opts

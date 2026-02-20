@@ -80,16 +80,16 @@ module DockerEngineRuby
       end
       attr_writer :ipam
 
-      sig { returns(T.nilable(T.anything)) }
+      sig { returns(T.nilable(T::Hash[Symbol, String])) }
       attr_reader :labels
 
-      sig { params(labels: T.anything).void }
+      sig { params(labels: T::Hash[Symbol, String]).void }
       attr_writer :labels
 
-      sig { returns(T.nilable(T.anything)) }
+      sig { returns(T.nilable(T::Hash[Symbol, String])) }
       attr_reader :options
 
-      sig { params(options: T.anything).void }
+      sig { params(options: T::Hash[Symbol, String]).void }
       attr_writer :options
 
       sig { returns(T.nilable(String)) }
@@ -111,8 +111,8 @@ module DockerEngineRuby
           ingress: T::Boolean,
           internal: T::Boolean,
           ipam: DockerEngineRuby::NetworkCreateParams::Ipam::OrHash,
-          labels: T.anything,
-          options: T.anything,
+          labels: T::Hash[Symbol, String],
+          options: T::Hash[Symbol, String],
           scope: String,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
@@ -149,8 +149,8 @@ module DockerEngineRuby
             ingress: T::Boolean,
             internal: T::Boolean,
             ipam: DockerEngineRuby::NetworkCreateParams::Ipam,
-            labels: T.anything,
-            options: T.anything,
+            labels: T::Hash[Symbol, String],
+            options: T::Hash[Symbol, String],
             scope: String,
             request_options: DockerEngineRuby::RequestOptions
           }
@@ -233,10 +233,10 @@ module DockerEngineRuby
         attr_writer :driver
 
         # Driver-specific options, specified as a map.
-        sig { returns(T.nilable(T.anything)) }
+        sig { returns(T.nilable(T::Hash[Symbol, String])) }
         attr_reader :options
 
-        sig { params(options: T.anything).void }
+        sig { params(options: T::Hash[Symbol, String]).void }
         attr_writer :options
 
         sig do
@@ -246,7 +246,7 @@ module DockerEngineRuby
                 DockerEngineRuby::NetworkCreateParams::Ipam::Config::OrHash
               ],
             driver: String,
-            options: T.anything
+            options: T::Hash[Symbol, String]
           ).returns(T.attached_class)
         end
         def self.new(
@@ -269,7 +269,7 @@ module DockerEngineRuby
               config:
                 T::Array[DockerEngineRuby::NetworkCreateParams::Ipam::Config],
               driver: String,
-              options: T.anything
+              options: T::Hash[Symbol, String]
             }
           )
         end
@@ -285,10 +285,10 @@ module DockerEngineRuby
               )
             end
 
-          sig { returns(T.nilable(T.anything)) }
+          sig { returns(T.nilable(T::Hash[Symbol, String])) }
           attr_reader :auxiliary_addresses
 
-          sig { params(auxiliary_addresses: T.anything).void }
+          sig { params(auxiliary_addresses: T::Hash[Symbol, String]).void }
           attr_writer :auxiliary_addresses
 
           sig { returns(T.nilable(String)) }
@@ -311,7 +311,7 @@ module DockerEngineRuby
 
           sig do
             params(
-              auxiliary_addresses: T.anything,
+              auxiliary_addresses: T::Hash[Symbol, String],
               gateway: String,
               ip_range: String,
               subnet: String
@@ -328,7 +328,7 @@ module DockerEngineRuby
           sig do
             override.returns(
               {
-                auxiliary_addresses: T.anything,
+                auxiliary_addresses: T::Hash[Symbol, String],
                 gateway: String,
                 ip_range: String,
                 subnet: String

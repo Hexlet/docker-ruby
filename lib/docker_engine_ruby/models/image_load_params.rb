@@ -9,8 +9,8 @@ module DockerEngineRuby
 
       # @!attribute body
       #
-      #   @return [Object]
-      required :body, DockerEngineRuby::Internal::Type::Unknown
+      #   @return [Pathname, StringIO, IO, String, DockerEngineRuby::FilePart]
+      required :body, DockerEngineRuby::Internal::Type::FileInput
 
       # @!attribute platform
       #
@@ -23,7 +23,7 @@ module DockerEngineRuby
       optional :quiet, DockerEngineRuby::Internal::Type::Boolean
 
       # @!method initialize(body:, platform: nil, quiet: nil, request_options: {})
-      #   @param body [Object]
+      #   @param body [Pathname, StringIO, IO, String, DockerEngineRuby::FilePart]
       #   @param platform [Array<String>]
       #   @param quiet [Boolean]
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]

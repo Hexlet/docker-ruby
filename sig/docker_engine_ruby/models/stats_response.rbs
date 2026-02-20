@@ -7,7 +7,7 @@ module DockerEngineRuby
         cpu_stats: DockerEngineRuby::StatsResponse::CPUStats,
         memory_stats: DockerEngineRuby::StatsResponse::MemoryStats,
         name: String?,
-        networks: top?,
+        networks: ::Hash[Symbol, DockerEngineRuby::StatsResponse::Network]?,
         num_procs: Integer,
         os_type: String?,
         pids_stats: DockerEngineRuby::StatsResponse::PidsStats,
@@ -40,7 +40,7 @@ module DockerEngineRuby
 
       attr_accessor name: String?
 
-      attr_accessor networks: top?
+      attr_accessor networks: ::Hash[Symbol, DockerEngineRuby::StatsResponse::Network]?
 
       attr_reader num_procs: Integer?
 
@@ -80,7 +80,7 @@ module DockerEngineRuby
         ?cpu_stats: DockerEngineRuby::StatsResponse::CPUStats,
         ?memory_stats: DockerEngineRuby::StatsResponse::MemoryStats,
         ?name: String?,
-        ?networks: top?,
+        ?networks: ::Hash[Symbol, DockerEngineRuby::StatsResponse::Network]?,
         ?num_procs: Integer,
         ?os_type: String?,
         ?pids_stats: DockerEngineRuby::StatsResponse::PidsStats,
@@ -96,7 +96,7 @@ module DockerEngineRuby
         cpu_stats: DockerEngineRuby::StatsResponse::CPUStats,
         memory_stats: DockerEngineRuby::StatsResponse::MemoryStats,
         name: String?,
-        networks: top?,
+        networks: ::Hash[Symbol, DockerEngineRuby::StatsResponse::Network]?,
         num_procs: Integer,
         os_type: String?,
         pids_stats: DockerEngineRuby::StatsResponse::PidsStats,
@@ -561,7 +561,7 @@ module DockerEngineRuby
           limit: Integer?,
           max_usage: Integer?,
           privateworkingset: Integer?,
-          stats: top,
+          stats: ::Hash[Symbol, Integer],
           usage: Integer?
         }
 
@@ -578,9 +578,9 @@ module DockerEngineRuby
 
         attr_accessor privateworkingset: Integer?
 
-        attr_reader stats: top?
+        attr_reader stats: ::Hash[Symbol, Integer]?
 
-        def stats=: (top) -> top
+        def stats=: (::Hash[Symbol, Integer]) -> ::Hash[Symbol, Integer]
 
         attr_accessor usage: Integer?
 
@@ -591,7 +591,7 @@ module DockerEngineRuby
           ?limit: Integer?,
           ?max_usage: Integer?,
           ?privateworkingset: Integer?,
-          ?stats: top,
+          ?stats: ::Hash[Symbol, Integer],
           ?usage: Integer?
         ) -> void
 
@@ -602,8 +602,86 @@ module DockerEngineRuby
           limit: Integer?,
           max_usage: Integer?,
           privateworkingset: Integer?,
-          stats: top,
+          stats: ::Hash[Symbol, Integer],
           usage: Integer?
+        }
+      end
+
+      type network =
+        {
+          endpoint_id: String?,
+          instance_id: String?,
+          rx_bytes: Integer,
+          rx_dropped: Integer,
+          rx_errors: Integer,
+          rx_packets: Integer,
+          tx_bytes: Integer,
+          tx_dropped: Integer,
+          tx_errors: Integer,
+          tx_packets: Integer
+        }
+
+      class Network < DockerEngineRuby::Internal::Type::BaseModel
+        attr_accessor endpoint_id: String?
+
+        attr_accessor instance_id: String?
+
+        attr_reader rx_bytes: Integer?
+
+        def rx_bytes=: (Integer) -> Integer
+
+        attr_reader rx_dropped: Integer?
+
+        def rx_dropped=: (Integer) -> Integer
+
+        attr_reader rx_errors: Integer?
+
+        def rx_errors=: (Integer) -> Integer
+
+        attr_reader rx_packets: Integer?
+
+        def rx_packets=: (Integer) -> Integer
+
+        attr_reader tx_bytes: Integer?
+
+        def tx_bytes=: (Integer) -> Integer
+
+        attr_reader tx_dropped: Integer?
+
+        def tx_dropped=: (Integer) -> Integer
+
+        attr_reader tx_errors: Integer?
+
+        def tx_errors=: (Integer) -> Integer
+
+        attr_reader tx_packets: Integer?
+
+        def tx_packets=: (Integer) -> Integer
+
+        def initialize: (
+          ?endpoint_id: String?,
+          ?instance_id: String?,
+          ?rx_bytes: Integer,
+          ?rx_dropped: Integer,
+          ?rx_errors: Integer,
+          ?rx_packets: Integer,
+          ?tx_bytes: Integer,
+          ?tx_dropped: Integer,
+          ?tx_errors: Integer,
+          ?tx_packets: Integer
+        ) -> void
+
+        def to_hash: -> {
+          endpoint_id: String?,
+          instance_id: String?,
+          rx_bytes: Integer,
+          rx_dropped: Integer,
+          rx_errors: Integer,
+          rx_packets: Integer,
+          tx_bytes: Integer,
+          tx_dropped: Integer,
+          tx_errors: Integer,
+          tx_packets: Integer
         }
       end
 

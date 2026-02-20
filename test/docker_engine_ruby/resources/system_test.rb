@@ -109,7 +109,7 @@ class DockerEngineRuby::Test::Resources::SystemTest < DockerEngineRuby::Test::Re
         product_license: String | nil,
         registry_config: DockerEngineRuby::Info::RegistryConfig | nil,
         runc_commit: DockerEngineRuby::Info::RuncCommit | nil,
-        runtimes: DockerEngineRuby::Internal::Type::Unknown | nil,
+        runtimes: ^(DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Info::Runtime]) | nil,
         security_options: ^(DockerEngineRuby::Internal::Type::ArrayOf[String]) | nil,
         server_version: String | nil,
         swap_limit: DockerEngineRuby::Internal::Type::Boolean | nil,

@@ -22,10 +22,10 @@ module DockerEngineRuby
       attr_writer :data
 
       # User-defined key/value metadata.
-      sig { returns(T.nilable(T.anything)) }
+      sig { returns(T.nilable(T::Hash[Symbol, String])) }
       attr_reader :labels
 
-      sig { params(labels: T.anything).void }
+      sig { params(labels: T::Hash[Symbol, String]).void }
       attr_writer :labels
 
       # User-defined name of the config.
@@ -49,7 +49,7 @@ module DockerEngineRuby
       sig do
         params(
           data: String,
-          labels: T.anything,
+          labels: T::Hash[Symbol, String],
           name: String,
           templating: DockerEngineRuby::ConfigSpec::Templating::OrHash
         ).returns(T.attached_class)
@@ -73,7 +73,7 @@ module DockerEngineRuby
         override.returns(
           {
             data: String,
-            labels: T.anything,
+            labels: T::Hash[Symbol, String],
             name: String,
             templating: DockerEngineRuby::ConfigSpec::Templating
           }
@@ -96,15 +96,17 @@ module DockerEngineRuby
         attr_accessor :name
 
         # Key/value map of driver-specific options.
-        sig { returns(T.nilable(T.anything)) }
+        sig { returns(T.nilable(T::Hash[Symbol, String])) }
         attr_reader :options
 
-        sig { params(options: T.anything).void }
+        sig { params(options: T::Hash[Symbol, String]).void }
         attr_writer :options
 
         # Driver represents a driver (network, logging, secrets).
         sig do
-          params(name: String, options: T.anything).returns(T.attached_class)
+          params(name: String, options: T::Hash[Symbol, String]).returns(
+            T.attached_class
+          )
         end
         def self.new(
           # Name of the driver.
@@ -114,7 +116,9 @@ module DockerEngineRuby
         )
         end
 
-        sig { override.returns({ name: String, options: T.anything }) }
+        sig do
+          override.returns({ name: String, options: T::Hash[Symbol, String] })
+        end
         def to_hash
         end
       end

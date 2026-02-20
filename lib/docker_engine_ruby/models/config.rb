@@ -62,8 +62,11 @@ module DockerEngineRuby
       #
       #   `{"<port>/<tcp|udp|sctp>": {}}`
       #
-      #   @return [Object, nil]
-      optional :exposed_ports, DockerEngineRuby::Internal::Type::Unknown, api_name: :ExposedPorts, nil?: true
+      #   @return [Hash{Symbol=>Hash{Symbol=>Object}}, nil]
+      optional :exposed_ports,
+               DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown]],
+               api_name: :ExposedPorts,
+               nil?: true
 
       # @!attribute healthcheck
       #   A test to perform to check that the container is healthy. Healthcheck commands
@@ -88,8 +91,8 @@ module DockerEngineRuby
       # @!attribute labels
       #   User-defined key/value metadata.
       #
-      #   @return [Object, nil]
-      optional :labels, DockerEngineRuby::Internal::Type::Unknown, api_name: :Labels
+      #   @return [Hash{Symbol=>String}, nil]
+      optional :labels, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Labels
 
       # @!attribute network_disabled
       #   Disable networking for the container.
@@ -155,8 +158,10 @@ module DockerEngineRuby
       # @!attribute volumes
       #   An object mapping mount point paths inside the container to empty objects.
       #
-      #   @return [Object, nil]
-      optional :volumes, DockerEngineRuby::Internal::Type::Unknown, api_name: :Volumes
+      #   @return [Hash{Symbol=>Hash{Symbol=>Object}}, nil]
+      optional :volumes,
+               DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown]],
+               api_name: :Volumes
 
       # @!attribute working_dir
       #   The working directory for commands to run in.
@@ -186,7 +191,7 @@ module DockerEngineRuby
       #
       #   @param env [Array<String>] A list of environment variables to set inside the container in the
       #
-      #   @param exposed_ports [Object, nil] An object mapping ports to an empty object in the form:
+      #   @param exposed_ports [Hash{Symbol=>Hash{Symbol=>Object}}, nil] An object mapping ports to an empty object in the form:
       #
       #   @param healthcheck [DockerEngineRuby::Models::Config::Healthcheck] A test to perform to check that the container is healthy.
       #
@@ -194,7 +199,7 @@ module DockerEngineRuby
       #
       #   @param image [String] The name (or reference) of the image to use when creating the container,
       #
-      #   @param labels [Object] User-defined key/value metadata.
+      #   @param labels [Hash{Symbol=>String}] User-defined key/value metadata.
       #
       #   @param network_disabled [Boolean, nil] Disable networking for the container.
       #
@@ -214,7 +219,7 @@ module DockerEngineRuby
       #
       #   @param user [String] Commands run as this user inside the container. If omitted, commands
       #
-      #   @param volumes [Object] An object mapping mount point paths inside the container to empty
+      #   @param volumes [Hash{Symbol=>Hash{Symbol=>Object}}] An object mapping mount point paths inside the container to empty
       #
       #   @param working_dir [String] The working directory for commands to run in.
 

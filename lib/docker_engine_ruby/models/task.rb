@@ -46,8 +46,8 @@ module DockerEngineRuby
       # @!attribute labels
       #   User-defined key/value metadata.
       #
-      #   @return [Object, nil]
-      optional :labels, DockerEngineRuby::Internal::Type::Unknown, api_name: :Labels
+      #   @return [Hash{Symbol=>String}, nil]
+      optional :labels, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Labels
 
       # @!attribute name
       #   Name of the task.
@@ -117,7 +117,7 @@ module DockerEngineRuby
       #
       #   @param job_iteration [DockerEngineRuby::Models::Task::JobIteration] The version number of the object such as node, service, etc. This is needed
       #
-      #   @param labels [Object] User-defined key/value metadata.
+      #   @param labels [Hash{Symbol=>String}] User-defined key/value metadata.
       #
       #   @param name [String] Name of the task.
       #

@@ -14,7 +14,7 @@ module DockerEngineRuby
           )
         end
 
-      sig { returns(T.anything) }
+      sig { returns(DockerEngineRuby::Internal::FileInput) }
       attr_accessor :body
 
       sig { returns(T.nilable(T::Array[String])) }
@@ -31,7 +31,7 @@ module DockerEngineRuby
 
       sig do
         params(
-          body: T.anything,
+          body: DockerEngineRuby::Internal::FileInput,
           platform: T::Array[String],
           quiet: T::Boolean,
           request_options: DockerEngineRuby::RequestOptions::OrHash
@@ -43,7 +43,7 @@ module DockerEngineRuby
       sig do
         override.returns(
           {
-            body: T.anything,
+            body: DockerEngineRuby::Internal::FileInput,
             platform: T::Array[String],
             quiet: T::Boolean,
             request_options: DockerEngineRuby::RequestOptions

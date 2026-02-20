@@ -114,7 +114,7 @@ module DockerEngineRuby
           image: String,
           init: bool?,
           isolation: DockerEngineRuby::Models::TaskSpec::ContainerSpec::isolation,
-          labels: top,
+          labels: ::Hash[Symbol, String],
           mounts: ::Array[DockerEngineRuby::TaskSpec::ContainerSpec::Mount],
           oom_score_adj: Integer,
           open_stdin: bool,
@@ -123,7 +123,7 @@ module DockerEngineRuby
           secrets: ::Array[DockerEngineRuby::TaskSpec::ContainerSpec::Secret],
           stop_grace_period: Integer,
           stop_signal: String,
-          sysctls: top,
+          sysctls: ::Hash[Symbol, String],
           tty: bool,
           ulimits: ::Array[DockerEngineRuby::TaskSpec::ContainerSpec::Ulimit],
           user: String
@@ -196,9 +196,9 @@ module DockerEngineRuby
           DockerEngineRuby::Models::TaskSpec::ContainerSpec::isolation
         ) -> DockerEngineRuby::Models::TaskSpec::ContainerSpec::isolation
 
-        attr_reader labels: top?
+        attr_reader labels: ::Hash[Symbol, String]?
 
-        def labels=: (top) -> top
+        def labels=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
         attr_reader mounts: ::Array[DockerEngineRuby::TaskSpec::ContainerSpec::Mount]?
 
@@ -238,9 +238,9 @@ module DockerEngineRuby
 
         def stop_signal=: (String) -> String
 
-        attr_reader sysctls: top?
+        attr_reader sysctls: ::Hash[Symbol, String]?
 
-        def sysctls=: (top) -> top
+        def sysctls=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
         attr_reader tty: bool?
 
@@ -272,7 +272,7 @@ module DockerEngineRuby
           ?image: String,
           ?init: bool?,
           ?isolation: DockerEngineRuby::Models::TaskSpec::ContainerSpec::isolation,
-          ?labels: top,
+          ?labels: ::Hash[Symbol, String],
           ?mounts: ::Array[DockerEngineRuby::TaskSpec::ContainerSpec::Mount],
           ?oom_score_adj: Integer,
           ?open_stdin: bool,
@@ -281,7 +281,7 @@ module DockerEngineRuby
           ?secrets: ::Array[DockerEngineRuby::TaskSpec::ContainerSpec::Secret],
           ?stop_grace_period: Integer,
           ?stop_signal: String,
-          ?sysctls: top,
+          ?sysctls: ::Hash[Symbol, String],
           ?tty: bool,
           ?ulimits: ::Array[DockerEngineRuby::TaskSpec::ContainerSpec::Ulimit],
           ?user: String
@@ -303,7 +303,7 @@ module DockerEngineRuby
           image: String,
           init: bool?,
           isolation: DockerEngineRuby::Models::TaskSpec::ContainerSpec::isolation,
-          labels: top,
+          labels: ::Hash[Symbol, String],
           mounts: ::Array[DockerEngineRuby::TaskSpec::ContainerSpec::Mount],
           oom_score_adj: Integer,
           open_stdin: bool,
@@ -312,7 +312,7 @@ module DockerEngineRuby
           secrets: ::Array[DockerEngineRuby::TaskSpec::ContainerSpec::Secret],
           stop_grace_period: Integer,
           stop_signal: String,
-          sysctls: top,
+          sysctls: ::Hash[Symbol, String],
           tty: bool,
           ulimits: ::Array[DockerEngineRuby::TaskSpec::ContainerSpec::Ulimit],
           user: String
@@ -323,7 +323,7 @@ module DockerEngineRuby
             config_id: String,
             config_name: String,
             file: DockerEngineRuby::TaskSpec::ContainerSpec::Config::File,
-            runtime: top
+            runtime: ::Hash[Symbol, top]
           }
 
         class Config < DockerEngineRuby::Internal::Type::BaseModel
@@ -341,22 +341,22 @@ module DockerEngineRuby
             DockerEngineRuby::TaskSpec::ContainerSpec::Config::File
           ) -> DockerEngineRuby::TaskSpec::ContainerSpec::Config::File
 
-          attr_reader runtime: top?
+          attr_reader runtime: ::Hash[Symbol, top]?
 
-          def runtime=: (top) -> top
+          def runtime=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
 
           def initialize: (
             ?config_id: String,
             ?config_name: String,
             ?file: DockerEngineRuby::TaskSpec::ContainerSpec::Config::File,
-            ?runtime: top
+            ?runtime: ::Hash[Symbol, top]
           ) -> void
 
           def to_hash: -> {
             config_id: String,
             config_name: String,
             file: DockerEngineRuby::TaskSpec::ContainerSpec::Config::File,
-            runtime: top
+            runtime: ::Hash[Symbol, top]
           }
 
           type file = { gid: String, mode: Integer, name: String, uid: String }
@@ -706,7 +706,7 @@ module DockerEngineRuby
           type volume_options =
             {
               driver_config: DockerEngineRuby::TaskSpec::ContainerSpec::Mount::VolumeOptions::DriverConfig,
-              labels: top,
+              labels: ::Hash[Symbol, String],
               no_copy: bool,
               subpath: String
             }
@@ -718,9 +718,9 @@ module DockerEngineRuby
               DockerEngineRuby::TaskSpec::ContainerSpec::Mount::VolumeOptions::DriverConfig
             ) -> DockerEngineRuby::TaskSpec::ContainerSpec::Mount::VolumeOptions::DriverConfig
 
-            attr_reader labels: top?
+            attr_reader labels: ::Hash[Symbol, String]?
 
-            def labels=: (top) -> top
+            def labels=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
             attr_reader no_copy: bool?
 
@@ -732,32 +732,36 @@ module DockerEngineRuby
 
             def initialize: (
               ?driver_config: DockerEngineRuby::TaskSpec::ContainerSpec::Mount::VolumeOptions::DriverConfig,
-              ?labels: top,
+              ?labels: ::Hash[Symbol, String],
               ?no_copy: bool,
               ?subpath: String
             ) -> void
 
             def to_hash: -> {
               driver_config: DockerEngineRuby::TaskSpec::ContainerSpec::Mount::VolumeOptions::DriverConfig,
-              labels: top,
+              labels: ::Hash[Symbol, String],
               no_copy: bool,
               subpath: String
             }
 
-            type driver_config = { name: String, options: top }
+            type driver_config =
+              { name: String, options: ::Hash[Symbol, String] }
 
             class DriverConfig < DockerEngineRuby::Internal::Type::BaseModel
               attr_reader name: String?
 
               def name=: (String) -> String
 
-              attr_reader options: top?
+              attr_reader options: ::Hash[Symbol, String]?
 
-              def options=: (top) -> top
+              def options=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
-              def initialize: (?name: String, ?options: top) -> void
+              def initialize: (
+                ?name: String,
+                ?options: ::Hash[Symbol, String]
+              ) -> void
 
-              def to_hash: -> { name: String, options: top }
+              def to_hash: -> { name: String, options: ::Hash[Symbol, String] }
             end
           end
         end
@@ -1055,20 +1059,23 @@ module DockerEngineRuby
         end
       end
 
-      type log_driver = { name: String, options: top }
+      type log_driver = { name: String, options: ::Hash[Symbol, String] }
 
       class LogDriver < DockerEngineRuby::Internal::Type::BaseModel
         attr_reader name: String?
 
         def name=: (String) -> String
 
-        attr_reader options: top?
+        attr_reader options: ::Hash[Symbol, String]?
 
-        def options=: (top) -> top
+        def options=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
-        def initialize: (?name: String, ?options: top) -> void
+        def initialize: (
+          ?name: String,
+          ?options: ::Hash[Symbol, String]
+        ) -> void
 
-        def to_hash: -> { name: String, options: top }
+        def to_hash: -> { name: String, options: ::Hash[Symbol, String] }
       end
 
       type network_attachment_spec = { container_id: String }
@@ -1084,16 +1091,20 @@ module DockerEngineRuby
       end
 
       type network =
-        { aliases: ::Array[String], driver_opts: top, target: String }
+        {
+          aliases: ::Array[String],
+          driver_opts: ::Hash[Symbol, String],
+          target: String
+        }
 
       class Network < DockerEngineRuby::Internal::Type::BaseModel
         attr_reader aliases: ::Array[String]?
 
         def aliases=: (::Array[String]) -> ::Array[String]
 
-        attr_reader driver_opts: top?
+        attr_reader driver_opts: ::Hash[Symbol, String]?
 
-        def driver_opts=: (top) -> top
+        def driver_opts=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
         attr_reader target: String?
 
@@ -1101,13 +1112,13 @@ module DockerEngineRuby
 
         def initialize: (
           ?aliases: ::Array[String],
-          ?driver_opts: top,
+          ?driver_opts: ::Hash[Symbol, String],
           ?target: String
         ) -> void
 
         def to_hash: -> {
           aliases: ::Array[String],
-          driver_opts: top,
+          driver_opts: ::Hash[Symbol, String],
           target: String
         }
       end

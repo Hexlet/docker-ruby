@@ -99,18 +99,27 @@ module DockerEngineRuby
         version: String
       }
 
-      type component = { name: String, version: String, details: top? }
+      type component =
+        { name: String, version: String, details: ::Hash[Symbol, top]? }
 
       class Component < DockerEngineRuby::Internal::Type::BaseModel
         attr_accessor name: String
 
         attr_accessor version: String
 
-        attr_accessor details: top?
+        attr_accessor details: ::Hash[Symbol, top]?
 
-        def initialize: (name: String, version: String, ?details: top?) -> void
+        def initialize: (
+          name: String,
+          version: String,
+          ?details: ::Hash[Symbol, top]?
+        ) -> void
 
-        def to_hash: -> { name: String, version: String, details: top? }
+        def to_hash: -> {
+          name: String,
+          version: String,
+          details: ::Hash[Symbol, top]?
+        }
       end
 
       type platform = { name: String }

@@ -140,10 +140,10 @@ module DockerEngineRuby
           end
 
         # Various key/value attributes of the object, depending on its type.
-        sig { returns(T.nilable(T.anything)) }
+        sig { returns(T.nilable(T::Hash[Symbol, String])) }
         attr_reader :attributes
 
-        sig { params(attributes: T.anything).void }
+        sig { params(attributes: T::Hash[Symbol, String]).void }
         attr_writer :attributes
 
         # The ID of the object emitting the event
@@ -156,7 +156,9 @@ module DockerEngineRuby
         # Actor describes something that generates events, like a container, network, or a
         # volume.
         sig do
-          params(attributes: T.anything, id: String).returns(T.attached_class)
+          params(attributes: T::Hash[Symbol, String], id: String).returns(
+            T.attached_class
+          )
         end
         def self.new(
           # Various key/value attributes of the object, depending on its type.
@@ -166,7 +168,9 @@ module DockerEngineRuby
         )
         end
 
-        sig { override.returns({ attributes: T.anything, id: String }) }
+        sig do
+          override.returns({ attributes: T::Hash[Symbol, String], id: String })
+        end
         def to_hash
         end
       end

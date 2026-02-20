@@ -26,7 +26,7 @@ class DockerEngineRuby::Test::Resources::ImagesTest < DockerEngineRuby::Test::Re
   def test_build_required_params
     skip("Prism tests are disabled")
 
-    response = @docker.images.build(body: {})
+    response = @docker.images.build(body: Pathname(__FILE__))
 
     assert_pattern do
       response => nil
@@ -132,7 +132,7 @@ class DockerEngineRuby::Test::Resources::ImagesTest < DockerEngineRuby::Test::Re
   def test_load__required_params
     skip("Prism tests are disabled")
 
-    response = @docker.images.load_(body: {})
+    response = @docker.images.load_(body: Pathname(__FILE__))
 
     assert_pattern do
       response => nil

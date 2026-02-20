@@ -9,8 +9,8 @@ module DockerEngineRuby
 
       # @!attribute body
       #
-      #   @return [Object]
-      required :body, DockerEngineRuby::Internal::Type::Unknown
+      #   @return [Pathname, StringIO, IO, String, DockerEngineRuby::FilePart]
+      required :body, DockerEngineRuby::Internal::Type::FileInput
 
       # @!attribute buildargs
       #
@@ -143,7 +143,7 @@ module DockerEngineRuby
       optional :x_registry_config, String
 
       # @!method initialize(body:, buildargs: nil, cachefrom: nil, cpuperiod: nil, cpuquota: nil, cpusetcpus: nil, cpushares: nil, dockerfile: nil, extrahosts: nil, forcerm: nil, labels: nil, memory: nil, memswap: nil, networkmode: nil, nocache: nil, outputs: nil, platform: nil, pull: nil, q: nil, remote: nil, rm: nil, shmsize: nil, squash: nil, t: nil, target: nil, version: nil, x_registry_config: nil, request_options: {})
-      #   @param body [Object]
+      #   @param body [Pathname, StringIO, IO, String, DockerEngineRuby::FilePart]
       #   @param buildargs [String]
       #   @param cachefrom [String]
       #   @param cpuperiod [Integer]

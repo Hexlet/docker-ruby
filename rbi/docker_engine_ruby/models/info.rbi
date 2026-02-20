@@ -581,10 +581,16 @@ module DockerEngineRuby
       #
       # The default runtime is `runc`, and automatically configured. Additional runtimes
       # can be configured by the user and will be listed here.
-      sig { returns(T.nilable(T.anything)) }
+      sig do
+        returns(T.nilable(T::Hash[Symbol, DockerEngineRuby::Info::Runtime]))
+      end
       attr_reader :runtimes
 
-      sig { params(runtimes: T.anything).void }
+      sig do
+        params(
+          runtimes: T::Hash[Symbol, DockerEngineRuby::Info::Runtime::OrHash]
+        ).void
+      end
       attr_writer :runtimes
 
       # List of security features that are enabled on the daemon, such as apparmor,
@@ -697,7 +703,7 @@ module DockerEngineRuby
           product_license: String,
           registry_config: DockerEngineRuby::Info::RegistryConfig::OrHash,
           runc_commit: DockerEngineRuby::Info::RuncCommit::OrHash,
-          runtimes: T.anything,
+          runtimes: T::Hash[Symbol, DockerEngineRuby::Info::Runtime::OrHash],
           security_options: T::Array[String],
           server_version: String,
           swap_limit: T::Boolean,
@@ -1035,7 +1041,7 @@ module DockerEngineRuby
             product_license: String,
             registry_config: DockerEngineRuby::Info::RegistryConfig,
             runc_commit: DockerEngineRuby::Info::RuncCommit,
-            runtimes: T.anything,
+            runtimes: T::Hash[Symbol, DockerEngineRuby::Info::Runtime],
             security_options: T::Array[String],
             server_version: String,
             swap_limit: T::Boolean,
@@ -1684,10 +1690,27 @@ module DockerEngineRuby
             )
           end
 
-        sig { returns(T.nilable(T.anything)) }
+        sig do
+          returns(
+            T.nilable(
+              T::Hash[
+                Symbol,
+                DockerEngineRuby::Info::RegistryConfig::IndexConfig
+              ]
+            )
+          )
+        end
         attr_reader :index_configs
 
-        sig { params(index_configs: T.anything).void }
+        sig do
+          params(
+            index_configs:
+              T::Hash[
+                Symbol,
+                DockerEngineRuby::Info::RegistryConfig::IndexConfig::OrHash
+              ]
+          ).void
+        end
         attr_writer :index_configs
 
         # List of IP ranges of insecure registries, using the CIDR syntax
@@ -1727,7 +1750,11 @@ module DockerEngineRuby
         # RegistryServiceConfig stores daemon registry services configuration.
         sig do
           params(
-            index_configs: T.anything,
+            index_configs:
+              T::Hash[
+                Symbol,
+                DockerEngineRuby::Info::RegistryConfig::IndexConfig::OrHash
+              ],
             insecure_registry_cid_rs: T::Array[String],
             mirrors: T::Array[String]
           ).returns(T.attached_class)
@@ -1764,13 +1791,107 @@ module DockerEngineRuby
         sig do
           override.returns(
             {
-              index_configs: T.anything,
+              index_configs:
+                T::Hash[
+                  Symbol,
+                  DockerEngineRuby::Info::RegistryConfig::IndexConfig
+                ],
               insecure_registry_cid_rs: T::Array[String],
               mirrors: T::Array[String]
             }
           )
         end
         def to_hash
+        end
+
+        class IndexConfig < DockerEngineRuby::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias do
+              T.any(
+                DockerEngineRuby::Info::RegistryConfig::IndexConfig,
+                DockerEngineRuby::Internal::AnyHash
+              )
+            end
+
+          # List of mirrors, expressed as URIs.
+          sig { returns(T.nilable(T::Array[String])) }
+          attr_reader :mirrors
+
+          sig { params(mirrors: T::Array[String]).void }
+          attr_writer :mirrors
+
+          # Name of the registry, such as "docker.io".
+          sig { returns(T.nilable(String)) }
+          attr_reader :name
+
+          sig { params(name: String).void }
+          attr_writer :name
+
+          # Indicates whether this is an official registry (i.e., Docker Hub / docker.io)
+          sig { returns(T.nilable(T::Boolean)) }
+          attr_reader :official
+
+          sig { params(official: T::Boolean).void }
+          attr_writer :official
+
+          # Indicates if the registry is part of the list of insecure registries.
+          #
+          # If `false`, the registry is insecure. Insecure registries accept un-encrypted
+          # (HTTP) and/or untrusted (HTTPS with certificates from unknown CAs)
+          # communication.
+          #
+          # > **Warning**: Insecure registries can be useful when running a local registry.
+          # > However, because its use creates security vulnerabilities it should ONLY be
+          # > enabled for testing purposes. For increased security, users should add their
+          # > CA to their system's list of trusted CAs instead of enabling this option.
+          sig { returns(T.nilable(T::Boolean)) }
+          attr_reader :secure
+
+          sig { params(secure: T::Boolean).void }
+          attr_writer :secure
+
+          # IndexInfo contains information about a registry.
+          sig do
+            params(
+              mirrors: T::Array[String],
+              name: String,
+              official: T::Boolean,
+              secure: T::Boolean
+            ).returns(T.attached_class)
+          end
+          def self.new(
+            # List of mirrors, expressed as URIs.
+            mirrors: nil,
+            # Name of the registry, such as "docker.io".
+            name: nil,
+            # Indicates whether this is an official registry (i.e., Docker Hub / docker.io)
+            official: nil,
+            # Indicates if the registry is part of the list of insecure registries.
+            #
+            # If `false`, the registry is insecure. Insecure registries accept un-encrypted
+            # (HTTP) and/or untrusted (HTTPS with certificates from unknown CAs)
+            # communication.
+            #
+            # > **Warning**: Insecure registries can be useful when running a local registry.
+            # > However, because its use creates security vulnerabilities it should ONLY be
+            # > enabled for testing purposes. For increased security, users should add their
+            # > CA to their system's list of trusted CAs instead of enabling this option.
+            secure: nil
+          )
+          end
+
+          sig do
+            override.returns(
+              {
+                mirrors: T::Array[String],
+                name: String,
+                official: T::Boolean,
+                secure: T::Boolean
+              }
+            )
+          end
+          def to_hash
+          end
         end
       end
 
@@ -1800,6 +1921,97 @@ module DockerEngineRuby
         end
 
         sig { override.returns({ id: String }) }
+        def to_hash
+        end
+      end
+
+      class Runtime < DockerEngineRuby::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              DockerEngineRuby::Info::Runtime,
+              DockerEngineRuby::Internal::AnyHash
+            )
+          end
+
+        # Name and, optional, path, of the OCI executable binary.
+        #
+        # If the path is omitted, the daemon searches the host's `$PATH` for the binary
+        # and uses the first result.
+        sig { returns(T.nilable(String)) }
+        attr_reader :path
+
+        sig { params(path: String).void }
+        attr_writer :path
+
+        # List of command-line arguments to pass to the runtime when invoked.
+        sig { returns(T.nilable(T::Array[String])) }
+        attr_accessor :runtime_args
+
+        # Information specific to the runtime.
+        #
+        # While this API specification does not define data provided by runtimes, the
+        # following well-known properties may be provided by runtimes:
+        #
+        # `org.opencontainers.runtime-spec.features`: features structure as defined in the
+        # [OCI Runtime Specification](https://github.com/opencontainers/runtime-spec/blob/main/features.md),
+        # in a JSON string representation.
+        #
+        # <p><br /></p>
+        #
+        # > **Note**: The information returned in this field, including the formatting of
+        # > values and labels, should not be considered stable, and may change without
+        # > notice.
+        sig { returns(T.nilable(T::Hash[Symbol, String])) }
+        attr_accessor :status
+
+        # Runtime describes an
+        # [OCI compliant](https://github.com/opencontainers/runtime-spec) runtime.
+        #
+        # The runtime is invoked by the daemon via the `containerd` daemon. OCI runtimes
+        # act as an interface to the Linux kernel namespaces, cgroups, and SELinux.
+        sig do
+          params(
+            path: String,
+            runtime_args: T.nilable(T::Array[String]),
+            status: T.nilable(T::Hash[Symbol, String])
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # Name and, optional, path, of the OCI executable binary.
+          #
+          # If the path is omitted, the daemon searches the host's `$PATH` for the binary
+          # and uses the first result.
+          path: nil,
+          # List of command-line arguments to pass to the runtime when invoked.
+          runtime_args: nil,
+          # Information specific to the runtime.
+          #
+          # While this API specification does not define data provided by runtimes, the
+          # following well-known properties may be provided by runtimes:
+          #
+          # `org.opencontainers.runtime-spec.features`: features structure as defined in the
+          # [OCI Runtime Specification](https://github.com/opencontainers/runtime-spec/blob/main/features.md),
+          # in a JSON string representation.
+          #
+          # <p><br /></p>
+          #
+          # > **Note**: The information returned in this field, including the formatting of
+          # > values and labels, should not be considered stable, and may change without
+          # > notice.
+          status: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              path: String,
+              runtime_args: T.nilable(T::Array[String]),
+              status: T.nilable(T::Hash[Symbol, String])
+            }
+          )
+        end
         def to_hash
         end
       end

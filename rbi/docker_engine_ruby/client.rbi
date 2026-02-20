@@ -19,19 +19,6 @@ module DockerEngineRuby
         T::Hash[Symbol, String]
       )
 
-    # Path to the trusted CA certificate file (PEM) used to verify the Docker daemon
-    # certificate.
-    sig { returns(T.nilable(String)) }
-    attr_reader :tls_ca_cert_path
-
-    # Path to the client TLS certificate file (PEM).
-    sig { returns(T.nilable(String)) }
-    attr_reader :tls_client_cert_path
-
-    # Path to the client TLS private key file (PEM).
-    sig { returns(T.nilable(String)) }
-    attr_reader :tls_client_key_path
-
     sig { returns(DockerEngineRuby::Resources::Auth) }
     attr_reader :auth
 
@@ -80,9 +67,6 @@ module DockerEngineRuby
     # Creates and returns a new client for interacting with the API.
     sig do
       params(
-        tls_ca_cert_path: T.nilable(String),
-        tls_client_cert_path: T.nilable(String),
-        tls_client_key_path: T.nilable(String),
         environment: T.nilable(T.any(Symbol, String)),
         base_url: T.nilable(String),
         max_retries: Integer,
@@ -92,15 +76,6 @@ module DockerEngineRuby
       ).returns(T.attached_class)
     end
     def self.new(
-      # Path to the trusted CA certificate file (PEM) used to verify the Docker daemon
-      # certificate. Defaults to `ENV["DOCKER_TLS_CA_CERT_PATH"]`
-      tls_ca_cert_path: ENV["DOCKER_TLS_CA_CERT_PATH"],
-      # Path to the client TLS certificate file (PEM). Defaults to
-      # `ENV["DOCKER_TLS_CLIENT_CERT_PATH"]`
-      tls_client_cert_path: ENV["DOCKER_TLS_CLIENT_CERT_PATH"],
-      # Path to the client TLS private key file (PEM). Defaults to
-      # `ENV["DOCKER_TLS_CLIENT_KEY_PATH"]`
-      tls_client_key_path: ENV["DOCKER_TLS_CLIENT_KEY_PATH"],
       # Specifies the environment to use for the API.
       #
       # Each environment maps to a different base URL:

@@ -274,8 +274,8 @@ module DockerEngineRuby
         #   This information is driver-specific, and depends on the storage-driver in use,
         #   and should be used for informational purposes only.
         #
-        #   @return [Object]
-        required :data, DockerEngineRuby::Internal::Type::Unknown, api_name: :Data
+        #   @return [Hash{Symbol=>String}]
+        required :data, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Data
 
         # @!attribute name
         #   Name of the storage driver.
@@ -290,7 +290,7 @@ module DockerEngineRuby
         #   Information about the storage driver used to store the container's and image's
         #   filesystem.
         #
-        #   @param data [Object] Low-level storage metadata, provided as key/value pairs.
+        #   @param data [Hash{Symbol=>String}] Low-level storage metadata, provided as key/value pairs.
         #
         #   @param name [String] Name of the storage driver.
       end
@@ -301,8 +301,8 @@ module DockerEngineRuby
         #   Arbitrary non-identifying metadata attached to container and provided to the
         #   runtime when the container is started.
         #
-        #   @return [Object, nil]
-        optional :annotations, DockerEngineRuby::Internal::Type::Unknown, api_name: :Annotations
+        #   @return [Hash{Symbol=>String}, nil]
+        optional :annotations, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Annotations
 
         # @!attribute auto_remove
         #   Automatically remove the container when the container's process exits. This has
@@ -752,8 +752,12 @@ module DockerEngineRuby
 
         # @!attribute port_bindings
         #
-        #   @return [Object, nil]
-        optional :port_bindings, DockerEngineRuby::Internal::Type::Unknown, api_name: :PortBindings
+        #   @return [Hash{Symbol=>Array<DockerEngineRuby::Models::Container::HostConfig::PortBinding>}, nil]
+        optional :port_bindings,
+                 -> {
+                   DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Container::HostConfig::PortBinding]]
+                 },
+                 api_name: :PortBindings
 
         # @!attribute privileged
         #   Gives the container full access to the host.
@@ -819,16 +823,16 @@ module DockerEngineRuby
         # @!attribute storage_opt
         #   Storage driver options for this container, in the form `{"size": "120G"}`.
         #
-        #   @return [Object, nil]
-        optional :storage_opt, DockerEngineRuby::Internal::Type::Unknown, api_name: :StorageOpt
+        #   @return [Hash{Symbol=>String}, nil]
+        optional :storage_opt, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :StorageOpt
 
         # @!attribute sysctls
         #   A list of kernel parameters (sysctls) to set in the container.
         #
         #   This field is omitted if not set.
         #
-        #   @return [Object, nil]
-        optional :sysctls, DockerEngineRuby::Internal::Type::Unknown, api_name: :Sysctls, nil?: true
+        #   @return [Hash{Symbol=>String}, nil]
+        optional :sysctls, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Sysctls, nil?: true
 
         # @!attribute tmpfs
         #   A map of container directories which should be replaced by tmpfs mounts, and
@@ -838,8 +842,8 @@ module DockerEngineRuby
         #   { "/run": "rw,noexec,nosuid,size=65536k" }
         #   ```
         #
-        #   @return [Object, nil]
-        optional :tmpfs, DockerEngineRuby::Internal::Type::Unknown, api_name: :Tmpfs
+        #   @return [Hash{Symbol=>String}, nil]
+        optional :tmpfs, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Tmpfs
 
         # @!attribute ulimits
         #   A list of resource limits to set in the container. For example:
@@ -887,7 +891,7 @@ module DockerEngineRuby
         #
         #   Container configuration that depends on the host we are running on
         #
-        #   @param annotations [Object] Arbitrary non-identifying metadata attached to container and
+        #   @param annotations [Hash{Symbol=>String}] Arbitrary non-identifying metadata attached to container and
         #
         #   @param auto_remove [Boolean] Automatically remove the container when the container's process
         #
@@ -991,7 +995,7 @@ module DockerEngineRuby
         #
         #   @param pids_limit [Integer, nil] Tune a container's PIDs limit. Set `0` or `-1` for unlimited, or `null`
         #
-        #   @param port_bindings [Object]
+        #   @param port_bindings [Hash{Symbol=>Array<DockerEngineRuby::Models::Container::HostConfig::PortBinding>}]
         #
         #   @param privileged [Boolean] Gives the container full access to the host.
         #
@@ -1009,11 +1013,11 @@ module DockerEngineRuby
         #
         #   @param shm_size [Integer] Size of `/dev/shm` in bytes. If omitted, the system uses 64MB.
         #
-        #   @param storage_opt [Object] Storage driver options for this container, in the form `{"size": "120G"}`.
+        #   @param storage_opt [Hash{Symbol=>String}] Storage driver options for this container, in the form `{"size": "120G"}`.
         #
-        #   @param sysctls [Object, nil] A list of kernel parameters (sysctls) to set in the container.
+        #   @param sysctls [Hash{Symbol=>String}, nil] A list of kernel parameters (sysctls) to set in the container.
         #
-        #   @param tmpfs [Object] A map of container directories which should be replaced by tmpfs
+        #   @param tmpfs [Hash{Symbol=>String}] A map of container directories which should be replaced by tmpfs
         #
         #   @param ulimits [Array<DockerEngineRuby::Models::Container::HostConfig::Ulimit>] A list of resource limits to set in the container. For example:
         #
@@ -1174,8 +1178,8 @@ module DockerEngineRuby
           #   Driver-specific options, specified as a key/value pairs. These options are
           #   passed directly to the driver.
           #
-          #   @return [Object, nil]
-          optional :options, DockerEngineRuby::Internal::Type::Unknown, api_name: :Options
+          #   @return [Hash{Symbol=>String}, nil]
+          optional :options, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Options
 
           # @!method initialize(capabilities: nil, count: nil, device_ids: nil, driver: nil, options: nil)
           #   Some parameter documentations has been truncated, see
@@ -1192,7 +1196,7 @@ module DockerEngineRuby
           #
           #   @param driver [String] The name of the device driver to use for this request.
           #
-          #   @param options [Object] Driver-specific options, specified as a key/value pairs. These options
+          #   @param options [Hash{Symbol=>String}] Driver-specific options, specified as a key/value pairs. These options
         end
 
         class Device < DockerEngineRuby::Internal::Type::BaseModel
@@ -1238,8 +1242,8 @@ module DockerEngineRuby
         class LogConfig < DockerEngineRuby::Internal::Type::BaseModel
           # @!attribute config
           #
-          #   @return [Object, nil]
-          optional :config, DockerEngineRuby::Internal::Type::Unknown, api_name: :Config
+          #   @return [Hash{Symbol=>String}, nil]
+          optional :config, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Config
 
           # @!attribute type
           #
@@ -1253,7 +1257,7 @@ module DockerEngineRuby
           # @!method initialize(config: nil, type: nil)
           #   The logging configuration for this container
           #
-          #   @param config [Object]
+          #   @param config [Hash{Symbol=>String}]
           #   @param type [Symbol, DockerEngineRuby::Models::Container::HostConfig::LogConfig::Type]
 
           # @see DockerEngineRuby::Models::Container::HostConfig::LogConfig#type
@@ -1509,8 +1513,8 @@ module DockerEngineRuby
 
             # @!attribute labels
             #
-            #   @return [Object, nil]
-            optional :labels, DockerEngineRuby::Internal::Type::Unknown, api_name: :Labels
+            #   @return [Hash{Symbol=>String}, nil]
+            optional :labels, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Labels
 
             # @!attribute no_copy
             #
@@ -1526,7 +1530,7 @@ module DockerEngineRuby
             #   Optional configuration for the `volume` type.
             #
             #   @param driver_config [DockerEngineRuby::Models::Container::HostConfig::Mount::VolumeOptions::DriverConfig]
-            #   @param labels [Object]
+            #   @param labels [Hash{Symbol=>String}]
             #   @param no_copy [Boolean]
             #   @param subpath [String]
 
@@ -1539,14 +1543,35 @@ module DockerEngineRuby
 
               # @!attribute options
               #
-              #   @return [Object, nil]
-              optional :options, DockerEngineRuby::Internal::Type::Unknown, api_name: :Options
+              #   @return [Hash{Symbol=>String}, nil]
+              optional :options, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Options
 
               # @!method initialize(name: nil, options: nil)
               #   @param name [String]
-              #   @param options [Object]
+              #   @param options [Hash{Symbol=>String}]
             end
           end
+        end
+
+        class PortBinding < DockerEngineRuby::Internal::Type::BaseModel
+          # @!attribute host_ip
+          #   Host IP address that the container's port is mapped to.
+          #
+          #   @return [String, nil]
+          optional :host_ip, String, api_name: :HostIp
+
+          # @!attribute host_port
+          #   Host port number that the container's port is mapped to.
+          #
+          #   @return [String, nil]
+          optional :host_port, String, api_name: :HostPort
+
+          # @!method initialize(host_ip: nil, host_port: nil)
+          #   PortBinding represents a binding between a host IP address and a host port.
+          #
+          #   @param host_ip [String] Host IP address that the container's port is mapped to.
+          #
+          #   @param host_port [String] Host port number that the container's port is mapped to.
         end
 
         # @see DockerEngineRuby::Models::Container::HostConfig#restart_policy
@@ -1636,8 +1661,8 @@ module DockerEngineRuby
         # @!attribute annotations
         #   Arbitrary metadata relating to the targeted content.
         #
-        #   @return [Object, nil]
-        optional :annotations, DockerEngineRuby::Internal::Type::Unknown, nil?: true
+        #   @return [Hash{Symbol=>String}, nil]
+        optional :annotations, DockerEngineRuby::Internal::Type::HashOf[String], nil?: true
 
         # @!attribute artifact_type
         #   ArtifactType is the IANA media type of this artifact.
@@ -1692,7 +1717,7 @@ module DockerEngineRuby
         #   A descriptor struct containing digest, media type, and size, as defined in the
         #   [OCI Content Descriptors Specification](https://github.com/opencontainers/image-spec/blob/v1.0.1/descriptor.md).
         #
-        #   @param annotations [Object, nil] Arbitrary metadata relating to the targeted content.
+        #   @param annotations [Hash{Symbol=>String}, nil] Arbitrary metadata relating to the targeted content.
         #
         #   @param artifact_type [String, nil] ArtifactType is the IANA media type of this artifact.
         #
@@ -1886,13 +1911,21 @@ module DockerEngineRuby
         # @!attribute networks
         #   Information about all networks that the container is connected to.
         #
-        #   @return [Object, nil]
-        optional :networks, DockerEngineRuby::Internal::Type::Unknown, api_name: :Networks
+        #   @return [Hash{Symbol=>DockerEngineRuby::Models::Container::NetworkSettings::Network}, nil]
+        optional :networks,
+                 -> {
+                   DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Container::NetworkSettings::Network]
+                 },
+                 api_name: :Networks
 
         # @!attribute ports
         #
-        #   @return [Object, nil]
-        optional :ports, DockerEngineRuby::Internal::Type::Unknown, api_name: :Ports
+        #   @return [Hash{Symbol=>Array<DockerEngineRuby::Models::Container::NetworkSettings::Port>}, nil]
+        optional :ports,
+                 -> {
+                   DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Container::NetworkSettings::Port]]
+                 },
+                 api_name: :Ports
 
         # @!attribute sandbox_id
         #   SandboxID uniquely represents a container's network stack.
@@ -1909,13 +1942,204 @@ module DockerEngineRuby
         # @!method initialize(networks: nil, ports: nil, sandbox_id: nil, sandbox_key: nil)
         #   NetworkSettings exposes the network settings in the API
         #
-        #   @param networks [Object] Information about all networks that the container is connected to.
+        #   @param networks [Hash{Symbol=>DockerEngineRuby::Models::Container::NetworkSettings::Network}] Information about all networks that the container is connected to.
         #
-        #   @param ports [Object]
+        #   @param ports [Hash{Symbol=>Array<DockerEngineRuby::Models::Container::NetworkSettings::Port>}]
         #
         #   @param sandbox_id [String] SandboxID uniquely represents a container's network stack.
         #
         #   @param sandbox_key [String] SandboxKey is the full path of the netns handle
+
+        class Network < DockerEngineRuby::Internal::Type::BaseModel
+          # @!attribute aliases
+          #
+          #   @return [Array<String>, nil]
+          optional :aliases, DockerEngineRuby::Internal::Type::ArrayOf[String], api_name: :Aliases
+
+          # @!attribute dns_names
+          #   List of all DNS names an endpoint has on a specific network. This list is based
+          #   on the container name, network aliases, container short ID, and hostname.
+          #
+          #   These DNS names are non-fully qualified but can contain several dots. You can
+          #   get fully qualified DNS names by appending `.<network-name>`. For instance, if
+          #   container name is `my.ctr` and the network is named `testnet`, `DNSNames` will
+          #   contain `my.ctr` and the FQDN will be `my.ctr.testnet`.
+          #
+          #   @return [Array<String>, nil]
+          optional :dns_names, DockerEngineRuby::Internal::Type::ArrayOf[String], api_name: :DNSNames
+
+          # @!attribute driver_opts
+          #   DriverOpts is a mapping of driver options and values. These options are passed
+          #   directly to the driver and are driver specific.
+          #
+          #   @return [Hash{Symbol=>String}, nil]
+          optional :driver_opts,
+                   DockerEngineRuby::Internal::Type::HashOf[String],
+                   api_name: :DriverOpts,
+                   nil?: true
+
+          # @!attribute endpoint_id
+          #   Unique ID for the service endpoint in a Sandbox.
+          #
+          #   @return [String, nil]
+          optional :endpoint_id, String, api_name: :EndpointID
+
+          # @!attribute gateway
+          #   Gateway address for this network.
+          #
+          #   @return [String, nil]
+          optional :gateway, String, api_name: :Gateway
+
+          # @!attribute global_i_pv6_address
+          #   Global IPv6 address.
+          #
+          #   @return [String, nil]
+          optional :global_i_pv6_address, String, api_name: :GlobalIPv6Address
+
+          # @!attribute global_i_pv6_prefix_len
+          #   Mask length of the global IPv6 address.
+          #
+          #   @return [Integer, nil]
+          optional :global_i_pv6_prefix_len, Integer, api_name: :GlobalIPv6PrefixLen
+
+          # @!attribute gw_priority
+          #   This property determines which endpoint will provide the default gateway for a
+          #   container. The endpoint with the highest priority will be used. If multiple
+          #   endpoints have the same priority, endpoints are lexicographically sorted based
+          #   on their network name, and the one that sorts first is picked.
+          #
+          #   @return [Integer, nil]
+          optional :gw_priority, Integer, api_name: :GwPriority
+
+          # @!attribute ip_address
+          #   IPv4 address.
+          #
+          #   @return [String, nil]
+          optional :ip_address, String, api_name: :IPAddress
+
+          # @!attribute ipam_config
+          #   EndpointIPAMConfig represents an endpoint's IPAM configuration.
+          #
+          #   @return [DockerEngineRuby::Models::Container::NetworkSettings::Network::IpamConfig, nil]
+          optional :ipam_config,
+                   -> { DockerEngineRuby::Container::NetworkSettings::Network::IpamConfig },
+                   api_name: :IPAMConfig
+
+          # @!attribute ip_prefix_len
+          #   Mask length of the IPv4 address.
+          #
+          #   @return [Integer, nil]
+          optional :ip_prefix_len, Integer, api_name: :IPPrefixLen
+
+          # @!attribute i_pv6_gateway
+          #   IPv6 gateway address.
+          #
+          #   @return [String, nil]
+          optional :i_pv6_gateway, String, api_name: :IPv6Gateway
+
+          # @!attribute links
+          #
+          #   @return [Array<String>, nil]
+          optional :links, DockerEngineRuby::Internal::Type::ArrayOf[String], api_name: :Links
+
+          # @!attribute mac_address
+          #   MAC address for the endpoint on this network. The network driver might ignore
+          #   this parameter.
+          #
+          #   @return [String, nil]
+          optional :mac_address, String, api_name: :MacAddress
+
+          # @!attribute network_id
+          #   Unique ID of the network.
+          #
+          #   @return [String, nil]
+          optional :network_id, String, api_name: :NetworkID
+
+          # @!method initialize(aliases: nil, dns_names: nil, driver_opts: nil, endpoint_id: nil, gateway: nil, global_i_pv6_address: nil, global_i_pv6_prefix_len: nil, gw_priority: nil, ip_address: nil, ipam_config: nil, ip_prefix_len: nil, i_pv6_gateway: nil, links: nil, mac_address: nil, network_id: nil)
+          #   Some parameter documentations has been truncated, see
+          #   {DockerEngineRuby::Models::Container::NetworkSettings::Network} for more
+          #   details.
+          #
+          #   Configuration for a network endpoint.
+          #
+          #   @param aliases [Array<String>]
+          #
+          #   @param dns_names [Array<String>] List of all DNS names an endpoint has on a specific network. This
+          #
+          #   @param driver_opts [Hash{Symbol=>String}, nil] DriverOpts is a mapping of driver options and values. These options
+          #
+          #   @param endpoint_id [String] Unique ID for the service endpoint in a Sandbox.
+          #
+          #   @param gateway [String] Gateway address for this network.
+          #
+          #   @param global_i_pv6_address [String] Global IPv6 address.
+          #
+          #   @param global_i_pv6_prefix_len [Integer] Mask length of the global IPv6 address.
+          #
+          #   @param gw_priority [Integer] This property determines which endpoint will provide the default
+          #
+          #   @param ip_address [String] IPv4 address.
+          #
+          #   @param ipam_config [DockerEngineRuby::Models::Container::NetworkSettings::Network::IpamConfig] EndpointIPAMConfig represents an endpoint's IPAM configuration.
+          #
+          #   @param ip_prefix_len [Integer] Mask length of the IPv4 address.
+          #
+          #   @param i_pv6_gateway [String] IPv6 gateway address.
+          #
+          #   @param links [Array<String>]
+          #
+          #   @param mac_address [String] MAC address for the endpoint on this network. The network driver might ignore th
+          #
+          #   @param network_id [String] Unique ID of the network.
+
+          # @see DockerEngineRuby::Models::Container::NetworkSettings::Network#ipam_config
+          class IpamConfig < DockerEngineRuby::Internal::Type::BaseModel
+            # @!attribute i_pv4_address
+            #
+            #   @return [String, nil]
+            optional :i_pv4_address, String, api_name: :IPv4Address
+
+            # @!attribute i_pv6_address
+            #
+            #   @return [String, nil]
+            optional :i_pv6_address, String, api_name: :IPv6Address
+
+            # @!attribute link_local_ips
+            #
+            #   @return [Array<String>, nil]
+            optional :link_local_ips,
+                     DockerEngineRuby::Internal::Type::ArrayOf[String],
+                     api_name: :LinkLocalIPs
+
+            # @!method initialize(i_pv4_address: nil, i_pv6_address: nil, link_local_ips: nil)
+            #   EndpointIPAMConfig represents an endpoint's IPAM configuration.
+            #
+            #   @param i_pv4_address [String]
+            #   @param i_pv6_address [String]
+            #   @param link_local_ips [Array<String>]
+          end
+        end
+
+        class Port < DockerEngineRuby::Internal::Type::BaseModel
+          # @!attribute host_ip
+          #   Host IP address that the container's port is mapped to.
+          #
+          #   @return [String, nil]
+          optional :host_ip, String, api_name: :HostIp
+
+          # @!attribute host_port
+          #   Host port number that the container's port is mapped to.
+          #
+          #   @return [String, nil]
+          optional :host_port, String, api_name: :HostPort
+
+          # @!method initialize(host_ip: nil, host_port: nil)
+          #   PortBinding represents a binding between a host IP address and a host port.
+          #
+          #   @param host_ip [String] Host IP address that the container's port is mapped to.
+          #
+          #   @param host_port [String] Host port number that the container's port is mapped to.
+        end
       end
 
       # @see DockerEngineRuby::Models::Container#state

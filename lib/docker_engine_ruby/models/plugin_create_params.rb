@@ -14,12 +14,12 @@ module DockerEngineRuby
 
       # @!attribute body
       #
-      #   @return [Object]
-      required :body, DockerEngineRuby::Internal::Type::Unknown
+      #   @return [Pathname, StringIO, IO, String, DockerEngineRuby::FilePart]
+      required :body, DockerEngineRuby::Internal::Type::FileInput
 
       # @!method initialize(name:, body:, request_options: {})
       #   @param name [String]
-      #   @param body [Object]
+      #   @param body [Pathname, StringIO, IO, String, DockerEngineRuby::FilePart]
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]
     end
   end

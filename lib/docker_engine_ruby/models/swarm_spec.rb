@@ -26,8 +26,8 @@ module DockerEngineRuby
       # @!attribute labels
       #   User-defined key/value metadata.
       #
-      #   @return [Object, nil]
-      optional :labels, DockerEngineRuby::Internal::Type::Unknown, api_name: :Labels
+      #   @return [Hash{Symbol=>String}, nil]
+      optional :labels, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Labels
 
       # @!attribute name
       #   Name of the swarm.
@@ -65,7 +65,7 @@ module DockerEngineRuby
       #
       #   @param encryption_config [DockerEngineRuby::Models::SwarmSpec::EncryptionConfig] Parameters related to encryption-at-rest.
       #
-      #   @param labels [Object] User-defined key/value metadata.
+      #   @param labels [Hash{Symbol=>String}] User-defined key/value metadata.
       #
       #   @param name [String] Name of the swarm.
       #
@@ -123,8 +123,8 @@ module DockerEngineRuby
 
           # @!attribute options
           #
-          #   @return [Object, nil]
-          optional :options, DockerEngineRuby::Internal::Type::Unknown, api_name: :Options
+          #   @return [Hash{Symbol=>String}, nil]
+          optional :options, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Options
 
           # @!attribute protocol
           #
@@ -140,7 +140,7 @@ module DockerEngineRuby
 
           # @!method initialize(ca_cert: nil, options: nil, protocol: nil, url: nil)
           #   @param ca_cert [String]
-          #   @param options [Object]
+          #   @param options [Hash{Symbol=>String}]
           #   @param protocol [Symbol, DockerEngineRuby::Models::SwarmSpec::CaConfig::ExternalCA::Protocol]
           #   @param url [String]
 
@@ -257,12 +257,12 @@ module DockerEngineRuby
 
           # @!attribute options
           #
-          #   @return [Object, nil]
-          optional :options, DockerEngineRuby::Internal::Type::Unknown, api_name: :Options
+          #   @return [Hash{Symbol=>String}, nil]
+          optional :options, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Options
 
           # @!method initialize(name: nil, options: nil)
           #   @param name [String]
-          #   @param options [Object]
+          #   @param options [Hash{Symbol=>String}]
         end
       end
     end

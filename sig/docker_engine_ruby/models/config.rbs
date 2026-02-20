@@ -10,11 +10,11 @@ module DockerEngineRuby
         domainname: String,
         entrypoint: ::Array[String],
         env: ::Array[String],
-        exposed_ports: top?,
+        exposed_ports: ::Hash[Symbol, ::Hash[Symbol, top]]?,
         healthcheck: DockerEngineRuby::Config::Healthcheck,
         hostname: String,
         image: String,
-        labels: top,
+        labels: ::Hash[Symbol, String],
         network_disabled: bool?,
         on_build: ::Array[String]?,
         open_stdin: bool,
@@ -24,7 +24,7 @@ module DockerEngineRuby
         stop_timeout: Integer?,
         tty: bool,
         user: String,
-        volumes: top,
+        volumes: ::Hash[Symbol, ::Hash[Symbol, top]],
         working_dir: String
       }
 
@@ -59,7 +59,7 @@ module DockerEngineRuby
 
       def env=: (::Array[String]) -> ::Array[String]
 
-      attr_accessor exposed_ports: top?
+      attr_accessor exposed_ports: ::Hash[Symbol, ::Hash[Symbol, top]]?
 
       attr_reader healthcheck: DockerEngineRuby::Config::Healthcheck?
 
@@ -75,9 +75,9 @@ module DockerEngineRuby
 
       def image=: (String) -> String
 
-      attr_reader labels: top?
+      attr_reader labels: ::Hash[Symbol, String]?
 
-      def labels=: (top) -> top
+      def labels=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
       attr_accessor network_disabled: bool?
 
@@ -105,9 +105,11 @@ module DockerEngineRuby
 
       def user=: (String) -> String
 
-      attr_reader volumes: top?
+      attr_reader volumes: ::Hash[Symbol, ::Hash[Symbol, top]]?
 
-      def volumes=: (top) -> top
+      def volumes=: (
+        ::Hash[Symbol, ::Hash[Symbol, top]]
+      ) -> ::Hash[Symbol, ::Hash[Symbol, top]]
 
       attr_reader working_dir: String?
 
@@ -122,11 +124,11 @@ module DockerEngineRuby
         ?domainname: String,
         ?entrypoint: ::Array[String],
         ?env: ::Array[String],
-        ?exposed_ports: top?,
+        ?exposed_ports: ::Hash[Symbol, ::Hash[Symbol, top]]?,
         ?healthcheck: DockerEngineRuby::Config::Healthcheck,
         ?hostname: String,
         ?image: String,
-        ?labels: top,
+        ?labels: ::Hash[Symbol, String],
         ?network_disabled: bool?,
         ?on_build: ::Array[String]?,
         ?open_stdin: bool,
@@ -136,7 +138,7 @@ module DockerEngineRuby
         ?stop_timeout: Integer?,
         ?tty: bool,
         ?user: String,
-        ?volumes: top,
+        ?volumes: ::Hash[Symbol, ::Hash[Symbol, top]],
         ?working_dir: String
       ) -> void
 
@@ -149,11 +151,11 @@ module DockerEngineRuby
         domainname: String,
         entrypoint: ::Array[String],
         env: ::Array[String],
-        exposed_ports: top?,
+        exposed_ports: ::Hash[Symbol, ::Hash[Symbol, top]]?,
         healthcheck: DockerEngineRuby::Config::Healthcheck,
         hostname: String,
         image: String,
-        labels: top,
+        labels: ::Hash[Symbol, String],
         network_disabled: bool?,
         on_build: ::Array[String]?,
         open_stdin: bool,
@@ -163,7 +165,7 @@ module DockerEngineRuby
         stop_timeout: Integer?,
         tty: bool,
         user: String,
-        volumes: top,
+        volumes: ::Hash[Symbol, ::Hash[Symbol, top]],
         working_dir: String
       }
 

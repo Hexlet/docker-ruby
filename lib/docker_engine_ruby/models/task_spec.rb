@@ -210,8 +210,8 @@ module DockerEngineRuby
 
         # @!attribute labels
         #
-        #   @return [Object, nil]
-        optional :labels, DockerEngineRuby::Internal::Type::Unknown, api_name: :Labels
+        #   @return [Hash{Symbol=>String}, nil]
+        optional :labels, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Labels
 
         # @!attribute mounts
         #
@@ -267,8 +267,8 @@ module DockerEngineRuby
 
         # @!attribute sysctls
         #
-        #   @return [Object, nil]
-        optional :sysctls, DockerEngineRuby::Internal::Type::Unknown, api_name: :Sysctls
+        #   @return [Hash{Symbol=>String}, nil]
+        optional :sysctls, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Sysctls
 
         # @!attribute tty
         #
@@ -331,7 +331,7 @@ module DockerEngineRuby
         #
         #   @param isolation [Symbol, DockerEngineRuby::Models::TaskSpec::ContainerSpec::Isolation]
         #
-        #   @param labels [Object]
+        #   @param labels [Hash{Symbol=>String}]
         #
         #   @param mounts [Array<DockerEngineRuby::Models::TaskSpec::ContainerSpec::Mount>]
         #
@@ -349,7 +349,7 @@ module DockerEngineRuby
         #
         #   @param stop_signal [String]
         #
-        #   @param sysctls [Object]
+        #   @param sysctls [Hash{Symbol=>String}]
         #
         #   @param tty [Boolean]
         #
@@ -375,14 +375,16 @@ module DockerEngineRuby
 
           # @!attribute runtime
           #
-          #   @return [Object, nil]
-          optional :runtime, DockerEngineRuby::Internal::Type::Unknown, api_name: :Runtime
+          #   @return [Hash{Symbol=>Object}, nil]
+          optional :runtime,
+                   DockerEngineRuby::Internal::Type::HashOf[DockerEngineRuby::Internal::Type::Unknown],
+                   api_name: :Runtime
 
           # @!method initialize(config_id: nil, config_name: nil, file: nil, runtime: nil)
           #   @param config_id [String]
           #   @param config_name [String]
           #   @param file [DockerEngineRuby::Models::TaskSpec::ContainerSpec::Config::File]
-          #   @param runtime [Object]
+          #   @param runtime [Hash{Symbol=>Object}]
 
           # @see DockerEngineRuby::Models::TaskSpec::ContainerSpec::Config#file
           class File < DockerEngineRuby::Internal::Type::BaseModel
@@ -764,8 +766,8 @@ module DockerEngineRuby
 
             # @!attribute labels
             #
-            #   @return [Object, nil]
-            optional :labels, DockerEngineRuby::Internal::Type::Unknown, api_name: :Labels
+            #   @return [Hash{Symbol=>String}, nil]
+            optional :labels, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Labels
 
             # @!attribute no_copy
             #
@@ -781,7 +783,7 @@ module DockerEngineRuby
             #   Optional configuration for the `volume` type.
             #
             #   @param driver_config [DockerEngineRuby::Models::TaskSpec::ContainerSpec::Mount::VolumeOptions::DriverConfig]
-            #   @param labels [Object]
+            #   @param labels [Hash{Symbol=>String}]
             #   @param no_copy [Boolean]
             #   @param subpath [String]
 
@@ -794,12 +796,12 @@ module DockerEngineRuby
 
               # @!attribute options
               #
-              #   @return [Object, nil]
-              optional :options, DockerEngineRuby::Internal::Type::Unknown, api_name: :Options
+              #   @return [Hash{Symbol=>String}, nil]
+              optional :options, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Options
 
               # @!method initialize(name: nil, options: nil)
               #   @param name [String]
-              #   @param options [Object]
+              #   @param options [Hash{Symbol=>String}]
             end
           end
         end
@@ -1043,8 +1045,8 @@ module DockerEngineRuby
 
         # @!attribute options
         #
-        #   @return [Object, nil]
-        optional :options, DockerEngineRuby::Internal::Type::Unknown, api_name: :Options
+        #   @return [Hash{Symbol=>String}, nil]
+        optional :options, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :Options
 
         # @!method initialize(name: nil, options: nil)
         #   Specifies the log driver to use for tasks created from this spec. If not
@@ -1052,7 +1054,7 @@ module DockerEngineRuby
         #   engine default if not specified.
         #
         #   @param name [String]
-        #   @param options [Object]
+        #   @param options [Hash{Symbol=>String}]
       end
 
       # @see DockerEngineRuby::Models::TaskSpec#network_attachment_spec
@@ -1084,8 +1086,8 @@ module DockerEngineRuby
         # @!attribute driver_opts
         #   Driver attachment options for the network target.
         #
-        #   @return [Object, nil]
-        optional :driver_opts, DockerEngineRuby::Internal::Type::Unknown, api_name: :DriverOpts
+        #   @return [Hash{Symbol=>String}, nil]
+        optional :driver_opts, DockerEngineRuby::Internal::Type::HashOf[String], api_name: :DriverOpts
 
         # @!attribute target
         #   The target network for attachment. Must be a network name or ID.
@@ -1098,7 +1100,7 @@ module DockerEngineRuby
         #
         #   @param aliases [Array<String>] Discoverable alternate names for the service on this network.
         #
-        #   @param driver_opts [Object] Driver attachment options for the network target.
+        #   @param driver_opts [Hash{Symbol=>String}] Driver attachment options for the network target.
         #
         #   @param target [String] The target network for attachment. Must be a network name or ID.
       end
