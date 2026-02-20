@@ -27,11 +27,16 @@ module DockerEngineRuby
         class << self
           # @api private
           sig do
-            params(cert_store: OpenSSL::X509::Store, url: URI::Generic).returns(
+            params(
+              cert_store: OpenSSL::X509::Store,
+              tls_cert: T.nilable(OpenSSL::X509::Certificate),
+              tls_key: T.nilable(OpenSSL::PKey::PKey),
+              url: URI::Generic
+            ).returns(
               Net::HTTP
             )
           end
-          def connect(cert_store:, url:)
+          def connect(cert_store:, tls_cert:, tls_key:, url:)
           end
 
           # @api private
@@ -73,9 +78,19 @@ module DockerEngineRuby
         end
 
         # @api private
-        sig { params(size: Integer).returns(T.attached_class) }
+        sig do
+          params(
+            size: Integer,
+            tls_ca_cert_path: T.nilable(String),
+            tls_client_cert_path: T.nilable(String),
+            tls_client_key_path: T.nilable(String)
+          ).returns(T.attached_class)
+        end
         def self.new(
-          size: DockerEngineRuby::Internal::Transport::PooledNetRequester::DEFAULT_MAX_CONNECTIONS
+          size: DockerEngineRuby::Internal::Transport::PooledNetRequester::DEFAULT_MAX_CONNECTIONS,
+          tls_ca_cert_path: nil,
+          tls_client_cert_path: nil,
+          tls_client_key_path: nil
         )
         end
       end
