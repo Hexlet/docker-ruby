@@ -372,6 +372,36 @@ class DockerEngineRubyTest < Minitest::Test
     assert_equal(304, error.status)
   end
 
+  def test_client_unix_base_url_routes_requests_through_unix_socket_path
+    response_class = Struct.new(:headers) do
+      def each_header = headers.each
+    end
+    requester_class = Class.new do
+      attr_reader :last_request
+
+      define_method(:initialize) { |response| @response = response }
+      define_method(:execute) do |request|
+        @last_request = request
+        [200, @response, ["[]"]]
+      end
+    end
+    requester = requester_class.new(response_class.new({"content-type" => "application/json"}))
+
+    docker = DockerEngineRuby::Client.new(base_url: "unix:///var/run/docker.sock")
+    docker.instance_variable_set(:@requester, requester)
+
+    docker.containers.list
+
+    assert_equal("/var/run/docker.sock", requester.last_request[:unix_socket_path])
+    assert_equal("http://localhost/containers/json", requester.last_request[:url].to_s)
+  end
+
+  def test_client_unix_base_url_requires_socket_path
+    assert_raises(ArgumentError) do
+      DockerEngineRuby::Client.new(base_url: "unix://")
+    end
+  end
+
   def test_default_headers
     stub_request(:get, "http://localhost/containers/json").to_return_json(status: 200, body: {})
 
