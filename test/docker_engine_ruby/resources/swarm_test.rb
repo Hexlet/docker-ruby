@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class DockerEngineRuby::Test::Resources::SwarmTest < DockerEngineRuby::Test::ResourceTest
   def test_update_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.swarm.update(version: 0, spec: {})
 
@@ -14,7 +14,7 @@ class DockerEngineRuby::Test::Resources::SwarmTest < DockerEngineRuby::Test::Res
   end
 
   def test_init
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.swarm.init
 
@@ -24,7 +24,7 @@ class DockerEngineRuby::Test::Resources::SwarmTest < DockerEngineRuby::Test::Res
   end
 
   def test_inspect_
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.swarm.inspect_
 
@@ -50,7 +50,7 @@ class DockerEngineRuby::Test::Resources::SwarmTest < DockerEngineRuby::Test::Res
   end
 
   def test_join
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.swarm.join
 
@@ -60,7 +60,7 @@ class DockerEngineRuby::Test::Resources::SwarmTest < DockerEngineRuby::Test::Res
   end
 
   def test_leave
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.swarm.leave
 
@@ -70,7 +70,7 @@ class DockerEngineRuby::Test::Resources::SwarmTest < DockerEngineRuby::Test::Res
   end
 
   def test_unlock
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.swarm.unlock
 
@@ -80,7 +80,7 @@ class DockerEngineRuby::Test::Resources::SwarmTest < DockerEngineRuby::Test::Res
   end
 
   def test_unlock_key
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.swarm.unlock_key
 

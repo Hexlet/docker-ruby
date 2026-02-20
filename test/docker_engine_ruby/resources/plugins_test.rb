@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class DockerEngineRuby::Test::Resources::PluginsTest < DockerEngineRuby::Test::ResourceTest
   def test_create_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.plugins.create(name: "name", body: Pathname(__FILE__))
 
@@ -14,7 +14,7 @@ class DockerEngineRuby::Test::Resources::PluginsTest < DockerEngineRuby::Test::R
   end
 
   def test_list
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.plugins.list
 
@@ -24,7 +24,7 @@ class DockerEngineRuby::Test::Resources::PluginsTest < DockerEngineRuby::Test::R
   end
 
   def test_delete
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.plugins.delete("name")
 
@@ -45,7 +45,7 @@ class DockerEngineRuby::Test::Resources::PluginsTest < DockerEngineRuby::Test::R
   end
 
   def test_disable
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.plugins.disable("name")
 
@@ -55,7 +55,7 @@ class DockerEngineRuby::Test::Resources::PluginsTest < DockerEngineRuby::Test::R
   end
 
   def test_enable
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.plugins.enable("name")
 
@@ -65,7 +65,7 @@ class DockerEngineRuby::Test::Resources::PluginsTest < DockerEngineRuby::Test::R
   end
 
   def test_inspect_
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.plugins.inspect_("name")
 
@@ -86,7 +86,7 @@ class DockerEngineRuby::Test::Resources::PluginsTest < DockerEngineRuby::Test::R
   end
 
   def test_privileges_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.plugins.privileges(remote: "remote")
 
@@ -96,7 +96,7 @@ class DockerEngineRuby::Test::Resources::PluginsTest < DockerEngineRuby::Test::R
   end
 
   def test_pull_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.plugins.pull(remote: "remote", body: [{}])
 
@@ -106,7 +106,7 @@ class DockerEngineRuby::Test::Resources::PluginsTest < DockerEngineRuby::Test::R
   end
 
   def test_push
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.plugins.push("name")
 
@@ -116,7 +116,7 @@ class DockerEngineRuby::Test::Resources::PluginsTest < DockerEngineRuby::Test::R
   end
 
   def test_set_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.plugins.set("name", body: ["string"])
 
@@ -126,7 +126,7 @@ class DockerEngineRuby::Test::Resources::PluginsTest < DockerEngineRuby::Test::R
   end
 
   def test_upgrade_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.plugins.upgrade("name", remote: "remote", body: [{}])
 

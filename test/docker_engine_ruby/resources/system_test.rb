@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class DockerEngineRuby::Test::Resources::SystemTest < DockerEngineRuby::Test::ResourceTest
   def test_data_usage
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.system_.data_usage
 
@@ -23,7 +23,7 @@ class DockerEngineRuby::Test::Resources::SystemTest < DockerEngineRuby::Test::Re
   end
 
   def test_events
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.system_.events
 
@@ -44,7 +44,7 @@ class DockerEngineRuby::Test::Resources::SystemTest < DockerEngineRuby::Test::Re
   end
 
   def test_info
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.system_.info
 
@@ -121,7 +121,7 @@ class DockerEngineRuby::Test::Resources::SystemTest < DockerEngineRuby::Test::Re
   end
 
   def test_ping
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.system_.ping
 
@@ -131,7 +131,7 @@ class DockerEngineRuby::Test::Resources::SystemTest < DockerEngineRuby::Test::Re
   end
 
   def test_version
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.system_.version
 

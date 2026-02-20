@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class DockerEngineRuby::Test::Resources::VolumesTest < DockerEngineRuby::Test::ResourceTest
   def test_create_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.volumes.create(create_request: {})
 
@@ -29,7 +29,7 @@ class DockerEngineRuby::Test::Resources::VolumesTest < DockerEngineRuby::Test::R
   end
 
   def test_update_required_params
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.volumes.update("name", version: 0)
 
@@ -39,7 +39,7 @@ class DockerEngineRuby::Test::Resources::VolumesTest < DockerEngineRuby::Test::R
   end
 
   def test_list
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.volumes.list
 
@@ -56,7 +56,7 @@ class DockerEngineRuby::Test::Resources::VolumesTest < DockerEngineRuby::Test::R
   end
 
   def test_delete
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.volumes.delete("name")
 
@@ -66,7 +66,7 @@ class DockerEngineRuby::Test::Resources::VolumesTest < DockerEngineRuby::Test::R
   end
 
   def test_inspect_
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.volumes.inspect_("name")
 
@@ -91,7 +91,7 @@ class DockerEngineRuby::Test::Resources::VolumesTest < DockerEngineRuby::Test::R
   end
 
   def test_prune
-    skip("Prism tests are disabled")
+    skip("Mock server tests are disabled")
 
     response = @docker.volumes.prune
 
