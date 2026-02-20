@@ -82,7 +82,10 @@ module DockerEngineRuby
           ?headers: ::Hash[String, (String
           | Integer
           | ::Array[(String | Integer)?])?],
-          ?idempotency_header: String?
+          ?idempotency_header: String?,
+          ?tls_ca_cert_path: String?,
+          ?tls_client_cert_path: String?,
+          ?tls_client_key_path: String?
         ) -> void
 
         private def user_agent: -> String

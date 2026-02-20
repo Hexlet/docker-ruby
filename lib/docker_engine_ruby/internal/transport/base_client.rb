@@ -197,6 +197,9 @@ module DockerEngineRuby
         # @param max_retry_delay [Float]
         # @param headers [Hash{String=>String, Integer, Array<String, Integer, nil>, nil}]
         # @param idempotency_header [String, nil]
+        # @param tls_ca_cert_path [String, nil]
+        # @param tls_client_cert_path [String, nil]
+        # @param tls_client_key_path [String, nil]
         def initialize(
           base_url:,
           timeout: 0.0,
@@ -204,9 +207,16 @@ module DockerEngineRuby
           initial_retry_delay: 0.0,
           max_retry_delay: 0.0,
           headers: {},
-          idempotency_header: nil
+          idempotency_header: nil,
+          tls_ca_cert_path: nil,
+          tls_client_cert_path: nil,
+          tls_client_key_path: nil
         )
-          @requester = DockerEngineRuby::Internal::Transport::PooledNetRequester.new
+          @requester = DockerEngineRuby::Internal::Transport::PooledNetRequester.new(
+            tls_ca_cert_path: tls_ca_cert_path,
+            tls_client_cert_path: tls_client_cert_path,
+            tls_client_key_path: tls_client_key_path
+          )
           @headers = DockerEngineRuby::Internal::Util.normalized_headers(
             self.class::PLATFORM_HEADERS,
             {
