@@ -165,7 +165,7 @@ class DockerEngineRuby::Test::Resources::ContainersTest < DockerEngineRuby::Test
   end
 
   def test_logs
-    skip("Mock server doesn't support application/octet-stream responses")
+    skip("Mock server tests are disabled")
 
     response = @docker.containers.logs("id")
 

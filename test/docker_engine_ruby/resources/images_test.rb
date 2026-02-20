@@ -67,7 +67,7 @@ class DockerEngineRuby::Test::Resources::ImagesTest < DockerEngineRuby::Test::Re
   end
 
   def test_get
-    skip("Mock server doesn't support application/octet-stream responses")
+    skip("Mock server tests are disabled")
 
     response = @docker.images.get("name")
 
@@ -77,7 +77,7 @@ class DockerEngineRuby::Test::Resources::ImagesTest < DockerEngineRuby::Test::Re
   end
 
   def test_get_all
-    skip("Mock server doesn't support application/octet-stream responses")
+    skip("Mock server tests are disabled")
 
     response = @docker.images.get_all
 
