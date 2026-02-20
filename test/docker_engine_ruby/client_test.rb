@@ -358,7 +358,7 @@ class DockerEngineRubyTest < Minitest::Test
       extension_factory.issuer_certificate = cert
       cert.add_extension(extension_factory.create_extension("basicConstraints", "CA:TRUE", true))
       cert.add_extension(extension_factory.create_extension("keyUsage", "keyCertSign,digitalSignature", true))
-      cert.sign(key, OpenSSL::Digest::SHA256.new)
+      cert.sign(key, OpenSSL::Digest.new("SHA256"))
 
       ca_path = File.join(dir, "ca.pem")
       cert_path = File.join(dir, "cert.pem")
