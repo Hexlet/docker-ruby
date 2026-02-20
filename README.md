@@ -17,7 +17,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "docker-engine-ruby", "~> 0.7.1"
+gem "docker-engine-ruby", "~> 0.7.2"
 ```
 
 <!-- x-release-please-end -->
