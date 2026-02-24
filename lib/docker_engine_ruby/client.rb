@@ -15,6 +15,9 @@ module DockerEngineRuby
     # Default max retry delay in seconds.
     DEFAULT_MAX_RETRY_DELAY = 8.0
 
+    # Whether to verify server TLS certificate chain.
+    DEFAULT_TLS_VERIFY_PEER = true
+
     # rubocop:disable Style/MutableConstant
     # @type [Hash{Symbol=>String}]
     ENVIRONMENTS = {production: "http://localhost:2375", production_tls: "https://localhost:2376"}
@@ -106,6 +109,8 @@ module DockerEngineRuby
     # @param initial_retry_delay [Float]
     #
     # @param max_retry_delay [Float]
+    #
+    # @param tls_verify_peer [Boolean] Whether to verify server TLS certificate chain.
     def initialize(
       tls_ca_cert_path: ENV["DOCKER_TLS_CA_CERT_PATH"],
       tls_client_cert_path: ENV["DOCKER_TLS_CLIENT_CERT_PATH"],
@@ -115,10 +120,12 @@ module DockerEngineRuby
       max_retries: self.class::DEFAULT_MAX_RETRIES,
       timeout: self.class::DEFAULT_TIMEOUT_IN_SECONDS,
       initial_retry_delay: self.class::DEFAULT_INITIAL_RETRY_DELAY,
-      max_retry_delay: self.class::DEFAULT_MAX_RETRY_DELAY
+      max_retry_delay: self.class::DEFAULT_MAX_RETRY_DELAY,
+      tls_verify_peer: self.class::DEFAULT_TLS_VERIFY_PEER
     )
       base_url ||= DockerEngineRuby::Client::ENVIRONMENTS.fetch(environment&.to_sym || :production) do
-        message = "environment must be one of #{DockerEngineRuby::Client::ENVIRONMENTS.keys}, got #{environment}"
+        message = "environment must be one of " \
+                  "#{DockerEngineRuby::Client::ENVIRONMENTS.keys}, got #{environment}"
         raise ArgumentError.new(message)
       end
 
@@ -132,6 +139,7 @@ module DockerEngineRuby
         max_retries: max_retries,
         initial_retry_delay: initial_retry_delay,
         max_retry_delay: max_retry_delay,
+        tls_verify_peer: tls_verify_peer,
         tls_ca_cert_path: @tls_ca_cert_path,
         tls_client_cert_path: @tls_client_cert_path,
         tls_client_key_path: @tls_client_key_path

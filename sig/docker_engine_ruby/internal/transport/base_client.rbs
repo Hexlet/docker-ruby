@@ -83,6 +83,7 @@ module DockerEngineRuby
           | Integer
           | ::Array[(String | Integer)?])?],
           ?idempotency_header: String?,
+          ?tls_verify_peer: bool,
           ?tls_ca_cert_path: String?,
           ?tls_client_cert_path: String?,
           ?tls_client_key_path: String?

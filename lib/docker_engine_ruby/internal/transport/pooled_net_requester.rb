@@ -37,10 +37,11 @@ module DockerEngineRuby
           # @param tls_cert [OpenSSL::X509::Certificate, nil]
           # @param tls_key [OpenSSL::PKey::PKey, nil]
           # @param unix_socket_path [String, nil]
+          # @param tls_verify_peer [Boolean]
           # @param url [URI::Generic]
           #
           # @return [Net::HTTP]
-          def connect(cert_store:, tls_cert:, tls_key:, unix_socket_path:, url:)
+          def connect(cert_store:, tls_cert:, tls_key:, unix_socket_path:, tls_verify_peer:, url:)
             if unix_socket_path
               return UnixSocketHTTP.new(unix_socket_path).tap do
                 _1.use_ssl = false
@@ -65,6 +66,7 @@ module DockerEngineRuby
                 _1.cert_store = cert_store
                 _1.cert = tls_cert if tls_cert
                 _1.key = tls_key if tls_key
+                _1.verify_mode = tls_verify_peer ? OpenSSL::SSL::VERIFY_PEER : OpenSSL::SSL::VERIFY_NONE
               end
             end
           end
@@ -141,6 +143,7 @@ module DockerEngineRuby
                   tls_cert: @tls_cert,
                   tls_key: @tls_key,
                   unix_socket_path: unix_socket_path,
+                  tls_verify_peer: @tls_verify_peer,
                   url: url
                 )
               end
@@ -236,9 +239,11 @@ module DockerEngineRuby
         # @param tls_client_cert_path [String, nil]
         # @param tls_client_key_path [String, nil]
         # @param unix_socket_path [String, nil]
+        # @param tls_verify_peer [Boolean]
         def initialize(
           size: self.class::DEFAULT_MAX_CONNECTIONS,
           unix_socket_path: nil,
+          tls_verify_peer: true,
           tls_ca_cert_path: nil,
           tls_client_cert_path: nil,
           tls_client_key_path: nil
@@ -246,12 +251,15 @@ module DockerEngineRuby
           @mutex = Mutex.new
           @size = size
           @default_unix_socket_path = unix_socket_path
+          @tls_verify_peer = tls_verify_peer
           @cert_store = OpenSSL::X509::Store.new.tap(&:set_default_paths)
           @cert_store.add_file(tls_ca_cert_path) if tls_ca_cert_path
 
           if tls_client_cert_path || tls_client_key_path
             if tls_client_cert_path.nil? || tls_client_key_path.nil?
-              raise ArgumentError.new("Both tls_client_cert_path and tls_client_key_path must be provided together.")
+              raise ArgumentError.new(
+                "Both tls_client_cert_path and tls_client_key_path must be provided together."
+              )
             end
 
             @tls_cert = OpenSSL::X509::Certificate.new(File.read(tls_client_cert_path))

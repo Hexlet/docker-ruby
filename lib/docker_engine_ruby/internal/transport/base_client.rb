@@ -197,6 +197,7 @@ module DockerEngineRuby
         # @param max_retry_delay [Float]
         # @param headers [Hash{String=>String, Integer, Array<String, Integer, nil>, nil}]
         # @param idempotency_header [String, nil]
+        # @param tls_verify_peer [Boolean]
         # @param tls_ca_cert_path [String, nil]
         # @param tls_client_cert_path [String, nil]
         # @param tls_client_key_path [String, nil]
@@ -208,6 +209,7 @@ module DockerEngineRuby
           max_retry_delay: 0.0,
           headers: {},
           idempotency_header: nil,
+          tls_verify_peer: true,
           tls_ca_cert_path: nil,
           tls_client_cert_path: nil,
           tls_client_key_path: nil
@@ -219,6 +221,7 @@ module DockerEngineRuby
           end
           @requester = DockerEngineRuby::Internal::Transport::PooledNetRequester.new(
             unix_socket_path: @unix_socket_path,
+            tls_verify_peer: tls_verify_peer,
             tls_ca_cert_path: tls_ca_cert_path,
             tls_client_cert_path: tls_client_cert_path,
             tls_client_key_path: tls_client_key_path

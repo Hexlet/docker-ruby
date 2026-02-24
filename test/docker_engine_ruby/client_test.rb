@@ -35,6 +35,18 @@ class DockerEngineRubyTest < Minitest::Test
     assert_match(/environment must be one of/, e.message)
   end
 
+  def test_client_enables_tls_verify_peer_by_default
+    docker = DockerEngineRuby::Client.new(base_url: "http://localhost")
+
+    assert_equal(true, docker.requester.instance_variable_get(:@tls_verify_peer))
+  end
+
+  def test_client_accepts_tls_verify_peer_option
+    docker = DockerEngineRuby::Client.new(base_url: "http://localhost", tls_verify_peer: false)
+
+    assert_equal(false, docker.requester.instance_variable_get(:@tls_verify_peer))
+  end
+
   def test_client_accepts_tls_paths
     with_tls_files do |ca_path:, cert_path:, key_path:|
       docker =
@@ -54,7 +66,10 @@ class DockerEngineRubyTest < Minitest::Test
   def test_client_raises_when_only_one_client_tls_file_is_provided
     e =
       assert_raises(ArgumentError) do
-        DockerEngineRuby::Client.new(base_url: "https://localhost:2376", tls_client_cert_path: "/tmp/cert.pem")
+        DockerEngineRuby::Client.new(
+          base_url: "https://localhost:2376",
+          tls_client_cert_path: "/tmp/cert.pem"
+        )
       end
 
     assert_match(/must be provided together/, e.message)

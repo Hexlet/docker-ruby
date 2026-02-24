@@ -31,12 +31,13 @@ module DockerEngineRuby
               cert_store: OpenSSL::X509::Store,
               tls_cert: T.nilable(OpenSSL::X509::Certificate),
               tls_key: T.nilable(OpenSSL::PKey::PKey),
+              tls_verify_peer: T::Boolean,
               url: URI::Generic
             ).returns(
               Net::HTTP
             )
           end
-          def connect(cert_store:, tls_cert:, tls_key:, url:)
+          def connect(cert_store:, tls_cert:, tls_key:, tls_verify_peer:, url:)
           end
 
           # @api private
@@ -81,6 +82,7 @@ module DockerEngineRuby
         sig do
           params(
             size: Integer,
+            tls_verify_peer: T::Boolean,
             tls_ca_cert_path: T.nilable(String),
             tls_client_cert_path: T.nilable(String),
             tls_client_key_path: T.nilable(String)
@@ -88,6 +90,7 @@ module DockerEngineRuby
         end
         def self.new(
           size: DockerEngineRuby::Internal::Transport::PooledNetRequester::DEFAULT_MAX_CONNECTIONS,
+          tls_verify_peer: true,
           tls_ca_cert_path: nil,
           tls_client_cert_path: nil,
           tls_client_key_path: nil
