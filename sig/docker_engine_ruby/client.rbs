@@ -8,6 +8,8 @@ module DockerEngineRuby
 
     DEFAULT_MAX_RETRY_DELAY: Float
 
+    DEFAULT_TLS_VERIFY_PEER: bool
+
     ENVIRONMENTS: {
       production: "http://localhost:2375",
       production_tls: "https://localhost:2376"
@@ -58,7 +60,8 @@ module DockerEngineRuby
       ?max_retries: Integer,
       ?timeout: Float,
       ?initial_retry_delay: Float,
-      ?max_retry_delay: Float
+      ?max_retry_delay: Float,
+      ?tls_verify_peer: bool
     ) -> void
   end
 end

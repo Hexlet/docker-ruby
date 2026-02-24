@@ -10,6 +10,8 @@ module DockerEngineRuby
 
     DEFAULT_MAX_RETRY_DELAY = T.let(8.0, Float)
 
+    DEFAULT_TLS_VERIFY_PEER = T.let(T.unsafe(nil), T::Boolean)
+
     ENVIRONMENTS =
       T.let(
         {
@@ -88,7 +90,8 @@ module DockerEngineRuby
         max_retries: Integer,
         timeout: Float,
         initial_retry_delay: Float,
-        max_retry_delay: Float
+        max_retry_delay: Float,
+        tls_verify_peer: T::Boolean
       ).returns(T.attached_class)
     end
     def self.new(
@@ -115,7 +118,8 @@ module DockerEngineRuby
       max_retries: DockerEngineRuby::Client::DEFAULT_MAX_RETRIES,
       timeout: DockerEngineRuby::Client::DEFAULT_TIMEOUT_IN_SECONDS,
       initial_retry_delay: DockerEngineRuby::Client::DEFAULT_INITIAL_RETRY_DELAY,
-      max_retry_delay: DockerEngineRuby::Client::DEFAULT_MAX_RETRY_DELAY
+      max_retry_delay: DockerEngineRuby::Client::DEFAULT_MAX_RETRY_DELAY,
+      tls_verify_peer: DockerEngineRuby::Client::DEFAULT_TLS_VERIFY_PEER
     )
     end
   end

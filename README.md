@@ -132,6 +132,15 @@ docker = DockerEngineRuby::Client.new(
 )
 ```
 
+By default, peer verification is enabled. You can disable it explicitly:
+
+```ruby
+docker = DockerEngineRuby::Client.new(
+  base_url: "https://localhost:2376",
+  tls_verify_peer: false
+)
+```
+
 You can also configure these through environment variables:
 
 - `DOCKER_TLS_CA_CERT_PATH`

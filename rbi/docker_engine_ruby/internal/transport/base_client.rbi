@@ -166,6 +166,7 @@ module DockerEngineRuby
                 )
               ],
             idempotency_header: T.nilable(String),
+            tls_verify_peer: T::Boolean,
             tls_ca_cert_path: T.nilable(String),
             tls_client_cert_path: T.nilable(String),
             tls_client_key_path: T.nilable(String)
@@ -179,6 +180,7 @@ module DockerEngineRuby
           max_retry_delay: 0.0,
           headers: {},
           idempotency_header: nil,
+          tls_verify_peer: true,
           tls_ca_cert_path: nil,
           tls_client_cert_path: nil,
           tls_client_key_path: nil

@@ -21,6 +21,7 @@ module DockerEngineRuby
           cert_store: OpenSSL::X509::Store,
           tls_cert: OpenSSL::X509::Certificate?,
           tls_key: OpenSSL::PKey::PKey?,
+          tls_verify_peer: bool,
           url: URI::Generic
         ) -> top
 
@@ -45,6 +46,7 @@ module DockerEngineRuby
 
         def initialize: (
           ?size: Integer,
+          ?tls_verify_peer: bool,
           ?tls_ca_cert_path: String?,
           ?tls_client_cert_path: String?,
           ?tls_client_key_path: String?
