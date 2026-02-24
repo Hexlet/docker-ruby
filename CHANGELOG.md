@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.3 (2026-02-24)
+
+Full Changelog: [v0.7.2...v0.7.3](https://github.com/Hexlet/docker-ruby/compare/v0.7.2...v0.7.3)
+
 ## 0.7.2 (2026-02-20)
 
 Full Changelog: [v0.7.1...v0.7.2](https://github.com/Hexlet/docker-ruby/compare/v0.7.1...v0.7.2)
