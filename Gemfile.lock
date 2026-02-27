@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    docker-engine-ruby (0.7.3)
+    docker-engine-ruby (0.7.4)
       cgi
       connection_pool
 
