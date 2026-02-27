@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.4 (2026-02-27)
+
+Full Changelog: [v0.7.3...v0.7.4](https://github.com/Hexlet/docker-ruby/compare/v0.7.3...v0.7.4)
+
+### Bug Fixes
+
+* properly mock time in ruby ci tests ([f291b96](https://github.com/Hexlet/docker-ruby/commit/f291b9605760add258fc3e596a664800663d9e7f))
+
 ## 0.7.3 (2026-02-24)
 
 Full Changelog: [v0.7.2...v0.7.3](https://github.com/Hexlet/docker-ruby/compare/v0.7.2...v0.7.3)
