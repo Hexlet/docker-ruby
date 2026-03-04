@@ -24,14 +24,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::SwarmUpdateParams
       def update(params)
         parsed, options = DockerEngineRuby::SwarmUpdateParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed.except(:spec))
         @client.request(
           method: :post,
           path: "swarm/update",
-          query: parsed.except(:spec).transform_keys(
-            rotate_manager_token: "rotateManagerToken",
-            rotate_manager_unlock_key: "rotateManagerUnlockKey",
-            rotate_worker_token: "rotateWorkerToken"
-          ),
+          query: query,
           body: parsed[:spec],
           model: NilClass,
           options: options
@@ -124,7 +121,8 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::SwarmLeaveParams
       def leave(params = {})
         parsed, options = DockerEngineRuby::SwarmLeaveParams.dump_request(params)
-        @client.request(method: :post, path: "swarm/leave", query: parsed, model: NilClass, options: options)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
+        @client.request(method: :post, path: "swarm/leave", query: query, model: NilClass, options: options)
       end
 
       # Unlock a locked manager

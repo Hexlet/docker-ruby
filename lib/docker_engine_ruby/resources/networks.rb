@@ -64,10 +64,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::NetworkListParams
       def list(params = {})
         parsed, options = DockerEngineRuby::NetworkListParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "networks",
-          query: parsed,
+          query: query,
           model: DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::NetworkSummary],
           options: options
         )
@@ -158,10 +159,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::NetworkInspectParams
       def inspect_(id, params = {})
         parsed, options = DockerEngineRuby::NetworkInspectParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["networks/%1$s", id],
-          query: parsed,
+          query: query,
           model: DockerEngineRuby::Models::NetworkInspectResponse,
           options: options
         )
@@ -179,10 +181,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::NetworkPruneParams
       def prune(params = {})
         parsed, options = DockerEngineRuby::NetworkPruneParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: "networks/prune",
-          query: parsed,
+          query: query,
           model: DockerEngineRuby::Models::NetworkPruneResponse,
           options: options
         )

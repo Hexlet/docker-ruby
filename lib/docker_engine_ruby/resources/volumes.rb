@@ -41,12 +41,13 @@ module DockerEngineRuby
       #
       # @see DockerEngineRuby::Models::VolumeUpdateParams
       def update(name, params)
-        parsed, options = DockerEngineRuby::VolumeUpdateParams.dump_request(params)
         query_params = [:version]
+        parsed, options = DockerEngineRuby::VolumeUpdateParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed.slice(*query_params))
         @client.request(
           method: :put,
           path: ["volumes/%1$s", name],
-          query: parsed.slice(*query_params),
+          query: query,
           body: parsed.except(*query_params),
           model: NilClass,
           options: options
@@ -65,10 +66,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::VolumeListParams
       def list(params = {})
         parsed, options = DockerEngineRuby::VolumeListParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "volumes",
-          query: parsed,
+          query: query,
           model: DockerEngineRuby::ListResponse,
           options: options
         )
@@ -87,10 +89,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::VolumeDeleteParams
       def delete(name, params = {})
         parsed, options = DockerEngineRuby::VolumeDeleteParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :delete,
           path: ["volumes/%1$s", name],
-          query: parsed,
+          query: query,
           model: NilClass,
           options: options
         )
@@ -127,10 +130,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::VolumePruneParams
       def prune(params = {})
         parsed, options = DockerEngineRuby::VolumePruneParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: "volumes/prune",
-          query: parsed,
+          query: query,
           model: DockerEngineRuby::Models::VolumePruneResponse,
           options: options
         )

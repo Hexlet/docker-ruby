@@ -19,10 +19,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ImageListParams
       def list(params = {})
         parsed, options = DockerEngineRuby::ImageListParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "images/json",
-          query: parsed.transform_keys(shared_size: "shared-size"),
+          query: query.transform_keys(shared_size: "shared-size"),
           model: DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::ImageSummary],
           options: options
         )
@@ -43,10 +44,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ImageDeleteParams
       def delete(name, params = {})
         parsed, options = DockerEngineRuby::ImageDeleteParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :delete,
           path: ["images/%1$s", name],
-          query: parsed,
+          query: query,
           model: DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::DeleteItem],
           options: options
         )
@@ -116,7 +118,6 @@ module DockerEngineRuby
       #
       # @see DockerEngineRuby::Models::ImageBuildParams
       def build(params)
-        parsed, options = DockerEngineRuby::ImageBuildParams.dump_request(params)
         query_params =
           [
             :buildargs,
@@ -145,6 +146,8 @@ module DockerEngineRuby
             :target,
             :version
           ]
+        parsed, options = DockerEngineRuby::ImageBuildParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: "build",
@@ -177,10 +180,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ImageBuildPruneParams
       def build_prune(params = {})
         parsed, options = DockerEngineRuby::ImageBuildPruneParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: "build/prune",
-          query: parsed.transform_keys(
+          query: query.transform_keys(
             max_used_space: "max-used-space",
             min_free_space: "min-free-space",
             reserved_space: "reserved-space"
@@ -265,12 +269,13 @@ module DockerEngineRuby
       #
       # @see DockerEngineRuby::Models::ImageCommitParams
       def commit(params = {})
-        parsed, options = DockerEngineRuby::ImageCommitParams.dump_request(params)
         query_params = [:author, :changes, :comment, :container, :pause, :repo, :tag]
+        parsed, options = DockerEngineRuby::ImageCommitParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed.slice(*query_params))
         @client.request(
           method: :post,
           path: "commit",
-          query: parsed.slice(*query_params),
+          query: query,
           body: parsed.except(*query_params),
           model: DockerEngineRuby::Models::ImageCommitResponse,
           options: options
@@ -290,10 +295,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ImageGetParams
       def get(name, params = {})
         parsed, options = DockerEngineRuby::ImageGetParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["images/%1$s/get", name],
-          query: parsed,
+          query: query,
           headers: {"accept" => "application/octet-stream"},
           model: StringIO,
           options: options
@@ -313,10 +319,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ImageGetAllParams
       def get_all(params = {})
         parsed, options = DockerEngineRuby::ImageGetAllParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "images/get",
-          query: parsed,
+          query: query,
           headers: {"accept" => "application/octet-stream"},
           model: StringIO,
           options: options
@@ -336,10 +343,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ImageHistoryParams
       def history(name, params = {})
         parsed, options = DockerEngineRuby::ImageHistoryParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["images/%1$s/history", name],
-          query: parsed,
+          query: query,
           model: DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::HistoryItem],
           options: options
         )
@@ -358,10 +366,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ImageInspectParams
       def inspect_(name, params = {})
         parsed, options = DockerEngineRuby::ImageInspectParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["images/%1$s/json", name],
-          query: parsed,
+          query: query,
           model: DockerEngineRuby::Image,
           options: options
         )
@@ -384,10 +393,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ImageLoadParams
       def load_(params)
         parsed, options = DockerEngineRuby::ImageLoadParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed.except(:body))
         @client.request(
           method: :post,
           path: "images/load",
-          query: parsed.except(:body),
+          query: query,
           headers: {"content-type" => "application/octet-stream"},
           body: parsed[:body],
           model: NilClass,
@@ -407,10 +417,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ImagePruneParams
       def prune(params = {})
         parsed, options = DockerEngineRuby::ImagePruneParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: "images/prune",
-          query: parsed,
+          query: query,
           model: DockerEngineRuby::Models::ImagePruneResponse,
           options: options
         )
@@ -444,8 +455,9 @@ module DockerEngineRuby
       #
       # @see DockerEngineRuby::Models::ImagePullParams
       def pull(params)
-        parsed, options = DockerEngineRuby::ImagePullParams.dump_request(params)
         query_params = [:changes, :from_image, :from_src, :message, :platform, :repo, :tag]
+        parsed, options = DockerEngineRuby::ImagePullParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: "images/create",
@@ -477,12 +489,13 @@ module DockerEngineRuby
       #
       # @see DockerEngineRuby::Models::ImagePushParams
       def push(name, params)
-        parsed, options = DockerEngineRuby::ImagePushParams.dump_request(params)
         query_params = [:platform, :tag]
+        parsed, options = DockerEngineRuby::ImagePushParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed.slice(*query_params))
         @client.request(
           method: :post,
           path: ["images/%1$s/push", name],
-          query: parsed.slice(*query_params),
+          query: query,
           headers: parsed.except(*query_params).transform_keys(x_registry_auth: "x-registry-auth"),
           model: NilClass,
           options: options
@@ -503,10 +516,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ImageSearchParams
       def search(params)
         parsed, options = DockerEngineRuby::ImageSearchParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "images/search",
-          query: parsed,
+          query: query,
           model: DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Models::ImageSearchResponseItem],
           options: options
         )
@@ -526,10 +540,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ImageTagParams
       def tag(name, params = {})
         parsed, options = DockerEngineRuby::ImageTagParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: ["images/%1$s/tag", name],
-          query: parsed,
+          query: query,
           model: NilClass,
           options: options
         )
