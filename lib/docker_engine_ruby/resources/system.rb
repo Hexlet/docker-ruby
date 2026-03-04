@@ -16,10 +16,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::SystemDataUsageParams
       def data_usage(params = {})
         parsed, options = DockerEngineRuby::SystemDataUsageParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "system/df",
-          query: parsed,
+          query: query,
           model: DockerEngineRuby::Models::SystemDataUsageResponse,
           options: options
         )
@@ -39,10 +40,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::SystemEventsParams
       def events(params = {})
         parsed, options = DockerEngineRuby::SystemEventsParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "events",
-          query: parsed.transform_keys(until_: "until"),
+          query: query.transform_keys(until_: "until"),
           model: DockerEngineRuby::Models::SystemEventsResponse,
           options: options
         )

@@ -50,8 +50,9 @@ module DockerEngineRuby
       #
       # @see DockerEngineRuby::Models::ServiceUpdateParams
       def update(id, params)
-        parsed, options = DockerEngineRuby::ServiceUpdateParams.dump_request(params)
         query_params = [:version, :registry_auth_from, :rollback]
+        parsed, options = DockerEngineRuby::ServiceUpdateParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: ["services/%1$s/update", id],
@@ -76,10 +77,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ServiceListParams
       def list(params = {})
         parsed, options = DockerEngineRuby::ServiceListParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "services",
-          query: parsed,
+          query: query,
           model: DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Service],
           options: options
         )
@@ -117,10 +119,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ServiceInspectParams
       def inspect_(id, params = {})
         parsed, options = DockerEngineRuby::ServiceInspectParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["services/%1$s", id],
-          query: parsed.transform_keys(insert_defaults: "insertDefaults"),
+          query: query.transform_keys(insert_defaults: "insertDefaults"),
           model: DockerEngineRuby::Service,
           options: options
         )
@@ -145,10 +148,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ServiceLogsParams
       def logs(id, params = {})
         parsed, options = DockerEngineRuby::ServiceLogsParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["services/%1$s/logs", id],
-          query: parsed,
+          query: query,
           headers: {"accept" => "application/octet-stream"},
           model: StringIO,
           options: options

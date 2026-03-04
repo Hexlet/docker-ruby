@@ -18,10 +18,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::PluginCreateParams
       def create(params)
         parsed, options = DockerEngineRuby::PluginCreateParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed.except(:body))
         @client.request(
           method: :post,
           path: "plugins/create",
-          query: parsed.except(:body),
+          query: query,
           headers: {"content-type" => "application/octet-stream"},
           body: parsed[:body],
           model: NilClass,
@@ -41,10 +42,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::PluginListParams
       def list(params = {})
         parsed, options = DockerEngineRuby::PluginListParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "plugins",
-          query: parsed,
+          query: query,
           model: DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Plugin],
           options: options
         )
@@ -63,10 +65,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::PluginDeleteParams
       def delete(name, params = {})
         parsed, options = DockerEngineRuby::PluginDeleteParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :delete,
           path: ["plugins/%1$s", name],
-          query: parsed,
+          query: query,
           model: DockerEngineRuby::Plugin,
           options: options
         )
@@ -85,10 +88,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::PluginDisableParams
       def disable(name, params = {})
         parsed, options = DockerEngineRuby::PluginDisableParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: ["plugins/%1$s/disable", name],
-          query: parsed,
+          query: query,
           model: NilClass,
           options: options
         )
@@ -107,10 +111,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::PluginEnableParams
       def enable(name, params = {})
         parsed, options = DockerEngineRuby::PluginEnableParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: ["plugins/%1$s/enable", name],
-          query: parsed,
+          query: query,
           model: NilClass,
           options: options
         )
@@ -147,10 +152,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::PluginPrivilegesParams
       def privileges(params)
         parsed, options = DockerEngineRuby::PluginPrivilegesParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "plugins/privileges",
-          query: parsed,
+          query: query,
           model: DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Privilege],
           options: options
         )
@@ -174,8 +180,9 @@ module DockerEngineRuby
       #
       # @see DockerEngineRuby::Models::PluginPullParams
       def pull(params)
-        parsed, options = DockerEngineRuby::PluginPullParams.dump_request(params)
         query_params = [:remote, :name]
+        parsed, options = DockerEngineRuby::PluginPullParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: "plugins/pull",
@@ -246,8 +253,9 @@ module DockerEngineRuby
       #
       # @see DockerEngineRuby::Models::PluginUpgradeParams
       def upgrade(name, params)
-        parsed, options = DockerEngineRuby::PluginUpgradeParams.dump_request(params)
         query_params = [:remote]
+        parsed, options = DockerEngineRuby::PluginUpgradeParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: ["plugins/%1$s/upgrade", name],

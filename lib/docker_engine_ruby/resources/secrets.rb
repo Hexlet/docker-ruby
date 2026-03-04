@@ -41,10 +41,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::SecretUpdateParams
       def update(id, params)
         parsed, options = DockerEngineRuby::SecretUpdateParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed.except(:spec))
         @client.request(
           method: :post,
           path: ["secrets/%1$s/update", id],
-          query: parsed.except(:spec),
+          query: query,
           body: parsed[:spec],
           model: NilClass,
           options: options
@@ -63,10 +64,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::SecretListParams
       def list(params = {})
         parsed, options = DockerEngineRuby::SecretListParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "secrets",
-          query: parsed,
+          query: query,
           model: DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Secret],
           options: options
         )

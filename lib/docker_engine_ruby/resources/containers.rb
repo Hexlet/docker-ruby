@@ -20,10 +20,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ContainerCreateParams
       def create(params)
         parsed, options = DockerEngineRuby::ContainerCreateParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed.except(:config))
         @client.request(
           method: :post,
           path: "containers/create",
-          query: parsed.except(:config),
+          query: query,
           body: parsed[:config],
           model: DockerEngineRuby::CreateResponse,
           options: options
@@ -130,10 +131,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ContainerListParams
       def list(params = {})
         parsed, options = DockerEngineRuby::ContainerListParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "containers/json",
-          query: parsed,
+          query: query,
           model: DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Summary],
           options: options
         )
@@ -154,10 +156,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ContainerDeleteParams
       def delete(id, params = {})
         parsed, options = DockerEngineRuby::ContainerDeleteParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :delete,
           path: ["containers/%1$s", id],
-          query: parsed,
+          query: query,
           model: NilClass,
           options: options
         )
@@ -176,10 +179,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ContainerArchiveParams
       def archive(id, params)
         parsed, options = DockerEngineRuby::ContainerArchiveParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["containers/%1$s/archive", id],
-          query: parsed,
+          query: query,
           model: NilClass,
           options: options
         )
@@ -203,10 +207,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ContainerAttachParams
       def attach(id, params = {})
         parsed, options = DockerEngineRuby::ContainerAttachParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: ["containers/%1$s/attach", id],
-          query: parsed.transform_keys(detach_keys: "detachKeys"),
+          query: query.transform_keys(detach_keys: "detachKeys"),
           model: NilClass,
           options: options
         )
@@ -295,10 +300,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ContainerInspectParams
       def inspect_(id, params = {})
         parsed, options = DockerEngineRuby::ContainerInspectParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["containers/%1$s/json", id],
-          query: parsed,
+          query: query,
           model: DockerEngineRuby::Container,
           options: options
         )
@@ -317,10 +323,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ContainerKillParams
       def kill(id, params = {})
         parsed, options = DockerEngineRuby::ContainerKillParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: ["containers/%1$s/kill", id],
-          query: parsed,
+          query: query,
           model: NilClass,
           options: options
         )
@@ -345,10 +352,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ContainerLogsParams
       def logs(id, params = {})
         parsed, options = DockerEngineRuby::ContainerLogsParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["containers/%1$s/logs", id],
-          query: parsed.transform_keys(until_: "until"),
+          query: query.transform_keys(until_: "until"),
           headers: {"accept" => "application/octet-stream"},
           model: StringIO,
           options: options
@@ -386,10 +394,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ContainerPruneParams
       def prune(params = {})
         parsed, options = DockerEngineRuby::ContainerPruneParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: "containers/prune",
-          query: parsed,
+          query: query,
           model: DockerEngineRuby::Models::ContainerPruneResponse,
           options: options
         )
@@ -408,10 +417,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ContainerRenameParams
       def rename(id, params)
         parsed, options = DockerEngineRuby::ContainerRenameParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: ["containers/%1$s/rename", id],
-          query: parsed,
+          query: query,
           model: NilClass,
           options: options
         )
@@ -431,10 +441,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ContainerResizeParams
       def resize(id, params)
         parsed, options = DockerEngineRuby::ContainerResizeParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: ["containers/%1$s/resize", id],
-          query: parsed,
+          query: query,
           model: NilClass,
           options: options
         )
@@ -454,10 +465,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ContainerRestartParams
       def restart(id, params = {})
         parsed, options = DockerEngineRuby::ContainerRestartParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: ["containers/%1$s/restart", id],
-          query: parsed,
+          query: query,
           model: NilClass,
           options: options
         )
@@ -476,10 +488,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ContainerStartParams
       def start(id, params = {})
         parsed, options = DockerEngineRuby::ContainerStartParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: ["containers/%1$s/start", id],
-          query: parsed.transform_keys(detach_keys: "detachKeys"),
+          query: query.transform_keys(detach_keys: "detachKeys"),
           model: NilClass,
           options: options
         )
@@ -502,10 +515,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ContainerStatsParams
       def stats(id, params = {})
         parsed, options = DockerEngineRuby::ContainerStatsParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["containers/%1$s/stats", id],
-          query: parsed.transform_keys(one_shot: "one-shot"),
+          query: query.transform_keys(one_shot: "one-shot"),
           model: DockerEngineRuby::StatsResponse,
           options: options
         )
@@ -525,10 +539,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ContainerStopParams
       def stop(id, params = {})
         parsed, options = DockerEngineRuby::ContainerStopParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: ["containers/%1$s/stop", id],
-          query: parsed,
+          query: query,
           model: NilClass,
           options: options
         )
@@ -550,10 +565,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ContainerTopParams
       def top(id, params = {})
         parsed, options = DockerEngineRuby::ContainerTopParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["containers/%1$s/top", id],
-          query: parsed,
+          query: query,
           model: DockerEngineRuby::TopResponse,
           options: options
         )
@@ -591,10 +607,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ContainerWaitParams
       def wait(id, params = {})
         parsed, options = DockerEngineRuby::ContainerWaitParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: ["containers/%1$s/wait", id],
-          query: parsed,
+          query: query,
           model: DockerEngineRuby::WaitResponse,
           options: options
         )

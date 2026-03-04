@@ -15,10 +15,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::TaskListParams
       def list(params = {})
         parsed, options = DockerEngineRuby::TaskListParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "tasks",
-          query: parsed,
+          query: query,
           model: DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Task],
           options: options
         )
@@ -62,10 +63,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::TaskLogsParams
       def logs(id, params = {})
         parsed, options = DockerEngineRuby::TaskLogsParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["tasks/%1$s/logs", id],
-          query: parsed,
+          query: query,
           headers: {"accept" => "application/octet-stream"},
           model: StringIO,
           options: options

@@ -36,10 +36,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ExecResizeParams
       def resize(id, params)
         parsed, options = DockerEngineRuby::ExecResizeParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: ["exec/%1$s/resize", id],
-          query: parsed,
+          query: query,
           model: NilClass,
           options: options
         )
