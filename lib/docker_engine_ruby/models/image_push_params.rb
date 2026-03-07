@@ -7,6 +7,11 @@ module DockerEngineRuby
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
+      # @!attribute name
+      #
+      #   @return [String]
+      required :name, String
+
       # @!attribute x_registry_auth
       #
       #   @return [String]
@@ -22,7 +27,8 @@ module DockerEngineRuby
       #   @return [String, nil]
       optional :tag, String
 
-      # @!method initialize(x_registry_auth:, platform: nil, tag: nil, request_options: {})
+      # @!method initialize(name:, x_registry_auth:, platform: nil, tag: nil, request_options: {})
+      #   @param name [String]
       #   @param x_registry_auth [String]
       #   @param platform [String]
       #   @param tag [String]

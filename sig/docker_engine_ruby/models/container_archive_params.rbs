@@ -1,20 +1,25 @@
 module DockerEngineRuby
   module Models
     type container_archive_params =
-      { path: String } & DockerEngineRuby::Internal::Type::request_parameters
+      { id: String, path: String }
+      & DockerEngineRuby::Internal::Type::request_parameters
 
     class ContainerArchiveParams < DockerEngineRuby::Internal::Type::BaseModel
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
+      attr_accessor id: String
+
       attr_accessor path: String
 
       def initialize: (
+        id: String,
         path: String,
         ?request_options: DockerEngineRuby::request_opts
       ) -> void
 
       def to_hash: -> {
+        id: String,
         path: String,
         request_options: DockerEngineRuby::RequestOptions
       }

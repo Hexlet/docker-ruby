@@ -7,6 +7,11 @@ module DockerEngineRuby
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
+      # @!attribute id
+      #
+      #   @return [String]
+      required :id, String
+
       # @!attribute one_shot
       #
       #   @return [Boolean, nil]
@@ -17,7 +22,8 @@ module DockerEngineRuby
       #   @return [Boolean, nil]
       optional :stream, DockerEngineRuby::Internal::Type::Boolean
 
-      # @!method initialize(one_shot: nil, stream: nil, request_options: {})
+      # @!method initialize(id:, one_shot: nil, stream: nil, request_options: {})
+      #   @param id [String]
       #   @param one_shot [Boolean]
       #   @param stream [Boolean]
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]

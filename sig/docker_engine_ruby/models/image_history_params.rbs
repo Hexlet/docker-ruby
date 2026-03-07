@@ -1,23 +1,27 @@
 module DockerEngineRuby
   module Models
     type image_history_params =
-      { platform: String }
+      { name: String, platform: String }
       & DockerEngineRuby::Internal::Type::request_parameters
 
     class ImageHistoryParams < DockerEngineRuby::Internal::Type::BaseModel
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
+      attr_accessor name: String
+
       attr_reader platform: String?
 
       def platform=: (String) -> String
 
       def initialize: (
+        name: String,
         ?platform: String,
         ?request_options: DockerEngineRuby::request_opts
       ) -> void
 
       def to_hash: -> {
+        name: String,
         platform: String,
         request_options: DockerEngineRuby::RequestOptions
       }

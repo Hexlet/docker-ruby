@@ -1,21 +1,25 @@
 module DockerEngineRuby
   module Models
     type config_update_params =
-      { version: Integer }
+      { id: String, version: Integer }
       & DockerEngineRuby::Internal::Type::request_parameters
 
     class ConfigUpdateParams < DockerEngineRuby::Internal::Type::BaseModel
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
+      attr_accessor id: String
+
       attr_accessor version: Integer
 
       def initialize: (
+        id: String,
         version: Integer,
         ?request_options: DockerEngineRuby::request_opts
       ) -> void
 
       def to_hash: -> {
+        id: String,
         version: Integer,
         request_options: DockerEngineRuby::RequestOptions
       }

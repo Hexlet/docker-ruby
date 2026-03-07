@@ -14,21 +14,26 @@ module DockerEngineRuby
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :name
+
       sig { returns(T::Array[String]) }
       attr_accessor :body
 
       sig do
         params(
+          name: String,
           body: T::Array[String],
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(body:, request_options: {})
+      def self.new(name:, body:, request_options: {})
       end
 
       sig do
         override.returns(
           {
+            name: String,
             body: T::Array[String],
             request_options: DockerEngineRuby::RequestOptions
           }

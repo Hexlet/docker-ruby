@@ -14,6 +14,9 @@ module DockerEngineRuby
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :id
+
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :details
 
@@ -58,6 +61,7 @@ module DockerEngineRuby
 
       sig do
         params(
+          id: String,
           details: T::Boolean,
           follow: T::Boolean,
           since: Integer,
@@ -69,6 +73,7 @@ module DockerEngineRuby
         ).returns(T.attached_class)
       end
       def self.new(
+        id:,
         details: nil,
         follow: nil,
         since: nil,
@@ -83,6 +88,7 @@ module DockerEngineRuby
       sig do
         override.returns(
           {
+            id: String,
             details: T::Boolean,
             follow: T::Boolean,
             since: Integer,

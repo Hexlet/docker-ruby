@@ -7,6 +7,11 @@ module DockerEngineRuby
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
+      # @!attribute id
+      #
+      #   @return [String]
+      required :id, String
+
       # @!attribute attach_stderr
       #
       #   @return [Boolean, nil]
@@ -65,7 +70,8 @@ module DockerEngineRuby
       #   @return [String, nil]
       optional :working_dir, String, api_name: :WorkingDir
 
-      # @!method initialize(attach_stderr: nil, attach_stdin: nil, attach_stdout: nil, cmd: nil, console_size: nil, detach_keys: nil, env: nil, privileged: nil, tty: nil, user: nil, working_dir: nil, request_options: {})
+      # @!method initialize(id:, attach_stderr: nil, attach_stdin: nil, attach_stdout: nil, cmd: nil, console_size: nil, detach_keys: nil, env: nil, privileged: nil, tty: nil, user: nil, working_dir: nil, request_options: {})
+      #   @param id [String]
       #   @param attach_stderr [Boolean]
       #   @param attach_stdin [Boolean]
       #   @param attach_stdout [Boolean]

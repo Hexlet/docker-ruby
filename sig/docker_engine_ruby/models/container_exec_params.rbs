@@ -2,6 +2,7 @@ module DockerEngineRuby
   module Models
     type container_exec_params =
       {
+        id: String,
         attach_stderr: bool,
         attach_stdin: bool,
         attach_stdout: bool,
@@ -19,6 +20,8 @@ module DockerEngineRuby
     class ContainerExecParams < DockerEngineRuby::Internal::Type::BaseModel
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_accessor id: String
 
       attr_reader attach_stderr: bool?
 
@@ -63,6 +66,7 @@ module DockerEngineRuby
       def working_dir=: (String) -> String
 
       def initialize: (
+        id: String,
         ?attach_stderr: bool,
         ?attach_stdin: bool,
         ?attach_stdout: bool,
@@ -78,6 +82,7 @@ module DockerEngineRuby
       ) -> void
 
       def to_hash: -> {
+        id: String,
         attach_stderr: bool,
         attach_stdin: bool,
         attach_stdout: bool,

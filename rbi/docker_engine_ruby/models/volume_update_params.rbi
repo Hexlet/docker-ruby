@@ -14,6 +14,9 @@ module DockerEngineRuby
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :name
+
       sig { returns(Integer) }
       attr_accessor :version
 
@@ -28,12 +31,14 @@ module DockerEngineRuby
 
       sig do
         params(
+          name: String,
           version: Integer,
           spec: DockerEngineRuby::VolumeUpdateParams::Spec::OrHash,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
+        name:,
         version:,
         # Cluster-specific options used to create the volume.
         spec: nil,
@@ -44,6 +49,7 @@ module DockerEngineRuby
       sig do
         override.returns(
           {
+            name: String,
             version: Integer,
             spec: DockerEngineRuby::VolumeUpdateParams::Spec,
             request_options: DockerEngineRuby::RequestOptions

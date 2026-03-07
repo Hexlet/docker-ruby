@@ -2,6 +2,7 @@ module DockerEngineRuby
   module Models
     type plugin_upgrade_params =
       {
+        name: String,
         remote: String,
         body: ::Array[DockerEngineRuby::Privilege],
         x_registry_auth: String
@@ -12,6 +13,8 @@ module DockerEngineRuby
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
+      attr_accessor name: String
+
       attr_accessor remote: String
 
       attr_accessor body: ::Array[DockerEngineRuby::Privilege]
@@ -21,6 +24,7 @@ module DockerEngineRuby
       def x_registry_auth=: (String) -> String
 
       def initialize: (
+        name: String,
         remote: String,
         body: ::Array[DockerEngineRuby::Privilege],
         ?x_registry_auth: String,
@@ -28,6 +32,7 @@ module DockerEngineRuby
       ) -> void
 
       def to_hash: -> {
+        name: String,
         remote: String,
         body: ::Array[DockerEngineRuby::Privilege],
         x_registry_auth: String,

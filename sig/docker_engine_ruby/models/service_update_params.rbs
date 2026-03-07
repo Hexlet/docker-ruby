@@ -2,6 +2,7 @@ module DockerEngineRuby
   module Models
     type service_update_params =
       {
+        id: String,
         version: Integer,
         registry_auth_from: DockerEngineRuby::Models::ServiceUpdateParams::registry_auth_from,
         rollback: String,
@@ -12,6 +13,8 @@ module DockerEngineRuby
     class ServiceUpdateParams < DockerEngineRuby::Internal::Type::BaseModel
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_accessor id: String
 
       attr_accessor version: Integer
 
@@ -30,6 +33,7 @@ module DockerEngineRuby
       def x_registry_auth=: (String) -> String
 
       def initialize: (
+        id: String,
         version: Integer,
         ?registry_auth_from: DockerEngineRuby::Models::ServiceUpdateParams::registry_auth_from,
         ?rollback: String,
@@ -38,6 +42,7 @@ module DockerEngineRuby
       ) -> void
 
       def to_hash: -> {
+        id: String,
         version: Integer,
         registry_auth_from: DockerEngineRuby::Models::ServiceUpdateParams::registry_auth_from,
         rollback: String,

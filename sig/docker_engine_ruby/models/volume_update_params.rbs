@@ -1,12 +1,18 @@
 module DockerEngineRuby
   module Models
     type volume_update_params =
-      { version: Integer, spec: DockerEngineRuby::VolumeUpdateParams::Spec }
+      {
+        name: String,
+        version: Integer,
+        spec: DockerEngineRuby::VolumeUpdateParams::Spec
+      }
       & DockerEngineRuby::Internal::Type::request_parameters
 
     class VolumeUpdateParams < DockerEngineRuby::Internal::Type::BaseModel
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_accessor name: String
 
       attr_accessor version: Integer
 
@@ -17,12 +23,14 @@ module DockerEngineRuby
       ) -> DockerEngineRuby::VolumeUpdateParams::Spec
 
       def initialize: (
+        name: String,
         version: Integer,
         ?spec: DockerEngineRuby::VolumeUpdateParams::Spec,
         ?request_options: DockerEngineRuby::request_opts
       ) -> void
 
       def to_hash: -> {
+        name: String,
         version: Integer,
         spec: DockerEngineRuby::VolumeUpdateParams::Spec,
         request_options: DockerEngineRuby::RequestOptions

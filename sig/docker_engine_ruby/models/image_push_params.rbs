@@ -1,12 +1,14 @@
 module DockerEngineRuby
   module Models
     type image_push_params =
-      { x_registry_auth: String, platform: String, tag: String }
+      { name: String, x_registry_auth: String, platform: String, tag: String }
       & DockerEngineRuby::Internal::Type::request_parameters
 
     class ImagePushParams < DockerEngineRuby::Internal::Type::BaseModel
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_accessor name: String
 
       attr_accessor x_registry_auth: String
 
@@ -19,6 +21,7 @@ module DockerEngineRuby
       def tag=: (String) -> String
 
       def initialize: (
+        name: String,
         x_registry_auth: String,
         ?platform: String,
         ?tag: String,
@@ -26,6 +29,7 @@ module DockerEngineRuby
       ) -> void
 
       def to_hash: -> {
+        name: String,
         x_registry_auth: String,
         platform: String,
         tag: String,

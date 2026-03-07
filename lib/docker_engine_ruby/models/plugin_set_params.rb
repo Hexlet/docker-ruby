@@ -7,12 +7,18 @@ module DockerEngineRuby
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
+      # @!attribute name
+      #
+      #   @return [String]
+      required :name, String
+
       # @!attribute body
       #
       #   @return [Array<String>]
       required :body, DockerEngineRuby::Internal::Type::ArrayOf[String]
 
-      # @!method initialize(body:, request_options: {})
+      # @!method initialize(name:, body:, request_options: {})
+      #   @param name [String]
       #   @param body [Array<String>]
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]
     end

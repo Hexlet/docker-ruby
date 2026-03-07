@@ -7,12 +7,18 @@ module DockerEngineRuby
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
+      # @!attribute id
+      #
+      #   @return [String]
+      required :id, String
+
       # @!attribute condition
       #
       #   @return [Symbol, DockerEngineRuby::Models::ContainerWaitParams::Condition, nil]
       optional :condition, enum: -> { DockerEngineRuby::ContainerWaitParams::Condition }
 
-      # @!method initialize(condition: nil, request_options: {})
+      # @!method initialize(id:, condition: nil, request_options: {})
+      #   @param id [String]
       #   @param condition [Symbol, DockerEngineRuby::Models::ContainerWaitParams::Condition]
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]
 

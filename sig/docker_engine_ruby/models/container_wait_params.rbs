@@ -1,12 +1,17 @@
 module DockerEngineRuby
   module Models
     type container_wait_params =
-      { condition: DockerEngineRuby::Models::ContainerWaitParams::condition }
+      {
+        id: String,
+        condition: DockerEngineRuby::Models::ContainerWaitParams::condition
+      }
       & DockerEngineRuby::Internal::Type::request_parameters
 
     class ContainerWaitParams < DockerEngineRuby::Internal::Type::BaseModel
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_accessor id: String
 
       attr_reader condition: DockerEngineRuby::Models::ContainerWaitParams::condition?
 
@@ -15,11 +20,13 @@ module DockerEngineRuby
       ) -> DockerEngineRuby::Models::ContainerWaitParams::condition
 
       def initialize: (
+        id: String,
         ?condition: DockerEngineRuby::Models::ContainerWaitParams::condition,
         ?request_options: DockerEngineRuby::request_opts
       ) -> void
 
       def to_hash: -> {
+        id: String,
         condition: DockerEngineRuby::Models::ContainerWaitParams::condition,
         request_options: DockerEngineRuby::RequestOptions
       }

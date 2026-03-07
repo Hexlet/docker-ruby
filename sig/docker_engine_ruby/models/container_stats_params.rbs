@@ -1,12 +1,14 @@
 module DockerEngineRuby
   module Models
     type container_stats_params =
-      { one_shot: bool, stream: bool }
+      { id: String, one_shot: bool, stream: bool }
       & DockerEngineRuby::Internal::Type::request_parameters
 
     class ContainerStatsParams < DockerEngineRuby::Internal::Type::BaseModel
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_accessor id: String
 
       attr_reader one_shot: bool?
 
@@ -17,12 +19,14 @@ module DockerEngineRuby
       def stream=: (bool) -> bool
 
       def initialize: (
+        id: String,
         ?one_shot: bool,
         ?stream: bool,
         ?request_options: DockerEngineRuby::request_opts
       ) -> void
 
       def to_hash: -> {
+        id: String,
         one_shot: bool,
         stream: bool,
         request_options: DockerEngineRuby::RequestOptions

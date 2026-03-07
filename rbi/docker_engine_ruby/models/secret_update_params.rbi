@@ -14,21 +14,26 @@ module DockerEngineRuby
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :id
+
       sig { returns(Integer) }
       attr_accessor :version
 
       sig do
         params(
+          id: String,
           version: Integer,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(version:, request_options: {})
+      def self.new(id:, version:, request_options: {})
       end
 
       sig do
         override.returns(
           {
+            id: String,
             version: Integer,
             request_options: DockerEngineRuby::RequestOptions
           }
