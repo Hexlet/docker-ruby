@@ -14,6 +14,9 @@ module DockerEngineRuby
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :name
+
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :force
 
@@ -34,6 +37,7 @@ module DockerEngineRuby
 
       sig do
         params(
+          name: String,
           force: T::Boolean,
           noprune: T::Boolean,
           platforms: T::Array[String],
@@ -41,6 +45,7 @@ module DockerEngineRuby
         ).returns(T.attached_class)
       end
       def self.new(
+        name:,
         force: nil,
         noprune: nil,
         platforms: nil,
@@ -51,6 +56,7 @@ module DockerEngineRuby
       sig do
         override.returns(
           {
+            name: String,
             force: T::Boolean,
             noprune: T::Boolean,
             platforms: T::Array[String],

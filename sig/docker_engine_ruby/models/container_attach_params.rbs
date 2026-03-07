@@ -2,6 +2,7 @@ module DockerEngineRuby
   module Models
     type container_attach_params =
       {
+        id: String,
         detach_keys: String,
         logs: bool,
         stderr: bool,
@@ -14,6 +15,8 @@ module DockerEngineRuby
     class ContainerAttachParams < DockerEngineRuby::Internal::Type::BaseModel
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_accessor id: String
 
       attr_reader detach_keys: String?
 
@@ -40,6 +43,7 @@ module DockerEngineRuby
       def stream=: (bool) -> bool
 
       def initialize: (
+        id: String,
         ?detach_keys: String,
         ?logs: bool,
         ?stderr: bool,
@@ -50,6 +54,7 @@ module DockerEngineRuby
       ) -> void
 
       def to_hash: -> {
+        id: String,
         detach_keys: String,
         logs: bool,
         stderr: bool,

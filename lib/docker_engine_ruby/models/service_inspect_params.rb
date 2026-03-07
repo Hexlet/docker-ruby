@@ -7,12 +7,18 @@ module DockerEngineRuby
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
+      # @!attribute id
+      #
+      #   @return [String]
+      required :id, String
+
       # @!attribute insert_defaults
       #
       #   @return [Boolean, nil]
       optional :insert_defaults, DockerEngineRuby::Internal::Type::Boolean
 
-      # @!method initialize(insert_defaults: nil, request_options: {})
+      # @!method initialize(id:, insert_defaults: nil, request_options: {})
+      #   @param id [String]
       #   @param insert_defaults [Boolean]
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]
     end

@@ -2,6 +2,7 @@ module DockerEngineRuby
   module Models
     type container_update_params =
       {
+        id: String,
         blkio_device_read_bps: ::Array[DockerEngineRuby::ContainerUpdateParams::BlkioDeviceReadBp],
         blkio_device_read_i_ops: ::Array[DockerEngineRuby::ContainerUpdateParams::BlkioDeviceReadIOp],
         blkio_device_write_bps: ::Array[DockerEngineRuby::ContainerUpdateParams::BlkioDeviceWriteBp],
@@ -38,6 +39,8 @@ module DockerEngineRuby
     class ContainerUpdateParams < DockerEngineRuby::Internal::Type::BaseModel
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_accessor id: String
 
       attr_reader blkio_device_read_bps: ::Array[DockerEngineRuby::ContainerUpdateParams::BlkioDeviceReadBp]?
 
@@ -172,6 +175,7 @@ module DockerEngineRuby
       ) -> ::Array[DockerEngineRuby::ContainerUpdateParams::Ulimit]
 
       def initialize: (
+        id: String,
         ?blkio_device_read_bps: ::Array[DockerEngineRuby::ContainerUpdateParams::BlkioDeviceReadBp],
         ?blkio_device_read_i_ops: ::Array[DockerEngineRuby::ContainerUpdateParams::BlkioDeviceReadIOp],
         ?blkio_device_write_bps: ::Array[DockerEngineRuby::ContainerUpdateParams::BlkioDeviceWriteBp],
@@ -206,6 +210,7 @@ module DockerEngineRuby
       ) -> void
 
       def to_hash: -> {
+        id: String,
         blkio_device_read_bps: ::Array[DockerEngineRuby::ContainerUpdateParams::BlkioDeviceReadBp],
         blkio_device_read_i_ops: ::Array[DockerEngineRuby::ContainerUpdateParams::BlkioDeviceReadIOp],
         blkio_device_write_bps: ::Array[DockerEngineRuby::ContainerUpdateParams::BlkioDeviceWriteBp],

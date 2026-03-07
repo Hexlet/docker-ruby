@@ -15,6 +15,9 @@ module DockerEngineRuby
         end
 
       sig { returns(String) }
+      attr_accessor :name
+
+      sig { returns(String) }
       attr_accessor :remote
 
       sig { returns(T::Array[DockerEngineRuby::Privilege]) }
@@ -28,18 +31,26 @@ module DockerEngineRuby
 
       sig do
         params(
+          name: String,
           remote: String,
           body: T::Array[DockerEngineRuby::Privilege::OrHash],
           x_registry_auth: String,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(remote:, body:, x_registry_auth: nil, request_options: {})
+      def self.new(
+        name:,
+        remote:,
+        body:,
+        x_registry_auth: nil,
+        request_options: {}
+      )
       end
 
       sig do
         override.returns(
           {
+            name: String,
             remote: String,
             body: T::Array[DockerEngineRuby::Privilege],
             x_registry_auth: String,

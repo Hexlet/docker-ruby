@@ -7,6 +7,11 @@ module DockerEngineRuby
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
+      # @!attribute id
+      #
+      #   @return [String]
+      required :id, String
+
       # @!attribute detach_keys
       #
       #   @return [String, nil]
@@ -37,7 +42,8 @@ module DockerEngineRuby
       #   @return [Boolean, nil]
       optional :stream, DockerEngineRuby::Internal::Type::Boolean
 
-      # @!method initialize(detach_keys: nil, logs: nil, stderr: nil, stdin: nil, stdout: nil, stream: nil, request_options: {})
+      # @!method initialize(id:, detach_keys: nil, logs: nil, stderr: nil, stdin: nil, stdout: nil, stream: nil, request_options: {})
+      #   @param id [String]
       #   @param detach_keys [String]
       #   @param logs [Boolean]
       #   @param stderr [Boolean]

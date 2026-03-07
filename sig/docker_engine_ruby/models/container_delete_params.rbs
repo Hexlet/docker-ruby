@@ -1,12 +1,14 @@
 module DockerEngineRuby
   module Models
     type container_delete_params =
-      { force: bool, link: bool, v: bool }
+      { id: String, force: bool, link: bool, v: bool }
       & DockerEngineRuby::Internal::Type::request_parameters
 
     class ContainerDeleteParams < DockerEngineRuby::Internal::Type::BaseModel
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_accessor id: String
 
       attr_reader force: bool?
 
@@ -21,6 +23,7 @@ module DockerEngineRuby
       def v=: (bool) -> bool
 
       def initialize: (
+        id: String,
         ?force: bool,
         ?link: bool,
         ?v: bool,
@@ -28,6 +31,7 @@ module DockerEngineRuby
       ) -> void
 
       def to_hash: -> {
+        id: String,
         force: bool,
         link: bool,
         v: bool,

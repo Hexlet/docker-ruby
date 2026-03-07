@@ -14,6 +14,9 @@ module DockerEngineRuby
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :id
+
       sig { returns(T.nilable(T::Array[Integer])) }
       attr_accessor :console_size
 
@@ -31,6 +34,7 @@ module DockerEngineRuby
 
       sig do
         params(
+          id: String,
           console_size: T.nilable(T::Array[Integer]),
           detach: T::Boolean,
           tty: T::Boolean,
@@ -38,6 +42,7 @@ module DockerEngineRuby
         ).returns(T.attached_class)
       end
       def self.new(
+        id:,
         console_size: nil,
         detach: nil,
         tty: nil,
@@ -48,6 +53,7 @@ module DockerEngineRuby
       sig do
         override.returns(
           {
+            id: String,
             console_size: T.nilable(T::Array[Integer]),
             detach: T::Boolean,
             tty: T::Boolean,

@@ -1,22 +1,27 @@
 module DockerEngineRuby
   module Models
     type image_inspect_params =
-      { manifests: bool } & DockerEngineRuby::Internal::Type::request_parameters
+      { name: String, manifests: bool }
+      & DockerEngineRuby::Internal::Type::request_parameters
 
     class ImageInspectParams < DockerEngineRuby::Internal::Type::BaseModel
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_accessor name: String
 
       attr_reader manifests: bool?
 
       def manifests=: (bool) -> bool
 
       def initialize: (
+        name: String,
         ?manifests: bool,
         ?request_options: DockerEngineRuby::request_opts
       ) -> void
 
       def to_hash: -> {
+        name: String,
         manifests: bool,
         request_options: DockerEngineRuby::RequestOptions
       }

@@ -7,6 +7,11 @@ module DockerEngineRuby
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
+      # @!attribute name
+      #
+      #   @return [String]
+      required :name, String
+
       # @!attribute remote
       #
       #   @return [String]
@@ -22,7 +27,8 @@ module DockerEngineRuby
       #   @return [String, nil]
       optional :x_registry_auth, String
 
-      # @!method initialize(remote:, body:, x_registry_auth: nil, request_options: {})
+      # @!method initialize(name:, remote:, body:, x_registry_auth: nil, request_options: {})
+      #   @param name [String]
       #   @param remote [String]
       #   @param body [Array<DockerEngineRuby::Models::Privilege>]
       #   @param x_registry_auth [String]

@@ -14,6 +14,9 @@ module DockerEngineRuby
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :id
+
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :size
 
@@ -22,16 +25,18 @@ module DockerEngineRuby
 
       sig do
         params(
+          id: String,
           size: T::Boolean,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(size: nil, request_options: {})
+      def self.new(id:, size: nil, request_options: {})
       end
 
       sig do
         override.returns(
           {
+            id: String,
             size: T::Boolean,
             request_options: DockerEngineRuby::RequestOptions
           }

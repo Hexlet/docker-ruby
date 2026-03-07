@@ -7,6 +7,11 @@ module DockerEngineRuby
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
+      # @!attribute id
+      #
+      #   @return [String]
+      required :id, String
+
       # @!attribute console_size
       #
       #   @return [Array<Integer>, nil]
@@ -25,7 +30,8 @@ module DockerEngineRuby
       #   @return [Boolean, nil]
       optional :tty, DockerEngineRuby::Internal::Type::Boolean, api_name: :Tty
 
-      # @!method initialize(console_size: nil, detach: nil, tty: nil, request_options: {})
+      # @!method initialize(id:, console_size: nil, detach: nil, tty: nil, request_options: {})
+      #   @param id [String]
       #   @param console_size [Array<Integer>, nil]
       #   @param detach [Boolean]
       #   @param tty [Boolean]

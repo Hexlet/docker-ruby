@@ -7,6 +7,11 @@ module DockerEngineRuby
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
+      # @!attribute id
+      #
+      #   @return [String]
+      required :id, String
+
       # @!attribute blkio_device_read_bps
       #   Limit read rate (bytes per second) from a device, in the form:
       #
@@ -263,9 +268,11 @@ module DockerEngineRuby
                },
                api_name: :Ulimits
 
-      # @!method initialize(blkio_device_read_bps: nil, blkio_device_read_i_ops: nil, blkio_device_write_bps: nil, blkio_device_write_i_ops: nil, blkio_weight: nil, blkio_weight_device: nil, cgroup_parent: nil, cpu_count: nil, cpu_percent: nil, cpu_period: nil, cpu_quota: nil, cpu_realtime_period: nil, cpu_realtime_runtime: nil, cpuset_cpus: nil, cpuset_mems: nil, cpu_shares: nil, device_cgroup_rules: nil, device_requests: nil, devices: nil, init: nil, io_maximum_bandwidth: nil, io_maximum_i_ops: nil, memory: nil, memory_reservation: nil, memory_swap: nil, memory_swappiness: nil, nano_cpus: nil, oom_kill_disable: nil, pids_limit: nil, ulimits: nil, request_options: {})
+      # @!method initialize(id:, blkio_device_read_bps: nil, blkio_device_read_i_ops: nil, blkio_device_write_bps: nil, blkio_device_write_i_ops: nil, blkio_weight: nil, blkio_weight_device: nil, cgroup_parent: nil, cpu_count: nil, cpu_percent: nil, cpu_period: nil, cpu_quota: nil, cpu_realtime_period: nil, cpu_realtime_runtime: nil, cpuset_cpus: nil, cpuset_mems: nil, cpu_shares: nil, device_cgroup_rules: nil, device_requests: nil, devices: nil, init: nil, io_maximum_bandwidth: nil, io_maximum_i_ops: nil, memory: nil, memory_reservation: nil, memory_swap: nil, memory_swappiness: nil, nano_cpus: nil, oom_kill_disable: nil, pids_limit: nil, ulimits: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {DockerEngineRuby::Models::ContainerUpdateParams} for more details.
+      #
+      #   @param id [String]
       #
       #   @param blkio_device_read_bps [Array<DockerEngineRuby::Models::ContainerUpdateParams::BlkioDeviceReadBp>] Limit read rate (bytes per second) from a device, in the form:
       #

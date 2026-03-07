@@ -14,6 +14,9 @@ module DockerEngineRuby
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :id
+
       sig { returns(Integer) }
       attr_accessor :version
 
@@ -48,6 +51,7 @@ module DockerEngineRuby
 
       sig do
         params(
+          id: String,
           version: Integer,
           registry_auth_from:
             DockerEngineRuby::ServiceUpdateParams::RegistryAuthFrom::OrSymbol,
@@ -57,6 +61,7 @@ module DockerEngineRuby
         ).returns(T.attached_class)
       end
       def self.new(
+        id:,
         version:,
         registry_auth_from: nil,
         rollback: nil,
@@ -68,6 +73,7 @@ module DockerEngineRuby
       sig do
         override.returns(
           {
+            id: String,
             version: Integer,
             registry_auth_from:
               DockerEngineRuby::ServiceUpdateParams::RegistryAuthFrom::OrSymbol,

@@ -14,6 +14,9 @@ module DockerEngineRuby
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :id
+
       sig do
         returns(
           T.nilable(DockerEngineRuby::ContainerWaitParams::Condition::OrSymbol)
@@ -30,16 +33,18 @@ module DockerEngineRuby
 
       sig do
         params(
+          id: String,
           condition: DockerEngineRuby::ContainerWaitParams::Condition::OrSymbol,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(condition: nil, request_options: {})
+      def self.new(id:, condition: nil, request_options: {})
       end
 
       sig do
         override.returns(
           {
+            id: String,
             condition:
               DockerEngineRuby::ContainerWaitParams::Condition::OrSymbol,
             request_options: DockerEngineRuby::RequestOptions

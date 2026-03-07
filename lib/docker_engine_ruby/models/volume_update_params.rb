@@ -7,6 +7,11 @@ module DockerEngineRuby
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
+      # @!attribute name
+      #
+      #   @return [String]
+      required :name, String
+
       # @!attribute version
       #
       #   @return [Integer]
@@ -18,7 +23,9 @@ module DockerEngineRuby
       #   @return [DockerEngineRuby::Models::VolumeUpdateParams::Spec, nil]
       optional :spec, -> { DockerEngineRuby::VolumeUpdateParams::Spec }, api_name: :Spec
 
-      # @!method initialize(version:, spec: nil, request_options: {})
+      # @!method initialize(name:, version:, spec: nil, request_options: {})
+      #   @param name [String]
+      #
       #   @param version [Integer]
       #
       #   @param spec [DockerEngineRuby::Models::VolumeUpdateParams::Spec] Cluster-specific options used to create the volume.
