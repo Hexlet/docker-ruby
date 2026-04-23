@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.7.4 (2026-04-23)
+
+Full Changelog: [v0.7.3...v0.7.4](https://github.com/Hexlet/docker-ruby/compare/v0.7.3...v0.7.4)
+
+### Bug Fixes
+
+* align path encoding with RFC 3986 section 3.3 ([590bc94](https://github.com/Hexlet/docker-ruby/commit/590bc94c26ce9d630f0f6b4c9458d837876a9a98))
+* **internal:** correct multipart form field name encoding ([d2df78a](https://github.com/Hexlet/docker-ruby/commit/d2df78ae65e43660b24958459e1f1f165ca9483f))
+* multipart encoding for file arrays ([b186016](https://github.com/Hexlet/docker-ruby/commit/b186016397a9419d3f4622e1bd5fc6ad8a02bc82))
+* properly mock time in ruby ci tests ([f291b96](https://github.com/Hexlet/docker-ruby/commit/f291b9605760add258fc3e596a664800663d9e7f))
+* variable name typo ([b827fa8](https://github.com/Hexlet/docker-ruby/commit/b827fa8ca02b7b0ca4d27ee6cf45cb520069c959))
+
+
+### Chores
+
+* **ci:** add build step ([f5b8022](https://github.com/Hexlet/docker-ruby/commit/f5b8022932e298a82aa303e923a6e5bf69279cdc))
+* **ci:** skip lint on metadata-only changes ([24f48e2](https://github.com/Hexlet/docker-ruby/commit/24f48e2052ca6fd27a2e19a49f9436891a522902))
+* **ci:** skip uploading artifacts on stainless-internal branches ([1b1aa08](https://github.com/Hexlet/docker-ruby/commit/1b1aa0891ea556e0c8ffa46ea20ff0a4d5f3e700))
+* **ci:** support opting out of skipping builds on metadata-only commits ([a9b2155](https://github.com/Hexlet/docker-ruby/commit/a9b2155d508034db5317b6e7122183b167f7ae92))
+* **internal:** codegen related update ([c0b2afb](https://github.com/Hexlet/docker-ruby/commit/c0b2afb257b2a173db9721e248ecbbcb230c54c1))
+* **internal:** codegen related update ([ab55081](https://github.com/Hexlet/docker-ruby/commit/ab550815719723e748965fb23c2547aee2b1de91))
+* **internal:** more robust bootstrap script ([d23ffee](https://github.com/Hexlet/docker-ruby/commit/d23ffee2238d18545a5b1bb69a515e22b427fea8))
+* **internal:** tweak CI branches ([7889dd4](https://github.com/Hexlet/docker-ruby/commit/7889dd429e6f5facaad352660290bee0a81bd446))
+* **internal:** update gitignore ([33e96c7](https://github.com/Hexlet/docker-ruby/commit/33e96c75c33be17c746f95320942a9e2d362cad1))
+* update placeholder string ([a3b8bba](https://github.com/Hexlet/docker-ruby/commit/a3b8bbab2dfb07a0a882c843f4d7c28da690772c))
+
 ## 0.7.3 (2026-02-24)
 
 Full Changelog: [v0.7.2...v0.7.3](https://github.com/Hexlet/docker-ruby/compare/v0.7.2...v0.7.3)
