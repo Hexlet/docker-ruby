@@ -1,12 +1,14 @@
 module DockerEngineRuby
   module Models
     type image_delete_params =
-      { force: bool, noprune: bool, platforms: ::Array[String] }
+      { name: String, force: bool, noprune: bool, platforms: ::Array[String] }
       & DockerEngineRuby::Internal::Type::request_parameters
 
     class ImageDeleteParams < DockerEngineRuby::Internal::Type::BaseModel
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_accessor name: String
 
       attr_reader force: bool?
 
@@ -21,6 +23,7 @@ module DockerEngineRuby
       def platforms=: (::Array[String]) -> ::Array[String]
 
       def initialize: (
+        name: String,
         ?force: bool,
         ?noprune: bool,
         ?platforms: ::Array[String],
@@ -28,6 +31,7 @@ module DockerEngineRuby
       ) -> void
 
       def to_hash: -> {
+        name: String,
         force: bool,
         noprune: bool,
         platforms: ::Array[String],

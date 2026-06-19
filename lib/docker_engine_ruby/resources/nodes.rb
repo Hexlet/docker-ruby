@@ -20,10 +20,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::NodeUpdateParams
       def update(id, params)
         parsed, options = DockerEngineRuby::NodeUpdateParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed.except(:spec))
         @client.request(
           method: :post,
           path: ["nodes/%1$s/update", id],
-          query: parsed.except(:spec),
+          query: query,
           body: parsed[:spec],
           model: NilClass,
           options: options
@@ -42,10 +43,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::NodeListParams
       def list(params = {})
         parsed, options = DockerEngineRuby::NodeListParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "nodes",
-          query: parsed,
+          query: query,
           model: DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::Node],
           options: options
         )
@@ -64,10 +66,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::NodeDeleteParams
       def delete(id, params = {})
         parsed, options = DockerEngineRuby::NodeDeleteParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :delete,
           path: ["nodes/%1$s", id],
-          query: parsed,
+          query: query,
           model: NilClass,
           options: options
         )

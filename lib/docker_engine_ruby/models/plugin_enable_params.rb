@@ -7,12 +7,18 @@ module DockerEngineRuby
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
+      # @!attribute name
+      #
+      #   @return [String]
+      required :name, String
+
       # @!attribute timeout
       #
       #   @return [Integer, nil]
       optional :timeout, Integer
 
-      # @!method initialize(timeout: nil, request_options: {})
+      # @!method initialize(name:, timeout: nil, request_options: {})
+      #   @param name [String]
       #   @param timeout [Integer]
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]
     end

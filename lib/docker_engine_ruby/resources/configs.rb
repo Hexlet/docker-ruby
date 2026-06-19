@@ -41,10 +41,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ConfigUpdateParams
       def update(id, params)
         parsed, options = DockerEngineRuby::ConfigUpdateParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed.except(:spec))
         @client.request(
           method: :post,
           path: ["configs/%1$s/update", id],
-          query: parsed.except(:spec),
+          query: query,
           body: parsed[:spec],
           model: NilClass,
           options: options
@@ -63,10 +64,11 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ConfigListParams
       def list(params = {})
         parsed, options = DockerEngineRuby::ConfigListParams.dump_request(params)
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "configs",
-          query: parsed,
+          query: query,
           model: DockerEngineRuby::Internal::Type::ArrayOf[DockerEngineRuby::ConfigObject],
           options: options
         )

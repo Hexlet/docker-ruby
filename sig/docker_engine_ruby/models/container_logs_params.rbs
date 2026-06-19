@@ -2,6 +2,7 @@ module DockerEngineRuby
   module Models
     type container_logs_params =
       {
+        id: String,
         follow: bool,
         since: Integer,
         stderr: bool,
@@ -15,6 +16,8 @@ module DockerEngineRuby
     class ContainerLogsParams < DockerEngineRuby::Internal::Type::BaseModel
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_accessor id: String
 
       attr_reader follow: bool?
 
@@ -45,6 +48,7 @@ module DockerEngineRuby
       def until_=: (Integer) -> Integer
 
       def initialize: (
+        id: String,
         ?follow: bool,
         ?since: Integer,
         ?stderr: bool,
@@ -56,6 +60,7 @@ module DockerEngineRuby
       ) -> void
 
       def to_hash: -> {
+        id: String,
         follow: bool,
         since: Integer,
         stderr: bool,

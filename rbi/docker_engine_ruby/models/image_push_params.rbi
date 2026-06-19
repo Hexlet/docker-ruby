@@ -15,6 +15,9 @@ module DockerEngineRuby
         end
 
       sig { returns(String) }
+      attr_accessor :name
+
+      sig { returns(String) }
       attr_accessor :x_registry_auth
 
       sig { returns(T.nilable(String)) }
@@ -31,6 +34,7 @@ module DockerEngineRuby
 
       sig do
         params(
+          name: String,
           x_registry_auth: String,
           platform: String,
           tag: String,
@@ -38,6 +42,7 @@ module DockerEngineRuby
         ).returns(T.attached_class)
       end
       def self.new(
+        name:,
         x_registry_auth:,
         platform: nil,
         tag: nil,
@@ -48,6 +53,7 @@ module DockerEngineRuby
       sig do
         override.returns(
           {
+            name: String,
             x_registry_auth: String,
             platform: String,
             tag: String,

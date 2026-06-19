@@ -1,12 +1,14 @@
 module DockerEngineRuby
   module Models
     type container_stop_params =
-      { signal: String, t: Integer }
+      { id: String, signal: String, t: Integer }
       & DockerEngineRuby::Internal::Type::request_parameters
 
     class ContainerStopParams < DockerEngineRuby::Internal::Type::BaseModel
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_accessor id: String
 
       attr_reader signal: String?
 
@@ -17,12 +19,14 @@ module DockerEngineRuby
       def t=: (Integer) -> Integer
 
       def initialize: (
+        id: String,
         ?signal: String,
         ?t: Integer,
         ?request_options: DockerEngineRuby::request_opts
       ) -> void
 
       def to_hash: -> {
+        id: String,
         signal: String,
         t: Integer,
         request_options: DockerEngineRuby::RequestOptions

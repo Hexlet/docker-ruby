@@ -1,21 +1,25 @@
 module DockerEngineRuby
   module Models
     type plugin_set_params =
-      { body: ::Array[String] }
+      { name: String, body: ::Array[String] }
       & DockerEngineRuby::Internal::Type::request_parameters
 
     class PluginSetParams < DockerEngineRuby::Internal::Type::BaseModel
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
+      attr_accessor name: String
+
       attr_accessor body: ::Array[String]
 
       def initialize: (
+        name: String,
         body: ::Array[String],
         ?request_options: DockerEngineRuby::request_opts
       ) -> void
 
       def to_hash: -> {
+        name: String,
         body: ::Array[String],
         request_options: DockerEngineRuby::RequestOptions
       }

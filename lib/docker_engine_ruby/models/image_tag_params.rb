@@ -7,6 +7,11 @@ module DockerEngineRuby
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
+      # @!attribute name
+      #
+      #   @return [String]
+      required :name, String
+
       # @!attribute repo
       #
       #   @return [String, nil]
@@ -17,7 +22,8 @@ module DockerEngineRuby
       #   @return [String, nil]
       optional :tag, String
 
-      # @!method initialize(repo: nil, tag: nil, request_options: {})
+      # @!method initialize(name:, repo: nil, tag: nil, request_options: {})
+      #   @param name [String]
       #   @param repo [String]
       #   @param tag [String]
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]

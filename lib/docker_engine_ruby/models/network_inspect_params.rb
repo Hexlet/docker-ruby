@@ -7,6 +7,11 @@ module DockerEngineRuby
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
+      # @!attribute id
+      #
+      #   @return [String]
+      required :id, String
+
       # @!attribute scope
       #
       #   @return [String, nil]
@@ -17,7 +22,8 @@ module DockerEngineRuby
       #   @return [Boolean, nil]
       optional :verbose, DockerEngineRuby::Internal::Type::Boolean
 
-      # @!method initialize(scope: nil, verbose: nil, request_options: {})
+      # @!method initialize(id:, scope: nil, verbose: nil, request_options: {})
+      #   @param id [String]
       #   @param scope [String]
       #   @param verbose [Boolean]
       #   @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}]

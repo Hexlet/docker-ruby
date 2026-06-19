@@ -7,6 +7,11 @@ module DockerEngineRuby
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
+      # @!attribute name
+      #
+      #   @return [String]
+      required :name, String
+
       # @!attribute force
       #
       #   @return [Boolean, nil]
@@ -22,7 +27,8 @@ module DockerEngineRuby
       #   @return [Array<String>, nil]
       optional :platforms, DockerEngineRuby::Internal::Type::ArrayOf[String]
 
-      # @!method initialize(force: nil, noprune: nil, platforms: nil, request_options: {})
+      # @!method initialize(name:, force: nil, noprune: nil, platforms: nil, request_options: {})
+      #   @param name [String]
       #   @param force [Boolean]
       #   @param noprune [Boolean]
       #   @param platforms [Array<String>]

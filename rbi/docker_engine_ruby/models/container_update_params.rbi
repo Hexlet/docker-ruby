@@ -14,6 +14,9 @@ module DockerEngineRuby
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :id
+
       # Limit read rate (bytes per second) from a device, in the form:
       #
       # ```
@@ -364,6 +367,7 @@ module DockerEngineRuby
 
       sig do
         params(
+          id: String,
           blkio_device_read_bps:
             T::Array[
               DockerEngineRuby::ContainerUpdateParams::BlkioDeviceReadBp::OrHash
@@ -418,6 +422,7 @@ module DockerEngineRuby
         ).returns(T.attached_class)
       end
       def self.new(
+        id:,
         # Limit read rate (bytes per second) from a device, in the form:
         #
         # ```
@@ -527,6 +532,7 @@ module DockerEngineRuby
       sig do
         override.returns(
           {
+            id: String,
             blkio_device_read_bps:
               T::Array[
                 DockerEngineRuby::ContainerUpdateParams::BlkioDeviceReadBp

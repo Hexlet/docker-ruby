@@ -2,6 +2,7 @@ module DockerEngineRuby
   module Models
     type task_logs_params =
       {
+        id: String,
         details: bool,
         follow: bool,
         since: Integer,
@@ -15,6 +16,8 @@ module DockerEngineRuby
     class TaskLogsParams < DockerEngineRuby::Internal::Type::BaseModel
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_accessor id: String
 
       attr_reader details: bool?
 
@@ -45,6 +48,7 @@ module DockerEngineRuby
       def timestamps=: (bool) -> bool
 
       def initialize: (
+        id: String,
         ?details: bool,
         ?follow: bool,
         ?since: Integer,
@@ -56,6 +60,7 @@ module DockerEngineRuby
       ) -> void
 
       def to_hash: -> {
+        id: String,
         details: bool,
         follow: bool,
         since: Integer,

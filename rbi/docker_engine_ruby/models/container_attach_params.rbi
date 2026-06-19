@@ -14,6 +14,9 @@ module DockerEngineRuby
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :id
+
       sig { returns(T.nilable(String)) }
       attr_reader :detach_keys
 
@@ -52,6 +55,7 @@ module DockerEngineRuby
 
       sig do
         params(
+          id: String,
           detach_keys: String,
           logs: T::Boolean,
           stderr: T::Boolean,
@@ -62,6 +66,7 @@ module DockerEngineRuby
         ).returns(T.attached_class)
       end
       def self.new(
+        id:,
         detach_keys: nil,
         logs: nil,
         stderr: nil,
@@ -75,6 +80,7 @@ module DockerEngineRuby
       sig do
         override.returns(
           {
+            id: String,
             detach_keys: String,
             logs: T::Boolean,
             stderr: T::Boolean,

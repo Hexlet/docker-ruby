@@ -7,6 +7,11 @@ module DockerEngineRuby
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
+      # @!attribute id
+      #
+      #   @return [String]
+      required :id, String
+
       # @!attribute follow
       #
       #   @return [Boolean, nil]
@@ -42,7 +47,8 @@ module DockerEngineRuby
       #   @return [Integer, nil]
       optional :until_, Integer
 
-      # @!method initialize(follow: nil, since: nil, stderr: nil, stdout: nil, tail: nil, timestamps: nil, until_: nil, request_options: {})
+      # @!method initialize(id:, follow: nil, since: nil, stderr: nil, stdout: nil, tail: nil, timestamps: nil, until_: nil, request_options: {})
+      #   @param id [String]
       #   @param follow [Boolean]
       #   @param since [Integer]
       #   @param stderr [Boolean]

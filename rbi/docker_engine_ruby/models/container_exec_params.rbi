@@ -14,6 +14,9 @@ module DockerEngineRuby
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :id
+
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :attach_stderr
 
@@ -79,6 +82,7 @@ module DockerEngineRuby
 
       sig do
         params(
+          id: String,
           attach_stderr: T::Boolean,
           attach_stdin: T::Boolean,
           attach_stdout: T::Boolean,
@@ -94,6 +98,7 @@ module DockerEngineRuby
         ).returns(T.attached_class)
       end
       def self.new(
+        id:,
         attach_stderr: nil,
         attach_stdin: nil,
         attach_stdout: nil,
@@ -112,6 +117,7 @@ module DockerEngineRuby
       sig do
         override.returns(
           {
+            id: String,
             attach_stderr: T::Boolean,
             attach_stdin: T::Boolean,
             attach_stdout: T::Boolean,
