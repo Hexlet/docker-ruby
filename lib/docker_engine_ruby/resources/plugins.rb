@@ -182,7 +182,6 @@ module DockerEngineRuby
       def pull(params)
         query_params = [:remote, :name]
         parsed, options = DockerEngineRuby::PluginPullParams.dump_request(params)
-        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: "plugins/pull",
@@ -255,7 +254,6 @@ module DockerEngineRuby
       def upgrade(name, params)
         query_params = [:remote]
         parsed, options = DockerEngineRuby::PluginUpgradeParams.dump_request(params)
-        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: ["plugins/%1$s/upgrade", name],

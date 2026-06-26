@@ -52,7 +52,6 @@ module DockerEngineRuby
       def update(id, params)
         query_params = [:version, :registry_auth_from, :rollback]
         parsed, options = DockerEngineRuby::ServiceUpdateParams.dump_request(params)
-        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: ["services/%1$s/update", id],

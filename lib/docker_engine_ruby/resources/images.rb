@@ -147,7 +147,6 @@ module DockerEngineRuby
             :version
           ]
         parsed, options = DockerEngineRuby::ImageBuildParams.dump_request(params)
-        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: "build",
@@ -457,7 +456,6 @@ module DockerEngineRuby
       def pull(params)
         query_params = [:changes, :from_image, :from_src, :message, :platform, :repo, :tag]
         parsed, options = DockerEngineRuby::ImagePullParams.dump_request(params)
-        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :post,
           path: "images/create",
