@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.7.5](https://github.com/Hexlet/docker-ruby/compare/v0.7.4...v0.7.5) (2026-06-27)
+
+
+### Refactors
+
+* drop dead query local assignments in resources ([43b3ea1](https://github.com/Hexlet/docker-ruby/commit/43b3ea1a22afb77c0d1518237d1ad72aa3bd126f))
+* drop dead query local assignments in resources ([bda6b97](https://github.com/Hexlet/docker-ruby/commit/bda6b97dd8001c05c1be48682b135353dfed02bc))
+
 ## 0.7.4 (2026-04-23)
 
 Full Changelog: [v0.7.3...v0.7.4](https://github.com/Hexlet/docker-ruby/compare/v0.7.3...v0.7.4)
