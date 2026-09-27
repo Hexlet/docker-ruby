@@ -3,6 +3,7 @@ module DockerEngineRuby
     class Containers
       def create: (
         config: DockerEngineRuby::Config,
+        ?host_config: DockerEngineRuby::Container::HostConfig,
         ?name: String,
         ?platform: String,
         ?request_options: DockerEngineRuby::request_opts

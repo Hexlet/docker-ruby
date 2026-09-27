@@ -14,12 +14,21 @@ module DockerEngineRuby
           )
         end
 
+      sig { returns(DockerEngineRuby::CreateRequest) }
+      attr_reader :create_request
+
+      sig do
+        params(create_request: DockerEngineRuby::CreateRequest::OrHash).void
+      end
+      attr_writer :create_request
+
       sig do
         params(
+          create_request: DockerEngineRuby::CreateRequest::OrHash,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(request_options: {})
+      def self.new(create_request:, request_options: {})
       end
 
       sig do

@@ -7,6 +7,11 @@ module DockerEngineRuby
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
+      # @!attribute spec
+      #
+      #   @return [DockerEngineRuby::Models::SwarmSpec]
+      required :spec, -> { DockerEngineRuby::SwarmSpec }
+
       # @!attribute version
       #
       #   @return [Integer]
@@ -27,7 +32,8 @@ module DockerEngineRuby
       #   @return [Boolean, nil]
       optional :rotate_worker_token, DockerEngineRuby::Internal::Type::Boolean
 
-      # @!method initialize(version:, rotate_manager_token: nil, rotate_manager_unlock_key: nil, rotate_worker_token: nil, request_options: {})
+      # @!method initialize(spec:, version:, rotate_manager_token: nil, rotate_manager_unlock_key: nil, rotate_worker_token: nil, request_options: {})
+      #   @param spec [DockerEngineRuby::Models::SwarmSpec]
       #   @param version [Integer]
       #   @param rotate_manager_token [Boolean]
       #   @param rotate_manager_unlock_key [Boolean]

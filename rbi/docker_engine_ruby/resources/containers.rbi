@@ -7,6 +7,7 @@ module DockerEngineRuby
       sig do
         params(
           config: DockerEngineRuby::Config::OrHash,
+          host_config: DockerEngineRuby::Container::HostConfig::OrHash,
           name: String,
           platform: String,
           request_options: DockerEngineRuby::RequestOptions::OrHash
@@ -15,6 +16,8 @@ module DockerEngineRuby
       def create(
         # Body param: Configuration for a container that is portable between hosts.
         config:,
+        # Body param: Настройки хоста: монтирования, сеть, лимиты.
+        host_config: nil,
         # Query param
         name: nil,
         # Query param

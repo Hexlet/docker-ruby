@@ -5,9 +5,11 @@ module DockerEngineRuby
     class Containers
       # Create a container
       #
-      # @overload create(config:, name: nil, platform: nil, request_options: {})
+      # @overload create(config:, host_config: nil, name: nil, platform: nil, request_options: {})
       #
       # @param config [DockerEngineRuby::Models::Config] Body param: Configuration for a container that is portable between hosts.
+      #
+      # @param host_config [DockerEngineRuby::Models::Container::HostConfig] Body param: Настройки хоста: монтирования, сеть, лимиты.
       #
       # @param name [String] Query param
       #
@@ -20,12 +22,15 @@ module DockerEngineRuby
       # @see DockerEngineRuby::Models::ContainerCreateParams
       def create(params)
         parsed, options = DockerEngineRuby::ContainerCreateParams.dump_request(params)
-        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed.except(:config))
+        query = DockerEngineRuby::Internal::Util.encode_query_params(parsed.except(:config, :host_config))
+        # Docker ждёт настройки хоста в том же теле, что и конфиг контейнера: `{..., "HostConfig": {...}}`.
+        host_config = parsed[:host_config]
+        body = host_config.nil? ? parsed[:config] : {**parsed[:config], HostConfig: host_config}
         @client.request(
           method: :post,
           path: "containers/create",
           query: query,
-          body: parsed[:config],
+          body: body,
           model: DockerEngineRuby::CreateResponse,
           options: options
         )

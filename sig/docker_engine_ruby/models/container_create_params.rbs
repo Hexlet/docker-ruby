@@ -1,12 +1,25 @@
 module DockerEngineRuby
   module Models
     type container_create_params =
-      { name: String, platform: String }
+      {
+        config: DockerEngineRuby::Config,
+        host_config: DockerEngineRuby::Container::HostConfig,
+        name: String,
+        platform: String
+      }
       & DockerEngineRuby::Internal::Type::request_parameters
 
     class ContainerCreateParams < DockerEngineRuby::Internal::Type::BaseModel
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_accessor config: DockerEngineRuby::Config
+
+      attr_reader host_config: DockerEngineRuby::Container::HostConfig?
+
+      def host_config=: (
+        DockerEngineRuby::Container::HostConfig
+      ) -> DockerEngineRuby::Container::HostConfig
 
       attr_reader name: String?
 
@@ -17,12 +30,16 @@ module DockerEngineRuby
       def platform=: (String) -> String
 
       def initialize: (
+        config: DockerEngineRuby::Config,
+        ?host_config: DockerEngineRuby::Container::HostConfig,
         ?name: String,
         ?platform: String,
         ?request_options: DockerEngineRuby::request_opts
       ) -> void
 
       def to_hash: -> {
+        config: DockerEngineRuby::Config,
+        host_config: DockerEngineRuby::Container::HostConfig,
         name: String,
         platform: String,
         request_options: DockerEngineRuby::RequestOptions

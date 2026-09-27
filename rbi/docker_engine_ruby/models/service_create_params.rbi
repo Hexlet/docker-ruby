@@ -14,6 +14,12 @@ module DockerEngineRuby
           )
         end
 
+      sig { returns(DockerEngineRuby::ServiceSpec) }
+      attr_reader :spec
+
+      sig { params(spec: DockerEngineRuby::ServiceSpec::OrHash).void }
+      attr_writer :spec
+
       sig { returns(T.nilable(String)) }
       attr_reader :x_registry_auth
 
@@ -22,16 +28,18 @@ module DockerEngineRuby
 
       sig do
         params(
+          spec: DockerEngineRuby::ServiceSpec::OrHash,
           x_registry_auth: String,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(x_registry_auth: nil, request_options: {})
+      def self.new(spec:, x_registry_auth: nil, request_options: {})
       end
 
       sig do
         override.returns(
           {
+            spec: DockerEngineRuby::ServiceSpec,
             x_registry_auth: String,
             request_options: DockerEngineRuby::RequestOptions
           }

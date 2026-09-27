@@ -14,12 +14,19 @@ module DockerEngineRuby
           )
         end
 
+      sig { returns(DockerEngineRuby::ConfigSpec) }
+      attr_reader :spec
+
+      sig { params(spec: DockerEngineRuby::ConfigSpec::OrHash).void }
+      attr_writer :spec
+
       sig do
         params(
+          spec: DockerEngineRuby::ConfigSpec::OrHash,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(request_options: {})
+      def self.new(spec:, request_options: {})
       end
 
       sig do

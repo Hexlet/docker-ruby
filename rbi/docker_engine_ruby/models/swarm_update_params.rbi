@@ -14,6 +14,12 @@ module DockerEngineRuby
           )
         end
 
+      sig { returns(DockerEngineRuby::SwarmSpec) }
+      attr_reader :spec
+
+      sig { params(spec: DockerEngineRuby::SwarmSpec::OrHash).void }
+      attr_writer :spec
+
       sig { returns(Integer) }
       attr_accessor :version
 
@@ -37,6 +43,7 @@ module DockerEngineRuby
 
       sig do
         params(
+          spec: DockerEngineRuby::SwarmSpec::OrHash,
           version: Integer,
           rotate_manager_token: T::Boolean,
           rotate_manager_unlock_key: T::Boolean,
@@ -45,6 +52,7 @@ module DockerEngineRuby
         ).returns(T.attached_class)
       end
       def self.new(
+        spec:,
         version:,
         rotate_manager_token: nil,
         rotate_manager_unlock_key: nil,
@@ -56,6 +64,7 @@ module DockerEngineRuby
       sig do
         override.returns(
           {
+            spec: DockerEngineRuby::SwarmSpec,
             version: Integer,
             rotate_manager_token: T::Boolean,
             rotate_manager_unlock_key: T::Boolean,
