@@ -1,0 +1,15 @@
+module DockerEngineRuby
+  module Models
+    type image_id = { id: String }
+
+    class ImageID < DockerEngineRuby::Internal::Type::BaseModel
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      def initialize: (?id: String) -> void
+
+      def to_hash: -> { id: String }
+    end
+  end
+end

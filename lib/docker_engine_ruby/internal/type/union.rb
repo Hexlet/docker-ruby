@@ -150,6 +150,8 @@ module DockerEngineRuby
             target = variant_fn.call
             exact = state[:exactness] = {yes: 0, no: 0, maybe: 0}
             state[:branched] += 1
+            # A failed attempt must not leave its error behind for the variant that fits.
+            state[:error] = nil
 
             coerced = DockerEngineRuby::Internal::Type::Converter.coerce(target, value, state: state)
             yes, no, maybe = exact.values
@@ -158,7 +160,7 @@ module DockerEngineRuby
               state[:exactness] = exactness
               return coerced
             elsif maybe.positive?
-              alternatives << [[-yes, -maybe, no], exact, coerced]
+              alternatives << [[-yes, -maybe, no], exact, coerced, state[:error]]
             end
           end
 
@@ -167,8 +169,9 @@ module DockerEngineRuby
             exactness[:no] += 1
             state[:error] = ArgumentError.new("no matching variant for #{value.inspect}")
             value
-          in [[_, exact, coerced], *]
+          in [[_, exact, coerced, error], *]
             exact.each { exactness[_1] += _2 }
+            state[:error] = error
             coerced
           end
             .tap { state[:exactness] = exactness }

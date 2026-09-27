@@ -16,6 +16,15 @@ module DockerEngineRuby
       ) -> void
     end
 
+    class StreamError < DockerEngineRuby::Errors::Error
+      attr_reader detail: DockerEngineRuby::Models::ErrorDetail?
+
+      def initialize: (
+        String message,
+        ?detail: DockerEngineRuby::Models::ErrorDetail?
+      ) -> void
+    end
+
     class APIError < DockerEngineRuby::Errors::Error
       attr_accessor url: URI::Generic
 

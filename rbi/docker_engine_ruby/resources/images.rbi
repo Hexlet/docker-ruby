@@ -73,7 +73,9 @@ module DockerEngineRuby
           target: String,
           version: DockerEngineRuby::ImageBuildParams::Version::OrSymbol,
           x_registry_config: String,
-          request_options: DockerEngineRuby::RequestOptions::OrHash
+          request_options: DockerEngineRuby::RequestOptions::OrHash,
+          blk:
+            T.nilable(T.proc.params(message: DockerEngineRuby::BuildInfo).void)
         ).void
       end
       def build(
@@ -131,7 +133,8 @@ module DockerEngineRuby
         version: nil,
         # Header param
         x_registry_config: nil,
-        request_options: {}
+        request_options: {},
+        &blk
       )
       end
 
@@ -364,7 +367,11 @@ module DockerEngineRuby
           repo: String,
           tag: String,
           x_registry_auth: String,
-          request_options: DockerEngineRuby::RequestOptions::OrHash
+          request_options: DockerEngineRuby::RequestOptions::OrHash,
+          blk:
+            T.nilable(
+              T.proc.params(message: DockerEngineRuby::CreateImageInfo).void
+            )
         ).void
       end
       def pull(
@@ -386,7 +393,8 @@ module DockerEngineRuby
         tag: nil,
         # Header param
         x_registry_auth: nil,
-        request_options: {}
+        request_options: {},
+        &blk
       )
       end
 
@@ -397,7 +405,11 @@ module DockerEngineRuby
           x_registry_auth: String,
           platform: String,
           tag: String,
-          request_options: DockerEngineRuby::RequestOptions::OrHash
+          request_options: DockerEngineRuby::RequestOptions::OrHash,
+          blk:
+            T.nilable(
+              T.proc.params(message: DockerEngineRuby::PushImageInfo).void
+            )
         ).void
       end
       def push(
@@ -409,7 +421,8 @@ module DockerEngineRuby
         platform: nil,
         # Query param
         tag: nil,
-        request_options: {}
+        request_options: {},
+        &blk
       )
       end
 

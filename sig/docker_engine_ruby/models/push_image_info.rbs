@@ -1,0 +1,90 @@
+module DockerEngineRuby
+  module Models
+    type push_image_info =
+      {
+        id: String,
+        error: String,
+        error_detail: DockerEngineRuby::ErrorDetail,
+        status: String,
+        progress: String,
+        progress_detail: DockerEngineRuby::ProgressDetail,
+        aux: DockerEngineRuby::PushImageInfo::Aux
+      }
+
+    class PushImageInfo < DockerEngineRuby::Internal::Type::BaseModel
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      attr_reader error: String?
+
+      def error=: (String) -> String
+
+      attr_reader error_detail: DockerEngineRuby::ErrorDetail?
+
+      def error_detail=: (
+        DockerEngineRuby::ErrorDetail
+      ) -> DockerEngineRuby::ErrorDetail
+
+      attr_reader status: String?
+
+      def status=: (String) -> String
+
+      attr_reader progress: String?
+
+      def progress=: (String) -> String
+
+      attr_reader progress_detail: DockerEngineRuby::ProgressDetail?
+
+      def progress_detail=: (
+        DockerEngineRuby::ProgressDetail
+      ) -> DockerEngineRuby::ProgressDetail
+
+      attr_reader aux: DockerEngineRuby::PushImageInfo::Aux?
+
+      def aux=: (
+        DockerEngineRuby::PushImageInfo::Aux
+      ) -> DockerEngineRuby::PushImageInfo::Aux
+
+      def initialize: (
+        ?id: String,
+        ?error: String,
+        ?error_detail: DockerEngineRuby::ErrorDetail,
+        ?status: String,
+        ?progress: String,
+        ?progress_detail: DockerEngineRuby::ProgressDetail,
+        ?aux: DockerEngineRuby::PushImageInfo::Aux
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        error: String,
+        error_detail: DockerEngineRuby::ErrorDetail,
+        status: String,
+        progress: String,
+        progress_detail: DockerEngineRuby::ProgressDetail,
+        aux: DockerEngineRuby::PushImageInfo::Aux
+      }
+
+      type aux = { tag: String, digest: String, size: Integer }
+
+      class Aux < DockerEngineRuby::Internal::Type::BaseModel
+        attr_reader tag: String?
+
+        def tag=: (String) -> String
+
+        attr_reader digest: String?
+
+        def digest=: (String) -> String
+
+        attr_reader size: Integer?
+
+        def size=: (Integer) -> Integer
+
+        def initialize: (?tag: String, ?digest: String, ?size: Integer) -> void
+
+        def to_hash: -> { tag: String, digest: String, size: Integer }
+      end
+    end
+  end
+end

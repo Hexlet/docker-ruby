@@ -288,4 +288,16 @@ module DockerEngineRuby
   class VolumeUpdateParams = DockerEngineRuby::Models::VolumeUpdateParams
 
   class WaitResponse = DockerEngineRuby::Models::WaitResponse
+
+  class BuildInfo = DockerEngineRuby::Models::BuildInfo
+
+  class CreateImageInfo = DockerEngineRuby::Models::CreateImageInfo
+
+  class ErrorDetail = DockerEngineRuby::Models::ErrorDetail
+
+  class ImageID = DockerEngineRuby::Models::ImageID
+
+  class ProgressDetail = DockerEngineRuby::Models::ProgressDetail
+
+  class PushImageInfo = DockerEngineRuby::Models::PushImageInfo
 end
