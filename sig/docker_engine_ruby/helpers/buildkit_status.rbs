@@ -1,0 +1,37 @@
+module DockerEngineRuby
+  module Helpers
+    module BuildkitStatus
+      TRACE_ID: String
+
+      class Vertex < Struct[untyped]
+        attr_accessor digest: String?
+        attr_accessor name: String?
+        attr_accessor cached: bool
+        attr_accessor started: bool
+        attr_accessor completed: bool
+        attr_accessor error: String?
+      end
+
+      class Log < Struct[untyped]
+        attr_accessor vertex: String?
+        attr_accessor stream: Integer
+        attr_accessor msg: String
+      end
+
+      class Status < Struct[untyped]
+        attr_accessor vertexes: ::Array[Vertex]
+        attr_accessor logs: ::Array[Log]
+      end
+
+      def self.trace?: (DockerEngineRuby::Models::BuildInfo info) -> bool
+
+      def self.decode: (String aux) -> Status
+
+      class PlainPrinter
+        def initialize: () { (String line) -> void } -> void
+
+        def print: (Status status) -> void
+      end
+    end
+  end
+end
