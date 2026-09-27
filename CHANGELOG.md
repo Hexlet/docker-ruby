@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.8.0](https://github.com/Hexlet/docker-ruby/compare/v0.7.5...v0.8.0) (2026-09-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* images.build, images.pull and images.push raise
+
+### Features
+
+* stream image build, pull and push progress ([#25](https://github.com/Hexlet/docker-ruby/issues/25)) ([3e3c940](https://github.com/Hexlet/docker-ruby/commit/3e3c9407dab7f74393278e41a8fa1a0cc8417fdf))
+
+
+### Bug Fixes
+
+* serialize whole-object request bodies and accept host_config ([#23](https://github.com/Hexlet/docker-ruby/issues/23)) ([d79aa12](https://github.com/Hexlet/docker-ruby/commit/d79aa1216027052260d698a907cab2727fa525ff))
+* ship RBI and RBS for Helpers::BuildkitStatus ([#26](https://github.com/Hexlet/docker-ruby/issues/26)) ([a630956](https://github.com/Hexlet/docker-ruby/commit/a6309563292e5e4647fd662446a06f96c4e34012))
+
 ## [0.7.5](https://github.com/Hexlet/docker-ruby/compare/v0.7.4...v0.7.5) (2026-06-27)
 
 
