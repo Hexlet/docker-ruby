@@ -33,9 +33,7 @@ module DockerEngineRuby
               tls_key: T.nilable(OpenSSL::PKey::PKey),
               tls_verify_peer: T::Boolean,
               url: URI::Generic
-            ).returns(
-              Net::HTTP
-            )
+            ).returns(Net::HTTP)
           end
           def connect(cert_store:, tls_cert:, tls_key:, tls_verify_peer:, url:)
           end

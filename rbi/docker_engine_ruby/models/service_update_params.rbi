@@ -14,6 +14,12 @@ module DockerEngineRuby
           )
         end
 
+      sig { returns(DockerEngineRuby::ServiceSpec) }
+      attr_reader :spec
+
+      sig { params(spec: DockerEngineRuby::ServiceSpec::OrHash).void }
+      attr_writer :spec
+
       sig { returns(String) }
       attr_accessor :id
 
@@ -51,6 +57,7 @@ module DockerEngineRuby
 
       sig do
         params(
+          spec: DockerEngineRuby::ServiceSpec::OrHash,
           id: String,
           version: Integer,
           registry_auth_from:
@@ -61,6 +68,7 @@ module DockerEngineRuby
         ).returns(T.attached_class)
       end
       def self.new(
+        spec:,
         id:,
         version:,
         registry_auth_from: nil,
@@ -73,6 +81,7 @@ module DockerEngineRuby
       sig do
         override.returns(
           {
+            spec: DockerEngineRuby::ServiceSpec,
             id: String,
             version: Integer,
             registry_auth_from:

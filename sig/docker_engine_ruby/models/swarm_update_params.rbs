@@ -2,6 +2,7 @@ module DockerEngineRuby
   module Models
     type swarm_update_params =
       {
+        spec: DockerEngineRuby::SwarmSpec,
         version: Integer,
         rotate_manager_token: bool,
         rotate_manager_unlock_key: bool,
@@ -12,6 +13,8 @@ module DockerEngineRuby
     class SwarmUpdateParams < DockerEngineRuby::Internal::Type::BaseModel
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
+
+      attr_accessor spec: DockerEngineRuby::SwarmSpec
 
       attr_accessor version: Integer
 
@@ -28,6 +31,7 @@ module DockerEngineRuby
       def rotate_worker_token=: (bool) -> bool
 
       def initialize: (
+        spec: DockerEngineRuby::SwarmSpec,
         version: Integer,
         ?rotate_manager_token: bool,
         ?rotate_manager_unlock_key: bool,
@@ -36,6 +40,7 @@ module DockerEngineRuby
       ) -> void
 
       def to_hash: -> {
+        spec: DockerEngineRuby::SwarmSpec,
         version: Integer,
         rotate_manager_token: bool,
         rotate_manager_unlock_key: bool,

@@ -7,6 +7,11 @@ module DockerEngineRuby
       extend DockerEngineRuby::Internal::Type::RequestParameters::Converter
       include DockerEngineRuby::Internal::Type::RequestParameters
 
+      # @!attribute spec
+      #
+      #   @return [DockerEngineRuby::Models::ServiceSpec]
+      required :spec, -> { DockerEngineRuby::ServiceSpec }
+
       # @!attribute id
       #
       #   @return [String]
@@ -32,7 +37,8 @@ module DockerEngineRuby
       #   @return [String, nil]
       optional :x_registry_auth, String
 
-      # @!method initialize(id:, version:, registry_auth_from: nil, rollback: nil, x_registry_auth: nil, request_options: {})
+      # @!method initialize(spec:, id:, version:, registry_auth_from: nil, rollback: nil, x_registry_auth: nil, request_options: {})
+      #   @param spec [DockerEngineRuby::Models::ServiceSpec]
       #   @param id [String]
       #   @param version [Integer]
       #   @param registry_auth_from [Symbol, DockerEngineRuby::Models::ServiceUpdateParams::RegistryAuthFrom]

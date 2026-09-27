@@ -14,6 +14,12 @@ module DockerEngineRuby
           )
         end
 
+      sig { returns(DockerEngineRuby::SecretSpec) }
+      attr_reader :spec
+
+      sig { params(spec: DockerEngineRuby::SecretSpec::OrHash).void }
+      attr_writer :spec
+
       sig { returns(String) }
       attr_accessor :id
 
@@ -22,17 +28,19 @@ module DockerEngineRuby
 
       sig do
         params(
+          spec: DockerEngineRuby::SecretSpec::OrHash,
           id: String,
           version: Integer,
           request_options: DockerEngineRuby::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
-      def self.new(id:, version:, request_options: {})
+      def self.new(spec:, id:, version:, request_options: {})
       end
 
       sig do
         override.returns(
           {
+            spec: DockerEngineRuby::SecretSpec,
             id: String,
             version: Integer,
             request_options: DockerEngineRuby::RequestOptions
