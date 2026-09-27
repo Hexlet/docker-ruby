@@ -33,6 +33,20 @@ module DockerEngineRuby
       end
     end
 
+    # Docker reports a failed build, pull or push inside a 200 response, as the last
+    # message of the progress stream.
+    class StreamError < DockerEngineRuby::Errors::Error
+      # @return [DockerEngineRuby::Models::ErrorDetail, nil]
+      attr_reader :detail
+
+      # @param message [String]
+      # @param detail [DockerEngineRuby::Models::ErrorDetail, nil]
+      def initialize(message, detail: nil)
+        @detail = detail
+        super(message)
+      end
+    end
+
     class APIError < DockerEngineRuby::Errors::Error
       # @return [URI::Generic]
       attr_accessor :url

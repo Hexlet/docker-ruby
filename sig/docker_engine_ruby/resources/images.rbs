@@ -47,7 +47,9 @@ module DockerEngineRuby
         ?version: DockerEngineRuby::Models::ImageBuildParams::version,
         ?x_registry_config: String,
         ?request_options: DockerEngineRuby::request_opts
-      ) -> nil
+      ) ?{
+        (DockerEngineRuby::BuildInfo message) -> void
+      } -> nil
 
       def build_prune: (
         ?all: bool,
@@ -140,7 +142,9 @@ module DockerEngineRuby
         ?tag: String,
         ?x_registry_auth: String,
         ?request_options: DockerEngineRuby::request_opts
-      ) -> nil
+      ) ?{
+        (DockerEngineRuby::CreateImageInfo message) -> void
+      } -> nil
 
       def push: (
         String name,
@@ -148,7 +152,9 @@ module DockerEngineRuby
         ?platform: String,
         ?tag: String,
         ?request_options: DockerEngineRuby::request_opts
-      ) -> nil
+      ) ?{
+        (DockerEngineRuby::PushImageInfo message) -> void
+      } -> nil
 
       def search: (
         term: String,

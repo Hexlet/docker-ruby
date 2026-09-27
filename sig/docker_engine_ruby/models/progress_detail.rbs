@@ -1,0 +1,19 @@
+module DockerEngineRuby
+  module Models
+    type progress_detail = { current: Integer, total: Integer }
+
+    class ProgressDetail < DockerEngineRuby::Internal::Type::BaseModel
+      attr_reader current: Integer?
+
+      def current=: (Integer) -> Integer
+
+      attr_reader total: Integer?
+
+      def total=: (Integer) -> Integer
+
+      def initialize: (?current: Integer, ?total: Integer) -> void
+
+      def to_hash: -> { current: Integer, total: Integer }
+    end
+  end
+end

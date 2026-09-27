@@ -1,0 +1,61 @@
+module DockerEngineRuby
+  module Models
+    type create_image_info =
+      {
+        id: String,
+        error: String,
+        error_detail: DockerEngineRuby::ErrorDetail,
+        status: String,
+        progress: String,
+        progress_detail: DockerEngineRuby::ProgressDetail
+      }
+
+    class CreateImageInfo < DockerEngineRuby::Internal::Type::BaseModel
+      attr_reader id: String?
+
+      def id=: (String) -> String
+
+      attr_reader error: String?
+
+      def error=: (String) -> String
+
+      attr_reader error_detail: DockerEngineRuby::ErrorDetail?
+
+      def error_detail=: (
+        DockerEngineRuby::ErrorDetail
+      ) -> DockerEngineRuby::ErrorDetail
+
+      attr_reader status: String?
+
+      def status=: (String) -> String
+
+      attr_reader progress: String?
+
+      def progress=: (String) -> String
+
+      attr_reader progress_detail: DockerEngineRuby::ProgressDetail?
+
+      def progress_detail=: (
+        DockerEngineRuby::ProgressDetail
+      ) -> DockerEngineRuby::ProgressDetail
+
+      def initialize: (
+        ?id: String,
+        ?error: String,
+        ?error_detail: DockerEngineRuby::ErrorDetail,
+        ?status: String,
+        ?progress: String,
+        ?progress_detail: DockerEngineRuby::ProgressDetail
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        error: String,
+        error_detail: DockerEngineRuby::ErrorDetail,
+        status: String,
+        progress: String,
+        progress_detail: DockerEngineRuby::ProgressDetail
+      }
+    end
+  end
+end

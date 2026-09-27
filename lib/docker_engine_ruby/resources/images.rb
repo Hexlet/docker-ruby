@@ -114,10 +114,14 @@ module DockerEngineRuby
       #
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
+      # @yieldparam message [DockerEngineRuby::Models::BuildInfo] each progress message, as it arrives
+      #
+      # @raise [DockerEngineRuby::Errors::StreamError] when the daemon reports a failure inside the stream
+      #
       # @return [nil]
       #
       # @see DockerEngineRuby::Models::ImageBuildParams
-      def build(params)
+      def build(params, &block)
         query_params =
           [
             :buildargs,
@@ -147,7 +151,7 @@ module DockerEngineRuby
             :version
           ]
         parsed, options = DockerEngineRuby::ImageBuildParams.dump_request(params)
-        @client.request(
+        messages = @client.request(
           method: :post,
           path: "build",
           query: parsed.slice(*query_params),
@@ -158,9 +162,11 @@ module DockerEngineRuby
             x_registry_config: "x-registry-config"
           ),
           body: parsed[:body],
-          model: NilClass,
+          stream: DockerEngineRuby::Internal::JSONLStream,
+          model: DockerEngineRuby::BuildInfo,
           options: options
         )
+        each_progress(messages, &block)
       end
 
       # Delete builder cache
@@ -450,13 +456,17 @@ module DockerEngineRuby
       #
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
+      # @yieldparam message [DockerEngineRuby::Models::CreateImageInfo] each progress message, as it arrives
+      #
+      # @raise [DockerEngineRuby::Errors::StreamError] when the daemon reports a failure inside the stream
+      #
       # @return [nil]
       #
       # @see DockerEngineRuby::Models::ImagePullParams
-      def pull(params)
+      def pull(params, &block)
         query_params = [:changes, :from_image, :from_src, :message, :platform, :repo, :tag]
         parsed, options = DockerEngineRuby::ImagePullParams.dump_request(params)
-        @client.request(
+        messages = @client.request(
           method: :post,
           path: "images/create",
           query: parsed.slice(*query_params).transform_keys(from_image: "fromImage", from_src: "fromSrc"),
@@ -464,9 +474,11 @@ module DockerEngineRuby
             x_registry_auth: "x-registry-auth"
           ),
           body: parsed[:body],
-          model: NilClass,
+          stream: DockerEngineRuby::Internal::JSONLStream,
+          model: DockerEngineRuby::CreateImageInfo,
           options: options
         )
+        each_progress(messages, &block)
       end
 
       # Push an image
@@ -483,21 +495,27 @@ module DockerEngineRuby
       #
       # @param request_options [DockerEngineRuby::RequestOptions, Hash{Symbol=>Object}, nil]
       #
+      # @yieldparam message [DockerEngineRuby::Models::PushImageInfo] each progress message, as it arrives
+      #
+      # @raise [DockerEngineRuby::Errors::StreamError] when the daemon reports a failure inside the stream
+      #
       # @return [nil]
       #
       # @see DockerEngineRuby::Models::ImagePushParams
-      def push(name, params)
+      def push(name, params, &block)
         query_params = [:platform, :tag]
         parsed, options = DockerEngineRuby::ImagePushParams.dump_request(params)
         query = DockerEngineRuby::Internal::Util.encode_query_params(parsed.slice(*query_params))
-        @client.request(
+        messages = @client.request(
           method: :post,
           path: ["images/%1$s/push", name],
           query: query,
           headers: parsed.except(*query_params).transform_keys(x_registry_auth: "x-registry-auth"),
-          model: NilClass,
+          stream: DockerEngineRuby::Internal::JSONLStream,
+          model: DockerEngineRuby::PushImageInfo,
           options: options
         )
+        each_progress(messages, &block)
       end
 
       # Search images
@@ -547,6 +565,23 @@ module DockerEngineRuby
           options: options
         )
       end
+
+      private
+
+      # Docker answers a failed build, pull or push with 200 and an error in the last message,
+      # so the stream is read to the end and that message turned into an exception.
+      def each_progress(messages)
+        messages.each do |message|
+          detail = message.error_detail
+          error = detail&.message || message.error
+          raise DockerEngineRuby::Errors::StreamError.new(error, detail: detail) if error
+
+          yield(message) if block_given?
+        end
+        nil
+      end
+
+      public
 
       # @api private
       #

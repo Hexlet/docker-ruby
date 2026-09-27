@@ -26,6 +26,20 @@ module DockerEngineRuby
       end
     end
 
+    class StreamError < DockerEngineRuby::Errors::Error
+      sig { returns(T.nilable(DockerEngineRuby::Models::ErrorDetail)) }
+      attr_reader :detail
+
+      sig do
+        params(
+          message: String,
+          detail: T.nilable(DockerEngineRuby::Models::ErrorDetail)
+        ).returns(T.attached_class)
+      end
+      def self.new(message, detail: nil)
+      end
+    end
+
     class APIError < DockerEngineRuby::Errors::Error
       sig { returns(URI::Generic) }
       attr_accessor :url

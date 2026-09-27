@@ -1,0 +1,19 @@
+module DockerEngineRuby
+  module Internal
+    class JSONLStream[Elem]
+      include Enumerable[Elem]
+
+      def initialize: (
+        model: top,
+        url: URI::Generic,
+        status: Integer,
+        headers: ::Hash[String, String],
+        response: top,
+        unwrap: top,
+        stream: Enumerable[String]
+      ) -> void
+
+      def each: { (Elem message) -> void } -> void
+    end
+  end
+end

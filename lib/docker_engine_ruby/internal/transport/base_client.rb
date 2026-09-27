@@ -537,7 +537,14 @@ module DockerEngineRuby
             return nil
           end
 
-          decoded = DockerEngineRuby::Internal::Util.decode_content(headers, stream: stream)
+          # A stream class takes the raw lines: Docker sends its progress streams as `application/json`,
+          # which `decode_content` would join and parse as a single document.
+          decoded =
+            if req.key?(:stream)
+              DockerEngineRuby::Internal::Util.decode_lines(stream)
+            else
+              DockerEngineRuby::Internal::Util.decode_content(headers, stream: stream)
+            end
           case req
           in {stream: Class => st}
             st.new(
